@@ -74,8 +74,8 @@ ooplot.default(data, width=1, space=NULL, names.arg=NULL,
   \item{main, sub}{overall and sub titles for the plot.}
   \item{xlab}{a label for the x axis.}
   \item{ylab}{a label for the y axis.}
-  \item{xlim}{ ~~Describe \code{xlim} here~~ }
-  \item{ylim}{ ~~Describe \code{ylim} here~~ }
+  \item{xlim}{limits for the x axis.}
+  \item{ylim}{limits for the y axis.}
  \item{xpd}{logical. Should bars be allowed to go outside region?}
   \item{log}{a character string which contains `"x"' if the x axis is
     to be logarithmic, `"y"' if the y axis is to be logarithmic and
