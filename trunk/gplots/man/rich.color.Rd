@@ -8,8 +8,8 @@
   an order that is easy to interpret.
 }
 \usage{
-rich.colors(n, palette=c("temperature", "blues"), rgb.matrix=FALSE,
-            plot.colors=FALSE)
+rich.colors(n, palette = "temperature", rgb.matrix = FALSE,
+            plot.colors = FALSE)
 }
 \arguments{
   \item{n}{number of colors to generate.}

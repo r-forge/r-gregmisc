@@ -8,7 +8,7 @@
   formatted in two columns for easy reading.
 }
 \usage{
-Args(name, sort.args=FALSE)
+Args(name, sort.args = FALSE)
 }
 \arguments{
   \item{name}{a function or function name.}

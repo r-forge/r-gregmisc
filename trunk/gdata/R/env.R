@@ -5,11 +5,9 @@ env <- function(unit=c("KB","MB","bytes"), digits=0)
   get.object.size <- function(object.name, pos)
   {
     object <- get(object.name, pos=pos)
-    use.zero <- c("classRepresentation", "ClassUnionRepresentation", "grob")
-    if(class(object)[1] %in% use.zero)
+    size <- try(object.size(object))
+    if(class(size) == "try-error")
       size <- 0
-    else
-      size <- object.size(object)
     return(size)
   }
 
