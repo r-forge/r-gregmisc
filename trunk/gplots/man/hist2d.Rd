@@ -1,6 +1,9 @@
 % $Id$
 %
 % $Log$
+% Revision 1.4  2002/10/01 18:16:47  warnes
+% - Added examples of using 'contour' and 'filled.contour' for display.
+%
 % Revision 1.3  2002/09/23 13:59:30  warnes
 % - Modified all files to include CVS Id and Log tags.
 %
@@ -69,11 +72,18 @@ hist2d(x,y=NULL, nbins=200, same.scale=FALSE, na.rm=TRUE, show=TRUE,
    # use different # bins in each dimension
    hist2d(x,y, same.scale=TRUE, nbins=c(100,200) )
 
-   # use the hist2d function to create inputs for a perspective plot
-   h2d <- hist2d(x,y,show=FALSE, same.scale=TRUE, nbins=30)
+   # use the hist2d function to create inputs for a perspective plot ...
+   h2d <- hist2d(x,y,show=FALSE, same.scale=TRUE, nbins=c(20,30))
    persp( h2d$x, h2d$y, h2d$counts,
           ticktype="detailed", theta=30, phi=30,
           expand=0.5, shade=0.5, col="cyan", ltheta=-30)
+
+   # for contour (line) plot ...
+   contour( h2d$x, h2d$y, h2d$counts, nlevels=4 )
+
+   # for a filled contour plot ...
+   filled.contour( h2d$x, h2d$y, h2d$counts, nlevels=4,
+                   col=gray((4:0)/4) )
 }
 \keyword{dplot}
 \keyword{hplot}
