@@ -7,9 +7,7 @@ par.apply.model <- function(fun,
                             ncpu=lsf.numcpu(8),
                             nelem,
                             packages=.packages(),
-                            cltype="MPI",
-                            debug = TRUE,
-                            cl = NULL
+                            debug = TRUE
                             )
   {
 
@@ -19,52 +17,26 @@ par.apply.model <- function(fun,
       else
         matrix <- matrix[nelem[1]:nelem[2],]  # include subset of elements
 
+    if(exists("last.warning"))  # work around R bug
+      remove("last.warning",inherits=TRUE)
+
+
+    
     #
     # Test on a single probeset so we easily catch general errors.
     #
 
     result <- fun(matrix[1,],covariates=covariates)
 
-    #
-    # Start up the cluster...
-    #
-
-    library(snow)
-
-    scat("numcpu=", ncpu, "\n")
-    makeLSFcluster(ncpu=ncpu)
-    
-    exitfun <- function()
-      {
-        traceback()
-        scat("ERROR, Stopping cluster ")
-        stopCluster(cl)
-        scat("Done.")
-      }
-    on.exit( exitfun, add=TRUE )
-
-    #
-    # Test if all cluster nodes are working
-    #
-    scat("Test cluster elemets by listing hostnames.")
-    tmp <- clusterCall(cl, function() system('hostname',intern=T))
-    scat("Done.")
-    #
-    # Initialize the cluster elements
-    #
-
-    load.libs <- function(packages)
-      {
-        for(pack in packages)
-          library(pack, character.only=TRUE)
-      }
-
-    scat("Initialize the cluster elements with libraries ")
-    clusterCall(cl, load.libs, packages=packages)
     if(exists("last.warning"))  # work around R bug
       warnings()
-    scat("Done.")
 
+    #
+    # Test if LSF is working
+    #
+    scat("Test if LSF is working...")
+    tmp <- lsf.run.job( function() system('hostname',intern=T))
+    scat("Done.")
     #
     # Evaluate the function on all rows of the data set, distributing the
     # work across the cluster
@@ -72,25 +44,20 @@ par.apply.model <- function(fun,
 
     scat("Starting paralle model fit with", ncpu, "nodes ")
     time <- system.time(
-                        fits <- parRapply(cl,
-                                          matrix,
-                                          fun,
-                                          covariates=covariates,
-                                          join=cbind )
+                        fits <- lsf.parRapply(
+                                              matrix,
+                                              fun,
+                                              ...,
+                                              covariates=covariates,
+                                              join.method=cbind,
+                                              njobs=ncpu,
+                                              packages=packages
+                                              )
                         )
     scat("Done. Computation used", time, "")
 
     if(exists("last.warning"))  # work around R bug
       warnings()
-
-    #
-    # Stop the Custer
-    #
-
-    scat("Stop the cluster. ")
-    stopCluster(cl)
-    on.exit(NULL)
-    scat("Done.")
 
     return(t(fits))
 

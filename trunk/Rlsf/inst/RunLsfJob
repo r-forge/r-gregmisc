@@ -32,6 +32,12 @@ R --vanilla <<EOF
 lsf.ret <- try({
   newenv <- environment()
   load("${lsfenvfile}", envir=newenv)
+  for(package.name in rev(packages))
+    {
+	cat("loading package", package.name, "\n")
+	library(package.name, character.only=TRUE)
+    }
+
   eval(get("lsf.call", env=newenv), envir=newenv)
 })
 

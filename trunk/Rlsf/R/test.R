@@ -5,9 +5,11 @@
 ##
 test <- function(ncpu=8)
   {
-    library(Design)
-    library(Hmisc)
-    library(gregmisc)
+    library(Rlsf)
+    library(gdata);
+    library(gmodels);
+    library(gplots);
+    library(gtools)
 
     set.seed(1)
     age <- rnorm(200,40,12)
@@ -37,8 +39,7 @@ test <- function(ncpu=8)
                           fun,
                           matrix = ymat,
                           covariates = dataframe,
-                          ncpu=ncpu,
-                          cltype="MPI"
+                          ncpu=ncpu
                           )
 
     ret
