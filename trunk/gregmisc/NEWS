@@ -3,6 +3,13 @@ This file provides a brief list of major feature enhancements
 associated with each package release. For a more detailed list of
 changes see the ChangeLog file.
 
+Version 1.11.2
+--------------
+
+- Simpify and fix the build process on both *nix and Windows by simply
+  providing pre-built perl modules.
+
+
 Version 1.11.1
 --------------
 
