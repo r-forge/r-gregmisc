@@ -3,8 +3,11 @@ Title: Simulate samples of gene expression data for sample size calculation
 Version: 2.0
 Date: 2004/07/12
 Author: Peng Liu
-Description: Simulate sample from different normal distributions
-             and compare power between calculated and simulated results
-Maintainer: Who to complain to <yourfault@somewhere.net>
-License: Peng Liu <peng_liu@groton.pfizer.com>
+Description: Functons for computing and displaying sample size
+     information for gene expression arrays. Also functions for
+     evaluating the performance of these methods via simulation.
+Maintainer: Peng Liu <peng_liu@groton.pfizer.com> and 
+	    Gregory R. Warnes <gregory_r_warnes@groton.pfizer.com>
+Depends: gregmisc 
 License: GPL
+
