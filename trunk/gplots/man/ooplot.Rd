@@ -10,19 +10,24 @@
 \usage{
 ooplot(data, ...)
 ooplot.default(data, width=1, space=NULL, names.arg=NULL, 
-               legend.text=NULL, horiz=FALSE, density=NULL, angle=45,
-               kmg="fpnumkMGTP",kmglim=FALSE,
-               type=c("xyplot","linear","barplot","stackbar"),
-               col=heat.colors(NR), prcol=NULL, border=par("fg"),
-               main=NULL, sub=NULL, xlab=NULL, ylab=NULL, xlim=NULL,
-               ylim=NULL, xpd=TRUE, log="", axes=TRUE, axisnames=TRUE,
-               prval=TRUE, cex.axis=par("cex.axis"),
-               cex.names=par("cex.axis"), cex.values=par("cex"),
-               inside=TRUE, plot=TRUE, axis.lty=0, plot.ci=FALSE,
-               ci.l=NULL, ci.u=NULL, ci.color="black", ci.lty="solid",
-               ci.lwd=1, plot.grid=FALSE, grid.inc=NULL,
-               grid.lty="dotted", grid.lwd=1, grid.col="black",
-               add=FALSE, by.row=FALSE, ...)
+                           legend.text=NULL, horiz=FALSE, 
+                           density=NULL, angle=45, kmg="fpnumkMGTP", 
+                           kmglim=TRUE, 
+                           type=c("xyplot", "linear", "barplot", "stackbar"), 
+                           col=heat.colors(NR), prcol=NULL, 
+                           border=par("fg"), main=NULL, sub=NULL, 
+                           xlab=NULL, ylab=NULL, xlim=NULL, ylim=NULL, 
+                           xpd=TRUE, log="", axes=TRUE, 
+                           axisnames=TRUE, prval=TRUE, 
+                           cex.axis=par("cex.axis"), 
+                           cex.names=par("cex.axis"),
+                           cex.values=par("cex"),inside=TRUE, 
+                           plot=TRUE, axis.lty=0, plot.ci=FALSE, 
+                           ci.l=NULL, ci.u=NULL, ci.color="black", 
+                           ci.lty="solid", ci.lwd=1, plot.grid=FALSE, 
+                           grid.inc=NULL, grid.lty="dotted", 
+                           grid.lwd=1, grid.col="black", add=FALSE, 
+                           by.row=FALSE, ...)
 }
 \arguments{
   \item{data}{a matrix of values describing the values that make up the
