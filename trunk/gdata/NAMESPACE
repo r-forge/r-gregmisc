@@ -6,6 +6,7 @@ export(
        ConvertMedUnits,
        elem,
        env,
+       frameApply,
        interleave,
        is.what,
        keep,

@@ -6,7 +6,6 @@ export(
        even,
        foldchange,
        foldchange2logratio,
-       frameApply,
        inv.logit,
        invalid,
        logit,
