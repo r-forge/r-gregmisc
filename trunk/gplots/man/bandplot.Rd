@@ -1,6 +1,9 @@
 % $Id$
 %
 % $Log$
+% Revision 1.5  2003/11/19 14:52:32  warnes
+% Remove extranious NULL that confused R CMD check.
+%
 % Revision 1.4  2002/09/23 13:59:30  warnes
 % - Modified all files to include CVS Id and Log tags.
 %
@@ -17,8 +20,6 @@
   bandplot(x, y, ..., add = FALSE, sd = c(-2:2),
            sd.col = c("lightblue", "blue", "red", "blue", "lightblue"),
            method = "frac", width = 1/5, n=50) 
-NULL
-
 }
 \arguments{
   \item{x}{numeric vector of x locations}
