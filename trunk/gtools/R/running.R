@@ -7,6 +7,7 @@
                       allow.fewer=FALSE, pad=FALSE,
                       align=c("right", "center", "left"),
                       simplify=TRUE,
+                      by,  # added a parameter
                       ...)
 {
   align=match.arg(align)
@@ -51,6 +52,11 @@
 
   run.elements  <- elements[!skip]
   
+  if(!invalid(by))
+    run.elements <- run.elements[seq(from=1, to=length(run.elements),
+                                     by=by)]
+  
+  
   if(is.null(Y))  # univariate 
     {
       funct <- function(which,what,fun,...) fun(what[which],...)
@@ -91,5 +97,6 @@
         Xvar <- wholelist
       }
   
-  return(Xvar)}
+  return(Xvar)
+}
 

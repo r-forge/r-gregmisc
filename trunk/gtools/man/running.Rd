@@ -1,35 +1,4 @@
 % $Id$
-%
-% $Log$
-% Revision 1.8  2004/04/27 14:33:28  warnes
-% Replaced argument `as.list' with `simplify'.  Updated documentation,
-% and updated examples appropriately.
-%
-% Revision 1.7  2004/04/26 16:37:02  warnes
-% Added simplify argument to return one list element per evaluation.
-%
-% Revision 1.6  2004/03/26 22:19:18  warnes
-% - Update to match changes in running()
-% - Add examples to illustrate new arguments.
-% - Modify running correlation plot example to be more clear.
-%
-% Revision 1.5  2003/01/30 21:56:29  warnes
-% - Fixed typo in email address.
-%
-% Revision 1.4  2002/04/09 00:51:33  warneg
-%
-% Checkin for version 0.5.3
-%
-% Revision 1.3  2002/03/07 23:39:00  warneg
-% - Added documentation and example for running2
-%
-% Revision 1.2  2001/09/01 00:01:55  warneg
-% Release 0.3.0
-%
-% Revision 1.1  2001/08/25 03:59:52  warneg
-% Initial Checkin
-%
-%
 
 \name{running}
 \alias{running}
@@ -39,7 +8,7 @@
 \usage{
 running(X, Y=NULL, fun=mean, width=min(length(X), 20),
         allow.fewer=FALSE, pad=FALSE, align=c("right", "center","left"),
-        simplify=TRUE, ...)
+        simplify=TRUE, by, ...)
 }
 \arguments{
   \item{X}{ data vector }
@@ -68,6 +37,9 @@ running(X, Y=NULL, fun=mean, width=min(length(X), 20),
     object will be coerced into a vector (if the computation returns a
     scalar) or a matrix (if the computation returns multiple values).
     Defaults to FALSE.}
+  \item{by}{Integer separation between groups. If \code{by=width} will
+    give non-overlapping windows. Default is missing, in which case
+    groups will start at each value in the X/Y range.}
   \item{\dots}{ parameters to be passed to \code{fun} }
 }
 \details{
@@ -83,7 +55,8 @@ running(X, Y=NULL, fun=mean, width=min(length(X), 20),
   Note that this function will create a vector or matrix even for
   objects which are not simplified by \code{sapply}. 
 }
-\author{ Gregory R. Warnes \email{Gregory\_R\_Warnes@groton.pfizer.com} }
+\author{ Gregory R. Warnes \email{Gregory\_R\_Warnes@groton.pfizer.com},
+         with contributions by Nintin Jain \email{nitin_jain@groton.pfizer.com}.}
 \seealso{ \code{\link{wapply}} to apply a function over an x-y window
   centered at each x point, \code{\link[base]{sapply}},
   \code{\link[base]{lapply}} }
@@ -102,6 +75,12 @@ running(1:20, width=5, align="right", pad=TRUE)
 # show effect of simplify
 running(1:20, width=5, fun=function(x) x )  # matrix
 running(1:20, width=5, fun=function(x) x, simplify=FALSE) # list
+
+# show effect of by
+running(1:20, width=5)       # normal
+running(1:20, width=5, by=5) # non-overlapping
+running(1:20, width=5, by=2) # starting every 2nd 
+
 
 # Use 'pad' to ensure correct length of vector, also show the effect
 # of allow.fewer.
