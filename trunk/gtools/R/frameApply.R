@@ -1,4 +1,6 @@
-frameApply <- function(x, by = NULL, on = by[1], fun = function(xi) c(Count = nrow(xi)) , subset = TRUE, simplify = TRUE, byvar.sep = "\001", ...) {
+# $Id$
+#
+frameApply <- function(x, by = NULL, on = by[1], fun = function(xi) c(Count = nrow(xi)) , subset = TRUE, simplify = TRUE, byvar.sep = "\\$\\@\\$", ...) {
   subset <- eval(substitute(subset), x, parent.frame())                               
   x <- x[subset, , drop = FALSE]
   if(!is.null(by)) {
@@ -12,11 +14,14 @@ frameApply <- function(x, by = NULL, on = by[1], fun = function(xi) c(Count = nr
     splres <- lapply(splx, fun, ...)
     if(!simplify) out <- list(by = byvars, result = splres)
     else {
-      nms <- lapply(splres, function(xi) {
-        if(inherits(xi, "try-error")) return(NULL)
-        else names(xi)
-      })
-      nms <- do.call("rbind", nms)[1, ]
+      i <- 1 ; nres <- length(splres)
+      while(inherits(splres[[i]], "try-error") & i < nres) i <- i + 1
+      nms <- names(splres[[i]])
+      # nms <- lapply(splres, function(xi) {
+      #   if(inherits(xi, "try-error")) return(NULL)
+      #   else names(xi)
+      # })
+      # nms <- do.call("rbind", nms)[1, ]
       splres <- lapply(splres, function(xi) {
         if(inherits(xi, "try-error")) {
           return(rep(NA, length(nms)))

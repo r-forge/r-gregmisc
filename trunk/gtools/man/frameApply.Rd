@@ -1,10 +1,13 @@
+% $Id%
+%
 \name{frameApply}
 \alias{frameApply}
 \title{Subset analysis on data frames}
 \description{Apply a function to row subsets of a data frame. 
 }
 \usage{
-frameApply(x, by = NULL, on = by[1], fun = function(xi) c(Count = nrow(xi)), subset = TRUE, simplify = TRUE, byvar.sep = "\001", ...)
+frameApply(x, by = NULL, on = by[1], fun = function(xi) c(Count =
+nrow(xi)), subset = TRUE, simplify = TRUE, byvar.sep = "\\$\\@\\$", ...)
 }
 \arguments{
   \item{x}{a data frame}
@@ -33,7 +36,7 @@ frameApply(x, by = NULL, on = by[1], fun = function(xi) c(Count = nrow(xi)), sub
     each element of the return vector of \code{fun}. If FALSE, the
     return value will be a list, sometimes necessary for less structured
     output (see description of return value below).}
-  \item{byvar.sep}{character. This can be any character not
+  \item{byvar.sep}{character. This can be any character string not
     found anywhere in the values of the \code{by} variables. The
     \code{by} variables will be pasted together using this as the
     separator, and the result will be used as the index to form the
@@ -57,7 +60,9 @@ frameApply(x, by = NULL, on = by[1], fun = function(xi) c(Count = nrow(xi)), sub
   results in great gains in efficiency, although \code{frameApply} is
   hardly an efficient function.}
 
-\examples{ data(ELISA)
+\examples{
+
+data(ELISA)
 
 # Default is slightly unintuitive, but commonly useful: 
 frameApply(ELISA, by = c("PlateDay", "Read"))
@@ -74,7 +79,8 @@ frameApply(ELISA, on = "Signal", by = "Concentration",
                              SD = sd(x, ...),
                              N = sum(!is.na(x)))
                   },
-           na.rm = TRUE)
+           na.rm = TRUE,
+           subset = !is.na(Concentration))
 }
 \author{Jim Rogers \email{james\_a\_rogers@groton.pfizer.com}}
 \keyword{manip}
