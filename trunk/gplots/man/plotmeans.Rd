@@ -1,7 +1,11 @@
 % $Id$
 %
 % $Log$
+% Revision 1.4  2001/10/16 23:03:27  warneg
+% Added description of minbar and maxbar.
+%
 % Revision 1.3  2001/10/16 22:35:36  warneg
+%
 % Added description of minsd parameter.
 %
 % Revision 1.2  2001/08/25 05:46:51  warneg
@@ -46,8 +50,16 @@ plotmeans(formula, data=NULL, subset, na.action,
   \item{p}{confidence level for error bars.  Defaults to 0.95.}
 
   \item{minsd}{minumum permitted value for the standard deviation within
-    each factor level.  Any standard deviation estimates smaller minsd
-    will be replaced with minsd. Defaults to 0.}
+    each factor level.  Any standard deviation estimates smaller than
+    \code{minsd} will be replaced with \code{minsd}. Defaults to 0.}
+
+  \item{minbar}{minumum allowed value for bar ends.  If specified,
+    values smaller than \code{minbar} will be replaced with
+    \code{minbar}. } 
+  
+  \item{maxbar}{maximum allowed value for bar ends.  If specified,
+    values larger than \code{maxbar} will be replaced with
+    \code{maxbar}. }
   
   \item{xlab}{x-axis label.}
   \item{ylab}{y-axis label.}
