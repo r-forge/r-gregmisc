@@ -1,13 +1,13 @@
 # $Id$
 
-\name{numcpu.lsf}
-\alias{numcpu.lsf}
+\name{lsf.numcpu}
+\alias{lsf.numcpu}
 \title{Determine the number of CPUs assigned by LSF}
 \description{
   Determine the number of CPUs assigned by LSF.
 }
 \usage{
-numcpu.lsf(default)
+lsf.numcpu(default)
 }
 \arguments{
   \item{default}{If present, A default number of CPUs to use if unable to determine
@@ -32,10 +32,10 @@ numcpu.lsf(default)
    }
 
    # get the number of cpus, fail if unable to do so
-   numcpu.lsf()
+   lsf.numcpu()
 
    # get the number of cpus, use '8' if unable to do so
-   numcpu.lsf(default=8)
+   lsf.numcpu(default=8)
 
 }
 \keyword{utilities}
