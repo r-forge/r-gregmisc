@@ -21,7 +21,7 @@ lsf.run.job(func, ..., savelist = c(), interval = 15)
     savelist.}
   \item{interval}{Defines the amount of time (in seconds) to wait
     between polls for the job status. If this is too low, it will cause
-    undue load on the LSF scheduler.
+    undue load on the LSF scheduler.}
 }
 \details{
   \code{lsf.run.job} is a convenience function that provides the
