@@ -41,6 +41,10 @@ smartlegend <- function(x=c("left","center","right"),
         yjust = 1
       }
 
+    
+    if(par("xlog")) x.pos <- 10^x.pos
+    if(par("ylog")) y.pos <- 10^y.pos 
+    
     legend( x=x.pos, y=y.pos, ..., xjust=xjust, yjust=yjust)
   }
 
