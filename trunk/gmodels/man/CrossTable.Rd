@@ -1,7 +1,32 @@
 % $Id$
 %
+% Revision 1.4  2004/03/01 schwartz
+%
+% - Thanks to Gabor Grothendieck for providing ideas and
+%   comments on the following updates
+% - Modified function to allow a single vector to be
+%   tabulated in 'x'
+% - Added 'chisq' argument to disable the generation and
+%   printing of the chi-square tests, producing a simple
+%   table with no tests. Default value = FALSE.
+% - Removed restriction on minimum 2 x 2 tables (ie. can do a
+%   1 x n table, but no stats will be generated
+% - Added code to create generic row/col names if argument 'x'
+%   is a matrix without dimnames
+% - Added 'max.width' argument to enable wrapped output for
+%   1 x n tables. If n > max.width, table will wrap to next
+%   line
+% - Separated functions to print m x n table and 1 x n vector
+%   to enable flexibility in vector output formats and to faciliate
+%   future creation and separation of table generation and print methods.
+
+
 % $Log$
+% Revision 1.4  2004/05/25 02:57:01  warnes
+% Updates from Mark Schwartz.
+%
 % Revision 1.3  2003/01/30 21:41:38  warnes
+%
 % - Removed argument 'correct' and now print separate corrected values
 %   for 2 x 2 tables.
 % - Added arguments 'prop.r', 'prop.c' and 'prop.t' to toggle printing
@@ -35,20 +60,27 @@
   Fisher and McNemar tests of the independence of all table factors.
 }
 \usage{
-CrossTable(x, y, digits=3, expected=FALSE, prop.r=TRUE, prop.c=TRUE,
-           prop.t=TRUE, fisher=FALSE, mcnemar=FALSE)
+CrossTable(x, y, digits=3, max.width = 5, expected=FALSE, prop.r=TRUE, prop.c=TRUE,
+           prop.t=TRUE, chisq = FALSE, fisher=FALSE, mcnemar=FALSE)
 }
 \arguments{
-  \item{x}{A vector in a matrix or a dataframe OR if y not specified,
-    a two-dimensional matrix}
+  \item{x}{A vector or a matrix. If y is specified, x must be a vector}
   \item{y}{A vector in a matrix or a dataframe}
   \item{digits}{Number of digits after the decimal point for cell
     proportions}
-  \item{expected}{If \code{TRUE}, expected cell counts from the
-    \eqn{\chi^2}{Chi-Square} will be included}
+	\item{max.width}{In the case of a 1 x n table, the default will be
+		to print the output horizontally. If the number of columns exceeds
+		max.width, the table will be wrapped for each successive increment
+		of max.width columns. If you want a single column vertical table,
+		set max.width to 1}
+  \item{expected}{If \code{TRUE}, chisq will be set to \code{TRUE} and
+		expected cell counts from the \eqn{\chi^2}{Chi-Square} will be
+		included}
   \item{prop.r}{If \code{TRUE}, row proportions will be included}
   \item{prop.c}{If \code{TRUE}, column proportions will be included}
   \item{prop.t}{If \code{TRUE}, table proportions will be included}
+  \item{chisq}{If \code{TRUE}, the results of a chi-square test will
+		be included}
   \item{fisher}{If \code{TRUE}, the results of a Fisher Exact test will
      be included}
   \item{mcnemar}{If \code{TRUE}, the results of a McNemar test will
@@ -57,11 +89,14 @@ CrossTable(x, y, digits=3, expected=FALSE, prop.r=TRUE, prop.c=TRUE,
 \details{
   A summary table will be generated with cell row, column and table
   proportions and marginal totals and proportions. Expected cell counts
-  can be printed if desired. In the case of a 2 x 2 table, both
-  corrected and uncorrected values will be included for appropriate
-  tests.
+  can be printed if desired (if 'chisq = TRUE'). In the case of a 2 x 2
+	table, both corrected and uncorrected values will be included for
+	appropriate tests. In the case of tabulating a single vector, cell
+	counts and table proportions will be printed.
 
   Note: Any unused factor levels will be dropped prior to tabulation.
+	If 'x' is a vector and 'y' is not specified, no statistical tests
+	will be performed, even if any are set to \code{TRUE}.
 }
 \value{
   A list with multiple components including key table data and
