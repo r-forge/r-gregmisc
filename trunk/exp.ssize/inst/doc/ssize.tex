@@ -64,8 +64,8 @@ of sample size estimation.  Fortunately, our method can be easily
 extended for either or both of these cases.
 
 \section{Availability:}
-An R package, \tt{exp.ssize}, implementing the described methods, is
-available upon request.
+An R package, \texttt{exp.ssize}, implementing the described
+methods, is available upon request.
 
 %\section{Contact:} \href{ $^{\rm a}$ $ Gregory_R_Warnes@groton.pfizer.com $ \\
 %                          $^{\rm b}$ $PL61@cornell.edu$}
@@ -78,11 +78,12 @@ available upon request.
 High-throughput microarray experiment allow the measurement of
 expression levels for tens of thousands of genes simultaneously.
 These experiments have been used in many disciplines of biological
-research, such as neuroscience (\citealp{Mandel03}), pharmacogenomcic
-research, genetic disease and cancer diagnosis (\citealp{Heller02}),
-etc. As a tool for estimating gene expression and SNP (Single
-Nucleotide Polymorphism) genotyping, microarrays produces huge amounts
-of data provide new insight into these disciplines.
+research, such as neuroscience (\citealp{Mandel03}),
+pharmacogenomcic research, genetic disease and cancer diagnosis
+(\citealp{Heller02}), etc. As a tool for estimating gene
+expression and SNP (Single Nucleotide Polymorphism) genotyping,
+microarrays produce huge amounts of data provide new insight into
+these disciplines.
 
 Microarray experiments are rather costly in terms of both
 materials (RNA sample, reagents, chip, etc), laboratory manpower,
@@ -112,15 +113,15 @@ appropriate, this choice should generate a highly accurate answer.
 However, it can take tremendous effort to find an appropriate and
 general model, not to mention the possible complexity and
 computation needed for the model. As an example of this approach,
-Zien et al.  (2002) proposed a hierarchical model including
-several different sources of error, including heuristic choices
-for the key parameters in the model. Unfortunately, the model
-itself is non-identifiable, preventing the direct use of
-historical data to provide all of the necessary parameters.  As
-the behavior of microarray data from different microarray
-technologies and for different biological systems is extremely
-varied, the applicability of this model and its heuristic
-parameters to a particular problem is uncertain.
+Zien et al. (2003) proposed a hierarchical model including several
+different sources of error, including heuristic choices for the
+key parameters in the model. Unfortunately, the model itself is
+non-identifiable, preventing the direct use of historical data to
+provide all of the necessary parameters.  As the behavior of
+microarray data from different microarray technologies and for
+different biological systems is extremely varied, the
+applicability of this model and its heuristic parameters to a
+particular problem is uncertain.
 
 At the other extreme, standard sample size calculation methods can
 be applied individually to each gene, and a summary can be
@@ -197,9 +198,9 @@ where $G$ is the number of genes on the microarray chip.
 \item{Compute sample size separately for each gene according to the
     standard formula for the two-sample t-test with pooled variance:}
   \begin{eqnarray}
-    \lefteqn{1-\beta}
-    &=& 1-T_{n1+n2-2} \left( t_{\alpha_G/2,n1+n2-2} | \frac{\Delta}{\sigma \sqrt{\frac{1}{n_1} + \frac{1}{n_2}}}\right) \nonumber \\
-    & & +~T_{n1+n2-2} \left( -t_{\alpha_G/2,n1+n2-2} | \frac{\Delta}{\sigma \sqrt{\frac{1}{n_1} + \frac{1}{n_2}}}\right)
+    \lefteqn{1-\beta} \nonumber \\
+    &= 1-T_{n1+n2-2} \left( t_{\alpha_G/2,n1+n2-2} | \frac{\Delta}{\sigma \sqrt{\frac{1}{n_1} + \frac{1}{n_2}}}\right) \nonumber \\
+    &  ~+~T_{n1+n2-2} \left( -t_{\alpha_G/2,n1+n2-2} | \frac{\Delta}{\sigma \sqrt{\frac{1}{n_1} + \frac{1}{n_2}}}\right)
     \label{eq:formula}
   \end{eqnarray}
                                 %
@@ -226,14 +227,14 @@ where $G$ is the number of genes on the microarray chip.
 
 On the cumulative plot, for the point with x coordinate being $n$,
 the y coordinate is the proportion of genes needing sample size
-smaller than or equal to $n$. This is the same as the proportion
-of genes with power greater than or equal to the specified power
-($1- \beta$) at sample size $n$. Hence it allows users to
-visualize the relationship between power for all genes and the
-sample size in a single plot. Based on user-defined criterion, a
-sample size will be picked for microarray experiment. For example,
-a sample size of 10 will be chosen if more than $80\%$ of genes
-are desired to achieve the power of $80\%$.
+smaller than or equal to $n$. Please note that y coordinate is the
+same as the proportion of genes with power greater than or equal
+to the specified power ($1- \beta$) at sample size $n$. Hence it
+allows users to visualize the relationship between power for all
+genes and the sample size in a single plot. Based on user-defined
+criterion, a sample size will be picked for microarray experiment.
+For example, a sample size of 10 will be chosen if more than
+$80\%$ of genes are desired to achieve the power of $80\%$.
 
 The method can be easily adapted to other tests for detecting
 differentially expressed genes. For example, if several groups of
@@ -249,11 +250,15 @@ influences of some variables that can possibly affect the result. A second goal 
 practical guide table of sample size for different situations, such as the case with a specified proportion of genes that are
 interdependent.
 
-There are many variables that may possibly affect the accuracy of sample size estimation. For example, Bonferroni adjustment
-assumes independence between tests. However, interdependencies exist among genes such as those regulatory groups. Proportions
-of truly differentially expressed genes and other violations of test assumptions such as unequal variance may also have various
-influencing effects on accuracy of sample size estimation. The variables that we included in this simulation study are
-summarized in Table \ref{tb:SimuVariables}.
+There are many variables that may possibly affect the accuracy of
+sample size estimation. For example, independence is assumed
+between tests and sample size calculation. However,
+interdependencies exist among genes such as those regulatory
+groups. Proportions of truly differentially expressed genes and
+other violations of test assumptions such as unequal variance may
+also have various influencing effects on accuracy of sample size
+estimation. The variables that we included in this simulation
+study are summarized in Table \ref{tb:SimuVariables}.
 
 \begin{table}[h]\centering
   \caption{Tested Variables in Simulation Study}\ \\
@@ -281,7 +286,9 @@ summarized in Table \ref{tb:SimuVariables}.
     comparison method & m.method & FDR* \\
     \hline\hline
   \end{tabular}
-  \emph{*:}FDR indicates the Benjamini and Hochberg procedure to control false discovery rate \label{tb:SimuVariables}
+  \emph{*:}FDR indicates the Benjamini and Hochberg procedure to control false discovery
+  rate.
+  \label{tb:SimuVariables}
 \end{table}
 
 The simulation starts with sampling standard deviation (for
@@ -332,19 +339,19 @@ compared with the estimated plot.
 
 \subsection{Observation of high interdependency}
 The independence assumption offers a nice property of the data and
-allows application of many statistical procedures such as
-Bonferroni adjustment for controlling type I error for multiple
-test. In checking whether this assumption is acceptable in sample
-size estimation, we investigated two real data sets from
-Affymetrix experiments. Both data sets are normalized expressions
-for an experiment using Affymetrix U133 chip. Both revealed that
-high dependencies exist for every gene on other genes from the
-calculated correlation matrix. For each gene, the highest 50
-correlation coefficients in absolute value are selected for one
-data set and summarized in the histogram (Figure
-\ref{fig:HistCorr}). It showed that the minimum absolute value of
-correlation coefficients is about 0.7. This indicates that each
-gene is highly interdependent with at least 50 other genes.
+allows application of many statistical procedures such as testing
+each single gene independently. In checking whether this
+assumption is acceptable in sample size estimation, we
+investigated two real data sets from Affymetrix experiments. Both
+data sets are normalized expressions for an experiment using
+Affymetrix U133 chip. Both revealed that high dependencies exist
+for every gene on other genes from the calculated correlation
+matrix. For each gene, the highest 50 correlation coefficients in
+absolute value are selected for one data set and summarized in the
+histogram (Figure \ref{fig:HistCorr}). It showed that the minimum
+absolute value of correlation coefficients is about 0.7. This
+indicates that each gene is highly interdependent with at least 50
+other genes.
 
 \begin{figure}[h]
   \centerline{\includegraphics*[width= 2.75 in]{HistCorr.pdf}}
@@ -367,14 +374,14 @@ independent of each other (panel (a)) and that 100\% of genes come
 from interdependent groups (panel (b)). The other parameters for
 generating the two panels are the same: $\alpha = 0.05, 1 - \beta
 = 80\%, a = 1, r = 1, \Delta = 2$ -fold change and Bonferroni
-adjustment is used for multiple testing. For both cases, estimated
-sample size curve overlapped with true results from simulation.
-This showed that dependencies among genes has no effect on sample
-size estimation for our method. The other tested levels, $\gamma$
-=80\% and $\gamma$ = 50\%, showed the same result. Considering
-that all genes are dependent on others, this is a assuring result
-which allows the assumption of independence in sample size
-calculation.
+adjustment is used for controlling family wise type I error of
+multiple testing. For both cases, estimated sample size curve
+overlapped with true results from simulation. This showed that
+dependencies among genes has no effect on sample size estimation
+for our method. The other tested levels, $\gamma$ =80\% and
+$\gamma$ = 50\%, showed the same result. Considering that all
+genes are dependent on others, this is a assuring result which
+allows the assumption of independence in sample size calculation.
 
 \begin{figure}[h]
   \centerline{\includegraphics*[width=3.5in]{ResDepF.pdf}}
@@ -448,12 +455,17 @@ calculation. Nonetheless, the main idea is still applicable.
 
 \subsubsection{Minimum effect Size ($\Delta$)}
 
-When the minimum effect size ($\Delta$) gets larger, the genes that are truly differentially expressed are easier to be
-detected, and the sample size needed is smaller.  With at least 80\% genes to achieve 80\% power, to effect $\Delta = 2$ -fold
-change needs sample size of 6, while to effect $\Delta = 4$ -fold change needs sample size of 4 with all other parameters in
-simulation the same: $\gamma = 1, a = 1$, variance ratio = 1 and using Bonferroni method to control type I error multiple
-testing. With regard to the effect on sample size calculation, $\Delta$ has no effect since the values of $\Delta$ is included
-in the formula \ref{eq:formula} and sample sizes were calculated accordingly.
+When the minimum effect size ($\Delta$) gets larger, the genes
+that are truly differentially expressed are easier to be detected,
+and the sample size needed is smaller.  With at least 80\% genes
+to achieve 80\% power, to effect $\Delta = 2$ -fold change needs
+sample size of 6, while to effect $\Delta = 4$ -fold change needs
+sample size of 4 with all other parameters in simulation the same:
+$\gamma = 1, a = 1$, variance ratio = 1 and using Bonferroni
+method to control type I error of multiple testing. With regard to
+the effect on sample size calculation, $\Delta$ has no effect
+since the values of $\Delta$ is included in the formula
+\ref{eq:formula} and sample sizes were calculated accordingly.
 
 \subsubsection{Multiple Comparison Method}
 
@@ -545,13 +557,13 @@ and sample size on a reduced parameter space. Dow studied
 relationship between minimum detecting size and sample size for a
 specific experiment (2003). Both methods cannot be applied to
 cases where preliminary results and knowledge of differentially
-expressed genes are not available. Zien et al. (2002) proposed a
+expressed genes are not available. Zien et al. (2003) proposed a
 hierarchical model including several different sources of error,
 including heuristic choices for the key parameters in the model.
 We tried fitting the model and found that the model itself is
 non-identifiable. Here we proposed a very straightforward method
 that is easy to apply and flexible to adapt to different
-statistical tests to effect differentially expressed genes. With a
+statistical tests to detect differentially expressed genes. With a
 cumulative plot that summarizes the sample size needed for all
 genes, our proposed method allows separate calculation of sample
 size for each gene. Therefore, traditional standard method to
@@ -564,13 +576,13 @@ proposed method. Among the variables tested in the simulation
 dependent ($\gamma$) and the proportion of genes with true
 differential expression ($a$) have little effect. This is good
 news since we observed that the microarray data we tested is
-highly interdependent (Figure \ref{fig:HistCorr}). Variance ratio
-has a large effect on tested procedure due to the assumption of
-equal variance for 2-sample test that we employed. In the cases
-when it is known that variance ratio is large, we suggest to use
-t-test without pooled variance. Sample size is calculated
-accordingly for each gene and the idea of our method still
-applies.
+highly interdependent (Figure \ref{fig:HistCorr}). The major
+influence comes from the variance structure. Variance ratio has a
+large effect on tested procedure due to the assumption of equal
+variance for 2-sample test that we employed. In the cases when it
+is known that variance ratio is large, we suggest to use t-test
+without pooled variance. Sample size is calculated accordingly for
+each gene and the idea of our method still applies.
 
 For all cumulative plots, we found that there is a steep increase
 when increasing sample size at small numbers. For example, Figure
@@ -621,5 +633,8 @@ This work was supported by Pfizer Global Research and Development.
 
 \bibitem[Yang {\it et~al.}, 2003]{Yang03} Yang, M. C. K., Yang, J. J., McIndoe, R. A., She, J. X. (2003)
   Microarray experimental design: power and sample size considerations, {\it Physiological Genomics}, {\bf 16}, 24-28.
+
+\bibitem[Zien {\it et~al.}, 2003]{Zien03} Zien, A., Fluck, J., Zimmer, R., Lengauer, T. (2003)
+  Microarrays: how many do you need?, {\it Journal of COmputational Biology}, {\bf 10:3-4}, 653-667.
 \end{thebibliography}
 \end{document}
