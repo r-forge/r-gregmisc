@@ -1,7 +1,13 @@
 # $Id$
 #
 # $Log$
+# Revision 1.4  2002/02/16 17:23:33  warneg
+# - Corrected problem removing missing values: The missing values of $x
+#   and $y were being removed indepdendently, leaving an uneven number
+#   of points in the result.
+#
 # Revision 1.3  2001/12/05 19:29:50  warneg
+#
 # - Added a better default for "width" when method="nobs".  For this case,
 #   width=max(5, length(x)/10).
 #
@@ -44,8 +50,9 @@
                       ...)
       if(drop.na)
         {
-          pts <- pts[!is.na(pts)]
-          result <- result[!is.na(result)]
+          missing <- is.na(pts) & is.na(result)
+          pts <- pts[!missing]
+          result <- result[!missing]
         }
       
       return(x=pts,y=result)
@@ -71,8 +78,9 @@
                          
       if(drop.na)
         {
-          retval$x <- retval$x[!is.na(retval$x)]
-          retval$y <- retval$y[!is.na(retval$y)]
+          missing <- is.na(retval$x) | is.na(retval$y)
+          retval$x <- retval$x[!missing]
+          retval$y <- retval$y[!missing]
         }
 
 
