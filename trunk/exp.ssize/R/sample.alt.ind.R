@@ -1,12 +1,12 @@
 "sample.alt.ind" <-
-function( ngenes.alt.ind , n, var.ratio, delta, shape = 1, scale = 10, distrn = "normal")
+function( ngenes.alt.ind , n, sd.vector, var.ratio, delta, distrn = "normal")
 				
 { ## start of the fn sample.alt.ind
 
-  sd.ctrl <- sapply(rgamma(ngenes.alt.ind, shape, scale), get.sd)
+  sd.ctrl <- sample(sd.vector, ngenes.alt.ind)
   
   delta <- sign(runif(ngenes.alt.ind, 0, 1) -0.5) * delta
-  sample <- sample.genes.ind( ngenes.alt.ind , n, sd.ctrl, var.ratio, delta)
+  sample.res <- sample.genes.ind( ngenes.alt.ind , n, sd.ctrl, var.ratio, delta)
 
-sample
+sample.res
 } ## the end of the function sample.alt.ind

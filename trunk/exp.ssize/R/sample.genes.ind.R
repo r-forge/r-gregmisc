@@ -12,7 +12,6 @@ function( ngenes.ind , n, sd.ctrl, var.ratio, delta, distrn = "normal")
   if(length(delta==1)) delta <- rep(delta, ngenes.ind)
   sample[, (n+1):(2*n)]<- matrix(rnorm(n*ngenes.ind , delta, sd.trt), nr = ngenes.ind, nc = n)
   # get data for the the treatment group, the diff from null group being the delta != 0
-  ## pooling them together by setting the first n columns are from ctrl for each gene
 
 sample
 } ## the end of the function sample.genes.ind

@@ -16,13 +16,14 @@ function(ngenes, n, fractn.alt, fractn.dep, var.ratio, cov.matrix, ngenes.matrix
 
 # simulate sample for the each category
   index <- c(1, ngenes.null.ind)
-  result[index[1] : index[2], ] <- sample.null.ind( ngenes.null.ind , n, var.ratio)
+  result[index[1] : index[2], ] <- sample.null.ind( ngenes.null.ind , n, sd.vector, var.ratio)
 
   index <- index[2] + c(1, ngenes.null.dep)
   result[index[1] : index[2], ] <- sample.null.dep( ngenes.null.dep , n, var.ratio, cov.matrix, ngenes.matrix)
 
   index <- index[2] + c(1, ngenes.alt.ind)
-  result[index[1] : index[2], ] <- sample.alt.ind( ngenes.alt.ind , n, var.ratio, delta)
+  result[index[1] : index[2], ] <- sample.alt.ind( ngenes.alt.ind , n, sd.vector, var.ratio, delta)
+)
 
   index <- index[2] + c(1, ngenes.alt.dep)
   result[index[1] : index[2], ] <- sample.alt.dep( ngenes.alt.dep , n, var.ratio, cov.matrix, ngenes.matrix, delta)	
