@@ -42,7 +42,9 @@ power.plot <- function(x,
                        ...)
   {
     n <- nobs(x)
-    inv <- ecdf(x,pl=F)
+    inv <- list()
+    inv$x <- sort(x)
+    inv$y <- ecdf(x)(inv$x)
     inv$y <- 1 - inv$y
     plot(inv, type="s",
          xlab=xlab, ylab=ylab, yaxt="n",
@@ -116,7 +118,9 @@ ssize.plot <- function(x,
                        ...)
   {
     n <- nobs(x)
-    inv <- ecdf(x,pl=F)
+    inv <- list()
+    inv$x <- sort(x)
+    inv$y <- ecdf(x)(inv$x)
     plot(inv, type="s",
          xlab=xlab, ylab=ylab, yaxt="n",
          ..., )
@@ -198,8 +202,9 @@ delta.plot <- function(x,
                        ...)
   {
     n <- nobs(x)
-    inv <- ecdf(x,pl=F)
-    inv$y <- inv$y
+    inv <- list()
+    inv$x <- sort(x)
+    inv$y <- ecdf(x)(inv$x)
     plot(inv, type="s",
          xlab=xlab, ylab=ylab, yaxt="n",
          ..., )

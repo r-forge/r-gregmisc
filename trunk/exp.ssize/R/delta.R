@@ -1,12 +1,8 @@
-#####
-# Power
-#####
-
-pow<-function(sd, n, delta, sig.level, alpha.correct="Bonferonni")
+delta<-function(sd, n, power, sig.level, alpha.correct="Bonferonni")
 {
   ntest <- length(sd)
 
-  if(length(delta)==1) delta <- rep(delta,ntest)
+  if(length(power==1)) power <- rep(power,ntest)
 
   if(alpha.correct=="Bonferonni")
     alpha <- sig.level/ntest
@@ -20,32 +16,31 @@ pow<-function(sd, n, delta, sig.level, alpha.correct="Bonferonni")
     if(i%%10==0) cat(".")
       try(
           retval[i]<-power.t.test(n=n,
-                                  delta=delta[i],
+                                  delta=NULL,
                                   sd=sd[i],
                                   sig.level=alpha, 
-                                  power=NULL,
+                                  power=power[i],
                                   type="two.sample",
-                                  alternative="two.sided")$power
+                                  alternative="two.sided")$delta
           )
   }   
 
-  retval
+  2^retval
 }
 
 
 
 
-power.plot <- function(x,
-                       xlab="Power",
-                       ylab="Proportion of Genes with Power >= x",
-                       marks=c(0.70,0.80,0.90),
+delta.plot <- function(x,
+                       xlab="Fold Change",
+                       ylab="Proportion of Genes with Power >= 80% at Fold Change=delta",
+                       marks=c(1.5, 2.0, 2.5, 3.0, 4.0, 6.0,10),
                        ...)
   {
     n <- nobs(x)
     inv <- list()
     inv$x <- sort(x)
     inv$y <- ecdf(x)(inv$x)
-    inv$y <- 1 - inv$y
     plot(inv, type="s",
          xlab=xlab, ylab=ylab, yaxt="n",
          ..., )
