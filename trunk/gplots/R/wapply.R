@@ -1,7 +1,13 @@
 # $Id$
 #
 # $Log$
+# Revision 1.5  2002/02/16 17:58:59  warneg
+# - Fixed Bug: When method=="range", the absolute range of x was being
+#   used to compute the relative width instead of the (correct) relative
+#   range.
+#
 # Revision 1.4  2002/02/16 17:23:33  warneg
+#
 # - Corrected problem removing missing values: The missing values of $x
 #   and $y were being removed indepdendently, leaving an uneven number
 #   of points in the result.
@@ -33,7 +39,7 @@
   if(method == "width" || method == "range" )
     {
       if(method=="range")
-        width <- width * range(x)
+        width <- width * diff(range(x))
       
       pts _ seq(min(x),max(x),length.out=n)
       
