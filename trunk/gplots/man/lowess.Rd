@@ -7,7 +7,7 @@
 lowess(x, ...)
 \method{lowess}{default}(x, y, f=2/3, iter=3, delta=.01*diff(range(x)))
 \method{lowess}{formula}(formula,data = parent.frame(), subset, na.action, 
-               f=3,  iter=3, delta=.01*diff(range(mf[-response])) )
+               f=3,  iter=3, delta=.01*diff(range(mf[-response])), ... )
 }
 \alias{lowess}
 \arguments{

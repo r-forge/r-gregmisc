@@ -1,12 +1,12 @@
-lowess.default  <- get("lowess",pos="package:base")
-
 lowess  <- function(x,...)
   UseMethod("lowess")
+
+lowess.default  <- get("lowess",pos=NULL, mode="function")
 
 "lowess.formula" <-  function (formula,
                                data = parent.frame(), subset, na.action, 
                                f=3,  iter=3,
-                               delta=.01*diff(range(mf[-response])) )
+                               delta=.01*diff(range(mf[-response])), ... )
 {
   if (missing(formula) || (length(formula) != 3)) 
     stop("formula missing or incorrect")

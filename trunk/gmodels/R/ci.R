@@ -1,6 +1,6 @@
 ci  <-  function(x,...) UseMethod("ci")
 
-ci.lm  <-  function(x,confidence=0.95,alpha=1-confidence)
+ci.lm  <-  function(x,confidence=0.95,alpha=1-confidence,...)
 {
   x  <-  summary(x)
   est  <-  coef(x)[,1] ;
@@ -15,7 +15,7 @@ ci.lm  <-  function(x,confidence=0.95,alpha=1-confidence)
   retval
 }
 
-ci.lme <- function(x,confidence=0.95,alpha=1-confidence)
+ci.lme <- function(x,confidence=0.95,alpha=1-confidence,...)
   {
   x  <-  summary(x)
   est  <-  x$tTable[,"Value"] ;

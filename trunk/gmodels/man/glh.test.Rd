@@ -10,8 +10,8 @@ Test, print, or summarize a general linear hypothesis for a regression model }
 
 \usage{
 glh.test(reg, cm, d=rep(0, nrow(cm)) )
-print.glh.test(x, digits=4)
-summary.glh.test(x, digits=4)
+print.glh.test(x, digits=4,...)
+summary.glh.test(object, digits=4,...)
 }
 
 \arguments{
@@ -20,8 +20,9 @@ summary.glh.test(x, digits=4)
     coefficients }
   \item{d}{ vector specifying the null hypothis values for each linear
     combination}
-  \item{x}{glh.test object}
-  \item{digits}{number of digits.}
+  \item{x, object}{glh.test object}
+  \item{digits}{number of digits}
+  \item{...}{ optional parameters (ignored)}
 }
 \details{
   Test the general lineary hypothesis

@@ -1,7 +1,12 @@
 % $Id$
 %
 % $Log$
+% Revision 1.6  2002/03/26 21:22:35  warneg
+% - Changed methods to include '...' to match the generic.
+% - Updated for version 0.5.1
+%
 % Revision 1.5  2002/02/20 20:09:02  warneg
+%
 % Minor changes, typo and formatting fixes.
 %
 % Revision 1.4  2001/12/07 19:50:50  warneg
@@ -26,8 +31,8 @@
   provided. }
 \synopsis{
   ci(x, ...)
-  \method{ci}{lm}(x, confidence = 0.95, alpha = 1 - confidence)
-  \method{ci}{lme}(x, confidence = 0.95, alpha = 1 - confidence) 
+  \method{ci}{lm}(x, confidence = 0.95, alpha = 1 - confidence,...)
+  \method{ci}{lme}(x, confidence = 0.95, alpha = 1 - confidence,...) 
 }
 \usage{
   ci(x, ...)

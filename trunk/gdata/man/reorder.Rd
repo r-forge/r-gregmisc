@@ -1,7 +1,12 @@
 # $Id$
 #
 # $Log$
+# Revision 1.2  2002/03/26 21:22:35  warneg
+# - Changed methods to include '...' to match the generic.
+# - Updated for version 0.5.1
+#
 # Revision 1.1  2002/03/26 15:27:37  warneg
+#
 # Initial checkin.
 #
 #
@@ -37,7 +42,6 @@ reorder(X, order)
 \seealso{ \code{\link{factor}} }
 
 \examples{
-
    # Create a 4 level example factor
    trt <- factor( sample( c("PLACEBO","300 MG", "600 MG", "1200 MG"),
                   100, replace=T ) )
@@ -52,5 +56,5 @@ reorder(X, order)
    # drop out the '300 MG' level
    trt3 <- reorder(trt, c(4,3,1) )
    summary(trt3)
-  
+}  
 \keyword{ manip }

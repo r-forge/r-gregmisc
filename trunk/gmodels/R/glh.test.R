@@ -1,7 +1,12 @@
 # $Id$
 #
 # $Log$
+# Revision 1.6  2002/03/26 21:22:26  warneg
+# - Changed methods to include '...' to match the generic.
+# - Updated for version 0.5.1
+#
 # Revision 1.5  2002/01/17 23:42:39  warneg
+#
 # - Fixed typo in code that resulted in an syntax error.
 #
 # Revision 1.4  2002/01/10 17:35:41  warneg
@@ -80,7 +85,7 @@ glh.test <- function( reg, cm, d=rep(0, nrow(cm)) )
   retval
 }
 
-print.glh.test <- function(x, digits = 4 )
+print.glh.test <- function(x, digits = 4, ... )
 {
     cat("\n")
     cat("\t",x$method, prefix = "\t")
@@ -102,33 +107,33 @@ print.glh.test <- function(x, digits = 4 )
 
 
   
-summary.glh.test <- function(x, digits = 4 )
+summary.glh.test <- function(object, digits = 4, ... )
 {
     cat("\n")
-    cat("\t",x$method, prefix = "\t")
+    cat("\t",object$method, prefiobject = "\t")
     cat("\n")
-    cat("Regression: ", x$data.name, "\n")
+    cat("Regression: ", object$data.name, "\n")
     cat("\n")
     cat("Null Hypothesis: C %*% Beta-hat = d \n")
     cat("\n")
-    cat("C matrix: \n")
-    print(x$matrix, digits=digits)
+    cat("C matriobject: \n")
+    print(object$matriobject, digits=digits)
     cat("\n")
     cat("d vector: \n")
-    print(x$null.value, digits=digits)
+    print(object$null.value, digits=digits)
     cat("\n")
     cat("C %*% Beta-hat: \n")
-    print(c(x$estimate))
+    print(c(object$estimate))
     cat("\n")
     
-    if (!is.null(x$statistic)) 
-        cat(names(x$statistic), " = ", format(round(x$statistic, 
+    if (!is.null(object$statistic)) 
+        cat(names(object$statistic), " = ", format(round(object$statistic, 
             4)), ", ", sep = "")
-    if (!is.null(x$parameter)) 
-        cat(paste(names(x$parameter), " = ", format(round(x$parameter, 
+    if (!is.null(object$parameter)) 
+        cat(paste(names(object$parameter), " = ", format(round(object$parameter, 
             3)), ",", sep = ""), "")
     cat("p-value =",
-        format.pval(x$p.value, digits = digits), 
+        format.pval(object$p.value, digits = digits), 
         "\n")
     cat("\n")
   }
