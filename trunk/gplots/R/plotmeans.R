@@ -1,6 +1,9 @@
 # $Id$
 #
 # $Log$
+# Revision 1.9  2002/03/20 04:17:05  warneg
+# - Changes to add compatibility with S-Plus 2000
+#
 # Revision 1.8  2002/03/05 16:44:24  warneg
 # - Replace "T" with "TRUE".  Problems arrive when there is a variable named "T".
 #
@@ -29,7 +32,7 @@
 
 plotmeans  <- function (formula, data = NULL, subset, na.action,
                          bars=TRUE, p=0.95,
-                         minsd=0, minbar, maxbar,
+                         minsd=0, minbar=NULL, maxbar=NULL,
                          xlab=names(mf)[2], ylab=names(mf)[1],
                          mean.labels=F, ci.label=F, n.label=TRUE,
                          digits=options("digits"), col="black",
