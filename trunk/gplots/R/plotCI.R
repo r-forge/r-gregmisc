@@ -1,7 +1,11 @@
 # $Id$
 #
 # $Log$
+# Revision 1.6  2002/03/20 04:16:32  warneg
+# - Changes to add compatibility with S-Plus 2000.
+#
 # Revision 1.5  2002/02/04 19:12:27  warneg
+#
 # - When err="x", 'col' was being used to plot bars, rather than 'barcol'.
 #
 # Revision 1.4  2002/02/04 19:09:53  warneg
@@ -75,21 +79,26 @@ plotCI <- function (x, y = NULL,
   if(missing(li)) 
     li <- z - liw
 
-  if(!missing(minbar))
+  if(!missing(minbar) && !is.null(minbar) )
     li <- ifelse( li < minbar, minbar, li)
 
-  if(!missing(maxbar))
+  if(!missing(maxbar) && !is.null(maxbar) )
     ui <- ifelse( ui > maxbar, maxbar, ui)
   
-  if(err=="y" & is.null(ylim))
-    {
-      ylim <- range(c(y, ui, li), na.rm=TRUE)
-    }
-  else if(err=="x" & is.null(xlim))
-    {
-      xlim <- range(c(x, ui, li), na.rm=TRUE)
-    }
-
+   if(err=="y")
+     {
+       if(is.null(ylim))
+         ylim <- range(c(y, ui, li), na.rm=TRUE)
+       if(is.null(xlim) && !is.R() )
+         xlim <- range( x, na.rm=TRUE)
+     }
+   else if(err=="x")
+     {
+       if(is.null(xlim))
+         xlim <- range(c(x, ui, li), na.rm=TRUE)
+       if(is.null(ylim) && !is.R() )
+         ylim <- range( x, na.rm=TRUE)
+     }
     
   if(!add)
     {
