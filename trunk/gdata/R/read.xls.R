@@ -30,6 +30,9 @@ read.xls <- function(xls, sheet = 1, verbose=FALSE, ...)
   if (verbose) cat("done.\n")
   #
   ###
+
+  # prepare for cleanup now, in case of error reading file
+  on.exit(file.remove(csv))  
   
   # now read the csv file
   out <- read.csv(csv, ...)
