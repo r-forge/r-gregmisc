@@ -1,7 +1,16 @@
 # $Id$
 #
 # $Log$
+# Revision 1.2  2001/12/18 21:34:25  warneg
+# - Modified to work correctly when obj is of class 'aov' by specifying
+#   summary.lm instead of summary.  This ensures that the summary object
+#   has the fields we need.
+#
+# - Moved detailed reporting of results from 'print' to 'summary'
+#   function and added a simpler report to 'print'
+#
 # Revision 1.1  2001/12/18 00:43:23  warneg
+#
 # Initial checkin.
 #
 #
@@ -12,13 +21,13 @@ glh.test <- function( reg, cm, d=rep(0, nrow(cm)) )
   if( !is.matrix(cm) && !is.data.frame(cm) )
     cm <- matrix(cm, nrow=1)
 
-  if (  class(reg) != "lm" )
-    stop("Only defined for lm regects")
+  if ( !( "lm" %in% class(reg) ) )
+    stop("Only defined for lm,glm objects")
 
-  Beta <- summary(reg)$coefficients[,1,drop=F]
-  XpX <- summary(reg)$cov.unscaled
+  Beta <- summary.lm(reg)$coefficients[,1,drop=F]
+  XpX <- summary.lm(reg)$cov.unscaled
   df <- reg$df.residual
-  msr <- summary(reg)$sigma  # == SSE / (n-p)
+  msr <- summary.lm(reg)$sigma  # == SSE / (n-p)
   r <- nrow(cm)
 
 
@@ -42,6 +51,7 @@ glh.test <- function( reg, cm, d=rep(0, nrow(cm)) )
   p <- 1-pf(Fstat,r,df)
 
   retval <- list()
+  retval$call <- match.call()
   retval$statistic <- c(F=Fstat)
   retval$parameter <- c(df1=r,df2=df)
   retval$p.value <- p
@@ -60,6 +70,27 @@ glh.test <- function( reg, cm, d=rep(0, nrow(cm)) )
 }
 
 print.glh.test <- function(x, digits = 4 )
+{
+    cat("\n")
+    cat("\t",x$method, prefix = "\t")
+    cat("\n")
+    cat("Call:", x$call, "\n")
+    
+    if (!is.null(x$statistic)) 
+        cat(names(x$statistic), " = ", format(round(x$statistic, 
+            4)), ", ", sep = "")
+    if (!is.null(x$parameter)) 
+        cat(paste(names(x$parameter), " = ", format(round(x$parameter, 
+            3)), ",", sep = ""), "")
+    cat("p-value =",
+        format.pval(x$p.value, digits = digits), 
+        "\n")
+    cat("\n")
+  }
+
+
+  
+summary.glh.test <- function(x, digits = 4 )
 {
     cat("\n")
     cat("\t",x$method, prefix = "\t")
