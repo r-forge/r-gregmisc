@@ -35,13 +35,13 @@ test: $(TGZ)
 	perl -I $(PERL_LIB) xls2csv.pl iris.xls iris.csv 1
 	diff -bBw iris.csv.save iris.csv
 
-clean:
+cleanup:
 	@echo -- Removing local sources --
 	-rm -rf $(DIRS)
 	-rm -f iris.csv
 	-rm xls2csv
 
-distclean: clean
+clean: cleanup
 	-rm -rf $(PERL_PREFIX)
 	-rm -rf $(BIN_PREFIX)
 
@@ -64,5 +64,5 @@ install_bin: xls2csv
 	install xls2csv $(BIN_PREFIX)/
 	install xls2csv.pl $(PERL_PREFIX)/
 
-install: build clean install_bin clean show
+install: build cleanup install_bin cleanup show
 	touch gregmisc.so
