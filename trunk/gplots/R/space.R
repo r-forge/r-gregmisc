@@ -1,7 +1,11 @@
 # $Id$
 #
 # $Log$
+# Revision 1.3  2002/02/04 23:20:29  warneg
+# - Add na.rm parameter and make the default TRUE.
+#
 # Revision 1.2  2001/12/07 22:24:30  warneg
+#
 # - Added cvs tags.
 #
 #
@@ -11,8 +15,15 @@
 # that the points are separated by at least distance s.
 
 
-space <-  function(x,y,s=1/50)
+space <-  function(x,y,s=1/50, na.rm=T)
   {
+    if(na.rm)
+      {
+        ind <- is.na(x) | is.na(y)
+        x <- x[!ind]
+        y <- y[!ind]
+      }
+    
     if (length(s)==1) s <- c(s,s)
     
     spacing.x <- (max(x) - min(x))*s[1]
