@@ -56,7 +56,7 @@ summary.glh.test(x, digits=4)
   Applications,  2nd Ed, 1990, p. 105}
 \author{Gregory R. Warnes \email{gregory\_r\_warnes\@groton.pfizer.com} }
 \seealso{\code{\link{contrast.lm}}, \code{\link{estimable}},
-  \code{\link{contrast}}, \code{\link{contrasts}} }
+  \code{\link{contrasts}} }
 \examples{
 
 # fit a simple model
