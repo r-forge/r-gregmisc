@@ -2,7 +2,7 @@
 function (p)
 {
     m <- length(p)
-    tmp <- sort(p, index.return = T)
+    tmp <- sort(p, index.return = TRUE)
     sortp <- tmp$x
     idx <- tmp$ix
     sortp <- sortp * m/(1:m)
