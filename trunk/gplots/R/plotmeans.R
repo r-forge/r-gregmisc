@@ -1,7 +1,12 @@
 # $Id$
 #
 # $Log$
+# Revision 1.14  2004/05/24 23:43:46  warnes
+# Modified to use invalid() to check arguments instead of missing().
+# This fixes some build errors under R-1.9.0-Patched.
+#
 # Revision 1.13  2003/11/10 22:11:13  warnes
+#
 # - Add files contributed by Arni Magnusson
 #   <arnima@u.washington.edu>. As well as some of my own.
 #
@@ -74,9 +79,9 @@ plotmeans  <- function (formula, data = NULL, subset, na.action,
         barcol <- 2
     }
   
-    if (missing(formula) || (length(formula) != 3)) 
+    if (invalid(formula) || (length(formula) != 3)) 
         stop("formula missing or incorrect")
-    if (missing(na.action)) 
+    if (invalid(na.action)) 
         na.action <- options("na.action")
     m <- match.call(expand.dots = FALSE)
     if(is.R())
@@ -123,15 +128,18 @@ plotmeans  <- function (formula, data = NULL, subset, na.action,
     else
       ci.width  <- qnorm( (1+p)/2 ) * sqrt(vars/ns)
 
-    if(length(mean.labels)==1 && mean.labels==TRUE)
-      mean.labels  <-  format( round(means, digits=digits ))
-    else if (mean.labels==FALSE)
-      mean.lable  <- NULL
+    if(length(mean.labels)==1)
+      {
+        if (mean.labels==TRUE)
+          mean.labels  <-  format( round(means, digits=digits ))
+        else if (mean.labels==FALSE)
+          mean.labels  <- NULL
+      }
 
     plotCI(x=1:length(means), y=means, uiw=ci.width, xaxt="n",
            xlab=xlab, ylab=ylab, labels=mean.labels, col=col, xlim=xlim,
            lwd=barwidth, barcol=barcol, minbar=minbar, maxbar=maxbar, ... )
-    if(missing(xaxt) || xaxt!="n")
+    if(invalid(xaxt) || xaxt!="n")
       axis(1, at = 1:length(means), labels = legends)
     
     if(ci.label)
@@ -139,9 +147,9 @@ plotmeans  <- function (formula, data = NULL, subset, na.action,
         ci.lower <- means-ci.width
         ci.upper <- means+ci.width
 
-        if(!missing(minbar))
+        if(!invalid(minbar))
           ci.lower <- ifelse(ci.lower < minbar, minbar, ci.lower)
-        if(!missing(maxbar))
+        if(!invalid(maxbar))
           ci.upper <- ifelse(ci.upper > maxbar, maxbar, ci.upper)
         
         labels.lower <- paste( " \n", format(round(ci.lower, digits=digits)),
@@ -167,7 +175,7 @@ plotmeans  <- function (formula, data = NULL, subset, na.action,
                labels=paste("n=",ns,"\n",sep=""))
         }
     
-    if(any(connect!=FALSE))
+    if(!invalid(connect) & !identical(connect,FALSE))
       {
         if(is.list(connect))
           {
