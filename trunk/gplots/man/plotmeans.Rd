@@ -1,7 +1,11 @@
 % $Id$
 %
 % $Log$
+% Revision 1.6  2001/12/05 19:41:43  warneg
+% - Added documentation of use.t parameter.
+%
 % Revision 1.5  2001/10/16 23:04:45  warneg
+%
 % Forgot to add minbar and maxbar to usage section.
 %
 % Revision 1.4  2001/10/16 23:03:27  warneg
@@ -29,7 +33,7 @@ plotmeans(formula, data=NULL, subset, na.action,
           xlab=names(mf)[2], ylab=names(mf)[1], mean.labels=F,
           ci.label=F, n.label=T, digits=getOption("digits"),
           col="black", barwidth=1, barcol="blue",
-          connect=T, ccol=col, legends=names(means), ...)
+          connect=T, ccol=col, legends=names(means), use.t=T, ...)
 }
 %
 %\usage{
@@ -101,8 +105,14 @@ plotmeans(formula, data=NULL, subset, na.action,
   \item{legends}{ vector containing strings used to label groups along
     the x axis. Defaults to group names.}
 
+  \item{use.t}{ a logical value indicating whether the t distribution
+    should be used to compute confidence intervals.  If \code{TRUE}, the
+    default, a t distribution will the correct number of degrees of
+    freedom for each group be used.  If \code{FALSE}, the a normal
+    distribution will be used.}
+
   \item{\dots}{ optional plotting parameters. }
-  
+
   }
 
 %\details{ 
