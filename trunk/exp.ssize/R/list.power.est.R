@@ -1,26 +1,18 @@
-# list.power.est.R
-# to calculate estimated power for all sets of sd
-
-list.power.est <- function(ngenes, fractn.dep, cov.matrix, ngenes.matrix,
-			 nrep.est, nrep.simu, fold.change)
+"list.power.est" <-
+function(est.sd, ngenes.null, nrep.simu, delta, sig.level)
 
 {
- n <- max(nrep.est) / 2 # ssize for treatment = control
-
- sample.est <- simu.sample(ngenes, n, fractn.alt = 0, fractn.dep, var.ratio = 1,
- cov.matrix, ngenes.matrix, delta = 0)
- # generate sample of size [ngenes x max(nrep.est)]
- # note: treatment = control for est sd
-
- est.sd <- est.sd.ctrl(sample.est, nrep.est)
- # output is matrix of sd with dim [ngenes x length(nrep.est)]
-
+ ngenes <- dim(est.sd)[1]
  nsd <- dim(est.sd)[2]
  
- list.power.est <- list(nsd)
-
+ list.power.est <- list(nsd, names = colnames(est.sd))
+ 
  for ( i in 1: nsd)
- {list.power.est[[i]] <- calc.power.est(est.sd[,i], nrep.simu, fold.change, sig.level = 0.05)}
+ {
+ list.power.est[[i]] <- calc.power.est(est.sd[(ngenes.null+1):ngenes,i],
+ nrep.simu, delta, sig.level)
+ }
+ # only calculate power for genes from Ha
 
  list.power.est
  # output is a list with the same length as nrep.est

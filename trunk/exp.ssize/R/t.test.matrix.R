@@ -1,16 +1,5 @@
-# get.cumsum
-# get the cumulative sum along the column
-
-get.cumsum<-function(mat)
-{ # take an argument of matrix and reurn the cumsum by col
- t(apply(mat,1,cumsum)) 
-}
-
-
-# t.test.matrix.R
-# get a vectorized function for t test
-
-t.test.matrix <- function(ctr, trt)
+"t.test.matrix" <-
+function(ctr, trt)
 
 { ngenes <- dim(ctr)[1]
   ctr.s <- get.cumsum(ctr)

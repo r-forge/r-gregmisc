@@ -1,11 +1,7 @@
-# calc.power.est.R
-# function to get the list of estimated power for each gene
-# for each of the sample size nrep.simu, set of sd and specified fold.change
-
-calc.power.est <- function(sd, nrep.simu, fold.change, sig.level = 0.05)
+"calc.power.est" <-
+function(sd, nrep.simu, delta, sig.level)
 {
 
-delta = log2(fold.change)
 calc.power <- matrix(0, nr = length(sd), nc = length(nrep.simu))
 
 for (j in 1:length(nrep.simu))
@@ -22,7 +18,7 @@ propn.80 <- apply(temp, 2, mean)
 # prop'n of tests with power>=0.8 for each ssize
 
 power.est.sd <- list(calc.power, propn.80)
-names(power.est) <- c("calc.power", "propn.80")
+names(power.est.sd) <- c("calc.power", "propn.80")
 
 # output will be a list
 # 1st element in list is the matrix of calculated power (ngenes x length(nrep.simu))

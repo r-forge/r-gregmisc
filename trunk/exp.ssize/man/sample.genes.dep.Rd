@@ -2,7 +2,7 @@
 \alias{sample.genes.dep}
 \title{Simulate Observations Given the Covariance Matrix for Normal Distribution}
 \description{
-    simulate a sample() for genes given the covariance matrix for normal
+    simulate a sample for genes given the covariance matrix for normal
     distribution
     }
 \usage{
@@ -31,7 +31,7 @@ sample.genes.dep(n, delta, cov.ctrl, var.ratio, distrn = "normal")
 }
 % \references{ ~put references to the literature/web site here ~ }
 
-\author{ Peng Liu \email{peng\_liu\@groton.pfizer.com}}
+\author{ Peng Liu \email{peng_liu\@groton.pfizer.com}}
 % \note{ ~~further notes~~ }
 
 % ~Make other sections like Warning with \section{Warning }{....} ~
@@ -77,3 +77,4 @@ cat("\n------------------------------------------ \n")
 }
 \keyword{ datagen }% at least one, from doc/KEYWORDS
 \keyword{ multivariate }% __ONLY ONE__ keyword per line
+
