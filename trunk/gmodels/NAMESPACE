@@ -2,6 +2,7 @@
 export(
        CrossTable,
        ci,
+       coefFrame,
        estimable,
        fast.prcomp,
        fast.svd,
