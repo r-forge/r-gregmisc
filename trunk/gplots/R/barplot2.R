@@ -1,9 +1,18 @@
-# $Id$
+# $Log$
+# Revision 1.5  2003/01/30 21:43:05  warnes
+# - Added argument 'add' to allow for the addition of a barplot to an
+#   existing graphic. Default is FALSE
+#
+# Revision 1.4  2003/01/26
+# Updates from Marc Schwartz:
+#
+# -  Added argument 'add' to allow for the addition of a barplot
+#    to an existing graphic. Default is FALSE
 #
 # $Log$
-# Revision 1.4  2003/01/02 16:09:46  warnes
-# - Changed assignment statements that used "=" to "<-" to avoid syntax
-#   errors in older versions of the S language.
+# Revision 1.5  2003/01/30 21:43:05  warnes
+# - Added argument 'add' to allow for the addition of a barplot to an
+#   existing graphic. Default is FALSE
 #
 # Revision 1.3  2002/11/04 14:21:40  warnes
 # Updates from Marc Schwartz:
@@ -46,7 +55,7 @@ function(height, width = 1, space = NULL, names.arg = NULL,
        ci.color = "black", ci.lty = "solid", ci.lwd = 1,
        plot.grid = FALSE, grid.inc = NULL,
        grid.lty = "dotted", grid.lwd = 1, grid.col = "black",
-       ...)
+       add = FALSE, ...)
 {
     if (!missing(inside)) .NotYetUsed("inside", error = FALSE)# -> help(.)
 
@@ -112,7 +121,7 @@ function(height, width = 1, space = NULL, names.arg = NULL,
 
     #if graphic will be stacked bars, do not plot ci
     if (!beside && (NR > 1) && plot.ci)
-      plot.ci <- FALSE
+      plot.ci = FALSE
 
     # error check ci arguments
     if (plot && plot.ci)
@@ -226,8 +235,13 @@ function(height, width = 1, space = NULL, names.arg = NULL,
 
       on.exit(par(opar))
 
-      plot.new()
-      plot.window(xlim, ylim, log = log, ...)
+      # If add = FALSE open new plot window
+      # else allow for adding new plot to existing window
+      if (!add)
+      {
+        plot.new()
+        plot.window(xlim, ylim, log = log, ...)
+      }
 
       # Set plot region coordinates
       usr <- par("usr")
@@ -308,7 +322,7 @@ function(height, width = 1, space = NULL, names.arg = NULL,
       if (plot.ci)
       {
         # CI plot width = barwidth / 2
-        ci.width <- width / 4
+        ci.width = width / 4
 
         if (horiz)
         {

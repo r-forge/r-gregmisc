@@ -1,19 +1,9 @@
 % $Id$
 %
 % $Log$
-% Revision 1.3  2002/11/04 14:21:40  warnes
-% Updates from Marc Schwartz:
-%
-% - Updated underlying code to be based upon the new barplot() in R v1.6.1
-% - This now uses the 'axis.lty' and 'border' arguments
-% - In R v1.6.0, R Core introduced a new function called axTicks().
-%   This is an R equivalent of the C code for CreateAtVector in plot.c.
-%   This now enables me to get the axis tick mark positions consistently
-%   when the 'height' related axis is either linear or log.  Thus, I can
-%   now have consistent tick marks and can plot grid lines in either
-%   situation.  If 'plot.grid = TRUE' and 'grid.inc' is specified, then
-%   I still use pretty() to determine the tick marks and lines.
-% - This code now depends on R 1.6.0 or later.
+% Revision 1.4  2003/01/30 21:43:05  warnes
+% - Added argument 'add' to allow for the addition of a barplot to an
+%   existing graphic. Default is FALSE
 %
 % Revision 1.2  2002/09/23 14:27:17  warnes
 %
@@ -46,7 +36,7 @@
         ci.u = NULL, ci.color = "black", ci.lty = "solid", ci.lwd = 1,
         plot.grid = FALSE, grid.inc = NULL,
         grid.lty = "dotted", grid.lwd = 1, grid.col = "black",
-        \dots)
+        add = FALSE, \dots)
 }
 \arguments{
   \item{height}{either a vector or matrix of values describing the
@@ -136,6 +126,7 @@
   \item{grid.lty}{the line type for the grid}
   \item{grid.lwd}{the line width for the grid}
   \item{grid.col}{the line color for the grid}
+  \item{add}{logical, if \code{TRUE} add barplot to current plot.}
   \item{\dots}{further graphical parameters (\code{\link{par}}) are
     passed to \code{\link{plot.window}()}, \code{\link{title}()} and
     \code{\link{axis}}.}
