@@ -36,15 +36,20 @@ if(exists("is.R") && is.R()==TRUE)
         r
     }
 
-    fast.svd <- function( x, nu, nv, ...) 
+    fast.svd <- function( x, nu = min(n, p), nv = min(n, p), ...) 
       {
-        retval <- La.svd(x, nu, nv,  ... )
-        retval$v <- t(retval$tv)
-        retval$tv <- NULL
+        x <- as.matrix(x)
+        dx <- dim(x)
+        n <- dx[1]
+        p <- dx[2]
+
+        retval <- La.svd(x, nu=nu, nv=nv,  ... )
+        retval$v <- t(retval$vt)
+        retval$vt <- NULL
+        retval
       }
     
-  }
-else    
+  } else 
   {
      # colnames isn't defined in S-Plus
      if(!exists('colnames')) colnames <- function(x) names(x)[[1]]

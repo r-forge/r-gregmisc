@@ -14,10 +14,11 @@
   fast.svd( x, nu = min(n, p), nv = min(n, p), ...) 
 }
 \arguments{
-  \item{x, retx, center, scale, tol}{ See documetation for
+  \item{x}{data matrix}
+  \item{retx, center, scale., tol}{ See documetation for
     \code{\link[mva]{prcomp}}
   }
-  \item{x, nu, nv, ...}{ See documetation for \code{\link{svd}} }
+  \item{nu, nv, ...}{ See documetation for \code{\link{svd}} }
 }
 \details{
  The current implementation of the function \code{\link{svd}} in S-Plus
@@ -96,6 +97,7 @@
   max( abs(val.x) - abs(val.tx) )
 
 
+  library(mva)
 
   # prcomp directly on matrix is SLOW:
   system.time( pr.x <- prcomp(x) )
