@@ -1,7 +1,12 @@
 % $Id$
 %
 % $Log$
+% Revision 1.2  2002/09/23 14:27:17  warnes
+% - Fixed syntax errors in barplot2.Rd and CrossTable.Rd
+% - Fixed incorrect translation of 'F' (distribution) to 'FALSE' in glh.test.Rd
+%
 % Revision 1.1  2002/09/23 13:38:53  warnes
+%
 % - Added CrossTable() and barplot2() code and docs contributed by Marc Schwartz.
 % - Permit combinations() to be used when r>n provided repeat.allowed=TRUE
 % - Bumped up version number
@@ -76,7 +81,7 @@
   \item{col}{a vector of colors for the bars or bar components.}
   \item{prcol}{the color to be used for the plot region.}
   \item{border}{the color to be used for the border of the bars.}
-  \item{main,sub}{overall and sub title for the plot.}
+  \item{main, sub}{overall and sub titles for the plot.}
   \item{xlab}{a label for the x axis.}
   \item{ylab}{a label for the y axis.}
   \item{xlim}{limits for the x axis.}
@@ -84,7 +89,7 @@
   \item{xpd}{logical. Should bars be allowed to go outside region?}
   \item{log}{a character string which contains `"x"' if the x axis is
     to be logarithmic, `"y"' if the y axis is to be logarithmic and
-    `"xy"' or `"yx"' if both axes are to be logarithmic.
+    `"xy"' or `"yx"' if both axes are to be logarithmic.}
   \item{axes}{logical.  If \code{TRUE}, a vertical (or horizontal, if
     \code{horiz} is true) axis is drawn.}
   \item{axisnames}{logical.  If \code{TRUE}, and if there are
@@ -99,10 +104,10 @@
    over the bars. Note that if a stacked bar plot is generated, confidence
    intervals will not be plotted even if \code{plot.ci = TRUE}}
   \item{ci.l and ci.u}{The confidence intervals (ci.l = lower bound, ci.u =
-   upper bound} to be plotted if \code{plot.ci} = \code{TRUE}. Values must have
+   upper bound) to be plotted if \code{plot.ci} = \code{TRUE}. Values must have
    the same dim structure as \code{height}.}
   \item{ci.color}{the color for the confidence interval line segments}
-  \item{ci.lty}{the line type for the confidence interval line segments]
+  \item{ci.lty}{the line type for the confidence interval line segments}
   \item{ci.lwd}{the line width for the confidence interval line segments}
   \item{plot.grid}{if \code{TRUE} a lined grid will be plotted behind the bars}
   \item{grid.inc}{the number of grid increments to be plotted}

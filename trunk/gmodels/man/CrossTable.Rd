@@ -1,7 +1,12 @@
 % $Id$
 %
 % $Log$
+% Revision 1.2  2002/09/23 14:27:16  warnes
+% - Fixed syntax errors in barplot2.Rd and CrossTable.Rd
+% - Fixed incorrect translation of 'F' (distribution) to 'FALSE' in glh.test.Rd
+%
 % Revision 1.1  2002/09/23 13:38:53  warnes
+%
 % - Added CrossTable() and barplot2() code and docs contributed by Marc Schwartz.
 % - Permit combinations() to be used when r>n provided repeat.allowed=TRUE
 % - Bumped up version number
@@ -25,10 +30,10 @@ CrossTable(x, y, digits = 3, expected = FALSE, correct = TRUE)
   \item{y}{A vector in a matrix or a dataframe}
   \item{digits}{Number of digits after the decimal point for cell
     proportions}
-  \item{expected}{If \code{TRUE}, expected cell counts from the Chi^2
-    will be included}
+  \item{expected}{If \code{TRUE}, expected cell counts from the
+    \eqn{\chi^2}{Chi-Square} will be included}
   \item{correct}{If \code{TRUE}, the Yates continuity correction will
-    be applied in the Chi^2 test}
+    be applied in the \eqn{\chi^2}{Chi-Square test}}
 }
 \details{
   A summary table will be generated with cell row, column and table

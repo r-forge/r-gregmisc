@@ -1,6 +1,10 @@
 % $Id$
 %
 % $Log$
+% Revision 1.10  2002/09/23 14:27:17  warnes
+% - Fixed syntax errors in barplot2.Rd and CrossTable.Rd
+% - Fixed incorrect translation of 'F' (distribution) to 'FALSE' in glh.test.Rd
+%
 % Revision 1.9  2002/09/23 13:59:30  warnes
 % - Modified all files to include CVS Id and Log tags.
 %
@@ -40,17 +44,17 @@ summary.glh.test(object, digits=4,...)
   The test statistic is obtained from the formula: 
   \deqn{f = \frac{(C \hat{\beta} - d)' ( C (X'X)^{-1} C' ) (C \hat{\beta}
       - d) / r }{ SSE / (n-p) } }{ 
-    FALSE = (C Beta-hat - d)' ( C (X'X)^-1   C' ) (C Beta-hat - d) / r /
+    F = (C Beta-hat - d)' ( C (X'X)^-1   C' ) (C Beta-hat - d) / r /
         ( SSE / (n-p) )
   }
   
-  Under the null hypothesis, f will follow a FALSE-distribution with r and
+  Under the null hypothesis, f will follow a F-distribution with r and
   n-p degrees of freedom.
 }
 \value{
   Object of class \code{c("glh.test","htest")} with elements:
   \item{call }{Function call that created the object}
-  \item{statistic }{FALSE statistic}
+  \item{statistic }{F statistic}
   \item{parameter}{ vector containing the numerator (r) and denominator
     (n-p) degrees of freedom }
   \item{p.value}{ p-value}
