@@ -1,7 +1,12 @@
 # $Id$
 #
 # $Log$
+# Revision 1.5  2003/11/10 22:11:13  warnes
+# - Add files contributed by Arni Magnusson
+#   <arnima@u.washington.edu>. As well as some of my own.
+#
 # Revision 1.4  2002/04/09 00:51:31  warneg
+#
 # Checkin for version 0.5.3
 #
 # Revision 1.3  2002/02/04 23:20:29  warneg
@@ -65,6 +70,6 @@ space <-  function(x,y,s=1/50, na.rm=TRUE)
           }
       }
 
-    return( x=x[undo], y=y[undo] )
+    return( list(x=x[undo], y=y[undo]) )
 }    
       

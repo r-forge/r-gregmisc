@@ -1,7 +1,12 @@
 # $Id$
 #
 # $Log$
+# Revision 1.13  2003/11/10 22:11:13  warnes
+# - Add files contributed by Arni Magnusson
+#   <arnima@u.washington.edu>. As well as some of my own.
+#
 # Revision 1.12  2003/04/22 17:28:56  warnes
+#
 # - Fixeed warning messing caused when 'connect' is a vector.
 #
 # Revision 1.11  2002/09/24 14:53:56  warnes
@@ -114,9 +119,9 @@ plotmeans  <- function (formula, data = NULL, subset, na.action,
     vars <- ifelse( vars < (minsd^2), (minsd^2), vars)
 
     if(use.t)
-      ci.width  <- qt( (1+p)/2, ns-1 ) * sqrt(vars/(ns-1) )
+      ci.width  <- qt( (1+p)/2, ns-1 ) * sqrt(vars/ns)
     else
-      ci.width  <- qnorm( (1+p)/2 ) * sqrt(vars/(ns-1) )
+      ci.width  <- qnorm( (1+p)/2 ) * sqrt(vars/ns)
 
     if(length(mean.labels)==1 && mean.labels==TRUE)
       mean.labels  <-  format( round(means, digits=digits ))

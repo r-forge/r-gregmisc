@@ -27,8 +27,11 @@ sprint(x,...)
   A character string, or if \code{collapse==NULL} a vector of character
   strings containing the printed output from the R expression.
 }
+\section{WARNING}{R 1.7.0+ includes \code{capture.output}, which
+  duplicates the functionality of \code{capture}.  Thus, \code{capture}
+  is depreciated.}
 \author{Gregory R. Warnes \email{gregory\_r\_warnes@groton.pfizer.com} }
-\seealso{\code{\link[session]{texteval}}}
+\seealso{\code{\link[session]{texteval}}, \code{\link[base]{capture.output}}}}
 \examples{
 
 # capture the results of a loop

@@ -8,8 +8,7 @@
 # Scale data to [0,1]
 foldchange.scale01 <- function(x, low=min(x), high=max(x) )
   {
-    x <- ifelse( abs(x) >= 1, x, NA)
-    x <- ifelse( x>0, x-1, x+1)
+    x <- sign(x)*(abs(x) - 1)
     x <- (x-low)/(high - low)
     x
   }
@@ -24,21 +23,45 @@ scale01 <- function(x, low=min(x), high=max(x) )
 odd <- function(x) x!=as.integer(x/2)*2
 even <- function(x) x==as.integer(x/2)*2 
 
-# Generate red-to-green colorscale
-redgreen <- function(n)
+colorpanel <- function(n,low,mid,high)
   {
-    if(even(n)) warning("n is even: colors will not be symmetric about black")
-    c(
-      hsv(h=0/6, v=seq(1,0,length=round((n+1)/2) )),
-      hsv(h=2/6, v=seq(0,1,length=1 + n - round((n+1)/2))[-1] ),
-      )
+    if(even(n)) warning("n is even: colors panel will not be symmetric")
+
+    # convert to rgb
+    low <- col2rgb(low)
+    mid <- col2rgb(mid)
+    high <- col2rgb(high)
+
+    # determine length of each component
+    lower <- floor(n/2)
+    upper <- n - lower
+    
+    red  <- c(
+              seq(low[1,1], mid [1,1], length=lower),
+              seq(mid[1,1], high[1,1], length=upper)
+              )/255
+
+    green <- c(
+               seq(low[3,1], mid [3,1], length=lower),
+               seq(mid[3,1], high[3,1], length=upper)
+               )/255
+
+    blue <- c(
+              seq(low[2,1], mid [2,1], length=lower),
+              seq(mid[2,1], high[2,1], length=upper)
+              )/255
+
+             
+    rgb(red,blue,green)
   }
 
-# Vice versa
-greenred <- function(...)
-  {
-    rev(redgreen(...))
-  }
+
+
+# Generate red-to-green colorscale
+redgreen <- function(n) colorpanel(n, 'red', 'black', 'green')
+greenred <- function(n) colorpanel(n, 'green', 'black', 'red' )
+bluered  <- function(n) colorpanel(n, 'blue','white','red')
+redblue  <- function(n) colorpanel(n, 'red','white','blue')
 
 # Compute foldchange from log-ratio values
 logratio2foldchange <- function(logratio, base=2)
@@ -78,7 +101,7 @@ heatmap.2 <- function (x,
                        legend.show = TRUE,
                        trace=c("none","column","row","both"),
                        breaks,
-                       density.info=c("histogram","density"),
+                       density.info=c("histogram","density","none"),
                        colsep,
                        rowsep,
                        cellnote,
@@ -91,6 +114,7 @@ heatmap.2 <- function (x,
                        ...
                        ) 
 {
+
     scale <- match.arg(scale)
     dendogram <- match.arg(dendogram)
     trace <- match.arg(trace)
@@ -160,6 +184,14 @@ heatmap.2 <- function (x,
     if(missing(breaks))
       breaks <- seq( min(x), max(x), length=length(col)+1 )
 
+    min.breaks <- min(breaks)
+    max.breaks <- max(breaks)
+    
+    # force data into range given by breaks
+    x[] <- ifelse(x<min.breaks, min.breaks, x)
+    x[] <- ifelse(x>max.breaks, max.breaks, x)
+
+    
     image(1:ncol(x), 1:nrow(x), t(x), axes = FALSE, xlim = c(0.5, 
         ncol(x) + 0.5), ylim = c(0.5, nrow(x) + 0.5), xlab = "", 
         ylab = "", col=col, breaks=breaks,
