@@ -8,7 +8,7 @@
   environment.
 }
 \usage{
-ll(pos, unit = "KB", digits = 0, dimensions = FALSE, ...)
+ll(pos, unit = "KB", digits = 0, dimensions = FALSE, function.dim="", ...)
 }
 \arguments{
   \item{pos}{environment position number or name.}
@@ -17,6 +17,7 @@ ll(pos, unit = "KB", digits = 0, dimensions = FALSE, ...)
   \item{digits}{number of decimals to display when rounding object
     size.}
   \item{dimensions}{whether object dimensions should be returned.}
+  \item{function.dim}{value to report as the dimension of function objects.}
   \item{...}{passed to \code{ls()}.}
 }
 \details{
