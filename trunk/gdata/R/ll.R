@@ -1,5 +1,18 @@
-ll <- function(pos=1, unit=c("KB","MB","bytes"), digits=0, dimensions=FALSE,
-        function.dim="", ...)
+# Contributed by Jim Rogers
+ll <- function(pos, ...) {
+  UseMethod("ll")
+}
+
+# Contributed by Jim Rogers
+ll.data.frame <- ll.list <- function(pos, ...) {
+  attach(pos) ; on.exit(detach(2))
+  pos <- 2
+  NextMethod(pos, ...)
+}
+
+
+ll.default <- function(pos=1, unit=c("KB","MB","bytes"), digits=0,
+                       dimensions=FALSE, function.dim="", ...)
 {
   get.object.classname <- function(object.name, pos)
   {

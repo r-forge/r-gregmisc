@@ -1,5 +1,7 @@
 \name{ll}
 \alias{ll}
+\alias{ll.default}
+\alias{ll.data.frame}
 \title{
   Display Information about Objects in a Given Environment
 }
@@ -8,11 +10,16 @@
   environment.
 }
 \usage{
-ll(pos=1, unit=c("KB","MB","bytes"), digits=0, dimensions=FALSE,
-        function.dim="", ...)
+ll(pos, ...)
+\method{ll}{default}(pos=1, unit=c("KB","MB","bytes"), digits=0,
+        dimensions=FALSE,function.dim="", ...)
+\method{ll}{data.frame}(pos, ...)
+\method{ll}{list}(pos, ...)
+
 }
 \arguments{
-  \item{pos}{environment position number or name.}
+  \item{pos}{environment position number, environment name, list, or
+    data frame.}
   \item{unit}{required unit for displaying object size: "KB", "MB",
     "bytes", or first letter.}
   \item{digits}{number of decimals to display when rounding object
@@ -37,7 +44,11 @@ ll(pos=1, unit=c("KB","MB","bytes"), digits=0, dimensions=FALSE,
   \code{ClassUnionRepresentation}, and \code{grob} do not have a defined
   size, so 0 bytes are assumed for those.
 }
-\author{Arni Magnusson \email{arnima@u.washington.edu}}
+
+\author{Arni Magnusson \email{arnima@u.washington.edu}.  Data frame and
+  list methods contributed by Jim Rogers
+  \email{james\_a\_rogers@groton.pfizer.com}.}
+
 \seealso{
   \code{\link{ls}} displays names of objects in a given environment.
 
@@ -48,6 +59,9 @@ ll()
 ll(all=TRUE)
 ll("package:base")
 ll("package:base")[ll("package:base")$Class!="function",]
+
+data(iris)
+ll(iris)
 }
 % Basics
 \keyword{data}
