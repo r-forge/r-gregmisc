@@ -1,6 +1,10 @@
 # $Id$
 #
 # $Log$
+# Revision 1.2  2001/12/17 18:52:55  warneg
+# - Fixed the link to contrasts.lm.
+# - Rephrased title/description to be more clear.
+#
 # Revision 1.1  2001/12/10 19:35:32  warneg
 # Renamed 'contrsts.coeff.Rd' to 'estimable.Rd' corresponding to function rename.
 #
@@ -12,10 +16,10 @@
 
 \name{estimable}
 \alias{estimable}
-\title{Compute and test estimable linear functions (including
-  contrasts) from the fitted coefficients of regression objects}
-\description{Compute and test estimable linear functions (including
-  contrasts) from the fitted coefficients of regression objects}
+\title{Compute and test estimable linear functions of the fitted
+  coefficients (including contrasts) of regression objects}
+\description{Compute and test estimable linear functions of the fitted
+  coefficients (including contrasts) of regression objects}
 \usage{
 estimable(obj, cm=NULL, alpha=0.05)
 }
@@ -37,7 +41,7 @@ estimable(obj, cm=NULL, alpha=0.05)
   
   The user is responsible for ensuring that the specified
   linear functions are meaningful.  For computing contrasts among levels
-  of a single factor, \code{\link{contrast.factor}} may be more
+  of a single factor, \code{\link{contrast.lm}} may be more
   convenient.
 }
 \note{
@@ -57,7 +61,7 @@ estimable(obj, cm=NULL, alpha=0.05)
   Gregory R. Warnes \email{Gregory\_R\_Warnes\@groton.pfizer.com}}
 
 \seealso{
-  \code{\link{contrast.factor}},
+  \code{\link{contrast.lm}},
   \code{\link{lm}}, \code{\link{lme}},
   \code{\link{contrasts}},
   \code{\link{contr.treatment}},  \code{\link{contr.poly}}  }
