@@ -30,6 +30,10 @@ importFrom(gtools, invalid)
 importFrom(gtools, odd)
 importFrom(gdata, nobs)
 
+importFrom(stats, reorder)
+importFrom(stats, na.omit)
+
+
 S3method(balloonplot,default)
 S3method(balloonplot,table)
 
