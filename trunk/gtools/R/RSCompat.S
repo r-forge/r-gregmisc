@@ -1,6 +1,9 @@
 # $Id$
 #
 # $Log$
+# Revision 1.6  2003/01/02 15:42:00  warnes
+# - Add nlevels function.
+#
 # Revision 1.5  2002/03/20 03:44:32  warneg
 # - Added definition of is.R function.
 #
@@ -166,6 +169,7 @@ if(!exists("is.R") || !is.R() )
 	
         boxplot(split(y, x), xlab = xlab, ylab = ylab, ...) 
       }
-    
+
+    nlevels <- function(x) length(levels(x))
     
   }
