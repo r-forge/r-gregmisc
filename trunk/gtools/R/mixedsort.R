@@ -79,8 +79,10 @@ mixedorder <- function(x)
 
     # and merge
     rank.numeric[!is.na(rank.character)] <- 0  # mask off string values
-    rank.character <- t(t(rank.character) +
-                        apply(rank.numeric,2,max,na.rm=TRUE))
+    rank.character <- t(
+                        t(rank.character) +
+                        apply(matrix(rank.numeric),2,max,na.rm=TRUE)
+                        )
     rank.overall <- ifelse(is.na(rank.character),rank.numeric,rank.character)
 
     order <- do.call("order",as.data.frame(rank.overall))
