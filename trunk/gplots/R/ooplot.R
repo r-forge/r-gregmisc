@@ -5,11 +5,11 @@ ooplot.default <- function(data, width=1, space=NULL, names.arg=NULL,
                            density=NULL, angle=45, kmg="fpnumkMGTP", 
                            kmglim=TRUE, 
                            type=c("xyplot", "linear", "barplot", "stackbar"), 
-                           col=heat.colors(NR), prcol=NULL, 
+                           col=heat.colors(NC), prcol=NULL, 
                            border=par("fg"), main=NULL, sub=NULL, 
                            xlab=NULL, ylab=NULL, xlim=NULL, ylim=NULL, 
                            xpd=TRUE, log="", axes=TRUE, 
-                           axisnames=TRUE, prval=TRUE, 
+                           axisnames=TRUE, prval=TRUE, lm=FALSE,
                            cex.axis=par("cex.axis"), 
                            cex.names=par("cex.axis"),
                            cex.values=par("cex"),inside=TRUE, 
@@ -21,11 +21,79 @@ ooplot.default <- function(data, width=1, space=NULL, names.arg=NULL,
                            by.row=FALSE, ...)
 {
 
+  ##
+  ##  oopplot function block
+  ##
+  ## this is the location of the helper functions for this method
+  ##
+  
+  
+  optlim <- function(lim, log=FALSE) {
+    ## define xlim and ylim, adjusting for log-scale if needed
+    factor <- 1.05
+    if (log) {
+      min <- 10^floor(log10(lim[1]/factor))
+      max <- 10^ceiling(log10(factor*lim[2]))
+    } else {
+      range <- (factor*lim[2]-lim[1]/factor)
+      if (range>0) {
+        ## we know the range, now find the optimal start and endpoints
+        scale <- 10^floor(log10(range))
+        min <- scale*(floor((lim[1]/factor)/scale))
+        max <- scale*(ceiling(factor*lim[2]/scale))
+      } else {
+        min=0
+        max=1
+      }
+    }
+    if (type=="barplot" || type=="stackbar") max=max+1
+    
+    return(c(min, max))
+  }
+
+  linearfitplot <- function(x,y,xlim,col) {
+    ## calculate a linear fit through the datapoints and plot
+    local <- data.frame(x=x,y=y)
+    local.lm <- lm(y ~ x, data=local)
+    summary <- summary(local.lm)
+    xmin=min(x)
+    xmax=max(x)
+    if (xlim[1]<xmin) {
+      x1=mean(xlim[1],xmin)
+    } else {
+      x1=max(min(x),xlim[1])
+    }
+    if (xlim[2]>xmax) {
+      x2=mean(xlim[2],xmax)
+    } else {
+      x2=min(max(x),xlim[2])
+    }
+    y1=summary$coefficients[2,1]*x1+summary$coefficients[1,1]  
+    y2=summary$coefficients[2,1]*x2+summary$coefficients[1,1]
+    p1=c(x1,x2)
+    p2=c(y1,y2)
+    lines(p1,p2,col=col,lty=2,lwd=2)   
+  }
+
+
+  castNA <- function(matrix) {
+    newmatrix <- matrix
+    for (j in 1:ncol(matrix)) {
+      for (i in 1:nrow(matrix)) {
+        newmatrix[i,j] <- ifelse(is.na(matrix[i,j]),0,matrix[i,j])
+      }
+    }
+    return(newmatrix)
+  }
+  ##
+  ## End of function block
+  ## 
   ## In R, most people think about data in columns rather than rows
   if(by.row)
     data <- as.matrix(data)
   else
     data <- t(as.matrix(data))
+
   ## make sure we only accept the supported plot options
   type <- match.arg(type)
   ## check data validity
@@ -33,17 +101,21 @@ ooplot.default <- function(data, width=1, space=NULL, names.arg=NULL,
   ## check defaults 
   if (!missing(inside)) .NotYetUsed("inside", error=FALSE)# -> help(.)
   ## set the beside parameter
-  if (type=="stackbar") 
+  if (type=="stackbar") {
     beside <- FALSE
+    data <- castNA(data)
+  }
   else 
     beside <- TRUE
   
   ## split the data into x and y values
-  height <- data[-1, ]
+  height <- data[-1,,drop=FALSE]
+
+  
   heightscale <- ""
   heightsymbol <- ""
   ##
-  if ((kmg!="") && (kmglim==TRUE)){
+  if ((kmg!="") && (kmglim==TRUE)){   
     ##
     ## auto scale the parameters 
     ##
@@ -114,17 +186,16 @@ ooplot.default <- function(data, width=1, space=NULL, names.arg=NULL,
     height <- height/heightfactor
     
   }
-  
+
+  ## fill the xaxis data set and matching rownames
   xaxis <- data[1, ]
   rownames <- rownames(data)
+
   ##
   if (missing(space))
     space <- if (is.matrix(height) && beside) c(0, 1) else 0.2  
   space <- space * mean(width)
-  
   ##
-  
- 
   if (plot && axisnames && missing(names.arg)) {
     if (type=="xyplot")
       names.arg <- colnames(height)
@@ -137,6 +208,7 @@ ooplot.default <- function(data, width=1, space=NULL, names.arg=NULL,
     else names.arg <- xaxis
   }
 
+
   ## set the legend text if it is null
   if(is.logical(legend.text))
     legend.text <- rownames[-c(1)]
@@ -144,13 +216,13 @@ ooplot.default <- function(data, width=1, space=NULL, names.arg=NULL,
   ##  if(legend.text && is.matrix(height)) rownames(height) 
   ##  else colnames(height)
   
-  ##print(legend.text)
   if (is.vector(height) || is.array(height))
     {
       height <- rbind(height)
     }
   else if (!is.matrix(height))
     stop("`height' must be a vector or a matrix")
+
   ## Check for log scales
   logx <- FALSE
   logy <- FALSE
@@ -172,7 +244,6 @@ ooplot.default <- function(data, width=1, space=NULL, names.arg=NULL,
   NC <- ncol(height)
   ## w.r, w.l, w.m are the x-axis coordinates
 
-
   if (type=="barplot") {
     if (NR<1) NR <- 1
     if (NC<1) NC <- 1
@@ -189,7 +260,8 @@ ooplot.default <- function(data, width=1, space=NULL, names.arg=NULL,
 
   ## set the proper x-axis scale
   ## linear is a switch between equidistant and scaled
-  if (type=="xyplot") { 
+  if (type=="xyplot") {
+    delta <- 0
     w.m <- xaxis
     w.r <- w.m + delta
     w.l <- w.m - delta
@@ -293,6 +365,7 @@ ooplot.default <- function(data, width=1, space=NULL, names.arg=NULL,
       ## if stacked bar, set up base/cumsum levels
       if (type=="stackbar") {
         heightdata <- height ## remember the original values
+
         height <- rbind(rectbase, apply(height, 2, cumsum))
       }
 
@@ -308,39 +381,11 @@ ooplot.default <- function(data, width=1, space=NULL, names.arg=NULL,
       rangeadj <- (-0.01 * lim)
     }
   
-  ## define xlim and ylim, adjusting for log-scale if needed
-  optlim <- function(lim, log=FALSE) {
-    if (log) {
-      min <- 10^floor(log10(lim[1]))
-      max <- 10^ceiling(log10(lim[2]))
-    } else {
-      range <- (lim[2]-lim[1])
-      if (range>0) {
-        ## we know the range, now find the optimal start and endpoints
-        scale <- 10^floor(log10(range))
-        min <- scale*(floor(lim[1]/scale))
-        ##print(paste(":optlim: ", scale, lim[1], min))
-        max <- scale*(ceiling(lim[2]/scale))
-      } else {
-        min=0
-        max=1
-      }
-    }
-    if (type=="barplot" || type=="stackbar") max=max+1
-    
-    return(c(min, max))
-  }
 
   ## calculate the ranges ourselves
   if (missing(xlim)) xlim <- optlim(range(w.l, w.r, na.rm=TRUE), logx)
   if (missing(ylim)) ylim <- optlim(range(height, na.rm=TRUE), logy)
   ##
-  if (FALSE) {
-    print(range(height, na.rm=TRUE))
-    print("xlim, ylim")
-    print(xlim)
-    print(ylim)
-  }
   if(plot) ##-------- Plotting :
     {
       if (type=="barplot" || type=="stackbar") {
@@ -435,9 +480,7 @@ ooplot.default <- function(data, width=1, space=NULL, names.arg=NULL,
 
       ##
       ## end of the general setup, now get ready to plot the elements
-      ##
-      ## print("height:")
-      ## print(height)
+      ##  
       ## cycle through all the sets and plot the lines
       if (type=="xyplot" || type=="linear") {
         pch <- c()
@@ -446,6 +489,7 @@ ooplot.default <- function(data, width=1, space=NULL, names.arg=NULL,
           xrange <- xaxis[list]
           yrange <- height[i, list]
           lines(xrange, yrange, col=col[i])
+          if ((type=="xyplot") && (lm==TRUE)) linearfitplot(xrange,yrange,xlim,col[i])
           symbol=21+(i %% 5)
           points(xrange, yrange, pch=symbol, bg=col[i], col=col[i])
           pch <- c(pch, symbol)
@@ -474,7 +518,7 @@ ooplot.default <- function(data, width=1, space=NULL, names.arg=NULL,
             else
               rect(y1, x1, y2, x2, ...)
           }
-        
+
         chh <- par()$cxy[2]
         chw <- par()$cxy[1]
         if (type=="barplot") {
@@ -547,7 +591,13 @@ ooplot.default <- function(data, width=1, space=NULL, names.arg=NULL,
                 if (length(names.arg)==NC) # i.e. beside (!)
                   colMeans(w.m)
                 else
-                  stop("incorrect number of names")
+                  if ((type=="barplot") && (NR==1)) {
+                    median(w.m)
+                  } else if ((type=="linear") && (NR==1)) {
+                    median(w.m) 
+                  } else {
+                    stop("incorrect number of names now")
+                  }
               }
             else w.m
 

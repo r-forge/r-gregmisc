@@ -10,24 +10,19 @@
 \usage{
 ooplot(data, ...)
 ooplot.default(data, width=1, space=NULL, names.arg=NULL, 
-                           legend.text=NULL, horiz=FALSE, 
-                           density=NULL, angle=45, kmg="fpnumkMGTP", 
-                           kmglim=TRUE, 
-                           type=c("xyplot", "linear", "barplot", "stackbar"), 
-                           col=heat.colors(NR), prcol=NULL, 
-                           border=par("fg"), main=NULL, sub=NULL, 
-                           xlab=NULL, ylab=NULL, xlim=NULL, ylim=NULL, 
-                           xpd=TRUE, log="", axes=TRUE, 
-                           axisnames=TRUE, prval=TRUE, 
-                           cex.axis=par("cex.axis"), 
-                           cex.names=par("cex.axis"),
-                           cex.values=par("cex"),inside=TRUE, 
-                           plot=TRUE, axis.lty=0, plot.ci=FALSE, 
-                           ci.l=NULL, ci.u=NULL, ci.color="black", 
-                           ci.lty="solid", ci.lwd=1, plot.grid=FALSE, 
-                           grid.inc=NULL, grid.lty="dotted", 
-                           grid.lwd=1, grid.col="black", add=FALSE, 
-                           by.row=FALSE, ...)
+               legend.text=NULL, horiz=FALSE, density=NULL, angle=45,
+               kmg="fpnumkMGTP",kmglim=FALSE,
+               type=c("xyplot","linear","barplot","stackbar"),
+               col=heat.colors(NR), prcol=NULL, border=par("fg"),
+               main=NULL, sub=NULL, xlab=NULL, ylab=NULL, xlim=NULL,
+               ylim=NULL, xpd=TRUE, log="", axes=TRUE, axisnames=TRUE,
+               prval=TRUE, lm=FALSE, cex.axis=par("cex.axis"),
+               cex.names=par("cex.axis"), cex.values=par("cex"),
+               inside=TRUE, plot=TRUE, axis.lty=0, plot.ci=FALSE,
+               ci.l=NULL, ci.u=NULL, ci.color="black", ci.lty="solid",
+               ci.lwd=1, plot.grid=FALSE, grid.inc=NULL,
+               grid.lty="dotted", grid.lwd=1, grid.col="black",
+               add=FALSE, by.row=FALSE, ...)
 }
 \arguments{
   \item{data}{a matrix of values describing the values that make up the
@@ -92,6 +87,8 @@ ooplot.default(data, width=1, space=NULL, names.arg=NULL,
     other axis is drawn (with \code{lty=0}) and labeled.}
   \item{prval}{logical. If \code{TRUE}, then values are plotted above
     all points and bars.
+    }
+  \item{lm}{logical. If \code{TRUE}, the linear fit is plotted.
     }
   \item{cex.axis, cex.names, cex.values}{character scaling factor for
     numeric axis labels,
@@ -167,8 +164,10 @@ ooplot.default(data, width=1, space=NULL, names.arg=NULL,
      mp <- ooplot(VADeaths) # default
      mp <- ooplot(VADeaths, type="xyplot")  # same as default
      mp <- ooplot(VADeaths, type="linear")  # linear scale
+     mp <- ooplot(VADeaths, type="linear", log="y") # log scale on y axis
      mp <- ooplot(VADeaths, type="barplot") # barplot
      mp <- ooplot(VADeaths, type="stackbar") # stacked
+
 
      tot <- colMeans(VADeaths[,-1])
      ooplot(VADeaths, 
@@ -176,6 +175,54 @@ ooplot.default(data, width=1, space=NULL, names.arg=NULL,
              legend = colnames(VADeaths)[-1], ylim = c(0, 100),
              type="barplot", cex.values=0.75)
      title(main = "Death Rates in Virginia", font.main = 4)
+
+
+     ##
+     ## Capability demo
+     ##
+     ## examples for the ooplot routine
+     ##
+     ## create some test data
+     test1 <- data.frame(x=c(0,1,2,3,4), lin=c(0,1,2,3,4))
+     test2 <- data.frame(x=c(0,1,2,3,4), par=c(0,1,4,9,16))
+     test3 <- data.frame(x=c(-2,-1,0,1,2),y2=c(4,1,0,1,4))
+     ## single line test example
+     test1f <- test1
+     ## two column example
+     test2f <- merge(test1,test2,by.x="x",all=TRUE,sort=TRUE)
+     ## three column example
+     test3f <- merge(test2f,test3,by.x="x",all=TRUE,sort=TRUE)
+     ## subset, single row, example
+     test5r <- test3f[5,]  
+     
+     ##
+     ## xyplot, linear, barplot, stackbar
+     mat <- matrix(c(1:16),4,4,byrow=TRUE)
+     layout(mat)
+     
+     ooplot(test1f,type="barplot",col=c("red"))
+     title(main="barplot")
+     ooplot(test2f,type="barplot",col=c("red","blue"))
+     ooplot(test3f,type="barplot",col=c("red","blue","green"))
+     ooplot(test5r,type="barplot",col=c("red","blue","green"))
+     
+     ooplot(test1f,type="xyplot",col=c("red"))
+     title(main="xyplot")
+     ooplot(test2f,type="xyplot",col=c("red","blue"))
+     ooplot(test3f,type="xyplot",col=c("red","blue","green"))
+     ooplot(test5r,type="xyplot",col=c("red","blue","green"))
+     
+     ooplot(test1f,type="linear",col=c("red"))
+     title(main="linear")
+     ooplot(test2f,type="linear",col=c("red","blue"))
+     ooplot(test3f,type="linear",col=c("red","blue","green"))
+     ooplot(test5r,type="linear",col=c("red","blue","green"))
+     
+     ooplot(test1f,type="stackbar",col=c("red"))
+     title(main="stackbar")
+     ooplot(test2f,type="stackbar",col=c("red","blue"))
+     ooplot(test3f,type="stackbar",col=c("red","blue","green"))
+     ooplot(test5r,type="stackbar",col=c("red","blue","green"))
 
 }
 \keyword{hplot}
