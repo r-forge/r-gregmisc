@@ -1,14 +1,14 @@
 #!/bin/sh
 
-if [ -z "$LSF_ENVDIR"]; then
+if [ -z "$LSF_ENVDIR" ]; then
     LSF_ENVDIR=/etc
 fi
 
-if [ -f ${LSF_ENVDIR}/profile.lsf]; then
+if [ -f ${LSF_ENVDIR}/profile.lsf ]; then
     . ${LSF_ENVDIR}/profile.lsf
 fi
 
-if [ -f ${LSF_ENVDIR}/lsf.conf]; then
+if [ -f ${LSF_ENVDIR}/lsf.conf ]; then
     . ${LSF_ENVDIR}/lsf.conf
 else
     echo "Cannot find the lsf.conf file in $LSF_ENVDIR"
@@ -18,7 +18,7 @@ fi
 
 LSF_INCLUDE=""
 echo "Try to find lsf/lsf.h ..."
-if [ -f ${LSF_INCLUDEDIR}/lsf/lsf.h]; then
+if [ -f ${LSF_INCLUDEDIR}/lsf/lsf.h ]; then
     echo "Found in ${LSF_INCLUDEDIR}"
     LSF_INCLUDE="-I${LSF_INCLUDEDIR}"
 else 
@@ -28,7 +28,7 @@ else
 fi
 
 echo "Try to find lsf/lsbatch.h ..."
-if [ -f ${LSF_INCLUDEDIR}/lsf/lsbatch.h]; then
+if [ -f ${LSF_INCLUDEDIR}/lsf/lsbatch.h ]; then
     echo "Found in ${LSF_INCLUDEDIR}"
 else 
     echo "Cannot find lsbatch.h header file"
@@ -38,7 +38,7 @@ fi
 
 LSF_LIBS=""
 echo "Try to find libbat ..."
-if [ -f ${LSF_LIBDIR}/libbat.a]; then
+if [ -f ${LSF_LIBDIR}/libbat.a ]; then
     echo "Found in ${LSF_LIBDIR}"
     LSF_LIBS="-L${LSF_LIBDIR} -lbat"
 else
@@ -48,7 +48,7 @@ else
 fi    
 
 echo "Try to find liblsf ..."
-if [ -f ${LSF_LIBDIR}/liblsf.a]; then
+if [ -f ${LSF_LIBDIR}/liblsf.a ]; then
     echo "Found in ${LSF_LIBDIR}"
     LSF_LIBS="${LSF_LIBS} -llsf"
 else
@@ -57,6 +57,7 @@ else
     exit 1
 fi    
 
+echo "Creating src/Makevars"
 echo "PKG_CPPFLAGS = ${LSF_INCLUDE}" > src/Makevars
 echo "PKG_LIBS = ${LSF_LIBS}" >> src/Makevars
 
