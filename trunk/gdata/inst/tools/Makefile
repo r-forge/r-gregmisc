@@ -1,9 +1,11 @@
 # Global Config Variables
 # Paths
 ifeq ($(OS),Windows_NT)
+  # Windows wants the buid to take place in the source dir
   TARGET_DIR  = $(shell pwd)/../inst
 else
-  R_PACKAGE_DIR = $(shell pwd)/../inst
+  # *nix wants it to take place in the target dir
+  R_PACKAGE_DIR ?= $(shell pwd)/../inst
   TARGET_DIR  = $(R_PACKAGE_DIR)/
 endif
 
@@ -51,6 +53,7 @@ PERLDIRS =  PERL_PREFIX='$(PERL_PREFIX)' \
 	    INSTALLMAN3DIR='$(PERL_PREFIX)/man/man3'
 
 ifeq ($(OS),Windows_NT)
+  # Calls to Windows code needs the Windows form of paths
   PERLVARS = $(subst /,\, $(subst /cygdrive/c,C:\,$(PERLDIRS)))	
   PERL_INC = $(subst /,\, $(subst /cygdrive/c,C:\,$(PERL_LIB)))
 else
@@ -107,14 +110,13 @@ show:
 
 
 xls2csv.pl: xls2csv.pl.in
-	# Set explicit path to libaries
 	$(CP) xls2csv.pl.in xls2csv.pl
 
 xls2csv.bat: xls2csv.bat.in
-	$(CP) xls2csv.bat.in  xls2csv.bat
+	$(CP) xls2csv.bat.in xls2csv.bat
 
 xls2csv: xls2csv.in
-	$(CP) xls2csv.in  xls2csv
+	$(CP) xls2csv.in xls2csv
 
 build: basedir $(DIRS) 
 
