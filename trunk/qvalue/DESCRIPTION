@@ -1,6 +1,6 @@
 Package: qvalue
 Title: Software for calculating q-values in multiple testing situations
-Version: 1.0
+Version: 1.0.0
 Author: John D. Storey <storey@stat.berkeley.edu>. R packaging by
         Gregory R. Warnes <gregory_r_warnes@groton.pfizer.com)
 Description: This package takes a list of p-values resulting from the
