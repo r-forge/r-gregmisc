@@ -3,6 +3,21 @@ This file provides a brief list of major feature enhancements
 associated with each package release. For a more detailed list of
 changes see the ChangeLog file.
 
+
+Version 2.0.0
+-------------
+
+First release as a package bundle.  Functions are now segregated into four topic-specific packages:
+
+	gplots
+	gmodels
+	gtool
+	gmisc
+
+Thanks to Nitin Jain for doing most of the work of the conversion to
+a package bundle.
+
+
 Version 1.11.2
 --------------
 
@@ -17,7 +32,7 @@ Version 1.11.1
 
   Runtime Requirements:
 
-	ActiveState perl in the PATH 
+	ActiveState perl in the PATH
 
   Build Requirements:
 
@@ -38,7 +53,7 @@ Version 1.11.0
 
 - Add read.xls(), a function to read Microsoft Excel files by
   translating them to csv files via the xls2csv.pl script, which has
-  also been added to the package.  I've provided scripts to run xls2csv: 
+  also been added to the package.  I've provided scripts to run xls2csv:
 
      Unix systems: $PACKAGE$/gregmisc/bin/xls2csv
      MS-Windows:   $PACKAGE$/gregmisc/bin/xls2csv.bat
