@@ -34,7 +34,7 @@ read.xls(xls, sheet=1, verbose=FALSE, ...)
 \examples{
 
    # iris.xls is included in the gregmisc package for use as an example
-   xlsfile <- file.path(.path.package('gregmisc'),'xls','iris.xls')
+   xlsfile <- file.path(.path.package('gdata'),'xls','iris.xls')
    xlsfile
 
    iris <- read.xls(xlsfile)
