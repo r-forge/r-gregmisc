@@ -1,11 +1,16 @@
 lowess  <- function(x,...)
   UseMethod("lowess")
 
+# make original lowess into the default method
 lowess.default  <- get("lowess",pos=NULL, mode="function")
+
+# add "..." to the argument list to match the generic
+formals(lowess.default) <- c(formals(lowess.default),alist(...= ))
+
 
 "lowess.formula" <-  function (formula,
                                data = parent.frame(), subset, na.action, 
-                               f=3,  iter=3,
+                               f=2/3,  iter=3,
                                delta=.01*diff(range(mf[-response])), ... )
 {
   if (missing(formula) || (length(formula) != 3)) 
