@@ -15,7 +15,7 @@
 textplot(object, halign="center", valign="center", cex, ...)
 \method{textplot}{default}(object, halign=c("center","left","right"),
                   valign=c("center", "top", "bottom"), cex, ... )
-\method{textplot}{data.frame}(object, halign = c("center", "center", "right"),
+\method{textplot}{data.frame}(object, halign = c("center", "left", "right"),
                   valign = c("center", "top", "bottom"), cex, ...)
 \method{textplot}{matrix}(object, halign = c("center", "left", "right"),
                   valign = c("center", "top", "bottom"), cex, cmar = 2,
