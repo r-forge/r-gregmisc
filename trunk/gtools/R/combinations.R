@@ -1,25 +1,5 @@
 # $Id$
 #
-# $Log$
-# Revision 1.4  2004/05/25 17:08:48  warnes
-# Fix an error in the code when using repeats.allow=T and r>2.  Bug
-# report and fix both due to Elizabeth Purdom <epurdom@stanford.edu>.
-#
-# Revision 1.3  2002/09/23 13:38:53  warnes
-#
-# - Added CrossTable() and barplot2() code and docs contributed by Marc Schwartz.
-# - Permit combinations() to be used when r>n provided repeat.allowed=TRUE
-# - Bumped up version number
-#
-# Revision 1.2  2002/04/09 00:51:29  warneg
-#
-# Checkin for version 0.5.3
-#
-# Revision 1.1  2001/06/29 13:23:55  warneg
-#
-# Initial revision.
-#
-
 
 ##
 ## From email by Brian D Ripley <ripley@stats.ox.ac.uk> to r-help
