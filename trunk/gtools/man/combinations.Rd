@@ -1,6 +1,11 @@
 % $Id$
 %
 % $Log$
+% Revision 1.5  2003/04/10 16:22:29  warnes
+% - Added note about the need to increase options("expressions") to use
+%   large values for 'n'.  Prompted by bug report from Huan Huang
+%   <huan.huang@bnpparibas.com
+%
 % Revision 1.4  2002/09/23 13:59:30  warnes
 % - Modified all files to include CVS Id and Log tags.
 %
@@ -42,7 +47,11 @@ permutations(n, r, v=1:n, set=TRUE, repeats.allowed=FALSE)
 }
 \details{
   Caution: The number of combinations and permutations increases rapidly
-  with n and r! 
+  with \code{n} and \code{r}!.
+
+  To use values of \code{n} above about 45, you will need to increase
+  R's recursion limit.  See the \code{expression} argument to the
+  \code{options} command for details on how to do this.
 }
 \value{
   Returns a matrix where each row contains a vector of length \code{n}.
@@ -58,7 +67,7 @@ permutations(n, r, v=1:n, set=TRUE, repeats.allowed=FALSE)
 
 % ~Make other sections like WARNING with \section{WARNING }{....} ~
 
-%\seealso{ ~~objects to SEE ALSO as \code{\link{~~fun~~}}, ~~~ }
+\seealso{ \code{\link[base]{choose}}, \code{\link[base]{options}} }
 
 \examples{
 combinations(3,2,letters[1:3])
@@ -66,5 +75,12 @@ combinations(3,2,letters[1:3],repeats=TRUE)
 
 permutations(3,2,letters[1:3])
 permutations(3,2,letters[1:3],repeats=TRUE)
+
+# To use large 'n', you need to change the default recusion limit
+\dontrun{
+options(expressions=1e5}
+cmat <- combinations(500,2)
+dim(cmat) # 44850 by 2 
+}
 }
 \keyword{ manip }
