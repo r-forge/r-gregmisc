@@ -22,12 +22,14 @@ lsf_initialize(void)
 SEXP
 lsf_job_submit(SEXP sexp_debug, SEXP sexp_command)
 {
-  int jobId, debug;
+  int jobId, debug, i;
   struct submit submitRequest;
   struct submitReply submitReply;
 
   debug = INTEGER(sexp_debug)[0];
   memset(&submitRequest, 0, sizeof(submitRequest));
+  for (i = 0; i < LSF_RLIM_NLIMITS; i++)
+    submitRequest.rLimits[i] = DEFAULT_RLIM;
   submitRequest.command = CHAR(STRING_ELT(sexp_command, 0));
   submitRequest.options |= SUB_OUT_FILE;
   if (debug) {
