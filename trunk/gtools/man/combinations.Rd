@@ -1,6 +1,9 @@
 % $Id$
 %
 % $Log$
+% Revision 1.7  2004/03/26 22:21:15  warnes
+% Uncomment and fix large 'n' example.
+%
 % Revision 1.6  2003/04/22 16:00:27  warnes
 % - Fixed tpyo in example that allowed combinations(500,2) to run when
 %   it should have been ignred for testing..
@@ -68,12 +71,7 @@ permutations(n, r, v=1:n, set=TRUE, repeats.allowed=FALSE)
   \code{repeats.allowed} by Gregory R. Warnes
   \email{Gregory\_R\_Warnes\@groton.pfizer.com}.
   }
-%\note{ ~~further notes~~ }
-
-% ~Make other sections like WARNING with \section{WARNING }{....} ~
-
 \seealso{ \code{\link[base]{choose}}, \code{\link[base]{options}} }
-
 \examples{
 combinations(3,2,letters[1:3])
 combinations(3,2,letters[1:3],repeats=TRUE)
@@ -82,10 +80,8 @@ permutations(3,2,letters[1:3])
 permutations(3,2,letters[1:3],repeats=TRUE)
 
 # To use large 'n', you need to change the default recusion limit
-\dontrun{
 options(expressions=1e5)
-cmat <- combinations(500,2)
+cmat <- combinations(300,2)
 dim(cmat) # 44850 by 2 
-}
 }
 \keyword{ manip }
