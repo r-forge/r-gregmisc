@@ -22,7 +22,7 @@ estimable(obj, cm, beta0, conf.int=NULL, joint.test=FALSE, show.beta0)
    \item{joint.test}{Logical value. If TRUE a 'joint' Wald test for the
      hypothesis \eqn{L \beta=\beta_0}{L \%*\% beta=beta0} is performed.
      Otherwise 'row-wise' tests are performed, i.e. \eqn{(L
-      \beta)_i=\beta_0_i}{(L \%*\% beta)[i]=beta0[i]}
+      \beta)_i=\beta_{0i}}{(L \%*\% beta)[i]=beta0[i]}
     }
    \item{show.beta0}{Logical value. If TRUE a column for beta0 will be
      included in the output table.  Defaults to TRUE when beta0 is
