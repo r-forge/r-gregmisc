@@ -204,8 +204,8 @@ where $G$ is the number of genes on the microarray chip.
     standard formula for the two-sample t-test with pooled variance:}
   \begin{eqnarray}
     \lefteqn{1-\beta} \nonumber \\
-    &= 1-T_{n1+n2-2} \left( t_{\alpha_G/2,n1+n2-2} | \frac{\Delta}{\sigma \sqrt{\frac{1}{n_1} + \frac{1}{n_2}}}\right) \nonumber \\
-    &  ~~+~T_{n1+n2-2} \left( -t_{\alpha_G/2,n1+n2-2} | \frac{\Delta}{\sigma \sqrt{\frac{1}{n_1} + \frac{1}{n_2}}}\right)
+    &= 1-T_{n1+n2-2} \left( t_{\alpha_G/2,n1+n2-2} | \frac{\Delta}{\sigma \sqrt{\frac{1}{n_1} + \frac{1}{n}}}\right) \nonumber \\
+    &  ~~+~T_{n1+n2-2} \left( -t_{\alpha_G/2,n1+n2-2} | \frac{\Delta}{\sigma \sqrt{\frac{1}{n_1} + \frac{1}{n}}}\right)
     \label{eq:formula}
   \end{eqnarray}
  %
@@ -215,7 +215,7 @@ where $G$ is the number of genes on the microarray chip.
 
 \item{Summarize the necessary sample size across all genes using a
       cumulative plot of required sample size. An example of such a
-      plot is given in Figure \ref{fig:CumNPlot} for which we assume equal sample size for the two groups, $n = n_1 = n_2$.}
+      plot is given in Figure \ref{fig:CumNPlot} for which we assume equal sample size for the two groups, $n = n_1 = n$.}
 
 \end{enumerate}
 
@@ -369,12 +369,14 @@ method.
 
 \begin{figure}[h]
   \centerline{\includegraphics*[width=3.2in]{SimuFC.pdf}}
-                                %\centerline{\includegraphics*[width=3.5in]{f3cv.pdf}}
   \caption[Flow Chart for Simulation Study]
-  {Simulation study is performed to check the performance of proposed method.
-    One set of gene expression sample is generated and calculated for sample size following the steps descried in Method. Many sets of gene expression data are generated and
-    tested with standard t-procedure. Test results are pooled to get the true power for
-    each sample size. Estimated sample size and simulation results are compared at the end.}
+   {Simulation study performed to check the performance of proposed method.
+    One set of gene expression sample is generated and calculated
+    for sample size following the steps descried in Method. Many
+    sets of gene expression data are generated and tested with
+    standard t-procedure. Test results are pooled to get the true
+    power for each sample size. Estimated sample size and simulation
+    results are compared at the end.}
   \label{fig:SimuFC}
 \end{figure}
 
@@ -407,8 +409,7 @@ is reassuring, given the high degree of interdependence known to
 exist among genes.
 
 \begin{figure}[h]
-  \centerline{\includegraphics*[width=3.5in]{ResDepF.pdf}}
-                                %\centerline{\includegraphics*[width=3.5in]{f3cv.pdf}}
+  \centerline{\includegraphics*[width=3.2in]{ResDepF.pdf}}
   \caption[Effect of interdependency of genes on sample size estimation]
   {Effect of interdependency of genes on sample size estimation.
     Cumulative plots for sample sizes from both estimation and simulation result
@@ -437,8 +438,7 @@ true result from simulation for all tested proportions of
 differentially expressed genes (Figure \ref{fig:ResAlt}).
 
 \begin{figure}[h]
-  \centerline{\includegraphics*[width=3.5in]{ResAlt.pdf}}
-                                %\centerline{\includegraphics*[width=3.5in]{f3cv.pdf}}
+  \centerline{\includegraphics*[width=3.2in]{ResAlt.pdf}}
   \caption[Effect of proportions of genes with true differential expression on sample size estimation]
   {Effect of proportions of genes with true differential expression on sample size estimation.
     Cumulative plots for sample sizes from both estimation and simulation result
@@ -475,8 +475,7 @@ and, of course, using an unequal variance t-test for detecting
 differentially expressed genes.
 
 \begin{figure}[h]
-  \centerline{\includegraphics*[width=3.5in]{ResVarF.pdf}}
-                                %\centerline{\includegraphics*[width=3.5in]{f3cv.pdf}}
+  \centerline{\includegraphics*[width=3.2in]{ResVarF.pdf}}
   \caption[Effect of variance ratio between treatment groups on sample size estimation]
   {Effect of variance ratio between treatment groups on sample size estimation.
     Cumulative plots for sample sizes from both estimation and simulation
@@ -528,11 +527,7 @@ sample sizes needed for the FDR method is considerably smaller
 than the sample size estimated using Bonferroni adjustment.
 
 \begin{figure}[h]
-  \centerline{\includegraphics*[width=3.5 in]{ResMtd.pdf}}
-                                %\centerline{\includegraphics*[width=3.5in]{f3cv.pdf}}
-  %\center{\Huge This plot is not in CVS, so I don't have it. Please
-  %          check it into CVS!}
-
+  \centerline{\includegraphics*[width=3.2in]{ResMtd.pdf}}
   \caption[Effect of multiple comparison method on sample size estimation]
   {Effect of multiple comparison method on sample size estimation.
     Cumulative plots for sample sizes from both estimation and
