@@ -1,6 +1,10 @@
 % $Id$
 %
 % $Log$
+% Revision 1.6  2003/01/03 19:23:34  warnes
+% - Added reference to and comparison example of sunflowerplot.
+% - Added code to put example plots on same plot window using par(mfrow=...).
+%
 % Revision 1.5  2002/09/23 13:59:30  warnes
 % - Modified all files to include CVS Id and Log tags.
 %
@@ -36,6 +40,9 @@ space(x, y, s=1/50, na.rm=TRUE)
   When there are two or more points with the same (x,y) value (or
   within x+-s[1] and x+-s[2]), it spaces these out in the x direction
   so that the points are separated by at least distance s.
+
+  Another method for dealing with overploting is available in the
+  \code{\link{sunflowerplot}} function.
 }
 \value{
   list with two components
@@ -43,17 +50,27 @@ space(x, y, s=1/50, na.rm=TRUE)
   \item{y}{y location of each input point}
 }
 \author{ Gregory R. Warnes \email{gregory\_r\_warnes\@groton.pfizer.com} }
-\seealso{ \code{\link{jitter}} }
+\seealso{ \code{\link{jitter}}, \code{link}[base]{sunflowerplot} }
 
 \examples{
    x <- rep(1:5, 10)
    y <- round(rnorm(length(x),x))
 
-   # standard x-y plot with overlapping points
-   plot(x,y)
+   prepar <- par("mfrow")
+   par(mfrow=c(1,3))
 
-   # 'spaced' plot 
+   # standard x-y plot: noverlapping points are hidden
+   plot(x,y)
+   title("Standard Plot") 
+
+   # 'spaced' plot: overlapping points are spread out and visible
    plot(space(x,y))
+   title("Plot with 'space'")
+
+   # 'sunflower' plot, another approach, overlapping points are
+   # indicated via petals
+   sunflowerplot(x,y)
+   title("Sunflower Plot")
 
    \testonly{
      # check that missign values correctly handled
@@ -61,6 +78,8 @@ space(x, y, s=1/50, na.rm=TRUE)
      y <- c(y,NA)
      plot(space(x,y))
    }
+
+   par(mfrow=prepar)
 }
 \keyword{ dplot }
 
