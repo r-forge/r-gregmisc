@@ -7,6 +7,8 @@
   These functions sort or order character strings containing numbers so
   that the numbers are numerically sorted rather than sorted by
   character value.  I.e. "Asprin 50mg" will come before "Asprin 100mg".
+  In addition, case of character strings is ignored so that "a", will
+  come before "B" and "C".
 }
 \usage{
 mixedsort(x)

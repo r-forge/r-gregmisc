@@ -5,7 +5,7 @@ mixedorder <- function(x)
     # - Separately rank numbers and strings
     # - Combine orders so that strings follow numbers
 
-    delim="\\$\\@\\$")
+    delim="\\$\\@\\$"
 
     numeric <- function(x)
       {

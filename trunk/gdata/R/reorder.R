@@ -1,6 +1,9 @@
 # $Id$
 #
 # $Log$
+# Revision 1.5  2004/08/27 21:57:41  warnes
+# Fixed bug in mixedsort, and modified reorder.factor to use mixedsort.
+#
 # Revision 1.4  2004/01/21 12:06:26  warnes
 # - Add ... argument to match generic provided in mva.
 #
@@ -24,10 +27,12 @@
 
 # Reorder the levels of a factor.
 
-reorder.factor <- function( x, order, ... )
+reorder.factor <- function( x, order="mixedsort", ... )
   {
     if(is.numeric(order))
       factor( x, levels=levels(x)[order] )
+    else if(length(order)==1 & !is.na(pmatch(order,"mixedsort")))
+      factor( x, levels=mixedsort(levels(x)))
     else
       factor( x, levels=order )
   }
