@@ -1,18 +1,19 @@
 # $Log$
+# Revision 1.6  2003/04/22 15:34:25  warnes
+# Update from Marc Schwartz, modified by Gregory Warnes:
+#
+# -  Modified dim() checks for 'ci.l' and 'ci.u' against 'height'
+#    to remove R v1.7.0 if() based error msgs for vector conditions.
+#
 # Revision 1.5  2003/01/30 21:43:05  warnes
+#
 # - Added argument 'add' to allow for the addition of a barplot to an
 #   existing graphic. Default is FALSE
 #
-# Revision 1.4  2003/01/26
-# Updates from Marc Schwartz:
+# revision 1.4  2003/01/02 16:09:46 warnes
 #
-# -  Added argument 'add' to allow for the addition of a barplot
-#    to an existing graphic. Default is FALSE
-#
-# $Log$
-# Revision 1.5  2003/01/30 21:43:05  warnes
-# - Added argument 'add' to allow for the addition of a barplot to an
-#   existing graphic. Default is FALSE
+#- Changed assignment statements that used "=" to "<-" to avoid syntax
+#  errors in older versions of the S language.
 #
 # Revision 1.3  2002/11/04 14:21:40  warnes
 # Updates from Marc Schwartz:
@@ -143,10 +144,9 @@ function(height, width = 1, space = NULL, names.arg = NULL,
       else if (!is.matrix(ci.u))
         stop("`ci.u' must be a vector or a matrix")
 
-      if (dim(height) != dim(ci.u))
+      if ( any(dim(height) != dim(ci.u) ) )
         stop("'height' and 'ci.u' must have the same dimensions.")
-
-      if (dim(height) != dim(ci.l))
+      else if ( any( dim(height) != dim(ci.l) ) )
         stop("'height' and 'ci.l' must have the same dimensions.")
     }
 
