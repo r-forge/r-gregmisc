@@ -1,40 +1,42 @@
 \name{ttest.matrix}
 \alias{ttest.matrix}
-
-\title{ Vectorized t test }
+\title{Compute running t-tests}
 \description{
-Perform 2-sided t test for two matrices: one is control and one is treatment group.
-Perform tests for the first two columns up to all columns
+  Compute a running pooled t-test
 }
 \usage{
 ttest.matrix(ctr, trt)
 }
-
 \arguments{
-  \item{ctr}{ a matrix of observations from control group
-	rows are observations and columns are replicates}
-  \item{trt}{ a matrix of observations from treatment group
-	rows are observations and columns are replicates }
+  \item{ctr}{ matrix of control samples, 1 sample per column, 1
+    variable per row }
+  \item{trt}{ matrix of treatment samples, 1 sample per column, 1
+    variable per row }
 }
-% \details{
-%    t-test in cumulative columns fashion, with the first column
-%    of result (p-value) for test with the first two columns
-%    and the last column of result for test with all data
-% }
+\details{
+  This function applies a pooled variance t-test 'sequentially' to the control and
+  treatment values specified in order to experimentally test the power
+  of the t-test at various sample sizes.  IE, it efficiently performs
+  the equivalent
+  of
+  \itemize{
+    \item{ t.test( ctr[1:2], trt[1:2] ) }
+    \item{ t.test( ctr[1:3], trt[1:3] ) }
+    \item{ t.test( ctr[1:4], trt[1:4] ) }
+  }
+  
+}
 \value{
-returns a matrix of p-values for 2-sample 2-sided t test
-the matrix has one column less than the sample matrix dimention
+  Matrix of p-values of dimension \code{nrow(x)} by \code{(ncol(x)-1)}
 }
-
-\author{ Peng Liu \email{peng_liu@groton.pfizer.com}}
-
-% \note{ ~~further notes~~ }
-% ~Make other sections like Warning with \section{Warning }{....} ~
-% \seealso{ ~~objects to See Also as \code{\link{~~fun~~}}, ~~~ }
-
+\author{ Peng Liu \email{peng\_liu@groton.pfizer.com}}
+%\seealso{ ~~objects to See Also as \code{\link{~~fun~~}}, ~~~ }
 \examples{
-ctr <- matrix(0, nr = 5, nc = 6)
-trt <- matrix(rnorm(30,5,0.5), nr = 5, nc = 6)
-a <- ttest.matrix(ctr,trt)
+  x <- rbind(V1=rnorm(20, mean=0, sd=1),
+             V2=rnorm(20, mean=0, sd=2))
+  y <- rbind(V1=rnorm(20, mean=0.25, sd=1),
+             V2=rnorm(20, mean=0.25, sd=2))
+
+  ttest.matrix(x,y)
 }
-\keyword{ univar }
+\keyword{htest}
