@@ -1,6 +1,9 @@
 makeLSFcluster <- function()
 {
-  ncpus <- lsf.numcpu()
+  if (!require(Rmpi))
+    stop("The 'Rmpi' package is needed for parallel LSF jobs.")
+  if (!require(snow))
+    stop("The 'snow' package could not be found.")
   
   if (mpi.comm.size() != 0) {
     cl <-getMPIcluster()
@@ -8,7 +11,7 @@ makeLSFcluster <- function()
       cl <- makeCluster(type="MPI") 
   }
   else {
-    cl <- makeCluster(ncpus - 1, type="MPI")
+    cl <- makeCluster(lsf.numcpu(), type="MPI")
   }
 
   return(cl)
