@@ -1,7 +1,11 @@
 # $Id$
 #
 # $Log$
+# Revision 1.6  2001/10/26 02:48:19  warneg
+# Added correct handling of 'xaxt="n"'.
+#
 # Revision 1.5  2001/10/16 22:59:27  warneg
+#
 # Added cvs id and log tag to file header
 #
 #
@@ -26,6 +30,7 @@ plotmeans  <- function (formula, data = NULL, subset, na.action,
                          connect=T,
                          ccol=col,
                          legends=names(means),
+                         xaxt,
                          ...)
 {
   is.R <- get("is.R")
@@ -60,6 +65,7 @@ plotmeans  <- function (formula, data = NULL, subset, na.action,
     m$col  <- m$barwidth  <- NULL
     m$digits  <- m$mean.labels  <- m$ci.label  <- m$n.label <- NULL
     m$connect  <- m$ccol  <-  m$legends <- m$labels<- NULL
+    m$xaxt <- NULL
     m[[1]] <- as.name("model.frame")
     mf <- eval(m, parent.frame())
     response <- attr(attr(mf, "terms"), "response")
@@ -92,7 +98,8 @@ plotmeans  <- function (formula, data = NULL, subset, na.action,
     plotCI(x=1:length(means), y=means, uiw=ci.width, xaxt="n",
            xlab=xlab, ylab=ylab, labels=mean.labels, col=col, xlim=xlim,
            lwd=barwidth, barcol=barcol, minbar=minbar, maxbar=maxbar, ... )
-    axis(1, at = 1:length(means), labels = legends)
+    if(missing(xaxt) || xaxt!="n")
+      axis(1, at = 1:length(means), labels = legends)
     
     if(ci.label)
       {
