@@ -2,9 +2,13 @@
 panel.overplot <- function(formula, data, subset, col, lty, ...)
   {
     m <- match.call()
-    m[[1]] <- as.name('plot.formula')
+    m[[1]] <- as.name('plot')
+    m$f <- NULL                      # Work around bug in R 1.9.X due to
+    names(m)[2] <- ''                # plot.formula() not having same args
+                                     # as plot().
     eval(m, parent.frame() )
 
+    m <- match.call()
     m[[1]] <- as.name('lowess.formula')
     tmp <- eval(m, parent.frame() )
           
