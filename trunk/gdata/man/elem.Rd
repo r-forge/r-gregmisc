@@ -37,8 +37,10 @@ elem(object, unit=c("KB","MB","bytes"), digits=0, dimensions=FALSE)
 }
 \author{Arni Magnusson \email{arnima@u.washington.edu}}
 \seealso{
-  \code{\link{names}}, \code{\link{str}}, and \code{\link{summary}}
-  display different information about object elements.
+
+  \code{\link[base]{names}}, \code{\link[utils{str}}, and
+  \code{\link[base]{summary}} display different information about object
+  elements.
 
   \code{\link{ll}} and \code{\link{env}} are related to \code{elem}.
 }
