@@ -1,12 +1,41 @@
-read.xls <- function(xls, sheet = 1, verbose=FALSE, ...) {
+read.xls <- function(xls, sheet = 1, verbose=FALSE, ...)
+{
+  ###
+  # directories
+  package.dir <- .path.package('gregmisc')
+  perl.dir <- file.path(package.dir,'perl')
+  #
+  ###
+
+  ###
+  # files
   xls <- dQuote(xls) # dQuote in case of spaces in path
-  xls2csv <- file.path(.path.package('gregmisc'),'bin','xls2csv')
+  xls2csv <- file.path(perl.dir,'xls2csv.pl')
   csv <- paste(tempfile(), "csv", sep = ".")
-  cmd <- paste(xls2csv, xls, dQuote(csv), sheet, sep=" ")
-  if(verbose)  cat("Executing ", cmd, "... \n") 
+  #
+  ###
+
+  ###
+  # execution command
+  cmd <- paste("perl", xls2csv, xls, dQuote(csv), sheet, sep=" ")
+  #
+  ###
+
+  ###
+  # do the translation
+  if(verbose)  cat("Executing ", cmd, "... \n")
+  #
   results <- system(cmd, intern=!verbose)
+  #
   if (verbose) cat("done.\n")
+  #
+  ###
+  
+  # now read the csv file
   out <- read.csv(csv, ...)
+
+  # clean up
   file.remove(csv)
-  out
+  
+  return(out)
 }
