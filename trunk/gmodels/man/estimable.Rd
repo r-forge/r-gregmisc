@@ -1,7 +1,14 @@
 # $Id$
 #
 # $Log$
+# Revision 1.3  2001/12/17 18:59:29  warneg
+# - Fixed spelling errors.
+#
+# Revision 1.1  2001/12/17 18:58:27  warneg
+# Initial revision
+#
 # Revision 1.2  2001/12/17 18:52:55  warneg
+#
 # - Fixed the link to contrasts.lm.
 # - Rephrased title/description to be more clear.
 #
@@ -24,8 +31,7 @@
 estimable(obj, cm=NULL, alpha=0.05)
 }
 \arguments{
-  \item{reg}{Regression (lm,glm,lme) object.}
-    be computed.}
+  \item{reg}{Regression (lm,glm,lme) object. }
   \item{cm}{matrix specifying estimable linear functions or contrasts (one per
     row). The number of columns must match the number of fitted
     coefficients in the model.} 
@@ -34,7 +40,7 @@ estimable(obj, cm=NULL, alpha=0.05)
 \details{
   Computes estimates, confidence intervals and significance tests for
   for linear functions of the model coefficients given by the rows of
-  \code{cm}.  The estimates and thier variances are obtainied by
+  \code{cm}.  The estimates and their variances are obtained by
   applying the matrix \code{cm} to the model estimates
   variance-covariance matrix.  Degrees of freedom are obtained from the
   appropriate model terms.
