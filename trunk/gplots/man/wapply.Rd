@@ -1,6 +1,9 @@
 % $Id$
 %
 % $Log$
+% Revision 1.2  2001/09/01 00:01:55  warneg
+% Release 0.3.0
+%
 % Revision 1.1  2001/08/25 05:45:10  warneg
 % Initial Checkin
 %
@@ -14,7 +17,7 @@
      local estimate of the variance. 
 }
 \usage{
-wapply(X, Y, fun=mean, method="range", width=1/10, n=50, ...)
+wapply(x, y, fun=mean, method="range", width=1/10, n=50, ...)
 }
 \arguments{
   \item{x}{ vector of x values for (x,y) pairs }

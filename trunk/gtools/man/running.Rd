@@ -1,6 +1,9 @@
 % $Id$
 %
 % $Log$
+% Revision 1.2  2001/09/01 00:01:55  warneg
+% Release 0.3.0
+%
 % Revision 1.1  2001/08/25 03:59:52  warneg
 % Initial Checkin
 %
@@ -45,7 +48,7 @@ plot(1:20, running(1:20,width=5, allow.fewer=T))
 # plot running mean and central 2 standard deviation range
 # estimated by last 40 observations
 dat <- rnorm(500, sd=1 + (1:500)/500 )
-plot(x)
+plot(dat)
 fun <- function(x,sign=1) mean(x) + sign * sqrt(var(x))
 lines(running(dat,width=50,fun=mean,allow=T),col="blue")
 lines(running(dat,width=50,fun=fun, sign=-1, allow=T),col="red")

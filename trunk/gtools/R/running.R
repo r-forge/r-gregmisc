@@ -1,10 +1,13 @@
-% $Id$
-%
-% $Log$
-% Revision 1.1  2001/08/25 05:53:37  warneg
-% Initial CVS checkin.
-%
-%
+# $Id$
+#
+# $Log$
+# Revision 1.2  2001/09/01 00:01:54  warneg
+# Release 0.3.0
+#
+# Revision 1.1  2001/08/25 05:53:37  warneg
+# Initial CVS checkin.
+#
+#
 "running" _ function( X, fun=mean, width=min(length(X),20),
                      allow.fewer=FALSE,...)
 {
