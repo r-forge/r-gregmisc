@@ -1,7 +1,11 @@
 # $Id$
 #
 # $Log$
+# Revision 1.4  2004/01/21 12:06:26  warnes
+# - Add ... argument to match generic provided in mva.
+#
 # Revision 1.3  2003/04/22 15:42:33  warnes
+#
 # - The mva package (which is part of recommended) now provides a
 #   generic 'reorder' function.  Consequently, the 'reorder' function
 #   here has been renamed to 'reorder.factor'.
@@ -20,7 +24,7 @@
 
 # Reorder the levels of a factor.
 
-reorder.factor <- function( x, order )
+reorder.factor <- function( x, order, ... )
   {
     if(is.numeric(order))
       factor( x, levels=levels(x)[order] )

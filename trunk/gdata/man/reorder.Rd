@@ -1,7 +1,11 @@
 % $Id$
 %
 % $Log$
+% Revision 1.7  2004/01/21 12:06:41  warnes
+% - Add ... argument to match generic provided in mva.
+%
 % Revision 1.6  2003/04/22 15:42:35  warnes
+%
 % - The mva package (which is part of recommended) now provides a
 %   generic 'reorder' function.  Consequently, the 'reorder' function
 %   here has been renamed to 'reorder.factor'.
@@ -38,11 +42,12 @@
   Reorder the levels of a factor
 }
 \usage{
-\method{reorder}{factor}(x, order)
+\method{reorder}{factor}(x, order, ...)
 }
 \arguments{
-  \item{x}{ factor. }
-  \item{order}{ Vector of indexes or label names for new factor ordering.}
+  \item{x}{factor.}
+  \item{order}{Vector of indexes or label names for new factor ordering.}
+  \item{...}{Optional parameters (ignored.)}
 }
 \details{
   When \code{order} is a numeric vector, this function is simply a
@@ -52,7 +57,6 @@
   
   I find this function useful for reordering factors so that the default
   treatment contrasts use the appropriate levels for comparison.
-  
 }
 \value{
   A new factor with the levels ordered as specified.  Note that levels
@@ -61,7 +65,7 @@
 
 \author{Gregory R. Warnes \email{Gregory\_R\_Warnes@groton.pfizer.com}}
 
-\seealso{ \code{\link{factor}} }
+\seealso{ \code{\link{factor}}, \code{\link[mva]{reorder}} }
 
 \examples{
    # Create a 4 level example factor
