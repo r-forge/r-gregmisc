@@ -5,7 +5,7 @@ lsf.apply.model <- function(fun,
                             ...,
                             njobs,
                             nelem,
-                            batch.size=options()$lsf.block.size,
+                            batch.size=getOptions('lsf.block.size'),
                             packages=.packages(),
                             debug = TRUE,
                             savelist = NULL

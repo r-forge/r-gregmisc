@@ -169,4 +169,55 @@ showArgs(SEXP args)
   return R_NilValue;
 }
 
-	
+SEXP
+lsf_kill_job(SEXP sexp_jobid)
+{
+  int jobid, rc;
+
+  jobid = INTEGER(sexp_jobid)[0];
+
+  rc = lsb_signaljob(jobid, SIGKILL);
+  
+  if (rc < 0) {
+    Rprintf("lsf_kill_job: lsb_signaljob: %s\n", lsb_sysmsg());
+    return AsInt(-1);
+  }
+  
+  return AsInt(0);
+}
+
+SEXP
+lsf_suspend_job(SEXP sexp_jobid)
+{
+  int jobid, rc;
+
+  jobid = INTEGER(sexp_jobid)[0];
+
+  rc = lsb_signaljob(jobid, SIGSTOP);
+  
+  if (rc < 0) {
+    Rprintf("lsf_suspend_job: lsb_signaljob: %s\n", lsb_sysmsg());
+    return AsInt(-1);
+  }
+  
+  return AsInt(0);
+}
+
+SEXP
+lsf_resume_job(SEXP sexp_jobid)
+{
+  int jobid, rc;
+
+  jobid = INTEGER(sexp_jobid)[0];
+
+  rc = lsb_signaljob(jobid, SIGCONT);
+  
+  if (rc < 0) {
+    Rprintf("lsf_resume_job: lsb_signaljob: %s\n", lsb_sysmsg());
+    return AsInt(-1);
+  }
+  
+  return AsInt(0);
+}
+
+

@@ -18,7 +18,8 @@
     jobid <- .Call("lsf_job_submit",
                    as.integer(debug),
                    script,
-                   as.integer(ncpus))
+                   as.integer(ncpus),
+                   PACKAGE="Rlsf")
 
     if (jobid)
       list(jobid=jobid,fname=fname,debug=debug)
