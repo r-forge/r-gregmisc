@@ -11,7 +11,7 @@ kill <- function(pid, signal=15)
 
 killall <- function(signal)
   {
-    if(!exists(".pidlist",pos="package:fork"))
+    if(!exists(".pidlist",where="package:fork"))
       warning("No processes to kill, ignored.")
     for(pid in get(".pidlist",pos="package:fork"))
       kill(pid, signal)

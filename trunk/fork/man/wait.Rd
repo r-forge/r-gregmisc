@@ -36,7 +36,7 @@ wait(pid, continued = FALSE, nohang = TRUE, nowait = FALSE,
   and the meanings of the status indicator.
 }
 \references{"wait" and "waitpid"  man pages}
-\author{Gregory R. Warnes <gregory_r_warnes@groton.pfizer.com>}
+\author{ Gregory R. Warnes \email{gregory\_r\_warnes\@groton.pfizer.com}}
 \seealso{\code{\link{fork}}, \code{\link{exit}}, \code{\link{getpid}},
          \code{\link{kill}}, \code{\link{killall}}}}
 \examples{

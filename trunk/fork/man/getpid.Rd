@@ -15,7 +15,7 @@ getpid()
   Integer process id.
 }
 \references{Unix "getpid" man page}
-\author{Gregory R. Warnes <gregory_r_warnes@groton.pfizer.com>}
+\author{ Gregory R. Warnes \email{gregory\_r\_warnes\@groton.pfizer.com}}
 \seealso{\code{\link{fork}}, \code{\link{exit}}, \code{\link{wait}},
          \code{\link{kill}}, \code{\link{killall}}}}
 \examples{

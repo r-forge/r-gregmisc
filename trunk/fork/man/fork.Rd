@@ -80,7 +80,7 @@ fork(slave)
    function returns 0 to the  child  process.
 }
 \references{'fork' man page}
-\author{Gregory R. Warnes <gregory_r_warnes@groton.pfizer.com>}
+\author{ Gregory R. Warnes \email{gregory\_r\_warnes\@groton.pfizer.com}}
 \seealso{\code{\link{getpid}}, \code{\link{exit}}, \code{\link{wait}},
          \code{\link{kill}}, \code{\link{killall}}}}
 \examples{
@@ -159,5 +159,5 @@ pid <- fork(recieve)
 send()
 }
 }
-\keyword{programmming}
+\keyword{programming}
 

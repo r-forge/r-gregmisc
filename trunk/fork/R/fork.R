@@ -11,7 +11,7 @@ fork <- function(slave)
     if(pid==0)
       {
         # the slave shouldn't get a list of the master's children (?)
-        if(exists(".pidlist",pos="package:fork"))
+        if(exists(".pidlist",where="package:fork"))
           remove(".pidlist",pos="package:fork")
         
         if(!is.null(slave))
@@ -25,7 +25,7 @@ fork <- function(slave)
       {
         # save all the pid's that get created just in case the user forgets
         # to keep track of them!
-        if(!exists(".pidlist",pos="package:fork"))
+        if(!exists(".pidlist",where="package:fork"))
           assign(".pidlist",pid,pos="package:fork")
         else
           assign(".pidlist",c(.pidlist, pid),pos="package:fork")
