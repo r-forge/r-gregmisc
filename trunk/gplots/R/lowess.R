@@ -1,7 +1,13 @@
 # $Id$
 #
 # $Log$
+# Revision 1.8  2003/03/07 15:43:44  warnes
+# - Add 'NULL' as the last element of if statement that defines
+#   lowess.default so that when the file is sourced, S-Plus doesn't
+#   display the function definition.
+#
 # Revision 1.7  2003/03/07 15:41:44  warnes
+#
 # - Specify where the defualt lowess function should be found.
 # - Use getFunction in S-Plus instead of 'get'
 #
@@ -25,6 +31,9 @@ if(is.R())
 
     # add "..." to the argument list to match the generic
     formals(lowess.default) <- c(formals(lowess.default),alist(...= ))
+
+    NULL
+
   } else
   {
 
@@ -33,6 +42,8 @@ if(is.R())
 
     lowess  <- function(x,...)
       UseMethod("lowess")
+
+    NULL
   }
 
 
