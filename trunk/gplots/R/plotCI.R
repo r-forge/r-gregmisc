@@ -1,7 +1,11 @@
 # $Id$
 #
 # $Log$
+# Revision 1.5  2002/02/04 19:12:27  warneg
+# - When err="x", 'col' was being used to plot bars, rather than 'barcol'.
+#
 # Revision 1.4  2002/02/04 19:09:53  warneg
+#
 # - fixed typo, when err="x", lty was 'slty' causing an error.
 #
 # Revision 1.3  2001/10/16 23:00:19  warneg
@@ -135,11 +139,11 @@ plotCI <- function (x, y = NULL,
 
       # draw left bar
       if(!is.null(li))
-        myarrows(li, y, pmax(x-gap,li), y, col=col, lwd=lwd, lty=lty,
-               angle=90, length=smidge, code=1)
+        myarrows(li, y, pmax(x-gap,li), y, col=barcol, lwd=lwd,
+                 lty=lty, angle=90, length=smidge, code=1)
       if(!is.null(ui))
-        myarrows(ui, y, pmin(x+gap,ui), y, col=col, lwd=lwd, lty=lty,
-               angle=90, length=smidge, code=1)
+        myarrows(ui, y, pmin(x+gap,ui), y, col=barcol, lwd=lwd,
+                 lty=lty, angle=90, length=smidge, code=1)
       
     }
       
