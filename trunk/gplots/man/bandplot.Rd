@@ -1,15 +1,14 @@
 \name{bandplot}
 \alias{bandplot}
-\title{Plot x-y Points with local Mean and Standard Deviation Lines}
+\title{Plot x-y Points with Locally Smoothed Mean and Standard Deviation}
 \description{
-  Plot x-y Points with lines showing locally smoothed mean and
-  standard deviation lines
+  Plot x-y Points with lines showing the locally smoothed mean and
+  standard deviation.
   }
 \usage{
-  bandplot(x, y,
-           ..., add = F, sd = c(-2:2),
+  bandplot(x, y, ..., add = F, sd = c(-2:2),
            sd.col = c("lightblue", "blue", "red", "blue", "lightblue"),
-           method = "range", width = diff(range(x, na.rm = T))/10, n=50) 
+           method = "frac", width = 1/5, n=50) 
 NULL
 
 }
@@ -34,8 +33,8 @@ NULL
   
   The local mean and standard deviation are calculated by calling
   'wapply'.  By default, bandplot asks wapply to smooth using intervals
-  that span 1/10 of the x range.  See the documentation of that function
-  for details on the algorithm.
+  that include the nearest 1/5 of the data.  See the documentation of
+  that function for details on the algorithm.
   
 }
 \value{
@@ -56,23 +55,25 @@ x <- 1:1000
 y <- rnorm(1000, mean=x/1000, sd=1)
 bandplot(x,y)
 
+#
 # changing mean and variance
-x <- rnorm(400)
-y <- rnorm(400, mean=x, sd=1+1.5*abs(x))
+#
+x <- abs(rnorm(500))
+y <- rnorm(500, mean=2*x, sd=2+2*x)
 
-# the change in dispersion is hard to see whith the points alone:
-plot(x,y, xlim=c(-2,2) )
+# the changing mean and dispersion are hard to see whith the points alone:
+plot(x,y )
 
-# the change is clear with the mean and sd smooths added:
-bandplot(x,y, add=T)
-
-
-# bandplot helps to see that regression removes the mean trend but
-# leaves the trend in variability
-
+# regression picks up the mean trend, but not the change in variance
 reg <- lm(y~x)
 summary(reg)
-bandplot(x,resid(reg))
+
+# using bandplot on the original data helps to show the mean and
+# variance trend
+bandplot(x,y)
+
+# using bandplot on the residuals helps to see that regression removes
+# the mean trend but leaves the trend in variability
 bandplot(predict(reg),resid(reg))
 
 }
