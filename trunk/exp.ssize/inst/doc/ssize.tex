@@ -1,6 +1,7 @@
 \documentclass{bioinfo}
-\copyrightyear{2004}
-\pubyear{2004}
+\usepackage{url}
+\copyrightyear{2005}
+\pubyear{2005}
 
 \begin{document}
 \firstpage{1}
@@ -67,8 +68,11 @@ extended for either or both of these cases.
 
 \section{Availability:}
 
-An R package, \texttt{ssize}, implementing the described
-methods, is available upon request.
+An R package, \texttt{ssize}, implementing the described methods, is
+available from the Bioconductor project web site at
+\url{http://www.bioconductor.org}.  In addition, the \texttt{ssize.sim},
+which includes all of the code for the described simulation is
+available upon request.
 
 %\section{Contact:} \href{ $^{\rm a}$ $ Gregory_R_Warnes@groton.pfizer.com $ \\
 %                          $^{\rm b}$ $PL61@cornell.edu$}
@@ -271,7 +275,7 @@ of a paired t-test.
 
 \section{Simulation Study}
 
-Given the simplifying assumptions used by our propsed method, we
+Given the simplifying assumptions used by our proposed method, we
 chose to perform a simulation study in order to check its
 performance under violations of our assumptions and to determine the
 influences of additional factors that could affect the accuracy of
@@ -615,7 +619,7 @@ desired power. Taking this into account, an ideal sample size
 might be the number on the top of the steep part of the curve and
 on the left of the flat part of the curve.
 
-Our simulation has confirmed that Bejamini and Hochberg procedure to
+Our simulation has confirmed that Benjamini and Hochberg procedure to
 control FDR has much more power than Bonferroni adjustment (Figure
 \ref{fig:ResMtd}). A useful extension of proposed method of would be
 the use of a FDR control instead of the conservative Bonferroni
@@ -631,7 +635,7 @@ FDR-control during the sample size estimation process in the hopes
 of location a method that controls FDR more accurately.
 
 
-\section*{Acknowledgement}
+\section*{Acknowledgment}
 
 This work was supported by Pfizer Global Research and Development.
 
