@@ -57,7 +57,7 @@ ll("package:base")
 ll("package:base")[ll("package:base")$Class!="function",]
 
 data(infert)
-elem(infert)
+ll(infert)
 model <- glm(case~spontaneous+induced, family=binomial, data=infert)
 ll(model, dim=TRUE)
 ll(model$family)

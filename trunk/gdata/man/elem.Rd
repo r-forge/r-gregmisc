@@ -4,6 +4,9 @@
   Display Information about Elements in a Given Object
 }
 \description{
+  \emph{This function is depreciated.  Please use \code{\link{ll}}
+    instead.}
+  
   Display name, class, size, and dimensions of each element in a given
   object.
 }
