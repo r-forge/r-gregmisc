@@ -1,7 +1,12 @@
 % $Id$
 %
 % $Log$
+% Revision 1.2  2003/03/12 17:58:47  warnes
+% - Fixed a typo in the example
+% - Added to lme example
+%
 % Revision 1.1  2003/01/30 21:53:09  warnes
+%
 % - Renamed 'contrast.lm' to 'fit.contrast'.  This new name is more
 %   descriptive and makes it easier to create and use methods for other
 %   classes, eg lme.
@@ -176,10 +181,9 @@ fit.contrast(reg2,x,c(-1,0,0,1))
 set.seed(03215)
 Genotype <- sample(c("WT","KO"), 1000, replace=TRUE)
 Time <- factor(sample(1:3, 1000, replace=TRUE))
-data <- data.frame(y, Genotype, Time)
 y <- rnorm(1000)
+data <- data.frame(y, Genotype, Time)
 
-data <- data.frame(y, Genotype, as.factor(Time))
 
 # Compute Contrasts & obtain 95\% confidence intervals
 
@@ -214,8 +218,25 @@ summary(model, split=list( Genotype=list( "KO vs WT"=1 ),
 library(nlme)
 data(Orthodont)
 fm1 <- lme(distance ~ Sex, data = Orthodont,random=~1|Subject) 
+
+# Contrast for sex.  This example is equivalent to standard treatment
+# contrast.
+#
+fit.contrast(fm1, "Sex", c(-1,1), conf.int=0.95 )
+#
+# and identical results can be obtained using lme built-in 'intervals'
+#
 intervals(fm1)
-fit.contrast(fm1, "Sex", c(1,0) )
+
+# Cut age into quantile groups & compute some contrasts
+Orthodont$AgeGroup <- quantcut(Orthodont$age)
+fm2 <- lme(distance ~ Sex + AgeGroup, data = Orthodont,random=~1|Subject)
+#
+fit.contrast(fm2, "AgeGroup", rbind("Linear"=c(-2,-1,1,2),
+                                    "U-Shaped"=c(-1,1,1,-1),
+                                    "Change-Point at 11"=c(-1,-1,1,1)),
+                              conf.int=0.95)
+
 
 }
 \keyword{ models }
