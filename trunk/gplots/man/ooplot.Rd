@@ -7,89 +7,78 @@
 }
 \usage{
 ooplot(data, ...)
-ooplot.default(data, width=1, space=NULL, names.arg=NULL,
-               legend.text=NULL, beside=TRUE, horiz=FALSE,
-               density=NULL, angle=45,
-               type=c("xyplot","linear","barplot"),
-               col=heat.colors(NR), prcol=NULL, border=par("fg"),
-               main=NULL, sub=NULL, xlab=NULL, ylab=NULL, xlim=NULL,
-               ylim=NULL, xpd=TRUE, log="", axes=TRUE, axisnames=TRUE,
-               cex.axis=par("cex.axis"), cex.names=par("cex.axis"),
-               cex.values=0.7, inside=TRUE, plot=TRUE, axis.lty=0,
-               plot.ci=FALSE, ci.l=NULL, ci.u=NULL, ci.color="black",
-               ci.lty="solid", ci.lwd=1, plot.grid=FALSE,
-               grid.inc=NULL, grid.lty="dotted", grid.lwd=1,
-               grid.col="black", add=FALSE, , by.row=FALSE,
-               ...)
+\method[default]{ooplot}(data, width=1, space=NULL, names.arg=NULL,
+       legend.text=NULL, beside=TRUE, horiz=FALSE, density=NULL,
+       angle=45, type=c("xyplot", "linear", "barplot"),
+       col=heat.colors(NR), prcol=NULL, border=par("fg"), main=NULL,
+       sub=NULL, xlab=NULL, ylab=NULL, xlim=NULL, ylim=NULL, xpd=TRUE,
+       log="", axes=TRUE, axisnames=TRUE, cex.axis=par("cex.axis"),
+       cex.names=par("cex.axis"), cex.values=0.7, inside=TRUE,
+       plot=TRUE, axis.lty=0, plot.ci=FALSE, ci.l=NULL, ci.u=NULL,
+       ci.color="black", ci.lty="solid", ci.lwd=1, plot.grid=FALSE,
+       grid.inc=NULL, grid.lty="dotted", grid.lwd=1, grid.col="black",
+       add=FALSE, by.row=FALSE, ...)
 }
 \arguments{
-  \item{data}{ ~~Describe \code{data} here~~ }
-  \item{width}{ ~~Describe \code{width} here~~ }
-  \item{space}{ ~~Describe \code{space} here~~ }
-  \item{names.arg}{ ~~Describe \code{names.arg} here~~ }
-  \item{legend.text}{ ~~Describe \code{legend.text} here~~ }
-  \item{beside}{ ~~Describe \code{beside} here~~ }
-  \item{horiz}{ ~~Describe \code{horiz} here~~ }
-  \item{density}{ ~~Describe \code{density} here~~ }
-  \item{angle}{ ~~Describe \code{angle} here~~ }
-  \item{type}{ ~~Describe \code{type} here~~ }
-  \item{col}{ ~~Describe \code{col} here~~ }
-  \item{prcol}{ ~~Describe \code{prcol} here~~ }
-  \item{border}{ ~~Describe \code{border} here~~ }
-  \item{main}{ ~~Describe \code{main} here~~ }
-  \item{sub}{ ~~Describe \code{sub} here~~ }
-  \item{xlab}{ ~~Describe \code{xlab} here~~ }
-  \item{ylab}{ ~~Describe \code{ylab} here~~ }
-  \item{xlim}{ ~~Describe \code{xlim} here~~ }
-  \item{ylim}{ ~~Describe \code{ylim} here~~ }
-  \item{xpd}{ ~~Describe \code{xpd} here~~ }
-  \item{log}{ ~~Describe \code{log} here~~ }
-  \item{axes}{ ~~Describe \code{axes} here~~ }
-  \item{axisnames}{ ~~Describe \code{axisnames} here~~ }
-  \item{cex.axis}{ ~~Describe \code{cex.axis} here~~ }
-  \item{cex.names}{ ~~Describe \code{cex.names} here~~ }
-  \item{cex.values}{ ~~Describe \code{cex.values} here~~ }
-  \item{inside}{ ~~Describe \code{inside} here~~ }
-  \item{plot}{ ~~Describe \code{plot} here~~ }
-  \item{axis.lty}{ ~~Describe \code{axis.lty} here~~ }
-  \item{plot.ci}{ ~~Describe \code{plot.ci} here~~ }
-  \item{ci.l}{ ~~Describe \code{ci.l} here~~ }
-  \item{ci.u}{ ~~Describe \code{ci.u} here~~ }
-  \item{ci.color}{ ~~Describe \code{ci.color} here~~ }
-  \item{ci.lty}{ ~~Describe \code{ci.lty} here~~ }
-  \item{ci.lwd}{ ~~Describe \code{ci.lwd} here~~ }
-  \item{plot.grid}{ ~~Describe \code{plot.grid} here~~ }
-  \item{grid.inc}{ ~~Describe \code{grid.inc} here~~ }
-  \item{grid.lty}{ ~~Describe \code{grid.lty} here~~ }
-  \item{grid.lwd}{ ~~Describe \code{grid.lwd} here~~ }
-  \item{grid.col}{ ~~Describe \code{grid.col} here~~ }
-  \item{add}{ ~~Describe \code{add} here~~ }
-  \item{by.row}{Logical value.  If \code{TRUE} the data matrix is
-    organized with variables along rows rather than down colums.}
-  \item{\dots}{ ~~Describe \code{\dots} here~~ }
+  \item{data}{A dataframe or matrix with one column (row if
+    \code{by.row}=TRUE) of x-values and one or more columns (rows) of
+    y-values.}
+  \item{width}{ (Not yet documented.) }
+  \item{space}{ (Not yet documented.) }
+  \item{names.arg}{ (Not yet documented.) }
+  \item{legend.text}{ (Not yet documented.) }
+  \item{beside}{ (Not yet documented.) }
+  \item{horiz}{ (Not yet documented.) }
+  \item{density}{ (Not yet documented.) }
+  \item{angle}{ (Not yet documented.) }
+  \item{type}{ (Not yet documented.) }
+  \item{col}{ (Not yet documented.) }
+  \item{prcol}{ (Not yet documented.) }
+  \item{border}{ (Not yet documented.) }
+  \item{main}{ (Not yet documented.) }
+  \item{sub}{ (Not yet documented.) }
+  \item{xlab}{ (Not yet documented.) }
+  \item{ylab}{ (Not yet documented.) }
+  \item{xlim}{ (Not yet documented.) }
+  \item{ylim}{ (Not yet documented.) }
+  \item{xpd}{ (Not yet documented.) }
+  \item{log}{ (Not yet documented.) }
+  \item{axes}{ (Not yet documented.) }
+  \item{axisnames}{ (Not yet documented.) }
+  \item{cex.axis}{ (Not yet documented.) }
+  \item{cex.names}{ (Not yet documented.) }
+  \item{cex.values}{ (Not yet documented.) }
+  \item{inside}{ (Not yet documented.) }
+  \item{plot}{ (Not yet documented.) }
+  \item{axis.lty}{ (Not yet documented.) }
+  \item{plot.ci}{ (Not yet documented.) }
+  \item{ci.l}{ (Not yet documented.) }
+  \item{ci.u}{ (Not yet documented.) }
+  \item{ci.color}{ (Not yet documented.) }
+  \item{ci.lty}{ (Not yet documented.) }
+  \item{ci.lwd}{ (Not yet documented.) }
+  \item{plot.grid}{ (Not yet documented.) }
+  \item{grid.inc}{ (Not yet documented.) }
+  \item{grid.lty}{ (Not yet documented.) }
+  \item{grid.lwd}{ (Not yet documented.) }
+  \item{grid.col}{ (Not yet documented.) }
+  \item{add}{Logical value.  If FALSE (the default), a new plot region is
+    created.  If TRUE, the plot is added to the current plot region.}
+  \item{by.row}{Logical value.  If FALSE (the default), each column
+    represents a variable.  If TRUE, each row represents a variable.}
+  \item{\dots}{Optional plotting parameters.}
 }
 \details{
-  ~~ If necessary, more details than the __description__  above ~~
+  \emph{This code is not yet properly documented.  Feel free to help out.}
 }
 \value{
-  ~Describe the value returned
-  If it is a LIST, use
-  \item{comp1 }{Description of 'comp1'}
-  \item{comp2 }{Description of 'comp2'}
-  ...
+  To be written.
 }
-\references{ ~put references to the literature/web site here ~ }
 \author{Lodewijk Bonebakker \email{bonebakker@comcast.net} with modifications
   by Gregory R. Warnes \email{gregory\_r\_warnes@groton.pfizer.com}.
   }
-\note{ ~~further notes~~ }
-
-\seealso{ ~~objects to See Also as \code{\link{~~fun~~}}, ~~~ }
+\seealso{\code{\link{barplot2}},\code{\link[base]{barplot}} }
 \examples{
-##---- Should be DIRECTLY executable !! ----
-##-- ==>  Define data, use random,
-##--	or do  help(data=index)  for the standard data sets.
-
      data(VADeaths, package = "base")
 
      VADeaths <- cbind( Age=c(50,55,60,65,70), VADeaths)
@@ -105,7 +94,5 @@ ooplot.default(data, width=1, space=NULL, names.arg=NULL,
              legend = colnames(VADeaths)[-1], ylim = c(0, 100),
              type="barplot", cex.values=1)
      title(main = "Death Rates in Virginia", font.main = 4)
-
 }
 \keyword{hplot}
-
