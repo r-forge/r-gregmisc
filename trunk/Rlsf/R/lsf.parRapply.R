@@ -13,16 +13,20 @@ lsf.parRapply <- function (x, fun, ...,
                            savelist=NULL
                            )
   {
-    require(snow)
-
     if(missing(njobs))
       njobs <- max(1,floor(nrow(x)/batch.size))
     
     if(!is.matrix(x) && !is.data.frame(x))
       stop("x must be a matrix or data frame")
 
+
+    # The version in snow of splitrows uses 'F' instead of 'FALSE' and
+    # so, causes errors in R CMD check
+    lsf.splitRows <- function (x, ncl) 
+      lapply(splitIndices(nrow(x), ncl), function(i) x[i, , drop = FALSE])
+    
     if(njobs>1)
-      rowSet <- splitRows(x, njobs)
+      rowSet <- lsf.splitRows(x, njobs)
     else
       rowSet <- list(x)
     
