@@ -161,20 +161,19 @@ textplot.character <- function (object,
                                 mar=c(0,0,3,0)+0.1,
                                 ...)
   {
-    # when fixed.withd=TRUE, we simulate a fixed width font by
-    # explicitly placing characters at appropriate x,y positions
-
-
     object <- paste(object,collapse="\n",sep="")
 
     halign = match.arg(halign)
     valign = match.arg(valign)
     plot.new()
 
-    opar <- par()[c("mar","xpd","cex")]
+    opar <- par()[c("mar","xpd","cex","family")]
     on.exit( par(opar) )
 
     par(mar=mar,xpd=FALSE )
+    if(fixed.width)
+        par(family="mono")
+
     plot.window(xlim = c(0, 1), ylim = c(0, 1), log = "", asp = NA)
 
     slist   <- unlist(lapply(object, function(x) strsplit(x,'\n')))
@@ -195,20 +194,17 @@ textplot.character <- function (object,
     for (i in 1:20)
       {
         oldcex <- cex
-
+        #cat("cex=",cex,"\n")
+        #cat("i=",i,"\n")
+        #cat("calculating width...")
         cwidth  <- max(sapply(unlist(slist), strwidth,  cex=cex)) * cspace
+        #cat("done.\n")
+        #cat("calculating height...")
         cheight <- max(sapply(unlist(slist), strheight, cex=cex)) * ( lspace + 0.5 )
+        #cat("done.\n")
 
-        if(fixed.width)
-          {
-            width  <- max(slen) * cwidth
-            height <- slines * cheight
-          }
-        else
-          {
-            width <- strwidth(object, cex=cex)
-            height <- strheight(object, cex=cex)
-          }
+        width <- strwidth(object, cex=cex)
+        height <- strheight(object, cex=cex)
 
         if(lastloop) break
 
@@ -233,26 +229,8 @@ textplot.character <- function (object,
         ypos <- 1 - (1 - height)/2
     else ypos <- 1 - (1 - height)
 
-    if(fixed.width)
-      {
-
-        for(line in 1:slines)
-          {
-            cpos <- ((1:length(slist[[line]]))-1) * cwidth
-
-            if(length(slist[[line]])>0)
-              text(x = xpos + cpos,
-                   y = ypos - (line-1)*cheight,
-                   labels=unlist(slist[[line]]),
-                   adj = c(0.5, 1),
-                   cex = cex, ...)
-          }
-      }
-    else
-      {
-        text(x=xpos, y=ypos, labels=object, adj=c(0,1),
+    text(x=xpos, y=ypos, labels=object, adj=c(0,1),
              cex=cex, ...)
-      }
 
     par(opar)
     invisible(cex)
