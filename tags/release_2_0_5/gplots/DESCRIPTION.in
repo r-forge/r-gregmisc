@@ -1,0 +1,4 @@
+Package: gplots
+Title: Various functions to draw plots.
+Description: Various functions to draw miscellaneous plots
+Depends: R (>= 1.9.0), gdata, gtools
