@@ -317,7 +317,7 @@ ooplot.default <- function(data, width=1, space=NULL, names.arg=NULL,
   ## adjust appropriate ranges and bar base values
   if ((logx && horiz) || (logy && !horiz))
     {
-      if (min(height, na.rm=T) <=0)
+      if (min(height, na.rm=TRUE) <=0)
         stop("log scale error: at least one 'height' value <=0")
       
       if (plot.ci && (min(ci.l) <=0))
