@@ -28,43 +28,49 @@
 
 Microarray technology is widely applied in biomedical and
 pharmaceutical research to detect differences in gene expression
-levels between treatment groups.  The high value, and cost, of
-experiments employing microarray technologies makes sample size
-estimation an important issue.  However, the high dimensionality of
-microarray data prevents traditional methods for sample size
-calculation from being directly applied.
+levels between treatment groups.  The information provided by
+experiments utilizing microarrays can have very high value, provided
+sufficient samples are utilized.  On the other hand, processing
+microarrays are expensive in terms of both materials and human
+effort.  As a consequence, an apropriate method for determing the
+effect of sample size on power is essential for balancing scientific
+impact of microarrays against thier experiment cost.  Unfortunately,
+the same high dimensionality that makes microarrays so useful also
+prevents direct application of traditional sample size calculation
+methods.
 
 \section{Method:}
 
-We propose a straightforward method for estimating the sample size
-for microarray experiments. First, standard deviations from
-existing control data are used to estimate the variability of each
-gene. Then, a standard sample size calculation is performed
-separately for each gene.  Finally the calculated sample sizes are
-summarized through a cumulative plot that displays the tradeoff
-between sample size and power.  Scientists can use this
-information to select the best sample size for their specific
-application.  While we illustrate the method using a two-sample
-t-test with pooled variance, it can be easily adapted to any
-statistical method for which sample-size calculation can be
-performed.
+We propose a straightforward method for estimating sample size for
+microarray experiments. First, standard deviations from existing
+control data are used to estimate the baseline variability of each
+gene in the system of interest. Next, a standard sample size
+calculation is performed separately for each gene.  Finally the
+calculated sample sizes are summarized through a cumulative plot
+that displays the tradeoff between sample size and power.
+
+Scientists can then use this information to select the best sample
+size for their specific application.  While we illustrate the method
+using a two-sample t-test with pooled variance, it can be easily
+adapted to any statistical method for which sample-size formulae are
+available.
 
 \section{Results:}
 
-We evaluated the performance of this method for 2-sample t-tests
-using a simulation study which varied parameters that could affect
-the accuracy of the method.  In order to make the simulation as
-realistic as possible, we used variance and covariance information
-obtained from real data.  While the sample size estimation method
-does not explicitly account for the interdependencies among genes,
-we found that its performance was unaffected by the level of
-dependency. We also found that the true proportion of
-differentially expressed genes had no effect on the accuracy of
-the sample size calculation method.  We did find that the large
-differences in variance between treatments and use of alternative
-multiple testing procedure can have a large effect on the accuracy
-of sample size estimation.  Fortunately, our method can be easily
-extended for either or both of these cases.
+We performed a simulation studty to evaluat the performance of this
+method for 2-sample t-tests.  Our simulation varied the primary
+parameters that could affect the accuracy of the proposed method.
+In order to make the simulation as realistic as possible, we used
+variance and covariance information obtained from real data.  While
+the sample size estimation method does not explicitly account for
+the interdependencies among genes, we found that its performance was
+unaffected by the level of dependency. We also found that the true
+proportion of differentially expressed genes had no effect on the
+accuracy of the sample size calculations.  As expected, we did find
+that the large differences in variance between treatments and use of
+alternative multiple testing procedure can have a large effect on
+the accuracy of sample size estimation.  Fortunately, our method can
+be easily extended for either or both of these cases.
 
 \section{Availability:}
 
@@ -416,7 +422,7 @@ is reassuring, given the high degree of interdependence known to
 exist among genes.
 
 \begin{figure}[h]
-  \centerline{\includegraphics*[width=3.2in]{ResDepF_2005.pdf}}
+  \centerline{\includegraphics*[width=3.2in]{ResDepF.pdf}} %%% ResDepF_2005.pdf
   \caption[Effect of interdependency of genes on sample size estimation]
   {Effect of interdependency of genes on sample size estimation.
     Cumulative plots for sample sizes from both estimation and simulation result
@@ -600,16 +606,16 @@ appropriate multiplicity correction during sample size estimation,
 respectively).
 
 Neither the proportion of genes that are interdependent ($\gamma$)
-nor the proportion of genes with true differential expression
-($a$) have any meaningful effect on the accuracy of the sample
-size estimates.  This is fortunate, since a problem in either area
-would be difficult to correct based on information available
-before the experiment is run.  That is, while we expect that genes
-have high correlation within regulatory and functional groups, it
-is currently impossible to determine the level of correlation
-among sets of genes for a given experiment before it is run.
-Likewise it also may be difficult to predict the fraction of genes
-with true differential expression before running the experiment.
+nor the proportion of genes with true differential expression ($a$)
+have any meaningful effect on the accuracy of the sample size
+estimates.  This is fortunate, since a problem in either area would
+be difficult to correct based on information available before the
+experiment is run.  That is, while we expect that genes have high
+correlation within regulatory and functional groups, it is currently
+impossible to determine the level of correlation among sets of genes
+for a given experiment before it is run.  Likewise it difficult to
+predict the fraction of genes with true differential expression
+before running the experiment.
 
 In all of the cumulative plots of sample size versus number of
 genes achieving 80\% power we found that there is a steep increase
