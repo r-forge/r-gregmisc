@@ -8,8 +8,8 @@
   signal to all processes \code{fork}ed during the current session.
 }
 \usage{
-kill(pid, signal = 9)
-killall(signal)
+kill(pid, signal = 15)
+killall(signal = 15)
 }
 \arguments{
   \item{pid}{Process ID for the target process}

@@ -6,10 +6,10 @@
   Create a new R process using the Unix 'fork' system call.
 }
 \usage{
-fork(slave)
+fork(child)
 }
 \arguments{
-  \item{slave}{Function to be executed in the new R process. This can be
+  \item{child}{Function to be executed in the new R process. This can be
   \code{NULL}, see details.}
 }
 \details{
@@ -18,27 +18,39 @@ fork(slave)
   current R process, including open files and sockets including STDIN
   and STDOUT.
   
-  The \code{slave} parameter should  normally contain a function
+  The \code{child} parameter should  normally contain a function
   to be executed in the newly created process.  This function will be
   called in the new process, and \code{exit()} will be called when it
   returns to terminate the process.
 
-  If you wish to explicitly control what happens in the slave process,
-  you can pass \code{slave=NULL}, in which case you are responsible for
-  properly closing down the created process by calling \code{exit()}.
-  Note that the child process inherits all files, including
-  STDIN and STDOUT.  Consequently, code following a fork that has
-  \code{slave=NULL} will be be obtained *competitively* by both
-  processes.  This usually means that neither process will get a
-  consistent picture of the following commands. Consequently you need to
-  ensure that all code that needs to be executed has already been fed to
-  the interpreter before the fork call occurs.  The simplest mechinism
-  to accomplish this is to wrap the code containing the fork in a code
-  block using curly brackets (\code{\{ ... \}}).  This can be a
-  top-level code block, or can be withing a loop or function call.,
+  If you wish to explicitly control what happens in the child process,
+  you can pass \code{child=NULL}, in which case you are responsible for
+  managing all the details.
+
+  First, the child process must call \code{exit()} to terminate instead
+  of \code{quit}.  This is necessary to ensure that temporary files
+  or directories created by the parent process are not removed by the
+  child.
+
+  Second, the child process should not attempt to use STDIN to obtain
+  commands since it shares all files open at the time of the fork with
+  the parent.  This includes STDIN, consequently, any code following
+  the fork will be be obtained *competitively* by both processes.  This
+  usually means that neither process will get a consistent picture of
+  the following commands, since which process gets each line will be
+  simply a matter of which process asked first.
+
+  The best way to avoid the second problem is to simply pass a function
+  to \code{fork} using the \code{slave} parameter.  Another way to
+  accomplish this is to ensure that all code that needs to be executed
+  has already been fed to the interpreter before the fork call occurs.
+  The simplest mechinism to achieve this is to wrap the code containing
+  the fork in a code block using curly brackets (\code{\{ ... \}}).
+  This can be a top-level code block, or can be withing a loop or
+  function call.,
  
-  To illustrate, this code (in a familiar C idiom) will NOT be
-  interpreted properly:
+  To illustrate the latter approach, this code is a familiar C idiom for
+  forking will NOT be interpreted properly:
     
   pid = fork(slave=NULL)
     
@@ -51,11 +63,12 @@ fork(slave)
     cat("Hi from the parent process"); 
     
   \} 
-    
+
+  [NB: sorry about the formatting verbatim blocks are not supported by
+  the R manual format, so indentation is lost]
 
   On the other hand, wrapping this code with curly brackets ensures it
-  is intepreted properly:
-
+  IS intepreted properly:
     
   \{ 
 
