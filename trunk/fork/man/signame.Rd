@@ -2,7 +2,7 @@
 \alias{signame}
 \alias{sigval}
 \alias{siglist}
-\title{Obtain information about signals}.
+\title{Obtain information about signals}
 \description{
   \code{signame} looks up signal information by the symbolic signal name.
   \code{sigval}  looks up signal information by the numeric value.
