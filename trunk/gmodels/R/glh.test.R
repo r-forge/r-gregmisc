@@ -1,7 +1,11 @@
 # $Id$
 #
 # $Log$
+# Revision 1.5  2002/01/17 23:42:39  warneg
+# - Fixed typo in code that resulted in an syntax error.
+#
 # Revision 1.4  2002/01/10 17:35:41  warneg
+#
 # - print.glh.test() was using cat() to printing the call.  This didn't work and
 # generated an error.
 #
@@ -42,7 +46,7 @@ glh.test <- function( reg, cm, d=rep(0, nrow(cm)) )
   if ( ncol(cm) != length(bhat) ) stop(  
                    paste( "\n Dimension of ",
                          deparse( substitute( cm ) ), ": ",
-o                         paste( dim(cm), collapse="x" ),
+                         paste( dim(cm), collapse="x" ),
                          ", not compatible with no of parameters in ",
                          deparse( substitute( reg ) ), ": ",
                          length(bhat), sep="" ) )
