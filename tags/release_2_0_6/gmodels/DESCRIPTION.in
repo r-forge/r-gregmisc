@@ -1,0 +1,4 @@
+Package: gmodels
+Title: Various functions to manipulate models.
+Description: Various functions to manipulate models.
+Depends: R (>= 1.9.0), MASS
