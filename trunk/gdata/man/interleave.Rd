@@ -1,6 +1,10 @@
 % $Id$
 %
 % $Log$
+% Revision 1.4  2003/06/07 17:58:37  warnes
+% - Fixed error in examples.  Had sqrt(var(x)/(n-1)) for the standard
+%   error of the mean instead of sqrt(var(x)/n).
+%
 % Revision 1.3  2002/09/23 13:59:30  warnes
 % - Modified all files to include CVS Id and Log tags.
 %
@@ -61,7 +65,7 @@ g1 <- sample(letters[1:5], 1000, replace=TRUE)
 g2 <- sample(LETTERS[1:3], 1000, replace=TRUE )
 dat <- rnorm(1000)
 
-stderr <- function(x) sqrt( var(x,na.rm=TRUE) / (nobs(x) - 1 ) )
+stderr <- function(x) sqrt( var(x,na.rm=TRUE) / nobs(x) )
 
 means   <- aggregate.table( dat, g1, g2, mean )
 stderrs <- aggregate.table( dat, g1, g2, stderr )
