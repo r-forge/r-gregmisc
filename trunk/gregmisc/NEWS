@@ -1,3 +1,15 @@
+Version 0.10.2
+
+- Fixed latex warning.
+
+- Fixed smartlegend() positioning when x and/or y axis are log-scale.
+
+- Add function remove.vars().
+
+Version 0.10.1
+
+- Fixed bug in textplot() reported by Kevin Wright  <kevin.d.wright at pioneer
+  dot com>.
 
 Version 0.10.0
 
