@@ -1,17 +1,18 @@
 #!/bin/sh 
 
-if [ $# != 2 ]; then
-	echo "Usage: $0 <environment file> <function to run>"
+if [ $# -lt 2 ]; then
+	echo "Usage: $0 <data file> <function name> [<function arg> ...]"
 	exit 1
 fi
 
 lsfenvfile=$1; shift
 lsffunc=$1; shift
+lsfargs=`echo $*|sed 's/ /,/g'`
 
-R --vanilla <<EOF > Rout.$LSB_JOBID
+R --vanilla <<EOF
 
 load("${lsfenvfile}")
-lsf.ret <- ${lsffunc}()
+lsf.ret <- ${lsffunc}(${lsfargs})
 save.image(file = "${lsfenvfile}")
 
 EOF
