@@ -2,3 +2,6 @@
 - Modify csv2xls.pl to accept a sheet name in place of a sheet number 
   (worksheets may not occupy sequential sheet numbers in the file, making
    it hard to pull the right one out by number.)
+
+- Recode gtools::running() to improve performance.  See
+  http://tolstoy.newcastle.edu.au/R/help/04/10/5161.html.
