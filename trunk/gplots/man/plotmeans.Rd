@@ -1,7 +1,11 @@
 % $Id$
 %
 % $Log$
+% Revision 1.5  2001/10/16 23:04:45  warneg
+% Forgot to add minbar and maxbar to usage section.
+%
 % Revision 1.4  2001/10/16 23:03:27  warneg
+%
 % Added description of minbar and maxbar.
 %
 % Revision 1.3  2001/10/16 22:35:36  warneg
@@ -21,8 +25,8 @@
 %\synopsis{
 \usage{
 plotmeans(formula, data=NULL, subset, na.action,
-          bars=T, p=0.95, minsd=0, xlab=names(mf)[2],
-          ylab=names(mf)[1], mean.labels=F,
+          bars=T, p=0.95, minsd=0, minbar, maxbar,
+          xlab=names(mf)[2], ylab=names(mf)[1], mean.labels=F,
           ci.label=F, n.label=T, digits=getOption("digits"),
           col="black", barwidth=1, barcol="blue",
           connect=T, ccol=col, legends=names(means), ...)
