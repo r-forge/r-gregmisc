@@ -1,6 +1,10 @@
 # $Id$
 #
 # $Log$
+# Revision 1.4  2003/01/02 16:09:46  warnes
+# - Changed assignment statements that used "=" to "<-" to avoid syntax
+#   errors in older versions of the S language.
+#
 # Revision 1.3  2002/11/04 14:21:40  warnes
 # Updates from Marc Schwartz:
 #
@@ -108,7 +112,7 @@ function(height, width = 1, space = NULL, names.arg = NULL,
 
     #if graphic will be stacked bars, do not plot ci
     if (!beside && (NR > 1) && plot.ci)
-      plot.ci = FALSE
+      plot.ci <- FALSE
 
     # error check ci arguments
     if (plot && plot.ci)
@@ -304,7 +308,7 @@ function(height, width = 1, space = NULL, names.arg = NULL,
       if (plot.ci)
       {
         # CI plot width = barwidth / 2
-        ci.width = width / 4
+        ci.width <- width / 4
 
         if (horiz)
         {
