@@ -49,42 +49,39 @@ fork(slave)
   This can be a top-level code block, or can be withing a loop or
   function call.,
  
-  To illustrate the latter approach, this code is a familiar C idiom for
-  forking will NOT be interpreted properly:
-    
-  pid = fork(slave=NULL)
-    
-  if(pid==0) \{ 
-    
-    cat("Hi from the child process"); exit() 
-    
-  \} else \{ 
-    
-    cat("Hi from the parent process"); 
-    
-  \} 
+  To illustrate, this code is a familiar C idiom for forking will NOT be
+  interpreted properly:
 
-  [NB: sorry about the formatting verbatim blocks are not supported by
-  the R manual format, so indentation is lost]
+\preformatted{
+  pid = fork(slave=NULL)
+      
+  if(pid==0) { 
+      
+    cat("Hi from the child process"); exit() 
+      
+  } else { 
+      
+    cat("Hi from the parent process"); 
+      
+  }
+}
+
+%  [NB: sorry about the formatting preformatted blocks are not supported by
+%  the R manual format, so indentation is lost]
 
   On the other hand, wrapping this code with curly brackets ensures it
   IS intepreted properly:
     
-  \{ 
-
+\preformatted{
+  {
     pid = fork(slave=NULL) 
-
-    if(pid==0) \{ 
-
-      cat("Hi from the child process\\n"); exit() 
-
-    \} else \{
-      
-      cat("Hi from the parent process\\n");
-    
-    \} 
-    
-  \} 
+    if(pid==0) { 
+      cat("Hi from the child process\n"); exit() 
+    } else {
+      cat("Hi from the parent process\n");
+    } 
+  } 
+}
 
 }
 \value{
@@ -95,7 +92,7 @@ fork(slave)
 \references{'fork' man page}
 \author{ Gregory R. Warnes \email{gregory\_r\_warnes\@groton.pfizer.com}}
 \seealso{\code{\link{getpid}}, \code{\link{exit}}, \code{\link{wait}},
-         \code{\link{kill}}, \code{\link{killall}}}}
+         \code{\link{kill}}, \code{\link{killall}} }
 \examples{
 
 ###

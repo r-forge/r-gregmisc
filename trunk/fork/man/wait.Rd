@@ -6,16 +6,13 @@
   stop or terminate.}
 }
 \usage{
-wait(pid, continued = FALSE, nohang = TRUE, nowait = FALSE,
-     untraced = FALSE)
+wait(pid, nohang=FALSE, untraced=FALSE)
 }
 \arguments{
   \item{pid}{integer indicating the set of child processes  for
     which status is requested.  If missing or \code{NULL}, wait
     for all child processes.}
-  \item{continued}{Use the WCONTINUED flag.}
   \item{nohang}{Use the WNOHANG flag.}
-  \item{nowait}{Use the WNOWAIT flag.}
   \item{untraced}{Use the WUNTRACED flag.}
 }
 \details{
@@ -38,7 +35,7 @@ wait(pid, continued = FALSE, nohang = TRUE, nowait = FALSE,
 \references{"wait" and "waitpid"  man pages}
 \author{ Gregory R. Warnes \email{gregory\_r\_warnes\@groton.pfizer.com}}
 \seealso{\code{\link{fork}}, \code{\link{exit}}, \code{\link{getpid}},
-         \code{\link{kill}}, \code{\link{killall}}}}
+         \code{\link{kill}}, \code{\link{killall}}}
 \examples{
 waittest <- function()
 { 
@@ -51,7 +48,7 @@ waittest <- function()
     }
   else
     {
-      wait(pid, nohang=FALSE, nowait=FALSE)
+      wait(pid)
       cat("Hi, I'm the main process, and I wait()ed until the child process\n")
       cat("finished before introducing myself.\n")
     }

@@ -27,7 +27,7 @@ exit(status = 0)
 \references{"\_exit" man page}
 \author{ Gregory R. Warnes \email{gregory\_r\_warnes\@groton.pfizer.com}}
 \seealso{\code{\link{fork}}, \code{\link{getpid}}, \code{\link{wait}},
-         \code{\link{kill}}, \code{\link{killall}}}}
+         \code{\link{kill}}, \code{\link{killall}} }
 \examples{
 waittest <- function()
 { 
@@ -40,7 +40,7 @@ waittest <- function()
     }
   else
     {
-      wait(pid, nohang=FALSE, nowait=FALSE)
+      wait(pid)
       cat("Hi, I'm the main process, and I wait()ed until the child process\n")
       cat("finished before introducing myself.\n")
     }

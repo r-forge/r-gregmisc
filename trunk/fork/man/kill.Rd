@@ -30,7 +30,7 @@ killall(signal = 15)
 \references{"kill" and "waitpid"  man pages}
 \author{ Gregory R. Warnes \email{gregory\_r\_warnes\@groton.pfizer.com}}
 \seealso{\code{\link{getpid}}, \code{\link{exit}}, \code{\link{wait}},
-         \code{\link{kill}}, \code{\link{killall}}}}
+         \code{\link{kill}}, \code{\link{killall}} }
 \examples{
 
    # start a process that just sleeps for 10 seconds
