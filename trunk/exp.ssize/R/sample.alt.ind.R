@@ -1,5 +1,5 @@
 "sample.alt.ind" <-
-function( ngenes.alt.ind , n, sd.vector, var.ratio, delta, distrn = "normal")
+function( ngenes.alt.ind , n, sd.vector, var.ratio, delta)
 				
 { ## start of the fn sample.alt.ind
 

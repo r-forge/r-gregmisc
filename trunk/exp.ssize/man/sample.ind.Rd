@@ -9,23 +9,17 @@
        Normal Distribution with Simulated sd
 }
 \usage{
-sample.null.ind(ngenes.null.ind, n, var.ratio, shape, scale)
-sample.alt.ind(ngenes.alt.ind, n, var.ratio, delta, shape, scale)
+sample.ind(ngenes.ind, n, sd.ctrl, var.ratio, delta)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{ngenes.null.ind}{ an integer number for the number of observations
-           (gene expression values) to simulate for genes coming from true
-            null hypothesis}
-  \item{n}{ number of replicates for each group of control/treatment}
-  \item{var.ratio}{ ratio of variance between treatment/control}
-  \item{shape}{ paramter of gamma distribution to generate inv(variance) }
-  \item{scale}{ paramter of gamma distribution to generate inv(variance) }
-  \item{distrn}{ always being normal}
-
-  \item{ngenes.alt.ind}{ an integer number for the number of observations
+  \item{ngenes.ind}{ an integer number for the number of observations
           (gene expression values) to simulate for genes coming from true
            alternative hypothesis}
+  \item{n}{ number of replicates for each group of control/treatment}
+  \item{sd.ctrl}{ vector of positive numbers for the sample length as 
+           ngenes.ind }
+  \item{var.ratio}{ ratio of variance between treatment/control}
   \item{delta}{ effect size, absolute difference of the means between genes
           from true alternative and true null nypothesis groups}
 }

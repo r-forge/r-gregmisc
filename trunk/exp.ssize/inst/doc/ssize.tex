@@ -67,7 +67,7 @@ extended for either or both of these cases.
 
 \section{Availability:}
 
-An R package, \texttt{exp.ssize}, implementing the described
+An R package, \texttt{ssize}, implementing the described
 methods, is available upon request.
 
 %\section{Contact:} \href{ $^{\rm a}$ $ Gregory_R_Warnes@groton.pfizer.com $ \\
@@ -88,27 +88,26 @@ expression and SNP (Single Nucleotide Polymorphism) genotyping,
 microarrays produce huge amounts of data which are providing new
 insights in these disciplines.
 
-Microarray experiments are rather costly in terms of both
-materials (RNA sample, reagents, chip, etc), laboratory manpower,
-and data analysis effort.  As a consequence, many microarray
-experiments often employ only a small number of replicates (2 to
-8) (\citealp{Speed03}). In many cases, this sample size may not be
-adequate to perform reliable statistical estimation.
-Alternatively, a given sample size may be larger than necessary
-for answering the question at hand.  Either case can result in an
-enormous waste of resources. It is critical, therefore, to perform
-proper experimental design, including sample size estimation,
-before carrying out the experiment. Since tens of thousands of
-variables (gene expressions) are measured on each single chip, it
-is essential to take into account multiple testing and dependency
-among variables when calculating sample size.  Estimating sample
-size for large numbers of statistical tests imposes new questions,
-including: Should one use one or multiple values for power? Should
-a single value for minimum effect size be used?  How should error
-rates be adjusted for multiple-testing?  Further, traditional
-methods for sample size calculation apply only to a single
-hypothesis test and cannot be directly applied to the microarray
-problem.
+Microarray experiments are rather costly in terms of materials (RNA
+sample, reagents, chip, etc), laboratory manpower, and data analysis
+effort.  As a consequence, many microarray experiments often employ
+only a small number of replicates (2 to 8) (\citealp{Speed03}). In
+many cases, this sample size may not be adequate to perform reliable
+statistical estimation.  Alternatively, a given sample size may be
+larger than necessary for answering the question at hand.  Either
+case can result in an enormous waste of resources. It is critical,
+therefore, to perform proper experimental design, including sample
+size estimation, before carrying out the experiment. Since tens of
+thousands of variables (gene expressions) are measured on each
+individual chip, it is essential to take into account multiple
+testing and dependency among variables when calculating sample size.
+Estimating sample size for large numbers of statistical tests
+imposes new questions, including: Should one use one or multiple
+values for power? Should a single value for minimum effect size be
+used?  How should error rates be adjusted for multiple-testing?
+Further, traditional methods for sample size calculation apply only
+to a single hypothesis test and cannot be directly applied to the
+microarray problem.
 
 Possible approaches to estimating sample size for microarray
 experiments range between two extremes. At one extreme, sample size
@@ -118,12 +117,12 @@ interdependencies among variables. Provided that the model is
 appropriate, this choice should generate a highly accurate answer.
 However, it can take tremendous effort to find an appropriate and
 general model, not to mention the complexity necessary for fitting
-the model. As an example of this approach, Zien et al. (2003)
+such a model. As an example of this approach, Zien et al. (2003)
 proposed a hierarchical model including several different sources of
-error, including heuristic choices for the key parameters in the
+error and suggest heuristic choices for the key parameters in the
 model. Unfortunately, the model itself is non-identifiable,
-preventing the direct use of historical data to provide all of the
-necessary parameters.  As the behavior of microarray data from
+preventing the direct use of historical data to directly estimate
+the necessary parameters.  As the behavior of microarray data from
 different microarray technologies and for different biological
 systems is extremely varied, the applicability of this model and its
 heuristic parameters to a particular problem is uncertain.
@@ -215,7 +214,7 @@ where $G$ is the number of genes on the microarray chip.
 
 \item{Summarize the necessary sample size across all genes using a
       cumulative plot of required sample size. An example of such a
-      plot is given in Figure \ref{fig:CumNPlot} for which we assume equal sample size for the two groups, $n = n_1 = n$.}
+      plot is given in Figure \ref{fig:CumNPlot} for which we assume equal sample size for the two groups, $n = n_1 = n_2$.}
 
 \end{enumerate}
 
@@ -243,16 +242,16 @@ where $G$ is the number of genes on the microarray chip.
   \label{fig:CumFoldChangePlot}
 \end{figure}
 
-On the cumulative plot, for the point with x coordinate $n$, the
-$y$ coordinate is the proportion of genes which require a sample
-size smaller than or equal to $n$, or equivalently the proportion
-of genes with power greater than or equal to the specified power
-($1-\beta$) at sample size $n$. Hence it allows users to visualize
-the relationship between power for all genes and the sample size
-in a single plot. Based on user-defined criterion, a sample size
-can be selected for a proposed microarray experiment. For example,
-a sample size of 10 will be chosen if more than $70\%$ of genes
-are desired to achieve the power of $80\%$ for this example.
+On the cumulative plot, for a point with x coordinate $n$, the $y$
+coordinate is the proportion of genes which require a sample size
+smaller than or equal to $n$, or equivalently the proportion of
+genes with power greater than or equal to the specified power
+($1-\beta$) at sample size $n$. This plot allows users to visualize
+the relationship between power for all genes and required sample
+size in a single display.  A sample size can thus be selected for a
+proposed microarray experiment based on user-defined criterion. For
+the plot in figure \ref{fig:CumNPlot}, for example, requiring $70\%$
+of genes to achieve the $80\%$ power yields a sample size of 10.
 
 Similar plots can be generated by fixing the sample size and
 varying one of the other parameters, namely, significance level
@@ -263,29 +262,30 @@ such plots are shown in Figures (\ref{fig:CumPowerPlot}) and
 Our method for computing sample size is easily adapted to other
 statistical tests for detecting differentially expressed genes. For
 example, if several groups of treatments are to be compared using
-ANOVA, our method can be modified by substituting the pooled t-test
+ANOVA, our method can be modified by replacing the pooled t-test
 sample size formula (\ref{eq:formula}) with the corresponding
-formula for the F-test. Similarly, for the paired t-test, formula
-(\ref{eq:formula}) can be replaced with a paired t-test sample
-formula.
+formula for the F-test. Similarly, formula (\ref{eq:formula}) can be
+replaced with a paired t-test sample size formula to allow the use
+of a paired t-test.
 
 
 \section{Simulation Study}
 
-We performed a simulation study in order to check the performance of
-the proposed method under violations of our assumptions and to
-determine the influences of additional variables that may affect the
-result.
+Given the simplifying assumptions used by our propsed method, we
+chose to perform a simulation study in order to check its
+performance under violations of our assumptions and to determine the
+influences of additional factors that could affect the accuracy of
+the results.
 
-There are many variables that may affect the accuracy of our
-sample size estimation method. For example, our method assumes
-independence between tests. However, our biological understanding
-predicts--and measured gene expressions demonstrate--strong
-dependency patterns among genes (e.g. among co-regulated genes).
-Unequal variance between the control and treatment groups is
-another potential violation of our method's assumptions. Finally,
-the proportion of truly differentially expressed genes might also
-influence the accuracy of sample size estimation.  Table
+Many variables could affect the accuracy of our sample size
+estimation method. For example, our method assumes independence
+between tests. However, our biological understanding predicts--and
+measured gene expressions demonstrate--strong dependency patterns
+among genes (e.g. among co-regulated genes).  Unequal variance
+between the control and treatment groups is another potential
+violation of our method's assumptions. Finally, the proportion of
+truly differentially expressed genes might also influence the
+accuracy of sample size estimation.  Table
 \ref{tb:SimuVariables} summarizes each of the variables that we
 included in our simulation study.
 
@@ -499,7 +499,7 @@ control family-wise type I error. Our simulations demonstrate
 that, as expected, change in $\Delta$ has no effect on the
 accuracy of our sample size estimation methods since the value of
 $\Delta$ is explicitly included in the sample size formula
-\ref{eq:formula}, thus sample sizes are calculated accordingly.
+\ref{eq:formula}.
 
 \subsection{Multiple Comparison Method}
 
@@ -582,16 +582,16 @@ clients to make the difficult tradeoffs between cost and
 statistical power.
 
 In order to check the performance of our proposed method, we
-performed an extensive simulation study. Of the variables tested
-in the simulation (Table \ref{tb:SimuVariables}), only variance
-structure and the error control method in multiple testing had any
-substantial impact on the accuracy of the sample size estimation.
-Both of these were expected \textit{a-priori }due to the specific
-assumption employed when estimating the sample size for each
-individual gene and are easily corrected by appropriate
-modifications to the method (i.e. use of the appropriate
-sample-size formula and use of the appropriate multiplicity
-correction during sample size estimation, respectively).
+performed an extensive simulation study. Of the variables tested in
+the simulation (Table \ref{tb:SimuVariables}), only variance
+structure and the multiple testing method in had any substantial
+impact on the accuracy of the sample size estimation.  Both of these
+were expected \textit{a-priori }due to the specific assumption
+employed when estimating the sample size for each individual gene
+and are easily corrected by appropriate modifications to the method
+(i.e. use of the appropriate sample-size formula and use of the
+appropriate multiplicity correction during sample size estimation,
+respectively).
 
 Neither the proportion of genes that are interdependent ($\gamma$)
 nor the proportion of genes with true differential expression
@@ -615,20 +615,20 @@ desired power. Taking this into account, an ideal sample size
 might be the number on the top of the steep part of the curve and
 on the left of the flat part of the curve.
 
-Our simulation has confirmed that Bejamini and Hochberg procedure
-to control FDR has much more power than Bonferroni adjustment
-(Figure \ref{fig:ResMtd}). A useful extension of proposed method
-of would be the use of a FDR control instead of the conservative
-Bonferroni adjustment. One approach, suggested by Yang \textit{et
-al.} (2003) computes an individual type I error to control FDR
-based on an initial guess of how many genes will be differentially
-expressed ($n_0$). This could be used to modify our method to
-provide a better estimate. But their proposed transformation of
-FDR to type I error rate is conservative and may control FDR at a
-level more strict than desired. We are currently investigating
-other methods for applying FDR-control during the sample size
-estimation process in the hopes of location a method that controls
-FDR similarly as the real test procedure.
+Our simulation has confirmed that Bejamini and Hochberg procedure to
+control FDR has much more power than Bonferroni adjustment (Figure
+\ref{fig:ResMtd}). A useful extension of proposed method of would be
+the use of a FDR control instead of the conservative Bonferroni
+adjustment. One approach, suggested by Yang \textit{et al.} (2003)
+computes an individual type I error to control FDR based on an
+initial guess of how many genes will be differentially expressed
+($n_0$). This could be used to modify our method to provide a better
+estimate when a FDR adjustment will be employed.  Unfortunately, the
+proposed transformation of FDR to type I error rate is conservative
+and may control FDR at a level more strict than desired. We are
+currently investigating this and other methods for applying
+FDR-control during the sample size estimation process in the hopes
+of location a method that controls FDR more accurately.
 
 
 \section*{Acknowledgement}
@@ -637,40 +637,55 @@ This work was supported by Pfizer Global Research and Development.
 
 \begin{thebibliography}{}
 
-\bibitem[Benjamini and Hochberg, 1995]{Benjamini95} Benjamini, Y. and Hochberg, Y. (1995)
-  Controlling the false discovery rate: a practical and powerful
-  approach to multiple testing, {\it Journal of Royal Statistical
-    Society B}, {\bf 57:1}, 289-300.
+\bibitem[Benjamini and Hochberg, 1995]{Benjamini95} Benjamini, Y. 
+  and Hochberg, Y. (1995) Controlling the false discovery rate: a
+  practical and powerful approach to multiple testing, {\it Journal
+  of Royal Statistical Society B}, {\bf 57:1}, 289-300.
 
-\bibitem[Dow, 2003]{Dow0303} Dow,G.S. (2003) Effect of sample size and p-value filtering techniques on the detection of transcriptional changes induced in
-  rat neuroblastoma (NG108) cells by mefloquine, {\it Malaria Journal}, {\bf 2}, 4.
+\bibitem[Dow, 2003]{Dow0303} Dow,G.S. (2003) Effect of sample size
+  and p-value filtering techniques on the detection of
+  transcriptional changes induced in rat neuroblastoma (NG108) cells
+  by mefloquine, {\it Malaria Journal}, {\bf 2}, 4.
 
-\bibitem[Heller, 2002]{Heller02} Heller, M. J. (2002) {DNA microarray technology: devices, systems, and applications},
-  {\it Annual Review in Biomedical Engineering}, {\bf 4}, 129-153.
+\bibitem[Heller, 2002]{Heller02} Heller, M. J. (2002) {DNA
+  microarray technology: devices, systems, and applications}, {\it
+  Annual Review in Biomedical Engineering}, {\bf 4}, 129-153.
 
-\bibitem[Hwang {\it et~al}., 2002]{Hwang02} Hwang,D., Schmitt, W. A., Stephanopoulos, G., Stephanopoulos, G. (2002)
-  Determination of minimum sample size and discriminatory expression patterns in microarray data,
-  {\it Bioinformatics}, {\bf 18:9}, 1184-1193.
+\bibitem[Hwang {\it et~al}., 2002]{Hwang02} Hwang,D., Schmitt,
+  W. A., Stephanopoulos, G., Stephanopoulos, G. (2002) Determination
+  of minimum sample size and discriminatory expression patterns in
+  microarray data, {\it Bioinformatics}, {\bf 18:9}, 1184-1193.
 
-\bibitem[Irizarry {\it et~al}., 2003]{Irizarry03} Irizarry, R.A., Hobbs, B., Collin, F., Beazer-Barclay, Y.D., Antonellis, K.J.,
-  Scherf, U., Speed, T.P. (2003)
-   Exploration, normalization, and summaries of high density oligonucleotide array probe level data,
+\bibitem[Irizarry {\it et~al}., 2003]{Irizarry03} Irizarry, R.A.,
+  Hobbs, B., Collin, F., Beazer-Barclay, Y.D., Antonellis, K.J.,
+  Scherf, U., Speed, T.P. (2003) Exploration, normalization, and
+  summaries of high density oligonucleotide array probe level data,
   {\it Biostatistics}, {\bf 4:2}, 249-264.
 
-\bibitem[Mandel {\it et~al}., 2003]{Mandel03} Mandel, S.,  Weinreb, O., Youdim, M. B. H. (2003)
-  Using cDNA microarray to assess Parkinson's disease models and
-  the effects of neuroprotective drugs, {\it TRENDS in Pharmacological Sciences}, {\bf 24:4}, 184-191.
+\bibitem[Mandel {\it et~al}., 2003]{Mandel03} Mandel, S.,  Weinreb,
+  O., Youdim, M. B. H. (2003) Using cDNA microarray to assess
+  Parkinson's disease models and the effects of neuroprotective
+  drugs, {\it TRENDS in Pharmacological Sciences}, {\bf 24:4},
+  184-191.
 
-\bibitem[Yang and Speed, 2003]{Speed03} Yang, Y. H., Speed, T. {Design and analysis of comparative microarray experiments
-  \it Statistical analysis of gene expression microarray data},  {Chapman and Hall}, 51.
+\bibitem[Yang and Speed, 2003]{Speed03} Yang, Y. H., Speed, T. 
+  {Design and analysis of comparative microarray experiments \it
+  Statistical analysis of gene expression microarray data}, {Chapman
+  and Hall}, 51.
 
 \bibitem[Storey, 2002]{Storey02} Storey, J., (2002)
-  A direct approach to false discovery rates, {\it Journal of Royal Statistical Society B}, {\bf 64:3}, 479-498.
+  A direct approach to false discovery rates, {\it Journal of Royal
+  Statistical Society B}, {\bf 64:3}, 479-498.
 
-\bibitem[Yang {\it et~al.}, 2003]{Yang03} Yang, M. C. K., Yang, J. J., McIndoe, R. A., She, J. X. (2003)
-  Microarray experimental design: power and sample size considerations, {\it Physiological Genomics}, {\bf 16}, 24-28.
+\bibitem[Yang {\it et~al.}, 2003]{Yang03} Yang, M. C. K., Yang,
+  J. J., McIndoe, R. A., She, J. X. (2003) Microarray experimental
+  design: power and sample size considerations, {\it Physiological
+  Genomics}, {\bf 16}, 24-28.
 
-\bibitem[Zien {\it et~al.}, 2003]{Zien03} Zien, A., Fluck, J., Zimmer, R., Lengauer, T. (2003)
-  Microarrays: how many do you need?, {\it Journal of Computational Biology}, {\bf 10:3-4}, 653-667.
+\bibitem[Zien {\it et~al.}, 2003]{Zien03} Zien, A., Fluck, J.,
+  Zimmer, R., Lengauer, T. (2003) Microarrays: how many do you
+  need?, {\it Journal of Computational Biology}, {\bf 10:3-4},
+  653-667.
+
 \end{thebibliography}
 \end{document}

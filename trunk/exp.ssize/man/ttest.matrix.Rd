@@ -1,4 +1,5 @@
 \name{ttest.matrix}
+\alias{t.test.matrix}
 \alias{ttest.matrix}
 \title{Compute running t-tests}
 \description{
@@ -6,6 +7,7 @@
 }
 \usage{
 ttest.matrix(ctr, trt)
+t.test.matrix(ctr, trt)
 }
 \arguments{
   \item{ctr}{ matrix of control samples, 1 sample per column, 1
@@ -17,12 +19,12 @@ ttest.matrix(ctr, trt)
   This function applies a pooled variance t-test 'sequentially' to the control and
   treatment values specified in order to experimentally test the power
   of the t-test at various sample sizes.  IE, it efficiently performs
-  the equivalent
-  of
-  \itemize{
-    \item{ t.test( ctr[1:2], trt[1:2] ) }
-    \item{ t.test( ctr[1:3], trt[1:3] ) }
-    \item{ t.test( ctr[1:4], trt[1:4] ) }
+  the equivalent of
+  \enumerate{
+    \item{1}{ t.test( ctr[1:2], trt[1:2] ) }
+    \item{2}{ t.test( ctr[1:3], trt[1:3] ) }
+    \item{3}{ t.test( ctr[1:4], trt[1:4] ) }
+    \item{\code{ncol(ctr)-1}}{ t.test( ctr[1:ncol(ctr)], trt[1:ncol(trt)]) }
   }
   
 }

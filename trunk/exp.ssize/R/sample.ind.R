@@ -1,5 +1,5 @@
 "sample.ind" <-
-function( ngenes.ind , n, sd.ctrl, var.ratio, delta, distrn = "normal")
+function( ngenes.ind , n, sd.ctrl, var.ratio, delta)
 { ## start of the fn sample.null.ind
   ## note: here, delta is a number, can change it to a vector
 

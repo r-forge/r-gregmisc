@@ -1,12 +1,15 @@
+% $Id$
 \name{sample.genes.dep}
 \alias{sample.genes.dep}
+\alias{sample.genes.dep.grp}
 \title{Simulate Observations Given the Covariance Matrix for Normal Distribution}
 \description{
     simulate a sample for genes given the covariance matrix for normal
     distribution
     }
 \usage{
-sample.genes.dep(n, delta, cov.ctrl, var.ratio, distrn = "normal")
+sample.genes.dep(n, delta, cov.ctrl, var.ratio)
+sample.genes.dep.grp(n, delta, cov.ctrl, var.ratio)
 }
 \arguments{
   \item{n}{ number of replicates for each observation(gene) for each 
@@ -17,10 +20,12 @@ sample.genes.dep(n, delta, cov.ctrl, var.ratio, distrn = "normal")
   \item{cov.ctrl}{ covariance matrix for control group }
   \item{var.ratio}{ a positive number for the ration of variance between 
            treatment and control }
-  \item{distrn}{ distribution of expression data, set to be normal for here }
 }
 \details{
-  the number of observation in the generated sample depends on the size of 
+  \code{sample.genes.dep} allows any size covariance matrix, while
+  \code{sample.genes.dep.grp} assumes that the covariance matrix is 50x50.
+
+  The number of observation in the generated sample depends on the size of 
   covariance matrix, the replicates for each observation for each control/
   treatment group is specified by n
 }
@@ -32,9 +37,6 @@ sample.genes.dep(n, delta, cov.ctrl, var.ratio, distrn = "normal")
 % \references{ ~put references to the literature/web site here ~ }
 
 \author{ Peng Liu \email{peng_liu\@groton.pfizer.com}}
-% \note{ ~~further notes~~ }
-
-% ~Make other sections like Warning with \section{Warning }{....} ~
 
 % \seealso{ ~~objects to See Also as \code{\link{~~fun~~}}, ~~~ }
 

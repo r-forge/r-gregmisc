@@ -11,7 +11,6 @@
 \usage{
 sample.dep(ngenes.dep, n, var.ratio, cov.matrix, ngenes.matrix, delta, distrn = "normal")
 }
-%- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{ngenes.dep}{integer number of genes to sample the dependent expression  }
   \item{n}{ positive integer number of replicates for each gene each group 
@@ -25,10 +24,6 @@ sample.dep(ngenes.dep, n, var.ratio, cov.matrix, ngenes.matrix, delta, distrn = 
            coming from the true alternative hypothesis group}
   \item{distrn}{ distribution of expression data, set to be normal for here }
 }
-% \details{
-%   ~~ If necessary, more details than the __description__  above ~~
-% }
-
 \value{
   returns a matrix with ngenes.ind rows and 2*n columns with the first n 
   columns being samples from control group and last n columns being from
@@ -38,14 +33,10 @@ sample.dep(ngenes.dep, n, var.ratio, cov.matrix, ngenes.matrix, delta, distrn = 
 % \references{ ~put references to the literature/web site here ~ }
 
 \author{ Peng Liu \email{peng\_liu@groton.pfizer.com}}
-% \note{ ~~further notes~~ }
-
-% ~Make other sections like Warning with \section{Warning }{....} ~
 
 % \seealso{ ~~objects to See Also as \code{\link{~~fun~~}}, ~~~ }
 
 \examples{
-##---- Should be DIRECTLY executable !! ----
  library(MASS)
 # set.seed(100)
 
@@ -70,13 +61,16 @@ cov.matrix[[7]][3,2] <- cov.matrix[[7]][2,3] <- 0.4
 ## begin testing
 test.sample.dep <- sample.dep( n.dep , n, var.ratio, cov.matrix, ngenes, delta, distrn = "normal")
 
-\dontrun{
-% begin of dontrun
+\dontrun{ % begin of dontrun
+
 ndim <- dim(test.sample.dep);
 var.r <- rep(0, ndim[1])
 
 for ( i in c(1:ndim[1]))
-  { var.r[i] <- var(test.sample.dep[i,(n+1):(2*n)]) / var(test.sample.dep[i,1:n])}
+  {
+     var.r[i] <- var(test.sample.dep[i,(n+1):(2*n)]) /
+                var(test.sample.dep[i,1:n])
+  }
 
 generated.cov <- cov(t(test.sample.dep[,1:n]), t(test.sample.dep[,1:n]))
 # the fn cov compute the covariance between the columns
@@ -93,8 +87,9 @@ cat(" ------------------------------------------ \n",
 cat("the covariance matrix for the generated sample is: \n")
 print(generated.cov)
 cat("\n------------------------------------------ \n")
+
 } % end of dontrun
-  } ## the end of the function sample.null.dep
+
 }
-\keyword{ datagen }% at least one, from doc/KEYWORDS
-\keyword{ multivariate }% __ONLY ONE__ keyword per line
+\keyword{ datagen }
+\keyword{ multivariate }

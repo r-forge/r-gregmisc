@@ -1,5 +1,5 @@
 "sample.genes.dep" <-
-function(n, delta, cov.ctrl, var.ratio, distrn = "normal")
+function(n, delta, cov.ctrl, var.ratio)
 {
      ndep <- ifelse(length(cov.ctrl) != 1, length(cov.ctrl[1,]), 1)	
    #  # get num(genes)/dependent group if the covariance matrices have different dim
