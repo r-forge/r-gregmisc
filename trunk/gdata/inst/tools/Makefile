@@ -3,6 +3,7 @@
 ifeq ($(OS),Windows_NT)
   TARGET_DIR  = $(shell pwd)/../inst
 else
+  R_PACKAGE_DIR = $(shell pwd)/../inst
   TARGET_DIR  = $(R_PACKAGE_DIR)/
 endif
 
