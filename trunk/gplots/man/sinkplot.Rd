@@ -38,7 +38,7 @@ sinkplot(operation = c("start", "plot", "cancel"), ...)
 \examples{
 
    set.seed(12456)
-   x <- factor(sample( LETTERS[1:5], 50, replace=T))
+   x <- factor(sample( LETTERS[1:5], 50, replace=TRUE))
    y <- rnorm(50, mean=as.numeric(x), sd=1)
 
 
