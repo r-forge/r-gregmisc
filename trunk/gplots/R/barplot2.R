@@ -1,7 +1,22 @@
 # $Id$
 #
 # $Log$
+# Revision 1.3  2002/11/04 14:21:40  warnes
+# Updates from Marc Schwartz:
+#
+# - Updated underlying code to be based upon the new barplot() in R v1.6.1
+# - This now uses the 'axis.lty' and 'border' arguments
+# - In R v1.6.0, R Core introduced a new function called axTicks().
+#   This is an R equivalent of the C code for CreateAtVector in plot.c.
+#   This now enables me to get the axis tick mark positions consistently
+#   when the 'height' related axis is either linear or log.  Thus, I can
+#   now have consistent tick marks and can plot grid lines in either
+#   situation.  If 'plot.grid = TRUE' and 'grid.inc' is specified, then
+#   I still use pretty() to determine the tick marks and lines.
+# - This code now depends on R 1.6.0 or later.
+#
 # Revision 1.2  2002/10/11 18:02:15  warnes
+#
 # - Fixed log scale errors in legend() call
 #
 # Revision 1.1  2002/09/23 13:38:53  warnes
@@ -10,10 +25,8 @@
 # - Permit combinations() to be used when r>n provided repeat.allowed=TRUE
 # - Bumped up version number
 #
-#
 
 barplot2 <- function(height, ...) UseMethod("barplot2")
-
 
 barplot2.default <-
 function(height, width = 1, space = NULL, names.arg = NULL,
@@ -24,15 +37,14 @@ function(height, width = 1, space = NULL, names.arg = NULL,
        xlim = NULL, ylim = NULL, xpd = TRUE, log = "",
        axes = TRUE, axisnames = TRUE,
        cex.axis = par("cex.axis"), cex.names = par("cex.axis"),
-       inside = TRUE, plot = TRUE,
+       inside = TRUE, plot = TRUE, axis.lty = 0,
        plot.ci = FALSE, ci.l = NULL, ci.u = NULL,
        ci.color = "black", ci.lty = "solid", ci.lwd = 1,
-       plot.grid = FALSE, grid.inc = 5,
+       plot.grid = FALSE, grid.inc = NULL,
        grid.lty = "dotted", grid.lwd = 1, grid.col = "black",
        ...)
 {
-    if (!missing(inside)) .NotYetUsed("inside", error = FALSE)
-    if (!missing(border)) .NotYetUsed("border", error = FALSE)
+    if (!missing(inside)) .NotYetUsed("inside", error = FALSE)# -> help(.)
 
     if (missing(space))
       space <- if (is.matrix(height) && beside) c(0, 1) else 0.2
@@ -56,12 +68,8 @@ function(height, width = 1, space = NULL, names.arg = NULL,
       stop("`height' must be a vector or a matrix")
 
     if(is.logical(legend.text))
-    {
-      if(legend.text && is.matrix(height))
-        legend.text <- rownames(height)
-      else
-        legend.text <- NULL
-    }
+      legend.text <-
+        if(legend.text && is.matrix(height)) rownames(height)
 
     # Check for log scales
     logx <- FALSE
@@ -238,41 +246,59 @@ function(height, width = 1, space = NULL, names.arg = NULL,
         rect(usr[1], usr[3], usr[2], usr[4], col = prcol)
 
       # if plot.grid, draw major y-axis lines if vertical or x axis if horizontal
-      # Due to issues with xaxp and yaxp when using log scale, use pretty() to set
-      # grid and axis increments for for both linear and log scales when plotting grid lines
+      # R V1.6.0 provided axTicks() as an R equivalent of the C code for
+      # CreateAtVector.  Use this to determine default axis tick marks when log
+      # scale used to be consistent when no grid is plotted.
+      # Otherwise if grid.inc is specified, use pretty()
+
       if (plot.grid)
       {
         par(xpd = FALSE)
 
-        if (horiz)
+        if (is.null(grid.inc))
         {
-          grid = pretty(xlim, n = grid.inc)
-          abline(v = grid, lty = grid.lty, lwd = grid.lwd, col = grid.col)
+          if (horiz)
+          {
+            grid <- axTicks(1)
+            abline(v = grid, lty = grid.lty, lwd = grid.lwd, col = grid.col)
+          }
+          else
+          {
+            grid <- axTicks(2)
+            abline(h = grid, lty = grid.lty, lwd = grid.lwd, col = grid.col)
+          }
         }
         else
         {
-          grid = pretty(ylim, n = grid.inc)
-          abline(h = grid, lty = grid.lty, lwd = grid.lwd, col = grid.col)
+          if (horiz)
+          {
+            grid <- pretty(xlim, n = grid.inc)
+            abline(v = grid, lty = grid.lty, lwd = grid.lwd, col = grid.col)
+          }
+          else
+          {
+            grid <- pretty(ylim, n = grid.inc)
+            abline(h = grid, lty = grid.lty, lwd = grid.lwd, col = grid.col)
+          }
         }
 
          par(xpd = xpd)
       }
 
-      # Beware : angle and density are passed using R scoping rules
       xyrect <- function(x1,y1, x2,y2, horizontal = TRUE, ...)
       {
         if(horizontal)
-          rect(x1,y1, x2,y2, angle = angle, density = density, ...)
+          rect(x1,y1, x2,y2, ...)
         else
-          rect(y1,x1, y2,x2, angle = angle, density = density, ...)
+          rect(y1,x1, y2,x2, ...)
       }
 
       if (beside)
-        xyrect(rectbase, w.l, c(height), w.r, horizontal=horiz, col = col)
+        xyrect(rectbase, w.l, c(height), w.r, horizontal=horiz, angle = angle, density = density, col = col, border = border)
       else
       {
         for (i in 1:NC)
-          xyrect(height[1:NR, i], w.l[i], height[-1, i], w.r[i], horizontal=horiz, col = col)
+          xyrect(height[1:NR, i], w.l[i], height[-1, i], w.r[i], horizontal=horiz,  angle = angle, density = density, col = col, border = border)
       }
 
       if (plot.ci)
@@ -306,7 +332,7 @@ function(height, width = 1, space = NULL, names.arg = NULL,
         }
         else w.m
 
-        axis(if(horiz) 2 else 1, at = at.l, labels = names.arg, lty = 0, cex.axis = cex.names, ...)
+        axis(if(horiz) 2 else 1, at = at.l, labels = names.arg, lty = axis.lty, cex.axis = cex.names, ...)
       }
 
       if(!is.null(legend.text))

@@ -1,7 +1,22 @@
 % $Id$
 %
 % $Log$
+% Revision 1.3  2002/11/04 14:21:40  warnes
+% Updates from Marc Schwartz:
+%
+% - Updated underlying code to be based upon the new barplot() in R v1.6.1
+% - This now uses the 'axis.lty' and 'border' arguments
+% - In R v1.6.0, R Core introduced a new function called axTicks().
+%   This is an R equivalent of the C code for CreateAtVector in plot.c.
+%   This now enables me to get the axis tick mark positions consistently
+%   when the 'height' related axis is either linear or log.  Thus, I can
+%   now have consistent tick marks and can plot grid lines in either
+%   situation.  If 'plot.grid = TRUE' and 'grid.inc' is specified, then
+%   I still use pretty() to determine the tick marks and lines.
+% - This code now depends on R 1.6.0 or later.
+%
 % Revision 1.2  2002/09/23 14:27:17  warnes
+%
 % - Fixed syntax errors in barplot2.Rd and CrossTable.Rd
 % - Fixed incorrect translation of 'F' (distribution) to 'FALSE' in glh.test.Rd
 %
@@ -26,9 +41,10 @@
         xlim = NULL, ylim = NULL, xpd = TRUE, log = "",
         axes = TRUE, axisnames = TRUE,
         cex.axis = par("cex.axis"), cex.names = par("cex.axis"),
-        inside = TRUE, plot = TRUE, plot.ci = FALSE, ci.l = NULL,
+        inside = TRUE, plot = TRUE, axis.lty = 0,
+        plot.ci = FALSE, ci.l = NULL,
         ci.u = NULL, ci.color = "black", ci.lty = "solid", ci.lwd = 1,
-        plot.grid = FALSE, grid.inc = 5,
+        plot.grid = FALSE, grid.inc = NULL,
         grid.lty = "dotted", grid.lwd = 1, grid.col = "black",
         \dots)
 }
@@ -97,9 +113,15 @@
     other axis is drawn (with \code{lty=0}) and labeled.}
   \item{cex.axis}{expansion factor for numeric axis labels.}
   \item{cex.names}{expansion factor for names.}
-  \item{inside}{logical.  If \code{TRUE}, the lines which  divide
-    adjacent bars will be drawn.}
+  \item{inside}{logical.  If \code{TRUE}, the lines which divide
+    adjacent (non-stacked!) bars will be drawn.  Only applies when
+    \code{space = 0} (which it partly is when \code{beside = TRUE}).}
+%MM: we still have "NotYetUsed" -- the above describe's S-plus 6.1 (not
+% precisely documented!) behavior!
   \item{plot}{logical.  If \code{FALSE}, nothing is plotted.}
+  \item{axis.lty}{the graphics parameter \code{lty} applied to the axis
+    and tick marks of the categorical (default horzontal) axis.  Note
+    that by default the axis is suppressed.}
   \item{plot.ci}{logical. If \code{TRUE}, confidence intervals are plotted
    over the bars. Note that if a stacked bar plot is generated, confidence
    intervals will not be plotted even if \code{plot.ci = TRUE}}
@@ -119,7 +141,7 @@
     \code{\link{axis}}.}
 }
 \description{
-  An enhancement of the standard R v1.5.1 barplot() function. Creates a bar plot
+  An enhancement of the standard R v1.6.1 barplot() function. Creates a bar plot
   with vertical or horizontal bars. Can plot confidence intervals for each
   bar, a lined grid behind the bars, change plot area color and
   logarithmic axes may be used. }
@@ -135,10 +157,13 @@
   If \code{beside} is true, use \code{colMeans(mp)} for the
   midpoints of each \emph{group} of bars, see example.
 }
-\author{Original v1.5.1 barplot() by R-Core. Enhancements by Marc
-  Schwartz \email{mschwartz@medanalytics.com} posted to r-devel on
-  Sept. 20, 2002.}
-
+\author{Original v1.6.1 barplot() by R-Core. Enhancements by Marc
+  Schwartz \email{mschwartz@medanalytics.com}
+}
+\note{
+  Prior to \R 1.6.0, \code{barplot} behaved as if \code{axis.lty = 1},
+  unintentionally.
+}
 \seealso{
   \code{\link{plot}(\dots, type="h")}, \code{\link{dotchart}},
   \code{\link{hist}}.
@@ -193,5 +218,9 @@ box()
 barplot2(VADeaths, angle = 15+10*1:5, density = 20, col = "black",
         legend = rownames(VADeaths))
 title(main = list("Death Rates in Virginia", font = 4))
+
+# border :
+barplot2(VADeaths, border = "dark blue") % lwd = 2 << not passed
+%notyet barplot(VADeaths, inside = FALSE, main = "barplot(*, inside=FALSE)")
 }
 \keyword{hplot}
