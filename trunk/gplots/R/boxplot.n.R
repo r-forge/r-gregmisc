@@ -1,3 +1,11 @@
+# $Id$
+#
+# $Log$
+# Revision 1.4  2002/09/23 13:59:30  warnes
+# - Modified all files to include CVS Id and Log tags.
+#
+#
+
 boxplot.n  <- function( ..., top=FALSE, shrink=1.0, textcolor=NULL )
   {
     boxcall <- match.call()           # get call

@@ -1,7 +1,11 @@
 % $Id$
 %
 % $Log$
+% Revision 1.4  2002/09/23 13:59:30  warnes
+% - Modified all files to include CVS Id and Log tags.
+%
 % Revision 1.3  2002/04/09 00:51:32  warneg
+%
 % Checkin for version 0.5.3
 %
 % Revision 1.2  2001/08/25 05:50:58  warneg
@@ -11,6 +15,7 @@
 %
 % Initial revision.
 %
+
 \name{combinations}
 \alias{combinations}
 \alias{permutations}

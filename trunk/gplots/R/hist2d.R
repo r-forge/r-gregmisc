@@ -1,3 +1,10 @@
+# $Id$
+#
+# $Log$
+# Revision 1.4  2002/09/23 13:59:30  warnes
+# - Modified all files to include CVS Id and Log tags.
+#
+#
 
 hist2d <- function( x,y=NULL, nbins=200, same.scale=FALSE, na.rm=TRUE, show=TRUE, col=c("black", heat.colors(12)), ... )
   {

@@ -1,14 +1,17 @@
-#
-# $Id$
-#
-# $Log$
-# Revision 1.2  2002/04/09 00:51:32  warneg
-# Checkin for version 0.5.3
-#
-# Revision 1.1  2002/02/20 21:41:54  warneg
-# Initial checkin.
-#
-#
+% $Id$
+%
+% $Log$
+% Revision 1.3  2002/09/23 13:59:30  warnes
+% - Modified all files to include CVS Id and Log tags.
+%
+% Revision 1.2  2002/04/09 00:51:32  warneg
+%
+% Checkin for version 0.5.3
+%
+% Revision 1.1  2002/02/20 21:41:54  warneg
+% Initial checkin.
+%
+%
 
 
 \name{interleave}

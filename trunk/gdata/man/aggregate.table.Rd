@@ -1,3 +1,11 @@
+% $Id$
+%
+% $Log$
+% Revision 1.3  2002/09/23 13:59:30  warnes
+% - Modified all files to include CVS Id and Log tags.
+%
+%
+
 \name{aggregate.table}
 \alias{aggregate.table}
 \title{Create 2-Way Table of Summary Statistics}

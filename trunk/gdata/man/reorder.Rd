@@ -1,19 +1,23 @@
-# $Id$
-#
-# $Log$
-# Revision 1.3  2002/04/09 00:51:33  warneg
-# Checkin for version 0.5.3
-#
-# Revision 1.2  2002/03/26 21:22:35  warneg
-#
-# - Changed methods to include '...' to match the generic.
-# - Updated for version 0.5.1
-#
-# Revision 1.1  2002/03/26 15:27:37  warneg
-#
-# Initial checkin.
-#
-#
+% $Id$
+%
+% $Log$
+% Revision 1.4  2002/09/23 13:59:30  warnes
+% - Modified all files to include CVS Id and Log tags.
+%
+% Revision 1.3  2002/04/09 00:51:33  warneg
+%
+% Checkin for version 0.5.3
+%
+% Revision 1.2  2002/03/26 21:22:35  warneg
+%
+% - Changed methods to include '...' to match the generic.
+% - Updated for version 0.5.1
+%
+% Revision 1.1  2002/03/26 15:27:37  warneg
+%
+% Initial checkin.
+%
+%
 
 
 \name{reorder}

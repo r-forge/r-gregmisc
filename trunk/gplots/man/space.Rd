@@ -1,3 +1,11 @@
+% $Id$
+%
+% $Log$
+% Revision 1.5  2002/09/23 13:59:30  warnes
+% - Modified all files to include CVS Id and Log tags.
+%
+%
+
 \name{space}
 \alias{space}
 \title{Space points in an x-y plot so they don't overlap.}

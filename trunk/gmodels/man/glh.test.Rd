@@ -1,3 +1,11 @@
+% $Id$
+%
+% $Log$
+% Revision 1.9  2002/09/23 13:59:30  warnes
+% - Modified all files to include CVS Id and Log tags.
+%
+%
+
 \name{glh.test}
 \alias{glh.test}
 \alias{print.glh.test}

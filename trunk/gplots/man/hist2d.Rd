@@ -1,3 +1,11 @@
+% $Id$
+%
+% $Log$
+% Revision 1.3  2002/09/23 13:59:30  warnes
+% - Modified all files to include CVS Id and Log tags.
+%
+%
+
 \name{hist2d}
 \alias{hist2d}
 \title{ Compute and Plot a 2-Dimensional Histogram }

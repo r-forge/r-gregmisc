@@ -1,3 +1,11 @@
+# $Id$
+#
+# $Log$
+# Revision 1.7  2002/09/23 13:59:30  warnes
+# - Modified all files to include CVS Id and Log tags.
+#
+#
+
 ci  <-  function(x, confidence=0.95,alpha=1-confidence,...)
   UseMethod("ci")
 

@@ -1,3 +1,11 @@
+% $Id$
+%
+% $Log$
+% Revision 1.6  2002/09/23 13:59:30  warnes
+% - Modified all files to include CVS Id and Log tags.
+%
+%
+
 \name{rename.vars}
 \alias{rename.vars}
 \title{ Rename variables in a dataframe }

@@ -1,3 +1,11 @@
+% $Id$
+%
+% $Log$
+% Revision 1.4  2002/09/23 13:59:30  warnes
+% - Modified all files to include CVS Id and Log tags.
+%
+%
+
 \name{plotCI}
 \alias{plotCI}
 \title{Plot Error Bars}

@@ -1,7 +1,9 @@
-#
 # $Id$
 #
 # $Log$
+# Revision 1.3  2002/09/23 13:59:30  warnes
+# - Modified all files to include CVS Id and Log tags.
+#
 # Revision 1.2  2002/04/09 00:46:04  warneg
 # - Properly handle case when some or all arguments are vectors.
 #

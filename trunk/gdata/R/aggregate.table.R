@@ -1,8 +1,11 @@
-# 
 # $Id$
 #
 # $Log$
+# Revision 1.3  2002/09/23 13:59:30  warnes
+# - Modified all files to include CVS Id and Log tags.
+#
 # Revision 1.2  2002/02/21 21:45:01  warneg
+#
 # - Fixed bug where row and column labels didn't always correspond to the
 # contents.  This only occured when a factor was used for by1 or by2 and
 # the factors levels weren't in the default sort order.

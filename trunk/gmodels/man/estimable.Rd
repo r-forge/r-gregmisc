@@ -1,51 +1,55 @@
-# $Id$
-#
-# $Log$
-# Revision 1.7  2002/08/01 19:37:14  warnes
-# - Corrected documentation mismatch for ci, ci.default.
-#
-# - Replaced all occurences of '_' for assignment with '<-'.
-#
-# - Replaced all occurences of 'T' or 'F' for 'TRUE' and 'FALSE' with
-#   the spelled out version.
-#
-# - Updaded version number and date.
-#
-# Revision 1.6  2002/02/20 20:09:02  warneg
-#
-# Minor changes, typo and formatting fixes.
-#
-# Revision 1.5  2002/01/17 23:51:06  warneg
-#
-# - Fixed errror in last example by adding 'conf.int' parameter to
-#   'estimable' call.
-#
-# Revision 1.4  2001/12/18 22:14:14  warneg
-#
-# - Updated documentation to reflect change of parameters from 'alpha'
-#   to 'conf.int', including the new optional status of the confidence
-#   intervals.
-#
-# Revision 1.3  2001/12/17 18:59:29  warneg
-#
-# - Fixed spelling errors.
-#
-# Revision 1.1  2001/12/17 18:58:27  warneg
-# Initial revision
-#
-# Revision 1.2  2001/12/17 18:52:55  warneg
-#
-# - Fixed the link to contrasts.lm.
-# - Rephrased title/description to be more clear.
-#
-# Revision 1.1  2001/12/10 19:35:32  warneg
-# Renamed 'contrsts.coeff.Rd' to 'estimable.Rd' corresponding to function rename.
-#
-# Revision 1.1  2001/12/07 20:39:04  warneg
-#
-# - Initial checkin
-#
-#
+% $Id$
+%
+% $Log$
+% Revision 1.8  2002/09/23 13:59:30  warnes
+% - Modified all files to include CVS Id and Log tags.
+%
+% Revision 1.7  2002/08/01 19:37:14  warnes
+%
+% - Corrected documentation mismatch for ci, ci.default.
+%
+% - Replaced all occurences of '_' for assignment with '<-'.
+%
+% - Replaced all occurences of 'T' or 'F' for 'TRUE' and 'FALSE' with
+%   the spelled out version.
+%
+% - Updaded version number and date.
+%
+% Revision 1.6  2002/02/20 20:09:02  warneg
+%
+% Minor changes, typo and formatting fixes.
+%
+% Revision 1.5  2002/01/17 23:51:06  warneg
+%
+% - Fixed errror in last example by adding 'conf.int' parameter to
+%   'estimable' call.
+%
+% Revision 1.4  2001/12/18 22:14:14  warneg
+%
+% - Updated documentation to reflect change of parameters from 'alpha'
+%   to 'conf.int', including the new optional status of the confidence
+%   intervals.
+%
+% Revision 1.3  2001/12/17 18:59:29  warneg
+%
+% - Fixed spelling errors.
+%
+% Revision 1.1  2001/12/17 18:58:27  warneg
+% Initial revision
+%
+% Revision 1.2  2001/12/17 18:52:55  warneg
+%
+% - Fixed the link to contrasts.lm.
+% - Rephrased title/description to be more clear.
+%
+% Revision 1.1  2001/12/10 19:35:32  warneg
+% Renamed 'contrsts.coeff.Rd' to 'estimable.Rd' corresponding to function rename.
+%
+% Revision 1.1  2001/12/07 20:39:04  warneg
+%
+% - Initial checkin
+%
+%
 
 \name{estimable}
 \alias{estimable}
