@@ -74,7 +74,7 @@ textplot(object, halign="center", valign="center", cex, ...)
         }
 
 \examples{
-
+\dontrun{
 ### simple examples
 # show R version information
 textplot(version)
@@ -106,5 +106,6 @@ title("Regression of Sepal Length by Species")
 
 par(mfrow=c(1,1))
 
+}
 }
 \keyword{hplot}

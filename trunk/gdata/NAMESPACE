@@ -15,7 +15,8 @@ export(
        rename.vars,
        remove.vars,
        reorder.factor,
-       trim
+       trim,
+       unmatrix
 )
 
 importFrom(stats, reorder, na.omit)

@@ -9,70 +9,70 @@
   restrictions imposed by the dendrogram is carried out.
 }
 \usage{
-heatmap.2 <- function (x, 
+heatmap.2 <- function (x,
 
-                     #-- dendrogram control --#
-                     Rowv=NULL, 
-                     Colv=if(symm)"Rowv" else NULL, 
-                     distfun=dist, 
-                     hclustfun=hclust, 
-                     dendogram=c("both", "row", "column", "none"), 
-                     symm=FALSE, 
+                     # dendrogram control
+                     Rowv=NULL,
+                     Colv=if(symm)"Rowv" else NULL,
+                     distfun = dist,
+                     hclustfun = hclust,
+                     dendrogram = c("both","row","column","none"),
+                     symm = FALSE,
 
-                     #-- data scaling --#
-                     scale=c("none", "row", "column"), 
-                     na.rm=TRUE, 
+                     # data scaling
+                     scale = c("none","row", "column"),
+                     na.rm=TRUE,
 
-                     #-- image plot --#
-                     revC=identical(Colv, "Rowv"), 
-                     add.expr, 
-                     breaks, 
-                     col=heat.colors(length(breaks)-1), 
+                     # image plot
+                     revC = identical(Colv, "Rowv"),
+                     add.expr,
+                     breaks,
+                     col="heat.colors",
 
-                     #-- block separation --#
-                     colsep, 
-                     rowsep, 
-                     sepcolor="white", 
-                     sepwidth=c(0.05, 0.05), 
+                     # block sepration
+                     colsep,
+                     rowsep,
+                     sepcolor="white",
+                     sepwidth=c(0.05,0.05),
 
-                     #-- cell labeling --#
-                     cellnote, 
-                     notecex=1.0, 
-                     notecol="cyan", 
-                     na.color=par("bg"), 
+                     # cell labeling
+                     cellnote,
+                     notecex=1.0,
+                     notecol="cyan",
+                     na.color=par("bg"),
 
-                     #-- level trace --#
-                     trace=c("column", "row", "both", "none"), 
-                     tracecol="yellow", 
-                     hline=median(breaks), 
-                     vline=median(breaks), 
-                     linecol=tracecol, 
+                     # level trace
+                     trace=c("column","row","both","none"),
+                     tracecol="cyan",
+                     hline=median(breaks),
+                     vline=median(breaks),
+                     linecol=tracecol,
 
-                     #-- Row/Column Labeling --#
-                     margins=c(5, 5), 
-                     ColSideColors, 
-                     RowSideColors, 
-                     cexRow=0.2 + 1/log10(nr), 
-                     cexCol=0.2 + 1/log10(nc), 
-                     labRow=NULL, 
-                     labCol=NULL, 
+                     # Row/Column Labeling
+                     margins = c(5, 5),
+                     ColSideColors,
+                     RowSideColors,
+                     cexRow = 0.2 + 1/log10(nr),
+                     cexCol = 0.2 + 1/log10(nc),
+                     labRow = NULL,
+                     labCol = NULL,
 
-                     #-- color key + density info --#
-                     key=TRUE, 
-                     density.info=c("histogram", "density", "none"), 
-                     denscol=tracecol, 
-                     symkey=TRUE, 
-                     sepwidth=c(0.05, 0.05), 
+                     # color key + density info
+                     key = TRUE,
+                     density.info=c("histogram","density","none"),
+                     denscol=tracecol,
+                     symkey = TRUE,
+                     densadj = 0.25,
 
-                     #-- plot labels --#
-                     main=NULL, 
-                     xlab=NULL, 
-                     ylab=NULL, 
+                     # plot labels
+                     main = NULL,
+                     xlab = NULL,
+                     ylab = NULL,
 
-                     #-- extras --#
+                     # extras
                      ...
                      )
-}
+               }
 \arguments{
   % Dendogram Control
   \item{x}{numeric matrix of the values to be plotted. }
@@ -90,7 +90,7 @@ heatmap.2 <- function (x,
   \item{hclustfun}{function used to compute the hierarchical clustering
     when \code{Rowv} or \code{Colv} are not dendrograms.  Defaults to
     \code{\link{hclust}}.}
-  \item{dendogram}{character string indicating whether to draw 'none', 
+  \item{dendrogram}{character string indicating whether to draw 'none', 
     'row', 'column' or 'both' dendrograms.  Defaults to 'both'.}
   \item{symm}{logical indicating if \code{x} should be treated
     \bold{symm}etrically; can only be true when \code{x} is a square matrix.}

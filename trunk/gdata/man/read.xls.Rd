@@ -11,9 +11,9 @@ read.xls(xls, sheet=1, verbose=FALSE, ..., perl="perl")
     to be read}
   \item{verbose}{logical flag indicating whether details should be
     printed as the file is processed.}
+  \item{perl}{name of the perl executable to be called.}
   \item{...}{additional arguments to read.table. The defaults of
     read.csv are used.}
-  \item{...}{name of the perl executable to be called.}
 }
 \value{
   a data frame

@@ -1,6 +1,5 @@
 \name{ll}
 \alias{ll}
-\alias{elem}
 \title{
   Display Information about Objects or Elements
 }
@@ -10,8 +9,8 @@
   object, its elements are listed and described.
 }
 \usage{
-ll(pos = 1, unit = "KB", digits = 0, dimensions = FALSE,
-   function.dim = "", ...)
+ll(pos=1, unit=c("KB","MB","bytes"), digits=0, dimensions=FALSE,
+               function.dim="", ...)
 }
 \arguments{
   \item{pos}{environment position number, environment name, data frame,

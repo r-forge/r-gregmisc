@@ -35,7 +35,7 @@ sinkplot(operation = c("start", "plot", "cancel"), ...)
 \author{ Gregory R. Warnes \email{gregory\_r\_warnes\@groton.pfizer.com}  }
 \seealso{ \code{\link[utils]{capture.output}}, \code{\link{textplot}} }
 \examples{
-
+\dontrun{
    set.seed(12456)
    x <- factor(sample( LETTERS[1:5], 50, replace=TRUE))
    y <- rnorm(50, mean=as.numeric(x), sd=1)
@@ -47,5 +47,6 @@ sinkplot(operation = c("start", "plot", "cancel"), ...)
    sinkplot()
    anova(lm(y~x))
    sinkplot("plot",col="darkgreen")
+}
 }
 \keyword{hplot}

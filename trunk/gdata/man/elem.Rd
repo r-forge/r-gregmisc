@@ -8,7 +8,8 @@
   object.
 }
 \usage{
-elem(object, unit=c("KB","MB","bytes"), digits=0, dimensions=FALSE)
+elem(object=1, unit=c("KB","MB","bytes"), digits=0,
+                 dimensions=FALSE)
 }
 \arguments{
   \item{object}{object containing named elements, perhaps a model or

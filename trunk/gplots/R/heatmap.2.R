@@ -360,7 +360,7 @@ heatmap.2 <- function (x,
 
         if(symkey)
           {
-            max.raw <- max(abs(x,na.rm=TRUE))
+            max.raw <- max(abs(x),na.rm=TRUE)
             min.raw <- -max.raw
           }
         else
