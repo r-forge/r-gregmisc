@@ -2,7 +2,11 @@
 # $Id$
 #
 # $Log$
+# Revision 1.3  2002/02/20 21:31:08  warneg
+# Noted that specialized methods exist.
+#
 # Revision 1.2  2002/02/20 21:29:34  warneg
+#
 # Incorrectly had contents of nobs.R here instead of help text.  Corrected.
 #
 #
@@ -15,7 +19,8 @@
 %- Also NEED an `\alias' for EACH other topic documented here.
 \title{ Compute the Number of Non-missing Observations }
 \description{
- Compute the number of non-missing observations
+ Compute the number of non-missing observations.  Special methods exist for
+ data frames, and lm objects.
 }
 \usage{
 nobs(x, ...)
