@@ -120,7 +120,7 @@ heatmap.2 <- function (x,
     items.}
   \item{notecol}{(optional) character string specifying the color for
     \code{cellnote} text.  Defaults to "green".}
-  \item{na.color}(Color to use for missing value (\code{NA}). Defaults
+  \item{na.color}{Color to use for missing value (\code{NA}). Defaults
     to the plot background color.}
   % level trace
   \item{trace}{character string indicating whether a solid "trace" line
@@ -256,9 +256,6 @@ heatmap.2 <- function (x,
  heatmap.2(cU, Rowv = FALSE, symm = TRUE, col = rev(heat.colors(16)),
              distfun = function(c) as.dist(1 - c), trace="none",
              cellnote=hM)
-
- heatmap.2(
-
 
  ## genechip data examples
  \dontrun{
