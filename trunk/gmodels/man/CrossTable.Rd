@@ -22,6 +22,9 @@
 
 
 % $Log$
+% Revision 1.6  2005/01/14 21:40:35  nj7w
+% Updated the manual to reflect prop.chisq change in its R file.
+%
 % Revision 1.5  2004/12/23 19:32:31  nj7w
 % Split the function print.CrossTable.vector in two parts - for SAS behaiour and SPSS behaviour. Also put the code of printing statistics in a function 'print.statistics'
 %
@@ -65,7 +68,7 @@
   }
 \usage{
 CrossTable(x, y, digits=3, max.width = 5, expected=FALSE, prop.r=TRUE, prop.c=TRUE,
-           prop.t=TRUE, chisq = FALSE, fisher=FALSE, mcnemar=FALSE,
+           prop.t=TRUE, prop.chisq=TRUE, chisq = FALSE, fisher=FALSE, mcnemar=FALSE,
            resid=FALSE, sresid=FALSE, asresid=FALSE,
            missing.include=FALSE,
 format=c("SAS","SPSS")),...
@@ -86,6 +89,7 @@ format=c("SAS","SPSS")),...
   \item{prop.r}{If \code{TRUE}, row proportions will be included}
   \item{prop.c}{If \code{TRUE}, column proportions will be included}
   \item{prop.t}{If \code{TRUE}, table proportions will be included}
+  \item{prop.chisq}{If \code{TRUE}, chi-square contribution of each cell will be included}
   \item{chisq}{If \code{TRUE}, the results of a chi-square test will
 		be included}
   \item{fisher}{If \code{TRUE}, the results of a Fisher Exact test will
