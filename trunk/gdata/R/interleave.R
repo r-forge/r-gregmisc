@@ -1,6 +1,9 @@
 # $Id$
 #
 # $Log$
+# Revision 1.4  2003/05/20 16:03:02  warnes
+# - Omit NULL variables.
+#
 # Revision 1.3  2002/09/23 13:59:30  warnes
 # - Modified all files to include CVS Id and Log tags.
 #
@@ -15,6 +18,8 @@
 interleave <- function(..., append.source=TRUE, sep=": ")
   {
     sources <- list(...)
+
+    sources[sapply(sources, is.null)] <- NULL
 
     sources <- lapply(sources, function(x)
                       if(is.matrix(x) || is.data.frame(x))
