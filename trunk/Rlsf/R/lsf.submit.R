@@ -1,10 +1,15 @@
 # $Id$
 
 "lsf.submit" <-
-  function(funcname, arglist = NULL,
-           savelist = ls(parent.frame()))
+  function(funcname, ..., savelist)
   {
     fname <- tempfile(pattern = ".LSFRdata", tmpdir = getwd())
+
+    if(missing(savelist))
+      savelist <- list()
+
+    savelist$lsf.submit.call <- match.call()
+    
     save(list = savelist, file = fname)
 
     script <- file.path(.path.package("Rlsf"), "RunLsfJob")
