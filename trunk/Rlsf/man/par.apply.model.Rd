@@ -5,7 +5,7 @@
   ~~ A concise (1-5 lines) description of what the function does. ~~
 }
 \usage{
-par.apply.model(fun, matrix, covariates, ..., ncpu = numcpu.lsf(),
+par.apply.model(fun, matrix, covariates, ..., ncpu = lsf.numcpu(),
                 nelem, packages = .packages(), cltype = "MPI",
                 debug = TRUE, cl = NULL)
 }
