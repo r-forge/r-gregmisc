@@ -146,7 +146,7 @@ fit.contrast(fm1, "Sex", c(-1,1), conf.int=0.95 )
 intervals(fm1)
 
 # Cut age into quantile groups & compute some contrasts
-Orthodont$AgeGroup <- quantcut(Orthodont$age)
+Orthodont$AgeGroup <- gtools::quantcut(Orthodont$age)
 fm2 <- lme(distance ~ Sex + AgeGroup, data = Orthodont,random=~1|Subject)
 #
 fit.contrast(fm2, "AgeGroup", rbind("Linear"=c(-2,-1,1,2),
