@@ -30,7 +30,7 @@ simu.sample(ngenes, n, fractn.alt, fractn.dep, var.ratio, cov.matrix, ngenes.mat
   columns being samples from control group and last n columns being from
   treatment group for each gene (row). each group of genes consists of 
   subgroups of genes that are dependent and/or coming from true alternative
-  hypothesis
+  hypothesis. the row order is: null.ind -> null.dep -> alt.ind -> alt.dep
 
 }
 
