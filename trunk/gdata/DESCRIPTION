@@ -1,0 +1,11 @@
+Package: gdata 
+Description: Various functions to manipulate data.
+Title: Various functions to manipulate data.
+Bundle: gregmisc
+Version: 1.0-0
+Date: 2004-08-19
+Depends: R (>= 1.9.0), lattice, nlme, MASS, gtools
+Author: Greg Warnes
+Maintainer: GregorY R Warnes <gregory_r_warnes@groton.pfizer.com>
+BundleDescription: Miscellaneous functions 
+License: GPL (version 2 or later)
