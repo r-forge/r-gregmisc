@@ -6,6 +6,7 @@
 /*************************************************************/
 
 #include <R.h>
+#include <Rdefines.h>
 
 #include <sys/types.h>
 #include <sys/wait.h>
@@ -132,10 +133,10 @@ SIGTAB sigtab[] = {
   {"SIGPOLL",    SIGPOLL,    "Pollable Event"},    
 #endif
 #ifdef SIGSTOP
-  {"SIGSTOP",    SIGSTOP,    "Stopped (signal)"},    
+  {"SIGSTOP",    SIGSTOP,    "Stopped (Signal)"},    
 #endif
 #ifdef SIGTSTP
-  {"SIGTSTP",    SIGTSTP,    "Stopped (user)"},    
+  {"SIGTSTP",    SIGTSTP,    "Stopped (User)"},    
 #endif
 #ifdef SIGCONT
   {"SIGCONT",    SIGCONT,    "Continued"},    
@@ -162,7 +163,7 @@ SIGTAB sigtab[] = {
   {"SIGWAITING", SIGWAITING, "Concurrency Signal Reserved by Threads Library"},
 #endif
 #ifdef SIGLWP
-  {"SIGLWP",     SIGLWP,     "Inter-LWP Signal Reserved by Threads library"},    
+  {"SIGLWP",     SIGLWP,     "Inter-LWP Signal Reserved by Threads Library"},    
 #endif
 #ifdef SIGFREEZE
   {"SIGFREEZE",  SIGFREEZE,  "Check Point Freeze"},    
@@ -197,37 +198,29 @@ SIGTAB sigtab[] = {
 void Rfork_siginfo(char **name, int *val, char **desc)
 {
   SIGTAB *ptr=sigtab;
-  //printf("Searching for signal named '%s'...\n", *name);
 
   while( ptr->val != -1 )
     {
-      //printf("Checking against name '%s'...\n", ptr->name);
-
       if(strcmp(*name, ptr->name)==0)
 	{
-	  //printf("Found it!\n");
 	  *val = ptr->val;
 	  *desc = ptr->desc;
 	  return;
 	}
-      ptr += 1;
+      ptr++;
     }
 
   error("Unknown or undefined signal name %s", *name);
 }
 
-void Rfork_signame(int *val, char **name, char **desc)
+void Rfork_signame(char **name, int *val, char **desc)
 {
   SIGTAB *ptr=sigtab;
-  //printf("Searching for signal value '%d'...\n", *val);
 
   while( ptr->val != -1 )
     {
-      //printf("Checking against value '%d'...\n", ptr->val);
-
       if(*val == ptr->val )
 	{
-	  //printf("Found it!\n");
 	  *name = ptr->name;
 	  *desc = ptr->desc;
 	  return;
@@ -237,4 +230,42 @@ void Rfork_signame(int *val, char **name, char **desc)
 
   error("Unknown or undefined signal valuee %s", *name);
 }
+
+int dummy(){
+  return 1;
+}
+
+// Uses R .Call interface 
+SEXP Rfork_siglist() 
+{ 
+  SEXP list, val, name, desc;
+  int tablen=1; 
+  int index;
+  
+
+  // first find the table length 
+  for( tablen = 0; sigtab[tablen].val != -1; tablen++) {};
+
+  // allocate the return list 
+  PROTECT( list = allocVector( VECSXP, 3 ) ); 
+
+  // now allocate sufficient space for the return values 
+  PROTECT( val  = allocVector( INTSXP, tablen) ); 
+  PROTECT( name = allocVector( STRSXP, tablen) ); 
+  PROTECT( desc = allocVector( STRSXP, tablen) ); 
+   
+  SET_VECTOR_ELT( list, 0, val  ); 
+  SET_VECTOR_ELT( list, 1, name ); 
+  SET_VECTOR_ELT( list, 2, desc ); 
+
+  for(index = 0; index < tablen; index++)
+    { 
+      INTEGER(val)[index] = sigtab[index].val;
+      SET_STRING_ELT ( name, index, mkChar(sigtab[index].name)); 
+      SET_STRING_ELT ( desc, index, mkChar(sigtab[index].desc)); 
+    } 
+
+  UNPROTECT(4); 
+  return list; 
+} 
 
