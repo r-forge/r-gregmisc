@@ -13,7 +13,7 @@ env <- function(unit=c("KB","MB","bytes"), digits=0)
 
   get.environment.size <- function(pos)
   {
-    if(search()[pos] == "Autoloads")
+    if(search()[pos]=="Autoloads" || length(ls(pos,all=TRUE))==0)
       size <- 0
     else
       size <- sum(sapply(ls(pos,all=TRUE), get.object.size, pos=pos))
