@@ -1,4 +1,7 @@
+% $Id$
+
 \name{RF}
+\alias{RF}
 \alias{print.RF}
 \title{Fit a random forest}
 \description{
@@ -12,12 +15,15 @@ RF(ycl, x, classwt=NULL, Vote=2, mtry=NULL, ntree=1000, ndsize=1,
 }
 \arguments{
   \item{ycl}{class label for nsample}
-  \item{x}{data matrix containing the training set}
-  \item{classwt}{weight specified for different classes (used in tree construction)}
+  \item{x}{data matrix containing the training set (\code{RF}), or random
+    forest object (\code{print.RF})}
+  \item{classwt}{weight specified for different classes (used in tree
+    construction)}
   \item{Vote}{method of tree voting (see details)}
   \item{mtry}{number of random features to try at each node split}
   \item{ntree}{number of trees to grow}
-  \item{ndsize}{minimum terminal node size (1 will give a saturated tree, which has good performance)}
+  \item{ndsize}{minimum terminal node size (1 will give a saturated
+    tree, which has good performance)}
   \item{nbs}{size of Bootstrap sample set for each (bagging) tree}
   \item{nreplace}{Bootstrap samples with/without replacement}
   \item{mreplace}{Bootstrap features with/without replacement}
@@ -30,6 +36,7 @@ RF(ycl, x, classwt=NULL, Vote=2, mtry=NULL, ntree=1000, ndsize=1,
   \item{iimp}{indicator of calculating importance or not}
   \item{ikeepft}{indicator of keeping forest}
   \item{wGini}{?}
+  \item{...}{Extra arguments for \code{print.RF}}
 
 }
 \details{
@@ -47,12 +54,13 @@ RF(ycl, x, classwt=NULL, Vote=2, mtry=NULL, ntree=1000, ndsize=1,
     \item{countts}{vote matrix for testing set xts}
     \item{prox}{proximity matrix}
     \item{tmiss}{number of miss-classifications for each class}
-    \item{tmissimp}{number of miss classifications for each class after permuting feature m [nclass, mdim]
-                  "a too gross measure; instead we can use posterior probability from countimp,
-		  is a continuous version of tmissimp "}
+    \item{tmissimp}{number of miss classifications for each class after
+      permuting feature m [nclass, mdim] "a too gross measure; instead
+      we can use posterior probability from countimp, is a continuous
+      version of tmissimp"}
     \item{diffmarg}{total decrease of impurity (Gini, weighted or not) after permuting feature m}
     \item{used}{as an importance measure for each feature
-      " derived from countimp, continuous version of tmissimp "
+      "derived from countimp, continuous version of tmissimp"
       \description{
 	\item{marg}{posterior pr(true group) - max posterior pr(other group)}
         \item{diffmarg}{\sum marg(without permutation) - \sum marg(after

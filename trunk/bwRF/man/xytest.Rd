@@ -1,3 +1,5 @@
+% $Id$
+
 \name{xytest}
 \alias{xytest}
 \docType{data}
