@@ -1,7 +1,11 @@
 # $Id$
 #
 # $Log$
+# Revision 1.2  2003/04/04 13:45:21  warnes
+# - Allow optional arguments to sprint to be passed to print
+#
 # Revision 1.1  2003/04/02 22:28:32  warnes
+#
 # - Added file 'capture.R' containing capture() and sprint().
 #
 #
@@ -25,7 +29,7 @@ capture <- function( expression, collapse="\n")
   }
 
 
-sprint <- function(x)
+sprint <- function(x,...)
   {
-    capture(print(x))
+    capture(print(x,...))
   }
