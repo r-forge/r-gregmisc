@@ -25,7 +25,7 @@ ci.lme <- function(x,confidence=0.95,alpha=1-confidence)
                    "CI lower"=ci.low,
                    "CI upper"=ci.high,
                    "Std. Error"= x$tTable[,"Std.Error"],
-                   "DF" = x$tTable[,"p-value"],
+                   "DF" = x$tTable[,"DF"],
                    "p-value" = x$tTable[,"p-value"])
   rownames(retval)  <-  rownames(x$tTable)
   retval
