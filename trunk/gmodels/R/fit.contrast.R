@@ -1,7 +1,14 @@
 # $Id$
 #
 # $Log$
+# Revision 1.3  2003/11/17 21:40:15  warnes
+# - Fix incorrect handling of glm objects by fit.contrast, as reported
+#   by Ulrich Halekoh, Phd <ulrich.halekoh@agrsci.dk>.
+#
+# - Add regression test code to for this bug.
+#
 # Revision 1.2  2003/04/22 17:24:29  warnes
+#
 # - the variable 'df' was used within the lme code section overwriting
 #   the argument 'df'.
 #
@@ -159,7 +166,12 @@ fit.contrast.lm <- function(model, varname, coeff, showall=FALSE,
                       )
 
     }
-  else  # lm, aov
+  else if('glm' %in% class(model))
+    {
+      smodel <- summary.glm(r)
+      retval <- cbind(coef(smodel), "DF"=smodel$df[2])
+    }
+  else # lm, aov
     {
       smodel <- summary.lm(r)
       retval <- cbind(coef(smodel), "DF"=smodel$df[2])
