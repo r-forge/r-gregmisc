@@ -14,48 +14,59 @@
 \usage{
 textplot(object, halign="center", valign="center", cex, ...)
 \method{textplot}{default}(object, halign=c("center","left","right"),
-                  valign=c("center", "top", "bottom"), cex, ... )
+         valign=c("center", "top", "bottom"), cex, ... )
+\method{textplot}{character}(object, halign = c("center", "left", "right"),
+         valign = c("center", "top", "bottom"), cex, fixed.width=TRUE,
+         cspace=1, lspace=1, mar, ...)
 \method{textplot}{data.frame}(object, halign = c("center", "left", "right"),
-                  valign = c("center", "top", "bottom"), cex, ...)
+         valign = c("center", "top", "bottom"), cex, ...)
 \method{textplot}{matrix}(object, halign = c("center", "left", "right"),
-                  valign = c("center", "top", "bottom"), cex, cmar = 2,
-                  rmar = 0.5, show.rownames = TRUE, show.colnames = TRUE,
-                  hadj = 1, vadj = 1, ...)
+         valign = c("center", "top", "bottom"), cex, cmar = 2,
+         rmar = 0.5, show.rownames = TRUE, show.colnames = TRUE,
+         hadj = 1, vadj = 1, mar, ...)
 }
 \arguments{
   \item{object}{Object to be displayed.}
   \item{halign}{Alignment in the x direction, one of "center", "left",
-  or "right". }
+    or "right". }
   \item{valign}{Alignment in the y direction, one of "center", "top" ,
-  or "bottom"}
+    or "bottom"}
   \item{cex}{Character size, see \code{\link{par}} for details. If
-  unset, the code will attempt to use the largest value which allows the
-  entire object to be displayed.}
+    unset, the code will attempt to use the largest value which allows
+    the entire object to be displayed.}
+  \item{fixed.width}{Logical value indicating whether to emulate a
+    fixed-width font by aligning characters in each row of text. This is
+    usually necessary for text-formatted tables display properly.
+    Defaults to 'TRUE'.}
+  \item{cspace}{Space between characters as a
+    multiple of the width of the letter 'W'. This only applies when 
+    \code{fixed.width==TRUE}. }
+  \item{lspace}{Line spacing. This only applies when
+    \code{fixed.width==TRUE}.}
+  \item{mar}{Figure margins, see the documentation for \code{par}.}
   \item{rmar, cmar}{Space between rows or columns, in
-  fractions of the size of the letter 'M'.}
-  \item{show.rownames, show.colnames}{Boolean indicating whether row or
-  column names will be displayed.}
+    fractions of the size of the letter 'M'.}
+  \item{show.rownames, show.colnames}{Logical value indicating whether row or
+    column names will be displayed.}
   \item{hadj,vadj}{Vertical and horizontal location of elements within
-  matrix cells.  These have the same meaning as the \code{adj} graphics
-  paramter (see \code{\link{par}}).}
+    matrix cells.  These have the same meaning as the \code{adj} graphics
+    paramter (see \code{\link{par}}).}
   \item{\dots}{ Optional arguments passed to the text plotting command
-  or specialied object methods}
+    or specialied object methods}
 }
 \details{
-  The default textplot function uses the \code{\link{sprint}} function
-  to store the result of calling \code{\link{print}} on the \code{object}
-  argument.  A new plot is then created and this string is displayed
+  A new plot is created and the object is displayed
   using the largest font that will fit on in the plotting region.  The
   \code{halign} and \code{valign} parameters can be used to control the
   location of the string within the plotting region.
 
-  For matrixes and vectors a specialized textplot function is called,
+  For matrixes and vectors a specialized textplot function is available,
   which plots each of the cells individually, with column widths set
   according to the sizes of the column elements.  If present, row and
   column labels will be displayed in a bold font.  
 }
 \value{
-  Nothing of interest.
+  The character scaling factor (\code{cex}) used.
 }
 \author{Gregory R. Warnes \email{Gregory\_R\_Warnes@groton.pfizer.com}}
 \seealso{ \code{\link{plot}}, \code{\link{text}}, \code{\link{capture}} }
@@ -88,9 +99,10 @@ textplot( info, valign="top"  )
 title("Sepal Length by Species")
 
 reg <- lm( Sepal.Length ~ Species, data=iris )
-textplot( summary(reg), valign="top" )
+textplot( capture.output(summary(reg)), valign="top")
 title("Regression of Sepal Length by Species")
 
+par(mfrow=c(1,1))
 
 }
 \keyword{hplot}
