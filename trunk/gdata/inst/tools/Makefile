@@ -1,4 +1,4 @@
-# Global Config Variables
+ # Global Config Variables
 R_PACKAGE_DIR ?= $(PWD)/../inst
 PERL_PREFIX = $(R_PACKAGE_DIR)/perl
 BIN_PREFIX  = $(R_PACKAGE_DIR)/bin
@@ -13,7 +13,7 @@ DIRS =  $(subst .tar.gz,,$(TGZ))
 PERLVER  = $(strip $(word 2, $(subst ;, ,$(subst =, ,$(shell perl -V:version)))))
 PERLMAJOR = $(strip $(word 2, $(subst ;, ,$(subst =, ,$(shell perl -V:revision)))))
 REL_PERL_LIB = lib/perl$(PERLMAJOR)/site_perl/$(PERLVER)
-PERL_LIB = $(PERL_PREFIX)/{REL_PERL_LIB}
+PERL_LIB = $(PERL_PREFIX)/$(REL_PERL_LIB)
 
 
 default: install
@@ -21,7 +21,7 @@ default: install
 basedir:
 	@mkdir -p $(PERL_LIB) 
 
-%:%.tar.gz 
+%:%.tar.gz basedir
 	@echo -- Installing PERL module $< --
 	@echo INCLUDE DIRS = $(PERL_LIB)
 	tar -xzf $<	
@@ -39,13 +39,14 @@ clean:
 	@echo -- Removing local sources --
 	-rm -rf $(DIRS)
 	-rm -f iris.csv
+	-rm xls2csv
 
 distclean: clean
-	-rm -rf PERL_PREFIX
+	-rm -rf $(PERL_PREFIX)
+	-rm -rf $(BIN_PREFIX)
 
 xls2csv: xls2csv.in
-	sed -e 's|@REL_PERL_LIB@|$(REL_PERL_LIB)|' xls2csv.in  > xls2csv.1
-	rm xls2csv.1
+	sed -e 's|@REL_PERL_LIB@|$(REL_PERL_LIB)|' xls2csv.in  > xls2csv
 
 show:	
 	@echo R_PACKAGE_DIR=$(R_PACKAGE_DIR)
@@ -58,10 +59,10 @@ show:
 
 build: basedir $(DIRS) 
 
-install_bin: xls2csv # binaries 
+install_bin: xls2csv 
 	mkdir -p $(BIN_PREFIX)
-	install xls2csv $(BIN_PREFIX)
-	install xls2csv.pl $(PERL_PREFIX)
+	install xls2csv $(BIN_PREFIX)/
+	install xls2csv.pl $(PERL_PREFIX)/
 
-install: build clean install_bin
+install: build clean install_bin clean show
 	touch gregmisc.so
