@@ -5,16 +5,17 @@ ifeq ($(OS),Windows_NT)
 else
   TARGET_DIR  = $(R_PACKAGE_DIR)/
 endif
+
 PERL_PREFIX = $(TARGET_DIR)/perl
 BIN_PREFIX  = $(TARGET_DIR)/bin
+PERL_LIB    = $(PERL_PREFIX)
 
-PERL_LIB=$(PERL_PREFIX)
 
 # Executables 
 ifeq ($(OS),Windows_NT)
   INSTALL=mkdir -p
   CP=cp
-  MAKE=MAKEFLAGS="" NMAKE
+  MAKE=MAKEFLAGS='' NMAKE
   ENV=set
 else
   INSTALL=$(R_HOME)/bin/mkinstalldirs
@@ -33,47 +34,48 @@ TGZ  =	IO-stringy-2.109.tar.gz \
 
 DIRS =  $(subst .tar.gz,,$(TGZ))
 
-PERLDIRS =  PERL_PREFIX=$(PERL_PREFIX) \
-	    PERLPREFIX=$(PERL_PREFIX) \
-	    PERL_LIB=${PERL_LIB} \
-	    PERL5LIB=${PERL_LIB} \
-	    PREFIX=${TARGET_DIR} \
-	    SITEPREFIX=$(TARGET_DIR)/perl \
-	    SITELIBEXP=${PERL_PREFIX} \
-	    SITEARCHEXP=${PERL_PREFIX} \
-	    INSTALLBIN=${TARGET_DIR}/bin \
-	    INSTALLSCRIPT=${TARGET_DIR}/bin \
-	    INSTALLPRIVLIB=${PERL_PREFIX} \
-	    INSTALLSITELIB=${PERL_PREFIX} \
-	    INSTALLMAN1DIR=${PERL_PREFIX}/man \
-	    INSTALLMAN3DIR=${PERL_PREFIX}/man/man3
+PERLDIRS =  PERL_PREFIX='$(PERL_PREFIX)' \
+	    PERLPREFIX='$(PERL_PREFIX)' \
+	    PERL_LIB='$(PERL_LIB)' \
+	    PERL5LIB='$(PERL_LIB)' \
+	    PREFIX='$(TARGET_DIR)' \
+	    SITEPREFIX='$(TARGET_DIR)/perl' \
+	    SITELIBEXP='$(PERL_PREFIX)' \
+	    SITEARCHEXP='$(PERL_PREFIX)' \
+	    INSTALLBIN='$(TARGET_DIR)/bin' \
+	    INSTALLSCRIPT='$(TARGET_DIR)/bin' \
+	    INSTALLPRIVLIB='$(PERL_PREFIX)' \
+	    INSTALLSITELIB='$(PERL_PREFIX)' \
+	    INSTALLMAN1DIR='$(PERL_PREFIX)/man' \
+	    INSTALLMAN3DIR='$(PERL_PREFIX)/man/man3'
 
 ifeq ($(OS),Windows_NT)
-	PERLVARS = $(subst /,\\, $(subst  /cygdrive/c,C:\,$(PERLDIRS)))	
+  PERLVARS = $(subst /,\, $(subst /cygdrive/c,C:\,$(PERLDIRS)))	
+  PERL_INC = $(subst /,\, $(subst /cygdrive/c,C:\,$(PERL_LIB)))
 else
-	PERLVARS = $(PERLDIRS)
+  PERLVARS = $(PERLDIRS)
+  PERL_INC=$(PERL_LIB)
 endif
 
 
 default: install
 
 basedir:
-	@mkdir -p $(TARGET_DIR) 
-	@mkdir -p $(PERL_PREFIX)
-	@mkdir -p $(BIN_PREFIX)
+	@mkdir -p '$(TARGET_DIR)' 
+	@mkdir -p '$(PERL_PREFIX)'
+	@mkdir -p '$(BIN_PREFIX)'
 
 %:%.tar.gz basedir
 	@echo -- Installing PERL module $< --
 	tar -xzf $<	
-	cd $@ ; \
-	perl -I$(PERL_LIB) Makefile.PL $(PERLVARS)
-	${MAKE} -C $@ $(PERLVARS)
-	${MAKE} -C $@ $(PERLVARS) test    
-	${MAKE} -C $@ $(PERLVARS) install
+	cd $@ ;	perl -I'$(PERL_INC)' Makefile.PL 
+	cd $@ ; $(MAKE)              $(PERLVARS)
+	cd $@ ; $(MAKE) test         $(PERLVARS)
+	cd $@ ; $(MAKE) install_site $(PERLVARS)
 	rm -rf $@ # clean up after ourselves
 
 test: $(TGZ)
-	perl -I$(PERL_LIB) xls2csv.pl iris.xls iris.csv 1
+	perl -I'$(PERL_INC)' xls2csv.pl iris.xls iris.csv 1
 	diff -bBw iris.csv.save iris.csv
 
 clean:
@@ -116,13 +118,13 @@ xls2csv: xls2csv.in
 build: basedir $(DIRS) 
 
 install_bin: xls2csv.pl xls2csv.bat xls2csv
-	$(INSTALL) $(BIN_PREFIX)
+	$(INSTALL) '$(BIN_PREFIX)'
 ifeq ($(OS),Windows_NT)
-	$(CP) xls2csv.bat $(BIN_PREFIX)/
+	$(CP) xls2csv.bat '$(BIN_PREFIX)/'
 else
-	$(CP) xls2csv $(BIN_PREFIX)/
+	$(CP) xls2csv '$(BIN_PREFIX)/'
 endif
-	$(CP) xls2csv.pl $(PERL_PREFIX)/
+	$(CP) xls2csv.pl '$(PERL_PREFIX)/'
 
 install: clean build install_bin
 	touch gregmisc.so
