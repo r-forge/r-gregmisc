@@ -1,7 +1,11 @@
 # $Id$
 #
 # $Log$
+# Revision 1.4  2002/02/04 19:09:53  warneg
+# - fixed typo, when err="x", lty was 'slty' causing an error.
+#
 # Revision 1.3  2001/10/16 23:00:19  warneg
+#
 # - Added minbar and maxbar parameters
 # - Added cvs id and log tags to header
 #
@@ -29,21 +33,6 @@ plotCI <- function (x, y = NULL,
                     ...
                     )
 {
-  is.R <- get("is.R")
-  if(is.null(is.R)) is.R <- function(x) FALSE
-
-  if(!is.R())
-    {
-      strwidth   <-  function(...)
-        {
-          par("cin")[1] / par("fin")[1] * (par("usr")[2] - par("usr")[1])
-        }
-
-      strheight <-  function(...)
-        {
-          par("cin")[2] / par("fin")[2] * (par("usr")[4] - par("usr")[3])
-        }
-    }
 
   if (is.list(x)) { 
     y <- x$y 
@@ -146,10 +135,10 @@ plotCI <- function (x, y = NULL,
 
       # draw left bar
       if(!is.null(li))
-        myarrows(li, y, pmax(x-gap,li), y, col=col, lwd=lwd, lty=slty,
+        myarrows(li, y, pmax(x-gap,li), y, col=col, lwd=lwd, lty=lty,
                angle=90, length=smidge, code=1)
       if(!is.null(ui))
-        myarrows(ui, y, pmin(x+gap,ui), y, col=col, lwd=lwd, lty=slty,
+        myarrows(ui, y, pmin(x+gap,ui), y, col=col, lwd=lwd, lty=lty,
                angle=90, length=smidge, code=1)
       
     }
