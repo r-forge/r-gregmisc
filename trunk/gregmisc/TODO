@@ -6,3 +6,6 @@
 	gtool
 	gmisc
 
+- Modify csv2xls.pl to accept a sheet name in place of a sheet number 
+  (worksheets may not occupy sequential sheet numbers in the file, making
+   it hard to pull the right one out by number.)
