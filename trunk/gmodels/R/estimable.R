@@ -1,7 +1,13 @@
 # $Id$
 #
 # $Log$
+# Revision 1.3  2001/12/18 22:12:28  warneg
+# - Modified to make confidence intervals optional.  Changed 'alpha'
+#   parameter giving significance level to 'conf.int' giving confidence
+#   level.
+#
 # Revision 1.2  2001/12/18 21:27:37  warneg
+#
 # - Modified to work correctly when obj is of class 'aov' by specifying
 #   summary.lm instead of summary.  This ensures that the summary object
 #   has the fields we need.
@@ -25,7 +31,7 @@
 #
 #
 
-estimable <- function( obj, cm=NULL, alpha=0.05 )
+estimable <- function( obj, cm, conf.int=NULL )
 {
 
   if( !is.matrix(cm) && !is.data.frame(cm) )
@@ -76,23 +82,36 @@ estimable <- function( obj, cm=NULL, alpha=0.05 )
                          dim(cf)[1], sep="" ) )
   ct <- cm %*% cf[,1]
   vc <- sqrt( diag( cm %*% vcv %*% t(cm) ) )
+
+
+  
   retval <- cbind(est=ct,
                   stderr=vc,
                   t.value=ct/vc,
                   df=df,
-                  prob= 2 * (1 - pt(abs(ct/vc), df) ),
-                  lower=ct - vc * qt(1-alpha/2, df),
-                  upper=ct + vc * qt(1-alpha/2, df) )
+                  prob= 2 * (1 - pt(abs(ct/vc), df) )
+                  )
+
   if (is.null(rownames(cm)))
     rn <- paste("(",apply(cm,1,paste,collapse=" "),")",sep="")
   else
     rn <- rownames(cm)
+
   dimnames(retval) <- list( rn, c("Estimate","Std. Error", 
                                   "t value",
                                   "DF",
-                                  "Pr(>|t|)",
-                                  "Lower CI",
-                                  "Upper CI") )
+                                  "Pr(>|t|)" ) )
+
+  if (!is.null(conf.int))
+    {
+      alpha <- 1 - conf.int
+      nm <- c(colnames(retval), "Lower CI", "Upper CI")
+      retval <- cbind(retval,
+                      lower=ct - vc * qt(1-alpha/2, df),
+                      upper=ct + vc * qt(1-alpha/2, df) )
+      colnames(retval) <- nm
+    }
+
   retval
 }
 
