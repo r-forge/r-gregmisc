@@ -1,41 +1,4 @@
 
-prettylog <- function( x, n=5)
-  {
-    # R version of GLPretty in graphics.c
-    LPR.SMALL <- 2
-    LPR.MEDIUM <- 3
-
-    ul <- min(x,na.rm=T)
-    uh <- max(x,na.rm=T)
-
-    p1 = floor(log10(ul));
-    p2 = ceiling(log10(uh));
-
-    if (p2 - p1 <= 1) {
-	# Very small range : Use tickmarks from a LINEAR scale
-	pretty(x, n);
-    }
-    else {
-
-      step <- 10^seq( p1, p2, by=1)
-      
-      if (p2 - p1 <= LPR.SMALL)
-        n = c(1,2,5,10)
-      else if (p2 - p1 <= LPR.MEDIUM)
-        n = c(1,5,10)
-      else
-        n = c(1,10)
-
-      tick <- unique(c(outer(n, step, '*')))
-      last <- which.max( tick > uh )
-      tick <- tick[1:last]
-            
-      return( tick )
-      }
-  }
-
-
-
 panel.overplot <- function(formula, data, subset, col, lty, ...)
   {
     m <- match.call()
@@ -225,35 +188,11 @@ overplot <- function (formula, data = parent.frame(),
 
         usr <- par("usr")
 
-        # draw y axis manually
-        if( log %in% c('y','xy') )
-          {
-            yseq <- prettylog(10^usr[3:4])
-            axis(side=2,at=yseq,label=yseq,line=2.5*(i-1),lty=i,col=i,lwd=2)
-          }
-        else
-          {
-            yseq <- pretty(usr[3:4]) 
-            axis(side=2,at=yseq,label=yseq,line=2.5*(i-1),lty=i,col=i,lwd=2)
-          }
+        axis(side=2,line=2.5*(i-1),lty=i,col=i,lwd=2) 
+        title(ylab=level, line=2.5*(i-1))
         
         if(i == 1)
-          {
-            # draw x axis manually
-            if( log %in% c('x','xy') )
-              {
-                xseq <- prettylog(10^usr[1:2])
-                axis(side=1,at=xseq,label=xseq)
-              }
-            else
-              {
-                xseq <- pretty(usr[1:2])
-                axis(side=1,at=xseq,label=xseq)
-              }
-          }
-
-        # y axis label
-        title(ylab=level, line=2.5*(i-1))
+          axis(side=1)
 
         i <- i+1
         
