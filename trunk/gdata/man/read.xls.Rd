@@ -23,18 +23,15 @@ read.xls(xls, sheet=1, verbose=FALSE, ..., perl="perl")
   temporary .csv file, using Greg Warnes' xls2csv Perl script (installed
   as part of the gregmisc package).
 
-  Note that, in the conversion to csv, strings will be quoted. This is a
-  problem if you are trying to use the \code{comment.char} option of
+  Caution: In the conversion to csv, strings will be quoted. This can be
+    problem if you are trying to use the \code{comment.char} option of
   \code{read.table} since the first character of all lines (including
   comment lines) will be "\"" after conversion.
-
-  Note that this function expects the Perl executable 1) be named 'perl'
-  and 2) to be present in the default path. If either is not true, use the
-  <code>perl</code> argument to specify the exact path and executable name.
 }
 \references{http://www.analytics.washington.edu/statcomp/downloads/xls2csv}
-\note{ A working version of Perl must be present in the executable
-	search path for \code{read.xls} to work properly.}
+\note{ Either a working version of Perl must be present in the executable
+  search path, or the exact path of the perl executable must be provided
+  via the \code{perl} argument.  See the examples below for an illustration.}
 \seealso{ \code{\link[base]{read.csv}} }
 \examples{
 
@@ -44,6 +41,15 @@ read.xls(xls, sheet=1, verbose=FALSE, ..., perl="perl")
 
    iris <- read.xls(xlsfile)
    head(iris)  # look at the top few rows
+
+  \dontrun{
+   # Example specifying exact Perl path for default MS-Windows install of
+   # ActiveState perl
+   iris <- read.xls(xlsfile, perl="C:\\perl\bin\perl.exe")
+
+   # Example specifying exact Perl path for Unix systems
+   iris <- read.xls(xlsfile, perl="/usr/bin/perl")
+   }
 }
 \author{Jim Rogers \email{james\_a\_rogers@groton.pfizer.com}, modified
   and extended by Gregory R. Warnes \email{gregory\_r\_warnes@groton.pfizer.com}.
