@@ -11,19 +11,20 @@ Version 1.11.0
 
 - Add read.xls(), a function to read Microsoft Excel files by
   translating them to csv files via the xls2csv.pl script, which has
-  also been added to the package.  To run xls2csv via a shell script: 
+  also been added to the package.  I've provided scripts to run xls2csv: 
 
-     Unix systems: $PACKAGE$/gregmisc/bin/xls2csv script
+     Unix systems: $PACKAGE$/gregmisc/bin/xls2csv
      MS-Windows:   $PACKAGE$/gregmisc/bin/xls2csv.bat
 
-  or call perl on
+  or you can execute the perl code directly:
 
      $PACKAGE$/gregmisc/perl/xls2csv.pl
 
   The perl script explicitly loads its libraries from the installed
-  gregmisc so you don't have to worry about that.  Executing the
-  script via any of the above methods with no arguments will give you
-  usage and parameter information.
+  gregmisc so you don't have to worry about paths.  To get usage and
+  parameter information, simply execute the script via any of the
+  above methods without providing any command-line arguments.
+
 
 - Improvements to CrossTable() by Marc Schwartz <MSchwartz@MedAnalytics.com>
 
