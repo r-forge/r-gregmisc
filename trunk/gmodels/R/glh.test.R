@@ -1,7 +1,12 @@
 # $Id$
 #
 # $Log$
+# Revision 1.4  2002/01/10 17:35:41  warneg
+# - print.glh.test() was using cat() to printing the call.  This didn't work and
+# generated an error.
+#
 # Revision 1.3  2001/12/19 20:05:27  warneg
+#
 # - Removed extra element of return object.
 #
 # Revision 1.2  2001/12/18 21:34:25  warneg
@@ -37,7 +42,7 @@ glh.test <- function( reg, cm, d=rep(0, nrow(cm)) )
   if ( ncol(cm) != length(bhat) ) stop(  
                    paste( "\n Dimension of ",
                          deparse( substitute( cm ) ), ": ",
-                         paste( dim(cm), collapse="x" ),
+o                         paste( dim(cm), collapse="x" ),
                          ", not compatible with no of parameters in ",
                          deparse( substitute( reg ) ), ": ",
                          length(bhat), sep="" ) )
@@ -76,7 +81,8 @@ print.glh.test <- function(x, digits = 4 )
     cat("\n")
     cat("\t",x$method, prefix = "\t")
     cat("\n")
-    cat("Call:", x$call, "\n")
+    cat("Call:\n")
+    print(x$call)
     
     if (!is.null(x$statistic)) 
         cat(names(x$statistic), " = ", format(round(x$statistic, 
