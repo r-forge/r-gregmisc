@@ -1,7 +1,12 @@
 % $Id$
 %
 % $Log$
+% Revision 1.6  2003/04/22 16:00:27  warnes
+% - Fixed tpyo in example that allowed combinations(500,2) to run when
+%   it should have been ignred for testing..
+%
 % Revision 1.5  2003/04/10 16:22:29  warnes
+%
 % - Added note about the need to increase options("expressions") to use
 %   large values for 'n'.  Prompted by bug report from Huan Huang
 %   <huan.huang@bnpparibas.com
@@ -78,7 +83,7 @@ permutations(3,2,letters[1:3],repeats=TRUE)
 
 # To use large 'n', you need to change the default recusion limit
 \dontrun{
-options(expressions=1e5}
+options(expressions=1e5)
 cmat <- combinations(500,2)
 dim(cmat) # 44850 by 2 
 }
