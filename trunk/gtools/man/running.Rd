@@ -1,7 +1,11 @@
 % $Id$
 %
 % $Log$
+% Revision 1.5  2003/01/30 21:56:29  warnes
+% - Fixed typo in email address.
+%
 % Revision 1.4  2002/04/09 00:51:33  warneg
+%
 % Checkin for version 0.5.3
 %
 % Revision 1.3  2002/03/07 23:39:00  warneg
@@ -49,7 +53,7 @@ running2(X,Y, fun=mean, width=min(length(X),20), allow.fewer=FALSE,...)
   Vector containg the results of applying the function \code{fun} to the
   subsets of \code{X} (\code{running}) or \code{X} and \code{Y} (running2).
 }
-\author{ Gregory R. Warnes \email{Gregory\_R\_Warnes\@groton.pfizer.com} }
+\author{ Gregory R. Warnes \email{Gregory\_R\_Warnes@groton.pfizer.com} }
 %\note{ ~~further notes~~ }
 %\seealso{ ~~objects to SEE ALSO as \code{\link{~~fun~~}}, ~~~ }
 
