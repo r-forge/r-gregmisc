@@ -1,6 +1,9 @@
 % $Id$
 %
 % $Log$
+% Revision 1.3  2001/10/16 22:35:36  warneg
+% Added description of minsd parameter.
+%
 % Revision 1.2  2001/08/25 05:46:51  warneg
 % Added CVS header.
 %
@@ -14,7 +17,7 @@
 %\synopsis{
 \usage{
 plotmeans(formula, data=NULL, subset, na.action,
-          bars=T, p=0.95, xlab=names(mf)[2],
+          bars=T, p=0.95, minsd=0, xlab=names(mf)[2],
           ylab=names(mf)[1], mean.labels=F,
           ci.label=F, n.label=T, digits=getOption("digits"),
           col="black", barwidth=1, barcol="blue",
@@ -42,6 +45,10 @@ plotmeans(formula, data=NULL, subset, na.action,
 
   \item{p}{confidence level for error bars.  Defaults to 0.95.}
 
+  \item{minsd}{minumum permitted value for the standard deviation within
+    each factor level.  Any standard deviation estimates smaller minsd
+    will be replaced with minsd. Defaults to 0.}
+  
   \item{xlab}{x-axis label.}
   \item{ylab}{y-axis label.}
 
