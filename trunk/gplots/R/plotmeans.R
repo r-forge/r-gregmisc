@@ -11,6 +11,7 @@
 
 plotmeans  <- function (formula, data = NULL, subset, na.action,
                          bars=T, p=0.95,
+                         minsd=0,
                          xlab=names(mf)[2], ylab=names(mf)[1],
                          mean.labels=F, ci.label=F, n.label=T,
                          digits=options("digits"), col="black",
@@ -47,8 +48,8 @@ plotmeans  <- function (formula, data = NULL, subset, na.action,
         if (is.matrix(eval(m$data, F)))
           m$data <- as.data.frame(data)
       }
-    m$... <- m$bars <- m$barcol <- m$p   <- NULL
-    m$xlab <- m$ylab  <-  NULL
+    m$... <- m$bars <- m$barcol <- m$p <- m$minsd <- NULL
+    m$xlab <- m$ylab <-  NULL
     m$col  <- m$barwidth  <- NULL
     m$digits  <- m$mean.labels  <- m$ci.label  <- m$n.label <- NULL
     m$connect  <- m$ccol  <-  m$legends <- m$labels<- NULL
@@ -68,6 +69,10 @@ plotmeans  <- function (formula, data = NULL, subset, na.action,
     myvar  <-  function(x) var(x[!is.na(x)])
         
     vars <- sapply(split(mf[[response]], mf[[-response]]), myvar)
+
+    # apply minimum variance specified by minsd^2
+    vars <- ifelse( vars < (minsd^2), (minsd^2), vars)
+    
     ns   <- sapply( sapply(split(mf[[response]], mf[[-response]]), na.omit,
                            simplify=F), length )
     ci.width  <- qnorm( (1+p)/2 ) * sqrt(vars/(ns-1) )
