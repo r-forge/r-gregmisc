@@ -4,7 +4,7 @@
 \title{Efficient computation of principal components and singular value
   decompositions.}
 \description{
-  The standard \code{\link[mva]{prcomp}} and \code{\link{svd}}
+  The standard \code{\link[stats]{prcomp}} and \code{\link{svd}}
   function are very inefficient for wide matrixes. \code{fast.prcomp}
   and \code{fast.svd} are modified versions which are efficient even
   for matrixes that are very wide.
@@ -16,7 +16,7 @@
 \arguments{
   \item{x}{data matrix}
   \item{retx, center, scale., tol}{ See documetation for
-    \code{\link[mva]{prcomp}}
+    \code{\link[stats]{prcomp}}
   }
   \item{nu, nv, ...}{ See documetation for \code{\link{svd}} }
 }
@@ -24,12 +24,12 @@
  The current implementation of the function \code{\link{svd}} in S-Plus
  and R is much slower when operating on a matrix with a large number of
  columns than on the transpose of this matrix, which has a large
- number of rows. As a consequence, \code{\link[mva]{prcomp}}, which uses
+ number of rows. As a consequence, \code{\link[stats]{prcomp}}, which uses
  \code{\link{svd}}, is also very slow when applied to matrixes with a
  large number of rows.
  
  For R, the simple solution is to use \code{\link{La.svd}} instead of
- \code{\link{svd}}.  A suitable patch to \code{\link[mva]{prcomp}} has
+ \code{\link{svd}}.  A suitable patch to \code{\link[stats]{prcomp}} has
  been submitted.  In the mean time, the function \code{fast.prcomp} has
  been provided as a short-term work-around.
 
@@ -40,7 +40,7 @@
  For R:
  \describe{
    \item{\code{fast.prcomp}}{is a modified versiom of
-     \code{\link[mva]{prcomp}} that calls \code{\link{La.svd}} instead
+     \code{\link[stats]{prcomp}} that calls \code{\link{La.svd}} instead
      of \code{\link{svd}}
    }
    \item{\code{fast.svd}}{is simply a wrapper around \code{\link{La.svd}}.
@@ -63,14 +63,14 @@
 
 }
 \value{
-  See the documetation for \code{\link[mva]{prcomp}} or 
+  See the documetation for \code{\link[stats]{prcomp}} or 
   \code{\link{svd}} .
 }
 \author{Modifications by Gregory R. Warnes
   \email{gregory\_r\_warnes@groton.pfizer.com} }
 
 \seealso{
-    \code{\link[mva]{prcomp}}, \code{\link{svd}}, \code{\link{La.svd}}
+    \code{\link[stats]{prcomp}}, \code{\link{svd}}, \code{\link{La.svd}}
 }
 
 \examples{
@@ -97,7 +97,7 @@
   max( abs(val.x) - abs(val.tx) )
 
 
-  library(mva)
+  library(stats)
 
   # prcomp directly on matrix is SLOW:
   system.time( pr.x <- prcomp(x) )
