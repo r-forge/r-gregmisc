@@ -1,13 +1,4 @@
-## $Log$
-## Revision 1.7  2004/12/23 19:32:26  nj7w
-## Split the function print.CrossTable.vector in two parts - for SAS behaiour and SPSS behaviour. Also put the code of printing statistics in a function 'print.statistics'
-##
-## Revision 1.6  2004/12/21 22:38:16  Warnes
-## Added & extended changes made by Nitin to implement 'SPSS' format, as suggested by
-## Dirk Enzmann <dirk.enzmann@jura.uni-hamburg.de>.
-##
-## Revision 1.5  2004/09/03 17:27:44  warneg
-##
+## $Id#$
 
 CrossTable <- function (x, y,
                         digits = 3,
@@ -16,6 +7,7 @@ CrossTable <- function (x, y,
                         prop.r = TRUE,
                         prop.c = TRUE,
                         prop.t = TRUE,
+                        prop.chisq=TRUE,
                         chisq = FALSE,
                         fisher = FALSE,
                         mcnemar = FALSE,
@@ -98,7 +90,7 @@ CrossTable <- function (x, y,
   ## even if any set to TRUE. Do not do col/table props
   if (any(dim(t) < 2))
     {
-      prop.c <- prop.r <- chisq <- expected <- fisher <- mcnemar <- FALSE
+      prop.c <- prop.r <- prop.chisq <- chisq <- expected <- fisher <- mcnemar <- FALSE
     }
 
   ## Generate cell proportion of row
@@ -183,6 +175,10 @@ CrossTable <- function (x, y,
                                    format = "f", width = CWidth),
                 SpaceSep2, sep = " | ", 
                 collapse = "\n")
+          if (prop.chisq)
+            cat(SpaceSep1, formatC((((CST$expected[i, ]-t[i, ])^2)/CST$expected[i, ]),
+                width = CWidth, digits = digits, format = "f"), SpaceSep2, 
+                sep = " | ", collapse = "\n")
           if (prop.r) 
             cat(SpaceSep1, formatC(c(CPR[i, ], RS[i]/GT), 
                                    width = CWidth, digits = digits, format = "f"), 
@@ -241,7 +237,13 @@ CrossTable <- function (x, y,
                             width = CWidth-1), sep="  | ", collapse=""),
                 cat(SpaceSep2, sep = " | ", collapse = "\n"), sep="", collapse="")
 
-          if (prop.r)
+          if (prop.chisq)
+            cat(cat(SpaceSep1, sep=" | ", collapse=""),
+                cat(formatC((((CST$expected[i, ]-t[i, ])^2)/CST$expected[i, ]),
+                    digits = digits, format = "f",
+                            width = CWidth-1), sep="  | ", collapse=""),
+                cat(SpaceSep2, sep = " | ", collapse = "\n"), sep="", collapse="")
+      if (prop.r)
             cat(cat(SpaceSep1, sep=" | ", collapse=""),
                 cat(formatC(c(CPR[i, ]*100, 100*RS[i] / GT),
                             width = CWidth-1, digits = digits, format = "f"),
@@ -523,17 +525,19 @@ CrossTable <- function (x, y,
       cat(rep("\n", 2))
       cat("   Cell Contents\n")
 
-      cat("|-----------------|\n")
-      cat("|               N |\n")
+      cat("|-------------------------|\n")
+      cat("|                       N |\n")
       if (expected)
-        cat("|      Expected N |\n")
+        cat("|              Expected N |\n")
+      if (prop.chisq)
+        cat("| Chi-square contribution |\n")
       if (prop.r)
-        cat("|   N / Row Total |\n")
+        cat("|           N / Row Total |\n")
       if (prop.c)
-        cat("|   N / Col Total |\n")
+        cat("|           N / Col Total |\n")
       if (prop.t)
-        cat("| N / Table Total |\n")
-      cat("|-----------------|\n")
+        cat("|         N / Table Total |\n")
+      cat("|-------------------------|\n")
       cat(rep("\n", 2))
       cat("Total Observations in Table: ", GT, "\n")
       cat(rep("\n", 2))
@@ -551,28 +555,30 @@ CrossTable <- function (x, y,
       ## Print Cell Layout
       cat("\n")
       cat("   Cell Contents\n")
-      cat("|-----------------|\n")
-      cat("|           Count |\n")
+      cat("|-------------------------|\n")
+      cat("|                   Count |\n")
       if (!vector.x)
         {
           if (expected)
-            cat("| Expected Values |\n")
+            cat("|         Expected Values |\n")
+          if (prop.chisq)
+            cat("| Chi-square contribution |\n")
           if (prop.r)
-            cat("|     Row Percent |\n")
+            cat("|             Row Percent |\n")
           if (prop.c)
-            cat("|  Column Percent |\n")
+            cat("|          Column Percent |\n")
           if (prop.t)
-            cat("|   Total Percent |\n")
+            cat("|           Total Percent |\n")
           if (resid)
-            cat("|        Residual |\n")
+            cat("|                Residual |\n")
           if (sresid)
-            cat("|    Std Residual |\n")
+            cat("|            Std Residual |\n")
           if (asresid)
-            cat("|   Adj Std Resid |\n")
+            cat("|           Adj Std Resid |\n")
         }
       else
-        cat("|     Row Percent |\n")
-      cat("|-----------------|\n")
+        cat("|             Row Percent |\n")
+      cat("|-------------------------|\n")
       cat("\n")
       cat("Total Observations in Table: ", GT, "\n")
       cat("\n")
