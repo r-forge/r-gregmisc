@@ -3,7 +3,7 @@ panel.overplot <- function(formula, data, subset, col, lty, ...)
   {
     m <- match.call()
 
-    m[[1]] <- as.name('graphics:::plot.formula')
+    m[[1]] <- graphics:::plot.formula
     eval(m, parent.frame() )
 
     m[[1]] <- as.name('lowess.formula')
