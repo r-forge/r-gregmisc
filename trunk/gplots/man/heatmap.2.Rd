@@ -107,7 +107,7 @@ heatmap <- function (x,
     number of break points to be used, in which case the break points
     will be spaced equally between \code{min(x)} and \code{max(x)}.}
   \item{col}{colors used for the image. Defaults to heat colors
-    (\code{heat.colors}}.}
+    (\code{heat.colors}).}
   % block separation
   \item{colsep,rowsep,sepcolor}{(optional) vector of integers indicating
     which columns or rows should be separated from the preceding columns
