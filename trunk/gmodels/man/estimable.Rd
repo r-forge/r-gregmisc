@@ -1,6 +1,7 @@
 % $Id$
 \name{estimable}
 \alias{estimable}
+\alias{.wald}
 \title{Contrasts and estimable linear functions of model coefficients
   for lm, glm, lme, and geese objects}
 \description{Compute and test contrasts and other estimable linear
@@ -8,29 +9,32 @@
   objects}
 \usage{
 estimable(obj, cm, beta0, conf.int=NULL, joint.test=FALSE, show.beta0)
+.wald(obj, cm,beta0=rep(0, ifelse(is.null(nrow(cm)), 1, nrow(cm))))
 }
 \arguments{
-  \item{obj}{Regression (lm,glm,lme) object. }
-  \item{cm}{Matrix specifying estimable linear functions or contrasts (one per
-    row). The number of columns must match the number of fitted
-    coefficients in the model.}
-  \item{beta0}{Vector of null hypothesis values}
-  \item{conf.int}{Confidence level.  If provided, confidence intervals
-    will be computed. }
-  \item{joint.test}{Logical value. If TRUE a 'joint' Wald test for the
-    hypothesis L beta=beta0 is made. Default is that the 'row-wise'
-    tests are made, i.e. (L beta)_i=beta0_i }
-  \item{show.beta0}{Logical value. If TRUE a column for beta0 will be
-    included in the output table.  Defaults to TRUE when beta0 is
-    specified, FALSE otherwise.}
+   \item{obj}{Regression (lm,glm,lme) object. }
+   \item{cm}{Matrix specifying estimable linear functions or contrasts (one per
+     row). The number of columns must match the number of fitted
+     coefficients in the model.}
+   \item{beta0}{Vector of null hypothesis values}
+   \item{conf.int}{Confidence level.  If provided, confidence intervals
+     will be computed.}
+   \item{joint.test}{Logical value. If TRUE a 'joint' Wald test for the
+     hypothesis \eqn{L \beta=\beta_0}{L \%*\% beta=beta0} is performed.
+     Otherwise 'row-wise' tests are performed, i.e. \eqn{(L
+      \beta)_i=\beta_0_i}{(L \%*\% beta)[i]=beta0[i]}
+    }
+   \item{show.beta0}{Logical value. If TRUE a column for beta0 will be
+     included in the output table.  Defaults to TRUE when beta0 is
+     specified, FALSE otherwise.}
 }
 \details{
-  Computes an estimate, test statitic, significance test, and (optional)
-  confidence interval for each linear functions of the model
-  coefficients specified by the rows of \code{cm}.  The estimates and
-  their variances are obtained by applying the matrix \code{cm} to the
-  model estimates variance-covariance matrix.  Degrees of freedom are
-  obtained from the appropriate model terms.
+  \code{estimable} computes an estimate, test statitic, significance
+  test, and (optional) confidence interval for each linear functions of
+  the model coefficients specified by the rows of \code{cm}.  The
+  estimates and their variances are obtained by applying the matrix
+  \code{cm} to the model estimates variance-covariance matrix.  Degrees
+  of freedom are obtained from the appropriate model terms.
   
   The user is responsible for ensuring that the specified
   linear functions are meaningful.
@@ -40,6 +44,9 @@ estimable(obj, cm, beta0, conf.int=NULL, joint.test=FALSE, show.beta0)
   contrasts between two specific combinations of model parameters, the
   \code{contrast} function in Frank Harrell's Design library may be more
   convenient.
+
+  The \code{.wald} function is called internally by \code{estimable} and
+  is not intended for direct use.
 }
 \note{
   The estimated fixed effect parameter of \code{lme} objects may have
@@ -78,7 +85,7 @@ x2 <- rnorm(100,mean=y,sd=0.5)
 reg2 <- lm(y ~ x + x2 + pmax(x2-0.5,0) )
 range <- seq(-2,2,,50)
 tmp <- estimable(reg2,cbind(1,0,0,1,range,pmax(range-0.5,0)), conf.int=0.95)
-plotCI(x=xx2,y=tmp[,1],li=tmp[,6],ui=tmp[,7])
+plotCI(x=range,y=tmp[,1],li=tmp[,6],ui=tmp[,7])
 
 # Fit both linear and quasi-Poisson models to iris data, then compute
 # conficence intervals on a contrast.

@@ -1,4 +1,4 @@
-new.estimable <- function (obj, cm, beta0, conf.int=NULL, joint.test=FALSE,
+estimable <- function (obj, cm, beta0, conf.int=NULL, joint.test=FALSE,
                            show.beta0) 
 {
   if (!is.matrix(cm) && !is.data.frame(cm)) 
@@ -105,21 +105,20 @@ new.estimable <- function (obj, cm, beta0, conf.int=NULL, joint.test=FALSE,
                prob <- 1 - pchisq((ct.diff/vc)^2, df=1)
              })
       
-      #if (length(which(c("glm", "geese") %in% class(obj))) > 0){
       if (stat.name=="X2.stat")
         {
-          retval <- cbind(hyp=beta0, est=ct, stderr=vc, t.value=ct.diff/vc, 
+          retval <- cbind(hyp=beta0, est=ct, stderr=vc,
+                          "X^2 value"=(ct.diff/vc)^2, 
                           df=df, prob=1 - pchisq((ct.diff/vc)^2, df=1))
-          dimnames(retval) <- list(rn, c("beta0", "Estimate", "Std.Error", 
-                                         "X2.value", "DF", "Pr(>|X^2|)"))
+          dimnames(retval) <- list(rn, c("beta0", "Estimate", "Std. Error", 
+                                         "X^2 value", "DF", "Pr(>|X^2|)"))
         }
-      #else if (length(which(c("lm", "lme", "aov", "nlme") %in%  class(obj))) > 0) {
       else if (stat.name=="t.stat")
         {
-          retval <- cbind(hyp=beta0, est=ct, stderr=vc, t.value=ct.diff/vc, 
+          retval <- cbind(hyp=beta0, est=ct, stderr=vc, "t value"=ct.diff/vc, 
                           df=df, prob=2 * (1 - pt(abs(ct.diff/vc), df)))
-          dimnames(retval) <- list(rn, c("beta0", "Estimate", "Std.Error", 
-                                         "t.value", "DF", "Pr(>|t|)"))
+          dimnames(retval) <- list(rn, c("beta0", "Estimate", "Std. Error", 
+                                         "t value", "DF", "Pr(>|t|)"))
         }
       
       if (!is.null(conf.int))
@@ -143,31 +142,33 @@ new.estimable <- function (obj, cm, beta0, conf.int=NULL, joint.test=FALSE,
     }
   }
 
-.wald <- function (obj, cm, beta0=rep(0, ifelse(is.null(nrow(cm)), 1, nrow(cm)))) 
+.wald <- function (obj, cm,
+                   beta0=rep(0, ifelse(is.null(nrow(cm)), 1, nrow(cm)))) 
 {
     if (!is.matrix(cm) && !is.data.frame(cm)) 
         cm <- matrix(cm, nrow=1)
     df <- nrow(cm)
     if ("geese" %in% class(obj))
-{
+      {
         cf <- obj$beta
         vcv <- obj$vbeta
-    }
+      }
     else if ("gee" %in% class(obj))
-{
+      {
         cf <- summary(obj)$coef
         vcv <- obj$robust.variance
-    }
+      }
     else if ("lm" %in% class(obj))
-{
+      {
         cf <- summary.lm(obj)$coefficients[, 1]
         vcv <- summary.lm(obj)$cov.unscaled * summary.lm(obj)$sigma^2
         if ("glm" %in% class(obj))
-{
+          {
             vcv <- summary(obj)$cov.scaled
-        }
-    }
-    else stop("obj must be of class 'lm', 'glm', 'aov', 'gee' or 'geese'")
+          }
+      }
+    else
+      stop("obj must be of class 'lm', 'glm', 'aov', 'gee' or 'geese'")
     u <- (cm %*% cf)-beta0
     vcv.u <- cm %*% vcv %*% t(cm)
     W <- t(u) %*% solve(vcv.u) %*% u
