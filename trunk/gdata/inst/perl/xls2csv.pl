@@ -1,5 +1,9 @@
 #!/bin/env perl
 
+# Explicit specify path to our library directory
+use lib "/mss/srg3/warneg/src/R/gregmisc.Rcheck/gregmisc/perl/lib/perl5/site_perl/5.6.1";
+# DO NOT REMOVE THE ABOVE LINE!
+
 use strict;
 use Spreadsheet::ParseExcel;
 
@@ -11,7 +15,7 @@ my($row, $col, $sheet, $cell, $usage, $basename, $sheetnumber, $filename);
 ##
 $usage = <<EOF;
 
-$0 <excel file> [<output file>] [<worksheet number>]
+xls2csv.pl <excel file> [<output file>] [<worksheet number>]
 
 Translate the Microsoft Excel spreadsheet file contained in
 <excel file> into comma separated value format (CSV) and store

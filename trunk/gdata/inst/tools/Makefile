@@ -1,5 +1,5 @@
 # Global Config Variables
-R_PACKAGE_DIR ?= $(PWD)/../inst  # usefule for testing
+R_PACKAGE_DIR ?= $(PWD)/../inst
 PERL_PREFIX = $(R_PACKAGE_DIR)/perl
 BIN_PREFIX  = $(R_PACKAGE_DIR)/bin
 
@@ -44,9 +44,11 @@ cleanup:
 	-rm -f iris.csv
 
 clean: cleanup
+	-rm -f xls2csv.pl
+	-rm -f xls2csv
+	-rm -f xls2csv.bat
 	-rm -rf $(PERL_PREFIX)
 	-rm -rf $(BIN_PREFIX)
-	-rm -f xls2csv.pl
 
 show:	
 	@echo R_PACKAGE_DIR=$(R_PACKAGE_DIR)
