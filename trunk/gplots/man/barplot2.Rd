@@ -1,7 +1,11 @@
 % $Id$
 %
 % $Log$
+% Revision 1.5  2003/11/18 18:59:08  warnes
+% - Tiny fix to remove R CMD check error.
+%
 % Revision 1.4  2003/01/30 21:43:05  warnes
+%
 % - Added argument 'add' to allow for the addition of a barplot to an
 %   existing graphic. Default is FALSE
 %
@@ -115,7 +119,7 @@
   \item{plot.ci}{logical. If \code{TRUE}, confidence intervals are plotted
    over the bars. Note that if a stacked bar plot is generated, confidence
    intervals will not be plotted even if \code{plot.ci = TRUE}}
-  \item{ci.l and ci.u}{The confidence intervals (ci.l = lower bound, ci.u =
+  \item{ci.l,ci.u}{The confidence intervals (ci.l = lower bound, ci.u =
    upper bound) to be plotted if \code{plot.ci} = \code{TRUE}. Values must have
    the same dim structure as \code{height}.}
   \item{ci.color}{the color for the confidence interval line segments}
