@@ -20,7 +20,11 @@ getpid()
          \code{\link{kill}}, \code{\link{killall}}}}
 \examples{
 
+getpid()
+
+\dontrun{
 for(i in 1:10)
-  fork( function() cat("PID:", getpid(), "\n") )
+  fork( function() { cat("PID:", getpid(), "\n"); exit()} )
+}
 }
 \keyword{programming}

@@ -1,6 +1,6 @@
 \name{signame}
 \alias{signame}
-\alias{siginfo}
+\alias{sigval}
 \alias{siglist}
 \title{Obtain information about signals}.
 \description{
@@ -10,7 +10,7 @@
 }
 \usage{
 signame(val)
-siginfo(name)
+sigval(name)
 siglist()
 }
 \arguments{
@@ -22,7 +22,7 @@ siglist()
   compile time.
 }
 \value{
-  A vector (\code{signame}, \code{siginfo}) or data frame
+  A vector (\code{signame}, \code{sigval}) or data frame
   (\code{siglist}) containing the components:
   \item{name}{Symbolic name}
   \item{val}{Integer value}
@@ -35,10 +35,10 @@ siglist()
 \examples{
 
    # look up the numeric value for SIGABT:
-   sigval("SIGABT")
+   sigval("SIGKILL")
 
    # the 'SIG' component can be ommitted:
-   sigval("HALT")
+   sigval("HUP")
 
    # now look up based on value
    signame(9)

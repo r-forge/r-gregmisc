@@ -12,7 +12,7 @@ exit(status = 0)
   \item{status}{Integer status flag. Use 0 for a normal exit.}
 }
 \details{
-  This function is a shallow warpper adound the Unix "_exit" command,
+  This function is a shallow warpper adound the Unix "\_exit" command,
   and should be used instead of \code{quit()} to exit from a  process
   created via \code{fork}.
 }
@@ -24,7 +24,7 @@ exit(status = 0)
   function that calls \code{exit} before evaluating the \code{slave}
   argument, so it is usually not necessary to directly call exit().
   }
-\references{"_exit" man page}
+\references{"\_exit" man page}
 \author{ Gregory R. Warnes \email{gregory\_r\_warnes\@groton.pfizer.com}}
 \seealso{\code{\link{fork}}, \code{\link{getpid}}, \code{\link{wait}},
          \code{\link{kill}}, \code{\link{killall}}}}

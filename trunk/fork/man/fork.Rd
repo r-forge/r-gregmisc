@@ -6,10 +6,10 @@
   Create a new R process using the Unix 'fork' system call.
 }
 \usage{
-fork(child)
+fork(slave)
 }
 \arguments{
-  \item{child}{Function to be executed in the new R process. This can be
+  \item{slave}{Function to be executed in the new R process. This can be
   \code{NULL}, see details.}
 }
 \details{
@@ -76,11 +76,11 @@ fork(child)
 
     if(pid==0) \{ 
 
-      cat("Hi from the child process\n"); exit() 
+      cat("Hi from the child process\\n"); exit() 
 
     \} else \{
       
-      cat("Hi from the parent process\n");
+      cat("Hi from the parent process\\n");
     
     \} 
     

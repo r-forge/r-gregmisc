@@ -21,10 +21,20 @@ sigval <- function(name)
     unlist(retval)
   }
 
-siglist <- function(val)
+siglist <- function()
   {
     retval <- .Call("Rfork_siglist")
     retval <- as.data.frame(retval)
     names(retval) <- c("name","val","desc")
     retval
   }
+
+#siginfo <- function(val, name)
+#  {
+#    if(missing(val) && missing(name))
+#      return(siglist())
+#    else if (missing(val))
+#      return(sigval(name))
+#    else
+#      return(signame(val))
+#  }
