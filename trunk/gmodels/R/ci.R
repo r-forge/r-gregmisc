@@ -1,6 +1,8 @@
 ci  <-  function(x,...) UseMethod("ci")
 
-ci.summary.lm  <-  function(x,confidence=0.95,alpha=1-confidence) {
+ci.lm  <-  function(x,confidence=0.95,alpha=1-confidence)
+{
+  x  <-  summary(x)
   est  <-  coef(x)[,1] ;
   ci.low  <- est + qt(alpha/2, x$df[2]) * coef(x)[,2] ;
   ci.high <- est - qt(alpha/2, x$df[2]) * coef(x)[,2] ;
@@ -13,9 +15,18 @@ ci.summary.lm  <-  function(x,confidence=0.95,alpha=1-confidence) {
   retval
 }
 
-ci.lm  <-  function(x,...)
-{
+ci.lme <- function(x,confidence=0.95,alpha=1-confidence)
+  {
   x  <-  summary(x)
-  return(ci.summary.lm(x))
+  est  <-  x$tTable[,"Value"] ;
+  ci.low  <- est + qt(alpha/2, x$tTable[,"DF"]) * x$tTable[,"Std.Error"] ;
+  ci.high <- est - qt(alpha/2, x$tTable[,"DF"]) * x$tTable[,"Std.Error"] ;
+  retval  <- cbind(Estimate=est,
+                   "CI lower"=ci.low,
+                   "CI upper"=ci.high,
+                   "Std. Error"= x$tTable[,"Std.Error"],
+                   "DF" = x$tTable[,"p-value"],
+                   "p-value" = x$tTable[,"p-value"])
+  rownames(retval)  <-  rownames(x$tTable)
+  retval
 }
-
