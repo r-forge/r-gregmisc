@@ -5,7 +5,7 @@
 
 \title{ Test a General Linear Hypothesis for a Regression Model }
 \description{
-Test a general linear hypothesis for a regression model }
+Test, print, or summarize a general linear hypothesis for a regression model }
 }
 
 \usage{
@@ -25,28 +25,32 @@ summary.glh.test(x, digits=4)
 }
 \details{
   Test the general lineary hypothesis
-  $$ C \hat{\beta} = d $$
+  \eqn{ C \hat{beta} = d }{C \%*\% beta_hat == d }
   for the regression model \code{reg}.
 
-  The test statistic is obtained from the formula
-
-
-  $$
-  f = \frac{(CB - d)' ( C {(X'X)}^{-1}   C' ) (CB - d) / r
-           {        SSE / (n-p) }
-  $$
-
+  The test statistic is obtained from the formula: 
+  \deqn{f = \frac{(C \hat{\beta} - d)' ( C (X'X)^{-1} C' ) (C \hat{\beta}
+      - d) / r }{ SSE / (n-p) } }{ 
+    F = (C Beta-hat - d)' ( C (X'X)^-1   C' ) (C Beta-hat - d) / r /
+        ( SSE / (n-p) )
+  }
+  
   Under the null hypothesis, f will follow a F-distribution with r and
   n-p degrees of freedom.
-  
-
 }
 \value{
-  ~Describe the value returned
-  If it is a LIST, use
-  \item{comp1 }{Description of `comp1'}
-  \item{comp2 }{Description of `comp2'}
-  ...
+  Object of class \code{c("glh.test","htest")} with elements:
+  \item{call }{Function call that created the object}
+  \item{statistic }{F statistic}
+  \item{parameter}{ vector containing the numerator (r) and denominator
+    (n-p) degrees of freedom }
+  \item{p.value}{ p-value}
+  \item{estimate}{ computed estimate for each row of \code{cm} }
+  \item{null.value}{ d }
+  \item{method}{ description of the method }
+  \item{data.name}{ name of the model given for \code{reg} }
+  \item{matrix} { matrix specifying the general linear hypotheis
+    (\code{cm}) }
 }
 \references{ R.H. Myers, Classical and Modern Regression with
   Applications,  2nd Ed, 1990, p. 105}
