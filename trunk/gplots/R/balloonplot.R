@@ -1,6 +1,9 @@
 # $Id$
 #
 # $Log$
+# Revision 1.2  2003/01/20 18:35:47  warnes
+# - Updated balloonplot help page.
+#
 # Revision 1.1  2003/01/03 21:34:06  warnes
 # - Initial checkin of balloonplot functions and documentation.
 #
@@ -32,9 +35,10 @@ balloonplot.table <- function(x, xlab, ylab, zlab, ... )
 balloonplot.default <- function(x,y,z,
                                 xlab=deparse(substitute(x)),
                                 ylab=deparse(substitute(y)),
-                                zlab=deparse(substitute(z)), 
+                                zlab=deparse(substitute(z)),
+                                dotsize=2/max(strwidth(19),strheight(19)),
+                                dotchar=19,
                                 dotcolor="skyblue",
-                                dotpch=19,
                                 main,
                                 label=TRUE,
                                 label.digits=2,
@@ -76,21 +80,18 @@ balloonplot.default <- function(x,y,z,
       X
     }
   
-  size <- scale(z, max=80/max(nlevels(x),nlevels(y)),
-                scale.method=scale.method)
-  
   plot(x=as.numeric(x),
        y=as.numeric(y),
-       cex=size,
-       pch=dotpch, # plot character
-       col=dotcol, # dot color
+       cex=scale(z, max=dotsize, scale.method=scale.method),
+       pch=dotchar, # plot character
+       col=dotcolor, # dot color
        xlab=xlab,
        ylab=ylab,
        xaxt="n", # no x axis lables
        yaxt="n", # no y axis lables
        bty="n",  # no box around the plot
        xlim=c(0,nlevels(x)+0.5), # extra space on either end of plot
-     ylim=c(0.5,nlevels(y)+1.5)  # so dots don't cross into margins
+       ylim=c(0.5,nlevels(y)+1.5)  # so dots don't cross into margins
      )
 
   # add text labels

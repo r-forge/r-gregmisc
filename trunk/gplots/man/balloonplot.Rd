@@ -10,12 +10,15 @@
 }
 \usage{
 balloonplot(x, ...)
-\method{balloonplot}{table}function (x, xlab, ylab, zlab, ...)
-\method{balloonplot}{default}(x, y, z, xlab = deparse(substitute(x)),
+\method{balloonplot}{table}(x, xlab, ylab, zlab, ...)
+\method{balloonplot}{default}(x, y, z,
+    xlab = deparse(substitute(x)),
     ylab = deparse(substitute(y)), 
-    zlab = deparse(substitute(z)), dotcolor = "skyblue", main, 
-    label = TRUE, label.digits = 2, scale.method = c("volume", 
-        "diameter"), ...)
+    zlab = deparse(substitute(z)),
+    dotsize = 2/max(strwidth(19), strheight(19)),
+    dotchar = 19, dotcolor = "skyblue",
+    main, label = TRUE, label.digits = 2,
+    scale.method = c("volume", "diameter"), ...) 
 }
 \arguments{
   \item{x}{Either a table object, or a vector of values for the first
@@ -29,6 +32,10 @@ balloonplot(x, ...)
     y axis and in the plot title.}
   \item{zlab}{Text label for the dot size. This will be included in the
     plot title.}
+  \item{dotsize}{Maximum dot size.  You may need to adjust this value
+    for different plot devices and layouts.}
+  \item{dotchar}{Plotting symbol or character used for dots.  See the help
+    page for the points function for symbol codes.}
   \item{dotcolor}{Scalar or vector specifying the color(s) of the dots in
     the plot.}
   \item{main}{Plot title text.}
