@@ -221,7 +221,7 @@ heatmap.2 <- function (x,
 	       RowSideColors = rc, ColSideColors = cc, margin=c(5,10),
 	       xlab = "specification variables", ylab= "Car Models",
 	       main = "heatmap(<Mtcars data>, ..., scale = \"column\")",
-               tracecol="green")
+               tracecol="green", density="density")
 
  str(hv) # the two re-ordering index vectors
 

@@ -155,7 +155,7 @@ heatmap.2 <- function (x,
     if(is.null(labRow)) 
       labRow <- if(is.null(rownames(x))) (1:nr)[rowInd] else rownames(x)
     else
-      labRow <- labRow[colInd]
+      labRow <- labRow[rowInd]
   
     if(is.null(labCol))
       labCol <- if(is.null(colnames(x))) (1:nc)[colInd] else colnames(x)
@@ -381,7 +381,8 @@ heatmap.2 <- function (x,
           title("Color Key")
         
       }
-    plot.new()
+    else
+      plot.new()
 
     invisible(list(rowInd = rowInd, colInd = colInd))
 }
