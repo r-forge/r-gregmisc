@@ -1,6 +1,9 @@
 # $Id$
 #
 # $Log$
+# Revision 1.4  2004/03/26 22:16:44  warnes
+# Misc changes.
+#
 # Revision 1.3  2004/01/21 04:31:25  warnes
 # - Mark sprint() as depreciated.
 # - Replace references to sprint with capture.output()
@@ -39,10 +42,10 @@ textplot.default <- function(object,
   halign <- match.arg(halign)
   valign <- match.arg(valign)
 
-  if(is.character(object))
-    object <- paste(object, collapse="\n")
-  else
-    object <- capture.output(print(object))
+  #if(is.character(object))
+  #  object <- paste(object, collapse="\n")
+  #else
+  #  object <- capture.output(print(object))
 
   textplot.character(object, halign,  valign, cex, ...)
 }
@@ -55,68 +58,6 @@ textplot.data.frame <- function(object,
     textplot.matrix(object, halign, valign, cex, ... )  
 
 
-
-textplot.character <- function(object,
-                             halign=c("center","left","right"),
-                             valign=c("center","top","bottom"),
-                             cex, ... )
-{
-  
-  halign=match.arg(halign)
-  valign=match.arg(valign)
-
-  object <- paste(object, collapse="\n")
-  
-  # setup plot area
-  plot.new()
-  pmar <- par()[c("mar","xpd")]
-  on.exit( par(pmar) )
-  par(mar=c(0,0,3,0)+0.1,xpd=NA )
-
-  plot.window(xlim=c(0,1),ylim=c(0,1), log = "", asp=NA)
-
-  # figure out how big to make the text
-  if(missing(cex))
-    {
-      cex <- 1.0
-      # iterate to find the best text size
-      for(i in 1:20)
-        {
-          oldcex <- cex
-          width <- strwidth(object,cex=cex)
-          height <- strheight(object,cex=cex)
-          cex <- oldcex/2 * (1 + 0.9/max(width,height) )
-          if( abs(oldcex - cex) < 0.001) break
-        }
-    }
-
-  width  <- strwidth(object,cex=cex)
-  height <- strheight(object,cex=cex)
-  
-  # setup x alignment
-  if(halign=="left")
-    xpos <- 0
-  else if(halign=="center")
-    xpos <- 0 + (1-width)/2
-  else #if(halign=="right")
-    xpos <- 0 + (1-width)
-
-
-  # setup y alignment
-  if(valign=="top")
-    ypos <- 1
-  else if (valign=="center") 
-    ypos <- 1 - (1-height)/2
-  else #if (valign=="bottom") 
-    ypos <- 1 - (1-height)
-    
-  # make the plot
-  text( x=xpos, y=ypos, object, adj=c(0,1), cex=cex, ... )
-
-  invisible()
-}
-
-
 textplot.matrix <- function(object,
                             halign=c("center","left","right"),
                             valign=c("center","top","bottom"),
@@ -124,6 +65,7 @@ textplot.matrix <- function(object,
                             show.rownames=TRUE, show.colnames=TRUE,
                             hadj=1,
                             vadj=1,
+                            mar= c(0,0,3,0)+0.1,
                             ... )
 {
 
@@ -135,15 +77,17 @@ textplot.matrix <- function(object,
   halign=match.arg(halign)
   valign=match.arg(valign)
   
-  opar <- par()[c("mar","xpd")]
-  par(mar=c(0,0,3,0)+0.1,xpd=FALSE )
+  opar <- par()[c("mar","xpd","cex")]
   on.exit( par(opar) )
+  mar=c(0,0,3,0)+0.1
+  par(mar=mar, xpd=FALSE )
     
   # setup plot area
   plot.new()
   plot.window(xlim=c(0,1),ylim=c(0,1), log = "", asp=NA)
 
 
+  
   # add 'r-style' row and column labels if not present
   if( is.null(colnames(object) ) )
     colnames(object) <- paste( "[,", 1:ncol(object), "]", sep="" )
@@ -165,29 +109,40 @@ textplot.matrix <- function(object,
   # set the character size
   if( missing(cex) )
     {
-      cex = 1.0
-      for(i in 1:20)  # try to find the right text size
+      cex <- 1.0
+      lastloop <- FALSE
+    }
+  else
+    {
+      lastloop <- TRUE
+    }
+
+  for (i in 1:20)
+    {
+      oldcex <- cex
+      
+      width  <- sum(
+                    apply( object, 2,
+                          function(x) max(strwidth(x,cex=1) ) )
+                    ) +
+                      strwidth('M', cex=cex) * cmar * ncol(object)
+      
+      height <- strheight('M', cex=cex) * nrow(object) * (1 + rmar)
+      
+      if(lastloop) break
+      
+      if (abs(oldcex - cex) < 0.001)
         {
-          oldcex <- cex
-            
-          width  <- sum(
-                        apply( object, 2,
-                              function(x) max(strwidth(x,cex=1) ) )
-                        ) +
-                          strwidth('M', cex=cex) * cmar * ncol(object)
-        
-          height <- strheight('M', cex=cex) * nrow(object) *
-                    (1 + rmar)
-
-          cex <- round(oldcex/2 * (1 + 0.95/max(width,height)), 2)
-          if( abs(oldcex - cex) < 0.001) break
+          lastloop <- TRUE
+          cex <- oldcex * (1/max(width, height))
         }
-      }
+    }
 
+  
   # compute the individual row and column heights
-  rowheight<-strheight("M",cex=cex) * (1 + rmar)
+  rowheight<-strheight("W",cex=cex) * (1 + rmar)
   colwidth<- apply( object, 2, function(XX) max(strwidth(XX, cex=cex)) ) + 
-               strwidth("M")*cmar
+               strwidth("W")*cmar
 
   
   width  <- sum(colwidth)
@@ -225,5 +180,111 @@ textplot.matrix <- function(object,
     }
   }
 
+  par(opar)
 }
 
+textplot.character <- function (object, 
+                                halign = c("center", "left", "right"), 
+                                valign = c("center", "top", "bottom"), 
+                                cex, fixed.width=TRUE,
+                                cspace=1,
+                                lspace=1,
+                                mar=c(0,0,3,0)+0.1,
+                                ...)
+  {
+    # when fixed.withd=TRUE, we simulate a fixed width font by
+    # explicitly placing characters at appropriate x,y positions
+
+
+    object <- paste(object,collapse="\n",sep="")
+  
+    halign = match.arg(halign)
+    valign = match.arg(valign)
+    plot.new()
+
+    opar <- par()[c("mar","xpd","cex")]
+    on.exit( par(opar) )
+
+    par(mar=mar,xpd=FALSE )
+    plot.window(xlim = c(0, 1), ylim = c(0, 1), log = "", asp = NA)
+
+    slist   <- lapply(object, function(x) unlist(strsplit(x,'\n')))[[1]]
+
+    if(length(slist)>1)
+      slist   <- sapply(slist, function(x) unlist(strsplit(x,'')))
+    else
+      slist   <- sapply(slist, function(x) strsplit(x,''))
+
+    slen    <- sapply(slist, length)
+    slines  <- length(slist)
+
+    if (missing(cex))
+      {
+        lastloop <- FALSE
+        cex <- 1
+      }
+    else
+      lastloop <- TRUE
+
+    
+    for (i in 1:20)
+      {
+        oldcex <- cex
+        
+        cwidth  <- max(sapply(unlist(slist), strwidth,  cex=cex)) * cspace
+        cheight <- max(sapply(unlist(slist), strheight, cex=cex)) *
+                   (lspace * 1.5)
+
+        if(fixed.width)
+          {
+            width  <- max(slen) * cwidth
+            height <- slines * cheight
+          }
+        else
+          {
+            width <- strwidth(object, cex=cex)
+            height <- strheight(object, cex=cex)
+          }
+
+        if(lastloop) break
+
+        if (abs(oldcex - cex) < 0.001)
+          {
+            lastloop <- TRUE
+            cex <- oldcex * (1/max(width, height))
+          }
+
+      }
+
+    if (halign == "left")
+        xpos <- 0
+    else if (halign == "center")
+        xpos <- 0 + (1 - width)/2
+    else xpos <- 0 + (1 - width)
+
+    if (valign == "top")
+        ypos <- 1
+    else if (valign == "center")
+        ypos <- 1 - (1 - height)/2
+    else ypos <- 1 - (1 - height)
+
+    if(fixed.width)
+      {
+        
+        for(line in 1:slines)
+          {
+            cpos <- ((1:length(slist[[line]]))-1) * cwidth
+            if(length(slist[[line]]))
+              text(x = xpos + cpos, y = ypos - (line-1)*cheight,
+                   labels=slist[[line]], adj = c(0, 1), cex = cex, ...)
+          }
+      }
+    else
+      {
+        text(x=xpos, y=ypos, labels=object, adj=c(0,1),
+             cex=cex, ...)
+      }
+
+    par(opar)
+    invisible(cex)
+}
