@@ -207,7 +207,8 @@ heatmap <- function (x,
     \code{\link{order.dendrogram}}.}
   \item{colInd}{\bold{c}olumn index permutation vector.}
 }
-\author{Andy Liaw, original; R. Gentleman, M. Maechler, W. Huber, revisions.}
+\author{Andy Liaw, original; R. Gentleman, M. Maechler, W. Huber,
+  G. Warnes, revisions.}
 
 \seealso{\code{\link{image}}, \code{\link{hclust}}}
 

@@ -2,6 +2,7 @@
 ## original Andy Liaw; modified RG, MM, GRW
 
 heatmap <- function (x,
+                     
                      # dendogram control
                      Rowv=NULL,
                      Colv=if(symm)"Rowv" else NULL,
@@ -9,28 +10,34 @@ heatmap <- function (x,
                      hclustfun = hclust,
                      dendogram = c("both","row","column","none"),
                      symm = FALSE,
+                     
                      # data scaling
                      scale = c("none","row", "column"),
                      na.rm=TRUE,
+                     
                      # image plot
                      revC = identical(Colv, "Rowv"),
                      add.expr,
                      breaks,
                      col="heat.colors",
+                     
                      # block sepration
                      colsep,
                      rowsep,
                      sepcolor="white",
+                     
                      # cell labeling
                      cellnote,
                      notecex=1.0,
                      notecol="cyan",
+                     
                      # level trace
                      trace=c("column","row","both","none"),
                      tracecol="cyan",
                      hline=median(breaks),
                      vline=median(breaks),
                      linecol=tracecol,
+                     
                      # Row/Column Labeling
                      margins = c(5, 5),
                      ColSideColors,
@@ -39,18 +46,27 @@ heatmap <- function (x,
                      cexCol = 0.2 + 1/log10(nc),
                      labRow = NULL,
                      labCol = NULL,
+                     
                      # color key + density info
                      key = TRUE,
                      density.info=c("histogram","density","none"),
                      denscol=tracecol,
+                     
                      # plot labels
                      main = NULL,
                      xlab = NULL,
                      ylab = NULL,
+                     
                      # extras
                      ...
                      )
 {
+  scale01 <- function(x, low=min(x), high=max(x) )
+    {
+      x <- (x-low)/(high - low)
+      x
+    }
+ 
     scale <- if(symm && missing(scale)) "none" else match.arg(scale)
     dendogram <- match.arg(dendogram)
     trace <- match.arg(trace)
