@@ -7,7 +7,7 @@ panel.overplot <- function(formula, data, subset, col, lty, ...)
     m[[1]] <- graphics:::plot.formula
     eval(m, parent.frame() )
 
-    m[[1]] <- as.name('lowess.formula')
+    m[[1]] <- gplots:::lowess.formula
     tmp <- eval(m, parent.frame() )
 
     lines( tmp, col=col, lwd=2, lty=lty )
