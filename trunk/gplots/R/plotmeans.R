@@ -1,13 +1,19 @@
+# $Id$
+#
+# $Log$
+# Revision 1.5  2001/10/16 22:59:27  warneg
+# Added cvs id and log tag to file header
+#
+#
+
+
 # Plot means with confidence intervals for groups defined by right
 # side of formulae
 #
 # example:
 #
-
 # data  <-  data.frame(y=rnorm(100), x=factor(rep(c("A","C","F","Z"),25)))
-
 # plotmeans( y ~ x, data=data, connect=F )
-
 
 plotmeans  <- function (formula, data = NULL, subset, na.action,
                          bars=T, p=0.95,
