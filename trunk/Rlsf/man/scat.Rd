@@ -5,7 +5,7 @@
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{Display debugging text}
 \description{
-  If \code{options()$DEBUG==TRUE}, write text to STDOUT and flush so
+  If \code{getOption('DEBUG')==TRUE}, write text to STDOUT and flush so
   that the text is immediatly displayed. Otherwise, do nothing.
 }
 
@@ -19,7 +19,7 @@ scat(...)
   NULL (invisibly)
 }
 \author{Gregory R. Warnes \email{gregory\_r\_warnes@groton.pfizer.com}}
-\\seealso{ \code{\link[base]{cat}}}
+\seealso{ \code{\link[base]{cat}}}
 \examples{
 options(DEBUG=NULL) # makee sure DEBUG isn't set
 scat("Not displayed")
