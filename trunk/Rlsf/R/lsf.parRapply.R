@@ -1,4 +1,5 @@
-# $Id$
+
+                                        # $Id$
 
 lsf.parCapply <- function(x, ...)
   lsf.parRapply( t(x), ...)
@@ -46,7 +47,7 @@ lsf.parRapply <- function (x, fun, ...,
         if(trace) cat("Done.\n")
         
         status <- sapply( jobs, lsf.job.status)
-        status <- sapply( status, function(x) if(is.null(x)) "UNKW" else x)
+        status <- sapply( status, function(x) if(is.null(x)) "UNKWN" else x)
 
         if(trace) cat("Current status:\n")
         statusTable <- as.matrix(table(status))
