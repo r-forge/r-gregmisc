@@ -1,6 +1,11 @@
 # $Id$
 #
 # $Log$
+# Revision 1.2  2001/12/18 21:27:37  warneg
+# - Modified to work correctly when obj is of class 'aov' by specifying
+#   summary.lm instead of summary.  This ensures that the summary object
+#   has the fields we need.
+#
 # Revision 1.1  2001/12/10 19:26:52  warneg
 # renamed from contrast.coeff.R to estimable.R (incorrectly via contrast.lm.R)
 #
@@ -49,15 +54,15 @@ estimable <- function( obj, cm=NULL, alpha=0.05 )
     }
   else if ( "lm" %in% class( obj ) )
     {
-      cf  <- summary(obj)$coefficients
-      vcv <- summary(obj)$cov.unscaled * summary(obj)$sigma^2
+      cf  <- summary.lm(obj)$coefficients
+      vcv <- summary.lm(obj)$cov.unscaled * summary.lm(obj)$sigma^2
       if ("glm" %in% class( obj ) ) 
         vcv <- summary(obj)$cov.scaled
       df <- obj$df.residual
     }
   else
     {
-      stop("obj must be of class 'lm', 'glm', 'lme', or 'nlme'")
+      stop("obj must be of class 'lm', 'glm', 'aov', 'lme', or 'nlme'")
     }
   
 
