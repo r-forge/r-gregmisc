@@ -1,0 +1,168 @@
+Abbreviation	Measurement	SIUnit	Conversion	ConvetionalUnit	Ignore
+	Acetaminophen  	g/mL  	6.62  	mol/L  	top
+	Acetoacetic acid 	mg/dL 	0.098 	mmol/L 	 
+	Acetone 	mg/dL 	0.172 	mmol/L 	 
+	Alanine 	mg/dL 	112.2 	mol/L 	 
+ALB	Albumin 	g/dL 	10 	g/L 	 
+	Aldosterone 	ng/dL 	0.0277 	nmol/L 	 
+	Aluminum 	ng/mL 	0.0371 	mol/L 	 
+	Aminobutyric acid 	mg/dL 	97 	mol/L 	 
+	Amitriptyline 	ng/mL 	3.61 	nmol/L 	 
+	Ammonia (as NH3) 	g/dL 	0.587 	mol/L 	 
+	Androstenedione 	ng/dL 	0.0349 	nmol/L 	 
+	Angiotensin I 	pg/mL 	0.772 	pmol/L 	 
+	Angiotensin II 	pg/mL 	0.957 	pmol/L 	 
+	Anion gap 	mEq/L 	1.0 	mmol/L 	 
+	Antidiuretic hormone 	pg/mL 	0.923 	pmol/L 	 
+	Antithrombin III 	mg/dL 	10 	mg/L 	 
+	alpha1-Antitrypsin 	mg/dL 	0.184 	mol/L 	 
+	Apolipoprotein A 	mg/dL 	0.01 	g/L 	 
+	Apolipoprotein B 	mg/dL 	0.01 	g/L 	 
+	Arginine 	mg/dL 	57.4 	mol/L 	 
+	Asparagine 	mg/dL 	75.7 	mol/L 	 
+	Bicarbonate 	mEq/L 	1.0 	mmol/L 	top
+	Bilirubin 	mg/dL 	17.1 	mol/L 	 
+	Bromide 	mg/dL 	0.125 	mmol/L 	 
+CPEP	C-peptide 	ng/mL 	0.333 	nmol/L 	top
+	C1 esterase inhibitor 	mg/dL 	10 	mg/L 	 
+	C3 complement 	mg/mL 	0.01 	g/L 	 
+	C4 complement 	mg/mL 	0.01 	g/L 	 
+	Calcitonin 	pg/mL 	1.0 	ng/L 	 
+CA	Calcium 	mg/dL 	0.25 	mmol/L 	 
+CA	Calcium 	mEq/L 	0.50 	mmol/L 	 
+	Carbon dioxide 	mEq/L 	1.0 	mmoI/L 	 
+	Carotene 	g/dL 	0.0186 	mol/L 	 
+	Ceruloplasmin 	mg/dL 	10 	mg/L 	 
+	Chloride 	mEq/L 	1.0 	mmol/L 	 
+CHOL	Cholesterol 	mg/dL 	0.0259 	mmol/L 	 
+	Citrate 	mg/dL 	52.05 	mol/L 	 
+CU	Copper 	g/dL 	0.157 	moI/L 	 
+	Coproporphyrins (urine) 	g/24 hr 	1.527 	nmol/d 	 
+	Corticotropin (ACTH) 	pg/mL 	0.22 	pmol/L 	 
+	Cortisol 	g/dL 	27.59 	nmol/L 	 
+	Cotinine 	ng/mL 	5.68 	nmol/L 	 
+CRE	Creatine 	mg/dL 	76.26 	mol/L 	 
+	Creatinine 	mg/dL 	88.4 	mol/L 	 
+	Creatinine clearance 	mL/min 	0.0167 	mL/s 	 
+	Cyanide 	mg/L 	23.24 	mol/L 	 
+DHEA	Dehydroepiandrosterone (DHEA) 	ng/mL 	3.47 	nmol/L 	top
+	Desipramine 	ng/mL 	3.75 	nmol/L 	 
+	Diazepam 	g/mL 	3.512 	mol/L 	 
+	Digoxin 	ng/mL 	1.281 	nmol/L 	 
+	Epinephrine 	pg/mL 	5.46 	pmol/L 	top
+	Estradiol 	pg/mL 	3.671 	pmol/L 	 
+	Estriol 	ng/mL 	3.467 	nmol/L 	 
+	Estrone 	ng/dL 	37 	pmoI/L 	 
+	Ethanol (ethyl alcohol) 	mg/dL 	0.217 	mmol/L 	 
+	Ethylene glycol 	mg/L 	16.11 	mol/L 	 
+	Ferritin 	ng/mL 	2.247 	pmol/L 	top
+	alpha -Fetoprotein 	ng/mL 	1.0 	g/L 	 
+	Fibrinogen 	mg/dL 	0.0294 	mol/L 	 
+	Fluoride 	g/mL 	52.6 	mol/L 	 
+	Folate 	ng/mL 	2.266 	nmol/L 	 
+	Follicle-stimulating hormone 	mIU/mL 	1.0 	IU/L 	 
+	Fructose 	mg/dL 	55.5 	mol/L 	 
+	Galactose 	mg/dL 	55.506 	mol/L 	top
+	Glucagon 	pg/mL 	1.0 	ng/L 	 
+	Glucose 	mg/dL 	0.0555 	mmol/L 	 
+	Glutamine 	mg/dL 	68.42 	mol/L 	 
+HBA1C	Glycated hemoglobin (glycosylated hemoglobin A1, A1C) 	% of total hemoglobin 	0.01 	Proportion of total hemoglobin 	 
+	Glycerol (free) 	mg/dL 	108.59 	mol/L 	 
+	Glycine 	mg/dL 	133.3 	mol/L 	 
+	Haptoglobin 	mg/dL 	0.10 	mol/L 	top
+	Hematocrit 	% 	0.01 	Proportion of 1.0 	 
+HGB	Hemoglobin (whole blood) Mass concentration 	g/dL 	10.0 	g/L 	 
+HDL	High-density lipoprotein cholesterol (HDL-C) 	mg/dL 	0.0259 	mmol/L 	 
+	Histidine 	mg/dL 	64.45 	mol/L 	 
+	Homocysteine (total) 	mg/L 	7.397 	mol/L 	 
+	Human chorionic gonadotropin (HCG) 	mlU/mL 	1.0 	IU/L 	 
+	Hydroxybutyric acid 	mg/dL 	96.05 	mol/L 	 
+	Hydroxyproline 	mg/dL 	76.3 	mol/L 	 
+IGA	Immunoglobulin A (IgA) 	mg/dL 	0.01 	g/L 	top
+IGD	Immunoglobulin D (IgD) 	mg/dL 	10 	mg/L 	 
+IGE	Immunoglobulin E (IgE) 	mg/dL 	10 	mg/L 	 
+IGG	Immunoglobulin G (IgG) 	mg/dL 	0.01 	g/L 	 
+IGM	Immunoglobulin M (IgM) 	mg/dL 	0.01 	g/L 	 
+	Insulin 	IU/mL 	6.945 	pmol/L 	 
+	Iron, total 	g/dL 	0.179 	mol/L 	 
+	Iron binding capacity, total 	g/dL 	0.179 	mol/L 	 
+	lsoleucine 	mg/dL 	76.24 	mol/L 	 
+	lsopropanol 	mg/L 	0.0166 	mmol/L 	 
+	Lactate (lactic acid) 	mg/dL 	0.111 	mmol/L 	top
+	Lactate dehydrogenase isoenzymes (LD1-LD5) 	% 	0.01 	Proportion of 1.0 	 
+	Lead 	g/dL 	0.0483 	mol/L 	 
+	Leucine 	mg/dL 	76.237 	mol/L 	 
+	Lipids (total) 	mg/dL 	0.01 	g/L 	 
+	Lipoprotein (a) 	mg/dL 	0.0357 	mol/L 	 
+	Lithium 	mEq/L 	1.0 	mmol/L 	 
+LDL	Low-density lipoprotein cholesterol (LDL-C) 	mg/dL 	0.0259 	mmol/L 	 
+	Lysine 	mg/dL 	68.5 	mol/L 	 
+	Magnesium 	mg/dL 	0.411 	mmol/L 	top
+	Magnesium 	mEq/L 	0.50 	mmol/L 	 
+	Manganese 	ng/mL 	18.2 	nmol/L 	 
+	Methanol 	mg/L 	0.0312 	mmol/L 	 
+	Methionine 	mg/dL 	67.02 	mol/L 	 
+	Myoglobin 	g/L 	0.0571 	nmol/L 	 
+	Nicotine 	mg/L 	6.164 	mol/L 	top
+	Nitrogen, nonprotein 	mg/dL 	0.714 	mmol/L 	 
+	Norepinephrine 	pg/mL 	0.00591 	nmol/L 	 
+	Ornithine 	mg/dL 	75.67 	mol/L 	top
+	Osteocalcin 	g/L 	0.171 	nmol/L 	 
+	Oxalate 	mg/L 	11.1 	mol/L 	 
+	Parathyroid hormone 	pg/mL 	1.0 	ng/L 	top
+	Phenobarbital 	mg/L 	4.31 	mol/L 	 
+	Phenylalanine 	mg/dL 	60.54 	mol/L 	 
+	Phenytoin 	g/mL 	3.96 	moI/L 	 
+	Phosphorus 	mg/dL 	0.323 	mmol/L 	 
+	Plasminogen 	mg/dL 	0.113 	mol/L 	 
+	Plasminogen activator inhibitor 	mIU/mL 	1.0 	IU/L 	 
+	Platelets (thrombocytes) 	x 103/L 	1.0 	x 109/L 	 
+	Potassium 	mEq/L 	1.0 	mmoI/L 	 
+	Pregnanetriol (urine) 	mg/24 h 	2.97 	mol/d 	 
+	Progesterone 	ng/mL 	3.18 	nmol/L 	 
+	Prolactin 	g/L 	43.478 	pmol 	 
+	Proline 	mg/dL 	86.86 	mol/L 	 
+	Prostate-specific antigen 	ng/mL 	1.0 	g/L 	 
+	Protein, total 	g/dL 	10.0 	g/L 	 
+	Prothrombin 	g/L 	13.889 	mol/L 	 
+	Protoporphyrin, erythrocyte 	g/dL 	0.01777 	mol/L 	 
+	Pyruvate 	mg/dL 	113.6 	moI/L 	 
+	Quinidine 	g/mL 	3.08 	mol/L 	top
+	Red blood cell count 	x 106/L 	1.0 	x 1012/L 	top
+	Renin 	pg/mL 	0.0237 	pmol/L 	 
+	Salicylate 	mg/L 	0.00724 	mmol/L 	top
+	Serine 	mg/dL 	95.2 	mol/L 	 
+	Serotonin (5-hydroxytryptamine) 	ng/mL 	0.00568 	mol/L 	 
+	Sodium 	mEq/L 	1.0 	mmol/L 	 
+	Somatomedin-C (insulinlike growth factor) 	ng/mL 	0.131 	nmol/L (coagulation factor II) 	 
+	Somatostatin 	pg/mL 	0.611 	pmol/L 	 
+	Testosterone 	ng/dL 	0.0347 	nmol/L 	top
+	Theophylline 	g/mL 	5.55 	mol/L 	 
+	Thiocyanate 	mg/L 	17.2 	mol/L 	 
+	Threonine 	mg/dL 	83.95 	mol/L 	 
+	Thyroglobulin 	ng/mL 	1.0 	g/L 	 
+	Thyroxine, free (T4) 	ng/dL 	12.87 	pmol/L 	 
+T4	Thyroxine, total (T4) 	g/dL 	12.87 	nmol/L 	 
+	Transferrin 	mg/dL 	0.01 	g/L 	 
+	Triglycerides 	mg/dL 	0.0113 	mmol/L 	 
+	Triiodothyronine Free (T3) 	pg/dL 	0.0154 	pmol/L 	 
+T3	Triiodothyronine Total (T3) 	ng/dL 	0.0154 	nmol/L 	 
+	Troponin I (cardiac) 	ng/mL 	1.0 	g/L 	 
+	Troponin T (cardiac) 	ng/mL 	1.0 	g/L 	 
+	Tryptophan 	mg/dL 	48.97 	mol/L 	 
+	Tyrosine 	mg/dL 	55.19 	mol/L 	 
+	Urea nitrogen 	mg/dL 	0.357 	mmol/L 	top
+	Uric acid 	mg/dL 	59.48 	mol/L 	 
+	Valine 	mg/dL 	85.5 	mol/L 	top
+	Vasoactive intestinal polypeptide 	pg/mL 	1.0 	ng/L 	 
+	Vitamin A (retinol) 	g/dL 	0.0349 	moI/L 	 
+	Vitamin B6 (pyridoxine) 	ng/mL 	4.046 	nmol/L 	 
+	Vitamin B12 (cyanocobalamin) 	pg/mL 	0.738 	pmol/L 	 
+	Vitamin C (ascorbic acid) 	mg/dL 	56.78 	mol/L 	 
+	Vitamin D 1,25-Dihydroxyvitamin D 	pg/mL 	2.6 	pmol/L 	 
+	Vitamin D 25-Hydroxyvitamin D 	ng/mL 	2.496 	nmol/L 	 
+	Vitamin E 	mg/dL 	23.22 	moI/L 	 
+	Vitamin K 	ng/mL 	2.22 	nmol/L 	 
+	Warfarin 	g/mL 	3.247 	mol/L 	top
+	White blood cell count 	x 103/L 	1.0 	x 109/L 	 
+	Zinc 	g/dL 	0.153 	moI/L
