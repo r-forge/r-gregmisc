@@ -5,7 +5,8 @@ signame <- function(val)
     retval <- .C("Rfork_signame",
                  name=character(1),
                  val=as.integer(val),
-                 desc=character(1))
+                 desc=character(1),
+                 PACKAGE="fork")
     unlist(retval)
   }
 
@@ -17,13 +18,15 @@ sigval <- function(name)
     retval <- .C("Rfork_siginfo",
                  name=name,
                  val=integer(1),
-                 desc=character(1))
+                 desc=character(1),
+                 PACKAGE="fork")
     unlist(retval)
   }
 
 siglist <- function()
   {
-    retval <- .Call("Rfork_siglist")
+    retval <- .Call("Rfork_siglist",
+                    PACKAGE="fork")
     retval <- as.data.frame(retval)
     names(retval) <- c("name","val","desc")
     retval

@@ -5,7 +5,8 @@ kill <- function(pid, signal=15)
     .C("Rfork_kill",
        as.integer(pid),
        as.integer(signal),
-       flag=integer(1)
+       flag=integer(1),
+       PACKAGE="fork"
        )$flag
   }
 

@@ -6,7 +6,10 @@ fork <- function(slave)
     if(missing(slave) || class(slave)!="function" && !is.null(slave) )
       stop("function for slave process to exectute must be provided.")
 
-    pid  <- .C("Rfork_fork",pid=integer(1))$pid
+    pid  <- .C("Rfork_fork",
+               pid=integer(1),
+               PACKAGE="fork"
+               )$pid
 
     if(pid==0)
       {
