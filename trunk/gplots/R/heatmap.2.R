@@ -31,6 +31,7 @@ heatmap.2 <- function (x,
                      cellnote,
                      notecex=1.0,
                      notecol="cyan",
+                     na.color=par("bg"),
                      
                      # level trace
                      trace=c("column","row","both","none"),
@@ -242,6 +243,15 @@ heatmap.2 <- function (x,
     image(1:nc, 1:nr, x, xlim = 0.5+ c(0, nc), ylim = 0.5+ c(0, nr),
           axes = FALSE, xlab = "", ylab = "", col=col, breaks=breaks,
           ...)
+
+    if(!invalid(na.color) & any(is.na(x)))
+      {
+        mmat <- ifelse(is.na(x), 1, NA)
+        image(1:nc, 1:nr, mmat, axes = FALSE, xlab = "", ylab = "",
+              col=na.color, add=TRUE)
+      }
+
+  
     axis(1, 1:nc, labels= labCol, las= 2, line= -0.5, tick= 0, cex.axis= cexCol)
     if(!is.null(xlab)) mtext(xlab, side = 1, line = margins[1] - 1.25)
     axis(4, iy, labels= labRow, las= 2, line= -0.5, tick= 0, cex.axis= cexRow)
@@ -355,7 +365,7 @@ heatmap.2 <- function (x,
         if(density.info=="density")
           {
             # Experimental : also plot density of data
-            dens <- density(x, adjust=0.25)
+            dens <- density(x, adjust=0.25, na.rm=TRUE)
             omit <- dens$x < min(breaks) | dens$x > min(breaks)
             dens$x <- dens$x[-omit]
             dens$y <- dens$y[-omit]
