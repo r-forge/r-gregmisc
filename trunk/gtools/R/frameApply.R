@@ -1,4 +1,4 @@
-frameApply <- function(x, by = NULL, on = by[1], fun = nrow , subset = TRUE, out.as.list = FALSE, byvar.sep = "\001", ...) {
+frameApply <- function(x, by = NULL, on = by[1], fun = function(xi) c(Count = nrow(xi)) , subset = TRUE, simplify = TRUE, byvar.sep = "\001", ...) {
   subset <- eval(substitute(subset), x, parent.frame())                               
   x <- x[subset, , drop = FALSE]
   if(!is.null(by)) {
@@ -10,7 +10,7 @@ frameApply <- function(x, by = NULL, on = by[1], fun = nrow , subset = TRUE, out
     byvars <- byvars[order(unique(BYVAR)), , drop = FALSE]
     splx <- split(x[on], BYVAR) 
     splres <- lapply(splx, fun, ...)
-    if(out.as.list) out <- list(by = byvars, result = splres)
+    if(!simplify) out <- list(by = byvars, result = splres)
     else {
       nms <- lapply(splres, function(xi) {
         if(inherits(xi, "try-error")) return(NULL)
@@ -33,7 +33,7 @@ frameApply <- function(x, by = NULL, on = by[1], fun = nrow , subset = TRUE, out
   }
   else {
     out <- fun(x[on])
-    if(!out.as.list) out <- as.data.frame(as.list(out))
+    if(simplify) out <- as.data.frame(as.list(out))
   }
   out
 }
