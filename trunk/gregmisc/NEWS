@@ -1,4 +1,44 @@
+
+This file provided a brief list of major feature enhancements
+associated with each release. For a detailed list of changes see the
+ChangeLog file.
+
+Version 1.11.0
+--------------
+
+- Bump version number to 1.11.0 to better reflect the production
+  status of the package.
+
+- Add read.xls(), a function to read Microsoft Excel files by
+  translating them to csv files via the xls2csv.pl script, which has
+  also been added to the package.  On Unix systems, xls2csv may be
+  executed directly via the $PACKAGE$/gregmisc/bin/xls2csv script.  On
+  MS-Windows systems, use $PACKAGE$/gregmisc/bin/xls2csv.bat instead.
+
+- Improvements to CrossTable() by Marc Schwartz <MSchwartz@MedAnalytics.com>
+
+- Improvements to ooplot() by Lodewijk Bonebakker <bonebakker@comcast.net>
+
+- plotCI() and plotmeans() now have improved argument handling.
+
+- The running() function now has an additional parameter `simplify'
+  which controls whether the returned values are simplified into a
+  vector/matrix or left as a list.
+
+- A makefile that will download and attempt to install all available
+  packages from CRAN and Bioconductor is now provided in
+  $PACKAGE$/gregmisc/tools/
+
+- space() can now space points along the 'y' dimension.
+
+- Fix an error in the permutations code for repeats.allow=T and r>2.
+  Both the bug report and fix are from Elizabeth Purdom
+  <epurdom@stanford.edu>.
+
+- Various fixes for compatibility with R 1.9.X.
+
 Version 0.10.2
+--------------
 
 - Fixed latex warning.
 
@@ -7,11 +47,13 @@ Version 0.10.2
 - Add function remove.vars().
 
 Version 0.10.1
+--------------
 
 - Fixed bug in textplot() reported by Kevin Wright  <kevin.d.wright at pioneer
   dot com>.
 
 Version 0.10.0
+--------------
 
 - Now works with and requires R 1.9.0
 
