@@ -33,8 +33,7 @@ sinkplot(operation = c("start", "plot", "cancel"), ...)
    \email{kwright@eskimo.com} in the R-devel newlist posting
    \url{https://www.stat.math.ethz.ch/pipermail/r-devel/2004-January/028483.html}}
 \author{ Gregory R. Warnes \email{gregory\_r\_warnes\@groton.pfizer.com}  }
-\seealso{ \code{\link[base]{capture.output}}, \code{\link{textplot}},
-          \code{\link{capture}} }
+\seealso{ \code{\link[utils]{capture.output}}, \code{\link{textplot}} }
 \examples{
 
    set.seed(12456)

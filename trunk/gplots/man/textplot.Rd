@@ -69,7 +69,9 @@ textplot(object, halign="center", valign="center", cex, ...)
   The character scaling factor (\code{cex}) used.
 }
 \author{Gregory R. Warnes \email{Gregory\_R\_Warnes@groton.pfizer.com}}
-\seealso{ \code{\link{plot}}, \code{\link{text}}, \code{\link{capture}} }
+\seealso{ \code{\link{plot}}, \code{\link{text}}, 
+          \code{\link[utils]{capture.output}} 
+        }
 
 \examples{
 

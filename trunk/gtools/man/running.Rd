@@ -57,7 +57,7 @@ running(X, Y=NULL, fun=mean, width=min(length(X), 20),
 }
 \author{ Gregory R. Warnes \email{Gregory\_R\_Warnes@groton.pfizer.com},
          with contributions by Nintin Jain \email{nitin\_jain@groton.pfizer.com}.}
-\seealso{ \code{\link{wapply}} to apply a function over an x-y window
+\seealso{ \code{\link[gplots]{wapply}} to apply a function over an x-y window
   centered at each x point, \code{\link[base]{sapply}},
   \code{\link[base]{lapply}} }
 

@@ -18,7 +18,7 @@ export(
        trim
 )
 
-importFrom(gtools, odd, invalid)
+importFrom(gtools, odd, invalid, mixedsort)
 
 S3method(nobs,data.frame)
 S3method(nobs,default)
