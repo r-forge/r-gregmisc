@@ -54,14 +54,31 @@ frameApply(x, by = NULL, on = by[1], fun = nrow, subset = TRUE, out.as.list = FA
   the \code{by} that are actually present in the data, not on the entire
   cartesian product of the \code{by} variables.}
 
-\examples{ data(ELISA)
+\examples{
 
-frameApply(ELISA, by = c("PlateDay", "Read"))
+# define two group descriptors
+group1 <- sample( c('A','B','C'), size=1000, replace=T) 
+group2 <- sample( c('I','II','III'), size=1000, replace=T)
 
-# Wouldn't actually recommend this model! Just a demo:
-frameApply(ELISA, on = c("Signal", "Concentration"), by = c("PlateDay", "Read"),
-           fun = function(dat) coef(lm(Signal ~ Concentration, data = dat)))
+# and some covariates
+x1 <- rnorm(1000, mean=10 )
+x2 <- runif(1000)
+x3 <- rnorm(10, mean=0.01, sd=0.1)
 
+# and a model for the outcome that depends on both groups and the
+# covariate
+y <- x1 + 2 *(group1=='A') + x2 *(group2=='II') + 10 * x3 + rnorm(1000, sd=0.5)
+data <- data.frame(group1, group2, x1, x2, x3, y)
+
+
+# show number of observations in each group pairing
+frameApply(data, by = c("group1", "group2"))
+
+# Fit a statistical model to each group pairing
+frameApply(data, on = c("y", "x1", "x2", "x3"), by = c("group1", "group2"),
+           fun = function(dat)
+                    coef( lm(y ~ x1 + x2 + x3, data=dat) )
+           )
 }
 \author{Jim Rogers \email{james\_a\_rogers@groton.pfizer.com}}
 \keyword{manip}
