@@ -18,7 +18,12 @@ balloonplot(x, ...)
     dotsize = 2/max(strwidth(19), strheight(19)),
     dotchar = 19, dotcolor = "skyblue",
     main, label = TRUE, label.digits = 2,
-    scale.method = c("volume", "diameter"), ...) 
+    scale.method = c("volume", "diameter"),
+    xsrt = par("srt"),
+    ysrt = par("srt"),
+    xmar = 1,
+    ymar = 1,
+     ...) 
 }
 \arguments{
   \item{x}{Either a table object, or a vector of values for the first
@@ -44,6 +49,9 @@ balloonplot(x, ...)
   \item{label.digits}{Number of digits used in formatting value labels.}
   \item{scale.method}{Method of scaling the sizes of the dot, either
     "volume" or "diameter". See below.}
+  \item{rowsrt, colsrt}{Angle of rotation for row and column labels.}
+  \item{rowmar, colmar}{Space allocated for row and column labels. Each
+    unit is the width/height of one cell in the table.}
   \item{\dots}{ Additional arguments passed to \code{balloonplot.default}
     or \code{plot}, as appropriate.}
 }
@@ -63,9 +71,10 @@ balloonplot(x, ...)
   \code{z} is expected to be non-negative.  The function will still
   operate correctly if there are negative values of \code{z}, but the
   corresponding dots will have 0 size and a warning will be generated.
-  }
+}
+
 \references{Function inspired by question posed on R-help by Ramon
-  \email{allende@gredos.cnb.uam.es}.}
+  Alonso-Allende \email{allende@cnb.uam.es}.}
 
 \author{ Gregory R. Warnes \email{Gregory\_R\_Warnes@groton.pfizer.com}}
 
@@ -89,6 +98,13 @@ data
 # generate balloon plot with default scaling
 balloonplot( data$Car, data$Color, data$Value)
 
+
+# show margin label rotation & space expansion, using some long labels
+levels(data$Car) <- c("BMW: High End, German","Renault: Medium End, French",
+ "Mercedes: High End, German", "Seat: Imaginary, Unknown Producer")
+
+# generate balloon plot with default scaling
+balloonplot( data$Car, data$Color, data$Value, colmar=3, colsrt=90)
 
 # Create an example using table
 xnames <- sample( letters[1:3], 50, replace=2)
