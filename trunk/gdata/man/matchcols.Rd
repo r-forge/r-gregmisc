@@ -6,7 +6,7 @@
   using a set of inclusion and exclusion critera.
 }
 \usage{
-matchcols(object, with, without, ...)
+matchcols(object, with, without, method=c("and","or"), ...)
 }
 \arguments{
   \item{object}{Matrix or dataframe}
@@ -20,7 +20,7 @@ matchcols(object, with, without, ...)
   none of the patterns specified in \code{without}.
 }
 
-\author{gregory_r_warnes \email{gregory\_r\_warnes@groton.pfizer.com}}
+\author{Gregory R. Warnes \email{gregory\_r\_warnes@groton.pfizer.com}}
 \seealso{ \code{\link[base]{grep}} }
 \examples{
 

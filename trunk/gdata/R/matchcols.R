@@ -10,12 +10,12 @@ matchcols <- function(object, with, without, method=c("and","or"), ...)
       for(i in 1:length(with))
         {
           if(length(cols)>0)
-            cols <- grep(with[i], cols, ...)
+            cols <- grep(with[i], cols, value=TRUE, ...)
         }
     else
       if(!missing(with))
         if(length(cols)>0)
-          cols <- sapply( cols, grep, x=cols, value=TRUE, ...)
+          cols <- sapply( with, grep, x=cols, value=TRUE, ...)
 
     # exclude columns matching 'without' pattern(s)
     if(!missing(without))
