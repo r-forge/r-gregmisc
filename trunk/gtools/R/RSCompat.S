@@ -1,7 +1,11 @@
 # $Id$
 #
 # $Log$
+# Revision 1.8  2003/04/04 13:58:59  warnes
+# - Replace 'T' with 'TRUE'
+#
 # Revision 1.7  2003/03/07 15:48:35  warnes
+#
 # - Minor changes to code to allow the package to be provided as an
 #   S-Plus chapter.
 #
@@ -155,7 +159,7 @@ if(!exists("is.R") || !is.R() )
         par("cin")[2] / par("fin")[2] * (par("usr")[4] - par("usr")[3])
       }
     
-    boxplot.formula <- function(x, data = sys.parent(), ..., ask = T)
+    boxplot.formula <- function(x, data = sys.parent(), ..., ask = TRUE)
       {
         if(!inherits(x, "formula"))
           x <- as.formula(x)
