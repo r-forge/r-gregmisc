@@ -19,10 +19,10 @@ balloonplot(x, ...)
     dotchar = 19, dotcolor = "skyblue",
     main, label = TRUE, label.digits = 2,
     scale.method = c("volume", "diameter"),
-    xsrt = par("srt"),
-    ysrt = par("srt"),
-    xmar = 1,
-    ymar = 1,
+    colsrt = par("srt"),
+    rowsrt = par("srt"),
+    colmar = 1,
+    rowmar = 1,
      ...) 
 }
 \arguments{
