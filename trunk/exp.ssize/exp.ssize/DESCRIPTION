@@ -1,0 +1,9 @@
+Package: exp.ssize
+Title: Simulate samples of gene expression data for sample size calculation
+Version: 1.0
+Date: 2004/06/24
+Author: Peng Liu
+Description: Simulate sample from different normal distributions for the current version
+Maintainer: Peng Liu <peng_liu@groton.pfizer.com>
+License: GPL
+Packaged: Thu June 24 10:35:08 2004; liup
