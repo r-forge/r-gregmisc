@@ -1,6 +1,10 @@
 # $Id$
 #
 # $Log$
+# Revision 1.3  2002/03/07 23:38:37  warneg
+# - Added "running2", which handles both univariate and bivariate cases
+# - Modified "running" to call "running2"
+#
 # Revision 1.2  2001/09/01 00:01:54  warneg
 # Release 0.3.0
 #
@@ -8,7 +12,12 @@
 # Initial CVS checkin.
 #
 #
+
 "running" _ function( X, fun=mean, width=min(length(X),20),
+                     allow.fewer=FALSE,...)
+  running2(X=X, fun=mean, width=width, allow.fewer=allow.fewer, ...)
+
+"running2" _ function( X, Y=NULL, fun=mean, width=min(length(X),20),
                      allow.fewer=FALSE,...)
 {
   n _ length(X)
@@ -20,10 +29,21 @@
 
   if(is.matrix(elements))
     elements  <- as.data.frame(elements)
+
+  if(is.null(Y))  # univariate 
+    {
+      funct _ function(which,what,fun,...) fun(what[which],...)
+      
+      Xvar _ sapply(elements, funct, what=X, fun=fun, ...)
+    }
+  else # bivariate
+    {
+      funct _ function(which,XX,YY,fun,...) fun(XX[which],YY[which], ...)
+      
+      Xvar _ sapply(elements, funct, XX=X, YY=Y, fun=fun, ...)
+    }
+
   
-  funct _ function(which,what,fun,...) fun(what[which],...)
-  
-  Xvar _ sapply(elements, funct, what=X, fun=fun, ...)
   names(Xvar) <- paste(from,to,sep=":")
 
   if(!allow.fewer)
