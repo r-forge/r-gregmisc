@@ -1,31 +1,57 @@
+#
+# $Id$
+#
+# $Log$
+# Revision 1.2  2002/02/20 21:29:34  warneg
+# Incorrectly had contents of nobs.R here instead of help text.  Corrected.
+#
+#
 
-interleave <- function(...)
-  {
-    sources <- list(...)
-    tmp <- rbind(...)
-    nrows <- nrow(sources[[1]])
-    nsources <- length(sources)
+\name{nobs}
+\alias{nobs}
+\alias{nobs.default}
+\alias{nobs.data.frame}
+\alias{nobs.lm}
+%- Also NEED an `\alias' for EACH other topic documented here.
+\title{ Compute the Number of Non-missing Observations }
+\description{
+ Compute the number of non-missing observations
+}
+\usage{
+nobs(x, ...)
+\method{nobs}{default}(x)
+\method{nobs}{data.frame}(x)
+\method{nobs}{lm}(x)
+}
+\arguments{
+  \item{x}{ Target Object }
+  \item{\dots}{ Optional parameters (currently ignored)}
+}
+\details{
 
-    indexes <- outer( ( 0:(nsources-1) ) * nrows , 1:nrows, "+" )
+  In the simplest case, this is really just wrapper code for
+  \code{sum(!is.na(x))}.
+  
+}
+\value{
+  A single numeric value or a vector of values (for data.frames) giving
+  the number of non-missing values.
+}
+\author{ Gregory R. Warnes \email{gregory\_r\_warnes\@groton.pfizer.com}  }
 
-    tmp[indexes,]
-  }
+\seealso{ \code{\link{is.na}}, \code{\link{length}} }
 
+\examples{
 
-aggregate.table <- function(x, by1, by2,  ... )
-  {
-    ag <- aggregate(x, by=list(by1,by2), ... )
-    tab <- matrix( ncol=nlevels(by1), nrow=nlevels(by2) )
-    dimnames(tab) <- list(levels(by1),levels(by2))
-    tab[ ag[,1], ag[,2] ] <- ag[,3]
-    tab
-  }
+x <- c(1,2,3,5,NA,6,7,1,NA )
+length(x)
+nobs(x)
 
-nobs <- function(x,...)
-  UseMethod("nobs",x)
+df <- data.frame(x=rnorm(100), y=rnorm(100))
+df[1,1] <- NA
+df[1,2] <- NA
+df[2,1] <- NA
 
-nobs.default <- function(x) sum( !is.na(x) )
-
-nobs.data.frame <- function(x)
-  sapply(x, nobs)
-
+nobs(df)
+}
+\keyword{attribute}
