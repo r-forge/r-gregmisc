@@ -1,7 +1,13 @@
 # $Id$
 #
 # $Log$
+# Revision 1.4  2001/12/18 22:14:14  warneg
+# - Updated documentation to reflect change of parameters from 'alpha'
+#   to 'conf.int', including the new optional status of the confidence
+#   intervals.
+#
 # Revision 1.3  2001/12/17 18:59:29  warneg
+#
 # - Fixed spelling errors.
 #
 # Revision 1.1  2001/12/17 18:58:27  warneg
@@ -28,22 +34,23 @@
 \description{Compute and test estimable linear functions of the fitted
   coefficients (including contrasts) of regression objects}
 \usage{
-estimable(obj, cm=NULL, alpha=0.05)
+estimable(obj, cm, conf.int=NULL)
 }
 \arguments{
   \item{reg}{Regression (lm,glm,lme) object. }
   \item{cm}{matrix specifying estimable linear functions or contrasts (one per
     row). The number of columns must match the number of fitted
     coefficients in the model.} 
-  \item{alpha}{significance level for confidence intervals}
+  \item{conf.int}{Confidence level.  If provided, confidence intervals
+    will be computed. }
 }
 \details{
-  Computes estimates, confidence intervals and significance tests for
-  for linear functions of the model coefficients given by the rows of
-  \code{cm}.  The estimates and their variances are obtained by
-  applying the matrix \code{cm} to the model estimates
-  variance-covariance matrix.  Degrees of freedom are obtained from the
-  appropriate model terms.
+  Computes an estimate, test statitic, significance test, and (optional)
+  confidence interval for each linear functions of the model
+  coefficients specified by the rows of \code{cm}.  The estimates and
+  their variances are obtained by applying the matrix \code{cm} to the
+  model estimates variance-covariance matrix.  Degrees of freedom are
+  obtained from the appropriate model terms.
   
   The user is responsible for ensuring that the specified
   linear functions are meaningful.  For computing contrasts among levels
