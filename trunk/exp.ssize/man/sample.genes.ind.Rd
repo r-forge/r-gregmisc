@@ -66,5 +66,4 @@ cat(" ------------------------------------------ \n",
     "------------------------------------------ \n")
 
 }
-\keyword{ ind }% at least one, from doc/KEYWORDS
-\keyword{ sample }
+\keyword{ datagen }% at least one, from doc/KEYWORDS

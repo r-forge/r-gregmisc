@@ -1,5 +1,6 @@
-\name{sample.ind}
-\alias{sample.ind}
+\name{sample.hyp.ind}
+\alias{sample.null.ind}
+\alias{sample.alt.ind}
 
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{ Function to Sample Observations(gene expressions) from Independent
@@ -9,8 +10,10 @@
        Normal Distribution with Simulated sd
 }
 \usage{
-sample.null.ind(ngenes.null.ind, n, var.ratio, shape, scale)
-sample.alt.ind(ngenes.alt.ind, n, var.ratio, delta, shape, scale)
+sample.null.ind(ngenes.null.ind, n, var.ratio, shape, scale, 
+        distrn = "normal")
+sample.alt.ind(ngenes.alt.ind, n, var.ratio, delta, shape, 
+        scale,  distrn = "normal")
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{

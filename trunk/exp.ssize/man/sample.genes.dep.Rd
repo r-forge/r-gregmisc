@@ -43,7 +43,9 @@ sample.genes.dep(n, delta, cov.ctrl, var.ratio, distrn = "normal")
 library(MASS)
 # set.seed(100)
 n <- 1000; delta <- 50; var.ratio <- 1;
-cov.ctrl <- test.cov # from test.sampling.cov
+cov.ctrl <- diag(rep(0.4,4))
+cov.ctrl[1,1] <- 1
+cov.ctrl[1,2] <- cov.ctrl[2,1] <- 0.15; # from test.sampling.cov
 
 test.sample <- sample.genes.dep(n, delta, cov.ctrl, var.ratio)
 
@@ -73,5 +75,5 @@ cat("\n------------------------------------------ \n")
 }	% end of dontrun
 
 }
-\keyword{ dep }% at least one, from doc/KEYWORDS
-\keyword{ sample }% __ONLY ONE__ keyword per line
+\keyword{ datagen }% at least one, from doc/KEYWORDS
+\keyword{ multivariate }% __ONLY ONE__ keyword per line

@@ -1,6 +1,6 @@
 \name{sample.hyp.dep}
 
-\alias{sample.null.ind}
+\alias{sample.null.dep}
 \alias{sample.alt.dep}
 
 \title{ Generate observations from each hypothesis (null/alternative)
@@ -9,8 +9,10 @@
  	  Generate observations from each hypothesis (null/alternative)
         group based on dependent normal distribution}
 \usage{
-sample.null.dep(ngenes.null.dep, n, var.ratio, cov.matrix, ngenes.matrix)
-sample.alt.dep(ngenes.alt.dep, n, var.ratio, cov.matrix, ngenes.matrix, delta)
+sample.null.dep(ngenes.null.dep, n, var.ratio, cov.matrix, 
+      ngenes.matrix, distrn = "normal")
+sample.alt.dep(ngenes.alt.dep, n, var.ratio, cov.matrix, 
+      ngenes.matrix, delta, distrn = "normal")
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -77,5 +79,5 @@ cov.matrix[[7]][3,2] <- cov.matrix[[7]][2,3] <- 0.4
       cov.matrix, ngenes.matrix, delta)
 
 }
-\keyword{ dep }% at least one, from doc/KEYWORDS
-\keyword{ hyp }% __ONLY ONE__ keyword per line
+\keyword{ datagen }% at least one, from doc/KEYWORDS
+\keyword{ multivariate }% __ONLY ONE__ keyword per line

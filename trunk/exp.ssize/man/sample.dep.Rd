@@ -96,5 +96,5 @@ cat("\n------------------------------------------ \n")
 } % end of dontrun
   } ## the end of the function sample.null.dep
 }
-\keyword{ dep }% at least one, from doc/KEYWORDS
-\keyword{ sample}% __ONLY ONE__ keyword per line
+\keyword{ datagen }% at least one, from doc/KEYWORDS
+\keyword{ multivariate }% __ONLY ONE__ keyword per line

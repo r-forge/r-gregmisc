@@ -28,4 +28,4 @@ temp1
 temp2 <- get.sd(c(1,4,9,16))
 temp2
 }
-\keyword{ sd }% at least one, from doc/KEYWORDS
+\keyword{ math }% at least one, from doc/KEYWORDS

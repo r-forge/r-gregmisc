@@ -64,5 +64,5 @@ function( ngenes.alt.dep , n, var.ratio, cov.matrix, ngenes.matrix, delta, distr
 
   } ## the end of the function sample.null.dep
 }
-\keyword{ ~kwd1 }% at least one, from doc/KEYWORDS
-\keyword{ ~kwd2 }% __ONLY ONE__ keyword per line
+\keyword{ datagen }% at least one, from doc/KEYWORDS
+\keyword{ multivariate }% __ONLY ONE__ keyword per line
