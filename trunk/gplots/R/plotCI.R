@@ -1,6 +1,9 @@
 # $Id$
 #
 # $Log$
+# Revision 1.10  2004/07/29 14:48:59  warnes
+# Integrate changes from the version of plotCI maintained by Martin Maechler.
+#
 # Revision 1.9  2004/05/24 23:43:46  warnes
 # Modified to use invalid() to check arguments instead of missing().
 # This fixes some build errors under R-1.9.0-Patched.
@@ -32,22 +35,34 @@
 #
 
 
-plotCI <- function (x, y = NULL,
-                    uiw, liw = uiw,   
-                    ui, li, 
-                    err='y', 
-                    col=par("col"),
+plotCI <- function (x,
+                    y = NULL,
+                    uiw,
+                    liw = uiw,
+                    ui,
+                    li,
+
+                    err='y',
                     ylim=NULL,
                     xlim=NULL,
+                    type="p",
+                    
+                    col=par("col"),
                     barcol=col,
+                    pt.bg = par("bg"),
+                    
                     sfrac = 0.01,
                     gap=1,
+
                     lwd=par("lwd"),
                     lty=par("lty"),
+
                     labels=FALSE,
+
                     add=FALSE,
                     xlab,
                     ylab,
+                    
                     minbar,
                     maxbar,
                     ...
@@ -167,8 +182,9 @@ plotCI <- function (x, y = NULL,
                  lty=lty, angle=90, length=smidge, code=1)
       
     }
-      
-    
 
-invisible(list(x = x, y = y)) 
+  ## _now_ draw the points (to avoid having lines drawn 'through' points)
+  points(x, y, col = col, lwd = lwd, bg = pt.bg, type = type, ...)
+
+  invisible(list(x = x, y = y)) 
 } 
