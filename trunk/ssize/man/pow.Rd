@@ -76,7 +76,9 @@ delta.plot (x, xlab = "Fold Change",
 library(gdata) # for nobs()
 
 data(exp.sd)
-
+\testonly{
+exp.sd <- exp.sd[1:1000]
+}
 
 # Histogram of the standard deviations
 
