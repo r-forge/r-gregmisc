@@ -5,7 +5,8 @@
   stop or terminate.}
 }
 \usage{
-wait(pid, continued = FALSE, nohang = TRUE, nowait = FALSE, untraced = FALSE)
+wait(pid, continued = FALSE, nohang = TRUE, nowait = FALSE,
+     untraced = FALSE)
 }
 \arguments{
   \item{pid}{integer indicating the set of child processes  for
@@ -28,7 +29,7 @@ wait(pid, continued = FALSE, nohang = TRUE, nowait = FALSE, untraced = FALSE)
 \value{
   A vector of length 2 containing 
   \item{pid}{Process id of a child process}
-  \item{status}}{Status of the child process.}
+  \item{status}{Status of the child process.}
 
   Refer to the local Unix man pages for details on these system calls
   and the meanings of the status indicator.

@@ -13,11 +13,10 @@ fork(slave)
 }
 \details{
   This function provides a thin wrapper around the Unix "fork" system
-  call, which will create a new process which is an exact copy of the current R
-  process, including open files and sockets including STDIN and STDOUT.
-  (In particular this means that reading from stdin in the client process
-  can cause a great deal of confusion!)
-
+  call, which will create a new process which is an exact copy of the
+  current R process, including open files and sockets including STDIN
+  and STDOUT.
+  
   The \code{slave} parameter should  normally contain a function
   to be executed in the newly created process.  This function will be
   called in the new process, and \code{exit()} will be called when it
@@ -26,22 +25,19 @@ fork(slave)
   If you wish to explicitly control what happens in the slave process,
   you can pass \code{slave=NULL}, in which case you are responsible for
   properly closing down the created process by calling \code{exit()}.
-  Don't do this unless you are ready to handle all of these complexities!  
-
-  In particular, since the child process inherits all files, including
-  stdin and stdout, code following a fork that has \code{slave=NULL}
-  will be be obtained *competitively* by both processes.  This usually
-  means that neither process will get a consistent picture of the
-  following commands. Consequently you need to ensure that all code that
-  needs to be executed has already been fed to the interpreter before
-  the fork call occurs.  The simplest mechinism to accomplish this is to
-  wrap the code containing the fork in a code block using curly brackets
-  (\code{\{ ... \}}).  This can be a top-level code block, or can be
-  withing a loop or function call.,
+  Note that the child process inherits all files, including
+  STDIN and STDOUT.  Consequently, code following a fork that has
+  \code{slave=NULL} will be be obtained *competitively* by both
+  processes.  This usually means that neither process will get a
+  consistent picture of the following commands. Consequently you need to
+  ensure that all code that needs to be executed has already been fed to
+  the interpreter before the fork call occurs.  The simplest mechinism
+  to accomplish this is to wrap the code containing the fork in a code
+  block using curly brackets (\code{\{ ... \}}).  This can be a
+  top-level code block, or can be withing a loop or function call.,
  
   To illustrate, this code (in a familiar C idiom) will NOT be
   interpreted properly:
-
     
   pid = fork(slave=NULL)
     
@@ -82,9 +78,6 @@ fork(slave)
    process to the parent process.  If \code{slave} is \code{NULL} the
    function returns 0 to the  child  process.
 }
-\note{
-
-   
 \references{'fork' man page}
 \author{Gregory R Warnes <gregory_r_wanres@groton.pfizer.com}
 \seealso{\code{\link{exit}}, \code{\link{wait}}, \code{\link{kill}}}

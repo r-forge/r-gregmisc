@@ -1,48 +1,47 @@
 \name{kill}
 \alias{kill}
-%- Also NEED an '\alias' for EACH other topic documented here.
-\title{ ~~function to do ... ~~ }
-\description{
-  ~~ A concise (1-5 lines) description of what the function does. ~~
+\alias{killall}
+\title{Send a signal to one or more processes.}
+\description{ 
+  This function sends a signal to a process.}
 }
 \usage{
 kill(pid, signal = 9)
+killall(signal)
 }
-%- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{pid}{ ~~Describe \code{pid} here~~ }
-  \item{signal}{ ~~Describe \code{signal} here~~ }
+  \item{pid}{Process ID for the target process}
+  \item{signal}{Signal number to send.  Defaults to 9 (SIGKILL)}
 }
 \details{
-  ~~ If necessary, more details than the __description__  above ~~
+  The \code{kill} function provides a thin wrapper around the Unix
+  "kill" system, which sends a signal to the specified process.  The
+  \code{killall} function sends a signal to all processes which have
+  been \code{forked} during this session.
+
+  Refer to the local Unix man pages for details.
 }
 \value{
-  ~Describe the value returned
-  If it is a LIST, use
-  \item{comp1 }{Description of 'comp1'}
-  \item{comp2 }{Description of 'comp2'}
-  ...
+  Returns 0 on successful completion, otherwise -1.
 }
-\references{ ~put references to the literature/web site here ~ }
-\author{ ~~who you are~~ }
-\note{ ~~further notes~~ }
-
- ~Make other sections like Warning with \section{Warning }{....} ~ 
-\seealso{ ~~objects to See Also as \code{\link{~~fun~~}}, ~~~ }
+\references{"kill" and "waitpid"  man pages}
+\author{Gregory R Warnes <gregory_r_wanres@groton.pfizer.com}
+\seealso{\code{\link{fork}}, \code{\link{exit}}, \code{\link{kill}}}
 \examples{
-##---- Should be DIRECTLY executable !! ----
-##-- ==>  Define data, use random,
-##--	or do  help(data=index)  for the standard data sets.
 
-## The function is currently defined as
-function(pid, signal=9)
-  {
-    .C("Rfork_kill",
-       as.integer(pid),
-       as.integer(signal),
-       flag=integer(1)
-       )$flag
-  }
+   # start a process that just sleeps for 10 seconds
+    sleepy <- function() 
+     {
+       cat("Going to sleep..")
+       Sys.sleep(10)
+       cat("Woke up!")
+     }
+   pid <- fork( sleepy )
+
+   # kill the sleeping process
+   kill(pid)
+
+
 }
-\keyword{ ~kwd1 }% at least one, from doc/KEYWORDS
-\keyword{ ~kwd2 }% __ONLY ONE__ keyword per line
+\keyword{programming}
+
