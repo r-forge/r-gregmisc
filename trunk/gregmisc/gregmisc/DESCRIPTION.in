@@ -1,0 +1,7 @@
+Package: gregmisc
+Title: Backword compatibility package for gregmisc bundle
+Description: Backword compatibility package for gregmisc bundle.  This package
+             simply loads the other packages within the gregmisc bundle, in
+	     in order to simulate the old behavior when gregmisc was a single
+             package.
+Depends: R (>= 1.9.0), gdata, gtools, gmodels, gplots
