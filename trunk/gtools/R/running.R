@@ -1,7 +1,16 @@
 # $Id$
 #
 # $Log$
+# Revision 1.6  2004/03/26 15:34:26  warnes
+# Fix bug discovered by Sean Davis <sdavis2@mail.nih.gov>.  The running
+# function took an improper shortcut.  When allow.fewer=FALSE it was
+# still passing shorter lists of elements to the called function, and
+# then overwriting the results for the shorter lists with NAs.  The code
+# now skips evaluation of the function on lists shorter than the
+# specified length when allow.fewer=FALSE.
+#
 # Revision 1.5  2002/09/24 14:57:19  warnes
+#
 # - Fixed error where running was always calling running2 with
 #   'fun=mean', ignoring the specified funtion.
 #
@@ -41,6 +50,12 @@
   from  <-  sapply( (1:n) - width + 1, function(x) max(x,1) )
   to    <-  1:n
 
+  if(!allow.fewer)
+    {
+      from <- from[ -(1:(width-1)) ]
+      to <- to[ -(1:(width-1)) ]
+    }
+  
   elements  <- apply(cbind(from,to), 1,function(x) seq(x[1], x[2]) )
 
   if(is.matrix(elements))
@@ -62,8 +77,5 @@
   
   names(Xvar) <- paste(from,to,sep=":")
 
-  if(!allow.fewer)
-    Xvar[1:(width-1)]  <- NA
-  
   return(Xvar)
 }
