@@ -20,7 +20,7 @@ lsf_initialize(void)
 }
 
 SEXP
-lsf_job_submit(SEXP sexp_debug, SEXP sexp_command)
+lsf_job_submit(SEXP sexp_debug, SEXP sexp_command, SEXP sexp_ncpus)
 {
   int jobId, debug, i;
   struct submit submitRequest;
@@ -37,6 +37,8 @@ lsf_job_submit(SEXP sexp_debug, SEXP sexp_command)
   } else {
     submitRequest.outFile = "/dev/null";
   }
+  submitRequest.numProcessors = INTEGER(sexp_ncpus)[0];
+  submitRequest.maxNumProcessors = INTEGER(sexp_ncpus)[0];
 
   if (setenv("BSUB_QUIET", "1", 1)) {
     return AsInt(0);

@@ -5,8 +5,27 @@ if [ $# != 1 ]; then
     exit 1
 fi
 
+if [ -z "$LSB_JOBID" ]; then
+    echo "Not running under LSF ... aborting."
+    exit 1
+fi
+
 lsfenvfile=$1; shift
 lsfreturnfile=${lsfenvfile}.lsf.ret
+
+numhosts=0
+for i in $LSB_HOSTS; do
+    numhosts=`expr $numhosts + 1`
+done
+
+if [ $numhosts -gt 1 ]; then
+    bhostfile="Rlsf_bhosts.$LSB_JOBID"
+    rm -f $bhostfile
+    for i in $LSB_HOSTS; do
+	echo $i >> $bhostfile
+    done
+    lamboot -v $bhostfile
+fi
 
 R --vanilla <<EOF
 
@@ -19,4 +38,13 @@ lsf.ret <- try({
 save(lsf.ret, file = "${lsfreturnfile}")
 
 EOF
+
+rc=$?
+
+if [ $numhosts -gt 1 ]; then
+    lamhalt -v
+    rm -f $bhostfile
+fi
+
+exit $rc
 

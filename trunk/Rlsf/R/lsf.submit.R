@@ -1,7 +1,7 @@
 # $Id$
 
 "lsf.submit" <-
-  function(func, ..., savelist=c(), debug=FALSE)
+  function(func, ..., savelist=c(), ncpus=1, debug=FALSE)
   # savelist is a character vector of *names* of objects to be
   # copied to the remote R session
   {
@@ -15,7 +15,10 @@
 
     script <- paste(file.path(.path.package("Rlsf"), "RunLsfJob"), fname)
 
-    jobid <- .Call("lsf_job_submit", as.integer(debug), script)
+    jobid <- .Call("lsf_job_submit",
+                   as.integer(debug),
+                   script,
+                   as.integer(ncpus))
 
     if (jobid)
       list(jobid=jobid,fname=fname,debug=debug)
