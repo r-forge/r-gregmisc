@@ -6,7 +6,7 @@
   the row and column names of the matrix.
 }
 \usage{
-unmatrix(x)
+unmatrix(x, byrow=FALSE)
 }
 \arguments{
   \item{x}{matrix}
