@@ -1,5 +1,5 @@
 # Global Config Variables
-R_PACKAGE_DIR ?= $(PWD)/../inst
+R_PACKAGE_DIR ?= /tmp/gregmisc/
 PERL_PREFIX = $(R_PACKAGE_DIR)/perl
 BIN_PREFIX  = $(R_PACKAGE_DIR)/bin
 
