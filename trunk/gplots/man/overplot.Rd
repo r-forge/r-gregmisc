@@ -1,11 +1,13 @@
 \name{overplot}
 \alias{overplot}
+\alias{panel.overplot}
 \title{Plot multiple variables on the same region, with appropriate axes}
 \description{
-  This function plots a set of variables defined on the same x-range
-  which have varyiny y-ranges on the same plotting area.  For each
+  \code{overplot} graphs a set of variables defined on the same x-range
+  but which have varying y-ranges on the same plotting area.  For each
   set of y-values it uses a different color and line-type and and draws
-  a correspondingly colored and line-typed axis.
+  a correspondingly colored and line-typed axis.  \code{panel.overplot}
+  is used by \code{overplot} to draw the individual graphs.
 }
 \usage{
 overplot(formula, data = parent.frame(), same.scale = FALSE, xlab, ylab,
@@ -34,8 +36,8 @@ overplot(formula, data = parent.frame(), same.scale = FALSE, xlab, ylab,
   \item{groups}{(optional) character vector giving the names of levels
     of the conditioning variable to plot. Defaults to all levels of the
     conditioning variable.}
-  \item{f}{Smoothing paramter for \code{lowess}}
-  \item{data, subset, \dots}{paramaters passed to \code{model.frame} to
+  \item{f}{Smoothing parameter for \code{lowess}}
+  \item{data, subset, \dots}{parameters passed to \code{model.frame} to
     obtain the data to be plotted from the formula.}
 }
 \details{

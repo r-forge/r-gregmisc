@@ -52,11 +52,11 @@ overplot <- function (formula, data = parent.frame(),
 
   #print(data.frame(cond,x,y))
   
-  y.all.min <- min(y, na.rm=T)
-  y.all.max <- max(y, na.rm=T)
+  y.all.min <- min(y, na.rm=TRUE)
+  y.all.max <- max(y, na.rm=TRUE)
 
-  x.all.min <- min(x, na.rm=T)
-  x.all.max <- max(x, na.rm=T)
+  x.all.min <- min(x, na.rm=TRUE)
+  x.all.max <- max(x, na.rm=TRUE)
 
   if(y.all.min==y.all.max) browser()
   
@@ -92,15 +92,15 @@ overplot <- function (formula, data = parent.frame(),
   if(same.scale)
     {
       if(missing(ylim))
-        mycall$ylim <- range(y[y>0],na.rm=T)
+        mycall$ylim <- range(y[y>0],na.rm=TRUE)
     }
 
   # xlim is always the same for all graphs
   if(missing(xlim))
     if(log %in% c("x","xy"))
-      mycall$xlim <- range(x[x>0],na.rm=T)
+      mycall$xlim <- range(x[x>0],na.rm=TRUE)
     else
-      mycall$xlim <- range(x,na.rm=T)
+      mycall$xlim <- range(x,na.rm=TRUE)
 
 
   
@@ -151,8 +151,8 @@ overplot <- function (formula, data = parent.frame(),
         mycall$lty = i
 
         tmp.y <- y[mycall$subset & cond==level]
-        min.tmp.y <- min(tmp.y, na.rm=T)
-        max.tmp.y <- max(tmp.y, na.rm=T)
+        min.tmp.y <- min(tmp.y, na.rm=TRUE)
+        max.tmp.y <- max(tmp.y, na.rm=TRUE)
                 
         if( !missing(min.y) || !missing(max.y) )
           {
