@@ -1,18 +1,17 @@
 #!/bin/sh 
 
-if [ $# -lt 2 ]; then
-	echo "Usage: $0 <data file> <function name> [<function arg> ...]"
+if [ $# != 1 ]; then
+	echo "Usage: $0 <data file>"
 	exit 1
 fi
 
 lsfenvfile=$1; shift
-lsffunc=$1; shift
-lsfargs=`echo $*|sed 's/ /,/g'`
 
 R --vanilla <<EOF
 
-load("${lsfenvfile}")
-lsf.ret <- ${lsffunc}(${lsfargs})
-save.image(file = "${lsfenvfile}")
+newenv <- environment()
+load("${lsfenvfile}", envir=newenv)
+lsf.ret <- eval(lsf.call, env=newenv)
+save(lsf.ret, file = "${lsfenvfile}")
 
 EOF
