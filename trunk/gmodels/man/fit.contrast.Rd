@@ -1,5 +1,5 @@
 % $Id$
-
+%
 \name{fit.contrast}
 \alias{fit.contrast}
 \alias{fit.contrast.lm}

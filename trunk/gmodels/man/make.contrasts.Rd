@@ -1,19 +1,5 @@
 % $Id$
 %
-% $Log$
-% Revision 1.2  2004/09/03 17:27:44  warneg
-% initial bundle checkin
-%
-% Revision 1.1  2002/10/29 23:00:43  warnes
-%
-% - Moved make.contrasts to a separate file.
-% - Enhanced make contrasts to better label contrast matrix, to give
-%   how.many a default value, and to coerce vectors into row matrixes.
-% - Added help page for make.contrasts.
-% - Added link from contrasts.lm seealso to make.contrasts.
-%
-% 
-
 \name{make.contrasts}
 \alias{make.contrasts}
 \title{Construct a User-Specified Contrast Matrix}

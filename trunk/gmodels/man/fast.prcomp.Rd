@@ -1,3 +1,5 @@
+% $Id$
+%
 \name{fast.prcomp}
 \alias{fast.prcomp}
 \alias{fast.svd}

@@ -1,5 +1,5 @@
 % $Id$
-
+%
 \name{glh.test}
 \alias{glh.test}
 \alias{print.glh.test}
