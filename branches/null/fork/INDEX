@@ -1,0 +1,6 @@
+exit                    ~~function to do ... ~~
+fork                    Create a new R process using the Unix 'fork'
+                        system call
+kill                    ~~function to do ... ~~
+wait                    Wait for child process(es) to stop or
+                        terminate.
