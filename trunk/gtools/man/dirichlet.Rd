@@ -1,3 +1,5 @@
+% $Id$
+%
 \name{rdirichlet}
 \alias{rdirichlet}
 \alias{ddirichlet}

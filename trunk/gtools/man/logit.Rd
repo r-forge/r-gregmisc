@@ -1,5 +1,5 @@
 % $Id$
-
+%
 \name{logit}
 \alias{logit}
 \alias{inv.logit}

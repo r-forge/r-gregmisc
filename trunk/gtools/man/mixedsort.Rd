@@ -1,3 +1,5 @@
+% $Id$
+%
 \name{mixedsort}
 \alias{mixedsort}
 \alias{mixedorder}

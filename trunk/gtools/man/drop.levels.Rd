@@ -1,3 +1,5 @@
+% $Id$
+%
 \name{drop.levels}
 \alias{drop.levels}
 \title{Drop unused factor levels}

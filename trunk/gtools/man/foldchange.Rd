@@ -1,3 +1,5 @@
+% $Id$
+%
 \name{foldchange}
 \alias{foldchange}
 \alias{logratio2foldchange}

@@ -1,37 +1,5 @@
 % $Id$
 %
-% $Log$
-% Revision 1.8  2004/05/26 13:40:13  warnes
-% Escape underscores in email addresses so Latex is happy.
-%
-% Revision 1.7  2004/03/26 22:21:15  warnes
-% Uncomment and fix large 'n' example.
-%
-% Revision 1.6  2003/04/22 16:00:27  warnes
-% - Fixed tpyo in example that allowed combinations(500,2) to run when
-%   it should have been ignred for testing..
-%
-% Revision 1.5  2003/04/10 16:22:29  warnes
-%
-% - Added note about the need to increase options("expressions") to use
-%   large values for 'n'.  Prompted by bug report from Huan Huang
-%   <huan.huang@bnpparibas.com
-%
-% Revision 1.4  2002/09/23 13:59:30  warnes
-% - Modified all files to include CVS Id and Log tags.
-%
-% Revision 1.3  2002/04/09 00:51:32  warneg
-%
-% Checkin for version 0.5.3
-%
-% Revision 1.2  2001/08/25 05:50:58  warneg
-% Fixed a typo and a syntax error.
-%
-% Revision 1.1  2001/06/29 13:24:08  warneg
-%
-% Initial revision.
-%
-
 \name{combinations}
 \alias{combinations}
 \alias{permutations}
