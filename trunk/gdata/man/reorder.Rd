@@ -1,12 +1,15 @@
 % $Id$
 %
 % $Log$
+% Revision 1.8  2004/03/26 22:31:09  warnes
+% Contents of package 'mva' moveed to 'stats'.
+%
 % Revision 1.7  2004/01/21 12:06:41  warnes
-% - Add ... argument to match generic provided in mva.
+% - Add ... argument to match generic provided in stats.
 %
 % Revision 1.6  2003/04/22 15:42:35  warnes
 %
-% - The mva package (which is part of recommended) now provides a
+% - The stats package (which is part of recommended) now provides a
 %   generic 'reorder' function.  Consequently, the 'reorder' function
 %   here has been renamed to 'reorder.factor'.
 %
@@ -65,7 +68,7 @@
 
 \author{Gregory R. Warnes \email{Gregory\_R\_Warnes@groton.pfizer.com}}
 
-\seealso{ \code{\link{factor}}, \code{\link[mva]{reorder}} }
+\seealso{ \code{\link{factor}}, \code{\link[stats]{reorder}} }
 
 \examples{
    # Create a 4 level example factor
