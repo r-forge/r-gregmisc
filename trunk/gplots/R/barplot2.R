@@ -1,4 +1,7 @@
 # $Log$
+# Revision 1.7  2003/12/01 15:55:50  warnes
+# - Follow patches applied to barplot() in base.
+#
 # Revision 1.6  2003/04/22 15:34:25  warnes
 # Update from Marc Schwartz, modified by Gregory Warnes:
 #
@@ -106,14 +109,16 @@ function(height, width = 1, space = NULL, names.arg = NULL,
     NC <- ncol(height)
 
     if (beside)
-    {
-      if (length(space) == 2)
-        space <- rep(c(space[2], rep(space[1], NR - 1)), NC)
-
-      width <- rep(width, length = NR * NC)
-    }
+      {
+        if (length(space) == 2)
+          space <- rep.int(c(space[2], rep.int(space[1], NR - 1)), NC)
+        
+        width <- rep(width, length = NR * NC)
+      }
     else
-      width <- rep(width, length = NC)
+      {
+        width <- rep(width, length = NC)
+      }
 
     delta <- width / 2
     w.r <- cumsum(space + width)
@@ -312,11 +317,14 @@ function(height, width = 1, space = NULL, names.arg = NULL,
       }
 
       if (beside)
-        xyrect(rectbase, w.l, c(height), w.r, horizontal=horiz, angle = angle, density = density, col = col, border = border)
+        xyrect(rectbase, w.l, c(height), w.r, horizontal=horiz,
+               angle = angle, density = density, col = col, border = border)
       else
       {
         for (i in 1:NC)
-          xyrect(height[1:NR, i], w.l[i], height[-1, i], w.r[i], horizontal=horiz,  angle = angle, density = density, col = col, border = border)
+          xyrect(height[1:NR, i], w.l[i], height[-1, i], w.r[i],
+                 horizontal=horiz,  angle = angle, density = density,
+                 col = col, border = border)
       }
 
       if (plot.ci)
