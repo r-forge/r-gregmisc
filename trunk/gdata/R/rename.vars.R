@@ -1,7 +1,11 @@
 # $Id$
 #
 # $Log$
+# Revision 1.5  2004/04/01 20:23:14  warnes
+# Add function remove.vars().
+#
 # Revision 1.4  2002/04/09 00:51:30  warneg
+#
 # Checkin for version 0.5.3
 #
 # Revision 1.3  2001/12/08 01:54:19  warneg
@@ -50,12 +54,27 @@ rename.vars <- function(data,from='',to='',info=TRUE) {
    dfn.new <- dfn
    dfn.new[chng] <- to
    if (info) cat('\nChanging in',dsn)
-     tmp <- rbind(from,to)
-     dimnames(tmp)[[1]] <- c('From:','To:')
-     dimnames(tmp)[[2]] <- rep('',length(from))
-   if (info) print(tmp,quote=FALSE)
+   tmp <- rbind(from,to)
+   dimnames(tmp)[[1]] <- c('From:','To:')
+   dimnames(tmp)[[2]] <- rep('',length(from))
+   if (info)
+     {
+       print(tmp,quote=FALSE)
+       cat("\n")
+     }
    names(data) <- dfn.new
-   invisible(data)
+   data
 }
 
 
+# GRW 2004-04-01
+remove.vars <- function( data, names, info=TRUE)
+  {
+    for( i in names )
+      {
+        if(info)
+          cat("Removing variable '", i, "'\n", sep="")
+        data[[i]] <- NULL
+      }
+    data
+  }
