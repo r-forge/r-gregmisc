@@ -1,5 +1,23 @@
 # $Log$
+# Revision 1.8  2004/06/28 20:16:40  warnes
+# - Default 2-d color set to grey as in (v2.0.0) r-devel
+# - The default (v1.9.1) barplot method now handles vectors and 1-d arrays
+#   (e.g., obtained by table()) the same, and uses grey instead of
+#   heat color palettes in these cases.  (Also fixes PR#6776.)
+# - Updated to reflect the addition of 'offset' argument in base
+# - Fix bug in stacked barplots, which would not be plotted properly
+#
+
+# Revision 1.8  2004/06/26
+# - Default 2-d color set to grey as in (v2.0.0) r-devel
+# - The default (v1.9.1) barplot method now handles vectors and 1-d arrays
+#   (e.g., obtained by table()) the same, and uses grey instead of
+#   heat color palettes in these cases.  (Also fixes PR#6776.)
+# - Updated fo reflect the addition of 'offset' argument in base
+# - Fix bug in stacked barplots, which would not be plotted properly
+#
 # Revision 1.7  2003/12/01 15:55:50  warnes
+#
 # - Follow patches applied to barplot() in base.
 #
 # Revision 1.6  2003/04/22 15:34:25  warnes
@@ -49,12 +67,12 @@ barplot2.default <-
 function(height, width = 1, space = NULL, names.arg = NULL,
        legend.text = NULL, beside = FALSE, horiz = FALSE,
        density = NULL, angle = 45,
-       col = heat.colors(NR), prcol = NULL, border = par("fg"),
+       col = NULL, prcol = NULL, border = par("fg"),
        main = NULL, sub = NULL, xlab = NULL, ylab = NULL,
        xlim = NULL, ylim = NULL, xpd = TRUE, log = "",
        axes = TRUE, axisnames = TRUE,
        cex.axis = par("cex.axis"), cex.names = par("cex.axis"),
-       inside = TRUE, plot = TRUE, axis.lty = 0,
+       inside = TRUE, plot = TRUE, axis.lty = 0, offset = 0, 
        plot.ci = FALSE, ci.l = NULL, ci.u = NULL,
        ci.color = "black", ci.lty = "solid", ci.lwd = 1,
        plot.grid = FALSE, grid.inc = NULL,
@@ -65,24 +83,26 @@ function(height, width = 1, space = NULL, names.arg = NULL,
 
     if (missing(space))
       space <- if (is.matrix(height) && beside) c(0, 1) else 0.2
-
     space <- space * mean(width)
 
     if (plot && axisnames && missing(names.arg))
-      names.arg <- if(is.matrix(height)) colnames(height) else names(height)
+      names.arg <-
+          if(is.matrix(height)) colnames(height) else names(height)
 
-    if (is.vector(height))
-    {
-      height <- cbind(height)
-      beside <- TRUE
+    if (is.vector(height)
+        || (is.array(height) && (length(dim(height)) == 1))) {
+        ## Treat vectors and 1-d arrays the same.
+	height <- cbind(height)
+	beside <- TRUE
+        ## The above may look strange, but in particular makes color
+        ## specs work as most likely expected by the users.
+        if(is.null(col)) col <- "grey"
+    } else if (is.matrix(height)) {
+        ## In the matrix case, we use "colors" by default.
+        if(is.null(col)) col <- heat.colors(nrow(height))
     }
-    else if (is.array(height) && (length(dim(height)) == 1))
-    {
-      height <- rbind(height)
-      beside <- TRUE
-    }
-    else if (!is.matrix(height))
-      stop("`height' must be a vector or a matrix")
+    else
+	stop(paste(sQuote("height"), "must be a vector or a matrix"))
 
     if(is.logical(legend.text))
       legend.text <-
@@ -107,19 +127,16 @@ function(height, width = 1, space = NULL, names.arg = NULL,
 
     NR <- nrow(height)
     NC <- ncol(height)
+  
+    if (beside) {
+	if (length(space) == 2)
+	    space <- rep.int(c(space[2], rep.int(space[1], NR - 1)), NC)
+	width <- rep(width, length.out = NR)
+    } else
+	width <- rep(width, length.out = NC)
 
-    if (beside)
-      {
-        if (length(space) == 2)
-          space <- rep.int(c(space[2], rep.int(space[1], NR - 1)), NC)
-        
-        width <- rep(width, length = NR * NC)
-      }
-    else
-      {
-        width <- rep(width, length = NC)
-      }
-
+    offset <- rep(as.vector(offset), length.out = length(width))
+   
     delta <- width / 2
     w.r <- cumsum(space + width)
     w.m <- w.r - delta
@@ -135,35 +152,32 @@ function(height, width = 1, space = NULL, names.arg = NULL,
       if ((missing(ci.l)) || (missing(ci.u)))
         stop("confidence interval values are missing")
 
-      if (is.vector(ci.l))
+      if (is.vector(ci.l)
+        || (is.array(ci.l) && (length(dim(ci.l)) == 1)))
         ci.l <- cbind(ci.l)
-      else if (is.array(ci.l) && (length(dim(ci.l)) == 1))
-        ci.l <- rbind(ci.l)
       else if (!is.matrix(ci.l))
-        stop("`ci.l' must be a vector or a matrix")
+        stop(paste(sQuote("ci.l"), "must be a vector or a matrix"))
 
-      if (is.vector(ci.u))
+      if (is.vector(ci.u)
+        || (is.array(ci.u) && (length(dim(ci.u)) == 1)))
         ci.u <- cbind(ci.u)
-      else if (is.array(ci.u) && (length(dim(ci.u)) == 1))
-        ci.u <- rbind(ci.u)
       else if (!is.matrix(ci.u))
-        stop("`ci.u' must be a vector or a matrix")
+        stop(paste(sQuote("ci.u"), "must be a vector or a matrix"))
 
-      if ( any(dim(height) != dim(ci.u) ) )
-        stop("'height' and 'ci.u' must have the same dimensions.")
-      else if ( any( dim(height) != dim(ci.l) ) )
-        stop("'height' and 'ci.l' must have the same dimensions.")
+      if (any(dim(height) != dim(ci.u)))
+        stop(paste(sQuote("height"), "and", sQuote("ci.u"),
+                   "must have the same dimensions."))
+      else if (any(dim(height) != dim(ci.l)))
+        stop(paste(sQuote("height"), "and", sQuote("ci.l"),
+                   "must have the same dimensions."))
     }
 
-    if (beside)
-      w.m <- matrix(w.m, nc = NC)
-
-    # check height/ci.l if using log scale to prevent log(<=0) error
+    # check height + offset/ci.l if using log scale to prevent log(<=0) error
     # adjust appropriate ranges and bar base values
     if ((logx && horiz) || (logy && !horiz))
     {
-      if (min(height) <= 0)
-        stop("log scale error: at least one 'height' value <= 0")
+      if (min(height + offset) <= 0)
+        stop("log scale error: at least one 'height + offset' value <= 0")
 
       if (plot.ci && (min(ci.l) <= 0))
         stop("log scale error: at least one lower c.i. value <= 0")
@@ -174,17 +188,18 @@ function(height, width = 1, space = NULL, names.arg = NULL,
       if (logy && !is.null(ylim) && (ylim[1] <= 0))
         stop("'log scale error: 'ylim[1]' <= 0")
 
-      # arbitrary adjustment to display some of bar for min(height) or min(ci.l)
+      # arbitrary adjustment to display some of bar for min(height) since
+      # 0 cannot be used with log scales. If plot.ci, also check ci.l
       if (plot.ci)
-        rectbase <- rangeadj <- (0.9 * min(c(height, ci.l)))
+        rectbase <- 0.9 * min(height, ci.l)
       else
-        rectbase <- rangeadj <- (0.9 * min(height))
-
+        rectbase <- 0.9 * min(height)
+      
       # if axis limit is set to < above, adjust bar base value
       # to draw a full bar
-      if (logy && !is.null(ylim))
+      if (logy && !is.null(ylim) && !horiz)
         rectbase <- ylim[1]
-      else if (logx && !is.null(xlim))
+      else if (logx && !is.null(xlim) && horiz)
         rectbase <- xlim[1]
 
       # if stacked bar, set up base/cumsum levels, adjusting for log scale
@@ -197,6 +212,8 @@ function(height, width = 1, space = NULL, names.arg = NULL,
           c(height, ci.l, ci.u)
         else
           height
+
+      rangeadj <- (0.9 * lim + offset)
     }
     else
     {
@@ -215,29 +232,29 @@ function(height, width = 1, space = NULL, names.arg = NULL,
           height
 
       # use original range adjustment factor
-      rangeadj <- (-0.01 * lim)
+      rangeadj <- (-0.01 * lim + offset)
     }
 
     # define xlim and ylim, adjusting for log-scale if needed
     if (horiz)
     {
-      if (missing(xlim)) xlim <- range(rangeadj, lim, na.rm=TRUE)
+      if (missing(xlim)) xlim <- range(rangeadj, lim + offset, na.rm=TRUE)
       if (missing(ylim)) ylim <- c(min(w.l), max(w.r))
     }
     else
     {
       if (missing(xlim)) xlim <- c(min(w.l), max(w.r))
-      if (missing(ylim)) ylim <- range(rangeadj, lim, na.rm=TRUE)
+      if (missing(ylim)) ylim <- range(rangeadj, lim + offset, na.rm=TRUE)
     }
+
+    if (beside)
+      w.m <- matrix(w.m, nc = NC)
 
     if(plot) ##-------- Plotting :
     {
       opar <-
-        if (horiz)
-          par(xaxs = "i", xpd = xpd)
-        else
-          par(yaxs = "i", xpd = xpd)
-
+        if (horiz) par(xaxs = "i", xpd = xpd)
+        else       par(yaxs = "i", xpd = xpd)
       on.exit(par(opar))
 
       # If add = FALSE open new plot window
@@ -315,15 +332,15 @@ function(height, width = 1, space = NULL, names.arg = NULL,
         else
           rect(y1,x1, y2,x2, ...)
       }
-
+      
       if (beside)
-        xyrect(rectbase, w.l, c(height), w.r, horizontal=horiz,
+        xyrect(rectbase + offset, w.l, c(height) + offset, w.r, horizontal=horiz,
                angle = angle, density = density, col = col, border = border)
       else
       {
         for (i in 1:NC)
-          xyrect(height[1:NR, i], w.l[i], height[-1, i], w.r[i],
-                 horizontal=horiz,  angle = angle, density = density,
+          xyrect(height[1:NR, i] + offset[i], w.l[i], height[-1, i] + offset[i], w.r[i],
+                 horizontal=horiz, angle = angle, density = density,
                  col = col, border = border)
       }
 

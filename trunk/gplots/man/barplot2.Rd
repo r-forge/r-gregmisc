@@ -1,4 +1,51 @@
 % $Id$
+%% $Log$
+%% Revision 1.9  2004/06/28 20:16:44  warnes
+%% - Default 2-d color set to grey as in (v2.0.0) r-devel
+%% - The default (v1.9.1) barplot method now handles vectors and 1-d arrays
+%%   (e.g., obtained by table()) the same, and uses grey instead of
+%%   heat color palettes in these cases.  (Also fixes PR#6776.)
+%% - Updated to reflect the addition of 'offset' argument in base
+%% - Fix bug in stacked barplots, which would not be plotted properly
+%%
+%
+% Revision 1.8  2004/06/26
+% - Default 2-d color set to grey as in (v2.0.0) r-devel
+% - The default (v1.9.1) barplot method now handles vectors and 1-d arrays
+%   (e.g., obtained by table()) the same, and uses grey instead of
+%   heat color palettes in these cases.  (Also fixes PR#6776.)
+% - Updated to reflect the addition of 'offset' argument in base
+% - Fix bug in stacked barplots, which would not be plotted properly
+%
+% Revision 1.7  2003/12/02 16:58:46  warnes
+%
+% - Remove '%' character from example code to avoid errors.
+%
+% Revision 1.6  2003/12/01 16:00:08  warnes
+%
+% - updated to match changes to barplot() in base.
+%
+% Revision 1.5  2003/11/18 18:59:08  warnes
+%
+% - Tiny fix to remove R CMD check error.
+%
+% Revision 1.4  2003/01/30 21:43:05  warnes
+%
+% - Added argument 'add' to allow for the addition of a barplot to an
+%   existing graphic. Default is FALSE
+%
+% Revision 1.2  2002/09/23 14:27:17  warnes
+%
+% - Fixed syntax errors in barplot2.Rd and CrossTable.Rd
+% - Fixed incorrect translation of 'F' (distribution) to 'FALSE' in glh.test.Rd
+%
+% Revision 1.1  2002/09/23 13:38:53  warnes
+%
+% - Added CrossTable() and barplot2() code and docs contributed by Marc Schwartz.
+% - Permit combinations() to be used when r>n provided repeat.allowed=TRUE
+% - Bumped up version number
+%
+%
 
 \name{barplot2}
 \alias{barplot2}
@@ -8,12 +55,12 @@
 \method{barplot2}{default}(height, width = 1, space = NULL,
         names.arg = NULL, legend.text = NULL, beside = FALSE,
         horiz = FALSE, density = NULL, angle = 45,
-        col = heat.colors(NR), prcol = NULL, border = par("fg"),
+        col = NULL, prcol = NULL, border = par("fg"),
         main = NULL, sub = NULL, xlab = NULL, ylab = NULL,
         xlim = NULL, ylim = NULL, xpd = TRUE, log = "",
         axes = TRUE, axisnames = TRUE,
         cex.axis = par("cex.axis"), cex.names = par("cex.axis"),
-        inside = TRUE, plot = TRUE, axis.lty = 0,
+        inside = TRUE, plot = TRUE, axis.lty = 0, offset = 0,
         plot.ci = FALSE, ci.l = NULL,
         ci.u = NULL, ci.color = "black", ci.lty = "solid", ci.lwd = 1,
         plot.grid = FALSE, grid.inc = NULL,
@@ -66,7 +113,9 @@
     drawing of shading lines.}
   \item{angle}{the slope of shading lines, given as an angle in
     degrees (counter-clockwise), for the bars or bar components.}
-  \item{col}{a vector of colors for the bars or bar components.}
+  \item{col}{a vector of colors for the bars or bar components.
+    By default, grey is used if \code{height} is a vector, and
+    \code{heat.colors(nrow(height))} if \code{height} is a matrix.}
   \item{prcol}{the color to be used for the plot region.}
   \item{border}{the color to be used for the border of the bars.}
   \item{main, sub}{overall and sub titles for the plot.}
@@ -82,7 +131,7 @@
     \code{horiz} is true) axis is drawn.}
   \item{axisnames}{logical.  If \code{TRUE}, and if there are
     \code{names.arg} (see above), the
-    other axis is drawn (with \code{lty=0}) and labeled.}
+    other axis is drawn (with \code{lty = 0}) and labeled.}
   \item{cex.axis}{expansion factor for numeric axis labels.}
   \item{cex.names}{expansion factor for names.}
   \item{inside}{logical.  If \code{TRUE}, the lines which divide
@@ -94,6 +143,8 @@
   \item{axis.lty}{the graphics parameter \code{lty} applied to the axis
     and tick marks of the categorical (default horzontal) axis.  Note
     that by default the axis is suppressed.}
+  \item{offset}{a vector indicating how much the bars should be shifted
+    relative to the x axis.}
   \item{plot.ci}{logical. If \code{TRUE}, confidence intervals are plotted
    over the bars. Note that if a stacked bar plot is generated, confidence
    intervals will not be plotted even if \code{plot.ci = TRUE}}
@@ -114,7 +165,7 @@
     \code{\link{axis}}.}
 }
 \description{
-  An enhancement of the standard R v1.6.1 barplot() function. Creates a bar plot
+  An enhancement of the standard barplot() function. Creates a bar plot
   with vertical or horizontal bars. Can plot confidence intervals for each
   bar, a lined grid behind the bars, change plot area color and
   logarithmic axes may be used. }
@@ -130,7 +181,7 @@
   If \code{beside} is true, use \code{colMeans(mp)} for the
   midpoints of each \emph{group} of bars, see example.
 }
-\author{Original v1.6.1 barplot() by R-Core. Enhancements by Marc
+\author{Original barplot() by R-Core. Enhancements by Marc
   Schwartz \email{mschwartz@medanalytics.com}
 }
 \note{
@@ -138,18 +189,18 @@
   unintentionally.
 }
 \seealso{
-  \code{\link{plot}(\dots, type="h")}, \code{\link{dotchart}},
+  \code{\link{plot}(\dots, type = "h")}, \code{\link{dotchart}},
   \code{\link{hist}}.
 }
 \examples{
-tN <- table(Ni <- rpois(100, lambda=5))
-r <- barplot2(tN, col='gray')
+tN <- table(Ni <- rpois(100, lambda = 5))
+r <- barplot2(tN, col = 'gray')
 
 #- type = "h" plotting *is* `bar'plot
-lines(r, tN, type='h', col='red', lwd=2)
+lines(r, tN, type = 'h', col = 'red', lwd = 2)
 
-barplot2(tN, space = 1.5, axisnames=FALSE,
-        sub = "barplot2(..., space= 1.5, axisnames = FALSE)")
+barplot2(tN, space = 1.5, axisnames = FALSE,
+        sub = "barplot2(..., space = 1.5, axisnames = FALSE)")
 
 data(VADeaths, package = "base")
 barplot2(VADeaths, plot = FALSE)
@@ -172,7 +223,7 @@ ci.u <- hh * 1.15
 mp <- barplot2(hh, beside = TRUE,
         col = c("lightblue", "mistyrose",
                 "lightcyan", "lavender"),
-        legend = colnames(VADeaths), ylim= c(0,100),
+        legend = colnames(VADeaths), ylim = c(0, 100),
         main = "Death Rates in Virginia", font.main = 4,
         sub = "Faked 95 percent error bars", col.sub = mybarcol,
         cex.names = 1.5, plot.ci = TRUE, ci.l = ci.l, ci.u = ci.u,
@@ -188,11 +239,12 @@ barplot2(1:10 , log = "x", plot.grid = TRUE, grid.inc = 10,
 box()
 
 # Bar shading example
-barplot2(VADeaths, angle = 15+10*1:5, density = 20, col = "black",
+barplot2(VADeaths, angle = 15 + 10 * 1:5, density = 20, col = "black",
         legend = rownames(VADeaths))
 title(main = list("Death Rates in Virginia", font = 4))
 
 # border :
-barplot2(VADeaths, border = "dark blue")
+barplot2(VADeaths, border = "dark blue") % lwd = 2 << not passed
+%notyet barplot(VADeaths, inside = FALSE, main = "barplot(*, inside=FALSE)")
 }
 \keyword{hplot}
