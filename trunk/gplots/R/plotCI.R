@@ -1,38 +1,4 @@
 # $Id$
-#
-# $Log$
-# Revision 1.10  2004/07/29 14:48:59  warnes
-# Integrate changes from the version of plotCI maintained by Martin Maechler.
-#
-# Revision 1.9  2004/05/24 23:43:46  warnes
-# Modified to use invalid() to check arguments instead of missing().
-# This fixes some build errors under R-1.9.0-Patched.
-#
-# Revision 1.8  2003/12/02 16:54:40  warnes
-#
-# - Add '...' parameter to call to text to allow user to control size/color/etc.
-#
-# Revision 1.7  2002/04/09 00:51:30  warneg
-#
-# Checkin for version 0.5.3
-#
-# Revision 1.6  2002/03/20 04:16:32  warneg
-# - Changes to add compatibility with S-Plus 2000.
-#
-# Revision 1.5  2002/02/04 19:12:27  warneg
-#
-# - When err="x", 'col' was being used to plot bars, rather than 'barcol'.
-#
-# Revision 1.4  2002/02/04 19:09:53  warneg
-#
-# - fixed typo, when err="x", lty was 'slty' causing an error.
-#
-# Revision 1.3  2001/10/16 23:00:19  warneg
-#
-# - Added minbar and maxbar parameters
-# - Added cvs id and log tags to header
-#
-#
 
 
 plotCI <- function (x,
@@ -46,11 +12,11 @@ plotCI <- function (x,
                     ylim=NULL,
                     xlim=NULL,
                     type="p",
-                    
+
                     col=par("col"),
                     barcol=col,
                     pt.bg = par("bg"),
-                    
+
                     sfrac = 0.01,
                     gap=1,
 
@@ -62,21 +28,21 @@ plotCI <- function (x,
                     add=FALSE,
                     xlab,
                     ylab,
-                    
+
                     minbar,
                     maxbar,
                     ...
                     )
 {
 
-  if (is.list(x)) { 
-    y <- x$y 
-    x <- x$x 
+  if (is.list(x)) {
+    y <- x$y
+    x <- x$x
   }
 
   if(invalid(xlab))
     xlab <- deparse(substitute(x))
-  
+
   if(invalid(ylab))
     {
       if(is.null(y))
@@ -88,22 +54,22 @@ plotCI <- function (x,
         ylab <- deparse(substitute(y))
     }
 
-  if (is.null(y)) { 
-    if (is.null(x)) 
-      stop("both x and y NULL") 
-    y <- as.numeric(x) 
-    x <- seq(along = x) 
+  if (is.null(y)) {
+    if (is.null(x))
+      stop("both x and y NULL")
+    y <- as.numeric(x)
+    x <- seq(along = x)
   }
 
-  
+
   if(err=="y")
     z  <- y
   else
     z  <- x
-  
+
   if(invalid(ui))
     ui <- z + uiw
-  if(invalid(li)) 
+  if(invalid(li))
     li <- z - liw
 
   if(!invalid(minbar))
@@ -111,7 +77,7 @@ plotCI <- function (x,
 
   if(!invalid(maxbar))
     ui <- ifelse( ui > maxbar, maxbar, ui)
-  
+
    if(err=="y")
      {
        if(is.null(ylim))
@@ -126,7 +92,7 @@ plotCI <- function (x,
        if(is.null(ylim) && !is.R() )
          ylim <- range( x, na.rm=TRUE)
      }
-    
+
   if(!add)
     {
       if(invalid(labels) || labels==FALSE )
@@ -150,14 +116,14 @@ plotCI <- function (x,
         else
           segments(x2-length/2,y2,x2+length/2,y2,...)
       }
- 
+
   if(err=="y")
     {
       if(gap!=FALSE)
         gap <- strheight("O") * gap
       smidge <- par("fin")[1] * sfrac
 
-      
+
       # draw upper bar
       if(!is.null(li))
           myarrows(x , li, x, pmax(y-gap,li), col=barcol, lwd=lwd,
@@ -180,11 +146,11 @@ plotCI <- function (x,
       if(!is.null(ui))
         myarrows(ui, y, pmin(x+gap,ui), y, col=barcol, lwd=lwd,
                  lty=lty, angle=90, length=smidge, code=1)
-      
+
     }
 
   ## _now_ draw the points (to avoid having lines drawn 'through' points)
   points(x, y, col = col, lwd = lwd, bg = pt.bg, type = type, ...)
 
-  invisible(list(x = x, y = y)) 
-} 
+  invisible(list(x = x, y = y))
+}

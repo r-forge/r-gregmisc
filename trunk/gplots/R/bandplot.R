@@ -1,22 +1,7 @@
 # $Id$
-#
-# $Log$
-# Revision 1.3  2002/04/09 00:51:28  warneg
-# Checkin for version 0.5.3
-#
-# Revision 1.2  2002/02/20 20:06:45  warneg
-#
-# - Generalized to allow specification of the multiples of the standard deviation levels to be plotted (0=mean, 1=1 sd, ..).
-# - Now (invisibly) returnes computed smooths.
-#
-# Revision 1.1  2001/08/31 23:41:58  warneg
-#
-# Used wrong comment character (% instead of #) in header.  Fixed.
-#
-#
 
 bandplot  <-  function(x,y,
-                       ..., 
+                       ...,
                        add=FALSE,
                        sd=c(-2:2),
                        sd.col=c("lightblue","blue","red",
@@ -27,7 +12,7 @@ bandplot  <-  function(x,y,
   {
 
     if(length(sd.col)<length(sd)) sd <-rep(sd.col,length=length(sd))
-    
+
     if(!add)
       {
         m <- match.call(expand.dots = FALSE)
@@ -39,7 +24,7 @@ bandplot  <-  function(x,y,
 
     x  <- as.numeric(x)
     y  <- as.numeric(y)
-    
+
     CL <- function(x,sd)
       if(length(x)<2)
         return( NA )

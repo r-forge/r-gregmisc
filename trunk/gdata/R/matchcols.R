@@ -1,10 +1,11 @@
+# $Id$
 # select the columns which match/don't match a set of include/omit patterns.
 
 matchcols <- function(object, with, without, method=c("and","or"), ...)
   {
     method <- match.arg(method)
     cols <- colnames(object)
-    
+
     # include columns matching 'with' pattern(s)
     if(method=="and")
       for(i in 1:length(with))

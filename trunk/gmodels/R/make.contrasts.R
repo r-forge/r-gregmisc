@@ -1,22 +1,4 @@
 # $Id$
-#
-# $Log$
-# Revision 1.2  2003/01/30 14:58:31  warnes
-# - Added explicit check to ensure that the number of specified
-#   contrasts is less than or equal to the ncol - 1.  Previously, this
-#   failed with an obtuse error message when the contrast matrix had row
-#   names, and silently dropped contrasts over ncol-1.
-#
-# Revision 1.1  2002/10/29 23:00:43  warnes
-#
-# - Moved make.contrasts to a separate file.
-# - Enhanced make contrasts to better label contrast matrix, to give
-#   how.many a default value, and to coerce vectors into row matrixes.
-# - Added help page for make.contrasts.
-# - Added link from contrasts.lm seealso to make.contrasts.
-#
-#
-
 
 "make.contrasts" <-  function (contr, how.many=ncol(contr)) 
 {

@@ -1,5 +1,4 @@
 # $Id$
-#
 
 "running" <- function(X, Y=NULL,
                       fun=mean,
@@ -11,25 +10,25 @@
                       ...)
 {
   align=match.arg(align)
-  
+
   n <- length(X)
 
   if (align=="left")
     {
-      from  <-  1:n 
+      from  <-  1:n
       to    <-  pmin( (1:n)+width-1, n)
     }
   else if (align=="right")
     {
       from  <-  pmax( (1:n)-width+1, 1)
-      to    <-  1:n 
+      to    <-  1:n
     }
   else #align=="center"
     {
       from <-  pmax((2-width):n,1)
       to   <-  pmin(1:(n+width-1),n)
       if(!odd(width)) stop("width must be odd for center alignment")
-      
+
     }
 
   elements  <- apply(cbind(from, to), 1, function(x) seq(x[1], x[2]) )
@@ -48,35 +47,35 @@
     {
       skip <- 0
     }
-  
+
 
   run.elements  <- elements[!skip]
-  
+
   if(!invalid(by))
     run.elements <- run.elements[seq(from=1, to=length(run.elements),
                                      by=by)]
-  
-  
-  if(is.null(Y))  # univariate 
+
+
+  if(is.null(Y))  # univariate
     {
       funct <- function(which,what,fun,...) fun(what[which],...)
 
       if(simplify)
         Xvar <- sapply(run.elements, funct, what=X, fun=fun, ...)
       else
-        Xvar <- lapply(run.elements, funct, what=X, fun=fun, ...)        
+        Xvar <- lapply(run.elements, funct, what=X, fun=fun, ...)
     }
   else # bivariate
     {
       funct <- function(which,XX,YY,fun,...) fun(XX[which],YY[which], ...)
-      
+
       if(simplify)
         Xvar <- sapply(run.elements, funct, XX=X, YY=Y, fun=fun, ...)
       else
         Xvar <- lapply(run.elements, funct, XX=X, YY=Y, fun=fun, ...)
     }
 
-  
+
   if(allow.fewer || !pad)
       return(Xvar)
 
@@ -96,7 +95,7 @@
         wholelist[ names(Xvar) ] <- Xvar
         Xvar <- wholelist
       }
-  
+
   return(Xvar)
 }
 

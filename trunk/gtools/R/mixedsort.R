@@ -1,3 +1,5 @@
+# $Id$
+
 mixedorder <- function(x)
   {
     # - Split each each character string into an vector of strings and

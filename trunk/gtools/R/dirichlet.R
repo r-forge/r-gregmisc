@@ -1,3 +1,4 @@
+# $Id$
 
 # Posted by Ben Bolker to R-News on Fri Dec 15 2000
 # http://www.r-project.org/nocvs/mail/r-help/2000/3865.html
@@ -5,7 +6,7 @@
 # Some code (originally contributed by Ian Wilson
 # <i.wilson@maths.abdn.ac.uk>
 
-           
+
 #  functions for the "Dirichlet function", the multidimensional
 #  generalization of the beta distribution: it's the Bayesian
 #  canonical # distribution for the parameter estimates of a
@@ -30,7 +31,7 @@ ddirichlet<-function(x,alpha)
       logD <- sum(lgamma(alpha)) - lgamma(sum(alpha))
       s<-sum((alpha-1)*log(x))
       exp(sum(s)-logD)
-      
+
     }
 
   # make sure x is a matrix
@@ -45,14 +46,14 @@ ddirichlet<-function(x,alpha)
 
   if( any(dim(x) != dim(alpha)) )
     stop("Mismatch between dimensions of 'x' and 'alpha'.")
-  
+
   pd <- vector(length=nrow(x))
   for(i in 1:nrow(x))
     pd[i] <- dirichlet1(x[i,],alpha[i,])
 
   # Enforce 0 <= x[i,j] <= 1, sum(x[i,]) = 1
   pd[ apply( x, 1, function(z) any( z <0 | z > 1)) ] <- 0
-  pd[ apply( x, 1, function(z) all.equal(sum( z ),1) !=TRUE) ] <- 0 
+  pd[ apply( x, 1, function(z) all.equal(sum( z ),1) !=TRUE) ] <- 0
   pd
 }
 

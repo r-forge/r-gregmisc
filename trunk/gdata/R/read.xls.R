@@ -1,3 +1,5 @@
+# $Id$
+
 read.xls <- function(xls, sheet = 1, verbose=FALSE, ...)
 {
   ###

@@ -1,17 +1,11 @@
 # $Id$
-#
-# $Log$
-# Revision 1.4  2002/09/23 13:59:30  warnes
-# - Modified all files to include CVS Id and Log tags.
-#
-#
 
 boxplot.n  <- function( ..., top=FALSE, shrink=1.0, textcolor=NULL )
   {
     boxcall <- match.call()           # get call
     boxcall$top  <- boxcall$shrink  <- boxcall$textcolor  <- NULL
     boxcall[[1]]  <- as.name("boxplot")
-    
+
     if(is.R())
       {
         box <- eval(boxcall, parent.frame())
@@ -23,7 +17,7 @@ boxplot.n  <- function( ..., top=FALSE, shrink=1.0, textcolor=NULL )
         boxcall$plot <- FALSE
         box <- eval(boxcall, parent.frame())
       }
-    
+
     if(top)
       {
         where  <- par("usr")[4]
@@ -36,23 +30,23 @@ boxplot.n  <- function( ..., top=FALSE, shrink=1.0, textcolor=NULL )
       }
     tcex <- par("cex")
     par(cex=shrink*tcex)
-    
+
     if(is.R())
-      text( x=mids, y=where, labels=paste("n=",box$n,sep=""), adj=adj, 
+      text( x=mids, y=where, labels=paste("n=",box$n,sep=""), adj=adj,
 			      col=textcolor)
     else
       {
-        if( is.null(textcolor) ) 
+        if( is.null(textcolor) )
           textcolor <- 1
         space <- ifelse(top, -1, 1) * par("1em")[2] / 2
-        
-        text( x=mids, y=where + space, labels=paste("n=",box$n,sep=""), adj=adj[1], 
+
+        text( x=mids, y=where + space, labels=paste("n=",box$n,sep=""), adj=adj[1],
              col=textcolor)
-        
+
       }
-    
+
     par(cex=tcex)
-    
+
     invisible(box)
   }
 

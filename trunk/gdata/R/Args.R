@@ -1,3 +1,5 @@
+# $Id$
+
 Args <- function(name, sort.args=FALSE)
 {
   a <- formals(get(as.character(substitute(name))))

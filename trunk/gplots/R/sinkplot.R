@@ -1,3 +1,5 @@
+# $Id$
+
 sinkplot <- function(operation=c("start","plot","cancel"),...)
   {
     operation <- match.arg(operation)
@@ -8,7 +10,7 @@ sinkplot <- function(operation=c("start","plot","cancel"),...)
             get(".sinkplot.conn", env=globalenv()) )
           stop("sinkplot already in force")
 
-        
+
         .sinkplot.conn <- textConnection(".sinkplot.data", "w", local=FALSE)
         assign(x=".sinkplot.conn", value=.sinkplot.conn, envir=globalenv())
 
@@ -24,10 +26,10 @@ sinkplot <- function(operation=c("start","plot","cancel"),...)
         sink()
 
         data <- get(".sinkplot.data", env=globalenv())
-        
+
         if( operation=="plot" )
             textplot( paste( data, collapse="\n"), ... )
-        
+
         close(get(".sinkplot.conn", env=globalenv()))
 
         if(exists(".sinkplot.data", env=globalenv()))

@@ -1,3 +1,5 @@
+# $Id$
+
 smartlegend <- function(x=c("left","center","right"),
                         y=c("top","center","bottom"),
                         ..., inset=0.05 )
@@ -8,7 +10,7 @@ smartlegend <- function(x=c("left","center","right"),
     usr <- par("usr")
     inset.x <- inset * (usr[2] - usr[1])
     inset.y <- inset * (usr[4] - usr[3])
-    
+
     if(x=="left")
       {
         x.pos <- usr[1] + inset.x
@@ -41,10 +43,10 @@ smartlegend <- function(x=c("left","center","right"),
         yjust = 1
       }
 
-    
+
     if(par("xlog")) x.pos <- 10^x.pos
-    if(par("ylog")) y.pos <- 10^y.pos 
-    
+    if(par("ylog")) y.pos <- 10^y.pos
+
     legend( x=x.pos, y=y.pos, ..., xjust=xjust, yjust=yjust)
   }
 

@@ -1,3 +1,5 @@
+# $Id$
+
 colorpanel <- function(n,low,mid,high)
   {
     isodd <- odd(n)
@@ -6,7 +8,7 @@ colorpanel <- function(n,low,mid,high)
       {
         n <- n+1
       }
-    
+
     # convert to rgb
     low <- col2rgb(low)
     mid <- col2rgb(mid)
@@ -25,7 +27,7 @@ colorpanel <- function(n,low,mid,high)
                seq(low[3,1], mid [3,1], length=lower),
                seq(mid[3,1], high[3,1], length=upper)
                )/255
-    
+
     blue <- c(
               seq(low[2,1], mid [2,1], length=lower),
               seq(mid[2,1], high[2,1], length=upper)

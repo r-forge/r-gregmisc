@@ -1,9 +1,7 @@
-
-
-## original Andy Liaw; modified RG, MM, GRW
+# $Id$
 
 heatmap.2 <- function (x,
-                     
+
                      # dendrogram control
                      Rowv=NULL,
                      Colv=if(symm)"Rowv" else NULL,
@@ -11,35 +9,35 @@ heatmap.2 <- function (x,
                      hclustfun = hclust,
                      dendrogram = c("both","row","column","none"),
                      symm = FALSE,
-                     
+
                      # data scaling
                      scale = c("none","row", "column"),
                      na.rm=TRUE,
-                     
+
                      # image plot
                      revC = identical(Colv, "Rowv"),
                      add.expr,
                      breaks,
                      col="heat.colors",
-                     
+
                      # block sepration
                      colsep,
                      rowsep,
                      sepcolor="white",
-                     
+
                      # cell labeling
                      cellnote,
                      notecex=1.0,
                      notecol="cyan",
                      na.color=par("bg"),
-                     
+
                      # level trace
                      trace=c("column","row","both","none"),
                      tracecol="cyan",
                      hline=median(breaks),
                      vline=median(breaks),
                      linecol=tracecol,
-                     
+
                      # Row/Column Labeling
                      margins = c(5, 5),
                      ColSideColors,
@@ -48,17 +46,17 @@ heatmap.2 <- function (x,
                      cexCol = 0.2 + 1/log10(nc),
                      labRow = NULL,
                      labCol = NULL,
-                     
+
                      # color key + density info
                      key = TRUE,
                      density.info=c("histogram","density","none"),
                      denscol=tracecol,
-                     
+
                      # plot labels
                      main = NULL,
                      xlab = NULL,
                      ylab = NULL,
-                     
+
                      # extras
                      ...
                      )
@@ -68,7 +66,7 @@ heatmap.2 <- function (x,
       x <- (x-low)/(high - low)
       x
     }
- 
+
     scale <- if(symm && missing(scale)) "none" else match.arg(scale)
     dendrogram <- match.arg(dendrogram)
     trace <- match.arg(trace)
@@ -87,7 +85,7 @@ heatmap.2 <- function (x,
 #      }
 
 
-    
+
     if(length(di <- dim(x)) != 2 || !is.numeric(x))
       stop("`x' must be a numeric matrix")
 
@@ -153,16 +151,16 @@ heatmap.2 <- function (x,
     x <- x[rowInd, colInd]
     x.unscaled <- x
 
-    if(is.null(labRow)) 
+    if(is.null(labRow))
       labRow <- if(is.null(rownames(x))) (1:nr)[rowInd] else rownames(x)
     else
       labRow <- labRow[rowInd]
-  
+
     if(is.null(labCol))
       labCol <- if(is.null(colnames(x))) (1:nc)[colInd] else colnames(x)
     else
       labCol <- labCol[colInd]
-  
+
     if(scale == "row") {
 	x <- sweep(x, 1, rowMeans(x, na.rm = na.rm))
 	sx <- apply(x, 1, sd, na.rm = na.rm)
@@ -187,18 +185,18 @@ heatmap.2 <- function (x,
 
     nbr <- length(breaks)
     ncol <- length(breaks)-1
-    
+
     if(class(col)=="function")
       col <- col(ncol)
     else if(is.character(col) && length(col)==1)
       col <- do.call(col,list(ncol))
-    
+
     min.breaks <- min(breaks)
     max.breaks <- max(breaks)
 
     x[] <- ifelse(x<min.breaks, min.breaks, x)
     x[] <- ifelse(x>max.breaks, max.breaks, x)
-    
+
     ## Calculate the plot layout
     lmat <- rbind(4:3, 2:1)
     lwid <- lhei <- c(1, 4)
@@ -251,7 +249,7 @@ heatmap.2 <- function (x,
               col=na.color, add=TRUE)
       }
 
-  
+
     axis(1, 1:nc, labels= labCol, las= 2, line= -0.5, tick= 0, cex.axis= cexCol)
     if(!is.null(xlab)) mtext(xlab, side = 1, line = margins[1] - 1.25)
     axis(4, iy, labels= labRow, las= 2, line= -0.5, tick= 0, cex.axis= cexRow)
@@ -299,7 +297,7 @@ heatmap.2 <- function (x,
 
 
 
-    
+
     ## add 'background' colored spaces to visually separate sections
     if(!missing(colsep))
       for(csep in colsep)
@@ -317,7 +315,7 @@ heatmap.2 <- function (x,
       text(x=c(col(cellnote)),
            y=nrow(cellnote)+1-c(row(cellnote)), labels=c(cellnote),
            col=notecol, cex=notecex)
-    
+
     ## the two dendrograms :
     par(mar = c(margins[1], 0, 0, 0))
     if( dendrogram %in% c("both","row") )
@@ -335,9 +333,9 @@ heatmap.2 <- function (x,
     else
       plot.new()
 
-    ## title 
+    ## title
     if(!is.null(main)) title(main, cex.main = 1.5*op[["cex.main"]])
-    
+
     ## Add the color-key
     if(key)
       {
@@ -345,7 +343,7 @@ heatmap.2 <- function (x,
 
         min.raw <- min(x, na.rm=TRUE) # Again, modified to use scaled or unscaled (SD 12/2/03)
         max.raw <- max(x, na.rm=TRUE)
-        
+
         z <- seq(min.raw,max.raw,length=length(col))
         image(z=matrix(z, ncol=1),
               col=col, breaks=breaks,
@@ -389,7 +387,7 @@ heatmap.2 <- function (x,
           }
         else
           title("Color Key")
-        
+
       }
     else
       plot.new()

@@ -1,14 +1,14 @@
 
 export(
-       CrossTable
-       ci
-       estimable
-       fast.prcomp
-       fast.svd
-       fit.contrast
-       glh.test
-       make.contrasts
-       print.glh.test
+       CrossTable,
+       ci,
+       estimable,
+       fast.prcomp,
+       fast.svd,
+       fit.contrast,
+       glh.test,
+       make.contrasts,
+       print.glh.test,
        summary.glh.test
 )
 
@@ -19,11 +19,11 @@ S3method(ci, lme)
 S3method(fit.contrast, lm)
 S3method(fit.contrast, lme)
 
-S3method(print.glh.test)
-S3method(summary.glh.test)
+S3method(print, glh.test)
+S3method(summary, glh.test)
 
-S3method(fit.contrast.lm)
-S3method(fit.contrast.lme)
+S3method(fit.contrast,lm)
+S3method(fit.contrast,lme)
 
 importFrom(MASS, ginv)
 

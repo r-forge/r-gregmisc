@@ -30,7 +30,7 @@ running(X, Y=NULL, fun=mean, width=min(length(X), 20),
     the end of the sequence (i.e. `right aligned'), "left" allows short
     subsets only at the end of the data so that the complete subsets
     are `left aligned', and "center" allows short subsets at both ends
-    of the data so that complete subsets are `centered'. 
+    of the data so that complete subsets are `centered'.
   }
   \item{simplify}{Boolean.  If FALSE the returned object will be a list
     containing one element per evaluation.  If TRUE, the returned
@@ -53,10 +53,10 @@ running(X, Y=NULL, fun=mean, width=min(length(X), 20),
   subsets of \code{X} (\code{running}) or \code{X} and \code{Y}.
 
   Note that this function will create a vector or matrix even for
-  objects which are not simplified by \code{sapply}. 
+  objects which are not simplified by \code{sapply}.
 }
 \author{ Gregory R. Warnes \email{Gregory\_R\_Warnes@groton.pfizer.com},
-         with contributions by Nintin Jain \email{nitin_jain@groton.pfizer.com}.}
+         with contributions by Nintin Jain \email{nitin\_jain@groton.pfizer.com}.}
 \seealso{ \code{\link{wapply}} to apply a function over an x-y window
   centered at each x point, \code{\link[base]{sapply}},
   \code{\link[base]{lapply}} }
@@ -79,7 +79,7 @@ running(1:20, width=5, fun=function(x) x, simplify=FALSE) # list
 # show effect of by
 running(1:20, width=5)       # normal
 running(1:20, width=5, by=5) # non-overlapping
-running(1:20, width=5, by=2) # starting every 2nd 
+running(1:20, width=5, by=2) # starting every 2nd
 
 
 # Use 'pad' to ensure correct length of vector, also show the effect

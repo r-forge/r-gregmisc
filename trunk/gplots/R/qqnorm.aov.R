@@ -1,18 +1,4 @@
 # $Id$
-#
-# $Log$
-# Revision 1.3  2003/03/07 15:48:35  warnes
-# - Minor changes to code to allow the package to be provided as an
-#   S-Plus chapter.
-#
-# Revision 1.2  2003/01/02 15:40:09  warnes
-# - Renamed first parameter to match qqnorm generic.
-#
-# Revision 1.1  2002/12/31 19:50:58  warnes
-# Initial checkin of qqnorm.aov function and documentation submitted by
-# Kjetil Halvorsen <kjetilh@jupiter.umsanet.edu.bo>.
-#
-#
 
 if(is.R())
 qqnorm.aov <- function (y, full = FALSE, label = FALSE, omit = NULL,

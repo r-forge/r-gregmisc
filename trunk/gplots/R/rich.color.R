@@ -1,3 +1,5 @@
+# $Id$
+
 rich.colors <- function(n, palette=c("temperature", "blues"),
                         rgb.matrix=FALSE, plot.colors=FALSE)
 {

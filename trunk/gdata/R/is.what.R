@@ -1,3 +1,4 @@
+# $Id$
 
 is.what <- function(object, verbose=FALSE)
 {
@@ -11,9 +12,9 @@ is.what <- function(object, verbose=FALSE)
   is.names <- unlist(sapply( search(),
                             function(name) ls(name, pattern="^is\\.")))
 
-  # narrow to functions 
+  # narrow to functions
   is.functions <- is.names[sapply( is.names, function(x) is.function(get(x)) )]
-  
+
   not.using <- c("is.element", "is.empty.model", "is.loaded", "is.mts",
                  "is.na.data.frame", "is.na.POSIXlt", "is.na<-",
                  "is.na<-.default", "is.na<-.factor", "is.pairlist", "is.qr",
@@ -24,7 +25,7 @@ is.what <- function(object, verbose=FALSE)
   results <- sapply(tests, do.test, object=object)
   names(results) <- tests
 
-  
+
   if(verbose == FALSE)
   {
     output <- tests[results==TRUE & !is.na(results)]

@@ -40,7 +40,7 @@ estimable(obj, cm, beta0, conf.int=NULL, joint.test=FALSE, show.beta0)
   linear functions are meaningful.
 
   For computing contrasts among levels of a single factor,
-  \code{\link{contrast.lm}} may be more convenient.  For computing
+  \code{\link{fit.contrast}} may be more convenient.  For computing
   contrasts between two specific combinations of model parameters, the
   \code{contrast} function in Frank Harrell's Design library may be more
   convenient.
@@ -66,7 +66,7 @@ estimable(obj, cm, beta0, conf.int=NULL, joint.test=FALSE, show.beta0)
   Gregory R. Warnes \email{Gregory\_R\_Warnes\@groton.pfizer.com}, and
   Søren Højsgaard \email{sorenh@agrsci.dk}}
 \seealso{
-  \code{\link{contrast.lm}},
+  \code{\link{fit.contrast}},
   \code{\link[stats]{lm}}, \code{\link[nlme]{lme}},
   \code{\link[stats]{contrasts}},
   \code{\link[Design]{contrast}},
@@ -81,6 +81,7 @@ estimable(reg, c(    0,   1,    0,   -1) )
 
 # Fit a spline with a single knot at 0.5 and plot the *pointwise*
 # confidence intervals
+library(gplots)
 x2 <- rnorm(100,mean=y,sd=0.5)
 reg2 <- lm(y ~ x + x2 + pmax(x2-0.5,0) )
 range <- seq(-2,2,,50)

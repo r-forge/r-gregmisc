@@ -1,19 +1,4 @@
- % $Id$
-%
-% $Log$
-% Revision 1.11  2002/09/26 12:11:50  warnes
-% - Added note and example code to illustrate how to properly compute
-%   contrasts for the first factor in the model.
-%
-% Revision 1.10  2002/09/23 14:27:17  warnes
-%
-% - Fixed syntax errors in barplot2.Rd and CrossTable.Rd
-% - Fixed incorrect translation of 'F' (distribution) to 'FALSE' in glh.test.Rd
-%
-% Revision 1.9  2002/09/23 13:59:30  warnes
-% - Modified all files to include CVS Id and Log tags.
-%
-%
+% $Id$
 
 \name{glh.test}
 \alias{glh.test}
@@ -64,7 +49,7 @@ summary.glh.test(object, digits=4,...)
     particularly when computing contrasts that include 'baseline'
     level of factors.
 
-    See the comparison with \code{contrast.lm} in the examples below.
+    See the comparison with \code{fit.contrast} in the examples below.
 }
 \value{
   Object of class \code{c("glh.test","htest")} with elements:
@@ -83,7 +68,7 @@ summary.glh.test(object, digits=4,...)
 \references{ R.H. Myers, Classical and Modern Regression with
   Applications,  2nd Ed, 1990, p. 105}
 \author{Gregory R. Warnes \email{gregory\_r\_warnes\@groton.pfizer.com} }
-\seealso{\code{\link{contrast.lm}}, \code{\link{estimable}},
+\seealso{\code{\link{fit.contrast}}, \code{\link{estimable}},
   \code{\link{contrasts}} }
 \examples{
 
@@ -102,9 +87,9 @@ ret  # same as 'print(ret) '
 summary(ret)
 
 # To compute a contrast between the first and second level of the factor
-# 'x' using 'contrast.lm' gives:
+# 'x' using 'fit.contrast' gives:
 
-contrast.lm( reg, x,c(1,-1,0,0) )
+fit.contrast( reg, x,c(1,-1,0,0) )
 	
 # To test this sampe contrast using 'glh.test', use a contrast matrix
 # with a zero coefficient for the intercept term.  See the Note section,

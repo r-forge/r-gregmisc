@@ -1,79 +1,7 @@
 # $Log$
-# Revision 1.4  2004/05/25 02:57:01  warnes
-# Updates from Mark Schwartz.
+# Revision 1.5  2004/09/03 17:27:44  warneg
+# initial bundle checkin
 #
-# Revision 1.4  2004/03/01 schwartz
-#
-# - Thanks to Gabor Grothendieck for providing ideas and
-#   comments on the following updates
-# - Modified function to allow a single vector to be
-#   tabulated in 'x'
-# - Added 'chisq' argument to disable the generation and
-#   printing of the chi-square tests, producing a simple
-#   table with no tests. Default value = FALSE.
-# - Removed restriction on minimum 2 x 2 tables (ie. can do a
-#   1 x n table, but no stats will be generated
-# - Added code to create generic row/col names if argument 'x'
-#   is a matrix without dimnames
-# - Added  'max.width' argument to enable wrapped output for
-#   1 x n tables. If n > max.width, output will wrap to next
-#   line
-# - Cleaned up list return code
-# - Separated functions to print m x n table and 1 x n vector
-#   to enable flexibility in vector output formats and to faciliate
-#   future creation and separation of table generation and print methods.
-
-
-# Revision 1.3  2003/01/30 21:41:35  warnes
-#
-# - Removed argument 'correct' and now print separate corrected values
-#   for 2 x 2 tables.
-# - Added arguments 'prop.r', 'prop.c' and 'prop.t' to toggle printing
-#   of row, col and table percentages. Default is TRUE.
-# - Added argument 'fisher' to toggle fisher exact test. Default is
-#   FALSE.
-# - Added McNemar test to statistics and argument 'mcnemar' to toggle
-#   test. Default is FALSE.
-# - Added code to generate an invisible return list containing table
-#   counts, proportions and the results of the appropriate statistical tests.
-#
-# Revision 1.3  2003/01/26
-# Updates from Marc Schwartz:
-#
-# - Removed argument 'correct' and now print separate corrected values for 2 x 2 tables.
-# - Added arguments 'prop.r', 'prop.c' and 'prop.t' to toggle printing of row, col
-#   and table percentages. Default is TRUE.
-# - Added argument 'fisher' to toggle fisher exact test. Default is FALSE.
-# - Added McNemar test to statistics and argument 'mcnemar' to toggle test.
-#   Default is FALSE.
-# - Added code to generate an invisible return list containing table counts, proportions
-#   and the results of the appropriate statistical tests.
-#
-#
-# $Log$
-# Revision 1.4  2004/05/25 02:57:01  warnes
-# Updates from Mark Schwartz.
-#
-# Revision 1.3  2003/01/30 21:41:35  warnes
-#
-# - Removed argument 'correct' and now print separate corrected values
-#   for 2 x 2 tables.
-# - Added arguments 'prop.r', 'prop.c' and 'prop.t' to toggle printing
-#   of row, col and table percentages. Default is TRUE.
-# - Added argument 'fisher' to toggle fisher exact test. Default is
-#   FALSE.
-# - Added McNemar test to statistics and argument 'mcnemar' to toggle
-#   test. Default is FALSE.
-# - Added code to generate an invisible return list containing table
-#   counts, proportions and the results of the appropriate statistical tests.
-#
-# Revision 1.2  2002/11/04 14:13:57  warnes
-#
-# - Moved fisher.test() to after table is printed, so that table is
-#   still printed in the event that fisher.test() results in errors.
-# ------------------------------------------------------------------------
-#
-
 
 CrossTable <- function (x, y,
                         digits = 3,
@@ -95,7 +23,7 @@ CrossTable <- function (x, y,
   # Ensure that if (expected), a chisq is done
   if (expected)
     chisq <- TRUE
-  
+
   if (missing(y))
   {
     # is x a vector?
@@ -105,13 +33,13 @@ CrossTable <- function (x, y,
       x <- factor(x)
       t <- t(as.matrix(table(x)))
       vector.x <- TRUE
-    }  
+    }
     # is x a matrix?
     else if (length(dim(x) == 2))
     {
       if(any(x < 0) || any(is.na(x)))
         stop("all entries of x must be nonnegative and finite")
-      
+
       # Add generic dimnames if required
       # check each dimname separately, in case user has defined one or the other
       if (is.null(rownames(x)))
@@ -144,10 +72,10 @@ CrossTable <- function (x, y,
   # if t is not at least a 2 x 2, do not do stats
   # even if any set to TRUE. Do not do col/table props
   if (any(dim(t) < 2))
-  {  
+  {
     prop.c <- prop.r <- chisq <- expected <- fisher <- mcnemar <- FALSE
-  }  
-  
+  }
+
   # Generate cell proportion of row
   CPR <- prop.table(t, 1)
 
@@ -188,7 +116,7 @@ CrossTable <- function (x, y,
   # Perform Chi-Square Tests
   # Needs to be before the table output, in case (expected = TRUE)
   if (chisq)
-  {  
+  {
     if (all(dim(t) == 2))
       CSTc <- chisq.test(t, correct = TRUE)
 
@@ -223,11 +151,11 @@ CrossTable <- function (x, y,
       if (prop.r)
         cat(SpaceSep1, formatC(c(CPR[i, ], RS[i] / GT), width = CWidth, digits = digits, format = "f"),
             sep = " | ", collapse = "\n")
-        
+
       if (prop.c)
         cat(SpaceSep1, formatC(CPC[i, ], width = CWidth, digits = digits, format = "f"), SpaceSep2,
             sep = " | ", collapse = "\n")
-      
+
       if (prop.t)
         cat(SpaceSep1, formatC(CPT[i, ], width = CWidth, digits = digits, format = "f"), SpaceSep2,
             sep = " | ", collapse = "\n")
@@ -237,7 +165,7 @@ CrossTable <- function (x, y,
 
     # Print Column Totals
     cat(ColTotal, formatC(c(CS, GT), width = CWidth), sep = " | ", collapse = "\n")
-    
+
     if (prop.c)
       cat(SpaceSep1, formatC(CS / GT, width = CWidth, digits = digits, format = "f"), SpaceSep2,
           sep = " | ", collapse = "\n")
@@ -271,7 +199,7 @@ CrossTable <- function (x, y,
     }
 
     SpaceSep3 <- paste(SpaceSep2, " ", sep = "")
-    
+
     for (i in 1:length(start))
     {
       # print column labels
@@ -388,11 +316,11 @@ CrossTable <- function (x, y,
   }
 
   cat(rep("\n", 2))
-  
+
   # Create list of results for invisible()
 
   CT <- list(t = t, prop.row = CPR, prop.col = CPC, prop.tbl = CPT)
-  
+
   if (any(chisq, fisher, mcnemar))
   {
     if (all(dim(t) == 2))
@@ -417,7 +345,7 @@ CrossTable <- function (x, y,
       if (mcnemar)
         CT <- c(CT, list(mcnemar = McN))
     }
-  }  
+  }
 
   # return list(CT)
   invisible(CT)

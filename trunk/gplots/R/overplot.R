@@ -1,3 +1,4 @@
+# $Id$
 
 panel.overplot <- function(formula, data, subset, col, lty, ...)
   {
@@ -8,7 +9,7 @@ panel.overplot <- function(formula, data, subset, col, lty, ...)
 
     m[[1]] <- as.name('lowess.formula')
     tmp <- eval(m, parent.frame() )
-          
+
     lines( tmp, col=col, lwd=2, lty=lty )
   }
 
@@ -40,7 +41,7 @@ overplot <- function (formula, data = parent.frame(),
       flag <- eval(substitute(subset), envir=data)
       data <- data[flag,]
     }
-  
+
   ###
   # Get the actual formula values
   ###
@@ -49,7 +50,7 @@ overplot <- function (formula, data = parent.frame(),
   y <- eval(formula[[2]], envir=data, parent.frame())
 
   #print(data.frame(cond,x,y))
-  
+
   y.all.min <- min(y, na.rm=TRUE)
   y.all.max <- max(y, na.rm=TRUE)
 
@@ -57,7 +58,7 @@ overplot <- function (formula, data = parent.frame(),
   x.all.max <- max(x, na.rm=TRUE)
 
   if(y.all.min==y.all.max) browser()
-  
+
   if (length(cond) == 0) {
     cond <- list(as.factor(rep(1, length(x))))
   }
@@ -74,7 +75,7 @@ overplot <- function (formula, data = parent.frame(),
   mycall$panel <- mycall$plot <- mycall$groups <- mycall$same.scale <- NULL
   mycall$min.y <- mycall$max.y <- NULL
   mycall$data <- data
-    
+
   # remove condition from formula
   mycall$formula[3] <- formula[[3]][2]
 
@@ -83,7 +84,7 @@ overplot <- function (formula, data = parent.frame(),
     panel <- as.name(panel)
   else
     panel <- deparse(substitute(panel))
-  
+
   mycall[[1]] <- as.name(panel)
 
   # ylim
@@ -101,7 +102,7 @@ overplot <- function (formula, data = parent.frame(),
       mycall$xlim <- range(x,na.rm=TRUE)
 
 
-  
+
   ###
   # Only plot groups with non-na entries
   ##
@@ -113,21 +114,21 @@ overplot <- function (formula, data = parent.frame(),
 
   if(!missing(min.y) && length(min.y==1))
     min.y <- rep(min.y, length=ngroups)
-  
+
   if(!missing(max.y) && length(max.y==1))
     max.y <- rep(max.y, length=ngroups)
-  
+
   ###
   # Set up the plot regions
   ###
   oldpar <- par()['mar']
   on.exit(par(oldpar))
-  
+
   par(mar=par("mar") +c(0,ngroups*2.5,0,0))
-  
+
   ###
   # Ok. Now iterate over groups
-  ## 
+  ##
 
     i <- 1
     for(level in groups)
@@ -151,12 +152,12 @@ overplot <- function (formula, data = parent.frame(),
         tmp.y <- y[mycall$subset & cond==level]
         min.tmp.y <- min(tmp.y, na.rm=TRUE)
         max.tmp.y <- max(tmp.y, na.rm=TRUE)
-                
+
         if( !missing(min.y) || !missing(max.y) )
           {
             if(!missing(min.y) && !missing(max.y) )
               {
-                mycall$ylim <- c(min.y[i], max.y[i])                
+                mycall$ylim <- c(min.y[i], max.y[i])
               }
             else if(missing(min.y) && !missing(max.y))
               {
@@ -181,32 +182,32 @@ overplot <- function (formula, data = parent.frame(),
                 )
             if('try-error' %in% class(status))
               break;
-            
+
           }
 
         usr <- par("usr")
 
-        axis(side=2,line=2.5*(i-1),lty=i,col=i,lwd=2) 
+        axis(side=2,line=2.5*(i-1),lty=i,col=i,lwd=2)
         title(ylab=level, line=2.5*(i-1))
-        
+
         if(i == 1)
           axis(side=1)
 
         i <- i+1
-        
+
       }
 
 
   if(missing(xlab))
       xlab <- as.character(formula[[3]][[2]])
-  
+
   if(missing(ylab))
       ylab <- as.character(formula[[2]])
 
   if(missing(main))
     main <- paste("plot of ", xlab, "vs.", ylab, "by",
                   as.character(formula[[3]][[3]]))
-  
+
   if(i>1)
     {
       title(main=main,xlab=xlab)
@@ -214,7 +215,7 @@ overplot <- function (formula, data = parent.frame(),
     }
 
   par(oldpar)
-  
+
   invisible( split(data.frame(x,y),cond) )
 }
 

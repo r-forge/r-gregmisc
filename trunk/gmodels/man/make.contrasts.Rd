@@ -1,7 +1,11 @@
 % $Id$
 %
 % $Log$
+% Revision 1.2  2004/09/03 17:27:44  warneg
+% initial bundle checkin
+%
 % Revision 1.1  2002/10/29 23:00:43  warnes
+%
 % - Moved make.contrasts to a separate file.
 % - Enhanced make contrasts to better label contrast matrix, to give
 %   how.many a default value, and to coerce vectors into row matrixes.
@@ -47,7 +51,7 @@ make.contrasts(contr, how.many = ncol(contr))
   Computation and testing of General Linear Hypothesis:
   \code{\link{glh.test}}, Computation and testing of estimable functions
   of model coefficients: \code{\link{estimable}}, Estimate and Test
-  Contrasts for a previously fit linear model: \code{\link{contrast.lm}}
+  Contrasts for a previously fit linear model: \code{\link{fit.contrast}}
   }
 
   \examples{
@@ -77,7 +81,7 @@ summary(lm( y ~ x ) )
 
 # or use contrasts.lm
 reg <- lm(y ~ x)
-contrast.lm( reg, "x", cmat )
+fit.contrast( reg, "x", cmat )
 
 # compare with values computed directly using group means
 gm <- sapply(split(y,x),mean)
@@ -100,9 +104,9 @@ data <- data.frame(y, Genotype, as.factor(Time))
 
 model <- aov( y ~ Genotype + Time + Genotype:Time, data=data )
 
-contrast.lm( model, "Genotype", rbind("KO vs WT"=c(-1,1) ), conf=0.95 )
+fit.contrast( model, "Genotype", rbind("KO vs WT"=c(-1,1) ), conf=0.95 )
 
-contrast.lm( model, "Time",
+fit.contrast( model, "Time",
             rbind("1 vs 2"=c(-1,1,0),
                   "2 vs 3"=c(0,-1,1)
                   ),

@@ -1,3 +1,5 @@
+# $Id$
+
 keep <- function(..., list=character(0), sure=FALSE)
 {
   if(missing(...) && missing(list))

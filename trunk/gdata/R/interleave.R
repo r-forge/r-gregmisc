@@ -1,19 +1,4 @@
 # $Id$
-#
-# $Log$
-# Revision 1.4  2003/05/20 16:03:02  warnes
-# - Omit NULL variables.
-#
-# Revision 1.3  2002/09/23 13:59:30  warnes
-# - Modified all files to include CVS Id and Log tags.
-#
-# Revision 1.2  2002/04/09 00:46:04  warneg
-# - Properly handle case when some or all arguments are vectors.
-#
-# Revision 1.1  2002/02/20 21:42:23  warneg
-# Initial checkin.
-#
-#
 
 interleave <- function(..., append.source=TRUE, sep=": ")
   {

@@ -1,64 +1,6 @@
 # $Log$
-# Revision 1.8  2004/06/28 20:16:40  warnes
-# - Default 2-d color set to grey as in (v2.0.0) r-devel
-# - The default (v1.9.1) barplot method now handles vectors and 1-d arrays
-#   (e.g., obtained by table()) the same, and uses grey instead of
-#   heat color palettes in these cases.  (Also fixes PR#6776.)
-# - Updated to reflect the addition of 'offset' argument in base
-# - Fix bug in stacked barplots, which would not be plotted properly
-#
-
-# Revision 1.8  2004/06/26
-# - Default 2-d color set to grey as in (v2.0.0) r-devel
-# - The default (v1.9.1) barplot method now handles vectors and 1-d arrays
-#   (e.g., obtained by table()) the same, and uses grey instead of
-#   heat color palettes in these cases.  (Also fixes PR#6776.)
-# - Updated fo reflect the addition of 'offset' argument in base
-# - Fix bug in stacked barplots, which would not be plotted properly
-#
-# Revision 1.7  2003/12/01 15:55:50  warnes
-#
-# - Follow patches applied to barplot() in base.
-#
-# Revision 1.6  2003/04/22 15:34:25  warnes
-# Update from Marc Schwartz, modified by Gregory Warnes:
-#
-# -  Modified dim() checks for 'ci.l' and 'ci.u' against 'height'
-#    to remove R v1.7.0 if() based error msgs for vector conditions.
-#
-# Revision 1.5  2003/01/30 21:43:05  warnes
-#
-# - Added argument 'add' to allow for the addition of a barplot to an
-#   existing graphic. Default is FALSE
-#
-# revision 1.4  2003/01/02 16:09:46 warnes
-#
-#- Changed assignment statements that used "=" to "<-" to avoid syntax
-#  errors in older versions of the S language.
-#
-# Revision 1.3  2002/11/04 14:21:40  warnes
-# Updates from Marc Schwartz:
-#
-# - Updated underlying code to be based upon the new barplot() in R v1.6.1
-# - This now uses the 'axis.lty' and 'border' arguments
-# - In R v1.6.0, R Core introduced a new function called axTicks().
-#   This is an R equivalent of the C code for CreateAtVector in plot.c.
-#   This now enables me to get the axis tick mark positions consistently
-#   when the 'height' related axis is either linear or log.  Thus, I can
-#   now have consistent tick marks and can plot grid lines in either
-#   situation.  If 'plot.grid = TRUE' and 'grid.inc' is specified, then
-#   I still use pretty() to determine the tick marks and lines.
-# - This code now depends on R 1.6.0 or later.
-#
-# Revision 1.2  2002/10/11 18:02:15  warnes
-#
-# - Fixed log scale errors in legend() call
-#
-# Revision 1.1  2002/09/23 13:38:53  warnes
-#
-# - Added CrossTable() and barplot2() code and docs contributed by Marc Schwartz.
-# - Permit combinations() to be used when r>n provided repeat.allowed=TRUE
-# - Bumped up version number
+# Revision 1.9  2004/09/03 17:27:44  warneg
+# initial bundle checkin
 #
 
 barplot2 <- function(height, ...) UseMethod("barplot2")
@@ -72,7 +14,7 @@ function(height, width = 1, space = NULL, names.arg = NULL,
        xlim = NULL, ylim = NULL, xpd = TRUE, log = "",
        axes = TRUE, axisnames = TRUE,
        cex.axis = par("cex.axis"), cex.names = par("cex.axis"),
-       inside = TRUE, plot = TRUE, axis.lty = 0, offset = 0, 
+       inside = TRUE, plot = TRUE, axis.lty = 0, offset = 0,
        plot.ci = FALSE, ci.l = NULL, ci.u = NULL,
        ci.color = "black", ci.lty = "solid", ci.lwd = 1,
        plot.grid = FALSE, grid.inc = NULL,
@@ -127,7 +69,7 @@ function(height, width = 1, space = NULL, names.arg = NULL,
 
     NR <- nrow(height)
     NC <- ncol(height)
-  
+
     if (beside) {
 	if (length(space) == 2)
 	    space <- rep.int(c(space[2], rep.int(space[1], NR - 1)), NC)
@@ -136,7 +78,7 @@ function(height, width = 1, space = NULL, names.arg = NULL,
 	width <- rep(width, length.out = NC)
 
     offset <- rep(as.vector(offset), length.out = length(width))
-   
+
     delta <- width / 2
     w.r <- cumsum(space + width)
     w.m <- w.r - delta
@@ -194,7 +136,7 @@ function(height, width = 1, space = NULL, names.arg = NULL,
         rectbase <- 0.9 * min(height, ci.l)
       else
         rectbase <- 0.9 * min(height)
-      
+
       # if axis limit is set to < above, adjust bar base value
       # to draw a full bar
       if (logy && !is.null(ylim) && !horiz)
@@ -332,7 +274,7 @@ function(height, width = 1, space = NULL, names.arg = NULL,
         else
           rect(y1,x1, y2,x2, ...)
       }
-      
+
       if (beside)
         xyrect(rectbase + offset, w.l, c(height) + offset, w.r, horizontal=horiz,
                angle = angle, density = density, col = col, border = border)

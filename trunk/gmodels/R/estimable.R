@@ -1,7 +1,9 @@
+# $Id$
+
 estimable <- function (obj, cm, beta0, conf.int=NULL, joint.test=FALSE,
-                           show.beta0) 
+                           show.beta0)
 {
-  if (!is.matrix(cm) && !is.data.frame(cm)) 
+  if (!is.matrix(cm) && !is.data.frame(cm))
     cm <- matrix(cm, nrow=1)
 
   if(missing(show.beta0))
@@ -11,15 +13,15 @@ estimable <- function (obj, cm, beta0, conf.int=NULL, joint.test=FALSE,
       else
         show.beta0=FALSE
     }
-       
-  
+
+
   if (missing(beta0))
     {
       beta0 = rep(0, ifelse(is.null(nrow(cm)), 1, nrow(cm)))
 
     }
-  
-  
+
+
   if (joint.test==TRUE)
     {
       .wald(obj, cm, beta0)
@@ -36,11 +38,11 @@ estimable <- function (obj, cm, beta0, conf.int=NULL, joint.test=FALSE,
         df.all <- t(abs(t(tmp) * obj$fixDF$X))
         df <- apply(df.all, 1, min, na.rm=TRUE)
         problem <- apply(df.all !=df, 1, any, na.rm=TRUE)
-        if (any(problem)) 
-          warning(paste("Degrees of freedom vary among parameters used to ", 
-                        "construct linear contrast(s): ", 
-                        paste((1:nrow(tmp))[problem], collapse=", "), 
-                        ". Using the smallest df among the set of parameters.", 
+        if (any(problem))
+          warning(paste("Degrees of freedom vary among parameters used to ",
+                        "construct linear contrast(s): ",
+                        paste((1:nrow(tmp))[problem], collapse=", "),
+                        ". Using the smallest df among the set of parameters.",
                         sep=""))
       }
       else if ("lm" %in% class(obj))
@@ -54,11 +56,11 @@ estimable <- function (obj, cm, beta0, conf.int=NULL, joint.test=FALSE,
               vcv <- summary(obj)$cov.scaled
               if(family(obj)[1] %in% c("poisson", "binomial"))
                 {
-                  stat.name <- "X2.stat"            
+                  stat.name <- "X2.stat"
                   df <- 1
                 }
               else
-                {              
+                {
                   stat.name <- "t.stat"
                   df <- obj$df.residual
                 }
@@ -82,48 +84,48 @@ estimable <- function (obj, cm, beta0, conf.int=NULL, joint.test=FALSE,
         {
           stop("obj must be of class 'lm', 'glm', 'aov', 'lme', 'gee', 'geese' or 'nlme'")
         }
-      if (is.null(cm)) 
+      if (is.null(cm))
         cm <- diag(dim(cf)[1])
-      if (!dim(cm)[2]==dim(cf)[1]) 
-        stop(paste("\n Dimension of ", deparse(substitute(cm)), 
+      if (!dim(cm)[2]==dim(cf)[1])
+        stop(paste("\n Dimension of ", deparse(substitute(cm)),
                    ": ", paste(dim(cm), collapse="x"),
-                   ", not compatible with no of parameters in ", 
+                   ", not compatible with no of parameters in ",
                    deparse(substitute(obj)), ": ", dim(cf)[1], sep=""))
-      ct <- cm %*% cf[, 1] 
+      ct <- cm %*% cf[, 1]
       ct.diff <- cm %*% cf[, 1] - beta0
-      
+
       vc <- sqrt(diag(cm %*% vcv %*% t(cm)))
-      if (is.null(rownames(cm))) 
-        rn <- paste("(", apply(cm, 1, paste, collapse=" "), 
+      if (is.null(rownames(cm)))
+        rn <- paste("(", apply(cm, 1, paste, collapse=" "),
                     ")", sep="")
       else rn <- rownames(cm)
-      switch(stat.name, 
+      switch(stat.name,
              t.stat={
                prob <- 2 * (1 - pt(abs(ct.diff/vc), df))
-             }, 
+             },
              X2.stat={
                prob <- 1 - pchisq((ct.diff/vc)^2, df=1)
              })
-      
+
       if (stat.name=="X2.stat")
         {
           retval <- cbind(hyp=beta0, est=ct, stderr=vc,
-                          "X^2 value"=(ct.diff/vc)^2, 
+                          "X^2 value"=(ct.diff/vc)^2,
                           df=df, prob=1 - pchisq((ct.diff/vc)^2, df=1))
-          dimnames(retval) <- list(rn, c("beta0", "Estimate", "Std. Error", 
+          dimnames(retval) <- list(rn, c("beta0", "Estimate", "Std. Error",
                                          "X^2 value", "DF", "Pr(>|X^2|)"))
         }
       else if (stat.name=="t.stat")
         {
-          retval <- cbind(hyp=beta0, est=ct, stderr=vc, "t value"=ct.diff/vc, 
+          retval <- cbind(hyp=beta0, est=ct, stderr=vc, "t value"=ct.diff/vc,
                           df=df, prob=2 * (1 - pt(abs(ct.diff/vc), df)))
-          dimnames(retval) <- list(rn, c("beta0", "Estimate", "Std. Error", 
+          dimnames(retval) <- list(rn, c("beta0", "Estimate", "Std. Error",
                                          "t value", "DF", "Pr(>|t|)"))
         }
-      
+
       if (!is.null(conf.int))
         {
-          if (conf.int <=0 || conf.int >=1) 
+          if (conf.int <=0 || conf.int >=1)
             stop("conf.int should be betweeon 0 and 1. Usual values are 0.95, 0.90")
           alpha <- 1 - conf.int
           switch(stat.name, t.stat={
@@ -132,7 +134,7 @@ estimable <- function (obj, cm, beta0, conf.int=NULL, joint.test=FALSE,
             quant <- qt(1 - alpha/2, 100)
           })
           nm <- c(colnames(retval), "Lower.CI", "Upper.CI")
-          retval <- cbind(retval, lower=ct.diff - vc * quant, upper=ct.diff + 
+          retval <- cbind(retval, lower=ct.diff - vc * quant, upper=ct.diff +
                           vc * quant)
           colnames(retval) <- nm
         }
@@ -143,9 +145,9 @@ estimable <- function (obj, cm, beta0, conf.int=NULL, joint.test=FALSE,
   }
 
 .wald <- function (obj, cm,
-                   beta0=rep(0, ifelse(is.null(nrow(cm)), 1, nrow(cm)))) 
+                   beta0=rep(0, ifelse(is.null(nrow(cm)), 1, nrow(cm))))
 {
-    if (!is.matrix(cm) && !is.data.frame(cm)) 
+    if (!is.matrix(cm) && !is.data.frame(cm))
         cm <- matrix(cm, nrow=1)
     df <- nrow(cm)
     if ("geese" %in% class(obj))

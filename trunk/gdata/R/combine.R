@@ -1,10 +1,4 @@
 # $Id$
-#
-# $Log$
-# Revision 1.2  2002/09/23 13:59:30  warnes
-# - Modified all files to include CVS Id and Log tags.
-#
-#
 
 combine  <-  function(..., names=NULL)
   {
@@ -16,7 +10,7 @@ combine  <-  function(..., names=NULL)
             sapply(tmp, is.matrix)
             |
             sapply(tmp, is.data.frame) ) )
-      { 
+      {
         len  <-  sapply(tmp, function(x) c(dim(x),1)[1] )
         len[is.null(len)]  <-  1
         data <-  rbind( ... )
@@ -25,10 +19,10 @@ combine  <-  function(..., names=NULL)
       {
         len  <- sapply(tmp,length)
         data  <-  unlist(tmp)
-        
+
       }
 
     namelist  <- factor(rep(names, len), levels=names)
-        
+
     return( data.frame( data, source=namelist) )
   }

@@ -1,16 +1,6 @@
 # $Id$
-#
-# $Log$
-# Revision 1.5  2003/03/07 15:48:35  warnes
-# - Minor changes to code to allow the package to be provided as an
-#   S-Plus chapter.
-#
-# Revision 1.4  2002/09/23 13:59:30  warnes
-# - Modified all files to include CVS Id and Log tags.
-#
-#
 
-if(is.R()) 
+if(is.R())
 hist2d <- function( x,y=NULL, nbins=200, same.scale=FALSE, na.rm=TRUE, show=TRUE, col=c("black", heat.colors(12)), ... )
   {
     if(is.null(y))
@@ -44,12 +34,12 @@ hist2d <- function( x,y=NULL, nbins=200, same.scale=FALSE, na.rm=TRUE, show=TRUE
         y.cuts <- seq( from=min(y), to=max(y), length=nbins[2]+1)
       }
 
-      
-    
+
+
     index.x <- cut( x, x.cuts, include.lowest=TRUE)
     index.y <- cut( y, y.cuts, include.lowest=TRUE)
 
-    m <- matrix( 0, nrow=nbins[1], ncol=nbins[2], 
+    m <- matrix( 0, nrow=nbins[1], ncol=nbins[2],
                 dimnames=list( levels(index.x),
                                levels(index.y) ) )
 

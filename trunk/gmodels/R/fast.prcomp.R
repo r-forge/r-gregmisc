@@ -1,3 +1,5 @@
+# $Id$
+
 # The current implementation of the function svd() in S-Plus and R is
 # much slower when operating on a matrix with a large number of
 # columns than on the transpose of this matrix, which has a large
@@ -22,21 +24,21 @@ if(exists("is.R") && is.R()==TRUE)
         s <- La.svd(x, nu = 0)
         if (!is.null(tol)) {
             rank <- sum(s$d > (s$d[1] * tol))
-            if (rank < ncol(x)) 
+            if (rank < ncol(x))
                 s$vt <- s$vt[, 1:rank, drop = FALSE]
         }
         s$d <- s$d/sqrt(max(1, nrow(x) - 1))
-    
+
         dimnames(s$vt) <- list(paste("PC", seq(len = nrow(s$vt)), sep = ""),
                                colnames(x), )
         r <- list(sdev = s$d, rotation = t(s$vt) )
-        if (retx) 
+        if (retx)
             r$x <- x %*% t(s$vt)
         class(r) <- "prcomp"
         r
     }
 
-    fast.svd <- function( x, nu = min(n, p), nv = min(n, p), ...) 
+    fast.svd <- function( x, nu = min(n, p), nv = min(n, p), ...)
       {
         x <- as.matrix(x)
         dx <- dim(x)
@@ -48,14 +50,14 @@ if(exists("is.R") && is.R()==TRUE)
         retval$vt <- NULL
         retval
       }
-    
-  } else 
+
+  } else
   {
       # The fast.svd() function checks if the number of columns is
       # larger than the number of rows.  When this is the case, it
       # transposes the matrix, calles svd, and then flips the returned
       # u and v matrixes. Otherwise it just calls svd.
-      # 
+      #
       # This permits an SVD to be computed efficiently regardless of whether
       # n >>p or vice versa.
 
@@ -64,7 +66,7 @@ if(exists("is.R") && is.R()==TRUE)
       # standard svd.  Consequently, it can be used with matrices with many
       # rows without a performance penalty.
 
-    
+
     fast.prcomp <- function (x, retx = TRUE, center = TRUE, scale. = FALSE,
                         tol = NULL)
     {
@@ -73,27 +75,27 @@ if(exists("is.R") && is.R()==TRUE)
         s <- fast.svd(x, nu = 0)
         if (!is.null(tol)) {
             rank <- sum(s$d > (s$d[1] * tol))
-            if (rank < ncol(x)) 
+            if (rank < ncol(x))
                 s$v <- s$v[, 1:rank, drop = FALSE]
         }
         s$d <- s$d/sqrt(max(1, nrow(x) - 1))
-        dimnames(s$v) <- list(colnames(x), paste("PC", seq(len = ncol(s$v)), 
+        dimnames(s$v) <- list(colnames(x), paste("PC", seq(len = ncol(s$v)),
             sep = ""))
         r <- list(sdev = s$d, rotation = s$v)
-        if (retx) 
+        if (retx)
             r$x <- x %*% s$v
         class(r) <- "prcomp"
         r
     }
-    
-    
-    fast.svd <- function( x, nu = min(n, p), nv = min(n, p), ...) 
+
+
+    fast.svd <- function( x, nu = min(n, p), nv = min(n, p), ...)
       {
         x <- as.matrix(x)
         dx <- dim(x)
         n <- dx[1]
         p <- dx[2]
-    
+
         if(  p <= n )
           return( svd( x, nu, nv, ... ) )
         else
@@ -108,5 +110,5 @@ if(exists("is.R") && is.R()==TRUE)
       }
 
     NULL
-    
+
    }

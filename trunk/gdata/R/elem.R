@@ -1,3 +1,5 @@
+# $Id$
+
 elem <- function(object, unit=c("KB","MB","bytes"), digits=0, dimensions=FALSE)
 {
   get.element.classname <- function(object, element.name)
