@@ -5,11 +5,12 @@ make.generator <- function(m, data)
   newcode <- function(...)
     {
       parms <- list(...)
+      if(length(parms)==1 && is.list(parms[[1]])) parms <- parms[[1]]
       attach(parms)
       retval <- list()
       # added code goes here
     }
-  index <- 5
+  index <- 6
 
   if(missing(data))
     {

@@ -109,7 +109,7 @@ Example.Model <- model(
 #########
 
 Proposal.Model <- model(
-    Beta <- N(Beta,30)
+    Beta <- N(Beta,30),
     sigma.2 <- InvGamma( 25, 1)
 )
 

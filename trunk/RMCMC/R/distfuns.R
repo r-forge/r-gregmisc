@@ -24,8 +24,6 @@ make.lookup.table <- function(distfuns)
   retval <- list()
   for(item in distfuns)
     {
-      cat("Working on:")
-      print(item)
       aliases <- item$aliases
       item$aliases <- NULL
       

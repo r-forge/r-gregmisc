@@ -5,11 +5,12 @@ make.density <- function(m, data)
   newcode <- function(...)
     {
       parms <- list(...)
+      if(length(parms)==1 && is.list(parms[[1]])) parms <- parms[[1]]
       attach(parms)
       loglik <- 0.0
       # added code goes here
     }
-  index <- 5
+  index <- 6
 
   if(missing(data))
     {
@@ -19,6 +20,7 @@ make.density <- function(m, data)
 
   for( expr in as.list(m))
     {
+      if(expr=="model") next
       if(length(expr)==3)
         {
           CALL <- expr[[1]]
