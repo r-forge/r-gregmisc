@@ -22,18 +22,10 @@ foldchange2logratio(foldchange, base=2)
 \details{
   Fold changes are commonly used in the biological sciences as a
   mechanism for comparing the relative size of two measurements.  They
-  are computed as: %
-  \deqn{%
-    f = \begin{cases}
-           \frac{num}{denom} & \text{if $num>denom$}, \\
-           \frac{-denom}{num} & \text{otherwise}
-       \end{cases}
-     }{%
-       \preformat{
-	 f =  num/denom   if a>b
-             -denom/num   otherwise
-       }
-     }
+  are computed as: \eqn{\frac{num}{denom}}{num/denom} if
+  \eqn{num>denom}, and as \eqn{\frac{-denom}{num}}{-denom/num}
+  otherwise.
+
   Fold-changes have the advantage of ease of interpretation and symmetry
   about \eqn{num=denom}, but suffer from a discontinuty between -1 and
   1, which can cause significant problems when performing data
