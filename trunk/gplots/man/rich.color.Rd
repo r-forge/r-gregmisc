@@ -37,7 +37,7 @@ matplot(m, type="l", lty=1, lwd=3, col=rich.colors(8))
 matplot(m, type="l", lty=1, lwd=3, col=rich.colors(8,"blues"))
 par(opar)
 
-barplot(rep(1,100), col=rich.colors(100), space=0, border=0, axes=F)
+barplot(rep(1,100), col=rich.colors(100), space=0, border=0, axes=FALSE)
 barplot(rep(1,20), col=rich.colors(40)[11:30]) # choose subset
 
 rich.colors(100, plot=TRUE, rgb=TRUE)  # describe rgb recipe
