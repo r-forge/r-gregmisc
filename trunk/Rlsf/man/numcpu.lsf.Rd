@@ -26,6 +26,11 @@ numcpu.lsf(default)
 \author{Gregory R. Warnes \email{gregory\_r\_warnes@groton.pfizer.com}}
 %\seealso{ ~~objects to See Also as \code{\link{~~fun~~}}, ~~~ }
 \examples{
+
+   \testonly{
+     Sys.putenv("LSB_HOSTS"="host1 host2 host3 host4")
+   }
+
    # get the number of cpus, fail if unable to do so
    numcpu.lsf()
 
