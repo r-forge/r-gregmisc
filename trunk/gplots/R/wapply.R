@@ -1,7 +1,15 @@
 # $Id$
 #
 # $Log$
+# Revision 1.8  2003/01/20 17:13:04  warnes
+# - Updated wapply.R to allow specification of evaluation points when
+#   method is 'width' or 'range' using the 'pts' argument.
+# - Updated wapply.Rd to add 'pts' argument
+# - Fixed typos, spelling errors, gramatical errors and lack of clarity
+#   in wapply.Rd help text.
+#
 # Revision 1.7  2002/08/01 19:37:14  warnes
+#
 # - Corrected documentation mismatch for ci, ci.default.
 #
 # - Replaced all occurences of '_' for assignment with '<-'.
@@ -43,7 +51,7 @@
 #
 #
 "wapply" <- function( x, y, fun=mean, method="range",
-                    width, n=50, drop.na=TRUE, ...)
+                    width, n=50, drop.na=TRUE, pts, ...)
 {
   method <- match.arg(method, c("width","range","nobs","fraction"))
   if(missing(width))
@@ -55,8 +63,9 @@
     {
       if(method=="range")
         width <- width * diff(range(x))
-      
-      pts <- seq(min(x),max(x),length.out=n)
+
+      if(missing(pts))
+        pts <- seq(min(x),max(x),length.out=n)
       
       result <- sapply( pts, function(pts,y,width,fun,XX,...)
                       {
