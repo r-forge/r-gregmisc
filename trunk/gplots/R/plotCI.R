@@ -1,3 +1,12 @@
+# $Id$
+#
+# $Log$
+# Revision 1.3  2001/10/16 23:00:19  warneg
+# - Added minbar and maxbar parameters
+# - Added cvs id and log tags to header
+#
+#
+
 
 plotCI <- function (x, y = NULL,
                     uiw, liw = uiw,   
@@ -15,6 +24,8 @@ plotCI <- function (x, y = NULL,
                     add=FALSE,
                     xlab,
                     ylab,
+                    minbar,
+                    maxbar,
                     ...
                     )
 {
@@ -70,7 +81,13 @@ plotCI <- function (x, y = NULL,
     ui <- z + uiw
   if(missing(li)) 
     li <- z - liw
-   
+
+  if(!missing(minbar))
+    li <- ifelse( li < minbar, minbar, li)
+
+  if(!missing(maxbar))
+    ui <- ifelse( ui > maxbar, maxbar, ui)
+  
   if(err=="y" & is.null(ylim))
     {
       ylim <- range(c(y, ui, li), na.rm=TRUE)
