@@ -1,34 +1,5 @@
 % $Id$
-%
-% $Log$
-% Revision 1.8  2002/04/09 00:51:32  warneg
-% Checkin for version 0.5.3
-%
-% Revision 1.7  2001/12/12 01:37:33  warneg
-%
-% Added documentation for xaxt parameter.
-%
-% Revision 1.6  2001/12/05 19:41:43  warneg
-% - Added documentation of use.t parameter.
-%
-% Revision 1.5  2001/10/16 23:04:45  warneg
-%
-% Forgot to add minbar and maxbar to usage section.
-%
-% Revision 1.4  2001/10/16 23:03:27  warneg
-%
-% Added description of minbar and maxbar.
-%
-% Revision 1.3  2001/10/16 22:35:36  warneg
-%
-% Added description of minsd parameter.
-%
-% Revision 1.2  2001/08/25 05:46:51  warneg
-% Added CVS header.
-%
-% Revision 1.1  2001/08/25 05:45:10  warneg
-% Initial Checkin
-%
+
 \name{plotmeans}
 \alias{plotmeans}
 \title{Plot Group Means and Confidence Intervals}
@@ -145,6 +116,25 @@ plotmeans(formula, data=NULL, subset, na.action,
   # show how to specify which means should be connected
   plotmeans(state.area ~ state.region, connect=list(1:2, 3:4),
             ccol="red", pch=7 )
+
+  # more complicated example showing how to show an interaction
+  data(esoph)  
+  par(las=2,                        # use perpendicular axis labels
+      mar=c(10.1,4.1,4.1,2.1),      # create enough space for long x labels
+      mgp=c(8,1,0)                  # move x axis legend down to avoid overlap
+      )
+  plotmeans(ncases/ncontrols ~ interaction(agegp , alcgp, sep ="   "), 
+            connect=list(1:6,7:12,13:18,19:24),
+            barwidth=2,
+            col="dark green",
+            data=esoph,
+            xlab="Age Group and Alcohol Consumption",
+            ylab="# Cases / # Controls",
+            main=c("Fraction of Cases for by Age and Alcohol Consumption",
+                   "Ile-et-Vilaine Esophageal Cancer Study")
+            )
+  abline(v=c(6.5, 12.5, 18.5), lty=2)
+  
 }
 
 \author{Gregory R. Warnes \email{Gregory\_R\_Warnes@groton.pfizer.com}}
