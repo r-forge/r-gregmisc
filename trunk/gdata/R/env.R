@@ -26,15 +26,13 @@ env <- function(unit=c("KB","MB","bytes"), digits=0)
     return(nobjects)
   }
 
-  unit <- unit[1]
-  denominator <- switch(substring(tolower(unit),1,1), "k"=1024, "m"=1024^2, 1)
-  size.label <- switch(substring(tolower(unit),1,1), "k"="KB", "m"="MB",
-                  "bytes")
+  unit <- match.arg(unit)
+  denominator <- switch(unit, "KB"=1024, "MB"=1024^2, 1)
   size.vector <- sapply(seq(along=search()), get.environment.size)
   size.vector <- round(size.vector/denominator, digits)
   nobjects.vector <- sapply(seq(along=search()), get.environment.nobjects)
   env.frame <- data.frame(search(), nobjects.vector, size.vector)
-  names(env.frame) <- c("Environment", "Objects", size.label)
+  names(env.frame) <- c("Environment", "Objects", unit)
 
   print(env.frame, right=FALSE)
   invisible(env.frame)

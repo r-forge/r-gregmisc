@@ -28,7 +28,7 @@ elem <- function(object, unit=c("KB","MB","bytes"), digits=0, dimensions=FALSE)
     return(size)
   }
 
-  unit <- unit[1]
+  unit <- match.arg(unit)
   if(is.null(names(object)))
   {
     element.frame <- data.frame()
@@ -43,13 +43,11 @@ elem <- function(object, unit=c("KB","MB","bytes"), digits=0, dimensions=FALSE)
       size.vector <- c("<row.names>"=object.size(row.names(object)),
                        size.vector)
     }
-    denominator <- switch(substring(tolower(unit),1,1), "k"=1024, "m"=1024^2, 1)
-    size.label <- switch(substring(tolower(unit),1,1), "k"="KB", "m"="MB",
-                    "bytes")
+    denominator <- switch(unit, "KB"=1024, "MB"=1024^2, 1)
     size.vector <- round(size.vector/denominator, digits)
     element.frame <- data.frame(class.vector=class.vector,
                        size.vector=size.vector, row.names=names(size.vector))
-    names(element.frame) <- c("Class", size.label)
+    names(element.frame) <- c("Class", unit)
     if(dimensions==TRUE && is.data.frame(object))
     {
       element.frame <- cbind(element.frame, Dim=c(nrow(object),

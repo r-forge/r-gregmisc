@@ -4,7 +4,7 @@
   Display Information about Objects in a Given Environment
 }
 \description{
-  Display name, class, size, and dimensions of each objects in a given
+  Display name, class, size, and dimensions of each object in a given
   environment.
 }
 \usage{

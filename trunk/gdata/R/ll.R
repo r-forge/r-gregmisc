@@ -31,10 +31,8 @@ ll <- function(pos=1, unit=c("KB","MB","bytes"), digits=0, dimensions=FALSE,
     return(size)
   }
 
-  unit <- unit[1]
-  denominator <- switch(substring(tolower(unit),1,1), "k"=1024, "m"=1024^2, 1)
-  size.label <- switch(substring(tolower(unit),1,1), "k"="KB", "m"="MB",
-                  "bytes")
+  unit <- match.arg(unit)
+  denominator <- switch(unit, "KB"=1024, "MB"=1024^2, 1)
 
   if(is.character(pos))
     pos <- match(pos, search())
@@ -50,10 +48,10 @@ ll <- function(pos=1, unit=c("KB","MB","bytes"), digits=0, dimensions=FALSE,
     if(dimensions == TRUE)
     {
       object.frame <- cbind(object.frame, rep("",nrow(object.frame)))
-      names(object.frame) <- c("Class", size.label, "Dimensions")
+      names(object.frame) <- c("Class", unit, "Dimensions")
     }
     else
-      names(object.frame) <- c("Class", size.label)
+      names(object.frame) <- c("Class", unit)
   }
   else
   {
@@ -62,7 +60,7 @@ ll <- function(pos=1, unit=c("KB","MB","bytes"), digits=0, dimensions=FALSE,
     size.vector <- round(size.vector/denominator, digits)
     object.frame <- data.frame(class.vector=class.vector,
                       size.vector=size.vector, row.names=names(size.vector))
-    names(object.frame) <- c("Class", size.label)
+    names(object.frame) <- c("Class", unit)
     if(dimensions == TRUE)
       object.frame <- cbind(object.frame, Dim=sapply(ls(pos,...),
                         get.object.dimensions, pos=pos))

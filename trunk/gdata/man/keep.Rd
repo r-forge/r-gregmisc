@@ -4,8 +4,7 @@
   Remove All Objects, Except Those Specified
 }
 \description{
-  Removes all objects from the default workspace, except those
-  specified.
+  Remove all objects from the default workspace, except those specified.
 }
 \usage{
 keep(..., list = character(0), sure = FALSE)
@@ -21,8 +20,9 @@ keep(..., list = character(0), sure = FALSE)
   Convenient interface to \code{rm()} when removing most objects from
   the default workspace.
 
-  Implemented with a few safety caps: \code{all=TRUE} is not supported
-  and \code{sure=TRUE} is required to perform the removal.
+  Implemented with a few safety caps: objects whose name starts with a
+  period \sQuote{\code{.}} are not removed, and \code{sure=TRUE} is
+  required to perform the removal.
 }
 \value{
   A character vector containing object names, or \code{NULL} when
