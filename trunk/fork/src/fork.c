@@ -5,9 +5,12 @@
 /* wait Unix API calls for use with R.                       */
 /*************************************************************/
 
+#include <R.h>
+
 #include <sys/types.h>
 #include <sys/wait.h>
 #include <unistd.h>
+#include <signal.h>
 
 void Rfork_fork(int *pid)
 {
@@ -49,4 +52,189 @@ void Rfork_wait(int *pid, int *status)
   *pid = wait(status);
 }
   
+
+/* The type definitions for the table of signal constants */
+typedef struct {
+  char   *name;  /* signal name */
+  int    val;    /* value (0 means not defined) */
+  char   *desc;  /* Text description */
+} SIGTAB;
+
+/* Table of signal constants.  The values change by OS and CPU so we
+   have to look them up here rather than having static definitions in
+   the R code. */
+
+SIGTAB sigtab[] = {
+#ifdef SIGHUP
+  {"SIGHUP",     SIGHUP,     "Hangup"},    
+#endif
+#ifdef SIGINT
+  {"SIGINT",     SIGINT,     "Interrupt"},    
+#endif
+#ifdef SIGQUIT
+  {"SIGQUIT",    SIGQUIT,    "Quit"},    
+#endif
+#ifdef SIGILL
+  {"SIGILL",     SIGILL,     "Illegal Instruction"},    
+#endif
+#ifdef SIGTRAP
+  {"SIGTRAP",    SIGTRAP,    "Trace or Breakpoint Trap"},    
+#endif
+#ifdef SIGABRT
+  {"SIGABRT",    SIGABRT,    "Abort"},    
+#endif
+#ifdef SIGEMT
+  {"SIGEMT",     SIGEMT,     "Emulation Trap"},    
+#endif
+#ifdef SIGFPE
+  {"SIGFPE",     SIGFPE,     "Arithmetic Exception"},    
+#endif
+#ifdef SIGKILL
+  {"SIGKILL",    SIGKILL,    "Killed"},    
+#endif
+#ifdef SIGBUS
+  {"SIGBUS",     SIGBUS,     "Bus Error"},    
+#endif
+#ifdef SIGSEGV
+  {"SIGSEGV",    SIGSEGV,    "Segmentation Fault"},    
+#endif
+#ifdef SIGSYS
+  {"SIGSYS",     SIGSYS,     "Bad System Call"},    
+#endif
+#ifdef SIGPIPE
+  {"SIGPIPE",    SIGPIPE,    "Broken Pipe"},    
+#endif
+#ifdef SIGALRM
+  {"SIGALRM",    SIGALRM,    "Alarm Clock"},    
+#endif
+#ifdef SIGTERM
+  {"SIGTERM",    SIGTERM,    "Terminated"},    
+#endif
+#ifdef SIGUSR1
+  {"SIGUSR1",    SIGUSR1,    "User Signal 1"},    
+#endif
+#ifdef SIGUSR2
+  {"SIGUSR2",    SIGUSR2,    "User Signal 2"},    
+#endif
+#ifdef SIGCHLD
+  {"SIGCHLD",    SIGCHLD,    "Child Status Changed"},    
+#endif
+#ifdef SIGPWR
+  {"SIGPWR",     SIGPWR,     "Power Fail or Restart"},    
+#endif
+#ifdef SIGWINCH
+  {"SIGWINCH",   SIGWINCH,   "Window Size Change"},    
+#endif
+#ifdef SIGURG
+  {"SIGURG",     SIGURG,     "Urgent Socket Condition"},    
+#endif
+#ifdef SIGPOLL
+  {"SIGPOLL",    SIGPOLL,    "Pollable Event"},    
+#endif
+#ifdef SIGSTOP
+  {"SIGSTOP",    SIGSTOP,    "Stopped (signal)"},    
+#endif
+#ifdef SIGTSTP
+  {"SIGTSTP",    SIGTSTP,    "Stopped (user)"},    
+#endif
+#ifdef SIGCONT
+  {"SIGCONT",    SIGCONT,    "Continued"},    
+#endif
+#ifdef SIGTTIN
+  {"SIGTTIN",    SIGTTIN,    "Stopped (tty input)"},    
+#endif
+#ifdef SIGTTOU
+  {"SIGTTOU",    SIGTTOU,    "Stopped (tty output)"},    
+#endif
+#ifdef SIGVTALRM
+  {"SIGVTALRM",  SIGVTALRM,  "Virtual Timer Expired"},    
+#endif
+#ifdef SIGPROF
+  {"SIGPROF",    SIGPROF,    "Profiling Timer Expired"},    
+#endif
+#ifdef SIGXCPU
+  {"SIGXCPU",    SIGXCPU,    "CPU Time limit Exceeded"},    
+#endif
+#ifdef SIGXFSZ
+  {"SIGXFSZ",    SIGXFSZ,    "File Size Limit Exceeded"},    
+#endif
+#ifdef SIGWAITING
+  {"SIGWAITING", SIGWAITING, "Concurrency Signal Reserved by Threads Library"},
+#endif
+#ifdef SIGLWP
+  {"SIGLWP",     SIGLWP,     "Inter-LWP Signal Reserved by Threads library"},    
+#endif
+#ifdef SIGFREEZE
+  {"SIGFREEZE",  SIGFREEZE,  "Check Point Freeze"},    
+#endif
+#ifdef SIGTHAW
+  {"SIGTHAW",    SIGTHAW,    "Check Point Thaw"},
+#endif
+#ifdef SIGIOT
+  {"SIGIOT",     SIGIOT,     "IOT trap. (Synonym for SIGABRT)"},
+#endif
+#ifdef SIGSTKFLT
+  {"SIGSTKFLT",  SIGSTKFLT,  "Stack Fault on Coprocessor"},
+#endif
+#ifdef SIGIO
+  {"SIGIO",      SIGIO,      "I/O Now Possible (4.2 BSD}"},
+#endif
+#ifdef SIGCLD
+  {"SIGCLD",     SIGCLD,     "Child Status Changed (Synonym for SIGCHLD}"},
+#endif
+#ifdef SIGINFO
+  {"SIGINFO",    SIGINFO,    "Power Fail or Restart (Synonym for SIGPWR}"},
+#endif
+#ifdef SIGLOST
+  {"SIGLOST",    SIGLOST,    "File Lock Lost"},
+#endif
+#ifdef SIGUNUSED
+  {"SIGUNUSED",  SIGUNUSED,  "Unused Signal (Will Be SIGSYS}"},
+#endif
+  {"",           -1,         "Unknown or Undefined Signal"} // end mark
+};
+
+void Rfork_siginfo(char **name, int *val, char **desc)
+{
+  SIGTAB *ptr=sigtab;
+  //printf("Searching for signal named '%s'...\n", *name);
+
+  while( ptr->val != -1 )
+    {
+      //printf("Checking against name '%s'...\n", ptr->name);
+
+      if(strcmp(*name, ptr->name)==0)
+	{
+	  //printf("Found it!\n");
+	  *val = ptr->val;
+	  *desc = ptr->desc;
+	  return;
+	}
+      ptr += 1;
+    }
+
+  error("Unknown or undefined signal name %s", *name);
+}
+
+void Rfork_signame(int *val, char **name, char **desc)
+{
+  SIGTAB *ptr=sigtab;
+  //printf("Searching for signal value '%d'...\n", *val);
+
+  while( ptr->val != -1 )
+    {
+      //printf("Checking against value '%d'...\n", ptr->val);
+
+      if(*val == ptr->val )
+	{
+	  //printf("Found it!\n");
+	  *name = ptr->name;
+	  *desc = ptr->desc;
+	  return;
+	}
+      ptr += 1;
+    }
+
+  error("Unknown or undefined signal valuee %s", *name);
+}
 
