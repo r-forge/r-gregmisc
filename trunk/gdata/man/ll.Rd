@@ -2,6 +2,7 @@
 \alias{ll}
 \alias{ll.default}
 \alias{ll.data.frame}
+\alias{ll.list}
 \title{
   Display Information about Objects in a Given Environment
 }
