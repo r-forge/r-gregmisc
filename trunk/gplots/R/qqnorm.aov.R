@@ -1,20 +1,23 @@
 # $Id$
 #
 # $Log$
+# Revision 1.2  2003/01/02 15:40:09  warnes
+# - Renamed first parameter to match qqnorm generic.
+#
 # Revision 1.1  2002/12/31 19:50:58  warnes
 # Initial checkin of qqnorm.aov function and documentation submitted by
 # Kjetil Halvorsen <kjetilh@jupiter.umsanet.edu.bo>.
 #
 #
 
-qqnorm.aov <- function (obj, full = FALSE, label = FALSE, omit = NULL,
+qqnorm.aov <- function (y, full = FALSE, label = FALSE, omit = NULL,
                         xlab = paste(if(full) "" else "Half", " Normal plot"),
                         ylab = "Effects", ...)
 {
-    r <- obj$rank
+    r <- y$rank
     eff <- if (full)
-        effects(obj, set.sign = TRUE)[1:r]
-    else abs(effects(obj))[1:r]
+        effects(y, set.sign = TRUE)[1:r]
+    else abs(effects(y))[1:r]
     na <- names(eff)
     int <- match("(Intercept)", na)
     if (!is.null(omit)) {

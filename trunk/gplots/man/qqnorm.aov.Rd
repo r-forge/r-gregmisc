@@ -8,13 +8,13 @@
   class \code{aov}. One can interactively label the points in the plot.
 }
 \usage{
-qqnorm.aov(obj, full=FALSE, label=FALSE, omit=NULL,
+qqnorm.aov(y, full=FALSE, label=FALSE, omit=NULL,
            xlab=paste(if (full) "" else "Half", " Normal plot"), 
            ylab="Effects", ...)
 }
 
 \arguments{
-  \item{obj}{A model object inheriting from \code{aov}}
+  \item{y}{A model object inheriting from \code{aov}}
    \item{full}{Full or half normal plot (half is default) }
    \item{label}{If \code{TRUE}, function allows interactive
      labelling of points in plot, using the mouse }
