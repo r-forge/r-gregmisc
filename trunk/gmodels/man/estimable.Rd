@@ -1,7 +1,12 @@
 # $Id$
 #
 # $Log$
+# Revision 1.5  2002/01/17 23:51:06  warneg
+# - Fixed errror in last example by adding 'conf.int' parameter to
+#   'estimable' call.
+#
 # Revision 1.4  2001/12/18 22:14:14  warneg
+#
 # - Updated documentation to reflect change of parameters from 'alpha'
 #   to 'conf.int', including the new optional status of the confidence
 #   intervals.
@@ -103,7 +108,7 @@ x2 <- rnorm(100,mean=y,sd=0.5)
 reg2 <- lm(y ~ x + x2 + pmax(x2-0.5,0) )
 
 xx2<-seq(-2,2,,50)
-tmp <- estimable(reg2,cbind(1,0,0,1,xx2,pmax(xx2-0.5,0)))
+tmp <- estimable(reg2,cbind(1,0,0,1,xx2,pmax(xx2-0.5,0)), conf.int=0.95)
 plotCI(x=xx2,y=tmp[,1],li=tmp[,6],ui=tmp[,7])
 }
 \keyword{ models }
