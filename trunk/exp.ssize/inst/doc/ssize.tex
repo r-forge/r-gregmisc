@@ -119,14 +119,16 @@ extremely varied, the applicability of this model and its heuristic
 parameters to a particular problem is uncertain.
 
 At the other extreme, standard sample size calculation methods can be
-applied individually to each gene, and the results can be summarized
-in order to provide an overall estimate of the required sample size.
-With this choice, it is relatively simple to setup the calculation,
-fast to get the answer, and easy to incorporate available data.
+applied individually to each gene, and a summary can be contstructed
+to provide an overall estimate of the required sample size.  With this
+choice, the calculations are simple to set up, the results can be
+obtained quickly, and it is easy to incorporate available data.
 Further, such methods are easy to understand and to explain to applied
 scientists.  However, this approach might not capture enough of the
 structure of the system, leading to incorrect estimates for sample
-size.  This is the approach we have applied.
+size.  This is the approach we have applied, and we describe a
+simulation study demonstrating that our method functions well despite
+its simplicity.
 
 Hwang et al.  (2002) proposed a method that lies between the two
 exremes.  This method first identifies differentially expressed genes
@@ -146,7 +148,7 @@ study.  Section 5 provides discussion of the simulation results and
 comparison of our method with other proposed methods.
 
 \section{Method}
-To illustrate our method, we assume the microarrray experiment is set
+To illustrate our method, we assume that a microarrray experiment is set
 up to compare gene expressions between one treatment group and one
 control group. We further assume that microarray data has been
 normalized and transformed so that the data for each gene is
@@ -169,8 +171,8 @@ The proposed procedure to estimate sample size is:
 
 \begin{enumerate}
 \item{Estimate standard deviation ($\sigma$) for each gene based on
-    \emph{control samples} from existing studies using the same
-    biological system.}
+    \emph{control samples} from existing studies performed one the
+    same biological system.}
 
 \item{Specify values for
     \begin{enumerate}
@@ -191,9 +193,9 @@ where $G$ is the number of genes on the microarray chip.
 \item{Compute sample size separately for each gene according to the
     standard formula for the two-sample pooled t-test:}
   \begin{eqnarray}
-    \lefteqn{1-\beta}  \nonumber \\
-    &= 1-T_{n1+n2-2} \left( t_{\alpha_G/2,n1+n2-2} | \frac{\Delta}{\sigma \sqrt{\frac{1}{n_1} + \frac{1}{n_2}}}\right) \nonumber \\
-    & +~T_{n1+n2-2} \left( -t_{\alpha_G/2,n1+n2-2} | \frac{\Delta}{\sigma \sqrt{\frac{1}{n_1} + \frac{1}{n_2}}}\right)
+    \lefteqn{1-\beta} 
+    &=& 1-T_{n1+n2-2} \left( t_{\alpha_G/2,n1+n2-2} | \frac{\Delta}{\sigma \sqrt{\frac{1}{n_1} + \frac{1}{n_2}}}\right) \nonumber \\
+    & & +~T_{n1+n2-2} \left( -t_{\alpha_G/2,n1+n2-2} | \frac{\Delta}{\sigma \sqrt{\frac{1}{n_1} + \frac{1}{n_2}}}\right)
     \label{eq:formula}
   \end{eqnarray}
                                 %
