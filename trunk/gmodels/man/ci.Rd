@@ -1,3 +1,11 @@
+% $Id$
+%
+% $Log$
+% Revision 1.2  2001/08/25 05:52:06  warneg
+% - Added CVS header.
+% - Added my email address.
+%
+%
 \name{ci}
 \alias{ci}
 \alias{ci.lm}
@@ -21,12 +29,10 @@ ci.summary.lm(x, confidence = 0.95, alpha = 1 - confidence)
 %  ~~ If necessary, more details than the __description__  above ~~
 %}
 \value{
-
   matrix with one row per model parameter and columns  \code{Estimate},
   \code{CI lower}, \code{CI upper}, \code{Std. Error}, and \code{p-value}.
-
 }
-\author{ Gregory R. Warnes }
+\author{ Gregory R. Warnes \email{Gregory\_R\_Warnes\@groton.pfizer.com}
 \seealso{ \code{\ref{MASS}\link{confint}}, \code{\link{lm}}, \code{\link{summary.lm}} }
 
 \examples{
