@@ -1,40 +1,26 @@
+% $Id$
 \name{getpid}
 \alias{getpid}
-%- Also NEED an '\alias' for EACH other topic documented here.
-\title{ ~~function to do ... ~~ }
+\title{Obtain the process id for the current process.}
 \description{
-  ~~ A concise (1-5 lines) description of what the function does. ~~
+  Obtain the process number for the current process.
 }
 \usage{
 getpid()
 }
-%- maybe also 'usage' for other objects documented here.
 \details{
-  ~~ If necessary, more details than the __description__  above ~~
+  This function is a simple wrapper around the Unix "getpid" function call.
 }
 \value{
-  ~Describe the value returned
-  If it is a LIST, use
-  \item{comp1 }{Description of 'comp1'}
-  \item{comp2 }{Description of 'comp2'}
-  ...
+  Integer process id.
 }
-\references{ ~put references to the literature/web site here ~ }
-\author{ ~~who you are~~ }
-\note{ ~~further notes~~ }
-
- ~Make other sections like Warning with \section{Warning }{....} ~ 
-\seealso{ ~~objects to See Also as \code{\link{~~fun~~}}, ~~~ }
+\references{Unix "getpid" man page}
+\author{Gregory R. Warnes <gregory_r_warnes@groton.pfizer.com>}
+\seealso{\code{\link{fork}}, \code{\link{exit}}, \code{\link{wait}},
+         \code{\link{kill}}, \code{\link{killall}}}}
 \examples{
-##---- Should be DIRECTLY executable !! ----
-##-- ==>  Define data, use random,
-##--	or do  help(data=index)  for the standard data sets.
 
-## The function is currently defined as
-function () 
-{
-    .C("Rfork_getpid", pid = integer(1))$pid
-  }
+for(i in 1:10)
+  fork( function() cat("PID:", getpid(), "\n") )
 }
-\keyword{ ~kwd1 }% at least one, from doc/KEYWORDS
-\keyword{ ~kwd2 }% __ONLY ONE__ keyword per line
+\keyword{programming}

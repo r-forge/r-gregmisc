@@ -1,3 +1,4 @@
+% $Id$
 \name{exit}
 \alias{exit}
 \title{Exit from a child process}
@@ -24,8 +25,9 @@ exit(status = 0)
   argument, so it is usually not necessary to directly call exit().
   }
 \references{"_exit" man page}
-\author{Gregory R Warnes <gregory_r_wanres@groton.pfizer.com}
-\seealso{\code{\link{fork}}, \code{\link{wait}}, \code{\link{kill}}}
+\author{Gregory R. Warnes <gregory_r_warnes@groton.pfizer.com>}
+\seealso{\code{\link{fork}}, \code{\link{getpid}}, \code{\link{wait}},
+         \code{\link{kill}}, \code{\link{killall}}}}
 \examples{
 waittest <- function()
 { 

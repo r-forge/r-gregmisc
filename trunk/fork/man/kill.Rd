@@ -1,3 +1,4 @@
+% $Id$
 \name{kill}
 \alias{kill}
 \alias{killall}
@@ -27,8 +28,9 @@ killall(signal)
   \code{killall} does not return a value.
 }
 \references{"kill" and "waitpid"  man pages}
-\author{Gregory R Warnes <gregory_r_wanres@groton.pfizer.com}
-\seealso{\code{\link{fork}}, \code{\link{exit}}, \code{\link{kill}}}
+\author{Gregory R. Warnes <gregory_r_warnes@groton.pfizer.com>}
+\seealso{\code{\link{getpid}}, \code{\link{exit}}, \code{\link{wait}},
+         \code{\link{kill}}, \code{\link{killall}}}}
 \examples{
 
    # start a process that just sleeps for 10 seconds
