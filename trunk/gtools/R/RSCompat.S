@@ -1,7 +1,11 @@
 # $Id$
 #
 # $Log$
+# Revision 1.3  2001/12/19 22:45:44  warneg
+# - Added code for %in%.
+#
 # Revision 1.2  2001/09/18 14:15:44  warneg
+#
 # Release 0.3.2
 #
 # Revision 1.1  2001/09/01 19:19:13  warneg
@@ -80,5 +84,48 @@ if(!is.R())
       else Xsvd$v[, Positive] %*% ((1/Xsvd$d[Positive]) * t(Xsvd$u[, Positive]))
     }
 
+
+ "format.pval" <- 
+   function (pv, digits = max(1, getOption("digits") - 2), eps = .Machine$double.eps, 
+             na.form = "NA") 
+     {
+       if ((has.na <- any(ina <- is.na(pv)))) 
+         pv <- pv[!ina]
+       r <- character(length(is0 <- pv < eps))
+       if (any(!is0)) {
+         rr <- pv <- pv[!is0]
+         expo <- floor(log10(pv))
+         fixp <- expo >= -3 | (expo == -4 & digits > 1)
+         if (any(fixp)) 
+           rr[fixp] <- format(pv[fixp], dig = digits)
+         if (any(!fixp)) 
+           rr[!fixp] <- format(pv[!fixp], dig = digits)
+         r[!is0] <- rr
+       }
+       if (any(is0)) {
+         digits <- max(1, digits - 2)
+         if (any(!is0)) {
+           nc <- max(nchar(rr))
+           if (digits > 1 && digits + 6 > nc) 
+             digits <- max(1, nc - 7)
+           sep <- if (digits == 1 && nc <= 6) 
+             ""
+           else " "
+         }
+         else sep <- if (digits == 1) 
+           ""
+	else " "
+         r[is0] <- paste("<", format(eps, digits = digits), sep = sep)
+       }
+       if (has.na) {
+         rok <- r
+         r <- character(length(ina))
+         r[!ina] <- rok
+         r[ina] <- na.form
+       }
+       r
+     }
+
+    "%in%" <- function (x, table)  match(x, table, nomatch = 0) > 0
 
 }
