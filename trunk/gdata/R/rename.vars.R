@@ -1,10 +1,16 @@
 # $Id$
 #
 # $Log$
+# Revision 1.2  2001/12/07 22:55:32  warneg
+# Added attribution.
+#
 # Revision 1.1  2001/12/07 21:40:54  warneg
+#
 # Initial checkin
 #
 #
+
+# submitted by Don MacQueen <macq@llnl.gov>
 
 rename.vars <- function(data,from='',to='',info=T) {
 
