@@ -10,10 +10,12 @@ function( ngenes.dep , n, var.ratio, cov.matrix, ngenes.matrix, delta, distrn = 
   ndep <- 50;
 
   ngrp <- ngenes.dep %/% 50;  # number of groups of size 50
-  
-for ( i in 1:ngrp )
-#   while ( (sum.genes+ndep) <= ngenes.dep)
-#   # use this loop if the dim of covariance matrices are not homogeneous
+ if (ngrp < 1)
+ { remainder <- ngenes.dep } else 
+ {
+  for ( i in 1:ngrp )
+  #   while ( (sum.genes+ndep) <= ngenes.dep)
+  #   # use this loop if the dim of covariance matrices are not homogeneous
 
   {  # start of for
 
@@ -29,6 +31,7 @@ for ( i in 1:ngrp )
   }  # end of for
 
      remainder <- ngenes.dep - ngrp * 50 # remaining number of gene samples to generate after while loop
+ } # end of else
      if (remainder != 0){
 
 	temp.sample <- sample.genes.dep(n, delta, cov.ctrl = cov.ctrl[(1:remainder) , (1:remainder)], var.ratio)
