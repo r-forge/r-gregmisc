@@ -1,1 +1,8 @@
-- Complete documentation of ooplot.
+- Gregmisc is getting pretty big, so it should be set into a set of
+  more topic-specific packages:
+
+	plotmisc
+	modelmisc
+	toolsmisc
+	miscmisc
+
