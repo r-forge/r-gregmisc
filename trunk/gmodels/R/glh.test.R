@@ -1,6 +1,9 @@
 # $Id$
 #
 # $Log$
+# Revision 1.3  2001/12/19 20:05:27  warneg
+# - Removed extra element of return object.
+#
 # Revision 1.2  2001/12/18 21:34:25  warneg
 # - Modified to work correctly when obj is of class 'aov' by specifying
 #   summary.lm instead of summary.  This ensures that the summary object
@@ -24,29 +27,29 @@ glh.test <- function( reg, cm, d=rep(0, nrow(cm)) )
   if ( !( "lm" %in% class(reg) ) )
     stop("Only defined for lm,glm objects")
 
-  Beta <- summary.lm(reg)$coefficients[,1,drop=F]
+  bhat <- summary.lm(reg)$coefficients[,1,drop=F]
   XpX <- summary.lm(reg)$cov.unscaled
   df <- reg$df.residual
   msr <- summary.lm(reg)$sigma  # == SSE / (n-p)
   r <- nrow(cm)
 
 
-  if ( ncol(cm) != length(Beta) ) stop(  
+  if ( ncol(cm) != length(bhat) ) stop(  
                    paste( "\n Dimension of ",
                          deparse( substitute( cm ) ), ": ",
                          paste( dim(cm), collapse="x" ),
                          ", not compatible with no of parameters in ",
                          deparse( substitute( reg ) ), ": ",
-                         length(Beta), sep="" ) )
+                         length(bhat), sep="" ) )
 
 
   #                        -1
-  #     (CB - d)' ( C (X'X)   C' ) (CB - d) / r
+  #     (Cb - d)' ( C (X'X)   C' ) (Cb - d) / r
   # F = ---------------------------------------
   #                 SSE / (n-p)
   #
 
-  Fstat <- t(cm %*% Beta - d) %*% solve((cm %*% XpX %*% t(cm))) %*% (cm %*% Beta - d) / r / msr^2 
+  Fstat <- t(cm %*% bhat - d) %*% solve((cm %*% XpX %*% t(cm))) %*% (cm %*% bhat - d) / r / msr^2 
 
   p <- 1-pf(Fstat,r,df)
 
@@ -56,15 +59,14 @@ glh.test <- function( reg, cm, d=rep(0, nrow(cm)) )
   retval$parameter <- c(df1=r,df2=df)
   retval$p.value <- p
   retval$conf.int <- NULL
-  retval$estimate <- cm%*%Beta
+  retval$estimate <- cm%*%bhat
   retval$null.value <- d
   retval$method <- "Test of General Linear Hypothesis"
   retval$data.name <- deparse(substitute(reg))
   retval$matrix <- cm
   colnames(retval$matrix) <- names(reg$coef)
-  retval$d <- d
   
-  class(retval) <- "glh.test"
+  class(retval) <- c("glh.test","htest")
 
   retval
 }
@@ -103,7 +105,7 @@ summary.glh.test <- function(x, digits = 4 )
     print(x$matrix, digits=digits)
     cat("\n")
     cat("d vector: \n")
-    print(x$d, digits=digits)
+    print(x$null.value, digits=digits)
     cat("\n")
     cat("C %*% Beta-hat: \n")
     print(c(x$estimate))
