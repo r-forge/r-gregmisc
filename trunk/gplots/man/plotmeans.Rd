@@ -1,6 +1,9 @@
 % $Id$
 %
 % $Log$
+% Revision 1.7  2001/12/12 01:37:33  warneg
+% Added documentation for xaxt parameter.
+%
 % Revision 1.6  2001/12/05 19:41:43  warneg
 % - Added documentation of use.t parameter.
 %
@@ -33,7 +36,7 @@ plotmeans(formula, data=NULL, subset, na.action,
           xlab=names(mf)[2], ylab=names(mf)[1], mean.labels=F,
           ci.label=F, n.label=T, digits=getOption("digits"),
           col="black", barwidth=1, barcol="blue",
-          connect=T, ccol=col, legends=names(means), use.t=T, ...)
+          connect=T, ccol=col, legends=names(means), xaxt, use.t=T, ...)
 }
 %
 %\usage{
@@ -105,6 +108,9 @@ plotmeans(formula, data=NULL, subset, na.action,
   \item{legends}{ vector containing strings used to label groups along
     the x axis. Defaults to group names.}
 
+  \item{xaxt}{A character which specifies the axis type. Specifying `"n"'
+          causes an axis to be set up, but not plotted.}
+  
   \item{use.t}{ a logical value indicating whether the t distribution
     should be used to compute confidence intervals.  If \code{TRUE}, the
     default, a t distribution will the correct number of degrees of
