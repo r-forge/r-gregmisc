@@ -1,7 +1,17 @@
 # $Id$
 #
 # $Log$
+# Revision 1.3  2004/01/21 04:31:25  warnes
+# - Mark sprint() as depreciated.
+# - Replace references to sprint with capture.output()
+# - Use match.arg for halign and valign arguments to textplot.default.
+# - Fix textplot.character so that a vector of characters is properly
+#   displayed. Previouslt, character vectors were plotted on top of each
+#   other.
+#
 # Revision 1.2  2003/04/04 13:41:42  warnes
+#
+#
 # - Added textplot.character to handle character strings.
 # - Moved test for vector and matrix arguments to textplot.default.
 # - Renamed arguments "col.margin" and "row.margin" to "cmar", and
@@ -26,18 +36,20 @@ textplot.default <- function(object,
   if (is.matrix(object) || (is.vector(object) && length(object)>1) )
     return(textplot.matrix(object, halign, valign, cex, ... ))
 
+  halign <- match.arg(halign)
+  valign <- match.arg(valign)
 
   if(is.character(object))
     object <- paste(object, collapse="\n")
   else
-    object <- sprint(object)
+    object <- capture.output(print(object))
 
   textplot.character(object, halign,  valign, cex, ...)
 }
 
 
 textplot.data.frame <- function(object,
-                             halign=c("center","center","right"),
+                             halign=c("center","left","right"),
                              valign=c("center","top","bottom"),
                              cex, ... )
     textplot.matrix(object, halign, valign, cex, ... )  
@@ -53,6 +65,8 @@ textplot.character <- function(object,
   halign=match.arg(halign)
   valign=match.arg(valign)
 
+  object <- paste(object, collapse="\n")
+  
   # setup plot area
   plot.new()
   pmar <- par()[c("mar","xpd")]
