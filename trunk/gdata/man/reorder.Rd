@@ -1,6 +1,13 @@
 % $Id$
 %
 % $Log$
+% Revision 1.6  2003/04/22 15:42:35  warnes
+% - The mva package (which is part of recommended) now provides a
+%   generic 'reorder' function.  Consequently, the 'reorder' function
+%   here has been renamed to 'reorder.factor'.
+%
+% - Removed check of whether the argument is a factor object.
+%
 % Revision 1.5  2003/03/03 17:48:58  warnes
 % - Updated to match reorder.Rd which was exetended to handle factor
 %   label names in addition to numeric indices.
@@ -24,24 +31,24 @@
 %
 
 
-\name{reorder}
-\alias{reorder}
+\name{reorder.factor}
+\alias{reorder.factor}
 \title{Reorder the Levels of a Factor}
 \description{
   Reorder the levels of a factor
 }
 \usage{
-reorder(X, order)
+\method{reorder}{factor}(x, order)
 }
 \arguments{
-  \item{X}{ factor. }
+  \item{x}{ factor. }
   \item{order}{ Vector of indexes or label names for new factor ordering.}
 }
 \details{
   When \code{order} is a numeric vector, this function is simply a
-  convenence wrapper for \code{factor(X,levels=levels(X)[order])}.
+  convenence wrapper for \code{factor(x,levels=levels(x)[order])}.
   Otherwise this functionis simply a wrapper for
-  \code{factor(X,levels=order)}.
+  \code{factor(x,levels=order)}.
   
   I find this function useful for reordering factors so that the default
   treatment contrasts use the appropriate levels for comparison.
