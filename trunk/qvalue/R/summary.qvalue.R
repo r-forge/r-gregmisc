@@ -20,8 +20,8 @@ print.qvalue <- function (x,
     cat("Cumulative number of significant calls:\n")
     cat("\n")
     counts <- sapply(cut, 
-                     function(x) c( "p-value"=sum(tmp$pvalues < x),
-                                   "q-value"=sum(tmp$qvalues < x)) )
+                     function(XX) c( "p-value"=sum(x$pvalues < XX),
+                                   "q-value"=sum(x$qvalues < XX)) )
     colnames(counts) <- paste("<", cut, sep="")
     print(counts)
     cat("\n")

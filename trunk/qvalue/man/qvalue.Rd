@@ -14,14 +14,18 @@ qvalue(p, lambda=seq(0,0.95,0.05), pi0.meth="smoother", fdr.level=NULL,
   \item{p}{a vector of p-values (only necessary input)}
   \item{fdr.level}{a level at which to control the FDR. (optional)}
   \item{lambda}{The value of the tuning parameter to estimate
-    \eqn{\pi_0}{pi_0} (optional). Must be in [0,1],  see Storey (2002).}
+    \eqn{\pi_0}{pi_0} These must be in [0,1] and are set to
+    lambda=seq(0, 0.95, 0.05) by default. Optional; see Storey (2002)
+    for more information.}
   \item{pi0.meth}{either "smoother" or "bootstrap"; the method for
     automatically choosing tuning parameter \code{lambda} in the
-    estimation of \eqn{\pi_0}{pi_0}, the proportion of true null hypotheses if
-    it is not specified}
-  \item{robust}{an indicator of whether it is desired to make the
-    estimate more robust for small p-values and a direct finite sample
-    estimate of pFDR (optional).}
+    estimation of \eqn{\pi_0}{pi_0}. If \code{lambda} is
+    only given one value this option is ignored.  Optional; the
+    default is "smoother".}
+  \item{robust}{An indicator of whether it is desired to make the
+    estimate more robust for small p-values. This uses the point
+    estimate of the "positive false discovery rate" (pFDR). Optional;
+    see Storey (2002) for more information.}
 }
 \details{
   If no options are selected, then the method used to estimate p 0 is
@@ -70,9 +74,23 @@ p <- scan("pvalues.txt")
 qobj <- qvalue(p)
 qplot(qobj)
 qwrite(qobj, filename="myresults.txt")
-
-qobj <- qvalue(p, lambda=0.5, robust=TRUE)
-qobj <- qvalue(p, fdr.level=0.05, pi0.meth="bootstrap")
 }
+
+# 900 false hypotheses + 100 true hypotheses
+p <- c(runif(900), runif(100,0,0.025))
+
+# defaults
+qvalue(p) 
+
+# robust
+qvalue(p, robust=TRUE) 
+
+# Storey, Taylor & Siegmund (2002) method
+qvalue(p, pi0.meth="bootstrap") 
+
+
+# Benjamini and Hochberg (1995) method
+qvalue(p, lambda=0) 
+
 }
 \keyword{misc}
