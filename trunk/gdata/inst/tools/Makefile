@@ -1,15 +1,26 @@
 # Global Config Variables
 # Paths
-R_PACKAGE_DIR ?= /tmp/gregmisc/
-PERL_PREFIX = $(R_PACKAGE_DIR)/perl
-BIN_PREFIX  = $(R_PACKAGE_DIR)/bin
+ifeq ($(OS),Windows_NT)
+  TARGET_DIR  = $(shell pwd)/../inst
+else
+  TARGET_DIR  = $(R_PACKAGE_DIR)/
+endif
+PERL_PREFIX = $(TARGET_DIR)/perl
+BIN_PREFIX  = $(TARGET_DIR)/bin
 
 PERL_LIB=$(PERL_PREFIX)
 
 # Executables 
-INSTALL=$(R_HOME)/bin/mkinstalldirs
-CP=install
-###
+ifeq ($(OS),Windows_NT)
+  INSTALL=mkdir -p
+  CP=cp
+  MAKE=MAKEFLAGS="" NMAKE
+  ENV=set
+else
+  INSTALL=$(R_HOME)/bin/mkinstalldirs
+  CP=install
+  ENV=env
+endif
 
 # Names of packages to install, ordered according to dependencies
 packages = IO-stringy \
@@ -22,25 +33,32 @@ TGZ  =	IO-stringy-2.109.tar.gz \
 
 DIRS =  $(subst .tar.gz,,$(TGZ))
 
-PERLVARS =  PERL_PREFIX=$(PERL_PREFIX) \
+PERLDIRS =  PERL_PREFIX=$(PERL_PREFIX) \
 	    PERLPREFIX=$(PERL_PREFIX) \
 	    PERL_LIB=${PERL_LIB} \
 	    PERL5LIB=${PERL_LIB} \
-	    PREFIX=${R_PACKAGE_DIR} \
-	    SITEPREFIX=$(R_PACKAGE_DIR)/perl \
+	    PREFIX=${TARGET_DIR} \
+	    SITEPREFIX=$(TARGET_DIR)/perl \
 	    SITELIBEXP=${PERL_PREFIX} \
 	    SITEARCHEXP=${PERL_PREFIX} \
-	    INSTALLBIN=${R_PACKAGE_DIR}/bin \
-	    INSTALLSCRIPT=${R_PACKAGE_DIR}/bin \
+	    INSTALLBIN=${TARGET_DIR}/bin \
+	    INSTALLSCRIPT=${TARGET_DIR}/bin \
 	    INSTALLPRIVLIB=${PERL_PREFIX} \
 	    INSTALLSITELIB=${PERL_PREFIX} \
 	    INSTALLMAN1DIR=${PERL_PREFIX}/man \
 	    INSTALLMAN3DIR=${PERL_PREFIX}/man/man3
 
+ifeq ($(OS),Windows_NT)
+	PERLVARS = $(subst /,\\, $(subst  /cygdrive/c,C:\,$(PERLDIRS)))	
+else
+	PERLVARS = $(PERLDIRS)
+endif
+
+
 default: install
 
 basedir:
-	@mkdir -p $(R_PACKAGE_DIR) 
+	@mkdir -p $(TARGET_DIR) 
 	@mkdir -p $(PERL_PREFIX)
 	@mkdir -p $(BIN_PREFIX)
 
@@ -48,7 +66,7 @@ basedir:
 	@echo -- Installing PERL module $< --
 	tar -xzf $<	
 	cd $@ ; \
-	perl -I$(PERL_LIB) Makefile.PL $(PERL_VARS)
+	perl -I$(PERL_LIB) Makefile.PL $(PERLVARS)
 	${MAKE} -C $@ $(PERLVARS)
 	${MAKE} -C $@ $(PERLVARS) test    
 	${MAKE} -C $@ $(PERLVARS) install
@@ -67,42 +85,44 @@ clean:
 	-rm -f *~ 
 	-rm -f *.csv
 
-
-
 show:	
 	@echo ------------------------------
 	@echo START of ENVIRONMENT VARIABLES
 	@echo ------------------------------
-	#$(ENV)
-	@echo R_PACKAGE_DIR=$(R_PACKAGE_DIR)
-	@echo BIN_PREFIX=   $(BIN_PREFIX)
-	@echo PERL_PREFIX=  $(PERL_PREFIX)
-	@echo INCLUDE DIRS = $(PERL_LIB)
-	@echo NMAKE=        $(NMAKE)
+	$(ENV)
+	@echo ------------------------------
+	@echo TARGET_DIR=$(TARGET_DIR)
+	@echo BIN_PREFIX=$(BIN_PREFIX)
+	@echo PERL_PREFIX=$(PERL_PREFIX)
+	@echo PERL_LIB=$(PERL_LIB)
+	@echo MAKE=$(NMAKE)
+	@echo ------------------------------
+	@echo PERLVARS=$(PERLVARS)
 	@echo ----------------------------
 	@echo END of ENVIRONMENT VARIABLES
 	@echo ----------------------------
 
 
-xls2csv.pl: xls2csv.pl.in Makefile
+xls2csv.pl: xls2csv.pl.in
 	# Set explicit path to libaries
-	perl -p -e 's|# use lib ".";|use lib "$(PERL_PREFIX)";|' \
-            xls2csv.pl.in > xls2csv.pl
+	$(CP) xls2csv.pl.in xls2csv.pl
 
-xls2csv.bat: xls2csv.bat.in Makefile
-	# Set explicit path to perl script
-	perl -p -e 's|../perl|$(PERL_PREFIX)|' xls2csv.bat.in > xls2csv.bat
+xls2csv.bat: xls2csv.bat.in
+	$(CP) xls2csv.bat.in  xls2csv.bat
 
-xls2csv: xls2csv.in Makefile
-	# Set explicit path to perl script
-	perl -p -e 's|../perl|$(PERL_PREFIX)|' xls2csv.in > xls2csv
+xls2csv: xls2csv.in
+	$(CP) xls2csv.in  xls2csv
 
 build: basedir $(DIRS) 
 
 install_bin: xls2csv.pl xls2csv.bat xls2csv
 	$(INSTALL) $(BIN_PREFIX)
+ifeq ($(OS),Windows_NT)
+	$(CP) xls2csv.bat $(BIN_PREFIX)/
+else
 	$(CP) xls2csv $(BIN_PREFIX)/
+endif
 	$(CP) xls2csv.pl $(PERL_PREFIX)/
 
-install: show clean build install_bin clean
+install: clean build install_bin
 	touch gregmisc.so

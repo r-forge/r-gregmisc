@@ -3,6 +3,29 @@ This file provided a brief list of major feature enhancements
 associated with each release. For a detailed list of changes see the
 ChangeLog file.
 
+Version 1.11.1
+--------------
+
+- Fix building of of gregmisc on Windows:
+
+  Runtime Requirements:
+
+	ActiveState perl in the PATH 
+
+  Build Requirements:
+
+	ActiveState perl in the PATH
+
+	Microsoft's NMAKE utility (A self extracting archive file
+	containing NMAKE is at
+	<ftp://ftp.microsoft.com/Softlib/MSLFILES/nmake15.exe>.)
+
+        I've only tested this on Windows2000 Pro with ActiveState Perl 
+        ActivePerl-5.8.3.809-MSWin32-x86.msi
+
+- (Hopefully) Fix building on Linux with Perl 5.8.0
+ 
+
 Version 1.11.0
 --------------
 
