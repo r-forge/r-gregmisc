@@ -6,7 +6,7 @@
                       width=min(length(X), 20),
                       allow.fewer=FALSE, pad=FALSE,
                       align=c("right", "center", "left"),
-                      as.list=FALSE,
+                      simplify=TRUE,
                       ...)
 {
   align=match.arg(align)
@@ -55,7 +55,7 @@
     {
       funct <- function(which,what,fun,...) fun(what[which],...)
 
-      if(!as.list)
+      if(simplify)
         Xvar <- sapply(run.elements, funct, what=X, fun=fun, ...)
       else
         Xvar <- lapply(run.elements, funct, what=X, fun=fun, ...)        
@@ -64,7 +64,7 @@
     {
       funct <- function(which,XX,YY,fun,...) fun(XX[which],YY[which], ...)
       
-      if(!as.list)
+      if(simplify)
         Xvar <- sapply(run.elements, funct, XX=X, YY=Y, fun=fun, ...)
       else
         Xvar <- lapply(run.elements, funct, XX=X, YY=Y, fun=fun, ...)
@@ -74,7 +74,7 @@
   if(allow.fewer || !pad)
       return(Xvar)
 
-  if(!as.list)
+  if(simplify)
     if(is.matrix(Xvar))
       {
         wholemat <- matrix( new(class(Xvar[1,1]), NA),
