@@ -1,7 +1,11 @@
 % $Id$
 %
 % $Log$
+% Revision 1.8  2003/12/03 02:46:51  warnes
+% - match function argument defaults with 'usage'
+%
 % Revision 1.7  2003/01/20 17:13:06  warnes
+%
 % - Updated wapply.R to allow specification of evaluation points when
 %   method is 'width' or 'range' using the 'pts' argument.
 % - Updated wapply.Rd to add 'pts' argument
@@ -44,7 +48,7 @@
 }
 
 \usage{
-wapply(x, y, fun=mean, method="range", width=1/10, n=50, drop.na=TRUE,
+wapply(x, y, fun=mean, method="range", width, n=50, drop.na=TRUE,
        pts, ...)
 }
 \arguments{

@@ -1,6 +1,9 @@
 % $Id$
 %
 % $Log$
+% Revision 1.6  2003/12/03 02:46:51  warnes
+% - match function argument defaults with 'usage'
+%
 % Revision 1.5  2002/09/23 13:59:30  warnes
 % - Modified all files to include CVS Id and Log tags.
 %
@@ -13,9 +16,10 @@
 \title{Scatter Plot Smoothing}
 \usage{
 lowess(x, ...)
-\method{lowess}{default}(x, y, f=2/3, iter=3, delta=.01*diff(range(x)), ...)
+\method{lowess}{default}(x, y = NULL, f = 2/3, iter = 3, delta = 0.01 *
+                  diff(range(xy$x[o])), ...)
 \method{lowess}{formula}(formula,data = parent.frame(), subset, na.action, 
-               f=3,  iter=3, delta=.01*diff(range(mf[-response])), ... )
+               f=2/3,  iter=3, delta=.01*diff(range(mf[-response])), ... )
 }
 \alias{lowess}
 \arguments{

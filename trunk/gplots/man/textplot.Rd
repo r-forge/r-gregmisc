@@ -12,12 +12,15 @@
   equivalent of 'print' except that the output is displayed as a plot.
 }
 \usage{
-textplot(object, halign="left", valign="center", cex, ...)
-\method{textplot}{default}(object, halign="center", valign="center", cex, ...)
-\method{textplot}{data.frame}(object, halign="center", valign="center", cex, ...)
-\method{textplot}{matrix}(object, halign="left", valign="top", cex,
-    cmar=2, rmar=0.5, show.rownames=TRUE, show.colnames=TRUE,
-    hadj=1, vadj=1, ...)
+textplot(object, halign="center", valign="center", cex, ...)
+\method{textplot}{default}(object, halign=c("center","left","right"),
+                  valign=c("center", "top", "bottom"), cex, ... )
+\method{textplot}{data.frame}(object, halign = c("center", "center", "right"),
+                  valign = c("center", "top", "bottom"), cex, ...)
+\method{textplot}{matrix}(object, halign = c("center", "left", "right"),
+                  valign = c("center", "top", "bottom"), cex, cmar = 2,
+                  rmar = 0.5, show.rownames = TRUE, show.colnames = TRUE,
+                  hadj = 1, vadj = 1, ...)
 }
 \arguments{
   \item{object}{Object to be displayed.}
