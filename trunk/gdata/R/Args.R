@@ -14,7 +14,8 @@ Args <- function(name, sort.args=FALSE)
   {
     ord <- order(arg.labels)
     if(any(arg.labels == "..."))
-      ord <- c(ord[-1], length(ord))
+      ord <- c(ord[-which(arg.labels[ord]=="...")],
+               which(arg.labels=="..."))
     arg.labels <- arg.labels[ord]
     arg.values <- arg.values[ord]
   }
@@ -24,3 +25,4 @@ Args <- function(name, sort.args=FALSE)
 
   invisible(output)
 }
+

@@ -26,7 +26,7 @@ Args(name, sort.args = FALSE)
 }
 \examples{
 Args(glm)
-Args(bxp)
+Args(scan)
 Args(legend)
 }
 % Programming
