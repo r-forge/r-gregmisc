@@ -49,7 +49,7 @@ sample.alt.dep(ngenes.alt.dep, n, var.ratio, cov.matrix, ngenes.matrix, delta)
 
  ~Make other sections like Warning with \section{Warning }{....} ~
 
-\seealso{ ~~objects to See Also as \code{\link{~~fun~~}}, ~~~ }
+\seealso{ } %~~objects to See Also as \code{\link{~~fun~~}}, ~~~ 
 \examples{
 ##---- Should be DIRECTLY executable !! ----
 ##-- ==>  Define data, use random,

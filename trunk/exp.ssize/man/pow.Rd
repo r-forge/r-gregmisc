@@ -73,7 +73,7 @@ delta.plot (x, xlab = "Fold Change",
   \code{\link{delta.plot}}
 }
 \examples{
-library(gregmisc)
+#library(gregmisc)
 
 data(exp.sd)
 

@@ -24,7 +24,7 @@ Example baseline variability for gene expression experiment
 \examples{
 data(exp.sd)
 
-hist(exp.sd, prob=T)
+hist(exp.sd, prob=TRUE)
 lines(density(exp.sd), col="red", lwd=2)
 }
 \keyword{datasets}
