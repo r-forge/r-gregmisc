@@ -4,7 +4,7 @@ read.xls <- function(xls, sheet = 1, verbose=FALSE, ...)
 {
   ###
   # directories
-  package.dir <- .path.package('gregmisc')
+  package.dir <- .path.package('gdata')
   perl.dir <- file.path(package.dir,'perl')
   #
   ###
