@@ -27,7 +27,7 @@ summary.glh.test(object, digits=4,...)
   \item{...}{ optional parameters (ignored)}
 }
 \details{
-  Test the general lineary hypothesis
+  Test the general linear hypothesis
   \eqn{ C \hat{beta} = d }{C \%*\% \hat{beta} == d }
   for the regression model \code{reg}.
 
@@ -44,7 +44,7 @@ summary.glh.test(object, digits=4,...)
 \note{
     When using treatment contrasts (the default) the first level of the
     factors are subsumed into the intercept term.  The estimated model
-    coefficients factors are contrasts verses the first level. This
+    coefficients are then contrasts versus the first level. This
     should be taken into account when forming contrast matrixes,
     particularly when computing contrasts that include 'baseline'
     level of factors.
@@ -91,7 +91,7 @@ summary(ret)
 
 fit.contrast( reg, x,c(1,-1,0,0) )
 	
-# To test this sampe contrast using 'glh.test', use a contrast matrix
+# To test this same contrast using 'glh.test', use a contrast matrix
 # with a zero coefficient for the intercept term.  See the Note section,
 # above, for an explanation.
 
