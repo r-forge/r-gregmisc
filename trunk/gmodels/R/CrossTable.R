@@ -1,5 +1,8 @@
 ## $Log$
-## Revision 1.6  2004/12/21 22:38:16  warnes
+## Revision 1.7  2004/12/23 19:32:26  nj7w
+## Split the function print.CrossTable.vector in two parts - for SAS behaiour and SPSS behaviour. Also put the code of printing statistics in a function 'print.statistics'
+##
+## Revision 1.6  2004/12/21 22:38:16  Warnes
 ## Added & extended changes made by Nitin to implement 'SPSS' format, as suggested by
 ## Dirk Enzmann <dirk.enzmann@jura.uni-hamburg.de>.
 ##
@@ -41,7 +44,7 @@ CrossTable <- function (x, y,
       ## is x a vector?
       if (is.null(dim(x)))
         {
-          #TotalN <- length(x)
+                                        #TotalN <- length(x)
           if (missing.include)
             x <- factor(x,exclude=NULL)
           else
@@ -116,7 +119,7 @@ CrossTable <- function (x, y,
     TotalN <- GT
   else
     TotalN <- length(x)
-    
+  
   
   ## Column and Row Total Headings
   ColTotal <- "Column Total"
@@ -150,17 +153,17 @@ CrossTable <- function (x, y,
 
       CST <- chisq.test(t, correct = FALSE, ...)
     }
-  else
+  else   
     CST <- suppressWarnings(chisq.test(t, correct = FALSE))
   if (asresid & !vector.x)
     ASR <- (CST$observed-CST$expected)/sqrt(CST$expected*((1-RS/GT) %*% t(1-CS/GT)))
-
+  
   print.CrossTable.SAS <- function()
     {
       if (exists("RowData"))
         {
           cat(SpaceSep1, "|", ColData, "\n")
-          cat(formatC(RowData, width = RWidth, format = "s"), 
+          cat(formatC(RowData, width = RWidth, format= "s"), 
               formatC(dimnames(t)[[2]], width = CWidth, format = "s"), 
               RowTotal, sep = " | ", collapse = "\n")
         }
@@ -203,7 +206,7 @@ CrossTable <- function (x, y,
         cat(SpaceSep1, formatC(CS/GT, width = CWidth, digits = digits, 
                                format = "f"), SpaceSep2, sep = " | ", collapse = "\n")
       cat(RowSep1, rep(RowSep, ncol(t) + 1), sep = "|", collapse = "\n")
-    }
+    } ## End Of print.Crosstable.SAS function
   
   print.CrossTable.SPSS <- function()
     {
@@ -292,10 +295,10 @@ CrossTable <- function (x, y,
             cat(SpaceSep2,sep = " | ", collapse = "\n"),sep="",collapes="")
 
       cat(RowSep1, rep(RowSep, ncol(t) + 1), sep = "|", collapse = "\n")
-    } ## End of if(SPSS.behaviour)
-  
-  ## Print function for 1 x n vector
-  print.CrossTable.vector <- function()
+    } ## End of print.CrossTable.SPSS function
+
+  ## Print Function For 1 X N Vector In SAS Format
+  print.CrossTable.vector.SAS <- function()
     {
       if (length(t) > max.width)
         {
@@ -320,55 +323,202 @@ CrossTable <- function (x, y,
         }
 
       SpaceSep3 <- paste(SpaceSep2, " ", sep = "")
-      if (format=="SAS") ##default
+
+      for (i in 1:length(start))
         {
+          ## print column labels
+          cat(SpaceSep2, formatC(dimnames(t)[[2]][start[i]:end[i]], width = CWidth, format = "s"),
+              sep = " | ", collapse = "\n")
 
-          for (i in 1:length(start))
+          cat(SpaceSep3, rep(RowSep, (end[i] - start[i]) + 1), sep = "|", collapse = "\n")
+          cat(SpaceSep2, formatC(t[, start[i]:end[i]], width = CWidth), sep = " | ", collapse = "\n")
+          cat(SpaceSep2, formatC(CPT[, start[i]:end[i]], width = CWidth, digits = digits, format = "f"),
+              sep = " | ", collapse = "\n")
+          cat(SpaceSep3, rep(RowSep, (end[i] - start[i]) + 1), sep = "|", collapse = "\n")
+          cat("\n\n")
+        }
+
+    } ## End of print.Crosstable.vector.SAS function
+
+  
+  ## Print function for 1 X N vector in SPSS format
+  print.CrossTable.vector.SPSS <- function()
+    {
+      if (length(t) > max.width)
+        {
+          ## set breakpoints for output based upon max.width
+          final.row <- length(t) %% max.width
+          max <- length(t) - final.row
+          ## Define breakpoint indices for each row
+          start <- seq(1, max, max.width)
+          end <- start + (max.width - 1)
+          ## Add final.row if required
+          if (final.row > 0)
             {
-              ## print column labels
-              cat(SpaceSep2, formatC(dimnames(t)[[2]][start[i]:end[i]], width = CWidth, format = "s"),
-                  sep = " | ", collapse = "\n")
-
-              cat(SpaceSep3, rep(RowSep, (end[i] - start[i]) + 1), sep = "|", collapse = "\n")
-              cat(SpaceSep2, formatC(t[, start[i]:end[i]], width = CWidth), sep = " | ", collapse = "\n")
-              cat(SpaceSep2, formatC(CPT[, start[i]:end[i]], width = CWidth, digits = digits, format = "f"),
-                  sep = " | ", collapse = "\n")
-              cat(SpaceSep3, rep(RowSep, (end[i] - start[i]) + 1), sep = "|", collapse = "\n")
-              cat("\n\n")
+              start <- c(start, end[length(end)] + 1)
+              end <- c(end, end[length(end)] + final.row)
             }
         }
-      else if (format=="SPSS")
-        {
-          for (i in 1:length(start))
-            {
-              cat(cat(SpaceSep2,sep=" | ",collapse=""),
-                  cat(formatC(dimnames(t)[[2]][start[i]:end[i]],
-                              width = CWidth-1, format = "s"), sep = "  | ", collapse = "\n"),
-                  sep="",collapse="")
-              cat(SpaceSep3, rep(RowSep, (end[i] - start[i]) +
-                                 1), sep = "|", collapse = "\n")
-              cat(cat(SpaceSep2,sep=" | ",collapse=""),
-                  cat(formatC(t[, start[i]:end[i]], width = CWidth-1),
-                      sep = "  | ", collapse = "\n"),
-                  sep="",collapse="")
-              cat(cat(SpaceSep2, sep=" | ",collapse=""),
-                  cat(formatC(CPT[, start[i]:end[i]], width = CWidth-1,
-                              digits = digits, format = "f"), sep = "% | ",
-                      collapse = ""),sep="",collapse="\n")
-              cat(SpaceSep3, rep(RowSep, (end[i] - start[i]) +
-                                 1), sep = "|", collapse = "\n")
-
-            }  ## End of for (i in 1:length(start))
-        } ## End of if(SPSS.behaviour)
       else
-        stop("unknown format")
+        {
+          ## Each value printed horizontally in a single row
+          start <- 1
+          end <- length(t)
+        }
 
-    } ## End of print.CrossTable.vector function
+      SpaceSep3 <- paste(SpaceSep2, " ", sep = "")
+      
+
+      for (i in 1:length(start))
+        {
+          cat(cat(SpaceSep2,sep=" | ",collapse=""),
+              cat(formatC(dimnames(t)[[2]][start[i]:end[i]],
+                          width = CWidth-1, format = "s"), sep = "  | ", collapse = "\n"),
+              sep="",collapse="")
+          cat(SpaceSep3, rep(RowSep, (end[i] - start[i]) +
+                             1), sep = "|", collapse = "\n")
+          cat(cat(SpaceSep2,sep=" | ",collapse=""),
+              cat(formatC(t[, start[i]:end[i]], width = CWidth-1),
+                  sep = "  | ", collapse = "\n"),
+              sep="",collapse="")
+          cat(cat(SpaceSep2, sep=" | ",collapse=""),
+              cat(formatC(CPT[, start[i]:end[i]], width = CWidth-1,
+                          digits = digits, format = "f"), sep = "% | ",
+                  collapse = ""),sep="",collapse="\n")
+          cat(SpaceSep3, rep(RowSep, (end[i] - start[i]) +
+                             1), sep = "|", collapse = "\n")
+
+        }  ## End of for (i in 1:length(start))
+
+      if (GT < TotalN)
+        cat("\nNumber of Missing Observations: ",TotalN-GT," (",100*(TotalN-GT)/TotalN,"%)\n",sep="")
+
+
+    } ## End of print.CrossTable.vector.SPSS Function
+
+
+
+
   
-  ## Print Cell Layout
+  print.statistics <- function()
+    {
+      ## Print Statistics
+      if (chisq)
+        {
+          cat(rep("\n", 2))
+          cat("Statistics for All Table Factors\n\n\n")
 
+          cat(CST$method,"\n")
+          cat("------------------------------------------------------------\n")
+          cat("Chi^2 = ", CST$statistic, "    d.f. = ", CST$parameter, "    p = ", CST$p.value, "\n\n")
+
+          if (all(dim(t) == 2))
+            {
+              cat(CSTc$method,"\n")
+              cat("------------------------------------------------------------\n")
+              cat("Chi^2 = ", CSTc$statistic, "    d.f. = ", CSTc$parameter, "    p = ", CSTc$p.value, "\n")
+            }
+        }
+
+      ## Perform McNemar tests
+      if (mcnemar)
+        {
+          McN <- mcnemar.test(t, correct = FALSE)
+          cat(rep("\n", 2))
+          cat(McN$method,"\n")
+          cat("------------------------------------------------------------\n")
+          cat("Chi^2 = ", McN$statistic, "    d.f. = ", McN$parameter, "    p = ", McN$p.value, "\n\n")
+
+          if (all(dim(t) == 2))
+            {
+              McNc <- mcnemar.test(t, correct = TRUE)
+              cat(McNc$method,"\n")
+              cat("------------------------------------------------------------\n")
+              cat("Chi^2 = ", McNc$statistic, "    d.f. = ", McNc$parameter, "    p = ", McNc$p.value, "\n")
+            }
+        }
+
+      ## Perform Fisher Tests
+      if (fisher)
+        {
+          cat(rep("\n", 2))
+          FTt <- fisher.test(t, alternative = "two.sided")
+
+          if (all(dim(t) == 2))
+            {
+              FTl <- fisher.test(t, alternative = "less")
+              FTg <- fisher.test(t, alternative = "greater")
+            }
+
+          cat("Fisher's Exact Test for Count Data\n")
+          cat("------------------------------------------------------------\n")
+
+          if (all(dim(t) == 2))
+            {
+              cat("Sample estimate odds ratio: ", FTt$estimate, "\n\n")
+
+              cat("Alternative hypothesis: true odds ratio is not equal to 1\n")
+              cat("p = ", FTt$p.value, "\n")
+              cat("95% confidence interval: ", FTt$conf.int, "\n\n")
+
+              cat("Alternative hypothesis: true odds ratio is less than 1\n")
+              cat("p = ", FTl$p.value, "\n")
+              cat("95% confidence interval: ", FTl$conf.int, "\n\n")
+
+              cat("Alternative hypothesis: true odds ratio is greater than 1\n")
+              cat("p = ", FTg$p.value, "\n")
+              cat("95% confidence interval: ", FTg$conf.int, "\n\n")
+            }
+          else
+            {
+              cat("Alternative hypothesis: two.sided\n")
+              cat("p = ", FTt$p.value, "\n")
+            }
+        } ## End Of If(Fisher) Loop
+
+      cat(rep("\n", 2))
+
+      ## Create list of results for invisible()
+
+      CT <- list(t = t, prop.row = CPR, prop.col = CPC, prop.tbl = CPT)
+
+      if (any(chisq, fisher, mcnemar))
+        {
+          if (all(dim(t) == 2))
+            {
+              if (chisq)
+                CT <- c(CT, list(chisq = CST, chisq.corr = CSTc))
+
+              if (fisher)
+                CT <- c(CT, list(fisher.ts = FTt, fisher.tl = FTl, fisher.gt = FTg))
+
+              if (mcnemar)
+                CT <- c(CT, list(mcnemar = McN, mcnemar.corr = McNc))
+            }
+          else
+            {
+              if (chisq)
+                CT <- c(CT, list(chisq = CST))
+
+              if (fisher)
+                CT <- c(CT, list(fisher.ts = FTt))
+
+              if (mcnemar)
+                CT <- c(CT, list(mcnemar = McN))
+            }
+        } ## End of if(any(chisq, fisher, mcnemar)) loop
+
+      
+      ## return list(CT)
+      invisible(CT)
+
+    } ## End of print.statistics function
+
+
+  ## Printing the tables
   if (format=="SAS")
     {
+      ## Print Cell Layout
       
       cat(rep("\n", 2))
       cat("   Cell Contents\n")
@@ -391,11 +541,14 @@ CrossTable <- function (x, y,
       if (!vector.x)
         print.CrossTable.SAS()
       else
-        print.CrossTable.vector()
-    } ## End of SAS.behaviour
-  else if (format=="SPSS")
-    {
+        print.CrossTable.vector.SAS()
 
+      print.statistics()
+    }
+  else if (format == "SPSS")
+    {
+      
+      ## Print Cell Layout
       cat("\n")
       cat("   Cell Contents\n")
       cat("|-----------------|\n")
@@ -425,122 +578,11 @@ CrossTable <- function (x, y,
       cat("\n")
       if (!vector.x)
         print.CrossTable.SPSS()
-      else print.CrossTable.vector()
-      if (GT < TotalN)
-        cat("\nNumber of Missing Observations: ",TotalN-GT," (",100*(TotalN-GT)/TotalN,"%)\n",sep="")
+      else print.CrossTable.vector.SPSS()
+
+      print.statistics()
+
       
-    } ## End of SPSS.behaviour
-  else stop("unknown format")
-  
-  ## Print Statistics
-  if (chisq)
-    {
-      cat(rep("\n", 2))
-      cat("Statistics for All Table Factors\n\n\n")
-
-      cat(CST$method,"\n")
-      cat("------------------------------------------------------------\n")
-      cat("Chi^2 = ", CST$statistic, "    d.f. = ", CST$parameter, "    p = ", CST$p.value, "\n\n")
-
-      if (all(dim(t) == 2))
-        {
-          cat(CSTc$method,"\n")
-          cat("------------------------------------------------------------\n")
-          cat("Chi^2 = ", CSTc$statistic, "    d.f. = ", CSTc$parameter, "    p = ", CSTc$p.value, "\n")
-        }
-    }
-
-  ## Perform McNemar tests
-  if (mcnemar)
-    {
-      McN <- mcnemar.test(t, correct = FALSE)
-      cat(rep("\n", 2))
-      cat(McN$method,"\n")
-      cat("------------------------------------------------------------\n")
-      cat("Chi^2 = ", McN$statistic, "    d.f. = ", McN$parameter, "    p = ", McN$p.value, "\n\n")
-
-      if (all(dim(t) == 2))
-        {
-          McNc <- mcnemar.test(t, correct = TRUE)
-          cat(McNc$method,"\n")
-          cat("------------------------------------------------------------\n")
-          cat("Chi^2 = ", McNc$statistic, "    d.f. = ", McNc$parameter, "    p = ", McNc$p.value, "\n")
-        }
-    }
-
-
-  ## Perform Fisher Tests
-  if (fisher)
-    {
-      cat(rep("\n", 2))
-      FTt <- fisher.test(t, alternative = "two.sided")
-
-      if (all(dim(t) == 2))
-        {
-          FTl <- fisher.test(t, alternative = "less")
-          FTg <- fisher.test(t, alternative = "greater")
-        }
-
-      cat("Fisher's Exact Test for Count Data\n")
-      cat("------------------------------------------------------------\n")
-
-      if (all(dim(t) == 2))
-        {
-          cat("Sample estimate odds ratio: ", FTt$estimate, "\n\n")
-
-          cat("Alternative hypothesis: true odds ratio is not equal to 1\n")
-          cat("p = ", FTt$p.value, "\n")
-          cat("95% confidence interval: ", FTt$conf.int, "\n\n")
-
-          cat("Alternative hypothesis: true odds ratio is less than 1\n")
-          cat("p = ", FTl$p.value, "\n")
-          cat("95% confidence interval: ", FTl$conf.int, "\n\n")
-
-          cat("Alternative hypothesis: true odds ratio is greater than 1\n")
-          cat("p = ", FTg$p.value, "\n")
-          cat("95% confidence interval: ", FTg$conf.int, "\n\n")
-        }
-      else
-        {
-          cat("Alternative hypothesis: two.sided\n")
-          cat("p = ", FTt$p.value, "\n")
-        }
-    }
-
-  cat(rep("\n", 2))
-
-  ## Create list of results for invisible()
-
-  CT <- list(t = t, prop.row = CPR, prop.col = CPC, prop.tbl = CPT)
-
-  if (any(chisq, fisher, mcnemar))
-    {
-      if (all(dim(t) == 2))
-        {
-          if (chisq)
-            CT <- c(CT, list(chisq = CST, chisq.corr = CSTc))
-
-          if (fisher)
-            CT <- c(CT, list(fisher.ts = FTt, fisher.tl = FTl, fisher.gt = FTg))
-
-          if (mcnemar)
-            CT <- c(CT, list(mcnemar = McN, mcnemar.corr = McNc))
-        }
-      else
-        {
-          if (chisq)
-            CT <- c(CT, list(chisq = CST))
-
-          if (fisher)
-            CT <- c(CT, list(fisher.ts = FTt))
-
-          if (mcnemar)
-            CT <- c(CT, list(mcnemar = McN))
-        }
-    }
-
-  if (format=="SPSS")
-    {
       if (any(dim(t) >= 2) & any(chisq,mcnemar,fisher))
         {
           MinExpF = min(CST$expected)
@@ -554,10 +596,11 @@ CrossTable <- function (x, y,
           cat("\n")
 
         } ## End of if (any(dim(t)...
-
-    } ## End of SPSS.behaviour
+      
+    } ## End of if(format=="SPSS") loop
+  else
+    stop("unknown format")
 
   
-  ## return list(CT)
-  invisible(CT)
-} ## End of the main function CrossTable.R
+  
+} ## End of the main function Crosstable.R

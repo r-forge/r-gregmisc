@@ -22,6 +22,9 @@
 
 
 % $Log$
+% Revision 1.5  2004/12/23 19:32:31  nj7w
+% Split the function print.CrossTable.vector in two parts - for SAS behaiour and SPSS behaviour. Also put the code of printing statistics in a function 'print.statistics'
+%
 % Revision 1.4  2004/05/25 02:57:01  warnes
 % Updates from Mark Schwartz.
 %
@@ -56,12 +59,16 @@
 \title{Cross Tabulation with Tests for Factor Independence}
 \description{
   An implementation of a cross-tabulation function with output
-  similar to S-Plus crosstabs() and SAS Proc Freq with Chi-square,
-  Fisher and McNemar tests of the independence of all table factors.
-}
+  similar to S-Plus crosstabs() and SAS Proc Freq (or SPSS format)
+  with Chi-square, Fisher and McNemar tests of the independence
+  of all table factors.
+  }
 \usage{
 CrossTable(x, y, digits=3, max.width = 5, expected=FALSE, prop.r=TRUE, prop.c=TRUE,
-           prop.t=TRUE, chisq = FALSE, fisher=FALSE, mcnemar=FALSE)
+           prop.t=TRUE, chisq = FALSE, fisher=FALSE, mcnemar=FALSE,
+           resid=FALSE, sresid=FALSE, asresid=FALSE,
+           missing.include=FALSE,
+format=c("SAS","SPSS")),...
 }
 \arguments{
   \item{x}{A vector or a matrix. If y is specified, x must be a vector}
@@ -85,7 +92,14 @@ CrossTable(x, y, digits=3, max.width = 5, expected=FALSE, prop.r=TRUE, prop.c=TR
      be included}
   \item{mcnemar}{If \code{TRUE}, the results of a McNemar test will
      be included}
-}
+   \item{resid}{If \code{TRUE}, residual (Pearson) will be included}
+   \item{sresid}{If \code{TRUE},  standardized residual will be included}
+   \item{asresid}{If \code{TRUE}, adjusted standardized residual will be included}
+   \item{missing.include}{If \code{TRUE}, then remove any unused factor levels}
+  \item{format}{Either SAS (default) or SPSS, depending on the type of
+  output desired.}
+
+ }
 \details{
   A summary table will be generated with cell row, column and table
   proportions and marginal totals and proportions. Expected cell counts
@@ -94,8 +108,7 @@ CrossTable(x, y, digits=3, max.width = 5, expected=FALSE, prop.r=TRUE, prop.c=TR
 	appropriate tests. In the case of tabulating a single vector, cell
 	counts and table proportions will be printed.
 
-  Note: Any unused factor levels will be dropped prior to tabulation.
-	If 'x' is a vector and 'y' is not specified, no statistical tests
+  Note: If 'x' is a vector and 'y' is not specified, no statistical tests
 	will be performed, even if any are set to \code{TRUE}.
 }
 \value{
@@ -140,6 +153,7 @@ CrossTable(x, y, digits=3, max.width = 5, expected=FALSE, prop.r=TRUE, prop.c=TR
                 included if 'mcnemar' = TRUE and in the case of a
                 2 x 2 table.
 
+  resid/sresid/asresid: Pearson Residuals (from chi-square tests).
 }
 \author{Marc Schwartz \email{mschwartz@medanalytics.com}. Original
         version posted to r-devel on Jul 27, 2002.}
@@ -152,9 +166,10 @@ CrossTable(x, y, digits=3, max.width = 5, expected=FALSE, prop.r=TRUE, prop.c=TR
 
 # Simple cross tabulation of education versus prior induced abortions
 # using infertility data
-data(infert, package = "base")
+data(infert, package = "datasets")
 CrossTable(infert$education, infert$induced, expected = TRUE)
-
+CrossTable(infert$education, infert$induced, expected = TRUE, format="SAS")
+CrossTable(infert$education, infert$induced, expected = TRUE, format="SPSS")
 }
 \keyword{category}
 \keyword{univar}
