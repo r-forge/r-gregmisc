@@ -1,6 +1,9 @@
 # $Id$
 #
 # $Log$
+# Revision 1.7  2004/06/30 19:32:10  warnes
+# Remove commented-out code.
+#
 # Revision 1.6  2004/06/30 19:26:22  warnes
 # Fixed text size calculations
 #
@@ -47,11 +50,6 @@ textplot.default <- function(object,
 
   halign <- match.arg(halign)
   valign <- match.arg(valign)
-
-  #if(is.character(object))
-  #  object <- paste(object, collapse="\n")
-  #else
-  #  object <- capture.output(print(object))
 
   textplot.character(object, halign,  valign, cex, ...)
 }
