@@ -46,7 +46,7 @@ elem(object, unit = "KB", digits = 0, dimensions = FALSE)
 data(infert)
 elem(infert)
 model <- glm(case~spontaneous+induced, family=binomial, data=infert)
-elem(model, dim=T)
+elem(model, dim=TRUE)
 elem(model$family)
 }
 % Basics
