@@ -6,6 +6,7 @@
                       width=min(length(X), 20),
                       allow.fewer=FALSE, pad=FALSE,
                       align=c("right", "center", "left"),
+                      as.list=FALSE,
                       ...)
 {
   align=match.arg(align)
@@ -53,35 +54,42 @@
   if(is.null(Y))  # univariate 
     {
       funct <- function(which,what,fun,...) fun(what[which],...)
-      
-      Xvar <- sapply(run.elements, funct, what=X, fun=fun, ...)
+
+      if(!as.list)
+        Xvar <- sapply(run.elements, funct, what=X, fun=fun, ...)
+      else
+        Xvar <- lapply(run.elements, funct, what=X, fun=fun, ...)        
     }
   else # bivariate
     {
       funct <- function(which,XX,YY,fun,...) fun(XX[which],YY[which], ...)
       
-      Xvar <- sapply(run.elements, funct, XX=X, YY=Y, fun=fun, ...)
+      if(!as.list)
+        Xvar <- sapply(run.elements, funct, XX=X, YY=Y, fun=fun, ...)
+      else
+        Xvar <- lapply(run.elements, funct, XX=X, YY=Y, fun=fun, ...)
     }
 
   
   if(allow.fewer || !pad)
       return(Xvar)
-    
-  if(is.matrix(Xvar))
-    {
-      wholemat <- matrix( new(class(Xvar[1,1]), NA),
-                         ncol=length(to), nrow=nrow(Xvar) )
-      colnames(wholemat) <- paste(from,to,sep=':')
-      wholemat[,-skip] <- Xvar
-      Xvar <- wholemat
-    }
-  else
-    {
-      wholelist <- rep(new(class(Xvar[1]),NA),length(from))
-      names(wholelist) <-  names(elements)
-      wholelist[ names(Xvar) ] <- Xvar
-      Xvar <- wholelist
-    }
+
+  if(!as.list)
+    if(is.matrix(Xvar))
+      {
+        wholemat <- matrix( new(class(Xvar[1,1]), NA),
+                           ncol=length(to), nrow=nrow(Xvar) )
+        colnames(wholemat) <- paste(from,to,sep=':')
+        wholemat[,-skip] <- Xvar
+        Xvar <- wholemat
+      }
+    else
+      {
+        wholelist <- rep(new(class(Xvar[1]),NA),length(from))
+        names(wholelist) <-  names(elements)
+        wholelist[ names(Xvar) ] <- Xvar
+        Xvar <- wholelist
+      }
   
   return(Xvar)}
 
