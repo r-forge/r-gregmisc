@@ -32,7 +32,7 @@ space(x, y, s=1/50)
   \item{x}{(modified) x location for each input point}
   \item{y}{y location of each input point}
 }
-\author{ Gregory R. Warnes \email{gregory_r_warnes\@groton.pfizer.com} }
+\author{ Gregory R. Warnes \email{gregory\_r\_warnes\@groton.pfizer.com} }
 \seealso{ \code{\link{jitter}} }
 
 \examples{
@@ -45,5 +45,5 @@ space(x, y, s=1/50)
    # 'spaced' plot 
    plot(space(x,y))
 }
-\keyword{ ~kwd1 }% at least one, from doc/KEYWORDS
-\keyword{ ~kwd2 }% __ONLY ONE__ keyword per line
+\keyword{ dplot }
+
