@@ -10,19 +10,15 @@ processing}
   processing
 }
 \usage{
-
 lsf.parRapply(x, fun, ..., join.method=cbind, njobs,
               batch.size=getOption('lsf.block.size'), trace=TRUE,
               packages=NULL, savelist=NULL)
 
 lsf.parCapply(x, ...)
 
-lsf.apply.model(fun, matrix, ..., njobs, nelem,
+lsf.apply.model(fun, matrix, ..., njobs,
                 batch.size=getOption('lsf.block.size'),
-                packages = .packages(), debug = TRUE, savelist = NULL)
-
-
-
+                packages = .packages(), savelist = NULL)
 }
 \arguments{
   \item{x,matrix}{Data matrix}
@@ -72,11 +68,52 @@ lsf.apply.model(fun, matrix, ..., njobs, nelem,
 \seealso{ \code{\link[Rlsf]{lsf.apply.model}}, \code{\link[Rlsf]{lsf.submit}} }
 \examples{
 
+   #####
+   ## Example of lsf.parRapply
+   #####
    set.seed(12345)
    x <- matrix(rnorm(1e6),ncol=20)
    dim(x)
    means <- lsf.parRapply(x, mean, na.rm=TRUE, join.method=c, njobs=20)
    means <- lsf.parRapply(x, mean, na.rm=TRUE, join.method=c, batch.size=1000)
+
+   ####
+   ## Example of lsf.apply,model
+   ####
+   library(Rlsf)
+   library(gdata);
+
+   # generate an example data set
+   set.seed(1)
+   age <- rnorm(200,40,12)
+   sex <- factor(sample(c('female','male'),200,TRUE))
+   logit <- (sex=='male') + (age-40)/5
+   y <- ifelse(runif(200) <= plogis(logit), 1, 0)
+   dataframe <- data.frame(age=age, sex=sex)
+
+   # create a matrix made up of rows containing the y data
+   ymat <- matrix(y, nrow=300, ncol=length(y), byrow=TRUE)
+
+   # define the model fitting function
+   fun <- function(y, covariates)
+     {
+
+       fit <- lm( y ~ age*sex, data=covariates )
+       sum <- summary(fit)
+       retval <- unmatrix( coef(sum) )
+       retval
+     }
+   
+   # now fit the model to each row (will yield identical results for each...)
+   ret <- lsf.apply.model (
+                           fun,
+                           matrix = ymat,
+                           covariates = dataframe,
+                           savelist="unmatrix",
+                           batch.size=100
+                         )
+
+
 
 }
 \keyword{utilities}

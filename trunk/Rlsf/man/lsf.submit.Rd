@@ -9,7 +9,8 @@
   queuing environment.
 }
 \usage{
-lsf.submit(func, ..., savelist = c(), ncpus = 1, debug = FALSE)
+lsf.submit(func, ..., savelist = c(), packages = NULL, ncpus = 1,
+           debug = FALSE)
 }
 \arguments{
   \item{func}{This argument provides the name of the function that will
@@ -18,9 +19,11 @@ lsf.submit(func, ..., savelist = c(), ncpus = 1, debug = FALSE)
     function name. They must be within the current scope, and must be
     provided to the remote function call as part of the
     \code{savelist}} 
-  \item{savelist}{A list of symbols to export to the remote
-    environment. Any arguments to \code{func} should be listed in the
-    savelist.}
+  \item{savelist}{Chacacter vector giving the names of local objects
+    that should be copied to each worker process before computation is
+    started.}
+  \item{packages}{List of library packages to be loaded by each worker
+    process before computation is started.}
   \item{ncpus}{A number indicating how many cpus should be allocted to
     the function call. Used in conjunction with the snow and Rmpi
     packages (see notes).}

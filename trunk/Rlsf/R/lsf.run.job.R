@@ -1,9 +1,10 @@
 # $Id$
 
 "lsf.run.job" <-
-  function(func, ..., interval=15)
+  function(func, ..., savelist=c(), packages=NULL, ncpus=1, debug=FALSE,
+           interval=15)
   {
-    job <- lsf.submit(func, ...)
+    job <- lsf.submit(func, ..., savelist=savelist, ncpus=ncpus, debug=debug)
     if (is.null(job)) {
       scat("lsf.run.job: Could not submit job to LSF.\n")
       return(NULL)

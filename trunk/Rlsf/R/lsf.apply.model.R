@@ -4,22 +4,14 @@ lsf.apply.model <- function(fun,
                             matrix,
                             ...,
                             njobs,
-                            nelem,
-                            batch.size=getOptions('lsf.block.size'),
+                            batch.size=getOption('lsf.block.size'),
                             packages=.packages(),
-                            debug = TRUE,
                             savelist = NULL
                             )
   {
     if(missing(njobs))
       njobs <- max(1,floor(nrow(matrix)/batch.size))
     
-    if(!missing(nelem))
-      if(length(nelem)==1)
-        matrix <- matrix[1:nelem,]            # include first nelem elements
-      else
-        matrix <- matrix[nelem[1]:nelem[2],]  # include subset of elements
-
     if(exists("last.warning"))  # work around R bug
       remove("last.warning", env=.GlobalEnv, inherits=FALSE)
 

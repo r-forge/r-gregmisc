@@ -46,7 +46,10 @@ lsf.parRapply <- function (x, fun, ...,
 
         if(trace) cat("Current status:\n")
         statusTable <- as.matrix(table(status))
-        statusTable <- data.frame("N"=statusTable, "%"=formatC(statusTable/njobs,format="f", width=4, digits=2), check.names=F)
+        statusTable <- data.frame("N"=statusTable,
+                                  "%"=formatC(statusTable/njobs, format="f",
+                                              width=4, digits=2),
+                                  check.names=FALSE)
         if(trace) print(statusTable)
         done <- all(status %in% c("DONE","EXIT","ZOMBI","UNKWN") )
       }
