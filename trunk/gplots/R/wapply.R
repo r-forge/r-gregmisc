@@ -1,6 +1,13 @@
 # $Id$
 #
 # $Log$
+# Revision 1.3  2001/12/05 19:29:50  warneg
+# - Added a better default for "width" when method="nobs".  For this case,
+#   width=max(5, length(x)/10).
+#
+# - Allow omission of x values which result in missing y values via
+#   'drop.na' parameter.
+#
 # Revision 1.2  2001/08/31 23:45:45  warneg
 # Used wrong character in header (% instead of #).  Fixed.
 #
@@ -9,15 +16,18 @@
 #
 #
 "wapply" _ function( x, y, fun=mean, method="range",
-                    width=1/10, n=50, ...)
+                    width, n=50, drop.na=T, ...)
 {
   method <- match.arg(method, c("width","range","nobs","fraction"))
+  if(missing(width))
+    if( method=="nobs" ) width <- max(5, length(x)/10 )
+  else
+    width <- 1/10
 
   if(method == "width" || method == "range" )
     {
       if(method=="range")
         width <- width * range(x)
-      
       
       pts _ seq(min(x),max(x),length.out=n)
       
@@ -32,6 +42,11 @@
                       fun=fun,
                       XX = x,
                       ...)
+      if(drop.na)
+        {
+          pts <- pts[!is.na(pts)]
+          result <- result[!is.na(result)]
+        }
       
       return(x=pts,y=result)
     }
@@ -39,7 +54,7 @@
     {
       if( method=="fraction")
         width <- floor(length(x) * width)
-      
+
       ord <- order(x)
       x  <- x[ord]
       y  <- y[ord]
@@ -54,6 +69,13 @@
       retval$y  <- apply(cbind(below,above), 1,
                          function(x) fun(y[x[1]:x[2]],...) )
                          
+      if(drop.na)
+        {
+          retval$x <- retval$x[!is.na(retval$x)]
+          retval$y <- retval$y[!is.na(retval$y)]
+        }
+
+
       return(retval)
     }
       
