@@ -1,6 +1,9 @@
 % $Id$
 %
 % $Log$
+% Revision 1.8  2004/05/26 13:40:13  warnes
+% Escape underscores in email addresses so Latex is happy.
+%
 % Revision 1.7  2004/03/26 22:21:15  warnes
 % Uncomment and fix large 'n' example.
 %
@@ -69,7 +72,7 @@ permutations(n, r, v=1:n, set=TRUE, repeats.allowed=FALSE)
 \author{ Original versions by Bill Venables
   \email{Bill.Venables@cmis.csiro.au}.  Extended to handle
   \code{repeats.allowed} by Gregory R. Warnes
-  \email{Gregory\_R\_Warnes\@groton.pfizer.com}.
+  \email{Gregory\_R\_Warnes@groton.pfizer.com}.
   }
 \seealso{ \code{\link[base]{choose}}, \code{\link[base]{options}} }
 \examples{

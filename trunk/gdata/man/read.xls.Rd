@@ -38,7 +38,7 @@ read.xls(xls, sheet=1, verbose=FALSE, ...)
    iris <- read.xls(xlsfile)  
 
 }
-\author{Jim Rogers \email{james_a_rogers@groton.pfizer.com}, modified
-  and extenede by Gregory R. Warnes \email{gregory_r_warnes@groton.pfizer.com}.
+\author{Jim Rogers \email{james\_a\_rogers@groton.pfizer.com}, modified
+  and extenede by Gregory R. Warnes \email{gregory\_r\_warnes@groton.pfizer.com}.
 }
 \keyword{file}
