@@ -3,8 +3,8 @@ Version: 0.1.0
 Date: 2004-10-21
 Title: Efficent Random Forests models
 Author: Baolin Wu <baolin@biostat.umn.edu>, 
-        R port by Gregory R. Warnes <gregory_r_warnes@groton.pfizer.com>
-Maintainer: Gregory R. Warnes <gregory_r_warnes@groton.pfizer.com>
+        R port by Gregory R. Warnes <Gregory.R.Warnes@Pfizer.com>
+Maintainer: Gregory R. Warnes <Gregory.R.Warnes@Pfizer.com>
 Description: Efficent code for fitting Random Forests models
 License: LGPL (see <http://www.opensource.org/licenses/lgpl-license.php>).
 
