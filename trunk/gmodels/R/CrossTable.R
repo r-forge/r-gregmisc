@@ -1,27 +1,19 @@
 # $Id$
 #
 # $Log$
+# Revision 1.2  2002/11/04 14:13:57  warnes
+# - Moved fisher.test() to after table is printed, so that table is
+#   still printed in the event that fisher.test() results in errors.
+#
 # Revision 1.1  2002/09/23 13:38:53  warnes
+#
 # - Added CrossTable() and barplot2() code and docs contributed by Marc Schwartz.
 # - Permit combinations() to be used when r>n provided repeat.allowed=TRUE
 # - Bumped up version number
-#
-#
 
 CrossTable <- function (x, y, digits = 3, expected = FALSE, correct = TRUE)
 {
-  require(ctest)
-
-#   Syntax <- paste("Syntax: CrossTable(x, y, digits = 3, expected = FALSE, correct = TRUE)",
-#                   "x:        A vector in a matrix or a dataframe OR if y not specified, a two-dimensional matrix",
-#                   "y:        A vector in a matrix or a dataframe.",
-#                   "digits:   Number of digits after the decimal point for cell proportions",
-#                   "expected: If TRUE, expected cell counts from the Chi^2 will be included.",
-#                   "correct:  If TRUE, the Yates continuity correction will be applied in the Chi^2 test.", sep = "\n")
-# 
-#   # Do error checking
-#   if (missing(x))
-#     stop(Syntax)
+  # require(ctest)  # included in base and loaded automatically
 
   if (missing(y))
   {
@@ -95,14 +87,6 @@ CrossTable <- function (x, y, digits = 3, expected = FALSE, correct = TRUE)
   # Perform Chi-Square Test
   CST <- chisq.test(t, correct = correct)
 
-  # Perform Fisher Tests
-  FTt <- fisher.test(t, alternative = "two.sided")
-
-  if (all(dim(t) == 2))
-  {
-    FTl <- fisher.test(t, alternative = "less")
-    FTg <- fisher.test(t, alternative = "greater")
-  }
 
   # Print Cell Layout
 
@@ -158,6 +142,15 @@ CrossTable <- function (x, y, digits = 3, expected = FALSE, correct = TRUE)
 
   cat(CST$method,"\n\n")
   cat("Chi^2 = ", CST$statistic, "    d.f. = ", CST$parameter, "    p = ", CST$p.value, "\n")
+
+  # Perform Fisher Tests
+  FTt <- fisher.test(t, alternative = "two.sided")
+
+  if (all(dim(t) == 2))
+  {
+    FTl <- fisher.test(t, alternative = "less")
+    FTg <- fisher.test(t, alternative = "greater")
+  }
 
   cat(rep("\n", 2))
   cat("Fisher's Exact Test for Count Data\n\n")
