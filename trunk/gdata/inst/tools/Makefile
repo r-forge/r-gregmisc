@@ -54,6 +54,7 @@ test: $(TGZ)
 clean:
 	-rm -rf $(PERL_PREFIX)
 	-rm -rf $(BIN_PREFIX)
+	-rm xls2csv xls2csv.bat xls2csv.pl
 
 
 show:	
