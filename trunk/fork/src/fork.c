@@ -34,14 +34,11 @@ void Rfork__exit(int *status)
   _exit(*status);
 }
 
-void Rfork_waitpid(int *pid, int *continued, int *nohang, int *nowait, 
-		   int *untraced, int *status)
+void Rfork_waitpid(int *pid, int *nohang, int *untraced, int *status)
 {
   int options=0;
   int pidnew=0;
-  if(*continued) options |= WCONTINUED;
   if(*nohang)    options |= WNOHANG;
-  if(*nowait)    options |= WNOWAIT;
   if(*untraced)  options |= WUNTRACED;
 
   *pid = waitpid( *pid, status, options);
