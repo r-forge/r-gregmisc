@@ -51,9 +51,6 @@ if(exists("is.R") && is.R()==TRUE)
     
   } else 
   {
-     # colnames isn't defined in S-Plus
-     if(!exists('colnames')) colnames <- function(x) names(x)[[1]]
-
       # The fast.svd() function checks if the number of columns is
       # larger than the number of rows.  When this is the case, it
       # transposes the matrix, calles svd, and then flips the returned
@@ -110,4 +107,6 @@ if(exists("is.R") && is.R()==TRUE)
         }
       }
 
+    NULL
+    
    }

@@ -1,6 +1,10 @@
 # $Id$
 #
 # $Log$
+# Revision 1.7  2003/03/07 15:48:35  warnes
+# - Minor changes to code to allow the package to be provided as an
+#   S-Plus chapter.
+#
 # Revision 1.6  2003/01/02 15:42:00  warnes
 # - Add nlevels function.
 #
@@ -171,5 +175,7 @@ if(!exists("is.R") || !is.R() )
       }
 
     nlevels <- function(x) length(levels(x))
+
+    NULL
     
   }
