@@ -1,10 +1,13 @@
-% $Id$
-%
-% $Log$
-% Revision 1.1  2001/08/25 05:48:54  warneg
-% Initial checkin.
-%
-%
+# $Id$
+#
+# $Log$
+# Revision 1.2  2001/08/31 23:45:45  warneg
+# Used wrong character in header (% instead of #).  Fixed.
+#
+# Revision 1.1  2001/08/25 05:48:54  warneg
+# Initial checkin.
+#
+#
 "wapply" _ function( x, y, fun=mean, method="range",
                     width=1/10, n=50, ...)
 {
