@@ -1,4 +1,4 @@
-# $Id$
+% $Id$
 
 \name{lsf.submit}
 \alias{lsf.submit}
@@ -61,11 +61,15 @@ lsf.submit(func, ..., savelist = c(), ncpus = 1, debug = FALSE)
 \code{\link{lsf.run.job}}} 
 \examples{
 
+   # define some variables
+   a <- 2
+   b <- 3
+   
    # define the function to remotely run
-   myfunc <- function() { 2+3 }
+   myfunc <- function(x,y) { x + y }
 
    # submit the function to run in batch
-   job <- lsf.submit(myfunc)
+   job <- lsf.submit(myfunc, a, b, savelist=c("a", "b"))
 
 }
 \keyword{utilities}
