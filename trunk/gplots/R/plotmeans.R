@@ -1,6 +1,9 @@
 # $Id$
 #
 # $Log$
+# Revision 1.8  2002/03/05 16:44:24  warneg
+# - Replace "T" with "TRUE".  Problems arrive when there is a variable named "T".
+#
 # Revision 1.7  2001/12/05 19:49:29  warneg
 # - Added ability to use the t-distribution to compute confidence
 #   intervals.  This is controlled using the 'use.t' parameter.
@@ -25,18 +28,18 @@
 # plotmeans( y ~ x, data=data, connect=F )
 
 plotmeans  <- function (formula, data = NULL, subset, na.action,
-                         bars=T, p=0.95,
+                         bars=TRUE, p=0.95,
                          minsd=0, minbar, maxbar,
                          xlab=names(mf)[2], ylab=names(mf)[1],
-                         mean.labels=F, ci.label=F, n.label=T,
+                         mean.labels=F, ci.label=F, n.label=TRUE,
                          digits=options("digits"), col="black",
                          barwidth=1,
                          barcol="blue",
-                         connect=T,
+                         connect=TRUE,
                          ccol=col,
                          legends=names(means),
                          xaxt,
-                         use.t = T,
+                         use.t = TRUE,
                          ...)
 {
   is.R <- get("is.R")
@@ -75,7 +78,7 @@ plotmeans  <- function (formula, data = NULL, subset, na.action,
     m[[1]] <- as.name("model.frame")
     mf <- eval(m, parent.frame())
     response <- attr(attr(mf, "terms"), "response")
-    means  <-  sapply(split(mf[[response]], mf[[-response]]), mean, na.rm=T)
+    means  <-  sapply(split(mf[[response]], mf[[-response]]), mean, na.rm=TRUE)
     xlim  <-  c(0.5, length(means)+0.5)
     
     if(!bars)
@@ -99,7 +102,7 @@ plotmeans  <- function (formula, data = NULL, subset, na.action,
     else
       ci.width  <- qnorm( (1+p)/2 ) * sqrt(vars/(ns-1) )
 
-    if(length(mean.labels)==1 && mean.labels==T)
+    if(length(mean.labels)==1 && mean.labels==TRUE)
       mean.labels  <-  format( round(means, digits=digits ))
     else if (mean.labels==F)
       mean.lable  <- NULL
