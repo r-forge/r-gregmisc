@@ -1,7 +1,11 @@
 % $Id$
 %
 % $Log$
+% Revision 1.6  2003/12/01 16:00:08  warnes
+% - updated to match changes to barplot() in base.
+%
 % Revision 1.5  2003/11/18 18:59:08  warnes
+%
 % - Tiny fix to remove R CMD check error.
 %
 % Revision 1.4  2003/01/30 21:43:05  warnes
@@ -196,7 +200,7 @@ mp <- barplot2(hh, beside = TRUE,
                 "lightcyan", "lavender"),
         legend = colnames(VADeaths), ylim= c(0,100),
         main = "Death Rates in Virginia", font.main = 4,
-        sub = "Faked error bars", col.sub = mybarcol,
+        sub = "Faked 95% error bars", col.sub = mybarcol,
         cex.names = 1.5, plot.ci = TRUE, ci.l = ci.l, ci.u = ci.u,
         plot.grid = TRUE)
 mtext(side = 1, at = colMeans(mp), line = -2,
