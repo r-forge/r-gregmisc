@@ -2,7 +2,6 @@
 export(
        combinations,
        ddirichlet,
-       drop.levels,
        even,
        foldchange,
        foldchange2logratio,

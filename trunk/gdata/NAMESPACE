@@ -4,6 +4,7 @@ export(
        aggregate.table,
        combine,
        ConvertMedUnits,
+       drop.levels,
        elem,
        env,
        frameApply,
