@@ -1,73 +1,37 @@
 \name{pow}
 \alias{pow}
-%- Also NEED an '\alias' for EACH other topic documented here.
-\title{ ~~function to do ... ~~ }
+
+\title{ Calculate power given sd, n, effect size (delta), sig.level }
 \description{
-  ~~ A concise (1-5 lines) description of what the function does. ~~
+ Calculate power given sd, n, effect size (delta), sig.level 
 }
 \usage{
 pow(sd, n, delta, sig.level, alpha.correct = "Bonferonni")
 }
-%- maybe also 'usage' for other objects documented here.
+
 \arguments{
-  \item{sd}{ ~~Describe \code{sd} here~~ }
-  \item{n}{ ~~Describe \code{n} here~~ }
-  \item{delta}{ ~~Describe \code{delta} here~~ }
-  \item{sig.level}{ ~~Describe \code{sig.level} here~~ }
-  \item{alpha.correct}{ ~~Describe \code{alpha.correct} here~~ }
+  \item{sd}{ vector of sd }
+  \item{n}{ sample size }
+  \item{delta}{ effect size }
+  \item{sig.level}{ type I error rate to control }
+  \item{alpha.correct}{ default is Bonferroni adjustment ,
+	 if specified to be others, no adjustment for multiple comparison }
 }
-\details{
-  ~~ If necessary, more details than the __description__  above ~~
-}
+%\details{
+%  calls power.t.test
+%}
 \value{
-  ~Describe the value returned
-  If it is a LIST, use
-  \item{comp1 }{Description of 'comp1'}
-  \item{comp2 }{Description of 'comp2'}
-  ...
+	returns a vector of power for corresponding sd
 }
-\references{ ~put references to the literature/web site here ~ }
-\author{ ~~who you are~~ }
-\note{ ~~further notes~~ }
+\references{ ctest library }
+\author{ Gregory R. Warnes\email{Gregory_R_Warnes@groton.pfizer.com}}
 
- ~Make other sections like Warning with \section{Warning }{....} ~
+% \note{ ~~further notes~~ }
+% ~Make other sections like Warning with \section{Warning }{....} ~
+% \seealso{ ~~objects to See Also as \code{\link{~~fun~~}}, ~~~ }
 
-\seealso{ ~~objects to See Also as \code{\link{~~fun~~}}, ~~~ }
 \examples{
-##---- Should be DIRECTLY executable !! ----
-##-- ==>  Define data, use random,
-##--	or do  help(data=index)  for the standard data sets.
-
-## The function is currently defined as
-function(sd, n, delta, sig.level, alpha.correct="Bonferonni")
-{
-  ntest <- length(sd)
-
-  if(length(delta)==1) delta <- rep(delta,ntest)
-
-  if(alpha.correct=="Bonferonni")
-    alpha <- sig.level/ntest
-  else
-    alpha <- sig.level
-  
-  retval<-rep(NA, ntest)
-  names(retval)<-names(sd)
-  for(i in 1:ntest)
-  {
-    if(i%%10==0) cat(".")
-      try(
-          retval[i]<-power.t.test(n=n,
-                                  delta=delta[i],
-                                  sd=sd[i],
-                                  sig.level=alpha, 
-                                  power=NULL,
-                                  type="two.sample",
-                                  alternative="two.sided")$power
-          )
-  }   
-
-  retval
-  }
+sd<-(1:4) *0.1
+test <- pow(sd, n=6, delta=1, sig.level=0.05, alpha.correct="Bonferonni")
 }
-\keyword{ ~kwd1 }% at least one, from doc/KEYWORDS
-\keyword{ ~kwd2 }% __ONLY ONE__ keyword per line
+\keyword{ statistics } 

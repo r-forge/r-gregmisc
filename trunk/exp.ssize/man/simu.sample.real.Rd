@@ -1,84 +1,61 @@
 \name{simu.sample.real}
 \alias{simu.sample.real}
-%- Also NEED an '\alias' for EACH other topic documented here.
-\title{ ~~function to do ... ~~ }
+
+\title{ Simulate a sample to do t test}
 \description{
-  ~~ A concise (1-5 lines) description of what the function does. ~~
+	Simulate a sample to do t test
 }
 \usage{
 simu.sample.real(sd.null, sd.alt, cov.null, ngenes.null.dep, cov.alt, ngenes.alt.dep, n, var.ratio, delta)
 }
-%- maybe also 'usage' for other objects documented here.
+
 \arguments{
-  \item{sd.null}{ ~~Describe \code{sd.null} here~~ }
-  \item{sd.alt}{ ~~Describe \code{sd.alt} here~~ }
-  \item{cov.null}{ ~~Describe \code{cov.null} here~~ }
-  \item{ngenes.null.dep}{ ~~Describe \code{ngenes.null.dep} here~~ }
-  \item{cov.alt}{ ~~Describe \code{cov.alt} here~~ }
-  \item{ngenes.alt.dep}{ ~~Describe \code{ngenes.alt.dep} here~~ }
-  \item{n}{ ~~Describe \code{n} here~~ }
-  \item{var.ratio}{ ~~Describe \code{var.ratio} here~~ }
-  \item{delta}{ ~~Describe \code{delta} here~~ }
+  \item{sd.null}{  sd vector for observations that are independent and come from Ho }
+  \item{sd.alt}{ sd vector for observations that are independent and come from Ha}
+  \item{cov.null}{ list of covariance matrices for observations that are 
+	dependent and come from Ho }
+  \item{ngenes.null.dep}{  number of observations in dependent groups for
+	observations coming from Ho }
+  \item{cov.alt}{ list of covariance matrices for observations that are 
+	dependent and come from Ha }
+  \item{ngenes.alt.dep}{ number of observations in dependent groups for
+	observations coming from Ha }
+  \item{n}{ number of replicates to simulate for each group of control/treatment }
+  \item{var.ratio}{ ratio of variance between treatment/control}
+  \item{delta}{ effect size for sample size calculation
+           the absolute distance from null value for expression values of genes 
+           coming from Ha group}
 }
 \details{
-  ~~ If necessary, more details than the __description__  above ~~
+ 	simulate observations from both control group and treatment group
 }
+
 \value{
-  ~Describe the value returned
-  If it is a LIST, use
-  \item{comp1 }{Description of 'comp1'}
-  \item{comp2 }{Description of 'comp2'}
-  ...
+	returns a matrix of data with each row for a observation and 
+	columns are replicates, observations from Ho group occupy
+	first rows followed by observations from Ha
+	first n columns are from control group and second n columns 
+	are from treatment group
 }
-\references{ ~put references to the literature/web site here ~ }
-\author{ ~~who you are~~ }
-\note{ ~~further notes~~ }
+\author{ Peng Liu \email{peng_liu@groton.pfizer.com}}
 
- ~Make other sections like Warning with \section{Warning }{....} ~
+% \note{ ~~further notes~~ }
+% ~Make other sections like Warning with \section{Warning }{....} ~
+% \seealso{ ~~objects to See Also as \code{\link{~~fun~~}}, ~~~ }
 
-\seealso{ ~~objects to See Also as \code{\link{~~fun~~}}, ~~~ }
 \examples{
-##---- Should be DIRECTLY executable !! ----
-##-- ==>  Define data, use random,
-##--	or do  help(data=index)  for the standard data sets.
 
-## The function is currently defined as
-function(sd.null, sd.alt, cov.null, ngenes.null.dep, cov.alt, ngenes.alt.dep, n,
-		var.ratio, delta)
+sd.null <- rep(0.1,4); sd.alt <- rep(0.2,5);
+cov.null <- cov.alt <- list(2)
+cov.null[[1]] <- cov.alt[[1]] <- cbind(c(0.1, 0.05), c(0.05,0.2));
+cov.null[[2]] <- cbind(c(0.15, 0.05), c(0.05,0.2));
+cov.alt[[2]] <- cbind(c(0.039, -0.037, 0.018), c(-0.037, 0.045, -0.021),
+	 c(0.018, -0.021, 0.013));
 
-{ ## start of the function simu.sample
+test <- simu.sample.real(sd.null, sd.alt, cov.null, ngenes.null.dep = 4,
+	 cov.alt, ngenes.alt.dep=5, n = 15,	var.ratio = 1, delta = 5)
 
-  ngenes.null.ind <- length(sd.null)
-  ngenes.alt.ind <- length(sd.alt)
-  ngenes <- sum(ngenes.null.ind, ngenes.null.dep, ngenes.alt.ind, ngenes.alt.dep)
-
-  result<- matrix(0, nr = ngenes, nc = n*2)	# place to store the simulated sample
-
-# simulate sample for the each category
-
-if (ngenes.null.ind > 0 ) {
-  index <- c(1, ngenes.null.ind)
-  result[index[1] : index[2], ] <- sample.genes.ind.2( n , sd.null, var.ratio, delta = 0)
-
- }
- 
-if (ngenes.null.dep > 0) {
-  index <- ngenes.null.ind + c(1, ngenes.null.dep)
-  result[index[1] : index[2], ] <- sample.dep.2(ngenes.null.dep , n, var.ratio, cov.null, delta = 0)
- }
-
-if (ngenes.alt.ind > 0) {
-  index <- ngenes.null.ind + ngenes.null.dep  + c(1, ngenes.alt.ind)
-  result[index[1] : index[2], ] <- sample.genes.ind.2( n, sd.alt, var.ratio, delta)
-  }
-
-if (ngenes.alt.dep > 0) {
-  index <- ngenes.null.ind + ngenes.null.dep + ngenes.alt.ind + c(1, ngenes.alt.dep)
-  result[index[1] : index[2], ] <- sample.dep.2(ngenes.alt.dep , n,  var.ratio, cov.alt, delta )
-  }	
-
- result # take n.est columns of data
-  } ## the end of the function simu.sample
+# dim(test) should be [18,30]
 }
-\keyword{ ~kwd1 }% at least one, from doc/KEYWORDS
-\keyword{ ~kwd2 }% __ONLY ONE__ keyword per line
+\keyword{ datagen } 
+\keyword{ multivariate } 

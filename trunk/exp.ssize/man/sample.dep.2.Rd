@@ -20,7 +20,7 @@ sample.dep.2(ngenes.dep, n, var.ratio, cov.matrix, delta, distrn = "normal")
   \item{cov.matrix}{ a list of covariance matrices based on which normal 
 	     samples are generated}
   \item{delta}{ effect size for sample size calculation
-           the absolute distance from zero for expression values of genes 
+           the absolute distance from null value for expression values of genes 
            coming from the true alternative hypothesis group}
   \item{distrn}{ distribution of expression data, set to be normal for here }
 }
