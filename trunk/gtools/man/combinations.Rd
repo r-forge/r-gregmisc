@@ -1,15 +1,17 @@
 % $Id$
 %
 % $Log$
+% Revision 1.2  2001/08/25 05:50:58  warneg
+% Fixed a typo and a syntax error.
+%
 % Revision 1.1  2001/06/29 13:24:08  warneg
+%
 % Initial revision.
 %
-
-
 \name{combinations}
 \alias{combinations}
 \alias{permutations}
-\Title{Enumerate the Combinations or Permutations of the Elements of a Vector}
+\title{Enumerate the Combinations or Permutations of the Elements of a Vector}
 \description{
   \code{combinations} enumerates the possible combinations of a
   specified size from the elements of a vector.  \code{permutations}
@@ -28,7 +30,7 @@ permutations(n, r, v=1:n, set=TRUE, repeats.allowed=FALSE)
     removed from the source vector \code{v}. Defaults to \code{TRUE}.}
   \item{repeats.allowed}{ Logical flag indicating whether the
     constructed vectors nay include duplicated values.  Defaults to
-    \code{FALSE}.  
+    \code{FALSE}.  }
 }
 \details{
   Caution: The number of combinations and permutations increases rapidly
@@ -38,11 +40,11 @@ permutations(n, r, v=1:n, set=TRUE, repeats.allowed=FALSE)
   Returns a matrix where each row contains a vector of length \code{n}.
 }
 \references{Venables, Bill.  "Programmers Note", R-News, Vol 1/1,
-  Jan. 2001. \link{http://cran.r-project.org/doc/Rnews} }
+  Jan. 2001. \url{http://cran.r-project.org/doc/Rnews} }
 \author{ Original versions by Bill Venables
   \email{Bill.Venables@cmis.csiro.au}.  Extended to handle
   \code{repeats.allowed} by Gregory R. Warnes
-  \email{Gregory\_R\_Warnes@groton.pfizer.com}.
+  \email{Gregory\_R\_Warnes\@groton.pfizer.com}.
   }
 %\note{ ~~further notes~~ }
 
