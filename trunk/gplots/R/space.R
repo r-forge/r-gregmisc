@@ -1,7 +1,11 @@
 # $Id$
 #
 # $Log$
+# Revision 1.6  2004/04/13 13:42:19  warnes
+# Add ability to space points along 'y' direction.
+#
 # Revision 1.5  2003/11/10 22:11:13  warnes
+#
 # - Add files contributed by Arni Magnusson
 #   <arnima@u.washington.edu>. As well as some of my own.
 #
@@ -24,8 +28,15 @@
 # that the points are separated by at least distance s.
 
 
-space <-  function(x,y,s=1/50, na.rm=TRUE)
+space <-  function(x,y,s=1/50, na.rm=TRUE, direction="x")
   {
+    if(direction!='x')
+      {
+        tmp <- y
+        y <- x
+        x <- tmp
+      }
+    
     if(na.rm)
       {
         ind <- is.na(x) | is.na(y)
@@ -68,6 +79,13 @@ space <-  function(x,y,s=1/50, na.rm=TRUE)
             same.x <- x[i]
             same.y <- y[i]
           }
+      }
+
+    if(direction!='x')
+      {
+        tmp <- y
+        y <- x
+        x <- tmp
       }
 
     return( list(x=x[undo], y=y[undo]) )

@@ -1,6 +1,9 @@
 % $Id$
 %
 % $Log$
+% Revision 1.7  2004/04/13 13:42:31  warnes
+% Add ability to space points along 'y' direction.
+%
 % Revision 1.6  2003/01/03 19:23:34  warnes
 % - Added reference to and comparison example of sunflowerplot.
 % - Added code to put example plots on same plot window using par(mfrow=...).
@@ -17,7 +20,7 @@
   Space points in an x-y plot so they don't overlap.
 }
 \usage{
-space(x, y, s=1/50, na.rm=TRUE)
+space(x, y, s=1/50, na.rm=TRUE, direction="x")
 }
 \arguments{
   \item{x}{numeric vector of x coordonates.}
@@ -27,6 +30,8 @@ space(x, y, s=1/50, na.rm=TRUE)
   fraction of the x and y range.  Defaults to 1/50.}
   \item{na.rm}{logical indicating whether pairs where one or both
     elements are missing should be removed.  Defaults to TRUE.}
+  \item{direction}{"x" or "y", indicating which direction points should
+    be moved to accomplish spacine.}
 }
 \details{
   In an x-y plot where at least one variable has discrete levels several
@@ -66,6 +71,12 @@ space(x, y, s=1/50, na.rm=TRUE)
    # 'spaced' plot: overlapping points are spread out and visible
    plot(space(x,y))
    title("Plot with 'space'")
+
+
+   # 'spaced' plot: overlapping points are spread out along y and visible
+   plot(space(x,y, direction='y'))
+   title("Plot with 'space', direction='y' ")
+
 
    # 'sunflower' plot, another approach, overlapping points are
    # indicated via petals
