@@ -5,7 +5,7 @@
   Space points in an x-y plot so they don't overlap.
 }
 \usage{
-space(x, y, s=1/50, na.rm=T)
+space(x, y, s=1/50, na.rm=TRUE)
 }
 \arguments{
   \item{x}{numeric vector of x coordonates.}

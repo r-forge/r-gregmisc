@@ -1,7 +1,7 @@
 
 residplot  <-  function(model, formula, ...)
   {
-    data  <- expand.model.frame( model, formula, na.expand=T)
+    data  <- expand.model.frame( model, formula, na.expand=TRUE)
 
     newform  <- eval(parse( text=paste("as.call(", "resid(model) ~",
                         formula[-1],")" )))

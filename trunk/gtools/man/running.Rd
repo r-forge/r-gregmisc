@@ -1,6 +1,9 @@
 % $Id$
 %
 % $Log$
+% Revision 1.4  2002/04/09 00:51:33  warneg
+% Checkin for version 0.5.3
+%
 % Revision 1.3  2002/03/07 23:39:00  warneg
 % - Added documentation and example for running2
 %
@@ -55,16 +58,16 @@ running2(X,Y, fun=mean, width=min(length(X),20), allow.fewer=FALSE,...)
 running(1:20,width=5)
 
 plot(1:20, running(1:20,width=5))
-plot(1:20, running(1:20,width=5, allow.fewer=T))
+plot(1:20, running(1:20,width=5, allow.fewer=TRUE))
 
 # plot running mean and central 2 standard deviation range
 # estimated by last 40 observations
 dat <- rnorm(500, sd=1 + (1:500)/500 )
 plot(dat)
 fun <- function(x,sign=1) mean(x) + sign * sqrt(var(x))
-lines(running(dat,width=50,fun=mean,allow=T),col="blue")
-lines(running(dat,width=50,fun=fun, sign=-1, allow=T),col="red")
-lines(running(dat,width=50,fun=fun, sign=1, allow=T),col="red")
+lines(running(dat,width=50,fun=mean,allow=TRUE),col="blue")
+lines(running(dat,width=50,fun=fun, sign=-1, allow=TRUE),col="red")
+lines(running(dat,width=50,fun=fun, sign=1, allow=TRUE),col="red")
 
 # plot running running correlation estimated by last 40 observations
 # along with true (local) correlation

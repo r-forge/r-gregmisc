@@ -1,7 +1,11 @@
 # $Id$
 #
 # $Log$
+# Revision 1.6  2002/04/09 00:51:31  warneg
+# Checkin for version 0.5.3
+#
 # Revision 1.5  2002/02/16 17:58:59  warneg
+#
 # - Fixed Bug: When method=="range", the absolute range of x was being
 #   used to compute the relative width instead of the (correct) relative
 #   range.
@@ -28,7 +32,7 @@
 #
 #
 "wapply" _ function( x, y, fun=mean, method="range",
-                    width, n=50, drop.na=T, ...)
+                    width, n=50, drop.na=TRUE, ...)
 {
   method <- match.arg(method, c("width","range","nobs","fraction"))
   if(missing(width))

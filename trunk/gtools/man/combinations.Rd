@@ -1,6 +1,9 @@
 % $Id$
 %
 % $Log$
+% Revision 1.3  2002/04/09 00:51:32  warneg
+% Checkin for version 0.5.3
+%
 % Revision 1.2  2001/08/25 05:50:58  warneg
 % Fixed a typo and a syntax error.
 %
@@ -54,9 +57,9 @@ permutations(n, r, v=1:n, set=TRUE, repeats.allowed=FALSE)
 
 \examples{
 combinations(3,2,letters[1:3])
-combinations(3,2,letters[1:3],repeats=T)
+combinations(3,2,letters[1:3],repeats=TRUE)
 
 permutations(3,2,letters[1:3])
-permutations(3,2,letters[1:3],repeats=T)
+permutations(3,2,letters[1:3],repeats=TRUE)
 }
 \keyword{ manip }

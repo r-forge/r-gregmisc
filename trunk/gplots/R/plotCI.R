@@ -1,6 +1,9 @@
 # $Id$
 #
 # $Log$
+# Revision 1.7  2002/04/09 00:51:30  warneg
+# Checkin for version 0.5.3
+#
 # Revision 1.6  2002/03/20 04:16:32  warneg
 # - Changes to add compatibility with S-Plus 2000.
 #
@@ -102,7 +105,7 @@ plotCI <- function (x, y = NULL,
     
   if(!add)
     {
-      if(missing(labels) || labels==F )
+      if(missing(labels) || labels==FALSE )
         plot(x, y, ylim = ylim, xlim=xlim, col=col,
              xlab=xlab, ylab=ylab, ...)
       else
@@ -117,7 +120,7 @@ plotCI <- function (x, y = NULL,
   else
     myarrows <- function(x1,y1,x2,y2,angle,code,length,...)
       {
-        segments(x1,y1,x2,y2,open=T,...)
+        segments(x1,y1,x2,y2,open=TRUE,...)
         if(code==1)
           segments(x1-length/2,y1,x1+length/2,y1,...)
         else

@@ -32,17 +32,17 @@ summary.glh.test(object, digits=4,...)
   The test statistic is obtained from the formula: 
   \deqn{f = \frac{(C \hat{\beta} - d)' ( C (X'X)^{-1} C' ) (C \hat{\beta}
       - d) / r }{ SSE / (n-p) } }{ 
-    F = (C Beta-hat - d)' ( C (X'X)^-1   C' ) (C Beta-hat - d) / r /
+    FALSE = (C Beta-hat - d)' ( C (X'X)^-1   C' ) (C Beta-hat - d) / r /
         ( SSE / (n-p) )
   }
   
-  Under the null hypothesis, f will follow a F-distribution with r and
+  Under the null hypothesis, f will follow a FALSE-distribution with r and
   n-p degrees of freedom.
 }
 \value{
   Object of class \code{c("glh.test","htest")} with elements:
   \item{call }{Function call that created the object}
-  \item{statistic }{F statistic}
+  \item{statistic }{FALSE statistic}
   \item{parameter}{ vector containing the numerator (r) and denominator
     (n-p) degrees of freedom }
   \item{p.value}{ p-value}

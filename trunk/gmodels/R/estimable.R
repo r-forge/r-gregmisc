@@ -1,7 +1,11 @@
 # $Id$
 #
 # $Log$
+# Revision 1.4  2002/04/09 00:51:29  warneg
+# Checkin for version 0.5.3
+#
 # Revision 1.3  2001/12/18 22:12:28  warneg
+#
 # - Modified to make confidence intervals optional.  Changed 'alpha'
 #   parameter giving significance level to 'conf.int' giving confidence
 #   level.
@@ -36,7 +40,7 @@ estimable <- function( obj, cm, conf.int=NULL )
 
   if( !is.matrix(cm) && !is.data.frame(cm) )
     cm <- matrix(cm, nrow=1)
-  
+
   # Function to compute arbitrary contrasts with c.i.
   # from a linear model ( lm, glm or nlme )
   # Original version by BXC (Bendix Carstensen) 12/01.
@@ -49,8 +53,8 @@ estimable <- function( obj, cm, conf.int=NULL )
       tmp <- cm
       tmp[tmp==0] <- NA
       df.all <- t(abs( t(tmp) * obj$fixDF$X))
-      df <- apply( df.all, 1, min, na.rm=T)
-      problem <- apply( df.all != df, 1, any, na.rm=T)
+      df <- apply( df.all, 1, min, na.rm=TRUE)
+      problem <- apply( df.all != df, 1, any, na.rm=TRUE)
       if( any(problem) )
         warning(paste("Degrees of freedom vary among parameters used to ",
                       "construct linear contrast(s): ",
@@ -104,6 +108,8 @@ estimable <- function( obj, cm, conf.int=NULL )
 
   if (!is.null(conf.int))
     {
+      if( conf.int <= 0 || conf.int >= 1 )
+        stop("conf.int should be betweeon 0 and 1. Usual values are 0.95, 0.90")
       alpha <- 1 - conf.int
       nm <- c(colnames(retval), "Lower CI", "Upper CI")
       retval <- cbind(retval,

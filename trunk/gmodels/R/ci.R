@@ -1,5 +1,21 @@
-ci  <-  function(x,...) UseMethod("ci")
+ci  <-  function(x, confidence=0.95,alpha=1-confidence,...)
+  UseMethod("ci")
 
+ci.default <- function(x, confidence=0.95,alpha=1-confidence,na.rm=F,...) {
+  est <- mean(x, na.rm=na.rm)
+  stderr <-  sd(x, na.rm=na.rm)/sqrt(nobs(x)-1);
+  ci.low  <- est + qt(alpha/2, nobs(x)-1) * stderr
+  ci.high <- est - qt(alpha/2, nobs(x)-1) * stderr
+  retval  <- c(
+               Estimate=est,
+               "CI lower"=ci.low,
+               "CI upper"=ci.high,
+               "Std. Error"=stderr,
+               )
+
+  retval
+}
+  
 ci.lm  <-  function(x,confidence=0.95,alpha=1-confidence,...)
 {
   x  <-  summary(x)
@@ -11,7 +27,7 @@ ci.lm  <-  function(x,confidence=0.95,alpha=1-confidence,...)
                    "CI upper"=ci.high,
                    "Std. Error"= coef(x)[,2],
                    "p-value" = coef(x)[,4])
-  rownames(retval)  <-  rownames(coef(x))
+
   retval
 }
 

@@ -1,7 +1,11 @@
 % $Id$
 %
 % $Log$
+% Revision 1.6  2002/04/09 00:51:33  warneg
+% Checkin for version 0.5.3
+%
 % Revision 1.5  2001/12/07 23:34:35  warneg
+%
 % Fixed an problem where \code was incorrectly delimited by parens
 % rather than curly brackets.
 %
@@ -28,7 +32,7 @@
      local estimate of the variance. 
 }
 \usage{
-wapply(x, y, fun=mean, method="range", width=1/10, n=50, drop.na=T, ...)
+wapply(x, y, fun=mean, method="range", width=1/10, n=50, drop.na=TRUE, ...)
 }
 \arguments{
   \item{x}{ vector of x values for (x,y) pairs }

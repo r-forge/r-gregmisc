@@ -2,6 +2,9 @@
 # $Id$
 #
 # $Log$
+# Revision 1.2  2002/04/09 00:51:32  warneg
+# Checkin for version 0.5.3
+#
 # Revision 1.1  2002/02/20 21:41:54  warneg
 # Initial checkin.
 #
@@ -42,20 +45,20 @@ interleave(..., append.source=TRUE, sep=": ")
 \examples{
 
 # Simple example
-a <- matrix(1:10,ncol=2,byrow=T)
-b <- matrix(letters[1:10],ncol=2,byrow=T)
-c <- matrix(LETTERS[1:10],ncol=2,byrow=T)
+a <- matrix(1:10,ncol=2,byrow=TRUE)
+b <- matrix(letters[1:10],ncol=2,byrow=TRUE)
+c <- matrix(LETTERS[1:10],ncol=2,byrow=TRUE)
 interleave(a,b,c)
 
 # Useful example:
 #
 # Create a 2-way table of means, standard errors, and # obs
 
-g1 <- sample(letters[1:5], 1000, replace=T)
-g2 <- sample(LETTERS[1:3], 1000, replace=T )
+g1 <- sample(letters[1:5], 1000, replace=TRUE)
+g2 <- sample(LETTERS[1:3], 1000, replace=TRUE )
 dat <- rnorm(1000)
 
-stderr <- function(x) sqrt( var(x,na.rm=T) / (nobs(x) - 1 ) )
+stderr <- function(x) sqrt( var(x,na.rm=TRUE) / (nobs(x) - 1 ) )
 
 means   <- aggregate.table( dat, g1, g2, mean )
 stderrs <- aggregate.table( dat, g1, g2, stderr )
@@ -66,7 +69,7 @@ tab <- interleave( "Mean"=round(means,2),
                    "Std Err"=round(stderrs,2),
                    "N"=ns, " " = blanks, sep=" " )
 
-print(tab, quote=F)
+print(tab, quote=FALSE)
 
 }
 \keyword{category}

@@ -1,4 +1,4 @@
-boxplot.n  <- function( ..., top=F, shrink=1.0, textcolor=NULL )
+boxplot.n  <- function( ..., top=FALSE, shrink=1.0, textcolor=NULL )
   {
     boxcall <- match.call()           # get call
     boxcall$top  <- boxcall$shrink  <- boxcall$textcolor  <- NULL

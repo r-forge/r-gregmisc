@@ -1,7 +1,11 @@
 % $Id$
 %
 % $Log$
+% Revision 1.8  2002/04/09 00:51:32  warneg
+% Checkin for version 0.5.3
+%
 % Revision 1.7  2001/12/12 01:37:33  warneg
+%
 % Added documentation for xaxt parameter.
 %
 % Revision 1.6  2001/12/05 19:41:43  warneg
@@ -32,11 +36,11 @@
 %\synopsis{
 \usage{
 plotmeans(formula, data=NULL, subset, na.action,
-          bars=T, p=0.95, minsd=0, minbar, maxbar,
-          xlab=names(mf)[2], ylab=names(mf)[1], mean.labels=F,
-          ci.label=F, n.label=T, digits=getOption("digits"),
+          bars=TRUE, p=0.95, minsd=0, minbar, maxbar,
+          xlab=names(mf)[2], ylab=names(mf)[1], mean.labels=FALSE,
+          ci.label=FALSE, n.label=TRUE, digits=getOption("digits"),
           col="black", barwidth=1, barcol="blue",
-          connect=T, ccol=col, legends=names(means), xaxt, use.t=T, ...)
+          connect=TRUE, ccol=col, legends=names(means), xaxt, use.t=TRUE, ...)
 }
 %
 %\usage{
@@ -135,8 +139,8 @@ plotmeans(formula, data=NULL, subset, na.action,
 
   # show some color and mean labels
   plotmeans(state.area ~ state.region,
-             mean.labels=T, digits=-3,
-             col="red", connect=F)
+             mean.labels=TRUE, digits=-3,
+             col="red", connect=FALSE)
 
   # show how to specify which means should be connected
   plotmeans(state.area ~ state.region, connect=list(1:2, 3:4),

@@ -1,7 +1,11 @@
 # $Id$
 #
 # $Log$
+# Revision 1.7  2002/04/09 00:51:29  warneg
+# Checkin for version 0.5.3
+#
 # Revision 1.6  2002/03/26 21:22:26  warneg
+#
 # - Changed methods to include '...' to match the generic.
 # - Updated for version 0.5.1
 #
@@ -41,7 +45,7 @@ glh.test <- function( reg, cm, d=rep(0, nrow(cm)) )
   if ( !( "lm" %in% class(reg) ) )
     stop("Only defined for lm,glm objects")
 
-  bhat <- summary.lm(reg)$coefficients[,1,drop=F]
+  bhat <- summary.lm(reg)$coefficients[,1,drop=FALSE]
   XpX <- summary.lm(reg)$cov.unscaled
   df <- reg$df.residual
   msr <- summary.lm(reg)$sigma  # == SSE / (n-p)

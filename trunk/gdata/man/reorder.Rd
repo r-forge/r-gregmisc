@@ -1,7 +1,11 @@
 # $Id$
 #
 # $Log$
+# Revision 1.3  2002/04/09 00:51:33  warneg
+# Checkin for version 0.5.3
+#
 # Revision 1.2  2002/03/26 21:22:35  warneg
+#
 # - Changed methods to include '...' to match the generic.
 # - Updated for version 0.5.1
 #
@@ -44,7 +48,7 @@ reorder(X, order)
 \examples{
    # Create a 4 level example factor
    trt <- factor( sample( c("PLACEBO","300 MG", "600 MG", "1200 MG"),
-                  100, replace=T ) )
+                  100, replace=TRUE ) )
    summary(trt)
    # Note that the levels are not in a meaningful order.
 

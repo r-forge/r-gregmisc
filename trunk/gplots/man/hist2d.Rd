@@ -5,7 +5,7 @@
   Compute and plot a 2-dimensional histogram. }
 }
 \usage{
-hist2d(x,y=NULL, nbins=200, same.scale=F, na.rm=T, show=T,
+hist2d(x,y=NULL, nbins=200, same.scale=FALSE, na.rm=TRUE, show=TRUE,
        col=c("black", heat.colors(12)), ... )
 }
 %- maybe also `usage' for other objects documented here.
@@ -56,13 +56,13 @@ hist2d(x,y=NULL, nbins=200, same.scale=F, na.rm=T, show=T,
    hist2d(x,y)
 
    # same scale for each axis, this looks oval
-   hist2d(x,y, same.scale=T)
+   hist2d(x,y, same.scale=TRUE)
 
    # use different # bins in each dimension
-   hist2d(x,y, same.scale=T, nbins=c(100,200) )
+   hist2d(x,y, same.scale=TRUE, nbins=c(100,200) )
 
    # use the hist2d function to create inputs for a perspective plot
-   h2d <- hist2d(x,y,show=F, same.scale=T, nbins=30)
+   h2d <- hist2d(x,y,show=FALSE, same.scale=TRUE, nbins=30)
    persp( h2d$x, h2d$y, h2d$counts,
           ticktype="detailed", theta=30, phi=30,
           expand=0.5, shade=0.5, col="cyan", ltheta=-30)

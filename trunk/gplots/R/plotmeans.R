@@ -1,11 +1,14 @@
 # $Id$
 #
 # $Log$
+# Revision 1.10  2002/04/09 00:51:30  warneg
+# Checkin for version 0.5.3
+#
 # Revision 1.9  2002/03/20 04:17:05  warneg
 # - Changes to add compatibility with S-Plus 2000
 #
 # Revision 1.8  2002/03/05 16:44:24  warneg
-# - Replace "T" with "TRUE".  Problems arrive when there is a variable named "T".
+# - Replace "TRUE" with "TRUE".  Problems arrive when there is a variable named "TRUE".
 #
 # Revision 1.7  2001/12/05 19:49:29  warneg
 # - Added ability to use the t-distribution to compute confidence
@@ -27,14 +30,14 @@
 #
 # example:
 #
-# data  <-  data.frame(y=rnorm(100), x=factor(rep(c("A","C","F","Z"),25)))
-# plotmeans( y ~ x, data=data, connect=F )
+# data  <-  data.frame(y=rnorm(100), x=factor(rep(c("A","C","FALSE","Z"),25)))
+# plotmeans( y ~ x, data=data, connect=FALSE )
 
 plotmeans  <- function (formula, data = NULL, subset, na.action,
                          bars=TRUE, p=0.95,
                          minsd=0, minbar=NULL, maxbar=NULL,
                          xlab=names(mf)[2], ylab=names(mf)[1],
-                         mean.labels=F, ci.label=F, n.label=TRUE,
+                         mean.labels=FALSE, ci.label=FALSE, n.label=TRUE,
                          digits=options("digits"), col="black",
                          barwidth=1,
                          barcol="blue",
@@ -68,7 +71,7 @@ plotmeans  <- function (formula, data = NULL, subset, na.action,
       }
     else
       {
-        if (is.matrix(eval(m$data, F)))
+        if (is.matrix(eval(m$data, FALSE)))
           m$data <- as.data.frame(data)
       }
     m$... <- m$bars <- m$barcol <- m$p <- NULL
@@ -95,7 +98,7 @@ plotmeans  <- function (formula, data = NULL, subset, na.action,
         
     vars <- sapply(split(mf[[response]], mf[[-response]]), myvar)
     ns   <- sapply( sapply(split(mf[[response]], mf[[-response]]), na.omit,
-                           simplify=F), length )
+                           simplify=FALSE), length )
 
     # apply minimum variance specified by minsd^2
     vars <- ifelse( vars < (minsd^2), (minsd^2), vars)
@@ -107,7 +110,7 @@ plotmeans  <- function (formula, data = NULL, subset, na.action,
 
     if(length(mean.labels)==1 && mean.labels==TRUE)
       mean.labels  <-  format( round(means, digits=digits ))
-    else if (mean.labels==F)
+    else if (mean.labels==FALSE)
       mean.lable  <- NULL
 
     plotCI(x=1:length(means), y=means, uiw=ci.width, xaxt="n",
@@ -149,7 +152,7 @@ plotmeans  <- function (formula, data = NULL, subset, na.action,
                labels=paste("n=",ns,"\n",sep=""))
         }
     
-    if(connect!=F)
+    if(connect!=FALSE)
       {
         if(is.list(connect))
           {

@@ -6,7 +6,7 @@
   standard deviation.
   }
 \usage{
-  bandplot(x, y, ..., add = F, sd = c(-2:2),
+  bandplot(x, y, ..., add = FALSE, sd = c(-2:2),
            sd.col = c("lightblue", "blue", "red", "blue", "lightblue"),
            method = "frac", width = 1/5, n=50) 
 NULL

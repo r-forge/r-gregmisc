@@ -1,8 +1,11 @@
 # $Id$
 #
 # $Log$
+# Revision 1.4  2002/04/09 00:51:30  warneg
+# Checkin for version 0.5.3
+#
 # Revision 1.3  2001/12/08 01:54:19  warneg
-# Changed 'T' to 'TRUE' in parameter list.
+# Changed 'TRUE' to 'TRUE' in parameter list.
 #
 # Revision 1.2  2001/12/07 22:55:32  warneg
 #
@@ -50,7 +53,7 @@ rename.vars <- function(data,from='',to='',info=TRUE) {
      tmp <- rbind(from,to)
      dimnames(tmp)[[1]] <- c('From:','To:')
      dimnames(tmp)[[2]] <- rep('',length(from))
-   if (info) print(tmp,quote=F)
+   if (info) print(tmp,quote=FALSE)
    names(data) <- dfn.new
    invisible(data)
 }

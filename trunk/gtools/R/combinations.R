@@ -1,7 +1,11 @@
 # $Id$
 #
 # $Log$
+# Revision 1.2  2002/04/09 00:51:29  warneg
+# Checkin for version 0.5.3
+#
 # Revision 1.1  2001/06/29 13:23:55  warneg
+#
 # Initial revision.
 #
 
@@ -21,7 +25,7 @@ combinations <- function(n, r, v = 1:n, set = TRUE, repeats.allowed=FALSE)
      || r < 1 || (r %% 1) != 0) stop("bad value of r") 
   if(!is.atomic(v) || length(v) < n) 
     stop("v is either non-atomic or too short")
-  if( (r > n) & repeats.allowed==F)
+  if( (r > n) & repeats.allowed==FALSE)
     stop("r > n")
   if(set) {
     v <- unique(sort(v))
@@ -67,7 +71,7 @@ permutations <- function(n, r, v = 1:n, set = TRUE, repeats.allowed=FALSE)
      || r < 1 || (r %% 1) != 0) stop("bad value of r") 
   if(!is.atomic(v) || length(v) < n) 
     stop("v is either non-atomic or too short")
-  if( (r > n) & repeats.allowed==F)
+  if( (r > n) & repeats.allowed==FALSE)
     stop("r > n")
   if(set) {
     v <- unique(sort(v))

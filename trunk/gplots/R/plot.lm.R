@@ -8,7 +8,7 @@ function(x, which = 1:5,
          	&& .Device != "postscript",
          ...,
          id.n = 3, labels.id = names(residuals(x)), cex.id = 0.75,
-         band=T,rug=T)
+         band=TRUE,rug=TRUE)
 {
     if (!inherits(x, "lm"))
 	stop("Use only with 'lm' objects")
@@ -66,7 +66,7 @@ function(x, which = 1:5,
 	     ylim = ylim, type = "n", ...)
 	panel(yh, r, ...)
         if(rug)  rug(yh)                    ## GRW 2001-06-08
-        if(band) bandplot(yh,r,add=T,lty=3) ## GRW 2001-06-08
+        if(band) bandplot(yh,r,add=TRUE,lty=3) ## GRW 2001-06-08
 	if (one.fig)
 	    title(sub = sub.caption, ...)
 	mtext(caption[1], 3, 0.25)
@@ -99,7 +99,7 @@ function(x, which = 1:5,
 
         abline(h=mean(sqrtabsr),lty = 3, col = "gray")
         if(rug)  rug(yh)                             ## GRW 2001-06-08
-        if(band) bandplot(yhn0,sqrtabsr,add=T,lty=3) ## GRW 2001-06-08
+        if(band) bandplot(yhn0,sqrtabsr,add=TRUE,lty=3) ## GRW 2001-06-08
 
 	if (one.fig)
 	    title(sub = sub.caption, ...)
@@ -130,7 +130,7 @@ function(x, which = 1:5,
             plot( data[,i], r, xlab=names(data)[i], ylab="Residuals", type="n")
             panel( data[,i], r, ... )
             if(rug)  rug(data[,i])
-            if(band) bandplot(data[,i],r,add=T,lty=3)
+            if(band) bandplot(data[,i],r,add=TRUE,lty=3)
             abline(h=0,lty = 3, col = "gray")
           }
       }

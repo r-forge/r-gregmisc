@@ -1,7 +1,11 @@
 # $Id$
 #
 # $Log$
+# Revision 1.4  2002/04/09 00:51:31  warneg
+# Checkin for version 0.5.3
+#
 # Revision 1.3  2002/02/04 23:20:29  warneg
+#
 # - Add na.rm parameter and make the default TRUE.
 #
 # Revision 1.2  2001/12/07 22:24:30  warneg
@@ -15,7 +19,7 @@
 # that the points are separated by at least distance s.
 
 
-space <-  function(x,y,s=1/50, na.rm=T)
+space <-  function(x,y,s=1/50, na.rm=TRUE)
   {
     if(na.rm)
       {
