@@ -1,6 +1,6 @@
 # $Id$
 
-unmatrix <- function(x, byrow=F)
+unmatrix <- function(x, byrow=FALSE)
   {
     rnames <- rownames(x)
     cnames <- colnames(x)
