@@ -1,18 +1,20 @@
 is.what <- function(object, verbose=FALSE)
-###########################################################################################################################
-###                                                                                                                       #
-### Function: is.what                                                                                                     #
-###                                                                                                                       #
-### Purpose:  Run multiple is.* tests on a given object                                                                   #
-###                                                                                                                       #
-### Args:     object is any R object                                                                                      #
-###           verbose is whether negative tests results should be included in output                                      #
-###                                                                                                                       #
-### Notes:    Based on demo(is.things)                                                                                    #
-###                                                                                                                       #
-### Returns:  String vector of positive results, or when verbose is TRUE, a data frame containing all test results        #
-###                                                                                                                       #
-###########################################################################################################################
+############################################################################
+###                                                                         
+### Function: is.what                                                       
+###                                                                         
+### Purpose:  Run multiple is.* tests on a given object                     
+###                                                                         
+### Args:     object is any R object                                        
+###           verbose is whether negative tests results should be included in
+###           output                                                          
+###                                                                          
+### Notes:    Based on demo(is.things)                                        
+###                                                                           
+### Returns:  String vector of positive results, or when verbose is TRUE, a
+###           data frame containing all test results                         
+###                                                                          
+#############################################################################
 {
   do.test <- function(test, object)
   {

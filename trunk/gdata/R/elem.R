@@ -1,18 +1,21 @@
-elem <- function(object, unit=c("KB", "MB", "bytes"), digits=0, dimensions=FALSE)
-###########################################################################################################################
-###                                                                                                                       #
-### Function: elem                                                                                                        #
-###                                                                                                                       #
-### Purpose:  Display information about elements in a given object                                                        #
-###                                                                                                                       #
-### Args:     object is an object containing named elements, perhaps a model or data.frame                                #
-###           unit is the required unit for displaying object size in memory ("KB", "MB", "bytes", or first letter)       #
-###           digits is the number of decimals to display                                                                 #
-###           dimensions is whether object dimensions (dim or length) should be returned                                  #
-###                                                                                                                       #
-### Returns:  Data frame containing information about object elements (name, class, size, and optionally dimensions)      #
-###                                                                                                                       #
-###########################################################################################################################
+elem <- function(object, unit=c("KB", "MB", "bytes"), digits=0,
+                 dimensions=FALSE)
+#############################################################################
+###                                                                          
+### Function: elem                                                           
+###                                                                          
+### Purpose:  Display information about elements in a given object           
+###                                                                          
+### Args:     object is an object containing named elements, perhaps a model
+###           or data.frame unit is the required unit for displaying object
+###           size in memory ("KB", "MB", "bytes", or first letter) digits is
+###           the number of decimals to display dimensions is whether object
+###           dimensions (dim or length) should be returned                  
+###                                                                          
+### Returns:  Data frame containing information about object elements (name,
+###           class, size, and optionally dimensions)                        
+###                                                                          
+#############################################################################
 {
   get.element.classname <- function(object, element.name)
   {

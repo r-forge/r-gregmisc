@@ -1,19 +1,22 @@
-ll <- function(pos=1, unit=c("KB","MB","bytes"), digits=0, dimensions=FALSE, ...)
-###########################################################################################################################
-###                                                                                                                       #
-### Function: ll                                                                                                          #
-###                                                                                                                       #
-### Purpose:  Display information about objects in a given environment                                                    #
-###                                                                                                                       #
-### Args:     pos is the environment position number or name                                                              #
-###           unit is the required unit for displaying object size in memory ("KB", "MB", "bytes", or first letter)       #
-###           digits is the number of decimals to display                                                                 #
-###           dimensions is whether object dimensions (dim or length) should be returned                                  #
-###           ... is passed to ls()                                                                                       #
-###                                                                                                                       #
-### Returns:  Data frame containing information about objects (name, class, size, and optionally dimensions)              #
-###                                                                                                                       #
-###########################################################################################################################
+ll <- function(pos=1, unit=c("KB","MB","bytes"), digits=0, dimensions=FALSE,
+               ...)
+#############################################################################
+###                                                                          
+### Function: ll                                                             
+###                                                                          
+### Purpose:  Display information about objects in a given environment       
+###                                                                          
+### Args:     pos is the environment position number or name                 
+###           unit is the required unit for displaying object size in memory
+###           ("KB", "MB", "bytes", or first letter) digits is the number of
+###           decimals to display dimensions is whether object dimensions
+###           (dim or length) should be returned                            
+###           ... is passed to ls()                                         
+###                                                                         
+### Returns:  Data frame containing information about objects (name, class,
+###           size, and optionally dimensions)                               
+###                                                                          
+#############################################################################
 {
   get.object.classname <- function(object.name, pos)
   {
