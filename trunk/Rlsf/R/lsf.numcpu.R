@@ -1,6 +1,6 @@
 # $Id$
 
-"numcpu.lsf" <-
+"lsf.numcpu" <-
 function(default)
   {
     hosts <- Sys.getenv("LSB_HOSTS")

@@ -1,11 +1,11 @@
 # $Id$
 
 "lsf.submit" <-
-  function(func, ..., savelist = c())
+  function(func, ..., savelist=c(), debug=FALSE)
   # savelist is a character vector of *names* of objects to be
   # copied to the remote R session
   {
-    fname <- tempfile(pattern = ".LSFRdata", tmpdir = getwd())
+    fname <- tempfile(pattern = "Rlsf_data", tmpdir = getwd())
 
     lsf.call <- as.call(list(func, ...) )
 
@@ -13,24 +13,14 @@
 
     save(list=savelist, file=fname)
 
-    script <- paste(
-                    file.path(.path.package("Rlsf"),
-                              "RunLsfJob"),
-                    fname
-                    )
+    script <- paste(file.path(.path.package("Rlsf"), "RunLsfJob"), fname)
 
-    jobid <- .Call("lsf_job_submit", script)
+    jobid <- .Call("lsf_job_submit", as.integer(debug), script)
 
     if (jobid)
-      list(jobid=jobid,fname=fname)
+      list(jobid=jobid,fname=fname,debug=debug)
     else 
       return(NULL)
   }
 
-
-# remote side needs to do:
-#    newenv <- environment()
-#    load(file = fname, envir=newenv)
-#    retval <- eval(lsf.call, env=newenv)
-#    save(retval, file=fname)
 
