@@ -5,8 +5,8 @@
 \title{Scatter Plot Smoothing}
 \usage{
 lowess(x, ...)
-lowess.default(x, y, f=2/3, iter=3, delta=.01*diff(range(x)))
-lowess.formula(formula,data = parent.frame(), subset, na.action, 
+\method{lowess}{default}(x, y, f=2/3, iter=3, delta=.01*diff(range(x)))
+\method{lowess}{formula}(formula,data = parent.frame(), subset, na.action, 
                f=3,  iter=3, delta=.01*diff(range(mf[-response])) )
 }
 \alias{lowess}
@@ -27,7 +27,13 @@ lowess.formula(formula,data = parent.frame(), subset, na.action,
     performed.
     Using smaller values of \code{iter} will make \code{lowess} run faster.}
   \item{delta}{values of \code{x} which lie within \code{delta}
-    of each other replaced by a single value in the output from \code{lowess}.}
+    of each other replaced by a single value in the output from
+    \code{lowess}.}
+  \item{na.action}{a function which indicates what should happen when the data
+          contain `NA's.  The default is set by the `na.action' setting
+          of `options', and is `na.fail' if that is unset. The
+          ``factory-fresh'' default is `na.omit'.}
+  \item{...}{parameters for methods.}
 }
 \description{
   This function performs the computations for the

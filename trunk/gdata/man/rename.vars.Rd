@@ -10,7 +10,7 @@ rename.vars(data, from="", to="", info=TRUE)
 \arguments{
   \item{data}{ dataframe to be modified.  }
   \item{from}{ character vector containing the current name of each variable to be renamed.}
-  \item{from}{ character vector containing the new name of each variable
+  \item{to}{ character vector containing the new name of each variable
     to be renamed.}
   \item{info}{ boolean value indicating whether to print details of the
     renaming.  Defaults to TRUE.}

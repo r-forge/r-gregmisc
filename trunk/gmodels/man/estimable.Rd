@@ -1,7 +1,11 @@
 # $Id$
 #
 # $Log$
+# Revision 1.6  2002/02/20 20:09:02  warneg
+# Minor changes, typo and formatting fixes.
+#
 # Revision 1.5  2002/01/17 23:51:06  warneg
+#
 # - Fixed errror in last example by adding 'conf.int' parameter to
 #   'estimable' call.
 #
@@ -42,7 +46,7 @@
 estimable(obj, cm, conf.int=NULL)
 }
 \arguments{
-  \item{reg}{Regression (lm,glm,lme) object. }
+  \item{obj}{Regression (lm,glm,lme) object. }
   \item{cm}{matrix specifying estimable linear functions or contrasts (one per
     row). The number of columns must match the number of fitted
     coefficients in the model.} 

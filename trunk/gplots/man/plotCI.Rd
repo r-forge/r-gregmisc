@@ -20,8 +20,9 @@ plotCI(x, y = NULL, uiw, liw = uiw, ui, li, err = "y", col = par("col"),
 
   \item{ui}{ upper end of error bars.  Defaults to \code{y + uiw} or
     \code{x + uiw} depeding on \code{err}.  Set to \code{NULL} omit
-    upper bars. }
-  \item{ui}{ lower end of error bars.  Defaults to \code{y - liw} or
+    upper bars. } 
+
+  \item{li}{ lower end of error bars.  Defaults to \code{y - liw} or
     \code{x - liw} depedning on \code{err}.  Set to \code{NULL} to omit
     lower bars.}
 

@@ -1,6 +1,9 @@
 % $Id$
 %
 % $Log$
+% Revision 1.5  2002/02/20 20:09:02  warneg
+% Minor changes, typo and formatting fixes.
+%
 % Revision 1.4  2001/12/07 19:50:50  warneg
 % - Added text noting that lme is now supported.
 %
@@ -21,16 +24,20 @@
 \description{ Compute and display confidence intervals for model
   estimates.  Methods for \code{lm} and \code{lme} objects are
   provided. }
-\usage{
-ci(x, ...)
-ci.lm(x, confidence = 0.95, alpha = 1 - confidence)
-ci.lme(x, confidence = 0.95, alpha = 1 - confidence) 
+\synopsis{
+  ci(x, ...)
+  \method{ci}{lm}(x, confidence = 0.95, alpha = 1 - confidence)
+  \method{ci}{lme}(x, confidence = 0.95, alpha = 1 - confidence) 
 }
-%- maybe also `usage' for other objects documented here.
+\usage{
+  ci(x, ...)
+  \method{ci}{lme}(x, confidence = 0.95, alpha = 1 - confidence) 
+}
 \arguments{
   \item{x}{ object from which to compute confidence intervals. }
   \item{confidence}{ confidence level. Defaults to 0.95. }
   \item{alpha}{Type one error rate.  Defaults to 1.0-\code{confidence} }
+  \item{\dots}{Argumens for methods}
 }
 %\details{
 %  ~~ If necessary, more details than the __description__  above ~~

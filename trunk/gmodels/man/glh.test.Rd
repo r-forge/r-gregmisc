@@ -49,7 +49,7 @@ summary.glh.test(x, digits=4)
   \item{null.value}{ d }
   \item{method}{ description of the method }
   \item{data.name}{ name of the model given for \code{reg} }
-  \item{matrix} { matrix specifying the general linear hypotheis
+  \item{matrix}{ matrix specifying the general linear hypotheis
     (\code{cm}) }
 }
 \references{ R.H. Myers, Classical and Modern Regression with

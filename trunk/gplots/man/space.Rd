@@ -5,7 +5,7 @@
   Space points in an x-y plot so they don't overlap.
 }
 \usage{
-space(x, y, s=1/50)
+space(x, y, s=1/50, na.rm=T)
 }
 \arguments{
   \item{x}{numeric vector of x coordonates.}
@@ -13,6 +13,8 @@ space(x, y, s=1/50)
   \item{s}{either a single numeric value or 2 element vector specifying
   the minimum distance between points in the x and y dimensions as a
   fraction of the x and y range.  Defaults to 1/50.}
+  \item{na.rm}{logical indicating whether pairs where one or both
+    elements are missing should be removed.  Defaults to TRUE.}
 }
 \details{
   In an x-y plot where at least one variable has discrete levels several
@@ -44,6 +46,13 @@ space(x, y, s=1/50)
 
    # 'spaced' plot 
    plot(space(x,y))
+
+   \testonly{
+     # check that missign values correctly handled
+     x <- c(x,NA)
+     y <- c(y,NA)
+     plot(space(x,y))
+   }
 }
 \keyword{ dplot }
 
