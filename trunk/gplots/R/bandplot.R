@@ -15,7 +15,7 @@ bandplot  <-  function(x,y,
 
     if(!add)
       {
-        m <- match.call(expand.dots = FALSE)
+        m <- match.call(expand.dots = TRUE)
         m$width  <- m$add  <- m$sd  <- m$sd.col  <- NULL
         m$method <- m$n <- NULL
         m[[1]] <- as.name("plot")
