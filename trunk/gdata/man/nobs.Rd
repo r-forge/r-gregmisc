@@ -2,7 +2,11 @@
 # $Id$
 #
 # $Log$
+# Revision 1.4  2002/03/26 19:29:15  warneg
+# Updated to add ... parameter to function calls.
+#
 # Revision 1.3  2002/02/20 21:31:08  warneg
+#
 # Noted that specialized methods exist.
 #
 # Revision 1.2  2002/02/20 21:29:34  warneg
@@ -24,9 +28,9 @@
 }
 \usage{
 nobs(x, ...)
-\method{nobs}{default}(x)
-\method{nobs}{data.frame}(x)
-\method{nobs}{lm}(x)
+\method{nobs}{default}(x, ...)
+\method{nobs}{data.frame}(x, ...)
+\method{nobs}{lm}(x, ...)
 }
 \arguments{
   \item{x}{ Target Object }
