@@ -1,7 +1,7 @@
 #!/bin/env perl
 
 # Explicit specify path to our library directory
-use lib "/mss/srg3/warneg/src/R/gregmisc.Rcheck/gregmisc/perl/lib/perl5/site_perl/5.6.1";
+use lib "/home/warneg/gregmisc.Rcheck/gregmisc/perl";
 # DO NOT REMOVE THE ABOVE LINE!
 
 use strict;
@@ -61,6 +61,9 @@ if(defined($ARGV[2]) )
 my $oExcel = new Spreadsheet::ParseExcel;
 
 print "Loading $ARGV[0] ...\n";
+
+stat($ARGV[0]);
+die "Unable to open file '$ARGV[0]'.\n" if not -r;
 
 my $oBook = $oExcel->Parse($ARGV[0]);
 
