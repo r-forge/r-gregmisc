@@ -24,6 +24,7 @@ heatmap.2 <- function (x,
                      colsep,
                      rowsep,
                      sepcolor="white",
+                     sepwidth=c(0.05,0.05),
 
                      # cell labeling
                      cellnote,
@@ -51,6 +52,8 @@ heatmap.2 <- function (x,
                      key = TRUE,
                      density.info=c("histogram","density","none"),
                      denscol=tracecol,
+                     symkey = TRUE,
+                     densadj = 0.25,
 
                      # plot labels
                      main = NULL,
@@ -269,6 +272,20 @@ heatmap.2 <- function (x,
     if (!missing(add.expr))
 	eval(substitute(add.expr))
 
+    ## add 'background' colored spaces to visually separate sections
+    if(!missing(colsep))
+      for(csep in colsep)
+        rect(xleft =csep+0.5,               ybottom=rep(0,length(csep)),
+             xright=csep+0.5+sepwidth[1],     ytop=rep(ncol(x)+1,csep),
+             lty=1, lwd=1, col=sepcolor, border=sepcolor)
+
+    if(!missing(rowsep))
+      for(rsep in rowsep)
+        rect(xleft =0,          ybottom= (ncol(x)+1-rsep)-0.5,
+             xright=ncol(x)+1,  ytop   = (ncol(x)+1-rsep)-0.5 - sepwidth[2],
+             lty=1, lwd=1, col=sepcolor, border=sepcolor)
+
+  
     # show traces
     min.scale <- min(breaks)
     max.scale <- max(breaks)
@@ -290,6 +307,7 @@ heatmap.2 <- function (x,
           }
       }
 
+ 
     if(trace %in% c("both","row") )
       {
         for( i in rowInd )
@@ -307,20 +325,6 @@ heatmap.2 <- function (x,
       }
 
 
-
-
-    ## add 'background' colored spaces to visually separate sections
-    if(!missing(colsep))
-      for(csep in colsep)
-        rect(xleft=csep+0.5,   ybottom=rep(0,length(csep)),
-             xright=csep+0.55, ytop=rep(ncol(x)+1,csep),
-             lty=1, lwd=1, col=sepcolor, border=sepcolor)
-
-    if(!missing(rowsep))
-      for(rsep in rowsep)
-        rect(xleft=0,          ybottom=nrow(x)+1-rsep-0.5,
-             xright=ncol(x)+1, ytop=nrow(x)+1-rsep-0.55,
-             lty=1, lwd=1, col=sepcolor, border=sepcolor)
 
     if(!missing(cellnote))
       text(x=c(row(cellnote)),
@@ -354,8 +358,16 @@ heatmap.2 <- function (x,
       {
         par(mar = c(5, 4, 2, 1), cex=0.75)
 
-        min.raw <- min(x, na.rm=TRUE) # Again, modified to use scaled or unscaled (SD 12/2/03)
-        max.raw <- max(x, na.rm=TRUE)
+        if(symkey)
+          {
+            max.raw <- max(abs(x))
+            min.raw <- -max.raw
+          }
+        else
+          {
+            min.raw <- min(x, na.rm=TRUE) # Again, modified to use scaled or unscaled (SD 12/2/03)
+            max.raw <- max(x, na.rm=TRUE)
+          }
 
         z <- seq(min.raw,max.raw,length=length(col))
         image(z=matrix(z, ncol=1),
@@ -376,11 +388,11 @@ heatmap.2 <- function (x,
         if(density.info=="density")
           {
             # Experimental : also plot density of data
-            dens <- density(x, adjust=0.25, na.rm=TRUE)
-            omit <- dens$x < min(breaks) | dens$x > min(breaks)
+            dens <- density(x, adjust=densadj, na.rm=TRUE)
+            omit <- dens$x < min(breaks) | dens$x > max(breaks)
             dens$x <- dens$x[-omit]
             dens$y <- dens$y[-omit]
-            dens$x <- scale01(dens$x)
+            dens$x <- scale01(dens$x,min.raw,max.raw)
             lines(dens$x, dens$y / max(dens$y) * 0.95, col=denscol, lwd=1)
             axis(2, at=pretty(dens$y)/max(dens$y) * 0.95, pretty(dens$y) )
             title("Color Key\nand Density Plot")

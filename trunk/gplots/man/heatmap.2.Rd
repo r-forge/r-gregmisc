@@ -9,62 +9,65 @@
   restrictions imposed by the dendrogram is carried out.
 }
 \usage{
-heatmap.2 <- function (x,
+heatmap.2 <- function (x, 
 
                      #-- dendrogram control --#
-                     Rowv=NULL,
-                     Colv=if(symm)"Rowv" else NULL,
-                     distfun = dist,
-                     hclustfun = hclust,
-                     dendogram = c("both","row","column","none"),
-                     symm = FALSE,
+                     Rowv=NULL, 
+                     Colv=if(symm)"Rowv" else NULL, 
+                     distfun=dist, 
+                     hclustfun=hclust, 
+                     dendogram=c("both", "row", "column", "none"), 
+                     symm=FALSE, 
 
                      #-- data scaling --#
-                     scale = c("none","row", "column"),
-                     na.rm=TRUE,
+                     scale=c("none", "row", "column"), 
+                     na.rm=TRUE, 
 
                      #-- image plot --#
-                     revC = identical(Colv, "Rowv"),
-                     add.expr,
-                     breaks,
-                     col=heat.colors(length(breaks)-1),
+                     revC=identical(Colv, "Rowv"), 
+                     add.expr, 
+                     breaks, 
+                     col=heat.colors(length(breaks)-1), 
 
                      #-- block separation --#
-                     colsep,
-                     rowsep,
-                     sepcolor="white",
+                     colsep, 
+                     rowsep, 
+                     sepcolor="white", 
+                     sepwidth=c(0.05, 0.05), 
 
                      #-- cell labeling --#
-                     cellnote,
-                     notecex=1.0,
-                     notecol="cyan",
-                     na.color=par("bg"),
+                     cellnote, 
+                     notecex=1.0, 
+                     notecol="cyan", 
+                     na.color=par("bg"), 
 
                      #-- level trace --#
-                     trace=c("column","row","both","none"),
-                     tracecol="yellow",
-                     hline=median(breaks),
-                     vline=median(breaks),
-                     linecol=tracecol,
+                     trace=c("column", "row", "both", "none"), 
+                     tracecol="yellow", 
+                     hline=median(breaks), 
+                     vline=median(breaks), 
+                     linecol=tracecol, 
 
                      #-- Row/Column Labeling --#
-                     margins = c(5, 5),
-                     ColSideColors,
-                     RowSideColors,
-                     cexRow = 0.2 + 1/log10(nr),
-                     cexCol = 0.2 + 1/log10(nc),
-                     labRow = NULL,
-                     labCol = NULL,
+                     margins=c(5, 5), 
+                     ColSideColors, 
+                     RowSideColors, 
+                     cexRow=0.2 + 1/log10(nr), 
+                     cexCol=0.2 + 1/log10(nc), 
+                     labRow=NULL, 
+                     labCol=NULL, 
 
                      #-- color key + density info --#
-                     key = TRUE,
-                     density.info=c("histogram","density","none"),
-                     denscol="yellow",
+                     key=TRUE, 
+                     density.info=c("histogram", "density", "none"), 
+                     denscol=tracecol, 
+                     symkey=TRUE, 
+                     sepwidth=c(0.05, 0.05), 
 
                      #-- plot labels --#
-                     main = NULL,
-                     xlab = NULL,
-                     ylab = NULL,
+                     main=NULL, 
+                     xlab=NULL, 
+                     ylab=NULL, 
 
                      #-- extras --#
                      ...
@@ -87,7 +90,7 @@ heatmap.2 <- function (x,
   \item{hclustfun}{function used to compute the hierarchical clustering
     when \code{Rowv} or \code{Colv} are not dendrograms.  Defaults to
     \code{\link{hclust}}.}
-  \item{dendogram}{character string indicating whether to draw 'none',
+  \item{dendogram}{character string indicating whether to draw 'none', 
     'row', 'column' or 'both' dendrograms.  Defaults to 'both'.}
   \item{symm}{logical indicating if \code{x} should be treated
     \bold{symm}etrically; can only be true when \code{x} is a square matrix.}
@@ -110,9 +113,12 @@ heatmap.2 <- function (x,
   \item{col}{colors used for the image. Defaults to heat colors
     (\code{heat.colors}).}
   % block separation
-  \item{colsep,rowsep,sepcolor}{(optional) vector of integers indicating
+  \item{colsep, rowsep, sepcolor}{(optional) vector of integers indicating
     which columns or rows should be separated from the preceding columns
     or rows by a narrow space of color \code{sepcolor}.}
+  \item{sepwidth}{(optional)  Vector of length 2 giving the width (colsep) or height (rowsep) the separator box
+   drawn by colsep and rowsep as a function of the width (colsep) or
+   height (rowsep) of a cell. Defaults to \code{c(0.05, 0.05)}}
   % cell labeling
   \item{cellnote}{(optional) matrix of character strings which will be
     placed within each color cell, e.g. p-value symbols.}
@@ -129,7 +135,7 @@ heatmap.2 <- function (x,
     proportional to the size of the measurement. Defaults to 'column'.}
   \item{tracecol}{character string giving the color for "trace"
     line. Defaults to "cyan".}
-  \item{hline,vline,linecol}{Vector of values within cells where a
+  \item{hline, vline, linecol}{Vector of values within cells where a
     horizontal or vertical dotted line should be drawn.  The color of
     the line is controlled by \code{linecol}.  Horizontal  lines are only
     plotted if \code{trace} is 'row' or 'both'.  Vertical lines are only
@@ -149,7 +155,7 @@ heatmap.2 <- function (x,
     for the row or column axis labeling.  The defaults currently only
     use number of rows or columns, respectively.}
   \item{labRow, labCol}{character vectors with row and column labels to
-    use; these default to \code{rownames(x)} or \code{colnames(x)},
+    use; these default to \code{rownames(x)} or \code{colnames(x)}, 
     respectively.}
   % Color key and density info
   \item{key}{logical indicating whether a color-key should be shown.}
@@ -159,6 +165,12 @@ heatmap.2 <- function (x,
   \item{denscol}{character string giving the color for the density
     display specified by \code{density.info}, defaults to the same value
     as \code{tracecol}.}
+  \item{symkey}{Boolean indicating whether the color key should be
+    made symmetric about 0. Defaults to \code{TRUE}.}
+  \item{densadj}{Numeric scaling value for tuning the kernel width when
+    a density plot is drawn on the color key.  (See the \code{adjust}
+    parameter for the \code{density} function for details.)  Defaults to
+    0.25.}
   % plot labels
   \item{main, xlab, ylab}{main, x- and y-axis titles; defaults to none.}
   \item{\dots}{additional arguments passed on to \code{\link{image}} } %
@@ -171,23 +183,23 @@ heatmap.2 <- function (x,
 
   If either is a vector (of \dQuote{weights}) then the appropriate
   dendrogram is reordered according to the supplied values subject to
-  the constraints imposed by the dendrogram, by \code{\link{reorder}(dd,
+  the constraints imposed by the dendrogram, by \code{\link{reorder}(dd, 
     Rowv)}, in the row case.
   %%
   If either is missing, as by default, then the ordering of the
-  corresponding dendrogram is by the mean value of the rows/columns,
+  corresponding dendrogram is by the mean value of the rows/columns, 
   i.e., in the case of rows, \code{Rowv <- rowMeans(x, na.rm=na.rm)}.
   %%
   If either is \code{\link{NULL}}, \emph{no reordering} will be done for
   the corresponding side.
 
-  If \code{scale = "row"} the rows are scaled to have mean
+  If \code{scale="row"} the rows are scaled to have mean
   zero and standard deviation one.  There is some empirical evidence
   from genomic plotting that this is useful.
 
   The default colors range from red to white (\code{heat.colors}) and
   are not pretty.  Consider using enhancements such
-  as the \pkg{RColorBrewer} package,
+  as the \pkg{RColorBrewer} package, 
   \url{http://cran.r-project.org/src/contrib/PACKAGES.html#RColorBrewer}
   to select better colors.
   
@@ -210,7 +222,7 @@ heatmap.2 <- function (x,
     \code{\link{order.dendrogram}}.}
   \item{colInd}{\bold{c}olumn index permutation vector.}
 }
-\author{Andy Liaw, original; R. Gentleman, M. Maechler, W. Huber,
+\author{Andy Liaw, original; R. Gentleman, M. Maechler, W. Huber, 
   G. Warnes, revisions.}
 
 \seealso{\code{\link{image}}, \code{\link{hclust}}}
@@ -220,10 +232,10 @@ heatmap.2 <- function (x,
  x  <- as.matrix(mtcars)
  rc <- rainbow(nrow(x), start=0, end=.3)
  cc <- rainbow(ncol(x), start=0, end=.3)
- hv <- heatmap.2(x, col = cm.colors(256), scale="column",
-	       RowSideColors = rc, ColSideColors = cc, margin=c(5,10),
-	       xlab = "specification variables", ylab= "Car Models",
-	       main = "heatmap(<Mtcars data>, ..., scale = \"column\")",
+ hv <- heatmap.2(x, col=cm.colors(256), scale="column", 
+	       RowSideColors=rc, ColSideColors=cc, margin=c(5, 10), 
+	       xlab="specification variables", ylab= "Car Models", 
+	       main="heatmap(<Mtcars data>, ..., scale=\"column\")", 
                tracecol="green", density="density")
 
  str(hv) # the two re-ordering index vectors
@@ -235,26 +247,26 @@ heatmap.2 <- function (x,
  symnum(Ca) # simple graphic
 
  # with reorder
- heatmap.2(Ca,		 symm = TRUE, margin=c(6,6), trace="none" )
+ heatmap.2(Ca, 		 symm=TRUE, margin=c(6, 6), trace="none" )
 
  # without reorder
- heatmap.2(Ca, Rowv=FALSE, symm = TRUE, margin=c(6,6), trace="none" )
+ heatmap.2(Ca, Rowv=FALSE, symm=TRUE, margin=c(6, 6), trace="none" )
 
  ## For variable clustering, rather use distance based on cor():
  data(USJudgeRatings)
  symnum( cU <- cor(USJudgeRatings) )
 
- hU <- heatmap.2(cU, Rowv = FALSE, symm = TRUE, col = topo.colors(16),
-              distfun = function(c) as.dist(1 - c), trace="none")
+ hU <- heatmap.2(cU, Rowv=FALSE, symm=TRUE, col=topo.colors(16), 
+              distfun=function(c) as.dist(1 - c), trace="none")
 
  ## The Correlation matrix with same reordering:
- hM <- format(round(cU[hU[[1]], hU[[2]]],2))
+ hM <- format(round(cU[hU[[1]], hU[[2]]], 2))
  hM
 
  # now with the correlation matrix on the plot itself
 
- heatmap.2(cU, Rowv = FALSE, symm = TRUE, col = rev(heat.colors(16)),
-             distfun = function(c) as.dist(1 - c), trace="none",
+ heatmap.2(cU, Rowv=FALSE, symm=TRUE, col=rev(heat.colors(16)), 
+             distfun=function(c) as.dist(1 - c), trace="none", 
              cellnote=hM)
 
  ## genechip data examples
@@ -264,15 +276,15 @@ heatmap.2 <- function (x,
  pms <- SpikeIn@pm
 
  # just the data, scaled across rows
- heatmap.2(pms, col=rev(heat.colors(16)), main="SpikeIn@pm",
-              xlab="Relative Concentration", ylab="Probeset",
+ heatmap.2(pms, col=rev(heat.colors(16)), main="SpikeIn@pm", 
+              xlab="Relative Concentration", ylab="Probeset", 
               scale="row")
 
  # fold change vs "12.50" sample
- data <- pms / pms[,"12.50"]
- data <- ifelse(data>1,data,-1/data)
- heatmap.2(data, breaks=16, col=redgreen, tracecol="blue",
-               main="SpikeIn@pm Fold Changes\nrelative to 12.50 sample",
+ data <- pms / pms[, "12.50"]
+ data <- ifelse(data>1, data, -1/data)
+ heatmap.2(data, breaks=16, col=redgreen, tracecol="blue", 
+               main="SpikeIn@pm Fold Changes\nrelative to 12.50 sample", 
                xlab="Relative Concentration", ylab="Probeset")
  }
 }
