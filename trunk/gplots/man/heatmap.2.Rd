@@ -1,5 +1,5 @@
-\name{heatmap}
-\alias{heatmap}
+\name{heatmap.2}
+\alias{heatmap.2}
 \title{ Draw a Heat Map }
 \description{
   A heat map is a false color image (basically
@@ -9,7 +9,7 @@
   restrictions imposed by the dendrogram is carried out.
 }
 \usage{
-heatmap <- function (x,
+heatmap.2 <- function (x,
 
                      #-- dendrogram control --#
                      Rowv=NULL,
@@ -217,7 +217,7 @@ heatmap <- function (x,
  x  <- as.matrix(mtcars)
  rc <- rainbow(nrow(x), start=0, end=.3)
  cc <- rainbow(ncol(x), start=0, end=.3)
- hv <- heatmap(x, col = cm.colors(256), scale="column",
+ hv <- heatmap.2(x, col = cm.colors(256), scale="column",
 	       RowSideColors = rc, ColSideColors = cc, margin=c(5,10),
 	       xlab = "specification variables", ylab= "Car Models",
 	       main = "heatmap(<Mtcars data>, ..., scale = \"column\")",
@@ -232,16 +232,16 @@ heatmap <- function (x,
  symnum(Ca) # simple graphic
 
  # with reorder
- heatmap(Ca,		 symm = TRUE, margin=c(6,6), trace="none" )
+ heatmap.2(Ca,		 symm = TRUE, margin=c(6,6), trace="none" )
 
  # without reorder
- heatmap(Ca, Rowv=FALSE, symm = TRUE, margin=c(6,6), trace="none" )
+ heatmap.2(Ca, Rowv=FALSE, symm = TRUE, margin=c(6,6), trace="none" )
 
  ## For variable clustering, rather use distance based on cor():
  data(USJudgeRatings)
  symnum( cU <- cor(USJudgeRatings) )
 
- hU <- heatmap(cU, Rowv = FALSE, symm = TRUE, col = topo.colors(16),
+ hU <- heatmap.2(cU, Rowv = FALSE, symm = TRUE, col = topo.colors(16),
               distfun = function(c) as.dist(1 - c), trace="none")
 
  ## The Correlation matrix with same reordering:
@@ -250,7 +250,7 @@ heatmap <- function (x,
 
  # now with the correlation matrix on the plot itself
 
- heatmap(cU, Rowv = FALSE, symm = TRUE, col = rev(heat.colors(16)),
+ heatmap.2(cU, Rowv = FALSE, symm = TRUE, col = rev(heat.colors(16)),
              distfun = function(c) as.dist(1 - c), trace="none",
              cellnote=hM)
 
@@ -262,14 +262,14 @@ heatmap <- function (x,
  pms <- SpikeIn@pm
 
  # just the data, scaled across rows
- heatmap(pms, col=rev(heat.colors(16)), main="SpikeIn@pm",
+ heatmap.2(pms, col=rev(heat.colors(16)), main="SpikeIn@pm",
               xlab="Relative Concentration", ylab="Probeset",
               scale="row")
 
  # fold change vs "12.50" sample
  data <- pms / pms[,"12.50"]
  data <- ifelse(data>1,data,-1/data)
- heatmap(data, breaks=8, col=redgreen, tracecol="blue",
+ heatmap.2(data, breaks=16, col=redgreen, tracecol="blue",
                main="SpikeIn@pm Fold Changes\nrelative to 12.50 sample",
                xlab="Relative Concentration", ylab="Probeset")
  }
