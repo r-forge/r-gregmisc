@@ -1,3 +1,10 @@
+/* $Id$ */
+
+/*************************************************************/
+/* Simple wrappers around the fork, getpid, kill, _exit, and */
+/* wait Unix API calls for use with R.                       */
+/*************************************************************/
+
 #include <sys/types.h>
 #include <sys/wait.h>
 #include <unistd.h>
