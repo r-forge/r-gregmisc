@@ -3,7 +3,7 @@
 \title{Read Excel files}
 \description{Reads a Microsoft Excel file into a data frame}
 \usage{
-read.xls(xls, sheet=1, verbose=FALSE, ...)
+read.xls(xls, sheet=1, verbose=FALSE, ..., perl="perl")
 }
 \arguments{
   \item{xls}{name of the Microsoft Excel file}
@@ -13,6 +13,7 @@ read.xls(xls, sheet=1, verbose=FALSE, ...)
     printed as the file is processed.}
   \item{...}{additional arguments to read.table. The defaults of
     read.csv are used.}
+  \item{...}{name of the perl executable to be called.}
 }
 \value{
   a data frame
@@ -26,6 +27,10 @@ read.xls(xls, sheet=1, verbose=FALSE, ...)
   problem if you are trying to use the \code{comment.char} option of
   \code{read.table} since the first character of all lines (including
   comment lines) will be "\"" after conversion.
+
+  Note that this function expects the Perl executable 1) be named 'perl'
+  and 2) to be present in the default path. If either is not true, use the
+  <code>perl</code> argument to specify the exact path and executable name.
 }
 \references{http://www.analytics.washington.edu/statcomp/downloads/xls2csv}
 \note{ A working version of Perl must be present in the executable

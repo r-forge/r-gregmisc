@@ -1,6 +1,6 @@
 # $Id$
 
-read.xls <- function(xls, sheet = 1, verbose=FALSE, ...)
+read.xls <- function(xls, sheet = 1, verbose=FALSE, ..., perl="perl")
 {
   ###
   # directories
@@ -19,7 +19,7 @@ read.xls <- function(xls, sheet = 1, verbose=FALSE, ...)
 
   ###
   # execution command
-  cmd <- paste("perl", xls2csv, xls, dQuote(csv), sheet, sep=" ")
+  cmd <- paste(perl, xls2csv, xls, dQuote(csv), sheet, sep=" ")
   #
   ###
 
