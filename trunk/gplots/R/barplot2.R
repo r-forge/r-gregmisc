@@ -1,7 +1,11 @@
 # $Id$
 #
 # $Log$
+# Revision 1.2  2002/10/11 18:02:15  warnes
+# - Fixed log scale errors in legend() call
+#
 # Revision 1.1  2002/09/23 13:38:53  warnes
+#
 # - Added CrossTable() and barplot2() code and docs contributed by Marc Schwartz.
 # - Permit combinations() to be used when r>n provided repeat.allowed=TRUE
 # - Bumped up version number
@@ -213,26 +217,25 @@ function(height, width = 1, space = NULL, names.arg = NULL,
       plot.new()
       plot.window(xlim, ylim, log = log, ...)
 
+      # Set plot region coordinates
+      usr <- par("usr")
+
+      # adjust par("usr") values if log scale(s) used
+      if (logx)
+      {
+        usr[1] <- 10 ^ usr[1]
+        usr[2] <- 10 ^ usr[2]
+      }
+
+      if (logy)
+      {
+        usr[3] <- 10 ^ usr[3]
+        usr[4] <- 10 ^ usr[4]
+      }
+
       # if prcol specified, set plot region color
       if (!missing(prcol))
-      {
-        usr <- par("usr")
-
-        # adjust par("usr") values if log scale(s) used
-        if (logx)
-        {
-          usr[1] <- 10 ^ usr[1]
-          usr[2] <- 10 ^ usr[2]
-        }
-
-        if (logy)
-        {
-          usr[3] <- 10 ^ usr[3]
-          usr[4] <- 10 ^ usr[4]
-        }
-
         rect(usr[1], usr[3], usr[2], usr[4], col = prcol)
-      }
 
       # if plot.grid, draw major y-axis lines if vertical or x axis if horizontal
       # Due to issues with xaxp and yaxp when using log scale, use pretty() to set
@@ -318,10 +321,20 @@ function(height, width = 1, space = NULL, names.arg = NULL,
           angle <- rev(angle)
         }
 
-	    xy <- par("usr")
-	    legend(xy[2] - xinch(0.1), xy[4] - yinch(0.1),
-             legend = legend.text, angle = angle, density = density,
-             fill = legend.col, xjust = 1, yjust = 1)
+        # adjust legend x and y values if log scaling in use
+        if (logx)
+          legx <- usr[2] - ((usr[2] - usr[1]) / 10)
+        else
+          legx <- usr[2] - xinch(0.1)
+
+        if (logy)
+          legy <- usr[4] - ((usr[4] - usr[3]) / 10)
+        else
+          legy <- usr[4] - yinch(0.1)
+
+        legend(legx, legy,
+        legend = legend.text, angle = angle, density = density,
+        fill = legend.col, xjust = 1, yjust = 1)
       }
 
       title(main = main, sub = sub, xlab = xlab, ylab = ylab, ...)
