@@ -24,7 +24,7 @@ rename.vars(data, from="", to="", info=T)
   \email{gregory_r_warnes\@groton.pfizer.com} }
 \seealso{ \code{\link{names}},
   \code{\link{colnames}},
-  \code{\link{dataframe}}
+  \code{\link{data.frame}}
 }
 
 \examples{
