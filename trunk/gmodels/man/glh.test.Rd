@@ -1,6 +1,7 @@
 \name{glh.test}
 \alias{glh.test}
 \alias{print.glh.test}
+\alias{summary.glh.test}
 
 \title{ Test a General Linear Hypothesis for a Regression Model }
 \description{
@@ -10,6 +11,7 @@ Test a general linear hypothesis for a regression model }
 \usage{
 glh.test(reg, cm, d=rep(0, nrow(cm)) )
 print.glh.test(x, digits=4)
+summary.glh.test(x, digits=4)
 }
 
 \arguments{
@@ -61,7 +63,10 @@ summary(reg)
 
 # test both group 1 = group 2  and group 3 = group 4
 C <- rbind( c(0,-1,0,0), c(0,0,-1,1) )
-glh.test(reg, C)
+ret <- glh.test(reg, C)
+ret  # same as 'print(ret) '
+summary(ret)
+
 
 }
 \keyword{ models }
