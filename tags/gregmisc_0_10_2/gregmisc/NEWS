@@ -1,0 +1,39 @@
+Version 0.10.2
+
+- Fixed latex warning.
+
+- Fixed smartlegend() positioning when x and/or y axis are log-scale.
+
+- Add function remove.vars().
+
+Version 0.10.1
+
+- Fixed bug in textplot() reported by Kevin Wright  <kevin.d.wright at pioneer
+  dot com>.
+
+Version 0.10.0
+
+- Now works with and requires R 1.9.0
+
+- Added ooplot() function that mimics Open-Office style plots.
+  Contributed by Lodewijk Bonebakker <bonebakker@comcast.net>
+
+- Fixed bug in running() that arose when the called function
+  really neaded a minimum number of elements to work on.
+
+- Added several new features to running(), it can now allow sequences
+  shorter than the requested width to be present at the front, the back,
+  or on both sides of the full lenth sequences.  This allows one to
+  align the data so that the window is before, after, or around the
+  indexed point.
+
+- Add enhancements to estimable() provided by Søren Højsgaard
+  <sorenh@agrsci.dk>:
+
+  The estimable function now
+  1) also works on geese and gee objects and
+  2) can test hypotheses af the forb L * beta = beta0 both as a
+     single Wald test and row-wise for each row in L.
+
+- Add colorpanel function, which generates a smoothly varying band of
+  colors over a three color range (lo, mid, high).
