@@ -360,13 +360,13 @@ heatmap.2 <- function (x,
 
         if(symkey)
           {
-            max.raw <- max(abs(x))
+            max.raw <- max(abs(x,na.rm=TRUE))
             min.raw <- -max.raw
           }
         else
           {
-            min.raw <- min(x, na.rm=TRUE) # Again, modified to use scaled or unscaled (SD 12/2/03)
-            max.raw <- max(x, na.rm=TRUE)
+            min.raw <- min(x, na.rm=TRUE) # Again, modified to use scaled 
+            max.raw <- max(x, na.rm=TRUE) # or unscaled (SD 12/2/03)
           }
 
         z <- seq(min.raw,max.raw,length=length(col))
