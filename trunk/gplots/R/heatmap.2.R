@@ -18,6 +18,10 @@ heatmap.2 <- function (x,
     scale <- match.arg(scale)
     dendogram <- match.arg(dendogram)
     trace <- match.arg(trace)
+
+    myscale <- function(x, low=min(x), high=max(x) )
+      
+
     
     if (length(di <- dim(x)) != 2 || !is.numeric(x)) 
         stop("`x' must be a numeric matrix")
@@ -96,7 +100,7 @@ heatmap.2 <- function (x,
         for( i in colInd )
           {
             abline(v=c(i-0.5,i+0.5), col='black', lty=1)
-            abline(v=i, col='black', lty=2)
+            abline(v=, col='black', lty=2)
             xv <- rep(i, nrow(tmp)) + tmp[,i] - 0.5
             xv <- c(xv[1], xv)
             yv <- 1:length(xv)-0.5
