@@ -7,6 +7,6 @@ Description: Functons for computing and displaying sample size
      information for gene expression arrays. Also functions for
      evaluating the performance of these methods via simulation.
 Maintainer: Peng Liu <peng_liu@groton.pfizer.com>
-Depends: 
+Depends: gdata
 License: GPL
 

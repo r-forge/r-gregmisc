@@ -23,7 +23,7 @@ ssize.plot(x, xlab = "Sample Size (per group)",
 
 delta(sd, n, power, sig.level, alpha.correct = "Bonferonni")
 delta.plot (x, xlab = "Fold Change",
-            ylab = "Proportion of Genes with Power >= 80% at Fold Change=delta",
+            ylab = "Proportion of Genes with Power >= 80\% at Fold Change=delta",
             marks = c(1.5, 2, 2.5, 3, 4, 6, 10), ...) 
 }
 \arguments{
@@ -73,7 +73,7 @@ delta.plot (x, xlab = "Fold Change",
   \code{\link{delta.plot}}
 }
 \examples{
-#library(gregmisc)
+library(gdata) # for nobs()
 
 data(exp.sd)
 
@@ -105,7 +105,7 @@ legend(x=xmax, y=ymax,
        xjust=1, yjust=1, cex=1.0)
 title("Power to Detect 2-Fold Change")
 
-# 2) What is necessary sample size for 80% power using 3 measurements/patient
+# 2) What is necessary sample size for 80\% power using 3 measurements/patient
 #    assuming Delta=1.0, Alpha=0.05 and Observed SDs?
 #
 all.size  <- ssize(sd=exp.sd, delta=log2(fold.change),
@@ -121,7 +121,7 @@ legend(x=xmax, y=ymin,
 title("Sample Size to Detect 2-Fold Change")
 
 
-# 3) What is necessary fold change to achieve 80% power using 3
+# 3) What is necessary fold change to achieve 80\% power using 3
 # measurements/patient assuming n=6, Delta=1.0, Alpha=0.05 and Observed
 # SDs?
 #
