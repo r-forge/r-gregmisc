@@ -1,10 +1,11 @@
 mixedorder <- function(x)
   {
     # - Split each each character string into an vector of strings and
-    #   numbers 
+    #   numbers
     # - Separately rank numbers and strings
     # - Combine orders so that strings follow numbers
 
+    delim="\\$\\@\\$")
 
     numeric <- function(x)
       {
@@ -20,10 +21,10 @@ mixedorder <- function(x)
         on.exit( options(optwarn) )
         options(warn=-1)
 
-        ifelse(is.na(as.numeric(x)), x, NA)
+        ifelse(is.na(as.numeric(x)), toupper(x), NA)
       }
 
-    
+
     x <- as.character(x)
 
     which.nas <- which(is.na(x))
@@ -36,39 +37,39 @@ mixedorder <- function(x)
     # - Convert each character string into an vector containing single
     #   character and  numeric values.
     ####
-      
-    # find and mark numbers in the form of +1.23e+45.67 
+
+    # find and mark numbers in the form of +1.23e+45.67
     delimited <- gsub("([+-]{0,1}[0-9\.]+([eE][\+\-]{0,1}[0-9\.]+){0,1})",
-                      "$\\1$", x)
+                      paste(delim,"\\1",delim,sep=""), x)
 
     # separate out numbers
-    step1 <- strsplit(delimited, "\\$")
+    step1 <- strsplit(delimited, delim)
 
     # remove empty elements
-    step1 <- sapply( step1, function(x) x[x>""] )
+    step1 <- lapply( step1, function(x) x[x>""] )
 
     # create numeric version of data
-    step1.numeric <- sapply( step1, numeric )
+    step1.numeric <- lapply( step1, numeric )
 
     # create non-numeric version of data
-    step1.character <- sapply( step1, nonnumeric )
+    step1.character <- lapply( step1, nonnumeric )
 
     # now transpose so that 1st vector contains 1st element from each
     # original string
     maxelem <- max(sapply(step1, length))
-    
+
     step1.numeric.t <- lapply(1:maxelem,
                               function(i)
                                  sapply(step1.numeric,
                                         function(x)x[i])
                               )
-                            
+
     step1.character.t <- lapply(1:maxelem,
                               function(i)
                                  sapply(step1.character,
                                         function(x)x[i])
                               )
-    
+
     # now order them
     rank.numeric   <- sapply(step1.numeric.t,rank)
     rank.character <- sapply(step1.character.t,
