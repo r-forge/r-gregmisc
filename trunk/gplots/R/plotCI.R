@@ -1,8 +1,8 @@
 
 plotCI <- function (x, y = NULL,
-                    uiw, liw = uiw,   # bar widths  -OR-
-                    ui, li, # bar ends
-                    err='y', # bar direction, 'y' or 'x'
+                    uiw, liw = uiw,   
+                    ui, li, 
+                    err='y', 
                     col=par("col"),
                     ylim=NULL,
                     xlim=NULL,
@@ -18,6 +18,22 @@ plotCI <- function (x, y = NULL,
                     ...
                     )
 {
+  is.R <- get("is.R")
+  if(is.null(is.R)) is.R <- function(x) FALSE
+
+  if(!is.R())
+    {
+      strwidth   <-  function(...)
+        {
+          par("cin")[1] / par("fin")[1] * (par("usr")[2] - par("usr")[1])
+        }
+
+      strheight <-  function(...)
+        {
+          par("cin")[2] / par("fin")[2] * (par("usr")[4] - par("usr")[3])
+        }
+    }
+
   if (is.list(x)) { 
     y <- x$y 
     x <- x$x 
@@ -77,7 +93,17 @@ plotCI <- function (x, y = NULL,
           text(x, y, label=labels, col=col )
         }
     }
-
+  if(is.R())
+    myarrows <- function(...) arrows(...)
+  else
+    myarrows <- function(x1,y1,x2,y2,angle,code,length,...)
+      {
+        segments(x1,y1,x2,y2,open=T,...)
+        if(code==1)
+          segments(x1-length/2,y1,x1+length/2,y1,...)
+        else
+          segments(x2-length/2,y2,x2+length/2,y2,...)
+      }
  
   if(err=="y")
     {
@@ -85,13 +111,14 @@ plotCI <- function (x, y = NULL,
         gap <- strheight("O") * gap
       smidge <- par("fin")[1] * sfrac
 
+      
       # draw upper bar
       if(!is.null(li))
-          arrows(x , li, x, pmax(y-gap,li), col=barcol, lwd=lwd,
+          myarrows(x , li, x, pmax(y-gap,li), col=barcol, lwd=lwd,
                  lty=lty, angle=90, length=smidge, code=1)
       # draw lower bar
       if(!is.null(ui))
-          arrows(x , ui, x, pmin(y+gap,ui), col=barcol,
+          myarrows(x , ui, x, pmin(y+gap,ui), col=barcol,
                  lwd=lwd, lty=lty, angle=90, length=smidge, code=1)
     }
   else
@@ -101,11 +128,11 @@ plotCI <- function (x, y = NULL,
       smidge <- par("fin")[2] * sfrac
 
       # draw left bar
-      if(li!=NULL)
-        arrows(li, y, pmax(x-gap,li), y, col=col, lwd=lwd, lty=slty,
+      if(!is.null(li))
+        myarrows(li, y, pmax(x-gap,li), y, col=col, lwd=lwd, lty=slty,
                angle=90, length=smidge, code=1)
-      if(ui!=NULL)
-        arrows(ui, y, pmin(x+gap,ui), y, col=col, lwd=lwd, lty=slty,
+      if(!is.null(ui))
+        myarrows(ui, y, pmin(x+gap,ui), y, col=col, lwd=lwd, lty=slty,
                angle=90, length=smidge, code=1)
       
     }

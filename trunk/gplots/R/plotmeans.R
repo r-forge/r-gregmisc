@@ -6,14 +6,14 @@
 
 # data  <-  data.frame(y=rnorm(100), x=factor(rep(c("A","C","F","Z"),25)))
 
-# means.plot( y ~ x, data=data, connect=F )
+# plotmeans( y ~ x, data=data, connect=F )
 
 
 plotmeans  <- function (formula, data = NULL, subset, na.action,
                          bars=T, p=0.95,
                          xlab=names(mf)[2], ylab=names(mf)[1],
                          mean.labels=F, ci.label=F, n.label=T,
-                         digits=getOption("digits"), col="black",
+                         digits=options("digits"), col="black",
                          barwidth=1,
                          barcol="blue",
                          connect=T,
@@ -21,13 +21,32 @@ plotmeans  <- function (formula, data = NULL, subset, na.action,
                          legends=names(means),
                          ...)
 {
+  is.R <- get("is.R")
+  if(is.null(is.R)) is.R <- function(x) FALSE
+
+  if(!is.R())
+    {
+      if(col=="black")
+        col <- 1
+      if(barcol=="blue")
+        barcol <- 2
+    }
+  
     if (missing(formula) || (length(formula) != 3)) 
         stop("formula missing or incorrect")
     if (missing(na.action)) 
-        na.action <- getOption("na.action")
+        na.action <- options("na.action")
     m <- match.call(expand.dots = FALSE)
-    if (is.matrix(eval(m$data, parent.frame()))) 
-        m$data <- as.data.frame(data)
+    if(is.R())
+      {
+        if (is.matrix(eval(m$data, parent.frame()))) 
+          m$data <- as.data.frame(data)
+      }
+    else
+      {
+        if (is.matrix(eval(m$data, F)))
+          m$data <- as.data.frame(data)
+      }
     m$... <- m$bars <- m$barcol <- m$p   <- NULL
     m$xlab <- m$ylab  <-  NULL
     m$col  <- m$barwidth  <- NULL
@@ -45,7 +64,10 @@ plotmeans  <- function (formula, data = NULL, subset, na.action,
       }
     else
       {
-    vars <- sapply(split(mf[[response]], mf[[-response]]), var, na.rm=T)
+
+    myvar  <-  function(x) var(x[!is.na(x)])
+        
+    vars <- sapply(split(mf[[response]], mf[[-response]]), myvar)
     ns   <- sapply( sapply(split(mf[[response]], mf[[-response]]), na.omit,
                            simplify=F), length )
     ci.width  <- qnorm( (1+p)/2 ) * sqrt(vars/(ns-1) )
@@ -81,8 +103,15 @@ plotmeans  <- function (formula, data = NULL, subset, na.action,
     
     
     if(n.label)
-      text(x=1:length(means),y=par("usr")[3],
-           labels=paste("n=",ns,"\n",sep=""))
+      if(is.R())
+        text(x=1:length(means),y=par("usr")[3],
+             labels=paste("n=",ns,"\n",sep=""))
+      else
+        {
+          axisadj <- (par("usr")[4] - (par("usr")[3]) )/75
+          text(x=1:length(means),y=par("usr")[3] + axisadj,
+               labels=paste("n=",ns,"\n",sep=""))
+        }
     
     if(connect!=F)
       {

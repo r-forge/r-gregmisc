@@ -1,7 +1,11 @@
 # $Id$
 #
 # $Log$
+# Revision 1.2  2001/09/18 14:15:44  warneg
+# Release 0.3.2
+#
 # Revision 1.1  2001/09/01 19:19:13  warneg
+#
 # Initial checkin.
 #
 #
@@ -14,7 +18,10 @@ is.R <- function()
 
 if(!is.R())
 {
-  
+  getOption <- function(...) options(...)  
+
+  if(!exists("parent.frame")) parent.frame <- sys.parent
+
   colnames <- function (x, do.NULL = TRUE, prefix = "col") 
     {
       dn <- dimnames(x)
