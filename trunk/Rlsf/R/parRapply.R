@@ -7,7 +7,7 @@ lsf.parCapply <- function(x, ...)
 lsf.parRapply <- function (x, fun, ...,
                            join.method=cbind,
                            njobs,
-                           batch.size=options()$par.block.size,
+                           batch.size=options()$lsf.block.size,
                            trace=TRUE,
                            packages=NULL,
                            savelist=NULL
@@ -42,6 +42,7 @@ lsf.parRapply <- function (x, fun, ...,
         if(trace) cat("Done.\n")
         
         status <- sapply( jobs, lsf.job.status)
+        status <- sapply( status, function(x) if(is.null(x)) "UNKW" else x)
 
         if(trace) cat("Current status:\n")
         statusTable <- as.matrix(table(status))

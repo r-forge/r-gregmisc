@@ -22,23 +22,25 @@ test <- function(nrow=300)
 
     fun <- function(y, covariates)
       {
-        unmatrix <- function(x)
-          {
-            vlist <- c(x)
-            names(vlist) <- c(outer( rownames(x), colnames(x), paste, sep=":" ))
-            return(vlist)
-          }
 
         fit <- lm( y ~ age*sex, data=covariates )
         sum <- summary(fit)
         retval <- unmatrix( coef(sum) )
         retval
       }
-
-    ret <- par.apply.model (
-                          fun,
-                          matrix = ymat,
-                          covariates = dataframe
+    
+    unmatrix <- function(x)
+      {
+        vlist <- c(x)
+        names(vlist) <- c(outer( rownames(x), colnames(x), paste, sep=":" ))
+        return(vlist)
+      }
+    
+    ret <- lsf.apply.model (
+                            fun,
+                            matrix = ymat,
+                            covariates = dataframe,
+                            savelist="unmatrix"
                           )
 
     ret
