@@ -1,0 +1,2 @@
+PKG_CPPFLAGS	= -I/usr/local/lsf/6.0/include
+PKG_LIBS		= -L/usr/local/lsf/6.0/linux2.4-glibc2.3-x86/lib -lbat -llsf -lnsl

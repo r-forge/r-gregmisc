@@ -1,0 +1,17 @@
+#!/bin/sh 
+
+if [ $# != 2 ]; then
+	echo "Usage: $0 <environment file> <function to run>"
+	exit 1
+fi
+
+lsfenvfile=$1; shift
+lsffunc=$1; shift
+
+R --vanilla <<EOF > Rout.$LSB_JOBID
+
+load("${lsfenvfile}")
+lsf.ret <- ${lsffunc}()
+save.image(file = "${lsfenvfile}")
+
+EOF
