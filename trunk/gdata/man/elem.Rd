@@ -49,11 +49,13 @@ elem(object=1, unit=c("KB","MB","bytes"), digits=0,
   \code{\link{ll}} and \code{\link{env}} are related to \code{elem}.
 }
 \examples{
+\dontrun{
 data(infert)
 elem(infert)
 model <- glm(case~spontaneous+induced, family=binomial, data=infert)
 elem(model, dim=TRUE)
 elem(model$family)
+}
 }
 % Basics
 \keyword{attribute}
