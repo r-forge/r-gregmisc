@@ -1,0 +1,8 @@
+- Gregmisc is getting pretty big, so it should be set into a set of
+  more topic-specific packages:
+
+	gplots
+	gmodels
+	gtool
+	gmisc
+
