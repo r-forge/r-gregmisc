@@ -1,25 +1,10 @@
 env <- function(unit=c("KB","MB","bytes"), digits=0)
-##############################################################################
-###                                                                           
-### Function: env                                                             
-###                                                                           
-### Purpose:  Display information about all loaded environments               
-###                                                                           
-### Args:     unit is the required unit for displaying object size in memory
-###           ("KB", "MB", "bytes", or first letter) digits is the number of
-###           decimals to display
-###
-### Returns:  Data frame containing information about environments (name,
-###           number of objects, and size in memory)                          
-###                                                                           
-##############################################################################
 {
   get.object.size <- function(object.name, pos)
   {
     object <- get(object.name, pos=pos)
-    ## classes whose size is not defined, assume 0
-    if(class(object)[1] %in% c("classRepresentation",
-                               "ClassUnionRepresentation","grob"))
+    use.zero <- c("classRepresentation", "ClassUnionRepresentation", "grob")
+    if(class(object)[1] %in% use.zero)
       size <- 0
     else
       size <- object.size(object)
@@ -29,9 +14,9 @@ env <- function(unit=c("KB","MB","bytes"), digits=0)
   get.environment.size <- function(pos)
   {
     if(search()[pos] == "Autoloads")
-       size <- 0
+      size <- 0
     else
-       size <- sum(sapply(ls(pos,all=TRUE), get.object.size, pos=pos))
+      size <- sum(sapply(ls(pos,all=TRUE), get.object.size, pos=pos))
     return(size)
   }
 
@@ -41,10 +26,10 @@ env <- function(unit=c("KB","MB","bytes"), digits=0)
     return(nobjects)
   }
 
-  unit <- unit[1]  # no need to match.arg strictly
+  unit <- unit[1]
   denominator <- switch(substring(tolower(unit),1,1), "k"=1024, "m"=1024^2, 1)
-  size.label <- switch(substring(tolower(unit),1,1),
-                       "k"="KB", "m"="MB", "bytes")
+  size.label <- switch(substring(tolower(unit),1,1), "k"="KB", "m"="MB",
+                  "bytes")
   size.vector <- sapply(seq(along=search()), get.environment.size)
   size.vector <- round(size.vector/denominator, digits)
   nobjects.vector <- sapply(seq(along=search()), get.environment.nobjects)
@@ -54,3 +39,4 @@ env <- function(unit=c("KB","MB","bytes"), digits=0)
   print(env.frame, right=FALSE)
   invisible(env.frame)
 }
+
