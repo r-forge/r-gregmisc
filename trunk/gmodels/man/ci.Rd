@@ -1,7 +1,18 @@
 % $Id$
 %
 % $Log$
+% Revision 1.7  2002/08/01 19:37:14  warnes
+% - Corrected documentation mismatch for ci, ci.default.
+%
+% - Replaced all occurences of '_' for assignment with '<-'.
+%
+% - Replaced all occurences of 'T' or 'F' for 'TRUE' and 'FALSE' with
+%   the spelled out version.
+%
+% - Updaded version number and date.
+%
 % Revision 1.6  2002/03/26 21:22:35  warneg
+%
 % - Changed methods to include '...' to match the generic.
 % - Updated for version 0.5.1
 %
@@ -23,6 +34,7 @@
 %
 \name{ci}
 \alias{ci}
+\alias{ci.default}
 \alias{ci.lm}
 \alias{ci.lme}
 \title{Compute Confidence Intervals}
@@ -30,19 +42,18 @@
   estimates.  Methods for \code{lm} and \code{lme} objects are
   provided. }
 \synopsis{
-  ci(x, ...)
+  ci(x, confidence = 0.95, alpha = 1 - confidence,...)
+  \method{ci}{default}(x, confidence = 0.95, alpha = 1 - confidence, na.rm=FALSE)...)
   \method{ci}{lm}(x, confidence = 0.95, alpha = 1 - confidence,...)
   \method{ci}{lme}(x, confidence = 0.95, alpha = 1 - confidence,...) 
-}
-\usage{
-  ci(x, ...)
-  \method{ci}{lme}(x, confidence = 0.95, alpha = 1 - confidence) 
 }
 \arguments{
   \item{x}{ object from which to compute confidence intervals. }
   \item{confidence}{ confidence level. Defaults to 0.95. }
-  \item{alpha}{Type one error rate.  Defaults to 1.0-\code{confidence} }
-  \item{\dots}{Argumens for methods}
+  \item{alpha}{type one error rate.  Defaults to 1.0-\code{confidence} }
+  \item{na.rm}{boolean indicating whether missing values should be
+    removed. Defaults to \code{FALSE}.}
+  \item{\dots}{Arguments for methods}
 }
 %\details{
 %  ~~ If necessary, more details than the __description__  above ~~

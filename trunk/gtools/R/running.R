@@ -1,7 +1,18 @@
 # $Id$
 #
 # $Log$
+# Revision 1.4  2002/08/01 19:37:14  warnes
+# - Corrected documentation mismatch for ci, ci.default.
+#
+# - Replaced all occurences of '_' for assignment with '<-'.
+#
+# - Replaced all occurences of 'T' or 'F' for 'TRUE' and 'FALSE' with
+#   the spelled out version.
+#
+# - Updaded version number and date.
+#
 # Revision 1.3  2002/03/07 23:38:37  warneg
+#
 # - Added "running2", which handles both univariate and bivariate cases
 # - Modified "running" to call "running2"
 #
@@ -13,14 +24,14 @@
 #
 #
 
-"running" _ function( X, fun=mean, width=min(length(X),20),
+"running" <- function( X, fun=mean, width=min(length(X),20),
                      allow.fewer=FALSE,...)
   running2(X=X, fun=mean, width=width, allow.fewer=allow.fewer, ...)
 
-"running2" _ function( X, Y=NULL, fun=mean, width=min(length(X),20),
+"running2" <- function( X, Y=NULL, fun=mean, width=min(length(X),20),
                      allow.fewer=FALSE,...)
 {
-  n _ length(X)
+  n <- length(X)
 
   from  <-  sapply( (1:n) - width + 1, function(x) max(x,1) )
   to    <-  1:n
@@ -32,15 +43,15 @@
 
   if(is.null(Y))  # univariate 
     {
-      funct _ function(which,what,fun,...) fun(what[which],...)
+      funct <- function(which,what,fun,...) fun(what[which],...)
       
-      Xvar _ sapply(elements, funct, what=X, fun=fun, ...)
+      Xvar <- sapply(elements, funct, what=X, fun=fun, ...)
     }
   else # bivariate
     {
-      funct _ function(which,XX,YY,fun,...) fun(XX[which],YY[which], ...)
+      funct <- function(which,XX,YY,fun,...) fun(XX[which],YY[which], ...)
       
-      Xvar _ sapply(elements, funct, XX=X, YY=Y, fun=fun, ...)
+      Xvar <- sapply(elements, funct, XX=X, YY=Y, fun=fun, ...)
     }
 
   

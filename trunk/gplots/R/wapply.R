@@ -1,7 +1,18 @@
 # $Id$
 #
 # $Log$
+# Revision 1.7  2002/08/01 19:37:14  warnes
+# - Corrected documentation mismatch for ci, ci.default.
+#
+# - Replaced all occurences of '_' for assignment with '<-'.
+#
+# - Replaced all occurences of 'T' or 'F' for 'TRUE' and 'FALSE' with
+#   the spelled out version.
+#
+# - Updaded version number and date.
+#
 # Revision 1.6  2002/04/09 00:51:31  warneg
+#
 # Checkin for version 0.5.3
 #
 # Revision 1.5  2002/02/16 17:58:59  warneg
@@ -31,7 +42,7 @@
 # Initial checkin.
 #
 #
-"wapply" _ function( x, y, fun=mean, method="range",
+"wapply" <- function( x, y, fun=mean, method="range",
                     width, n=50, drop.na=TRUE, ...)
 {
   method <- match.arg(method, c("width","range","nobs","fraction"))
@@ -45,12 +56,12 @@
       if(method=="range")
         width <- width * diff(range(x))
       
-      pts _ seq(min(x),max(x),length.out=n)
+      pts <- seq(min(x),max(x),length.out=n)
       
-      result _ sapply( pts, function(pts,y,width,fun,XX,...)
+      result <- sapply( pts, function(pts,y,width,fun,XX,...)
                       {
-                        low _ min((pts-width/2),max(XX))
-                        high _ max((pts+width/2), min(XX))
+                        low <- min((pts-width/2),max(XX))
+                        high <- max((pts+width/2), min(XX))
                         return (fun(y[(XX>= low) & (XX<=high)],...))
                       },
                       y=y,

@@ -1,5 +1,5 @@
 
-hist2d _ function( x,y=NULL, nbins=200, same.scale=FALSE, na.rm=TRUE, show=TRUE, col=c("black", heat.colors(12)), ... )
+hist2d <- function( x,y=NULL, nbins=200, same.scale=FALSE, na.rm=TRUE, show=TRUE, col=c("black", heat.colors(12)), ... )
   {
     if(is.null(y))
       {
@@ -37,7 +37,7 @@ hist2d _ function( x,y=NULL, nbins=200, same.scale=FALSE, na.rm=TRUE, show=TRUE,
     index.x <- cut( x, x.cuts, include.lowest=TRUE)
     index.y <- cut( y, y.cuts, include.lowest=TRUE)
 
-    m _ matrix( 0, nrow=nbins[1], ncol=nbins[2], 
+    m <- matrix( 0, nrow=nbins[1], ncol=nbins[2], 
                 dimnames=list( levels(index.x),
                                levels(index.y) ) )
 

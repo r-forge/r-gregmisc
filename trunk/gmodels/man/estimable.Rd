@@ -1,7 +1,18 @@
 # $Id$
 #
 # $Log$
+# Revision 1.7  2002/08/01 19:37:14  warnes
+# - Corrected documentation mismatch for ci, ci.default.
+#
+# - Replaced all occurences of '_' for assignment with '<-'.
+#
+# - Replaced all occurences of 'T' or 'F' for 'TRUE' and 'FALSE' with
+#   the spelled out version.
+#
+# - Updaded version number and date.
+#
 # Revision 1.6  2002/02/20 20:09:02  warneg
+#
 # Minor changes, typo and formatting fixes.
 #
 # Revision 1.5  2002/01/17 23:51:06  warneg
@@ -90,9 +101,9 @@ estimable(obj, cm, conf.int=NULL)
 
 \examples{
 
-y _ rnorm(100)
-x _  cut(rnorm(100, mean=y, sd=0.25),c(-4,-1.5,0,1.5,4))
-reg _ lm(y ~ x)
+y <- rnorm(100)
+x <-  cut(rnorm(100, mean=y, sd=0.25),c(-4,-1.5,0,1.5,4))
+reg <- lm(y ~ x)
 summary(reg)
 
 # look at the group means

@@ -26,7 +26,7 @@ summary.glh.test(object, digits=4,...)
 }
 \details{
   Test the general lineary hypothesis
-  \eqn{ C \hat{beta} = d }{C \%*\% beta_hat == d }
+  \eqn{ C \hat{beta} = d }{C \%*\% \hat{beta} == d }
   for the regression model \code{reg}.
 
   The test statistic is obtained from the formula: 
@@ -61,9 +61,9 @@ summary.glh.test(object, digits=4,...)
 \examples{
 
 # fit a simple model
-y _ rnorm(100)
-x _  cut(rnorm(100, mean=y, sd=0.25),c(-4,-1.5,0,1.5,4))
-reg _ lm(y ~ x)
+y <- rnorm(100)
+x <-  cut(rnorm(100, mean=y, sd=0.25),c(-4,-1.5,0,1.5,4))
+reg <- lm(y ~ x)
 summary(reg)
 
 # test both group 1 = group 2  and group 3 = group 4

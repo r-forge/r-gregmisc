@@ -1,7 +1,7 @@
 ci  <-  function(x, confidence=0.95,alpha=1-confidence,...)
   UseMethod("ci")
 
-ci.default <- function(x, confidence=0.95,alpha=1-confidence,na.rm=F,...) {
+ci.default <- function(x, confidence=0.95,alpha=1-confidence,na.rm=FALSE,...) {
   est <- mean(x, na.rm=na.rm)
   stderr <-  sd(x, na.rm=na.rm)/sqrt(nobs(x)-1);
   ci.low  <- est + qt(alpha/2, nobs(x)-1) * stderr
