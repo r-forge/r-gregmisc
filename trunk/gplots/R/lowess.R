@@ -1,7 +1,12 @@
 # $Id$
 #
 # $Log$
+# Revision 1.7  2003/03/07 15:41:44  warnes
+# - Specify where the defualt lowess function should be found.
+# - Use getFunction in S-Plus instead of 'get'
+#
 # Revision 1.6  2003/01/02 16:07:35  warnes
+#
 # - Added wrapper code so that R-specific fiddling won't be executed
 #   under S-Plus.
 #
@@ -13,7 +18,7 @@
 if(is.R())
   {
     # make original lowess into the default method
-    lowess.default  <- get("lowess",pos=NULL, mode="function")
+    lowess.default  <- get("lowess",pos="package:base", mode="function")
 
     lowess  <- function(x,...)
       UseMethod("lowess")
@@ -24,7 +29,7 @@ if(is.R())
   {
 
     # make original lowess into the default method
-    lowess.default  <- get("lowess", mode="function")
+    lowess.default  <- getFunction("lowess",where="main")
 
     lowess  <- function(x,...)
       UseMethod("lowess")
