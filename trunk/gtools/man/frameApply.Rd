@@ -57,8 +57,8 @@ frameApply(x, by = NULL, on = by[1], fun = nrow, subset = TRUE, out.as.list = FA
 \examples{
 
 # define two group descriptors
-group1 <- sample( c('A','B','C'), size=1000, replace=T) 
-group2 <- sample( c('I','II','III'), size=1000, replace=T)
+group1 <- sample( c('A','B','C'), size=1000, replace=TRUE) 
+group2 <- sample( c('I','II','III'), size=1000, replace=TRUE)
 
 # and some covariates
 x1 <- rnorm(1000, mean=10 )
