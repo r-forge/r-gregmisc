@@ -1,6 +1,10 @@
 # $Id$
 #
 # $Log$
+# Revision 1.9  2004/01/21 05:17:07  warnes
+# Track R 1.9.0's move of 'lowess' from the base package to the (new)
+# stats package.
+#
 # Revision 1.8  2003/03/07 15:43:44  warnes
 # - Add 'NULL' as the last element of if statement that defines
 #   lowess.default so that when the file is sourced, S-Plus doesn't
@@ -24,7 +28,10 @@
 if(is.R())
   {
     # make original lowess into the default method
-    lowess.default  <- get("lowess",pos="package:base", mode="function")
+    if(R.version$major == 1 && R.version$minor < 9)
+      lowess.default <- base::lowess
+    else
+      lowess.default <- stats::lowess
 
     lowess  <- function(x,...)
       UseMethod("lowess")
