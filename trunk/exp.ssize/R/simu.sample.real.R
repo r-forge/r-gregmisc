@@ -2,7 +2,7 @@
 function(sd.null, sd.alt, cov.null, ngenes.null.dep, cov.alt, ngenes.alt.dep, n,
 		var.ratio, delta)
 
-{ ## start of the function simu.sample
+{ ## start of the function simu.sample.real
 
   ngenes.null.ind <- length(sd.null)
   ngenes.alt.ind <- length(sd.alt)
@@ -33,5 +33,5 @@ if (ngenes.alt.dep > 0) {
   result[index[1] : index[2], ] <- sample.dep.2(ngenes.alt.dep , n,  var.ratio, cov.alt, delta )
 }	
 
- result # take n.est columns of data
-} ## the end of the function simu.sample
+ result 
+} ## the end of the function simu.sample.real
