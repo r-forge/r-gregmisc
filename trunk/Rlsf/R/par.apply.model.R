@@ -1,16 +1,19 @@
 # $Id$
 
-par.apply.model <- function(fun,
+lsf.apply.model <- function(fun,
                             matrix,
-                            covariates,
                             ...,
-                            ncpu=lsf.numcpu(8),
+                            njobs,
                             nelem,
+                            batch.size=options()$par.block.size,
                             packages=.packages(),
-                            debug = TRUE
+                            debug = TRUE,
+                            savelist = NULL
                             )
   {
-
+    if(missing(njobs))
+      njobs <- max(1,floor(nrow(matrix)/batch.size))
+    
     if(!missing(nelem))
       if(length(nelem)==1)
         matrix <- matrix[1:nelem,]            # include first nelem elements
@@ -18,17 +21,15 @@ par.apply.model <- function(fun,
         matrix <- matrix[nelem[1]:nelem[2],]  # include subset of elements
 
     if(exists("last.warning"))  # work around R bug
-      remove("last.warning",inherits=TRUE)
+      remove("last.warning", env=.GlobalEnv, inherits=FALSE)
 
-
-    
     #
-    # Test on a single probeset so we easily catch general errors.
+    # Test on a single row so we easily catch general errors.
     #
+    args <- list( matrix[1,], ...)
+    result <- do.call("fun", args)
 
-    result <- fun(matrix[1,],covariates=covariates)
-
-    if(exists("last.warning"))  # work around R bug
+    if(exists("last.warning", env=.GlobalEnv) )  # work around R bug
       warnings()
 
     #
@@ -42,21 +43,23 @@ par.apply.model <- function(fun,
     # work across the cluster
     #
 
-    scat("Starting paralle model fit with", ncpu, "nodes ")
+    scat("Starting paralle model fit using", njobs ,"jobs",
+         "each of size",batch.size,"...")
+    
     time <- system.time(
                         fits <- lsf.parRapply(
                                               matrix,
                                               fun,
                                               ...,
-                                              covariates=covariates,
                                               join.method=cbind,
-                                              njobs=ncpu,
-                                              packages=packages
+                                              njobs=njobs,
+                                              packages=packages,
+                                              savelist=savelist
                                               )
                         )
     scat("Done. Computation used", time, "")
 
-    if(exists("last.warning"))  # work around R bug
+    if(exists("last.warning", env=.GlobalEnv))  # work around R bug
       warnings()
 
     return(t(fits))

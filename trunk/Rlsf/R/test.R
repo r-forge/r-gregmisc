@@ -3,7 +3,7 @@
 ##
 ## EXAMPLE TEST CODE
 ##
-test <- function(ncpu=8)
+test <- function(nrow=300)
   {
     library(Rlsf)
     library(gdata);
@@ -18,7 +18,7 @@ test <- function(ncpu=8)
     y <- ifelse(runif(200) <= plogis(logit), 1, 0)
     dataframe <- data.frame(age=age, sex=sex)
     fit.lm  <- lm (y ~ age*sex, data=dataframe)
-    ymat <- matrix(y, nrow=20, ncol=length(y), byrow=T)
+    ymat <- matrix(y, nrow=nrow, ncol=length(y), byrow=T)
 
     fun <- function(y, covariates)
       {
@@ -38,8 +38,7 @@ test <- function(ncpu=8)
     ret <- par.apply.model (
                           fun,
                           matrix = ymat,
-                          covariates = dataframe,
-                          ncpu=ncpu
+                          covariates = dataframe
                           )
 
     ret

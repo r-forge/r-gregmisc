@@ -9,7 +9,6 @@
 
     if (!file.exists(lsf.fname))
       return(NULL)
-
     load(lsf.fname)
     if (job$debug == FALSE) {
       file.remove(job$fname)

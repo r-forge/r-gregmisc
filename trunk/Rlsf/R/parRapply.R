@@ -6,13 +6,17 @@ lsf.parCapply <- function(x, ...)
 
 lsf.parRapply <- function (x, fun, ...,
                            join.method=cbind,
-                           njobs=floor(nrows(x)/50),
+                           njobs,
+                           batch.size=options()$par.block.size,
                            trace=TRUE,
                            packages=NULL,
                            savelist=NULL
                            )
   {
     require(snow)
+
+    if(missing(njobs))
+      njobs <- max(1,floor(nrow(matrix)/batch.size))
     
     if(!is.matrix(x) && !is.data.frame(x))
       stop("x must be a matrix or data frame")
