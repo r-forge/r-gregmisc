@@ -1,7 +1,11 @@
 # $Id$
 #
 # $Log$
+# Revision 1.3  2001/12/08 01:54:19  warneg
+# Changed 'T' to 'TRUE' in parameter list.
+#
 # Revision 1.2  2001/12/07 22:55:32  warneg
+#
 # Added attribution.
 #
 # Revision 1.1  2001/12/07 21:40:54  warneg
@@ -12,7 +16,7 @@
 
 # submitted by Don MacQueen <macq@llnl.gov>
 
-rename.vars <- function(data,from='',to='',info=T) {
+rename.vars <- function(data,from='',to='',info=TRUE) {
 
    dsn <- deparse(substitute(data))
    dfn <- names(data)
