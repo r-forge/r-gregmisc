@@ -1,6 +1,9 @@
 % $Id$
 %
 % $Log$
+% Revision 1.3  2001/10/16 23:15:01  warneg
+% Fixed unbalanced brace.
+%
 % Revision 1.2  2001/09/01 00:01:55  warneg
 % Release 0.3.0
 %
@@ -62,6 +65,7 @@ wapply(x, y, fun=mean, method="range", width=1/10, n=50, ...)
   \item{y }{Result of applying \code{fun} to the window about each x location}
 }
 \author{ Gregory R. Warnes \email{Gregory\_R\_Warnes\@groton.pfizer.com}
+  }
 \examples{
 
 #show local mean and inner 2-sd interval to help diagnose changing mean
