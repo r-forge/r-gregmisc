@@ -36,7 +36,7 @@ read.xls(xls, sheet=1, verbose=FALSE, ...)
    xlsfile
 
    iris <- read.xls(xlsfile)  
-
+   head(iris)  # look at the top few rows
 }
 \author{Jim Rogers \email{james\_a\_rogers@groton.pfizer.com}, modified
   and extenede by Gregory R. Warnes \email{gregory\_r\_warnes@groton.pfizer.com}.
