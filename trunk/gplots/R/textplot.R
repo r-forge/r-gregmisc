@@ -1,6 +1,9 @@
 # $Id$
 #
 # $Log$
+# Revision 1.6  2004/06/30 19:26:22  warnes
+# Fixed text size calculations
+#
 # Revision 1.5  2004/03/30 19:04:53  warnes
 # - Fix bug in textplot() reported by Wright, Kevin <kevin.d.wright@pioneer.com>.
 #
@@ -68,7 +71,7 @@ textplot.matrix <- function(object,
                             show.rownames=TRUE, show.colnames=TRUE,
                             hadj=1,
                             vadj=1,
-                            mar= c(0,0,3,0)+0.1,
+                            mar= c(1,1,4,1)+0.1,
                             ... )
 {
 
@@ -82,7 +85,6 @@ textplot.matrix <- function(object,
   
   opar <- par()[c("mar","xpd","cex")]
   on.exit( par(opar) )
-  mar=c(0,0,3,0)+0.1
   par(mar=mar, xpd=FALSE )
     
   # setup plot area
@@ -123,21 +125,22 @@ textplot.matrix <- function(object,
   for (i in 1:20)
     {
       oldcex <- cex
-      
+
       width  <- sum(
                     apply( object, 2,
-                          function(x) max(strwidth(x,cex=1) ) )
+                          function(x) max(strwidth(x,cex=cex) ) )
                     ) +
                       strwidth('M', cex=cex) * cmar * ncol(object)
       
       height <- strheight('M', cex=cex) * nrow(object) * (1 + rmar)
-      
+
       if(lastloop) break
-      
+
+      cex <- cex / max(width,height) 
+
       if (abs(oldcex - cex) < 0.001)
         {
           lastloop <- TRUE
-          cex <- oldcex * (1/max(width, height))
         }
     }
 
@@ -211,13 +214,9 @@ textplot.character <- function (object,
     par(mar=mar,xpd=FALSE )
     plot.window(xlim = c(0, 1), ylim = c(0, 1), log = "", asp = NA)
 
-    slist   <- lapply(object, function(x) unlist(strsplit(x,'\n')))[[1]]
-
-    if(length(slist)>1)
-      slist   <- lapply(slist, function(x) unlist(strsplit(x,'')))
-    else
-      slist   <- lapply(slist, function(x) strsplit(x,''))
-
+    slist   <- unlist(lapply(object, function(x) strsplit(x,'\n')))
+    slist   <- lapply(slist, function(x) unlist(strsplit(x,'')))
+    
     slen    <- sapply(slist, length)
     slines  <- length(slist)
 
@@ -235,8 +234,7 @@ textplot.character <- function (object,
         oldcex <- cex
         
         cwidth  <- max(sapply(unlist(slist), strwidth,  cex=cex)) * cspace
-        cheight <- max(sapply(unlist(slist), strheight, cex=cex)) *
-                   (lspace * 1.5)
+        cheight <- max(sapply(unlist(slist), strheight, cex=cex)) * ( lspace + 0.5 )
 
         if(fixed.width)
           {
@@ -251,10 +249,11 @@ textplot.character <- function (object,
 
         if(lastloop) break
 
+        cex <- cex  / max(width, height)
+        
         if (abs(oldcex - cex) < 0.001)
           {
             lastloop <- TRUE
-            cex <- oldcex * (1/max(width, height))
           }
 
       }
@@ -277,9 +276,13 @@ textplot.character <- function (object,
         for(line in 1:slines)
           {
             cpos <- ((1:length(slist[[line]]))-1) * cwidth
-            if(length(slist[[line]]))
-              text(x = xpos + cpos, y = ypos - (line-1)*cheight,
-                   labels=slist[[line]], adj = c(0, 1), cex = cex, ...)
+            
+            if(length(slist[[line]])>0)
+              text(x = xpos + cpos,
+                   y = ypos - (line-1)*cheight,
+                   labels=unlist(slist[[line]]),
+                   adj = c(0.5, 1),
+                   cex = cex, ...)
           }
       }
     else
