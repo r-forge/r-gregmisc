@@ -79,7 +79,8 @@ fork(slave)
     } 
   } 
 }
-%
+
+.
 }
 \value{
    This function returns the process ID of the child

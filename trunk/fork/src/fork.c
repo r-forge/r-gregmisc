@@ -189,7 +189,7 @@ SIGTAB sigtab[] = {
 #ifdef SIGUNUSED
   {"SIGUNUSED",  SIGUNUSED,  "Unused Signal (Will Be SIGSYS}"},
 #endif
-  {"",           -1,         "Unknown or Undefined Signal"} // end mark
+  {"",           -1,         "Unknown or Undefined Signal"} /* end mark */
 };
 
 void Rfork_siginfo(char **name, int *val, char **desc)
@@ -232,7 +232,7 @@ int dummy(){
   return 1;
 }
 
-// Uses R .Call interface 
+/* Uses R .Call interface */
 SEXP Rfork_siglist() 
 { 
   SEXP list, val, name, desc;
@@ -240,13 +240,13 @@ SEXP Rfork_siglist()
   int index;
   
 
-  // first find the table length 
+  /* first find the table length  */
   for( tablen = 0; sigtab[tablen].val != -1; tablen++) {};
 
-  // allocate the return list 
+  /* allocate the return list  */
   PROTECT( list = allocVector( VECSXP, 3 ) ); 
 
-  // now allocate sufficient space for the return values 
+  /* now allocate sufficient space for the return values  */
   PROTECT( val  = allocVector( INTSXP, tablen) ); 
   PROTECT( name = allocVector( STRSXP, tablen) ); 
   PROTECT( desc = allocVector( STRSXP, tablen) ); 
