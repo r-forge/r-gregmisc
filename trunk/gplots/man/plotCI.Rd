@@ -1,6 +1,9 @@
 % $Id$
 %
 % $Log$
+% Revision 1.5  2004/05/27 15:11:08  warnes
+% Fix spelling error.
+%
 % Revision 1.4  2002/09/23 13:59:30  warnes
 % - Modified all files to include CVS Id and Log tags.
 %
@@ -17,7 +20,7 @@ plotCI(x, y = NULL, uiw, liw = uiw, ui, li, err = "y", col = par("col"),
     xlab, ylab, minbar, maxbar, ...)
 }
 \arguments{
-  \item{x,y}{ coordonates for the center of error bars. \code{y}
+  \item{x,y}{ coordinates for the center of error bars. \code{y}
     defaults to \code{1:n}.}
   
   \item{uiw}{ width of the upper or right error bar. Set to \code{NULL}
