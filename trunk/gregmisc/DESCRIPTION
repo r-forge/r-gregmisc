@@ -1,11 +1,11 @@
 Bundle: gregmisc
-Contains: gtools gdata gmodels gplots 
+Contains: gtools gdata gmodels gplots gregmisc
 Title: Greg's Miscellaneous Functions
 BundleDescription: The gregmisc bundle is a repository for a variety of
              useful functions.  See the individual packages for more
              details.
-Version: 2.0.3
-Date: 2005-02-25
+Version: 2.0.4
+Date: 2005-03-21
 Author: Gregory R. Warnes.  Includes R source code and documentation
         contributed by
 	   - Ben Bolker,

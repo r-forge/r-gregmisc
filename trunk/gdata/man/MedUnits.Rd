@@ -17,9 +17,9 @@
   \describe{
     \item{Abbreviation}{Common Abbreviation (mostly missing)}
     \item{Measurement}{Measurement Name}
-    \item{SIUnits}{SI Units}
+    \item{SIUnit}{SI Unit}
     \item{Conversion}{Conversion factor}
-    \item{ConvetionalUnits}{Conventional Units}
+    \item{ConvetionalUnit}{Conventional Unit}
   }
 }
 \details{
@@ -36,20 +36,20 @@
 
   To perform the conversion from SI units to US 'Conventional' units do:
 
-     Measurement in \code{ConventionalUnits} =
-     (Measurement in \code{SIUnits}) /  \code{Conversion}
+     Measurement in \code{ConventionalUnit} =
+     (Measurement in \code{SIUnit}) /  \code{Conversion}
 
   To perform conversion from 'Conventional' to SI units do:
 
-     Measurement in \code{SIUnits} =
-     (Measurement in \code{ConventionalUnits}) * \code{Conversion}
+     Measurement in \code{SIUnit} =
+     (Measurement in \code{ConventionalUnit}) * \code{Conversion}
 
 }
 \source{
   \url{http://www.globalrph.com/conv_si.htm}
 }
 \seealso{
-  The function \seealso{ \code{\link{MedUnits}}} automates the
+  The function \code{\link{ConvertMedUnits}} automates the
   conversion task.
 }
 \examples{

@@ -3,6 +3,7 @@ export(
        Args,
        aggregate.table,
        combine,
+       ConvertMedUnits,
        elem,
        env,
        interleave,

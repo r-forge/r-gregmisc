@@ -1,7 +1,8 @@
-ConvertMedUnits <- function(x, measurement, abbreviation, to=c("Conventional","SI","US"),
+ConvertMedUnits <- function(x, measurement, abbreviation,
+                            to=c("Conventional","SI","US"),
                             exact=!missing(abbreviation))
   {
-    #data(MedUnits)
+    data(MedUnits,package='gdata')
     to=match.arg(to)
     if(!missing(measurement) && missing(abbreviation))
       {

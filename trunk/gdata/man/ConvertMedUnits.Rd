@@ -39,8 +39,10 @@ ConvertMedUnits(x, measurement, abbreviation,
   Returns a vector of converted values.  The attribute 'units' will
   contain the target units converted.
 }
-\seealso{ The data set \code{\link{MedUnits}} provides the conversion
-  factors.}
+\seealso{
+  The data set \code{\link{MedUnits}} provides the conversion
+  factors.
+}
 \references{
   \url{http://www.globalrph.com/conv_si.htm}
   }
@@ -56,8 +58,10 @@ GlucoseSI = c(5, 5.4, 5, 5.1, 5.6, 5.1, 4.9, 5.2, 5.5) # in SI Units
 GlucoseUS = ConvertMedUnits( GlucoseSI, "Glucose", to="US" )
 cbind(GlucoseSI,GlucoseUS)
 
+\dontrun{
 # See what happens when there is more than one match
 ConvertMedUnits( 27.5, "Creatin", to="US")
+}
 
 # To solve the problem do:
 ConvertMedUnits( 27.5, "Creatinine", to="US", exact=TRUE)
