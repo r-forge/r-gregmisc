@@ -18,6 +18,7 @@ export(
        trim
 )
 
+importFrom(stats, reorder, na.omit)
 importFrom(gtools, odd, invalid, mixedsort)
 
 S3method(nobs,data.frame)
