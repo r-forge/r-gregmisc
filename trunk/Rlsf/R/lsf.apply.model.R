@@ -10,7 +10,7 @@ lsf.apply.model <- function(fun,
                             )
   {
     if(missing(njobs))
-      njobs <- max(1,floor(nrow(matrix)/batch.size))
+      njobs <- max(1,ceiling(nrow(matrix)/batch.size))
     
     if(exists("last.warning"))  # work around R bug
       remove("last.warning", env=.GlobalEnv, inherits=FALSE)

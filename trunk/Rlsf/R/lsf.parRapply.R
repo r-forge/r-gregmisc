@@ -14,7 +14,7 @@ lsf.parRapply <- function (x, fun, ...,
                            )
   {
     if(missing(njobs))
-      njobs <- max(1,floor(nrow(x)/batch.size))
+      njobs <- max(1,ceiling(nrow(x)/batch.size))
     
     if(!is.matrix(x) && !is.data.frame(x))
       stop("x must be a matrix or data frame")

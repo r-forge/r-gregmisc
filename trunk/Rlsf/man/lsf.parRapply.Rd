@@ -72,7 +72,7 @@ lsf.apply.model(fun, matrix, ..., njobs,
    ## Example of lsf.parRapply
    #####
    set.seed(12345)
-   x <- matrix(rnorm(1e6),ncol=20)
+   x <- matrix(rnorm(1e6+20),ncol=20)
    dim(x)
    means <- lsf.parRapply(x, mean, na.rm=TRUE, join.method=c, njobs=20)
    means <- lsf.parRapply(x, mean, na.rm=TRUE, join.method=c, batch.size=1000)
@@ -92,7 +92,7 @@ lsf.apply.model(fun, matrix, ..., njobs,
    dataframe <- data.frame(age=age, sex=sex)
 
    # create a matrix made up of rows containing the y data
-   ymat <- matrix(y, nrow=300, ncol=length(y), byrow=TRUE)
+   ymat <- matrix(y, nrow=30127, ncol=length(y), byrow=TRUE)
 
    # define the model fitting function
    fun <- function(y, covariates)
@@ -110,7 +110,7 @@ lsf.apply.model(fun, matrix, ..., njobs,
                            matrix = ymat,
                            covariates = dataframe,
                            savelist="unmatrix",
-                           batch.size=100
+                           batch.size=3000
                          )
 
 
