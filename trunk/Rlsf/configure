@@ -57,6 +57,14 @@ else
     exit 1
 fi    
 
+echo "Check for libnsl ..."
+if [ -f /usr/lib/libnsl.so ]; then
+	echo "Found in /usr/lib"
+	LSF_LIBS="${LSF_LIBS} -lnsl"
+else
+	echo "Not found"
+fi
+
 echo "Creating src/Makevars"
 echo "PKG_CPPFLAGS = ${LSF_INCLUDE}" > src/Makevars
 echo "PKG_LIBS = ${LSF_LIBS}" >> src/Makevars
