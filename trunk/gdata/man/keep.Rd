@@ -36,7 +36,7 @@ keep(..., list = character(0), sure = FALSE)
 data(women, cars)
 keep(cars)
 ## To remove all objects except cars, run:
-## keep(cars, sure=T)
+## keep(cars, sure=TRUE)
 }
 % Programming
 \keyword{data}

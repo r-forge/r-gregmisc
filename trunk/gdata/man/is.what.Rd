@@ -26,7 +26,7 @@ is.what(object, verbose = FALSE)
 }
 \examples{
 is.what(pi)
-is.what(NA, verbose=T)
+is.what(NA, verbose=TRUE)
 is.what(lm(1~1))
 }
 % Basics

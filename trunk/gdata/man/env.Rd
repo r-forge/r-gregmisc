@@ -38,7 +38,9 @@ env(unit = c("KB", "MB", "bytes"), digits = 0)
   \code{\link{ll}} and \code{\link{elem}} are related to \code{env}.
 }
 \examples{
+\dontrun{
 env()
+}
 }
 % Basics
 \keyword{data}

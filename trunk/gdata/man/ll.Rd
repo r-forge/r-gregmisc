@@ -43,7 +43,7 @@ ll(pos, unit = "KB", digits = 0, dimensions = FALSE, ...)
 }
 \examples{
 ll()
-ll(all=T)
+ll(all=TRUE)
 ll("package:base")
 ll("package:base")[ll("package:base")$Class!="function",]
 }
