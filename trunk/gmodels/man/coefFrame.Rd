@@ -39,6 +39,8 @@ coefFrame(mod, data, by = NULL, fit.on = TRUE, fitfun, keep.unused.levels = TRUE
   column for each model paramter, as well as columns specified in \code{by}.   
 }
 \examples{
+# load example data
+library(gtools)
 data(ELISA)
 
 # Coefficients for four parameter logistic fits:
