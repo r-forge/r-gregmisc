@@ -1,7 +1,12 @@
 # $Id$
 #
 # $Log$
+# Revision 1.7  2001/12/05 19:49:29  warneg
+# - Added ability to use the t-distribution to compute confidence
+#   intervals.  This is controlled using the 'use.t' parameter.
+#
 # Revision 1.6  2001/10/26 02:48:19  warneg
+#
 # Added correct handling of 'xaxt="n"'.
 #
 # Revision 1.5  2001/10/16 22:59:27  warneg
@@ -31,6 +36,7 @@ plotmeans  <- function (formula, data = NULL, subset, na.action,
                          ccol=col,
                          legends=names(means),
                          xaxt,
+                         use.t = T,
                          ...)
 {
   is.R <- get("is.R")
@@ -65,7 +71,7 @@ plotmeans  <- function (formula, data = NULL, subset, na.action,
     m$col  <- m$barwidth  <- NULL
     m$digits  <- m$mean.labels  <- m$ci.label  <- m$n.label <- NULL
     m$connect  <- m$ccol  <-  m$legends <- m$labels<- NULL
-    m$xaxt <- NULL
+    m$xaxt <- m$use.t <- NULL
     m[[1]] <- as.name("model.frame")
     mf <- eval(m, parent.frame())
     response <- attr(attr(mf, "terms"), "response")
@@ -87,8 +93,11 @@ plotmeans  <- function (formula, data = NULL, subset, na.action,
 
     # apply minimum variance specified by minsd^2
     vars <- ifelse( vars < (minsd^2), (minsd^2), vars)
-    
-    ci.width  <- qnorm( (1+p)/2 ) * sqrt(vars/(ns-1) )
+
+    if(use.t)
+      ci.width  <- qt( (1+p)/2, ns-1 ) * sqrt(vars/(ns-1) )
+    else
+      ci.width  <- qnorm( (1+p)/2 ) * sqrt(vars/(ns-1) )
 
     if(length(mean.labels)==1 && mean.labels==T)
       mean.labels  <-  format( round(means, digits=digits ))
