@@ -1,7 +1,12 @@
 # $Id$
 #
 # $Log$
+# Revision 1.4  2004/05/25 17:08:48  warnes
+# Fix an error in the code when using repeats.allow=T and r>2.  Bug
+# report and fix both due to Elizabeth Purdom <epurdom@stanford.edu>.
+#
 # Revision 1.3  2002/09/23 13:38:53  warnes
+#
 # - Added CrossTable() and barplot2() code and docs contributed by Marc Schwartz.
 # - Permit combinations() to be used when r>n provided repeat.allowed=TRUE
 # - Bumped up version number
@@ -93,7 +98,9 @@ permutations <- function(n, r, v = 1:n, set = TRUE, repeats.allowed=FALSE)
         {
           inner  <-  Recall(n, r-1, v)
           cbind( rep( v, rep(nrow(inner),n)  ),
-                 matrix( inner, ncol=ncol(inner), nrow=nrow(inner) * n ) )
+                 matrix( t(inner), ncol=ncol(inner), nrow=nrow(inner) * n ,
+                        byrow=T )
+                )
         }
       }
   else
