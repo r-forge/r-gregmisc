@@ -98,6 +98,9 @@ heatmap.2 <- function (x,
     if(!is.numeric(margins) || length(margins) != 2)
       stop("`margins' must be a numeric vector of length 2")
 
+    if(missing(cellnote))
+      cellnote <- matrix("", ncol=ncol(x), nrow=nrow(x))
+    
     ## by default order by row/col mean
     if(is.null(Rowv)) Rowv <- rowMeans(x, na.rm = na.rm)
     if(is.null(Colv)) Colv <- colMeans(x, na.rm = na.rm)
@@ -147,9 +150,10 @@ heatmap.2 <- function (x,
         colInd <- order(Colv)
       }
 
-    ## reorder x
+    ## reorder x & cellnote
     x <- x[rowInd, colInd]
     x.unscaled <- x
+    cellnote <- cellnote[rowInd, colInd]
 
     if(is.null(labRow))
       labRow <- if(is.null(rownames(x))) (1:nr)[rowInd] else rownames(x)
@@ -231,12 +235,19 @@ heatmap.2 <- function (x,
     }
     ## draw the main carpet
     par(mar = c(margins[1], 0, 0, margins[2]))
-    if(!symm || scale != "none") x <- t(x)
-    if(revC) { # x columns reversed
+    if(!symm || scale != "none")
+      {
+        x <- t(x)
+        cellnote <- t(cellnote)
+      }
+    if(revC)
+      { # x columns reversed
         iy <- nr:1
         ddr <- rev(ddr)
         x <- x[,iy]
-    } else iy <- 1:nr
+        cellnote <- cellnote[,iy]
+      }
+    else iy <- 1:nr
 
     image(1:nc, 1:nr, x, xlim = 0.5+ c(0, nc), ylim = 0.5+ c(0, nr),
           axes = FALSE, xlab = "", ylab = "", col=col, breaks=breaks,
@@ -312,9 +323,11 @@ heatmap.2 <- function (x,
              lty=1, lwd=1, col=sepcolor, border=sepcolor)
 
     if(!missing(cellnote))
-      text(x=c(col(cellnote)),
-           y=nrow(cellnote)+1-c(row(cellnote)), labels=c(cellnote),
-           col=notecol, cex=notecex)
+      text(x=c(row(cellnote)),
+           y=c(col(cellnote)),
+           labels=c(cellnote),
+           col=notecol,
+           cex=notecex)
 
     ## the two dendrograms :
     par(mar = c(margins[1], 0, 0, 0))
