@@ -41,7 +41,7 @@ ddirichlet<-function(x,alpha)
       x <- t(x)
 
   if(!is.matrix(alpha))
-    alpha <- matrix( alpha, ncol=length(alpha), nrow=nrow(x), byrow=T)
+    alpha <- matrix( alpha, ncol=length(alpha), nrow=nrow(x), byrow=TRUE)
 
   if( any(dim(x) != dim(alpha)) )
     stop("Mismatch between dimensions of 'x' and 'alpha'.")

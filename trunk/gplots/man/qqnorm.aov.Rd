@@ -56,7 +56,7 @@ library(MASS)
 data(npk)
 npk.aov <- aov(yield ~ block + N*P*K, npk)
 qqnorm(npk.aov)
-if (dev.interactive()) qqnorm(npk.aov, omit=2:6, label=T)
+if (dev.interactive()) qqnorm(npk.aov, omit=2:6, label=TRUE)
 }
 \keyword{ hplot }%
 \keyword{ design }

@@ -1,7 +1,11 @@
 # $Id$
 #
 # $Log$
+# Revision 1.4  2003/04/04 13:49:27  warnes
+# - Change occurences of 'T' to 'TRUE'
+#
 # Revision 1.3  2003/03/08 16:22:47  warnes
+#
 # - Added parameters for rotation of and amount of space allocated for
 #   the row and column labels.
 #
@@ -85,7 +89,7 @@ balloonplot.default <- function(x,y,z,
           X <- sqrt(X)
         }
       
-      X <- min + (X/max(X, na.rm=T) * (max - min) )
+      X <- min + (X/max(X, na.rm=TRUE) * (max - min) )
       X
     }
   
