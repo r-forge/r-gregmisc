@@ -1,14 +1,15 @@
 
+
 ## original Andy Liaw; modified RG, MM, GRW
 
-heatmap <- function (x,
+heatmap.2 <- function (x,
                      
-                     # dendogram control
+                     # dendrogram control
                      Rowv=NULL,
                      Colv=if(symm)"Rowv" else NULL,
                      distfun = dist,
                      hclustfun = hclust,
-                     dendogram = c("both","row","column","none"),
+                     dendrogram = c("both","row","column","none"),
                      symm = FALSE,
                      
                      # data scaling
@@ -68,7 +69,7 @@ heatmap <- function (x,
     }
  
     scale <- if(symm && missing(scale)) "none" else match.arg(scale)
-    dendogram <- match.arg(dendogram)
+    dendrogram <- match.arg(dendrogram)
     trace <- match.arg(trace)
     density.info <- match.arg(density.info)
 
@@ -78,11 +79,11 @@ heatmap <- function (x,
               "Please consider using only one or the other.")
 
     # key & density don't make sense when data is not all on the same scale
-    if(scale!="none" &&  key==TRUE)
-      {
-        warning("Key cannot be plotted when scale!=\"none\".")
-        key=FALSE
-      }
+#    if(scale!="none" &&  key==TRUE)
+#      {
+#        warning("Key cannot be plotted when scale!=\"none\".")
+#        key=FALSE
+#      }
 
 
     
@@ -98,13 +99,13 @@ heatmap <- function (x,
     if(!is.numeric(margins) || length(margins) != 2)
       stop("`margins' must be a numeric vector of length 2")
 
-    ## by default order by row/col means
+    ## by default order by row/col mean
     if(is.null(Rowv)) Rowv <- rowMeans(x, na.rm = na.rm)
     if(is.null(Colv)) Colv <- colMeans(x, na.rm = na.rm)
 
     ## get the dendrograms and reordering indices
 
-    if( dendogram %in% c("both","row") )
+    if( dendrogram %in% c("both","row") )
       {
         if(inherits(Rowv, "dendrogram"))
           ddr <- Rowv
@@ -123,7 +124,7 @@ heatmap <- function (x,
         rowInd <- order(Rowv)
       }
 
-    if( dendogram %in% c("both","column") )
+    if( dendrogram %in% c("both","column") )
       {
         if(inherits(Colv, "dendrogram"))
           ddc <- Colv
@@ -151,11 +152,16 @@ heatmap <- function (x,
     x <- x[rowInd, colInd]
     x.unscaled <- x
 
-    if(is.null(labRow))
-        labRow <- if(is.null(rownames(x))) (1:nr)[rowInd] else rownames(x)
+    if(is.null(labRow)) 
+      labRow <- if(is.null(rownames(x))) (1:nr)[rowInd] else rownames(x)
+    else
+      labRow <- labRow[colInd]
+  
     if(is.null(labCol))
-        labCol <- if(is.null(colnames(x))) (1:nc)[colInd] else colnames(x)
-
+      labCol <- if(is.null(colnames(x))) (1:nc)[colInd] else colnames(x)
+    else
+      labCol <- labCol[colInd]
+  
     if(scale == "row") {
 	x <- sweep(x, 1, rowMeans(x, na.rm = na.rm))
 	sx <- apply(x, 1, sd, na.rm = na.rm)
@@ -175,7 +181,7 @@ heatmap <- function (x,
         breaks <- length(col)+1
     if(length(breaks)==1)
       {
-        breaks <- seq( min(x), max(x), length=breaks)
+        breaks <- seq( min(x, na.rm=na.rm), max(x,na.rm=na.rm), length=breaks)
       }
 
     nbr <- length(breaks)
@@ -213,7 +219,7 @@ heatmap <- function (x,
 
     op <- par(no.readonly = TRUE)
     on.exit(par(op))
-    layout(lmat, widths = lwid, heights = lhei, respect = TRUE)
+    layout(lmat, widths = lwid, heights = lhei, respect = FALSE)
 
     ## draw the side bars
     if(!missing(RowSideColors)) {
@@ -304,7 +310,7 @@ heatmap <- function (x,
     
     ## the two dendrograms :
     par(mar = c(margins[1], 0, 0, 0))
-    if( dendogram %in% c("both","row") )
+    if( dendrogram %in% c("both","row") )
       {
         plot(ddr, horiz = TRUE, axes = FALSE, yaxs = "i", leaflab = "none")
       }
@@ -312,7 +318,7 @@ heatmap <- function (x,
       plot.new()
 
     par(mar = c(0, 0, if(!is.null(main)) 5 else 0, margins[2]))
-    if( dendogram %in% c("both","column") )
+    if( dendrogram %in% c("both","column") )
       {
         plot(ddc, axes = FALSE, xaxs = "i", leaflab = "none")
       }
@@ -325,11 +331,10 @@ heatmap <- function (x,
     ## Add the color-key
     if(key)
       {
-
         par(mar = c(5, 4, 2, 1), cex=0.75)
 
-        min.raw <- min(x.unscaled, na.rm=TRUE)
-        max.raw <- max(x.unscaled, na.rm=TRUE)
+        min.raw <- min(x, na.rm=TRUE) # Again, modified to use scaled or unscaled (SD 12/2/03)
+        max.raw <- max(x, na.rm=TRUE)
         
         z <- seq(min.raw,max.raw,length=length(col))
         image(z=matrix(z, ncol=1),
@@ -340,6 +345,12 @@ heatmap <- function (x,
         lv <- pretty(breaks)
         xv <- scale01(as.numeric(lv), min.raw, max.raw)
         axis(1, at=xv, labels=lv)
+        if(scale=="row")
+          mtext(side=1,"Row Z-Score", line=2)
+        else if(scale=="column")
+          mtext(side=1,"Column Z-Score", line=2)
+        else
+          mtext(side=1,"Value", line=2)
 
         if(density.info=="density")
           {
@@ -353,7 +364,6 @@ heatmap <- function (x,
             axis(2, at=pretty(dens$y)/max(dens$y) * 0.95, pretty(dens$y) )
             title("Color Key\nand Density Plot")
             par(cex=0.5)
-            mtext(side=1,"Value", line=2)
             mtext(side=2,"Density", line=2)
           }
         else if(density.info=="histogram")
@@ -365,7 +375,6 @@ heatmap <- function (x,
             axis(2, at=pretty(hy)/max(hy) * 0.95, pretty(hy) )
             title("Color Key\nand Histogram")
             par(cex=0.5)
-            mtext(side=1,"Value", line=2)
             mtext(side=2,"Count", line=2)
           }
         else
