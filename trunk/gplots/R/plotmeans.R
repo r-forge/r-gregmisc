@@ -11,7 +11,7 @@
 
 plotmeans  <- function (formula, data = NULL, subset, na.action,
                          bars=T, p=0.95,
-                         minsd=0,
+                         minsd=0, minbar, maxbar,
                          xlab=names(mf)[2], ylab=names(mf)[1],
                          mean.labels=F, ci.label=F, n.label=T,
                          digits=options("digits"), col="black",
@@ -48,7 +48,8 @@ plotmeans  <- function (formula, data = NULL, subset, na.action,
         if (is.matrix(eval(m$data, F)))
           m$data <- as.data.frame(data)
       }
-    m$... <- m$bars <- m$barcol <- m$p <- m$minsd <- NULL
+    m$... <- m$bars <- m$barcol <- m$p <- NULL
+    m$minsd <- m$minbar <- m$maxbar <- NULL
     m$xlab <- m$ylab <-  NULL
     m$col  <- m$barwidth  <- NULL
     m$digits  <- m$mean.labels  <- m$ci.label  <- m$n.label <- NULL
@@ -69,17 +70,13 @@ plotmeans  <- function (formula, data = NULL, subset, na.action,
     myvar  <-  function(x) var(x[!is.na(x)])
         
     vars <- sapply(split(mf[[response]], mf[[-response]]), myvar)
+    ns   <- sapply( sapply(split(mf[[response]], mf[[-response]]), na.omit,
+                           simplify=F), length )
 
     # apply minimum variance specified by minsd^2
     vars <- ifelse( vars < (minsd^2), (minsd^2), vars)
     
-    ns   <- sapply( sapply(split(mf[[response]], mf[[-response]]), na.omit,
-                           simplify=F), length )
     ci.width  <- qnorm( (1+p)/2 ) * sqrt(vars/(ns-1) )
-#    ci.lower  <- means - qnorm( (1+p)/2 ) * sqrt(vars/(ns-1) )    
-#    ci.upper  <- means + qnorm( (1+p)/2 ) * sqrt(vars/(ns-1) )
-#    error.bar( x=1:length(means), y=means, lower=ci.lower, upper=ci.upper,
-#              incr=F, xaxt="n" )
 
     if(length(mean.labels)==1 && mean.labels==T)
       mean.labels  <-  format( round(means, digits=digits ))
@@ -88,13 +85,19 @@ plotmeans  <- function (formula, data = NULL, subset, na.action,
 
     plotCI(x=1:length(means), y=means, uiw=ci.width, xaxt="n",
            xlab=xlab, ylab=ylab, labels=mean.labels, col=col, xlim=xlim,
-           lwd=barwidth, barcol=barcol, ... )
+           lwd=barwidth, barcol=barcol, minbar=minbar, maxbar=maxbar, ... )
     axis(1, at = 1:length(means), labels = legends)
     
     if(ci.label)
       {
         ci.lower <- means-ci.width
-        ci.upper <- means+ci.width 
+        ci.upper <- means+ci.width
+
+        if(!missing(minbar))
+          ci.lower <- ifelse(ci.lower < minbar, minbar, ci.lower)
+        if(!missing(maxbar))
+          ci.upper <- ifelse(ci.upper > maxbar, maxbar, ci.upper)
+        
         labels.lower <- paste( " \n", format(round(ci.lower, digits=digits)),
                               sep="")
         labels.upper <- paste( format(round(ci.upper, digits=digits)), "\n ",
