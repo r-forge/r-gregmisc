@@ -75,9 +75,9 @@ mixedorder <- function(x)
                              function(x) as.numeric(factor(x)))
 
     # and merge
-    rank.numeric[!is.na(rank.character)] <- NA  # mask off string values
+    rank.numeric[!is.na(rank.character)] <- 0  # mask off string values
     rank.character <- t(t(rank.character) +
-                        apply(rank.numeric,2,max,na.rm=T))
+                        apply(rank.numeric,2,max,na.rm=TRUE))
     rank.overall <- ifelse(is.na(rank.character),rank.numeric,rank.character)
 
     order <- do.call("order",as.data.frame(rank.overall))
@@ -88,10 +88,3 @@ mixedorder <- function(x)
 mixedsort <- function(x) x[mixedorder(x)]
 
 
-#x <- rev(c("AA 0.50 ml", "AA 1.5 ml", "AA 500 ml", "AA 1500 ml",
-#           "EXP 1", "AA 1e3 ml", "A A A", "1 2 3 A", "NA", NA, "1e2",
-#           "", "-", "1A", "1 A", "100", "100A"))
-
-#mixedorder(x)
-
-#mixedsort(x)

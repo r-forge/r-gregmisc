@@ -32,8 +32,8 @@ mixedsort(x)
   \code{mixedorder} returns a vector giving the sort order of the input
   elements. \code{mixedsort} returns the sorted vector.
 }
-\author{ Gregory R. Warnes \email{Gregory\_R\_Warnes@groton.pfizer.com}\}
-\seealso{ \code[base]{\link{sort}}, \code[base]{\link{order}} }
+\author{ Gregory R. Warnes \email{Gregory\_R\_Warnes@groton.pfizer.com} }
+\seealso{ \code{\link[base]{sort}}, \code{\link[base]{order}} }
 \examples{
 # compound & dose labels
 Treatment <- c("Control", "Asprin 10mg/day", "Asprin 50mg/day",
