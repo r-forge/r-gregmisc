@@ -1,4 +1,4 @@
 Package: gdata
 Title: Various functions to manipulate data.
 Description: Various functions to manipulate data.
-Depends: gtools
+Depends: R (>= 1.9.0), gtools
