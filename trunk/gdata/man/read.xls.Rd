@@ -28,6 +28,8 @@ read.xls(xls, sheet=1, verbose=FALSE, ...)
   comment lines) will be "\"" after conversion.
 }
 \references{http://www.analytics.washington.edu/statcomp/downloads/xls2csv}
+\note{ A working version of PERL must be present in the executable
+	search path for \code{read.xls} to work properly.}
 \seealso{ \code{\link[base]{read.csv}} }
 \examples{
 
