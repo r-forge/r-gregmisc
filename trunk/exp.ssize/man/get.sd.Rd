@@ -17,7 +17,7 @@ get.sd(num)
 \value{
   a number that is the sqrt of the inverse of the argument
 }
-\author{Peng Liu \email{peng\_liu\@groton.pfizer.com}}
+\author{Peng Liu \email{peng\_liu@groton.pfizer.com}}
 \examples{
 
 ## example 1

@@ -1,77 +1,66 @@
 \name{simu.sample}
 \alias{simu.sample}
-%- Also NEED an '\alias' for EACH other topic documented here.
-\title{ ~~function to do ... ~~ }
+
+\title{ Simulate a sample with normal distribution}
 \description{
-  ~~ A concise (1-5 lines) description of what the function does. ~~
+ Simulate samples from normal distributions with specified proportion 
+ of observations from true alternative hypothesis, dependent groups,
+ variance ratio for treatment/control group
 }
 \usage{
 simu.sample(ngenes, n, fractn.alt, fractn.dep, var.ratio, cov.matrix, ngenes.matrix, delta)
 }
-%- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{ngenes}{ ~~Describe \code{ngenes} here~~ }
-  \item{n}{ ~~Describe \code{n} here~~ }
-  \item{fractn.alt}{ ~~Describe \code{fractn.alt} here~~ }
-  \item{fractn.dep}{ ~~Describe \code{fractn.dep} here~~ }
-  \item{var.ratio}{ ~~Describe \code{var.ratio} here~~ }
-  \item{cov.matrix}{ ~~Describe \code{cov.matrix} here~~ }
-  \item{ngenes.matrix}{ ~~Describe \code{ngenes.matrix} here~~ }
-  \item{delta}{ ~~Describe \code{delta} here~~ }
+  \item{ngenes}{number of genes to simulate }
+  \item{n}{number of replicates for each group of control/treatment}
+  \item{fractn.alt}{ the fraction of genes coming from true alternative hypothesis}
+  \item{fractn.dep}{ the fraction of genes coming from dependent group }
+  \item{var.ratio}{ ratio of variance between treatment/control }
+  \item{cov.matrix}{  a list of covariance matrices to sample the covariance from }
+  \item{ngenes.matrix}{ the number of covariance matrices in the list of cov.matrix }
+  \item{delta}{ effect size for sample size calculation
+           the absolute distance from zero for expression values of genes 
+           coming from the true alternative hypothesis group }
 }
-\details{
-  ~~ If necessary, more details than the __description__  above ~~
-}
+% \details{
+%  ~~ If necessary, more details than the __description__  above ~~
+% }
 \value{
-  ~Describe the value returned
-  If it is a LIST, use
-  \item{comp1 }{Description of 'comp1'}
-  \item{comp2 }{Description of 'comp2'}
-  ...
+  returns a matrix with ngenes rows and 2*n columns with the first n 
+  columns being samples from control group and last n columns being from
+  treatment group for each gene (row). each group of genes consists of 
+  subgroups of genes that are dependent and/or coming from true alternative
+  hypothesis
+
 }
-\references{ ~put references to the literature/web site here ~ }
-\author{ ~~who you are~~ }
-\note{ ~~further notes~~ }
 
- ~Make other sections like Warning with \section{Warning }{....} ~
+\author{ Peng Liu \email{peng\_liu@groton.pfizer.com}}
+% \note{ ~~further notes~~ }
 
-\seealso{ ~~objects to See Also as \code{\link{~~fun~~}}, ~~~ }
+% ~Make other sections like Warning with \section{Warning }{....} ~
+
+% \seealso{ ~~objects to See Also as \code{\link{~~fun~~}}, ~~~ }
+
 \examples{
-##---- Should be DIRECTLY executable !! ----
-##-- ==>  Define data, use random,
-##--	or do  help(data=index)  for the standard data sets.
+library(MASS)
+cov.matrix <- list(7);
 
-## The function is currently defined as
-function(ngenes, n, fractn.alt, fractn.dep, var.ratio, cov.matrix, ngenes.matrix, delta)
-{ ## start of the function simu.sample
+for ( i in c(1:7)) {
+    cov.matrix[[i]] <- diag(rep(i*0.1, i+1))
+    # cov.matrix[[i]] <- diag(rep(i*0.1,4))
+}
 
-# get the number of genes in each of the four categories
-  ngenes.null.ind <- round(ngenes * ( 1-fractn.alt ) * ( 1-fractn.dep ))
-  ngenes.null.dep <- round(ngenes * ( 1-fractn.alt ) * fractn.dep )
+cov.matrix[[4]][1,1] <- cov.matrix[[5]][1,1] <- cov.matrix[[6]][1,1] <- 1
+cov.matrix[[4]][2,1] <- cov.matrix[[4]][1,2] <- 0.15 # corr = 0.15 / (1*0.2) = 0.75
+cov.matrix[[5]][2,1] <- cov.matrix[[5]][1,2] <- 0.5 # corr = 0.15 /(1*sqrt(0.5)) = 0.59
+cov.matrix[[7]][1,1] <- 10
+cov.matrix[[7]][2,1] <- cov.matrix[[7]][1,2] <- 0.6 # corr = 0.67
+cov.matrix[[7]][3,1] <- cov.matrix[[7]][1,3] <- 0.5
+cov.matrix[[7]][3,2] <- cov.matrix[[7]][2,3] <- 0.4
 
-  ngenes.alt.ind <- round(ngenes * fractn.alt * ( 1-fractn.dep ))
-  ngenes.alt.dep <- ngenes - ngenes.null.ind - ngenes.null.dep - ngenes.alt.ind  
+test.sample <- simu.sample(ngenes = 100, n = 6, fractn.alt = 0.8, fractn.dep = 0.2,
+   var.ratio=1, cov.matrix, ngenes.matrix = 7, delta = 10)
 
-  result<- array(0, c(ngenes, n*2))	# place to store the simulated sample
-					# for each gene, first n samples from ctrl
-					# then n samples from treatment group
-
-
-# simulate sample for the each category
-  index <- c(1, ngenes.null.ind)
-  result[index[1] : index[2], ] <- sample.null.ind( ngenes.null.ind , n, var.ratio)
-
-  index <- index[2] + c(1, ngenes.null.dep)
-  result[index[1] : index[2], ] <- sample.null.dep( ngenes.null.dep , n, var.ratio, cov.matrix, ngenes.matrix)
-
-  index <- index[2] + c(1, ngenes.alt.ind)
-  result[index[1] : index[2], ] <- sample.alt.ind( ngenes.alt.ind , n, var.ratio, delta)
-
-  index <- index[2] + c(1, ngenes.alt.dep)
-  result[index[1] : index[2], ] <- sample.alt.dep( ngenes.alt.dep , n, var.ratio, cov.matrix, ngenes.matrix, delta)	
-	
- result[1:ngenes,]
-  } ## the end of the function simu.sample
 }
 \keyword{ datagen }% at least one, from doc/KEYWORDS
 \keyword{ multivariate }% __ONLY ONE__ keyword per line

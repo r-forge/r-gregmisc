@@ -1,5 +1,4 @@
 \name{sample.hyp.dep}
-
 \alias{sample.null.dep}
 \alias{sample.alt.dep}
 
@@ -9,10 +8,8 @@
  	  Generate observations from each hypothesis (null/alternative)
         group based on dependent normal distribution}
 \usage{
-sample.null.dep(ngenes.null.dep, n, var.ratio, cov.matrix, 
-      ngenes.matrix, distrn = "normal")
-sample.alt.dep(ngenes.alt.dep, n, var.ratio, cov.matrix, 
-      ngenes.matrix, delta, distrn = "normal")
+sample.null.dep(ngenes.null.dep, n, var.ratio, cov.matrix, ngenes.matrix, distrn = "normal")
+sample.alt.dep(ngenes.alt.dep, n, var.ratio, cov.matrix, ngenes.matrix, delta, distrn = "normal")
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -29,7 +26,7 @@ sample.alt.dep(ngenes.alt.dep, n, var.ratio, cov.matrix,
   \item{ngenes.alt.dep}{an integer number for the number of observations
            (gene expression values) to simulate for genes coming from true
             alternative hypothesis}
-  \item{delta}{ effect size for sample size calculation
+  \item{delta}{  effect size for sample size calculation
            the absolute distance from zero for expression values of genes 
            coming from the true alternative hypothesis group}
 
@@ -46,7 +43,7 @@ sample.alt.dep(ngenes.alt.dep, n, var.ratio, cov.matrix,
 }
 % \references{ ~put references to the literature/web site here ~ }
 
-\author{ Peng Liu \email{peng\_liu\@groton.pfizer.com}}
+\author{ Peng Liu \email{peng\_liu@groton.pfizer.com}}
 % \note{ ~~further notes~~ }
 
 % ~Make other sections like Warning with \section{Warning }{....} ~
@@ -54,13 +51,13 @@ sample.alt.dep(ngenes.alt.dep, n, var.ratio, cov.matrix,
 % \seealso{ ~~objects to See Also as \code{\link{~~fun~~}}, ~~~ }
 
 \examples{
-
-ngenes.null.dep <- <- ngenes.alt.dep <- 10
+library(MASS)
+ngenes.null.dep <- ngenes.alt.dep <- 10
 n <- 1000; delta <- 50; var.ratio <- 1;
 
-ngenes <- 7; cov.matrix <- list(ngenes);
+ngenes.matrix <- 7; cov.matrix <- list(ngenes.matrix);
 
-for ( i in c(1:ngenes)) {
+for ( i in c(1:ngenes.matrix)) {
     cov.matrix[[i]] <- diag(rep(i*0.1, i+1))
     # cov.matrix[[i]] <- diag(rep(i*0.1,4))
 }

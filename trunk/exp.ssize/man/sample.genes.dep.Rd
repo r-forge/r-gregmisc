@@ -49,7 +49,7 @@ cov.ctrl[1,2] <- cov.ctrl[2,1] <- 0.15; # from test.sampling.cov
 
 test.sample <- sample.genes.dep(n, delta, cov.ctrl, var.ratio)
 
-\dontrun {
+\dontrun{
 % begin dontrun
 ndim <- dim(test.sample);
 var.r <- rep(0, ndim[1])

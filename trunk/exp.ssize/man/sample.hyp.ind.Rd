@@ -42,7 +42,7 @@ sample.alt.ind(ngenes.alt.ind, n, var.ratio, delta, shape,
 }
 % \references{ ~put references to the literature/web site here ~ }
 
-\author{ Peng Liu \email{peng\_liu\@groton.pfizer.com}}
+\author{ Peng Liu \email{peng\_liu@groton.pfizer.com}}
 % \note{ ~~further notes~~ }
 
 % ~Make other sections like Warning with \section{Warning }{....} ~
