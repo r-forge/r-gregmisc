@@ -1,34 +1,4 @@
 % $Id$
-%
-% $Log$
-% Revision 1.7  2003/12/02 16:58:46  warnes
-% - Remove '%' character from example code to avoid errors.
-%
-% Revision 1.6  2003/12/01 16:00:08  warnes
-%
-% - updated to match changes to barplot() in base.
-%
-% Revision 1.5  2003/11/18 18:59:08  warnes
-%
-% - Tiny fix to remove R CMD check error.
-%
-% Revision 1.4  2003/01/30 21:43:05  warnes
-%
-% - Added argument 'add' to allow for the addition of a barplot to an
-%   existing graphic. Default is FALSE
-%
-% Revision 1.2  2002/09/23 14:27:17  warnes
-%
-% - Fixed syntax errors in barplot2.Rd and CrossTable.Rd
-% - Fixed incorrect translation of 'F' (distribution) to 'FALSE' in glh.test.Rd
-%
-% Revision 1.1  2002/09/23 13:38:53  warnes
-%
-% - Added CrossTable() and barplot2() code and docs contributed by Marc Schwartz.
-% - Permit combinations() to be used when r>n provided repeat.allowed=TRUE
-% - Bumped up version number
-%
-%
 
 \name{barplot2}
 \alias{barplot2}
@@ -223,7 +193,6 @@ barplot2(VADeaths, angle = 15+10*1:5, density = 20, col = "black",
 title(main = list("Death Rates in Virginia", font = 4))
 
 # border :
-barplot2(VADeaths, border = "dark blue") % lwd = 2 << not passed
-%notyet barplot(VADeaths, inside = FALSE, main = "barplot(*, inside=FALSE)")
+barplot2(VADeaths, border = "dark blue")
 }
 \keyword{hplot}
