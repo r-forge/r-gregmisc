@@ -1,3 +1,11 @@
+# $Id$
+#
+# $Log$
+# Revision 1.2  2001/12/07 22:24:30  warneg
+# - Added cvs tags.
+#
+#
+
 # When there are two or more points with the same (x,y) value (or
 # within x+-s[1] and x+-s[2]), space these out in the y direction so
 # that the points are separated by at least distance s.
