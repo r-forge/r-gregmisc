@@ -43,7 +43,6 @@ sample.genes.ind.2(n, sd.ctrl, var.ratio, delta, distrn = "normal")
 % \seealso{ ~~objects to See Also as \code{\link{~~fun~~}}, ~~~ }
 
 \examples{
-##---- Should be DIRECTLY executable !! ----
 
 sd.ctrl <- c(1:100)*0.01
 

@@ -35,4 +35,4 @@ plot of power versus sample size
 \examples{
 
 }
-\keyword{ graphics }
+\keyword{ device }

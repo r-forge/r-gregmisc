@@ -1,10 +1,10 @@
 \name{calc.power.est}
 \alias{calc.power.est}
 
-\title{ Calculate power and proportion of observations with power greater than 80%}
+\title{ Calculate power and proportion of observations with power greater than 0.8 }
 \description{
 Given a set of sd and specified effect size, significance level and sample size,
-	 calculate power and proportion of observations with power greater than 80%
+	 calculate power and proportion of observations with power greater than 0.8
 }
 \usage{
 calc.power.est(sd, nrep.simu, delta, sig.level)
@@ -20,10 +20,9 @@ calc.power.est(sd, nrep.simu, delta, sig.level)
   to be called by list.power.est
 }
 \value{
-  returns a list
-  \item{calc.power }{the matrix of calculated power (ngenes x length(nrep.simu))}
-  \item{propn.80 }{a vector of with the same length as the number of observations
-		to store the proportion of observations with power greater than 80%}
+  \item{calc.power }{	the matrix of calculated power (ngenes x length( nrep.simu ))}
+  \item{propn.80 }{	a vector of with the same length as the number of observations
+		to store the proportion of observations with power greater than 0.8 }
 }
 % \references{ ~put references to the literature/web site here ~ }
 \author{ Peng Liu \email{peng_liu@groton.pfizer.com}}

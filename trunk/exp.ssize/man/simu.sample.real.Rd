@@ -44,7 +44,7 @@ simu.sample.real(sd.null, sd.alt, cov.null, ngenes.null.dep, cov.alt, ngenes.alt
 % \seealso{ ~~objects to See Also as \code{\link{~~fun~~}}, ~~~ }
 
 \examples{
-
+library(MASS)
 sd.null <- rep(0.1,4); sd.alt <- rep(0.2,5);
 cov.null <- cov.alt <- list(2)
 cov.null[[1]] <- cov.alt[[1]] <- cbind(c(0.1, 0.05), c(0.05,0.2));

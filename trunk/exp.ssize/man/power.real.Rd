@@ -16,10 +16,10 @@ power.real(avg.power)
 %\details{
 %  ~~ If necessary, more details than the __description__  above ~~
 %}
+
 \value{
-a list of summary for power
   \item{avg.power }{mean power based on all tests in simulation}
-  \item{propn.80}{proportion of number of observations with power greater than 80%}
+  \item{propn.80}{proportion of number of observations with power greater than 0.8 }
 }
 
 \author{ Peng Liu \email{peng_liu@groton.pfizer.com}}

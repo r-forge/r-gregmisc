@@ -20,8 +20,8 @@ power.simu(avg.power, nrep.simu, ngenes.null)
 %  ~~ If necessary, more details than the __description__  above ~~
 % }
 \value{
-  \item{true.power} {the matrix of calculated power (ngenes x length(nrep.simu))}
-  \item{propn.80} {a vector of propn.80 with length=ngenes}
+  \item{true.power}{the matrix of calculated power with dimension: ngenes x length(nrep.simu)}
+  \item{propn.80}{a vector of propn.80 with length = ngenes}
 
 }
 

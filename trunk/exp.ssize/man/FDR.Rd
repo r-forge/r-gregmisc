@@ -28,4 +28,4 @@ FDR(p)
 p.test <- c(0.01,0.025,0.05,0.1)
 FDR(p.test)
 }
-\keyword{ multivariate}% 
+\keyword{ multivariate}

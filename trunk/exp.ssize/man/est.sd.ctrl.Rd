@@ -4,7 +4,7 @@
 \title{ Estimate sd for a control sample matrix}
 \description{
     Estimate sd for a control sample matrix with dimension
-    num(observation) x num(replicates)
+    being num(observation) * num(replicates)
 }
 \usage{
 est.sd.ctrl(sample.ctrl, nrep)

@@ -42,27 +42,18 @@ sample.dep.2(ngenes.dep, n, var.ratio, cov.matrix, delta, distrn = "normal")
 % \seealso{ ~~objects to See Also as \code{\link{~~fun~~}}, ~~~ }
 
 \examples{
-##---- Should be DIRECTLY executable !! ----
- library(MASS)
-# initial values to put in argument
-n.dep <- 10; n <- 1000; delta <- 50; var.ratio <- 1;
+library(MASS)
 
-ngenes <- 7; cov.matrix <- list(ngenes);
+n.dep <- 9; n <- 100; delta <- 5; var.ratio <- 1;
+n.matrix <- 3; cov.matrix <- list(n.matrix);
 
-for ( i in c(1:ngenes)) {
-    cov.matrix[[i]] <- diag(rep(i*0.1, i+1))
-    # cov.matrix[[i]] <- diag(rep(i*0.1,4))
+for ( i in c(1:n.matrix)) {
+    cov.matrix[[i]] <- diag(rep(i*0.1, 3))
 }
 
-cov.matrix[[4]][1,1] <- cov.matrix[[5]][1,1] <- cov.matrix[[6]][1,1] <- 1
-cov.matrix[[4]][2,1] <- cov.matrix[[4]][1,2] <- 0.15 # corr = 0.15 / (1*0.2) = 0.75
-cov.matrix[[5]][2,1] <- cov.matrix[[5]][1,2] <- 0.5 # corr = 0.15 /(1*sqrt(0.5)) = 0.59
-cov.matrix[[7]][1,1] <- 10
-cov.matrix[[7]][2,1] <- cov.matrix[[7]][1,2] <- 0.6 # corr = 0.67
-cov.matrix[[7]][3,1] <- cov.matrix[[7]][1,3] <- 0.5
-cov.matrix[[7]][3,2] <- cov.matrix[[7]][2,3] <- 0.4
+cov.matrix[[3]][1,1] <- cov.matrix[[2]][1,1] <- 1
+cov.matrix[[3]][2,1] <- cov.matrix[[3]][1,2] <- 0.15 
 
-## begin testing
 test.sample.dep <- sample.dep.2( n.dep , n, var.ratio, cov.matrix, delta, distrn = "normal")
 
 }
