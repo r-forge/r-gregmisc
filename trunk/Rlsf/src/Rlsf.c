@@ -20,16 +20,21 @@ lsf_initialize(void)
 }
 
 SEXP
-lsf_job_submit(SEXP sexp_c)
+lsf_job_submit(SEXP sexp_debug, SEXP sexp_command)
 {
-  int jobId;
+  int jobId, debug;
   struct submit submitRequest;
   struct submitReply submitReply;
 
+  debug = INTEGER(sexp_debug)[0];
   memset(&submitRequest, 0, sizeof(submitRequest));
-  submitRequest.command = CHAR(STRING_ELT(sexp_c, 0));
+  submitRequest.command = CHAR(STRING_ELT(sexp_command, 0));
   submitRequest.options |= SUB_OUT_FILE;
-  submitRequest.outFile = "LSF.out";
+  if (debug) {
+    submitRequest.outFile = "Rlsf_job_output.%J";
+  } else {
+    submitRequest.outFile = "/dev/null";
+  }
 
   if (setenv("BSUB_QUIET", "1", 1)) {
     return AsInt(0);
@@ -44,13 +49,13 @@ lsf_job_submit(SEXP sexp_c)
 }
 
 SEXP
-lsf_job_status(SEXP sexp_i)
+lsf_job_status(SEXP sexp_jobid)
 {
   int jobid, numrec;
   struct jobInfoEnt *jInfo;
   SEXP status;
 
-  jobid = INTEGER(sexp_i)[0];
+  jobid = INTEGER(sexp_jobid)[0];
   
   if ((numrec = lsb_openjobinfo(jobid, NULL, NULL, NULL, NULL, ALL_JOB)) < 0) {
     Rprintf("lsf_job_status: lsb_openjobinfo: %s\n", lsb_sysmsg());
