@@ -1,3 +1,12 @@
+% $Id$
+%
+% $Log$
+% Revision 1.2  2001/08/25 05:46:51  warneg
+% Added CVS header.
+%
+% Revision 1.1  2001/08/25 05:45:10  warneg
+% Initial Checkin
+%
 \name{plotmeans}
 \alias{plotmeans}
 \title{Plot Group Means and Confidence Intervals}

@@ -1,3 +1,12 @@
+% $Id$
+%
+% $Log$
+% Revision 1.2  2001/08/25 05:46:21  warneg
+% Added CVS header.
+%
+% Revision 1.1  2001/08/25 05:45:10  warneg
+% Initial Checkin
+%
 \name{boxplot.n}
 \alias{boxplot.n}
 \title{Produce a Boxplot Annotated with the Number of Observations}
