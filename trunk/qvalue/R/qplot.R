@@ -1,4 +1,4 @@
-qplot <- function(qobj, rng=0.1, ...o) {
+qplot <- function(qobj, rng=0.1, ...) {
 #Input
 #=============================================================================
 #qobj: a q-value object returned by the qvalue function

@@ -21,7 +21,7 @@ qvalue(p, lambda=seq(0,0.95,0.05), pi0.meth="smoother", fdr.level=NULL,
     it is not specified}
   \item{robust}{an indicator of whether it is desired to make the
     estimate more robust for small p-values and a direct finite sample
-    estimate of pFDR (optional).
+    estimate of pFDR (optional).}
 }
 \details{
   If no options are selected, then the method used to estimate p 0 is
