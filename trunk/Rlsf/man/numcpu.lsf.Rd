@@ -1,3 +1,5 @@
+# $Id$
+
 \name{numcpu.lsf}
 \alias{numcpu.lsf}
 \title{Determine the number of CPUs assigned by LSF}
