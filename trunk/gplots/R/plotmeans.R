@@ -1,7 +1,13 @@
 # $Id$
 #
 # $Log$
+# Revision 1.11  2002/09/24 14:53:56  warnes
+# - Changed digits=options("digits") which produces a list of length 1
+#   to digits=getOption("digits") which returns a vector of length one.
+#   The former was causing an error when passed to round().
+#
 # Revision 1.10  2002/04/09 00:51:30  warneg
+#
 # Checkin for version 0.5.3
 #
 # Revision 1.9  2002/03/20 04:17:05  warneg
@@ -38,7 +44,7 @@ plotmeans  <- function (formula, data = NULL, subset, na.action,
                          minsd=0, minbar=NULL, maxbar=NULL,
                          xlab=names(mf)[2], ylab=names(mf)[1],
                          mean.labels=FALSE, ci.label=FALSE, n.label=TRUE,
-                         digits=options("digits"), col="black",
+                         digits=getOption("digits"), col="black",
                          barwidth=1,
                          barcol="blue",
                          connect=TRUE,
