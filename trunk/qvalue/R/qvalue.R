@@ -1,65 +1,57 @@
-qvalue <- function(p, alpha=NULL, lam=NULL, lam.meth="smoother", robust=F) { 
-#This is a function for estimating the q-values for a given set of p-values. The
-#methodology mainly comes from:
-#Storey JD. (2002) A direct approach to false discovery rates. 
-#Journal of the Royal Statistical Society, Series B, 64: 479-498.
-#See http://www.stat.berkeley.edu/~storey/ for more info. 
-#This function was written by John D. Storey. Copyright 2002 by John D. Storey.
-#All rights are reserved and no responsibility is assumed for mistakes in or caused by
-#the program.
-#
+qvalue <- function(p, lambda=seq(0,0.95,0.05), pi0.meth="smoother", fdr.level=NULL, robust=FALSE) { 
 #Input
 #=============================================================================
 #p: a vector of p-values (only necessary input)
-#alpha: a level at which to control the FDR (optional)
-#lam: the value of the tuning parameter to estimate pi0 (optional)
-#lam.method: either "smoother" or "bootstrap"; the method for automatically
-#           choosing tuning parameter lam if it is not specified
+#fdr.level: a level at which to control the FDR (optional)
+#lambda: the value of the tuning parameter to estimate pi0 (optional)
+#pi0.method: either "smoother" or "bootstrap"; the method for automatically
+#           choosing tuning parameter in the estimation of pi0, the proportion
+#           of true null hypotheses
 #robust: an indicator of whether it is desired to make the estimate more robust 
-#        for small p-values (optional)
+#        for small p-values and a direct finite sample estimate of pFDR (optional)
 #
 #Output
 #=============================================================================
-#remarks: tells the user what options were used, and gives any relevant warnings
+#call: gives the function call
 #pi0: an estimate of the proportion of null p-values
 #qvalues: a vector of the estimated q-values (the main quantity of interest)
 #pvalues: a vector of the original p-values
-#significant: if alpha is specified, and indicator of whether the q-value fell below alpha 
-#    (taking all such q-values to be significant controls FDR at level alpha)
+#significant: if fdr.level is specified, and indicator of whether the q-value 
+#    fell below fdr.level (taking all such q-values to be significant controls 
+#    FDR at level fdr.level)
 
 #This is just some pre-processing
     if(min(p)<0 || max(p)>1) {
     print("ERROR: p-values not in valid range"); return(0)
     }
+    if(length(lambda)>1 && length(lambda)<4) {
+    print("ERROR: If length of lambda greater than 1, you need at least 4 values."); return(0)
+    }
     m <- length(p)
 #These next few functions are the various ways to estimate pi0
-    if(!is.null(lam)) {
-        pi0 <- mean(p>lam)/(1-lam)
+    if(length(lambda)==1) {
+        pi0 <- mean(p >= lambda)/(1-lambda)
         pi0 <- min(pi0,1)
-        remark <- "The user prespecified lam in the calculation of pi0."
     }
     else{
-        lam <- seq(0,0.95,0.01)
-        pi0 <- rep(0,length(lam))
-        for(i in 1:length(lam)) {
-            pi0[i] <- mean(p>lam[i])/(1-lam[i])
+        pi0 <- rep(0,length(lambda))
+        for(i in 1:length(lambda)) {
+            pi0[i] <- mean(p >= lambda[i])/(1-lambda[i])
         }
-        if(lam.meth=="smoother") {
-            remark <- "A smoothing method was used in the calculation of pi0."
-            library(modreg)
-            spi0 <- smooth.spline(lam,pi0,df=3,w=(1-lam))
-            pi0 <- predict(spi0,x=0.95)$y
+        if(pi0.meth=="smoother") {
+            #library(modreg)
+            spi0 <- smooth.spline(lambda,pi0,df=3)
+            pi0 <- predict(spi0,x=max(lambda))$y
             pi0 <- min(pi0,1)
         }
-        if(lam.meth=="bootstrap") {
-            remark <- "A bootstrap method was used in the calculation of pi0."
+        if(pi0.meth=="bootstrap") {
             minpi0 <- min(pi0)
-            mse <- rep(0,length(lam))
-            pi0.boot <- rep(0,length(lam))
+            mse <- rep(0,length(lambda))
+            pi0.boot <- rep(0,length(lambda))
             for(i in 1:100) {
-                p.boot <- sample(p,size=m,replace=T)
-                for(i in 1:length(lam)) {
-                    pi0.boot[i] <- mean(p.boot>lam[i])/(1-lam[i])
+                p.boot <- sample(p,size=m,replace=TRUE)
+                for(i in 1:length(lambda)) {
+                    pi0.boot[i] <- mean(p.boot>lambda[i])/(1-lambda[i])
                 }
                 mse <- mse + (pi0.boot-minpi0)^2
             }
@@ -68,32 +60,26 @@ qvalue <- function(p, alpha=NULL, lam=NULL, lam.meth="smoother", robust=F) {
         }    
     }
     if(pi0 <= 0) {
-    print("ERROR: Check that you have valid p-values. The estimated pi0 < 0."); return(0)
+    print("ERROR: The estimated pi0 <= 0. Check that you have valid p-values or use another lambda.meth."); return(0)
     }
-#The q-values are actually calculated here
+#The estimated q-values calculated here
     u <- order(p)
     v <- rank(p)
     qvalue <- pi0*m*p/v
     if(robust) {
         qvalue <- pi0*m*p/(v*(1-(1-p)^m))
-        remark <- c(remark, "The robust version of the q-value was calculated. See Storey JD (2002) JRSS-B 64: 479-498.")
     }
     qvalue[u[m]] <- min(qvalue[u[m]],1)
     for(i in (m-1):1) {
     qvalue[u[i]] <- min(qvalue[u[i]],qvalue[u[i+1]],1)
     }
-#Here the results are returned
-    if(!is.null(alpha)) {
-        retval <- list(call=match.call(),
-                       remarks=remark, pi0=pi0, qvalues=qvalue,
-                       significant=(qvalue <= alpha), pvalues=p)
+#The results are returned
+    if(!is.null(fdr.level)) {
+        retval <- list(call=match.call(), pi0=pi0, qvalues=qvalue, pvalues=p, significant=(qvalue <= fdr.level), lambda=lambda)
     }
     else {
-        retval <- list(call=match.call(),
-                       remarks=remark, pi0=pi0, qvalues=qvalue, pvalues=p)
+        retval <- list(call=match.call(), pi0=pi0, qvalues=qvalue, pvalues=p, lambda=lambda)
     }
-
-    
     class(retval) <- "qvalue"
     return(retval)
 }

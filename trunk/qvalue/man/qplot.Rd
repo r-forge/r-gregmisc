@@ -16,14 +16,16 @@ qplot(qobj, rng = 0.1, ...)
     to \code{qplot}, or optional arguments plot commands.}
 }
 \details{
-  The function qplot allows one to view several useful plots:
-  \enumerate{
-  \item The estimated \eqn{\pi_0}{pi_0} versus the tuning parameter
-  \eqn{\lambda}{lambda}.
-  \item The q-values versus the p-values
-  \item The number of significant tests versus each q-value cut-off
-  \item The number of expected false positives versus the number of
-  significant tests
+  The function qplot genearates four plots:
+
+  \describe{
+  \item{Upper-left:}{The estimated \eqn{\widehat{\pi_0}}{pi_0} versus the
+    tuning parameter \eqn{\lambda}{lambda} with a smoother.}
+  \item{Upper-right:}{The q-values versus the p-values}
+  \item{Lower-left:}{The number of significant tests versus each q-value
+    cut-off}
+  \item{Lower-right:}{The number of expected false positives versus the
+    number of significant tests}
   }
 
   The main purpose of the first plot is to gauge how reliable the

@@ -8,14 +8,18 @@
 qwrite(qobj, filename)
 }
 \arguments{
-  \item{qobj}{qvalue object}
-  \item{filename}{output filename}
+  \item{qobj}{a q-value object returned by the qvalue function}
+  \item{filename}{the name of the file where the results are written}
 }
 \details{
-  The output file lists the estimate of \deqn{\pi_0}{pi_0}, which is the
-  proportion of true null hypotheses. It also lists each p-value and
-  corresponding q-value, one per line.
-}
+  A file is sent to "filename" with the following:
+  \describe{
+    \item{First row:}{the function call used to produce the estimates}
+    \item{Second row:}{the estimate of the proportion of false positives, pi0}
+    \item{Third row and below:}{the p-values (1st column) and the
+      estimated q-values (2nd column) }
+    }
+  }
 \value{
   Nothing of interest.
 }

@@ -7,19 +7,21 @@
   false discovery rate) when that particular test is called significant.
 }
 \usage{
-qvalue(p, alpha = NULL, lam = NULL, lam.meth = "smoother", robust = F)
+qvalue(p, lambda=seq(0,0.95,0.05), pi0.meth="smoother", fdr.level=NULL,
+       robust=FALSE) 
 }
 \arguments{
   \item{p}{a vector of p-values (only necessary input)}
-  \item{alpha}{a level at which to control the FDR. Optional; if this is
-    selected, a vector of TRUE and FALSE is returned that specifies
-    whether each q-value is less than alpha or not.}
-  \item{lam}{The value of the tuning parameter to estimate
-    \eqn{\pi_0}{pi_0}. Must be in [0,1]. Optional, see Storey (2002).}
-  \item{lam.meth}{either "smoother" or "bootstrap"; the method for
-    automatically choosing tuning parameter lam if it is not specified}
+  \item{fdr.level}{a level at which to control the FDR. (optional)}
+  \item{lambda}{The value of the tuning parameter to estimate
+    \eqn{\pi_0}{pi_0} (optional). Must be in [0,1],  see Storey (2002).}
+  \item{pi0.meth}{either "smoother" or "bootstrap"; the method for
+    automatically choosing tuning parameter \code{lambda} in the
+    estimation of \eqn{\pi_0}{pi_0}, the proportion of true null hypotheses if
+    it is not specified}
   \item{robust}{an indicator of whether it is desired to make the
-    estimate more robust for small p-values. Optional.}
+    estimate more robust for small p-values and a direct finite sample
+    estimate of pFDR (optional).
 }
 \details{
   If no options are selected, then the method used to estimate p 0 is
@@ -28,15 +30,14 @@ qvalue(p, alpha = NULL, lam = NULL, lam.meth = "smoother", robust = F)
 }
 \value{
   A list containing:
-\item{remarks}{tells the user what options were used, and gives any
-  relevant warnings} 
+\item{call}{give the function call}
 \item{pi0}{an estimate of the proportion of null p-values}
 \item{qvalues}{a vector of the estimated q-values (the main quantity of
   interest)} 
 \item{pvalues}{a vector of the original p-values}
-\item{significant}{if alpha is specified, and indicator of whether the
-  q-value fell below alpha (taking all such q-values to be significant
-  controls FDR at level alpha)}
+\item{significant}{if fdr.level is specified, and indicator of whether the
+  q-value fell below fdr.level (taking all such q-values to be significant
+  controls FDR at level fdr.level)}
 }
 \references{
   Benjamini Y and Hochberg Y. (1995) Controlling the false discovery
@@ -70,8 +71,8 @@ qobj <- qvalue(p)
 qplot(qobj)
 qwrite(qobj, filename="myresults.txt")
 
-qobj <- qvalue(p, lam=0.5, robust=TRUE)
-qobj <- qvalue(p, alpha=0.05, lam.meth="bootstrap")
+qobj <- qvalue(p, lambda=0.5, robust=TRUE)
+qobj <- qvalue(p, fdr.level=0.05, pi0.meth="bootstrap")
 }
 }
 \keyword{misc}
