@@ -1,6 +1,10 @@
 % $Id$
 %
 % $Log$
+% Revision 1.5  2001/12/07 23:34:35  warneg
+% Fixed an problem where \code was incorrectly delimited by parens
+% rather than curly brackets.
+%
 % Revision 1.4  2001/12/05 19:36:30  warneg
 %  - Clarified how the width of the window is computed when method="nobs".
 %
@@ -35,7 +39,7 @@ wapply(x, y, fun=mean, method="range", width=1/10, n=50, drop.na=T, ...)
   \item{width}{ width of an x-neighborhood. See details. }
   \item{n}{ Number of equally spaced points at which to compute local
     estimates. See details.}
-  \item{drop.na}{ should points which result in missing values \code(NA)
+  \item{drop.na}{ should points which result in missing values \code{NA}
     be omitted from the return value. Defaults to true. }
   \item{\dots}{ arguments to be passed to \code{fun} }
 }
