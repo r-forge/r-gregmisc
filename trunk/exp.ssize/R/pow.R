@@ -13,9 +13,9 @@ pow<-function(sd, n, delta, sig.level, alpha.correct="Bonferonni")
   else
     alpha <- sig.level
   
-  retval<-rep(NA, ntest)
-  names(retval)<-names(sd)
-  for(i in 1:ntest)
+  retval<-rep(NA, ntest)     #
+  names(retval)<-names(sd)   #
+  for(i in 1:ntest)          # can be replaced with an sapply
   {
     if(i%%10==0) cat(".")
       try(
