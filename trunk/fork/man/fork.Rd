@@ -66,9 +66,6 @@ fork(slave)
   }
 }
 
-%  [NB: sorry about the formatting preformatted blocks are not supported by
-%  the R manual format, so indentation is lost]
-
   On the other hand, wrapping this code with curly brackets ensures it
   IS intepreted properly:
     
@@ -82,7 +79,7 @@ fork(slave)
     } 
   } 
 }
-
+%
 }
 \value{
    This function returns the process ID of the child
