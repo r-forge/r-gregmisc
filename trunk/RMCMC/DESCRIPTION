@@ -1,0 +1,7 @@
+Package: RMCMC
+Title: MCMC within R
+Version: 0.1.0
+Author: Gregory R. Warnes  <gregory.r.warnes@pfizer.com>
+Description: Tools to perform MCMC within R
+Maintainer: Gregory R. Warnes  <gregory.r.warnes@pfizer.com>
+License: LGPL
