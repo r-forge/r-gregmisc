@@ -3,10 +3,7 @@
 
 get.cumsum<-function(mat)
 { # take an argument of matrix and reurn the cumsum by col
-  nr <- dim(mat)[1]; res.cumsum <- mat;
-  for (i in 1:nr)
-    { res.cumsum[i,] <- cumsum(mat[i,])}
-  res.cumsum
+ t(apply(mat,1,cumsum)) 
 }
 
 
@@ -48,7 +45,10 @@ t.test.matrix <- function(ctr, trt)
   ts<- matrix(ts[!is.na(ts)], nr = ngenes)
 
   tp <- matrix(2*pt(-abs(c(ts)),df =c(df)), nrow = nrow(ts), nc = ncol(ts))
-# factor 2: for 2-sided test p-values
+# multiplication factor 2: for 2-sided test p-values
+
 tp
+# output is a matrix of p-values of 2-sided t-test with dim
+# ngenes x [ncol(ctr)-1]
 
 }
