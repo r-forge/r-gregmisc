@@ -1,9 +1,15 @@
 # Global Config Variables
+# Paths
 R_PACKAGE_DIR ?= /tmp/gregmisc/
 PERL_PREFIX = $(R_PACKAGE_DIR)/perl
 BIN_PREFIX  = $(R_PACKAGE_DIR)/bin
 
 PERL_LIB=$(PERL_PREFIX)
+
+# Executables 
+INSTALL=$(R_HOME)/bin/mkinstalldirs
+CP=install
+###
 
 # Names of packages to install, ordered according to dependencies
 packages = IO-stringy \
@@ -16,7 +22,9 @@ TGZ  =	IO-stringy-2.109.tar.gz \
 
 DIRS =  $(subst .tar.gz,,$(TGZ))
 
-PERLVARS =  PERL_LIB=${PERL_LIB} \
+PERLVARS =  PERL_PREFIX=$(PERL_PREFIX) \
+	    PERLPREFIX=$(PERL_PREFIX) \
+	    PERL_LIB=${PERL_LIB} \
 	    PERL5LIB=${PERL_LIB} \
 	    PREFIX=${R_PACKAGE_DIR} \
 	    SITEPREFIX=$(R_PACKAGE_DIR)/perl \
@@ -38,13 +46,12 @@ basedir:
 
 %:%.tar.gz basedir
 	@echo -- Installing PERL module $< --
-	@echo INCLUDE DIRS = $(PERL_LIB)
 	tar -xzf $<	
 	cd $@ ; \
 	perl -I$(PERL_LIB) Makefile.PL $(PERL_VARS)
-	${MAKE} -C $@         PERL_PREFIX=$(PERL_PREFIX) $(PERLVARS)
-	${MAKE} -C $@ test    PERL_PREFIX=$(PERL_PREFIX) $(PERLVARS) 
-	${MAKE} -C $@ install PERL_PREFIX=$(PERL_PREFIX) $(PERLVARS)
+	${MAKE} -C $@ $(PERLVARS)
+	${MAKE} -C $@ $(PERLVARS) test    
+	${MAKE} -C $@ $(PERLVARS) install
 	rm -rf $@ # clean up after ourselves
 
 test: $(TGZ)
@@ -54,13 +61,27 @@ test: $(TGZ)
 clean:
 	-rm -rf $(PERL_PREFIX)
 	-rm -rf $(BIN_PREFIX)
-	-rm xls2csv xls2csv.bat xls2csv.pl
+	-rm -rf $(DIRS)
+	-rm -f gregmisc.dll gregmisc.so
+	-rm -f xls2csv xls2csv.bat xls2csv.pl
+	-rm -f *~ 
+	-rm -f *.csv
+
 
 
 show:	
+	@echo ------------------------------
+	@echo START of ENVIRONMENT VARIABLES
+	@echo ------------------------------
+	#$(ENV)
 	@echo R_PACKAGE_DIR=$(R_PACKAGE_DIR)
 	@echo BIN_PREFIX=   $(BIN_PREFIX)
 	@echo PERL_PREFIX=  $(PERL_PREFIX)
+	@echo INCLUDE DIRS = $(PERL_LIB)
+	@echo NMAKE=        $(NMAKE)
+	@echo ----------------------------
+	@echo END of ENVIRONMENT VARIABLES
+	@echo ----------------------------
 
 
 xls2csv.pl: xls2csv.pl.in Makefile
@@ -79,10 +100,9 @@ xls2csv: xls2csv.in Makefile
 build: basedir $(DIRS) 
 
 install_bin: xls2csv.pl xls2csv.bat xls2csv
-	mkdir -p $(BIN_PREFIX)
-	install xls2csv $(BIN_PREFIX)/
-	install xls2csv.bat $(BIN_PREFIX)/
-	install xls2csv.pl $(PERL_PREFIX)/
+	$(INSTALL) $(BIN_PREFIX)
+	$(CP) xls2csv $(BIN_PREFIX)/
+	$(CP) xls2csv.pl $(PERL_PREFIX)/
 
 install: show clean build install_bin clean
 	touch gregmisc.so
