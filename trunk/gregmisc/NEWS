@@ -3,6 +3,60 @@ This file provides a brief list of major feature enhancements
 associated with each package release. For a more detailed list of
 changes see the ChangeLog file.
 
+Version 2.0.3
+-------------
+
+New functions:
+
+	* gdata/unmatrix: function for converting a matrix into a
+	  well-labeled vector
+
+	* gtools/frameApply: Apply a functon the the rows of a data
+	  frame.
+
+	* gtools/drop.levels remove unused factor levels from the
+	  factors contained in a data frame
+
+Feature enhancements:
+
+	* gmodels/CrossTable: Added 'SPSS' format, as suggested by
+  	  Dirk Enzmann
+
+	* gplots/heatmap.2: 
+
+             - Add new parameters for controlling color key: 
+
+             - New parameter to allow control of height and width of
+               separator box
+
+	* gmodels/CrossTable: Show Chisquare contribution of each
+	  cell, suggested by Greg Snow.
+
+	* gdata/read.xls: Add ability to specify the perl executable
+	  and path.
+
+Bug fixes:
+
+	* gplots/heatmap2: 
+
+	     - cell note layout was incorrect
+
+	     - Fix handling of rowsep/colsep.
+
+	     - Ignore missing values when computing symmetric range.
+
+	* gplots/bandplot: Fix problem in passing graphical parameters
+
+ 	* add import of 'reorder' and 'na.omit' from 'stats' package
+ 	  to satisfy packages depending on us.
+
+Other changes:
+
+	* gplots/textplot: Code can be simplified because R now
+	  supports selecting a fixed width font.
+
+	* gplots/plotmeans: Add more extensive example.
+
 
 Version 2.0.0
 -------------
