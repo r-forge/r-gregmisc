@@ -1,0 +1,92 @@
+
+This file provided a brief list of major feature enhancements
+associated with each release. For a detailed list of changes see the
+ChangeLog file.
+
+Version 1.11.0
+--------------
+
+- Bump version number to 1.11.0 to better reflect the production
+  status of the package.
+
+- Add read.xls(), a function to read Microsoft Excel files by
+  translating them to csv files via the xls2csv.pl script, which has
+  also been added to the package.  I've provided scripts to run xls2csv: 
+
+     Unix systems: $PACKAGE$/gregmisc/bin/xls2csv
+     MS-Windows:   $PACKAGE$/gregmisc/bin/xls2csv.bat
+
+  or you can execute the perl code directly:
+
+     $PACKAGE$/gregmisc/perl/xls2csv.pl
+
+  The perl script explicitly loads its libraries from the installed
+  gregmisc so you don't have to worry about paths.  To get usage and
+  parameter information, simply execute the script via any of the
+  above methods without providing any command-line arguments.
+
+
+- Improvements to CrossTable() by Marc Schwartz <MSchwartz@MedAnalytics.com>
+
+- Improvements to ooplot() by Lodewijk Bonebakker <bonebakker@comcast.net>
+
+- plotCI() and plotmeans() now have improved argument handling.
+
+- The running() function now has an additional parameter `simplify'
+  which controls whether the returned values are simplified into a
+  vector/matrix or left as a list.
+
+- A makefile that will download and attempt to install all available
+  packages from CRAN and Bioconductor is now provided in
+  $PACKAGE$/gregmisc/tools/
+
+- space() can now space points along the 'y' dimension.
+
+- Fix an error in the permutations code for repeats.allow=T and r>2.
+  Both the bug report and fix are from Elizabeth Purdom
+  <epurdom@stanford.edu>.
+
+- Various fixes for compatibility with R 1.9.X.
+
+Version 0.10.2
+--------------
+
+- Fixed latex warning.
+
+- Fixed smartlegend() positioning when x and/or y axis are log-scale.
+
+- Add function remove.vars().
+
+Version 0.10.1
+--------------
+
+- Fixed bug in textplot() reported by Kevin Wright  <kevin.d.wright at pioneer
+  dot com>.
+
+Version 0.10.0
+--------------
+
+- Now works with and requires R 1.9.0
+
+- Added ooplot() function that mimics Open-Office style plots.
+  Contributed by Lodewijk Bonebakker <bonebakker@comcast.net>
+
+- Fixed bug in running() that arose when the called function
+  really neaded a minimum number of elements to work on.
+
+- Added several new features to running(), it can now allow sequences
+  shorter than the requested width to be present at the front, the back,
+  or on both sides of the full lenth sequences.  This allows one to
+  align the data so that the window is before, after, or around the
+  indexed point.
+
+- Add enhancements to estimable() provided by Søren Højsgaard
+  <sorenh@agrsci.dk>:
+
+  The estimable function now
+  1) also works on geese and gee objects and
+  2) can test hypotheses af the forb L * beta = beta0 both as a
+     single Wald test and row-wise for each row in L.
+
+- Add colorpanel function, which generates a smoothly varying band of
+  colors over a three color range (lo, mid, high).
