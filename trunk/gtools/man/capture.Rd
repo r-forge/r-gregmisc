@@ -12,7 +12,7 @@ sprint(x,...)
 \arguments{
   \item{expression}{R expression whose output will be captured.}
   \item{collapse}{Character used to join output lines.  Defaults to
-    "\n".  Use \code{NULL} to return a vector of separate lines.}
+    "\\n".  Use \code{NULL} to return a vector of individual output lines.}
   \item{x}{Object to be printed}
   \item{...}{Optional parameters to be passed to \code{\link{print}} }
 }
@@ -28,7 +28,7 @@ sprint(x,...)
   strings containing the printed output from the R expression.
 }
 \author{Gregory R. Warnes \email{gregory\_r\_warnes@groton.pfizer.com} }
-\seealso{\code[session]{texteval}}
+\seealso{\code{\link[session]{texteval}}}
 \examples{
 
 # capture the results of a loop
@@ -41,5 +41,5 @@ reg <- lm( Sepal.Length ~ Species, data=iris )
 summary.text <- sprint( summary(reg) )
 cat(summary.text)
 }
-\keyword{ ~kwd1 }% at least one, from doc/KEYWORDS
-\keyword{ ~kwd2 }% __ONLY ONE__ keyword per line
+\keyword{print}
+\keyword{IO}
