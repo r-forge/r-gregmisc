@@ -14,13 +14,13 @@ ddirichlet(x, alpha)
   \item{x}{A vector containing a single random deviate or matrix
     containg one random deviate per row.} 
   \item{n}{Number of random vectors to generate. }
-  \item{a}{Vector or (for \code{ddirichlet}) matrix containing shape
+  \item{alpha}{Vector or (for \code{ddirichlet}) matrix containing shape
     parameters. }
 }
 \details{
   The Dirichlet distribution is the multidimensional generalization of
   the beta distribution.  It is the canonical Bayesian distribution for
-  the parameter estimates for the multinomial distribution.
+  the parameter estimates of a multinomial distribution.
 }
 \value{
   \code{ddirichlet} returns a vector containing the Dirichlet density for the
@@ -34,7 +34,7 @@ ddirichlet(x, alpha)
   \url{http://www.r-project.org/nocvs/mail/r-help/2000/3865.html}.  Ben 
   attributed the code to Ian Wilson \email{i.wilson@maths.abdn.ac.uk}.
   Subsequent modifications by Gregory R. Warnes
-  \email{gregory_r_warnes@groton.pfizer.com}.
+  \email{gregory\_r\_warnes@groton.pfizer.com}.
 }
 \seealso{ \code{\link{dbeta}}, \code{\link{rbeta}} }
 \examples{
