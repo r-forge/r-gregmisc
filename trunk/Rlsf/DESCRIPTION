@@ -1,6 +1,6 @@
 Package: Rlsf
 Title: Interface to the LSF Queuing System
-Version: 0.1.5
+Version: 0.1.6
 Author: Chris Smith <csmith@platform.com> and Gregory Warnes
         <gregory_r_warnes@groton.pfizer.com>
 Description: This package provides functions for using R with the
