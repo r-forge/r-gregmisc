@@ -1,16 +1,23 @@
-make.density <- function(m, data)
+# $Id$
+
+make.density <- function(m, data, monitor)
 {
   if(!is.call(m)) stop("The model 'm' is not a model object (see ?model)")
   
   newcode <- function(...)
     {
+      LIBS
       parms <- list(...)
-      if(length(parms)==1 && is.list(parms[[1]])) parms <- parms[[1]]
+      if(length(parms)==1 && is.list(parms[[1]])) 
+        parms <- parms[[1]] 
       attach(parms)
-      loglik <- 0.0
-      # added code goes here
+      ASSIGNMENTS
+      loglik <- 0.0 
+      DENSITIES
+      MONITOR
+      detach(parms)       
+      loglik
     }
-  index <- 6
 
   if(missing(data))
     {
@@ -30,7 +37,7 @@ make.density <- function(m, data)
             {
               newCALL <- insert.arg(RHS, LHS)
 
-              # convert from name to distribution function
+              ## convert from name to distribution function
               CALL = as.character(newCALL[[1]])
               fun <- lookup.table[[CALL]]$logdensity
               if(is.null(fun))
@@ -51,15 +58,26 @@ make.density <- function(m, data)
                 }
 
               
-              # put into function
-              body(newcode)[[index]] <- bquote( loglik <- loglik + sum
-                                               (.(newCALL)) )
-              index <- index + 1
+              ## put into function
+              newcode <- insert.function( newcode, "DENSITIES",
+                                         bquote(
+                                         loglik <- loglik + sum(.(newCALL))
+                                                )
+                                         )
+
+              ## Load appropriate package
+              libname <- lookup.table[[CALL]]$package
+              
+              newcode <- insert.function( newcode, "LIBS",
+                                         bquote(
+                                                library( .(libname) )
+                                                )
+                                         )
+              
             }
           else if (CALL=="<-")
             {
-              body(newcode)[[index]] <- expr
-              index <- index + 1
+              newcode <- insert.function(newcode, "ASSIGNMENTS", expr)
             }
         }
       else if (!is.null(expr) && nchar(as.character(expr)) > 0 )
@@ -72,15 +90,25 @@ make.density <- function(m, data)
           cat("Skipping empty line\n")
         }
     }
-  body(newcode)[[index]] <- quote(detach(parms))
-  index <- index+1
 
-  body(newcode)[[index]] <- quote(loglik)
-  index <- index+1
+  ## Add monitors
+  if(!missing(monitor))
+    for( VAR in monitor)
+      newcode <- insert.function(newcode, "MONITOR",
+                                 bquote(
+                                        cat(.(VAR),"=",
+                                            paste( .(as.name(VAR)),
+                                                  collapse=",", sep="," ),
+                                            "\n" )
+                                        )
+                                 )
+
   
-
-  # Create an environment to hold the constant data
-
+  ## Remove place markers
+  newcode <- remove.marker(newcode,
+                           c("LIBS", "ASSIGNMENTS", "DENSITIES", "MONITOR"))
+  
+  ## Create an environment to hold the constant data
   newenv <- new.env()
   for(n in names(data))
     {

@@ -1,38 +1,35 @@
 \name{distfuns}
 \alias{distfuns}
 \docType{data}
-\title{ ~~ data name/kind ... ~~}
+\title{Distribution functions availalbe for MCMC}
 \description{
-  ~~ A concise (1-5 lines) description of the dataset. ~~
+  Distribution functions availalbe for MCMC
 }
 \usage{data(distfuns)}
 \format{
-  The format is:
-List of 2
- $ Normal        :List of 5
-  ..$ aliases   : chr [1:4] "N" "Norm" "Normal" "Gaussian"
-  ..$ random    : chr "rnorm"
-  ..$ density   : chr "dnorm"
-  ..$ logdensity: chr "log.dnorm"
-  ..$ package   : chr "stats"
- $ Inverted Gamma:List of 5
-  ..$ aliases   : chr [1:3] "IG" "InvGamma" "Inverted Gamma"
-  ..$ random    : chr "rinvgamma"
-  ..$ density   : chr "dinvgamma"
-  ..$ logdensity: chr "log.dinvgamma"
-  ..$ package   : chr "MCMCpack"
+  The format is: a list of lists, one component per distribution.
+  Each distribution element is a list containing the following elements:
+  \item{aliases}{List of names for this distribution. For the univariat
+    normal this is \code{c("N", "Norm", "Normal", "Gaussian")}.}
+  \item{random}{Name of the random generator for this distribution. E.G.
+    "rnorm"}
+  \item{density}{Density function for this distribution.  E.G. "dnorm"}
+  \item{logdensity}{Log-Density function for this distribution.
+    E.G. "log.dnorm"}
+  \item{package}{Name(s) of package(s) which contain the functions
+    listed in \code{random}, \code{density}, and \code{logdensity}.}
+  }
 }
 \details{
-  ~~ If necessary, more details than the __description__ above ~~
-}
-\source{
-  ~~ reference to a publication or URL from which the data were obtained ~~
-}
-\references{
-  ~~ possibly secondary sources and usages ~~
+  This list is intended to be extendable by users.  Please forward 
+  additions which are of general interest to the author for inclusion in
+  future versions of the package.
 }
 \examples{
 data(distfuns)
-## maybe str(distfuns) ; plot(distfuns) ...
+str(distfuns)
+
+# Add a new dummy distribution
+
 }
 \keyword{datasets}
