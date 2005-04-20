@@ -1,97 +1,128 @@
-\documentclass{bioinfo}
+\documentclass[12pt]{article}
+
+\usepackage{biometrics2}
 \usepackage{url}
-\copyrightyear{2005}
-\pubyear{2005}
+\usepackage{amsmath}
+\usepackage{endfloat} % move tables to end, but note where they
+                      % came from
+
+
+%\copyrightyear{2005}
+%\pubyear{2005}
 
 \begin{document}
-\firstpage{1}
+%\firstpage{1}
 
 \title{Sample Size Estimation for Microarray Experiments}
-\author{
-  Gregory R Warnes\,$^{\rm a}$\footnote{to whom correspondence should
-    be addressed}\t
-  and
-  Peng Liu\,$^{\rm b}$
-}
+\author{Gregory R Warnes}
 \address{
-  $^{\rm a}$Nonclinical Statistics, Pfizer Global Research and Development,
-  Groton, CT 06340 \\
-  $^{\rm b}$Department of Biological Statistics and Computational
-  Biology, Cornell University, Ithaca, NY 14853
+    Nonclinical Statistics \\
+    Pfizer Global Research and Development\\
+    Groton, CT 06340
+}
+\email{gregory.r.warnes@pfizer.com}
+
+
+\author{Peng Liu}
+\address{
+  Department of Biological Statistics and Computational Biology\\
+  Cornell University\\
+  Ithaca, NY 14853
   }
 
 \maketitle
 
 \begin{abstract}
 
-\section{Motivation:}
+RNA Expression Microarray technology is widely applied in biomedical
+and pharmaceutical research.  An important challenge in designing
+and analyzing experiments employing microarrays is the huge number
+of gene expression variables collected for each sample, making it
+difficult to apply traditional sample size calculation techniques.
+We present a simple method for performing and visualizing sample
+size calculations for microarray experiments.  We further
+demonstrate, via simulation studies, that our method performs well
+under a variety of departures from our simplifying assumptions,
+except in the case where the underlying sample size calculation
+formula employed is inappropriate.  In this latter case, the method
+is easily adapted by substituting an appropriate sample size
+formula.  The \texttt{ssize} R package implementing the described
+method is available from the authors and from the Bioconductor
+project (\url{http://www.bioconductor.org}) web site.
 
-Microarray technology is widely applied in biomedical and
-pharmaceutical research to detect differences in gene expression
-levels between treatment groups.  The information provided by
-experiments utilizing microarrays can have very high value, provided
-sufficient samples are utilized.  However, microarrays are expensive
-to process, in terms of both materials and human effort.
-Consequently, an appropriate method for determining the effect of
-sample size on power is essential for balancing statistical power
-against experiment cost. Unfortunately, the same high
-dimensionality that makes microarrays so useful also prevents direct
-application of traditional sample size calculation methods.
 
-\section{Method:}
+%\subsection{Motivation:}
 
-We propose a straightforward method for estimating sample size for
-microarray experiments. First, standard deviations from existing
-control data for the system of interest are used to estimate the
-baseline variability of each gene. Next, a standard sample size
-calculation (a pooled t-test in our example) is performed separately
-for each gene.  Finally the calculated sample sizes are summarized
-through a cumulative plot that displays the tradeoff between sample
-size and power. Scientists can use this plot to select the best
-sample size for their specific application.  While we illustrate the
-method using pooled two-sample t-tests. the method can easily be
-adapted to any statistical method for which sample-size formulae are
-available.
+%Microarray technology is widely applied in biomedical and
+%pharmaceutical research to detect differences in gene expression
+%levels between treatment groups.  The information provided by
+%experiments utilizing microarrays can have very high value, provided
+%sufficient samples are utilized.  However, microarrays are expensive
+%to process, in terms of both materials and human effort.
+%Consequently, an appropriate method for determining the effect of
+%sample size on power is essential for balancing statistical power
+%against experiment cost. Unfortunately, the same high
+%dimensionality that makes microarrays so useful also prevents direct
+%application of traditional sample size calculation methods.
 
-\section{Results:}
+%\subsection{Method:}
 
-We performed a simulation study to evaluate the performance of our
-method for estimating the relationship between sample size and power
-for 2-sample pooled-variance t-tests.  Our simulation varied the
-primary parameters that could affect the accuracy of the proposed
-method.  In order to make the simulation as realistic as possible,
-we used variance and covariance information obtained from real data.
-While the sample size estimation method does not explicitly account
-for the interdependencies among genes, we found that its performance
-was unaffected by the level of dependency. We also found that the
-true proportion of differentially expressed genes had no effect on
-the accuracy of the sample size calculations.  As expected, we found
-that large differences in variance between treatments or the use of
-alternative multiple testing procedure can effect the accuracy of
-our method of sample size estimation.  Fortunately, the method can
-be easily extended for either or both of these cases.
+%We propose a straightforward method for estimating sample size for
+%microarray experiments. First, standard deviations from existing
+%control data for the system of interest are used to estimate the
+%baseline variability of each gene. Next, a standard sample size
+%calculation (a pooled t-test in our example) is performed separately
+%for each gene.  Finally the calculated sample sizes are summarized
+%through a cumulative plot that displays the tradeoff between sample
+%size and power. Scientists can use this plot to select the best
+%sample size for their specific application.  While we illustrate the
+%method using pooled two-sample t-tests. the method can easily be
+%adapted to any statistical method for which sample-size formulae are
+%available.
 
-\section{Availability:}
+%\subsection{Results:}
 
-The \texttt{ssize} R package, available from the Bioconductor
-project (\url{http://www.bioconductor.org}), implements the proposed
-method.  In addition, all of the codes and data for the described
-simulation have been assembled into an R package,
-\texttt{ssize.sim}, which is available upon request.
+%We performed a simulation study to evaluate the performance of our
+%method for estimating the relationship between sample size and power
+%for 2-sample pooled-variance t-tests.  Our simulation varied the
+%primary parameters that could affect the accuracy of the proposed
+%method.  In order to make the simulation as realistic as possible,
+%we used variance and covariance information obtained from real data.
+%While the sample size estimation method does not explicitly account
+%for the interdependencies among genes, we found that its performance
+%was unaffected by the level of dependency. We also found that the
+%true proportion of differentially expressed genes had no effect on
+%the accuracy of the sample size calculations.  As expected, we found
+%that large differences in variance between treatments or the use of
+%alternative multiple testing procedure can effect the accuracy of
+%our method of sample size estimation.  Fortunately, the method can
+%be easily extended for either or both of these cases.
 
-%\section{Contact:} \href{ $^{\rm a}$ $ Gregory_R_Warnes@groton.pfizer.com $ \\
+%\subsection{Availability:}
+
+%The \texttt{ssize} R package, available from the Bioconductor
+%project (\url{http://www.bioconductor.org}), implements the proposed
+%method.  In addition, all of the codes and data for the described
+%simulation have been assembled into an R package,
+%\texttt{ssize.sim}, which is available upon request.
+
+%\section{Contact:} \href{ $^{\rm a}$ $ Gregory.R.Warnes@Pfizer.com $ \\
 %                          $^{\rm b}$ $PL61@cornell.edu$}
-%                          {$ Gregory_R_Warnes@groton.pfizer.com $  \\
+%                          {$ Gregory.R.Warnes@Pfizer.com $  \\
 %                           $ PL61@cornell.edu $}
 \end{abstract}
+
+\keywords{
+
+}
 
 \section{Introduction}
 
 High-throughput microarray experiments allow the measurement of
 expression levels for tens of thousands of genes simultaneously.
 These experiments have been used in many disciplines of biological
-research, such as neuroscience (\citealp{Mandel03}), pharmacogenomic
-research, genetic disease and cancer diagnosis (\citealp{Heller02}).
+research, such as neuroscience (\fullcite{Mandel03}), pharmacogenomic
+research, genetic disease and cancer diagnosis (\fullcite{Heller02}).
 As a tool for estimating gene expression and single nucleotide
 polymorphism (SNP) genotyping, microarrays produce huge amounts of
 data which are providing important new insights.
@@ -99,7 +130,7 @@ data which are providing important new insights.
 Microarray experiments are rather costly in terms of materials (RNA
 sample, reagents, chip, etc), laboratory manpower, and data analysis
 effort.  As a consequence, such experiments often employ only
-a small number of replicates (2 to 8) (\citealp{Speed03}). In many
+a small number of replicates (2 to 8) (\fullcite{Speed03}). In many
 cases, the selected sample size may not be adequate to perform
 reliable statistical estimation.  Conversely, a given sample size
 may be larger than necessary for answering the question at hand.
@@ -233,31 +264,31 @@ where $G$ is the number of genes on the microarray chip.
 
 \end{enumerate}
 
-\begin{figure}[h]
-  \centerline{\includegraphics*[width=3.2in]{CumPlotP.pdf}}
+\begin{figure}%[h]
   \caption[Effect of Sample Size on Power]{
     After estimation for each gene separately, all estimated sample
     sizes are summarized in this cumulative plot. Sample size can then
     be selected by balancing the number of genes achieving the desired
     power against the required sample size.}
   \label{fig:CumNPlot}
+  \centerline{\includegraphics*[width=0.8\textwidth]{CumPlotP.pdf}}
 \end{figure}
 
-\begin{figure}[h]
-  \centerline{\includegraphics*[width=3.2in]{CumPowerPlotP.pdf}}
+\begin{figure}%[h]
   \caption[Given Sample Size, Fraction of Genes Achieving a Specified Power]{
     Given sample size, this plot allows visualization of the fraction
     of genes achieving a specified power.}
   \label{fig:CumPowerPlot}
+  \centerline{\includegraphics*[width=0.8\textwidth]{CumPowerPlotP.pdf}}
 \end{figure}
 
-\begin{figure}[h]
-  \centerline{\includegraphics*[width=3.2in]{CumFoldChangePlotP.pdf}}
+\begin{figure}%[h]
   \caption[Given Sample Size, Fold Change (Effect Size) Necessary to
     Achieving a Specified Power]{Given sample size, this plot allows
     visualization of the fraction of genes achieving the specified
     power for different fold changes.}
   \label{fig:CumFoldChangePlot}
+  \centerline{\includegraphics*[width=0.8\textwidth]{CumFoldChangePlotP.pdf}}
 \end{figure}
 
 On the cumulative plot, for a point with $x$ coordinate $n$, the
@@ -306,11 +337,15 @@ differentially expressed genes might also influence the accuracy of
 sample size estimation.  Table \ref{tb:SimuVariables} summarizes
 each of the variables that we included in our simulation study.
 
-\begin{table}\centering
-  \caption{Tested Variables in Simulation Study}\ \\
+\begin{table}
+  \caption{Tested Variables in Simulation Study.
+	FDR indicates the Benjamini and Hochberg procedure (1995) to
+	    control false discovery rate}
+  \label{tb:SimuVariables}
+  \centering
+  \vspace{0.1in}
   \begin{tabular}{lcl}
-    \hline\hline
-    \\
+    %\hline\hline
     % after \\: \hline or \cline{col1-col2} \cline{col3-col4} ...
     Description & Variable & Tested Levels \\
     \\
@@ -328,12 +363,9 @@ each of the variables that we included in our simulation study.
     for scientific relevance & $\Delta$ & 4-fold \\
     \hline
     Choice of multiple  & & Bonferroni,  \\
-    comparison method & m.method & FDR* \\
+    comparison method & m.method & FDR \\
     \hline\hline\\
   \end{tabular}
-  \emph{*:}FDR indicates the Benjamini and Hochberg procedure (1995) to
-    control false discovery rate
-  \label{tb:SimuVariables}
 \end{table}
 
 We performed simulation passes for each combination of the
@@ -377,15 +409,14 @@ variance is then applied to each individual population using a range
 of sample sizes.  Error rate within populations is controlled using
 one of two different methods, either the Bonferroni method for
 family-wise Type I error rate or the Benjamini and Hochberg
-procedure (\citealp{Benjamini95}) for False Discovery Rate (FDR).
+procedure (\fullcite{Benjamini95}) for False Discovery Rate (FDR).
 The tests from all populations are then pooled to determine the true
 power for each gene at each sample size. This allows the generation
 of the true cumulative sample size by summarizing across genes,
 which is then compared with the estimated curve generated by our
 proposed method.
 
-\begin{figure}[h]
-  \centerline{\includegraphics*[width=3.2in]{SimuFC.pdf}}
+\begin{figure}%[h]
   \caption[Flow Chart for Simulation Study]{ Simulation study
   performed to check the performance of proposed method.  One set of
   gene expression sample is generated and calculated for sample size
@@ -395,6 +426,8 @@ proposed method.
   the true power for each sample size. Estimated sample size and
   simulation results are compared at the end.}  
   \label{fig:SimuFC}
+  \vspace{0.1in}
+  \centerline{\includegraphics*[width=0.8\textwidth]{SimuFC.pdf}}
 \end{figure}
 
 \section{Results}
@@ -425,9 +458,7 @@ has little or no effect on sample size estimation using our
 method. This result is reassuring, given the high degree of
 interdependence known to exist among genes.
 
-\begin{figure}[h]
-  \centerline{\includegraphics*[width=3.2in]{ResDepF.pdf}} 
-  %%% ResDepF_2005.pdf 
+\begin{figure}%[h]
   \caption[Effect of interdependency of genes on sample size
     estimation] {Effect of interdependency of genes on sample size
     estimation.  Cumulative plots for sample sizes from both
@@ -437,6 +468,7 @@ interdependence known to exist among genes.
     error. Dashed green lines are estimated sample sizes while solid
     black lines are sample sizes obtained from simulation result.}
   \label{fig:ResDep}
+  \centerline{\includegraphics*[width=\textwidth]{ResDepF.pdf}} 
 \end{figure}
 
 \subsection{Proportions of Genes with True Differential Expression}
@@ -457,8 +489,7 @@ estimation, i.e., the estimated sample size curve overlapped with
 true result from simulation for all tested proportions of
 differentially expressed genes (Figure \ref{fig:ResAlt}).
 
-\begin{figure}[h]
-  \centerline{\includegraphics*[width=3.2in]{ResAlt.pdf}}
+\begin{figure}%[h]
   \caption[Effect of the proportion of genes with true differential
     expression on sample size estimation] {Effect of the proportion of
     genes with true differential expression on sample size estimation.
@@ -469,6 +500,7 @@ differentially expressed genes (Figure \ref{fig:ResAlt}).
     lines are estimated sample sizes while solid black lines are
     sample sizes obtained from simulation result.}
   \label{fig:ResAlt}
+  \centerline{\includegraphics*[width=\textwidth]{ResAlt.pdf}}
 \end{figure}
 
 \subsection{Variance Ratio}
@@ -497,8 +529,7 @@ with an appropriate unequal variance t-test sample size formula,
 and, of course, using the unequal-variance t-test for detecting
 differentially expressed genes.
 
-\begin{figure}[h]
-  \centerline{\includegraphics*[width=3.2in]{ResVarF.pdf}}
+\begin{figure}%[h]
   \caption[Effect of variance ratio between treatment groups on
     sample size estimation] {Effect of variance ratio between
     treatment groups on sample size estimation.  Cumulative plots for
@@ -509,6 +540,7 @@ differentially expressed genes.
     estimated sample sizes while solid black lines are sample
     sizes obtained from simulation result.}  
   \label{fig:ResVar}
+  \centerline{\includegraphics*[width=\textwidth]{ResVarF.pdf}}
 \end{figure}
 
 \subsection{Minimum effect Size}
@@ -533,8 +565,8 @@ Many different methods have been proposed to control error rate for
 multiple testing.  These include the Bonferroni correction for
 strong control of family-wise Type I error, the Benjamini and
 Hochberg method for controlling false discovery rate (FDR)
-(\citealp{Benjamini95}) and Storey's q-value procedure to control
-FDR or positive FDR (pFDR) (\citealp{Storey02}).  Both the FDR and
+(\fullcite{Benjamini95}) and Storey's q-value procedure to control
+FDR or positive FDR (pFDR) (\fullcite{Storey02}).  Both the FDR and
 pFDR methods control the proportions of false positives among all
 positive findings.  These allow a certain proportion of Type I
 errors within the list of positive calls, usually resulting in
@@ -548,13 +580,12 @@ Second, it provides a conservative estimate of power and hence
 sample size.  To determine the extent of the conservatism, we
 compared the estimated sample size using the Bonferroni correction
 with the true sample size needed when controlling FDR via the
-Benjamini and Hochberg procedure (\citealp{Benjamini95}). As
+Benjamini and Hochberg procedure (\fullcite{Benjamini95}). As
 expected, Figure \ref{fig:ResMtd} shows that the true sample sizes
 needed for the FDR method is considerably smaller than the sample
 size estimated using the Bonferroni adjustment.
 
-\begin{figure}[h]
-  \centerline{\includegraphics*[width=3.2in]{ResMtd.pdf}}
+\begin{figure}%[h]
   \caption[Effect of multiple comparison method on sample size
     estimation] {Effect of multiple comparison method on sample size
     estimation.  Cumulative plots for sample sizes from both
@@ -563,6 +594,7 @@ size estimated using the Bonferroni adjustment.
     change). Dashed green lines are estimated sample sizes while solid
     black lines are for sample sizes obtained from simulation result.}
   \label{fig:ResMtd}
+  \centerline{\includegraphics*[width=\textwidth]{ResMtd.pdf}}
 \end{figure}
 
 \section{Discussions}
@@ -601,10 +633,10 @@ desired power as a function of sample size, based on simple
 gene-by-gene calculations.  While this mechanism can be used to
 select a sample size numerically based on pre-specified conditions,
 its real utility is as a visual tool for helping clients to
-understand the tradeoff between sample size and power.  In our
+understand the trade off between sample size and power.  In our
 consulting work, this latter use as a visual tool has been
 exceptionally valuable in helping scientific clients to make the
-difficult tradeoffs between experiment cost and statistical power.
+difficult trade offs between experiment cost and statistical power.
 
 In order to check the performance of our proposed method, we
 performed an extensive simulation study. Of the variables tested in
@@ -659,6 +691,7 @@ accurately.
 
 This work was supported by Pfizer Global Research and Development.
 
+\bibliographystyle{biometrics}
 \begin{thebibliography}{}
 
 \bibitem[Benjamini and Hochberg, 1995]{Benjamini95} Benjamini, Y.
