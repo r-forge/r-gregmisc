@@ -1,11 +1,10 @@
 \documentclass[12pt]{article}
-
-\usepackage{biometrics2}
 \usepackage{url}
 \usepackage{amsmath}
+\usepackage{biometrics2}
+\usepackage{natbib}
 \usepackage{endfloat} % move tables to end, but note where they
                       % came from
-
 
 %\copyrightyear{2005}
 %\pubyear{2005}
@@ -14,7 +13,7 @@
 %\firstpage{1}
 
 \title{Sample Size Estimation for Microarray Experiments}
-\author{Gregory R Warnes}
+\author{Gregory R. Warnes}
 \address{
     Nonclinical Statistics \\
     Pfizer Global Research and Development\\
@@ -35,19 +34,20 @@
 \begin{abstract}
 
 RNA Expression Microarray technology is widely applied in biomedical
-and pharmaceutical research.  An important challenge in designing
-and analyzing experiments employing microarrays is the huge number
-of gene expression variables collected for each sample, making it
-difficult to apply traditional sample size calculation techniques.
-We present a simple method for performing and visualizing sample
-size calculations for microarray experiments.  We further
-demonstrate, via simulation studies, that our method performs well
+and pharmaceutical research.  The huge number of RNA concentrations
+estimated for each sample make it difficult to apply traditional
+sample size calculation techniques and has left most practitioners
+to rely on rule-of-thumb techniques.  In this paper, we describe and
+demonstrate a simple method for performing and visualizing sample
+size calculations for microarray experiments. We then summarize
+simulation results showing that this method performs well, even
 under a variety of departures from our simplifying assumptions,
-except in the case where the underlying sample size calculation
-formula employed is inappropriate.  In this latter case, the method
-is easily adapted by substituting an appropriate sample size
-formula.  The \texttt{ssize} R package implementing the described
-method is available from the authors and from the Bioconductor
+provided that the underlying formula for computing sample size has
+been appropriately selected.  Although we demonstrate sample size
+calculation only for the two-sample pooled t-test, it is trivial to
+substitute an alternative sample size formula appropriate to the
+problem at hand.  The described method has been implemented in the
+\texttt{ssize} R package, which is available from the Bioconductor
 project (\url{http://www.bioconductor.org}) web site.
 
 
@@ -112,43 +112,41 @@ project (\url{http://www.bioconductor.org}) web site.
 %                           $ PL61@cornell.edu $}
 \end{abstract}
 
-\keywords{
-
-}
+\keywords{Sample Size, Gene Expression, Microarray, t-test}
 
 \section{Introduction}
 
 High-throughput microarray experiments allow the measurement of
 expression levels for tens of thousands of genes simultaneously.
 These experiments have been used in many disciplines of biological
-research, such as neuroscience (\fullcite{Mandel03}), pharmacogenomic
-research, genetic disease and cancer diagnosis (\fullcite{Heller02}).
-As a tool for estimating gene expression and single nucleotide
-polymorphism (SNP) genotyping, microarrays produce huge amounts of
-data which are providing important new insights.
+research, including as neuroscience \citep{Mandel03},
+pharmacogenomic research, genetic disease and cancer diagnosis
+\citep{Heller02}.  As a tool for estimating gene expression and
+single nucleotide polymorphism (SNP) genotyping, microarrays produce
+huge amounts of data which are providing important new insights.
 
 Microarray experiments are rather costly in terms of materials (RNA
 sample, reagents, chip, etc), laboratory manpower, and data analysis
-effort.  As a consequence, such experiments often employ only
-a small number of replicates (2 to 8) (\fullcite{Speed03}). In many
-cases, the selected sample size may not be adequate to perform
-reliable statistical estimation.  Conversely, a given sample size
-may be larger than necessary for answering the question at hand.
-Either case can result in an enormous waste of resources. It is
-critical, therefore, to perform proper experimental design,
-including sample size estimation, before carrying out microarray
-experiments. Since tens of thousands of variables (gene expressions)
-may be measured on each individual chip, it is essential to take into
-account multiple testing and dependency among variables when
-calculating sample size.  Estimating sample size for large number of
-statistical tests adds new questions to those traditionally posed by
-sample size calculations, including: Should one use one or multiple
-values for power? Should a single value for minimum effect size be
-used?  How should error rates be adjusted for multiple-testing?  How
-can we account for dependency among the variables?  Further,
-traditional methods for sample size calculation apply only to a
-single hypothesis test and cannot be directly applied to the
-microarray problem.
+effort.  As a consequence, such experiments often employ only a
+small number of replicates (2 to 8) \citep{Speed03}. In many cases,
+the selected sample size may not be adequate to perform reliable
+statistical estimation.  Conversely, a given sample size may be
+larger than necessary for answering the question at hand.  Either
+case can result in an enormous waste of resources. It is critical,
+therefore, to perform proper experimental design, including sample
+size estimation, before carrying out microarray experiments. Since
+tens of thousands of variables (gene expressions) may be measured on
+each individual chip, it is essential to take into account multiple
+testing and dependency among variables when calculating sample size.
+Estimating sample size for large number of statistical tests adds
+new questions to those traditionally posed by sample size
+calculations, including: Should one use one or multiple values for
+power? Should a single value for minimum effect size be used?  How
+should error rates be adjusted for multiple-testing?  How can we
+account for dependency among the variables?  Further, traditional
+methods for sample size calculation apply only to a single
+hypothesis test and cannot be directly applied to the microarray
+problem where tens of thousands of hypothesis tests are preformed.
 
 Possible approaches to estimating sample size for microarray
 experiments range between two extremes. At one extreme, sample size
@@ -158,12 +156,12 @@ interdependencies among variables. Provided that the model is
 appropriate, this choice should generate a highly accurate answer.
 However, it can take tremendous effort to find an appropriate and
 general model, not to mention the complexity necessary for fitting
-such a model. As an example of this approach, Zien et al. (2003)
+such a model. As an example of this approach, \citet{Zien03}
 proposed a hierarchical model including several different sources of
 error and suggest heuristic choices for the key parameters in the
 model. Unfortunately, the model itself is non-identifiable,
-preventing the use of historical data to directly estimate
-the necessary parameters.  Since the behavior of microarray data from
+preventing the use of historical data to directly estimate the
+necessary parameters.  Since the behavior of microarray data from
 different microarray technologies and for different biological
 systems is extremely varied, the applicability of this model and its
 heuristic parameters to a particular problem is uncertain.
@@ -339,8 +337,9 @@ each of the variables that we included in our simulation study.
 
 \begin{table}
   \caption{Tested Variables in Simulation Study.
-	FDR indicates the Benjamini and Hochberg procedure (1995) to
-	    control false discovery rate}
+	FDR indicates the Benjamini and Hochberg
+	(1995) procedure to  
+	control false discovery rate}
   \label{tb:SimuVariables}
   \centering
   \vspace{0.1in}
@@ -379,7 +378,7 @@ reference data set.  Our reference data set contains gene
 expression values for smooth muscle cells from a control group of
 untreated healthy volunteers processed using Affymetrix U133 chips
 and normalized per the Robust Multi-array Average (RMA) method of
-Irizarry, \textit{et al.} (2003).  A specified fraction $a$ of the
+\citet{Irizarry03}.  A specified fraction $a$ of the
 genes is randomly selected as exhibiting a true change in
 expression consequent to the applied treatment. For these genes,
 the mean is set to the selected effect size $\Delta$.  For all
@@ -409,7 +408,7 @@ variance is then applied to each individual population using a range
 of sample sizes.  Error rate within populations is controlled using
 one of two different methods, either the Bonferroni method for
 family-wise Type I error rate or the Benjamini and Hochberg
-procedure (\fullcite{Benjamini95}) for False Discovery Rate (FDR).
+procedure \citeyearpar{Benjamini95} for False Discovery Rate (FDR).
 The tests from all populations are then pooled to determine the true
 power for each gene at each sample size. This allows the generation
 of the true cumulative sample size by summarizing across genes,
@@ -564,9 +563,9 @@ $\Delta$ is explicitly included in the sample size formula
 Many different methods have been proposed to control error rate for
 multiple testing.  These include the Bonferroni correction for
 strong control of family-wise Type I error, the Benjamini and
-Hochberg method for controlling false discovery rate (FDR)
-(\fullcite{Benjamini95}) and Storey's q-value procedure to control
-FDR or positive FDR (pFDR) (\fullcite{Storey02}).  Both the FDR and
+Hochberg \citeyearpar{Benjamini95} method for controlling false
+discovery rate (FDR) and Storey's \citeyearpar{Storey02} q-value
+procedure to control FDR or positive FDR (pFDR) .  Both the FDR and
 pFDR methods control the proportions of false positives among all
 positive findings.  These allow a certain proportion of Type I
 errors within the list of positive calls, usually resulting in
@@ -580,7 +579,7 @@ Second, it provides a conservative estimate of power and hence
 sample size.  To determine the extent of the conservatism, we
 compared the estimated sample size using the Bonferroni correction
 with the true sample size needed when controlling FDR via the
-Benjamini and Hochberg procedure (\fullcite{Benjamini95}). As
+Benjamini and Hochberg \citeyearpar{Benjamini95} procedure. As
 expected, Figure \ref{fig:ResMtd} shows that the true sample sizes
 needed for the FDR method is considerably smaller than the sample
 size estimated using the Bonferroni adjustment.
@@ -611,19 +610,19 @@ appropriate methods be developed.
 
 The literature proposes several methods of sample size calculation
 for microarray experiments. None are as straightforward and flexible
-as the method proposed here. Hwang et al. (2002) proposed a method
-that first identifies differentially expressed
-genes and then calculates power and sample size on a reduced
-parameter space. Dow studied relationship between minimum detection
-size and sample size for a specific experiment (2003). Both methods
-cannot be applied to cases where preliminary results, including a
-knowledge of differentially expressed genes, are not available. Zien
-et al.  (2003) proposed a hierarchical model which includes several
-different sources of error and recommend heuristic choices for the
-key parameters in the model.  After attempting unsuccessfully to fit
-this model to real data, we discovered that that the model itself is
-non-identifiable.  This makes it inappropriate to employ across the
-variety of sample types we see in practice.
+as the method proposed here. \citet{Hwang02} proposed a method that
+first identifies differentially expressed genes and then calculates
+power and sample size on a reduced parameter space. Dow studied
+relationship between minimum detection size and sample size for a
+specific experiment (2003). Both methods cannot be applied to cases
+where preliminary results, including a knowledge of differentially
+expressed genes, are not available. \citet{Zien03} proposed a
+hierarchical model which includes several different sources of error
+and recommend heuristic choices for the key parameters in the model.
+After attempting unsuccessfully to fit this model to real data, we
+discovered that that the model itself is non-identifiable.  This
+makes it inappropriate to employ across the variety of sample types
+we see in practice.
 
 We have instead proposed a very straightforward method for
 estimating required sample size that is easy to apply and is simple

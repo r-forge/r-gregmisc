@@ -286,51 +286,56 @@ words:\,\,\,\,}{#1}{\vskip 0.5 em}}
 \theoremstyle{bkathm} \newtheorem{Thm}{Theorem}
 \theoremstyle{bkathm} \newtheorem{Lem}{Lemma}
 \theoremstyle{proof}  \newtheorem{proof}{Proof}
-\newcommand{\@intcite}{\@ifnextchar
-  [{\@tempswatrue\@citex}{\@tempswafalse\@citex[]}}
-\newcommand{\@intcitep}{\@ifnextchar
-  [{\@tempswatrue\@citexp}{\@tempswafalse\@citexp[]}}
-\renewcommand{\cite}{\@ifstar{\shortcitefullp}{\shortcitefull}}
-\newcommand{\fullcite}{\@ifstar{\citefullp}{\citefull}}
-\newcommand{\citefull}{\def\bsccite##1##2##3{##1 (##3}\@intcite}
-\newcommand{\citefullp}{\def\bsccite##1##2##3{##1, ##3}\@intcitep}
-\newcommand{\shortcitefull}{\def\bsccite##1##2##3{##2 (##3}\@intcite}
-\newcommand{\shortcitefullp}{\def\bsccite##1##2##3{##2, ##3}\@intcitep}
-\newcommand{\citeyear}{\def\bsccite##1##2##3{##3}\@intcitep}
 
-\newcommand{\citeA}{\def\bsccite##1##2##3{##2}\@intcitep}
-\newcommand{\fullciteA}{\def\bsccite##1##2##3{##1}\@intcitep}
-\renewcommand{\@citex}[2][default]{%
-  \if@filesw\immediate\write\@auxout{\string\citation{#2}}\fi
-  \def\@citea{}\@cite{\@for\@citeb:=#2\do
-    {\@citea\def\@citea{), }\@ifundefined
-      {b@\@citeb}{{\bf ?}\@warning
-        {Citation `\@citeb' on page \thepage \space undefined}}%
-      {\csname b@\@citeb\endcsname}}}{#1}}
+%
+% Citation stuff
+%
+%\newcommand{\@intcite}{\@ifnextchar
+%  [{\@tempswatrue\@citex}{\@tempswafalse\@citex[]}}
+%\newcommand{\@intcitep}{\@ifnextchar
+%  [{\@tempswatrue\@citexp}{\@tempswafalse\@citexp[]}}
+%\renewcommand{\cite}{\@ifstar{\shortcitefullp}{\shortcitefull}}
+%\newcommand{\fullcite}{\@ifstar{\citefullp}{\citefull}}
+%\newcommand{\citefull}{\def\bsccite##1##2##3{##1 (##3}\@intcite}
+%\newcommand{\citefullp}{\def\bsccite##1##2##3{##1, ##3}\@intcitep}
+%\newcommand{\shortcitefull}{\def\bsccite##1##2##3{##2 (##3}\@intcite}
+%\newcommand{\shortcitefullp}{\def\bsccite##1##2##3{##2, ##3}\@intcitep}
+%\newcommand{\citeyear}{\def\bsccite##1##2##3{##3}\@intcitep}
 
-\newcommand{\@citexp}[2][default]{%
-  \if@filesw\immediate\write\@auxout{\string\citation{#2}}\fi
-  \def\@citea{}\@citep{\@for\@citeb:=#2\do
-    {\@citea\def\@citea{; }\@ifundefined
-      {b@\@citeb}{{\bf ?}\@warning
-        {Citation `\@citeb' on page \thepage \space undefined}}%
-      {\csname b@\@citeb\endcsname}}}{#1}}
+%\newcommand{\citeA}{\def\bsccite##1##2##3{##2}\@intcitep}
+%\newcommand{\fullciteA}{\def\bsccite##1##2##3{##1}\@intcitep}
+%\renewcommand{\@citex}[2][default]{%
+%  \if@filesw\immediate\write\@auxout{\string\citation{#2}}\fi
+%  \def\@citea{}\@cite{\@for\@citeb:=#2\do
+%    {\@citea\def\@citea{), }\@ifundefined
+%      {b@\@citeb}{{\bf ?}\@warning
+%        {Citation `\@citeb' on page \thepage \space undefined}}%
+%      {\csname b@\@citeb\endcsname}}}{#1}}
 
-\renewcommand{\@cite}[2]{#1\if@tempswa , #2\fi)}
-\newcommand{\@citep}[2]{#1\if@tempswa , #2\fi}
-\renewcommand{\thebibliography}[1]{\section*{\sc\center%
-    References\vskip 0.5 em \@mkboth{REFERENCES}{REFERENCES}}
-  \list {\relax}{\setlength{\labelsep}{0em}
-    \setlength{\itemindent}{-\bibhang}
-    \setlength{\itemsep}{0pt}
-    \setlength{\parsep}{0pt}
-    \setlength{\leftmargin}{\bibhang}}
-  \renewcommand{\newblock}{\hskip .11em plus .33em minus .07em}
-  \sloppy\clubpenalty4000\widowpenalty4000
-  \sfcode`\.=1000\relax}
-\newlength{\bibhang}
-\setlength{\bibhang}{1.4em}
-\renewcommand{\@biblabel}[1]{}
+%\newcommand{\@citexp}[2][default]{%
+%  \if@filesw\immediate\write\@auxout{\string\citation{#2}}\fi
+%  \def\@citea{}\@citep{\@for\@citeb:=#2\do
+%    {\@citea\def\@citea{; }\@ifundefined
+%      {b@\@citeb}{{\bf ?}\@warning
+%        {Citation `\@citeb' on page \thepage \space undefined}}%
+%      {\csname b@\@citeb\endcsname}}}{#1}}
+
+%\renewcommand{\@cite}[2]{#1\if@tempswa , #2\fi)}
+%\newcommand{\@citep}[2]{#1\if@tempswa , #2\fi}
+%\renewcommand{\thebibliography}[1]{\section*{\sc\center%
+%    References\vskip 0.5 em \@mkboth{REFERENCES}{REFERENCES}}
+%  \list {\relax}{\setlength{\labelsep}{0em}
+%    \setlength{\itemindent}{-\bibhang}
+%    \setlength{\itemsep}{0pt}
+%    \setlength{\parsep}{0pt}
+%    \setlength{\leftmargin}{\bibhang}}
+%  \renewcommand{\newblock}{\hskip .11em plus .33em minus .07em}
+%  \sloppy\clubpenalty4000\widowpenalty4000
+%  \sfcode`\.=1000\relax}
+%\newlength{\bibhang}
+%\setlength{\bibhang}{1.4em}
+%\renewcommand{\@biblabel}[1]{}
+
 \newcounter{appendix}
 \@addtoreset{section}{appendix}
 
