@@ -77,7 +77,8 @@ library(gdata) # for nobs()
 
 data(exp.sd)
 \testonly{
-exp.sd <- exp.sd[1:1000]
+exp.sd <- exp.sd[1:1000]  # so calculations are more
+                          # speedy during tests
 }
 
 # Histogram of the standard deviations
