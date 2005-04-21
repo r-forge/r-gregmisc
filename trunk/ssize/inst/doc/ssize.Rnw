@@ -1,8 +1,20 @@
+%\VignetteIndexEntry{Sample Size Estimation for Microarray Experiments Using the \code{ssize} package}
+%\VignetteDepends{ssize,xtable,gdata}
+%\VignetteKeywords{Expression Analysis, Sample Size}
+%\VignettePackage{ssize}
+
+
 \documentclass[12pt]{article}
 \usepackage{url}
 \usepackage{amsmath}
 \usepackage{natbib}
 
+
+\newcommand{\Robject}[1]{{\texttt{#1}}}
+\newcommand{\Rfunction}[1]{{\texttt{#1}}}
+\newcommand{\Rpackage}[1]{{\textit{#1}}}
+\newcommand{\Rclass}[1]{{\textit{#1}}}
+\newcommand{\Rmethod}[1]{{\textit{#1}}}
 \newcommand{\code}[1]{\texttt{#1}}
 
 \begin{document}
