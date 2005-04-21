@@ -57,7 +57,12 @@ delta.plot (x, xlab = "Fold Change",
   \code{pow} returns a vector containing the power for each standard deviation.
 }
 \references{
-  Warnes GR and Fasheng Li
+Warnes GR and Fasheng Li
+  Warnes GR and Liu P,
+  ``Sample Size Selection for Microarray Experiments'' submitted to
+  \emph{Biometrics}.
+  
+  Warnes GR and Fasheng Li,
   ``Sample Size Selection for Microarray based Gene Expression Studies,''
   Talk,
   "2003 FDA/Industry Statistics Workshop: From Theory to Regulatory
