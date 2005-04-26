@@ -1,1162 +1,388 @@
-%%
-%% This is file `biometrics.bst',
-%% generated with the docstrip utility.
-%%
-%% The original source files were:
-%%
-%% biometrics.dtx  (with options: `bibstyle')
-%% Copyright 1998 Josephine Collis.
-%% 
-%% This file is part of the LaTeX2e biometrics bundle.
-%% 
-%% =======================================================================
-%% 
-%% The biometrics BibTeX file is used to create the references for papers
-%% published in ``Biometrics'', the Journal of the International Biometric
-%% Society.
-%% 
-%% =======================================================================
-%% 
-%%  This system is distributed in the hope that it will be useful,
-%%  but WITHOUT ANY WARRANTY; without even the implied warranty of
-%%  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-%% 
-%% 
-%% IMPORTANT NOTICE:
-%% 
-%% For error reports or feature requests in case of UNCHANGED versions
-%% write to the author Josephine Collis (further details below).
-%% 
-%% You are not allowed to change this file.
-%% 
-%% You are NOT ALLOWED to distribute this file alone.  You are NOT
-%% ALLOWED to take money for the distribution or use of either this
-%% file or a changed version, except for a nominal charge for copying
-%% etc.
-%% 
-%% BIOMETRICS.BST is based on APA.BST ((C) 1992 Alan Rogers), which is
-%% based on APALIKE.BST, itself based on ALPHA.BST (version 0.99a (C) 1998).
-%% APA.BST incorporates features of Sake J. Hogeveen's ASTRON.BST.
-%% BIOMETRICS.CLS was altered by Josephine Collis during 1997 and 1998.
-%% 
-%% This style should be used with the BIOMETRICS.CLS class file.
-%% 
-%% See APA.BST, APALIKE.BST, ASTRON.BST and ALPHA.BST for more history
-%%  details.
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% -*- Mode: Latex -*- %%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% biometrics.dtx -- the biometrics class and bibliography style files.
-%% Copyright (C) 1998 Josephine Collis
-%%
-%% This program is free software; you can redistribute it and/or
-%% modify it under the terms of the GNU General Public License as
-%% published by the Free Software Foundation; either version 2 of
-%% the License, or (at your option) any later version.
-%%
-%% This program is distributed in the hope that it will be useful,
-%% but WITHOUT ANY WARRANTY; without even the implied warranty of
-%% MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-%% GNU General Public License for more details.
-%%
-%% You should have received a copy of the GNU General Public
-%% License along with this program in the file COPYING; if not,
-%% write to the Free Software Foundation, Inc., 675 Mass Ave,
-%% Cambridge, MA 02139, USA.
-%%
-%% The author can be contacted at:
-%%
-%%      email: j-collis@adfa.edu.au
-%%             j-marley@adfa.edu.au
-%%      paper: Josephine Collis
-%%             John Marley
-%%             School of Mathematics and Statistics
-%%             University College
-%%             University of New South Wales
-%%             Australian Defence Force Academy
-%%             Canberra ACT Australia 2600
-%%
-%% Author          : John Marley & Josephine Collis
-%% Created On      : Wed Jul  8 10:53:10 1998
-%% Last Modified By: Josephine Collis
-%% Last Modified On: Tue Aug 25 12:30:05 1998
-%% Update Count    : 1691
-%% Status          : Unknown, Use with caution!
-%% $Locker$
-%% $Log$
-%% Revision 1.1  2005/04/20 14:15:26  warnes
-%% Reformatted for submission to Biometrics.
-%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-ENTRY
-  { address
-    author
-    booktitle
-    chapter
-    edition
-    editor
-    howpublished
-    institution
-    journal
-    key
-    note
-    number
-    organization
-    pages
-    publisher
-    school
-    series
-    title
-    type
-    volume
-    year
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%           This is file `biometrics.sty'                 %%  
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\RequirePackage{theorem}
+\RequirePackage{rotating}
+\newcount\auth@cnt
+\auth@cnt=1
+\newcount\addr@cnt
+\addr@cnt=1
+\renewcommand{\author}[1]{%
+  \expandafter\gdef\csname author@\romannumeral\auth@cnt\endcsname{#1}%
+  \advance\auth@cnt by 1}
+\newcommand{\email}[1]{%
+  \expandafter\gdef\csname email@\romannumeral\auth@cnt\endcsname{#1}}%
+\newcommand{\address}[1]{\newif\ifexists\newif\ifnotdone\notdonetrue\existsfalse
+  \def\newaddress{#1}
+  \newcount\n
+  \n=1
+  % loop over all previously defined addresses.
+  \loop \ifnum\n=\addr@cnt\notdonefalse\fi
+  \expandafter\ifx\csname address@\romannumeral\n\endcsname\newaddress%
+  \existstrue\notdonefalse\fi%
+  \ifnotdone \advance\n by 1\repeat%
+  \ifexists
+  \expandafter\gdef\csname a\romannumeral\auth@cnt @a%
+  \romannumeral\n\endcsname{A}%
+  \else
+  \expandafter\gdef\csname address@\romannumeral\addr@cnt\endcsname{#1}%
+    \expandafter\gdef\csname a\romannumeral\auth@cnt @a%
+    \romannumeral\addr@cnt\endcsname{A}\advance\addr@cnt by 1%
+  \fi}
+%\newcommand{\keywords}{\def\@keywords}
+
+\renewcommand{\footnoterule}{\vskip 0.3 ex%
+\hskip -3.25ex plus -0ex minus -0.ex\hrulefill\vskip 1ex}
+
+\renewcommand{\footnotesize}{\normalsize}
+
+\renewcommand{\@makefntext}{\bcsmakefntext}
+\renewcommand{\@makefnmark}{\bcsmakefnmark}
+
+\newcommand{\bcsmakefntext}[1]%
+{\hskip -3ex\makebox[1.8em][r]{\@makefnmark}#1}
+
+\newcommand{\bcsmakefnmark}
+{\rlap{\@textsuperscript{\hskip -1ex \normalfont\@thefnmark}}}%
+
+\renewcommand\maketitle{\par
+  \begingroup
+    \renewcommand\thefootnote{\@fnsymbol\c@footnote}%
+    \if@twocolumn
+      \ifnum \col@number=\@ne
+        \@maketitle
+      \else
+        \twocolumn[\@maketitle]%
+      \fi
+    \else
+      \newpage
+      \global\@topnum\z@   % Prevents figures from going at top of page.
+      \@maketitle
+    \fi
+    \thispagestyle{plain} %\keywordsfn% Add in the Key Words here.
+  \endgroup
+  \setcounter{footnote}{0}%
+  \global\let\thanks\relax
+%  \global\let\keywords\relax
+  \global\let\maketitle\relax
+  \global\let\@maketitle\relax
+  \global\let\@thanks\@empty
+  \global\let\@author\@empty
+  \global\let\@date\@empty
+  \global\let\@title\@empty
+  \global\let\title\relax
+  \global\let\author\relax
+  \global\let\date\relax
+  \global\let\and\relax
+}
+
+%\newcommand{\keywordsfn}{%
+%  \renewcommand{\@makefntext}{}
+%  \footnotetext{\begin{description}
+%   \item\vskip -2.5\footnotesep \hskip -0.5em {\sc Key words:} \@keywords
+%    \end{description}}
+%}
+
+\renewcommand{\@maketitle}{%
+  \begin{center}%
+%    \let \footnote \keywords
+    {\Large \bf \@title\par}%
+    \vskip 1.5em%
+    {
+      \ifnum\auth@cnt>3
+      \compactmode
+      \else
+      \expandedmode
+      \fi
+      }
+    \vskip 1em%
+    {\@date}%
+  \end{center}%
+  \par
+  \vskip 1.5em}
+\newcommand{\ifundefined}[1]{\expandafter\ifx\csname#1\endcsname\relax}
+
+\newcommand{\expandedmode}{%
+  \newcount\n%
+  \newcount\o%
+  \n=1%
+  \o=\n%
+  \advance\o by 1%
+  \loop \textbf{\csname author@\romannumeral\n\endcsname}%
+  \ifundefined{email@\romannumeral\o}\else\expandemail{\o}%
+  \fi%
+  \par \vskip 4pt%
+  \csname address@\romannumeral\n\endcsname%
+  \advance \n by 1%
+  \advance \o by 1%
+  \ifnum\n<\auth@cnt%
+  \par \vskip 8pt \textbf{and} \vskip 8pt \par \repeat%
   }
-  {}
-  { label extra.label sort.label }
 
-INTEGERS { output.state before.all mid.sentence after.sentence after.block }
-
-FUNCTION {init.state.consts}
-{ #0 'before.all :=
-  #1 'mid.sentence :=
-  #2 'after.sentence :=
-  #3 'after.block :=
-}
-
-STRINGS { s t }
-
-FUNCTION {output.nonnull}
-{
-%% JAC: swap$ was 's :=
-  swap$
-  output.state mid.sentence =
-    { ", " * write$ }
-    { output.state after.block =
-        { add.period$ write$
-          newline$
-          "\newblock " write$
-        }
-        { output.state before.all =
-            'write$
-            { add.period$ " " * write$ }
-          if$
-        }
-      if$
-      mid.sentence 'output.state :=
-    }
-  if$
-%% JAC: remove s
-}
-
-FUNCTION {output}
-{ duplicate$ empty$
-    'pop$
-    'output.nonnull
-  if$
-}
-
-FUNCTION {output.check}
-{ 't :=
-  duplicate$ empty$
-    { pop$ "empty " t * " in " * cite$ * warning$ }
-    'output.nonnull
-  if$
-}
-
-FUNCTION {output.year.check}
-{ year empty$
-    { "empty year in " cite$ * warning$ }
-    { write$
-      " (" year * extra.label * ")" *
-      mid.sentence 'output.state :=
-    }
-  if$
-}
-
-FUNCTION {output.bibitem}
-{ newline$
-  "\bibitem[" write$
-  label write$
-  "]{" write$
-  cite$ write$
-  "}" write$
-  newline$
-  ""
-  before.all 'output.state :=
-}
-
-FUNCTION {fin.entry}
-{ add.period$
-  write$
-  newline$
-}
-
-FUNCTION {new.block}
-{ output.state before.all =
-    'skip$
-    { after.block 'output.state := }
-  if$
-}
-
-FUNCTION {new.sentence}
-{ output.state after.block =
-    'skip$
-    { output.state before.all =
-        'skip$
-        { after.sentence 'output.state := }
-      if$
-    }
-  if$
-}
-
-FUNCTION {not}
-{   { #0 }
-    { #1 }
-  if$
-}
-
-FUNCTION {and}
-{   'skip$
-    { pop$ #0 }
-  if$
-}
-
-FUNCTION {or}
-{   { pop$ #1 }
-    'skip$
-  if$
-}
-
-FUNCTION {new.block.checkb}
-{ empty$
-  swap$ empty$
-  and
-    'skip$
-    'new.block
-  if$
-}
-
-FUNCTION {field.or.null}
-{ duplicate$ empty$
-    { pop$ "" }
-    'skip$
-  if$
-}
-
-FUNCTION {emphasize}
-{ duplicate$ empty$
-    { pop$ "" }
-    { "{\em " swap$ * "}" * }
-  if$
-}
-
-FUNCTION {smallcapsify}
-{ duplicate$ empty$
-    { pop$ "" }
-    { "{\sc " swap$ * "}" * }
-  if$
-}
-
-FUNCTION {embolden}
-{ duplicate$ empty$
-    { pop$ "" }
-    { "{\bf " swap$ * "}" * }
-  if$
-}
-
-INTEGERS { nameptr namesleft numnames }
-
-FUNCTION {format.names}
-{ 's :=
-  #1 'nameptr :=
-  s num.names$ 'numnames :=
-  numnames 'namesleft :=
-    { namesleft #0 > }
-    { s nameptr "{vv~}{ll}{, jj}{, f.}" format.name$ 't :=   % last name first
-      nameptr #1 >
-        { namesleft #1 >
-            { ", " * t * }
-            { numnames #2 >
-%% JAC: remove { "," * }
-                'skip$
-                'skip$
-              if$
-              t "others" =
-                { " et~al." * }
-%% JAC: remove { " \&\ " * t * }
-                { " and " * t * }
-              if$
-            }
-          if$
-        }
-        't
-      if$
-      nameptr #1 + 'nameptr :=
-      namesleft #1 - 'namesleft :=
-    }
-  while$
-}
-
-FUNCTION {format.lab.names2}
-{ 's :=
-  #1 'nameptr :=
-  s num.names$ 'numnames :=
-  numnames 'namesleft :=
-    { namesleft #0 > }
-    { s nameptr "{vv~}{ll}{, jj.}" format.name$ 't :=   % last name first
-      nameptr #1 >
-        { namesleft #1 >
-            { ", " * t * }
-            { numnames #2 >
-                %{ "," * }
-                'skip$
-                'skip$
-              if$
-              t "others" =
-                { " et~al." * }
-%% JAC: remove { " \&\ " * t * }
-                { " and " * t * }
-              if$
-            }
-          if$
-        }
-        't
-      if$
-      nameptr #1 + 'nameptr :=
-      namesleft #1 - 'namesleft :=
-    }
-  while$
-}
-
-FUNCTION {format.authors}
-{ author empty$
-    { "" }
-    { author format.names }
-%% JAC: remove { author format.names smallcapsify }
-  if$
-}
-
-FUNCTION {format.key}                   % this function is just for apalike
-{ empty$
-    { key field.or.null }
-    { "" }
-  if$
-}
-
-FUNCTION {format.editors}
-{ editor empty$
-    { "" }
-    { editor format.names
-      editor num.names$ #1 >
-        { ", editors" * }
-        { ", editor" * }
-      if$
-    }
-  if$
-}
-
-FUNCTION {format.title}
-{ title empty$
-    { "" }
-    { title "t" change.case$ }
-  if$
-}
-
-FUNCTION {n.dashify}
-{ 't :=
-  ""
-    { t empty$ not }
-    { t #1 #1 substring$ "-" =
-        { t #1 #2 substring$ "--" = not
-            { "--" *
-              t #2 global.max$ substring$ 't :=
-            }
-            {   { t #1 #1 substring$ "-" = }
-                { "-" *
-                  t #2 global.max$ substring$ 't :=
-                }
-              while$
-            }
-          if$
-        }
-        { t #1 #1 substring$ *
-          t #2 global.max$ substring$ 't :=
-        }
-      if$
-    }
-  while$
-}
-
-FUNCTION {format.btitle}
-{ title emphasize
-}
-
-FUNCTION {tie.or.space.connect}
-{ duplicate$ text.length$ #3 <
-    { "~" }
-    { " " }
-  if$
-  swap$ * *
-}
-
-FUNCTION {either.or.check}
-{ empty$
-    'pop$
-    { "can't use both " swap$ * " fields in " * cite$ * warning$ }
-  if$
-}
-
-FUNCTION {format.bvolume}
-{ volume empty$
-    { "" }
-    { "volume" volume tie.or.space.connect
-      series empty$
-        'skip$
-        { " of " * series emphasize * }
-      if$
-      "volume and number" number either.or.check
-    }
-  if$
-}
-
-FUNCTION {format.number.series}
-{ volume empty$
-    { number empty$
-        { series field.or.null }
-        { output.state mid.sentence =
-            { "number" }
-            { "Number" }
-          if$
-          number tie.or.space.connect
-          series empty$
-            { "there's a number but no series in " cite$ * warning$ }
-            { " in " * series * }
-          if$
-        }
-      if$
-    }
-    { "" }
-  if$
-}
-
-FUNCTION {format.edition}
-{ edition empty$
-    { "" }
-    { output.state mid.sentence =
-        { edition "l" change.case$ " edition" * }
-        { edition "t" change.case$ " edition" * }
-      if$
-    }
-  if$
-}
-
-INTEGERS { multiresult }
-
-FUNCTION {multi.page.check}
-{ 't :=
-  #0 'multiresult :=
-    { multiresult not
-      t empty$ not
-      and
-    }
-    { t #1 #1 substring$
-      duplicate$ "-" =
-      swap$ duplicate$ "," =
-      swap$ "+" =
-      or or
-        { #1 'multiresult := }
-        { t #2 global.max$ substring$ 't := }
-      if$
-    }
-  while$
-  multiresult
-}
-
-FUNCTION {format.pages}
-{ pages empty$
-    { "" }
-    { pages multi.page.check
-        { "pages" pages n.dashify tie.or.space.connect }
-        { "page" pages tie.or.space.connect }
-      if$
-    }
-  if$
-}
-
-FUNCTION {format.vol.num.pages}
-{ volume field.or.null embolden
-  pages empty$
-    'skip$
-    { duplicate$ empty$
-        { pop$ format.pages }
-        { ", " * pages n.dashify * }
-      if$
-    }
-  if$
-}
-
-FUNCTION {format.chapter.pages}
-{ chapter empty$
-    'format.pages
-    { type empty$
-        { "chapter" }
-        { type "l" change.case$ }
-      if$
-      chapter tie.or.space.connect
-      pages empty$
-        'skip$
-        { ", " * format.pages * }
-      if$
-    }
-  if$
-}
-
-FUNCTION {format.in.ed.booktitle}
-{ booktitle empty$
-    { "" }
-    { editor empty$
-        { "In " booktitle emphasize * }
-        { "In " format.editors * ", " * booktitle emphasize * }
-      if$
-    }
-  if$
-}
-
-FUNCTION {format.thesis.type}
-{ type empty$
-    'skip$
-    { pop$
-      type "t" change.case$
-    }
-  if$
-}
-
-FUNCTION {format.tr.number}
-{ type empty$
-    { "Technical Report" }
-    'type
-  if$
-  number empty$
-    { "t" change.case$ }
-    { number tie.or.space.connect }
-  if$
-}
-
-FUNCTION {format.article.crossref}
-{ "In"                                                  % this is for apalike
-  " \cite{" * crossref * "}" *
-}
-
-FUNCTION {format.book.crossref}
-{ volume empty$
-    { "empty volume in " cite$ * "'s crossref of " * crossref * warning$
-      "In "
-    }
-    { "Volume" volume tie.or.space.connect
-      " of " *
-    }
-  if$
-  "\cite{" * crossref * "}" *                           % this is for apalike
-}
-
-FUNCTION {format.incoll.inproc.crossref}
-{ "In"                                                  % this is for apalike
-  " \cite{" * crossref * "}" *
-}
-
-FUNCTION {article}
-{ output.bibitem
-  format.authors "author" output.check
-  author format.key output                              % special for
-  output.year.check                                     % apalike
-  new.block
-  format.title "title" output.check
-  new.block
-  crossref missing$
-    { journal emphasize " " * "journal" output.check
-      format.vol.num.pages
-      before.all 'output.state :=
-      output
-    }
-    { format.article.crossref output.nonnull
-      format.pages output
-    }
-  if$
-  new.block
-  note output
-  fin.entry
-}
-
-FUNCTION {book}
-{ output.bibitem
-  author empty$
-    { format.editors "author and editor" output.check
-      editor format.key output
-    }
-    { format.authors output.nonnull
-      crossref missing$
-        { "author and editor" editor either.or.check }
-        'skip$
-      if$
-    }
-  if$
-  output.year.check                             % special for apalike
-  new.block
-  format.btitle "title" output.check
-  crossref missing$
-    { format.bvolume output
-      new.block
-      format.number.series output
-      new.sentence
-      publisher "publisher" output.check
-      address output
-    }
-    { new.block
-      format.book.crossref output.nonnull
-    }
-  if$
-  format.edition output
-  new.block
-  note output
-  fin.entry
-}
-
-FUNCTION {booklet}
-{ output.bibitem
-  format.authors output
-  author format.key output                              % special for
-  output.year.check                                     % apalike
-  new.block
-  format.title "title" output.check
-  new.block
-  howpublished output
-  address output
-  new.block
-  note output
-  fin.entry
-}
-
-FUNCTION {inbook}
-{ output.bibitem
-  author empty$
-    { format.editors "author and editor" output.check
-      editor format.key output
-    }
-    { format.authors output.nonnull
-      crossref missing$
-        { "author and editor" editor either.or.check }
-        'skip$
-      if$
-    }
-  if$
-  output.year.check                             % special for apalike
-  new.block
-  format.btitle "title" output.check
-  crossref missing$
-    { format.bvolume output
-      format.chapter.pages "chapter and pages" output.check
-      new.block
-      format.number.series output
-      new.sentence
-      publisher "publisher" output.check
-      address output
-    }
-    { format.chapter.pages "chapter and pages" output.check
-      new.block
-      format.book.crossref output.nonnull
-    }
-  if$
-  format.edition output
-  new.block
-  note output
-  fin.entry
-}
-
-FUNCTION {incollection}
-{ output.bibitem
-  format.authors "author" output.check
-  author format.key output                              % special for
-  output.year.check                                     % apalike
-  new.block
-  format.title "title" output.check
-  new.block
-  crossref missing$
-    { format.in.ed.booktitle "booktitle" output.check
-      format.bvolume output
-      format.number.series output
-      format.chapter.pages output
-      new.sentence
-      publisher "publisher" output.check
-      address output
-      format.edition output
-    }
-    { format.incoll.inproc.crossref output.nonnull
-      format.chapter.pages output
-    }
-  if$
-  new.block
-  note output
-  fin.entry
-}
-
-FUNCTION {inproceedings}
-{ output.bibitem
-  format.authors "author" output.check
-  author format.key output                              % special for
-  output.year.check                                     % apalike
-  new.block
-  format.title "title" output.check
-  new.block
-  crossref missing$
-    { format.in.ed.booktitle "booktitle" output.check
-      format.bvolume output
-      format.number.series output
-      format.pages output
-      address output                                    % for apalike
-      new.sentence                                      % there's no year
-      organization output                               % here so things
-      publisher output                                  % are simpler
-    }
-    { format.incoll.inproc.crossref output.nonnull
-      format.pages output
-    }
-  if$
-  new.block
-  note output
-  fin.entry
-}
-
-FUNCTION {conference} { inproceedings }
-
-FUNCTION {manual}
-{ output.bibitem
-  format.authors output
-  author format.key output                              % special for
-  output.year.check                                     % apalike
-  new.block
-  format.btitle "title" output.check
-  organization address new.block.checkb
-  organization output
-  address output
-  format.edition output
-  new.block
-  note output
-  fin.entry
-}
-
-FUNCTION {mastersthesis}
-{ output.bibitem
-  format.authors "author" output.check
-  author format.key output                              % special for
-  output.year.check                                     % apalike
-  new.block
-  format.title "title" output.check
-  new.block
-  "Master's thesis" format.thesis.type output.nonnull
-  school "school" output.check
-  address output
-  new.block
-  note output
-  fin.entry
-}
-
-FUNCTION {misc}
-{ output.bibitem
-  format.authors output
-  author format.key output                              % special for
-  output.year.check                                     % apalike
-  new.block
-  format.title output
-  new.block
-  howpublished output
-  new.block
-  note output
-  fin.entry
-}
-
-FUNCTION {phdthesis}
-{ output.bibitem
-  format.authors "author" output.check
-  author format.key output                              % special for
-  output.year.check                                     % apalike
-  new.block
-  format.btitle "title" output.check
-  new.block
-  "PhD thesis" format.thesis.type output.nonnull
-  school "school" output.check
-  address output
-  new.block
-  note output
-  fin.entry
-}
-
-FUNCTION {proceedings}
-{ output.bibitem
-  format.editors output
-  editor format.key output                              % special for
-  output.year.check                                     % apalike
-  new.block
-  format.btitle "title" output.check
-  format.bvolume output
-  format.number.series output
-  address output                                % for apalike
-  new.sentence                                  % we always output
-  organization output                           % a nonempty organization
-  publisher output                              % here
-  new.block
-  note output
-  fin.entry
-}
-
-FUNCTION {techreport}
-{ output.bibitem
-  format.authors "author" output.check
-  author format.key output                              % special for
-  output.year.check                                     % apalike
-  new.block
-  format.title "title" output.check
-  new.block
-  format.tr.number output.nonnull
-  institution "institution" output.check
-  address output
-  new.block
-  note output
-  fin.entry
-}
-
-FUNCTION {unpublished}
-{ output.bibitem
-  format.authors "author" output.check
-  author format.key output                              % special for
-  output.year.check                                     % apalike
-  new.block
-  format.title "title" output.check
-  new.block
-  note "note" output.check
-  fin.entry
-}
-
-FUNCTION {default.type} { misc }
-
-MACRO {jan} {"January"}
-MACRO {feb} {"February"}
-MACRO {mar} {"March"}
-MACRO {apr} {"April"}
-MACRO {may} {"May"}
-MACRO {jun} {"June"}
-MACRO {jul} {"July"}
-MACRO {aug} {"August"}
-MACRO {sep} {"September"}
-MACRO {oct} {"October"}
-MACRO {nov} {"November"}
-MACRO {dec} {"December"}
-
-MACRO {ajs} {"Australian Journal of Statistics"}
-MACRO {annpr} {"Annals of Probability"}
-MACRO {annst} {"Annals of Statistics"}
-MACRO {anzjs} {"Australian and New Zealand Journal of Statistics"}
-MACRO {appst} {"Applied Statistics"}
-MACRO {bcs} {"Biometrics"}
-MACRO {bj} {"Biometrical Journal"}
-MACRO {bka}  {"Biometrika"}
-MACRO {bs}  {"Bayesian Statistics"}
-MACRO {cjs} {"Canadian Journal of Statistics"}
-MACRO {csa} {"Communications in Statistics, A"}
-MACRO {csb} {"Communications in Statistics, B"}
-MACRO {csc} {"Communications in Statistics, C"}
-MACRO {econ} {"Econometrica"}
-MACRO {isr} {"International Statistics Review"}
-MACRO {jabes} {"Journal of Agricultural, Biological, and Environmental Statistics"}
-MACRO {jasa} {"Journal of the American Statistical Association"}
-MACRO {jma} {"Journal of Multivariate Analysis"}
-MACRO {jqt} {"Journal of Quality Technology"}
-MACRO {jrssa} {"Journal of the Royal Statistical Society, Series A"}
-MACRO {jrssb} {"Journal of the Royal Statistical Society, Series B"}
-MACRO {jscs} {"Journal of Statistical Computation and Simulation"}
-MACRO {sim} {"Statistics in Medicine"}
-MACRO {sjs} {"Scandinavian Journal of Statistics"}
-MACRO {ss} {"Statistical Science"}
-MACRO {stat} {"Statistics"}
-MACRO {tas} {"The American Statistician"}
-MACRO {tcs} {"Technometrics"}
-MACRO {thestat} {"The Statistician"}
-MACRO {risi} {"Review of the International Statistics Institute"}
-
-READ
-
-FUNCTION {sortify}
-{ purify$
-  "l" change.case$
-}
-
-INTEGERS { len }
-
-FUNCTION {chop.word}
-{ 's :=
-  'len :=
-  s #1 len substring$ =
-    { s len #1 + global.max$ substring$ }
-    's
-  if$
-}
-
-FUNCTION {format.lab.names}
-{ 's :=
-  s #1 "{vv~}{ll}" format.name$
-  s num.names$ duplicate$
-  #2 >
-    { pop$ " et~al." * }
-    { #2 <
-        'skip$
-        { s #2 "{ff }{vv }{ll}{ jj}" format.name$ "others" =
-            { " et~al." * }
-%% JAC { " \&\ " * s #2 "{vv~}{ll}" format.name$ * }
-            { " and " * s #2 "{vv~}{ll}" format.name$ * }
-          if$
-        }
-      if$
-    }
-  if$
-}
-
-FUNCTION {author.key.label}
-{ author empty$
-    { key empty$
-        { cite$ #1 #3 substring$ }
-        'key                                    % apalike uses the whole key
-      if$
-    }
-    { author format.lab.names2 }
-  if$
-}
-
-FUNCTION {author.editor.key.label}
-{ author empty$
-    { editor empty$
-        { key empty$
-            { cite$ #1 #3 substring$ }
-            'key                                % apalike uses the whole key
-          if$
-        }
-        { editor format.lab.names }
-      if$
-    }
-    { author format.lab.names }
-  if$
-}
-
-FUNCTION {editor.key.label}
-{ editor empty$
-    { key empty$
-        { cite$ #1 #3 substring$ }
-        'key                    % apalike uses the whole key, no organization
-      if$
-    }
-    { editor format.lab.names }
-  if$
-}
-
-FUNCTION {calc.label}      % this function came from ASTRON.BST (ARR)
-{ type$ "book" =
-  type$ "inbook" =
-  or
-    'author.editor.key.label
-    { type$ "proceedings" =
-        'editor.key.label                       % apalike ignores organization
-        'author.key.label                       % for labeling and sorting
-      if$
-    }
-  if$
-  "}{" * author format.lab.names *
-  "\protect\bsccite{" swap$ * "}{"                   % these three lines are
-  *                                                     % for apalike, which
-  year field.or.null purify$ #-1 #4 substring$          % uses all four digits
-  *                       % the mathing closing "}" comes in at the reverse.pass
-  'label :=
-}
-
-FUNCTION {sort.format.names}
-{ 's :=
-  #1 'nameptr :=
-  ""
-  s num.names$ 'numnames :=
-  numnames 'namesleft :=
-    { namesleft #0 > }
-    { nameptr #1 >
-        { "   " * }
-        'skip$
-      if$                                               % apalike uses initials
-      s nameptr "{vv{ } }{ll{ }}{  f{ }}{  jj{ }}" format.name$ 't := % <= here
-      nameptr numnames = t "others" = and
-        { "et al" * }
-        { t sortify * }
-      if$
-      nameptr #1 + 'nameptr :=
-      namesleft #1 - 'namesleft :=
-    }
-  while$
-}
-
-FUNCTION {sort.format.title}
-{ 't :=
-  "A " #2
-    "An " #3
-      "The " #4 t chop.word
-    chop.word
-  chop.word
-  sortify
-  #1 global.max$ substring$
-}
-
-FUNCTION {author.sort}
-{ author empty$
-    { key empty$
-        { "to sort, need author or key in " cite$ * warning$
-          ""
-        }
-        { key sortify }
-      if$
-    }
-    { author sort.format.names }
-  if$
-}
-
-FUNCTION {author.editor.sort}
-{ author empty$
-    { editor empty$
-        { key empty$
-            { "to sort, need author, editor, or key in " cite$ * warning$
-              ""
-            }
-            { key sortify }
-          if$
-        }
-        { editor sort.format.names }
-      if$
-    }
-    { author sort.format.names }
-  if$
-}
-
-FUNCTION {editor.sort}
-{ editor empty$
-    { key empty$
-        { "to sort, need editor or key in " cite$ * warning$
-          ""
-        }
-        { key sortify }
-      if$
-    }
-    { editor sort.format.names }
-  if$
-}
-
-FUNCTION {presort}
-{ calc.label
-  label sortify
-  "    "
-  *
-  type$ "book" =
-  type$ "inbook" =
-  or
-    'author.editor.sort
-    { type$ "proceedings" =
-        'editor.sort
-        'author.sort
-      if$
-    }
-  if$
-  #1 entry.max$ substring$      % for
-  'sort.label :=                % apalike
-  sort.label                    % style
-  *
-  "    "
-  *
-  title field.or.null
-  sort.format.title
-  *
-  #1 entry.max$ substring$
-  'sort.key$ :=
-}
-
-ITERATE {presort}
-
-SORT            % by label, sort.label, title---for final label calculation
-
-STRINGS { last.label next.extra }       % apalike labels are only for the text;
-
-INTEGERS { last.extra.num }             % there are none in the bibliography
-
-FUNCTION {initialize.extra.label.stuff} % and hence there is no `longest.label'
-{ #0 int.to.chr$ 'last.label :=
-  "" 'next.extra :=
-  #0 'last.extra.num :=
-}
-
-FUNCTION {forward.pass}
-{ last.label label =
-    { last.extra.num #1 + 'last.extra.num :=
-      last.extra.num int.to.chr$ 'extra.label :=
-    }
-    { "a" chr.to.int$ 'last.extra.num :=
-      "" 'extra.label :=
-      label 'last.label :=
-    }
-  if$
-}
-
-FUNCTION {reverse.pass}       % this function came from ASTRON.BST (ARR)
-{ next.extra "b" =
-    { "a" 'extra.label := }
-    'skip$
-  if$
-  label extra.label * "}" * 'label :=
-  extra.label 'next.extra :=
-}
-
-EXECUTE {initialize.extra.label.stuff}
-
-ITERATE {forward.pass}
-
-REVERSE {reverse.pass}
-
-FUNCTION {bib.sort.order}
-{ sort.label
-  "    "
-  *
-  year field.or.null sortify
-  *
-  "    "
-  *
-  title field.or.null
-  sort.format.title
-  *
-  #1 entry.max$ substring$
-  'sort.key$ :=
-}
-
-ITERATE {bib.sort.order}
-
-SORT            % by sort.label, year, title---giving final bibliography order
-
-FUNCTION {begin.bib}
-{ preamble$ empty$                              % no \etalchar in apalike
-    'skip$
-    { preamble$ write$ newline$ }
-  if$
-  "\begin{thebibliography}{}" write$ newline$           % no labels in apalike
-}
-
-EXECUTE {begin.bib}
-
-EXECUTE {init.state.consts}
-
-ITERATE {call.type$}
-
-FUNCTION {end.bib}
-{ newline$
-  "\end{thebibliography}" write$ newline$
-}
-
-EXECUTE {end.bib}
-%% 
+\newcommand{\expandemail}[1]{%
+  \ifnum\auth@cnt<3 \footnotetext{\hskip -1ex \textit{email:}\ %
+    \csname email@\romannumeral#1\endcsname}
+  \else
+  \hskip1ex\footnotemark{}\footnotetext{\textit{email:}\ %
+      \csname email@\romannumeral#1\endcsname}\fi}
+\newcommand{\compactmode}{
+  \bf
+  \newcount\n
+  \newcount\m
+  \m=\auth@cnt
+  \advance \m by-1
+  \n=1
+  \loop
+      \csname author@\romannumeral\n\endcsname%
+      \advance \n by 1
+      \ifnum\n=\m\authaddrs{\n} and
+      \else\ifnum\n<\m,\authaddrs{\n}
+      \else\authaddrs{\n}\fi\fi
+  \ifnum\n<\auth@cnt
+  \repeat
+
+  \rm
+  \n=1
+  \loop $^\number\n$\csname address@\romannumeral\n\endcsname \advance \n by 1
+  \ifnum\n<\addr@cnt \\ \repeat
+  }
+
+\newcommand{\authaddrs}[1]{%
+  \def\testthing{A}%
+  \newcount\o%
+  \newif\ifdoneone%
+  \doneonefalse%
+  \o=1%
+  {\loop
+    \expandafter\ifx\csname a\romannumeral#1@a\romannumeral\o\endcsname\testthing
+    \ifdoneone$^,$\fi\doneonetrue$^\number\o$\fi
+    \advance \o by 1
+    \ifnum\o<\addr@cnt%
+    \repeat}%
+  \compactemail{#1}%
+  }
+
+\newcommand{\compactemail}[1]{%
+  \ifundefined{email@\romannumeral#1}\else$^,$%
+  \hskip1ex\footnotemark{}\footnotetext
+   {\textit{email:}\ %
+      \csname email@\romannumeral#1\endcsname}
+  \fi}
+%\newenvironment{summary}{\biosub{Summary \vskip 0.5 em}}{}
+\newenvironment{summary}{\par \noindent{\sc Summary.\/}}{}{\vskip 0.5 em}
+\newenvironment{acknowledgements}{\biosub{Acknowledgements \vskip 0.5 em}}{}
+\newenvironment{resume}{\biosub{R\'{e}sum\'{e} \vskip 0.5 em}}{}
+
+\newcommand{\keywords}[1]{\vskip 0.5 em \par \noindent{\sc Key
+words:\,\,\,\,}{#1}{\vskip 0.5 em}}
+
+\newenvironment{custom}[1]{\biosub{#1} \vskip 0.5 em}{}
+
+\renewcommand\abstract{\biosub{Summary}}
+\renewcommand{\abstractname}{Summary}
+
+\newcommand{\biosub}{\@startsection
+  {paragraph}{99}{\z@}{-3.25ex plus -0ex minus -0.ex }
+  {0.3ex plus .2ex}
+  {\sc\center}}
+
+\renewcommand\thesubsection {\thesection{.}\arabic{subsection}}
+\renewcommand\thesubsubsection {\thesubsection{.}\arabic{subsubsection}}
+\renewcommand{\thesection}{\arabic{section}}
+
+\renewcommand{\section}{\@startsection {section}{1}{\z@}{-2.3ex plus -.2ex}
+  {0.3ex plus .0ex}{\normalsize\bfseries}}
+
+\renewcommand{\@seccntformat}[1]{\csname the#1\endcsname.\quad}
+
+\newcommand{\@startsubsection}[6]{\if@noskipsec \leavevmode \fi
+  \par \@tempskipa #4\relax
+  \@afterindenttrue
+  \ifdim \@tempskipa <\z@ \@tempskipa -\@tempskipa \@afterindentfalse\fi
+  \if@nobreak \everypar{}\else
+  \addpenalty{\@secpenalty}\addvspace{\@tempskipa}\fi \@ifstar
+  {\@ssect{#3}{#4}{#5}{#6}}{\@dblarg{\@subsect{#1}{#2}{#3}{#4}{#5}{#6}}}}
+
+\newcommand{\@startsubsubsection}[6]{\if@noskipsec \leavevmode \fi
+  \par \@tempskipa #4\relax
+  \@afterindenttrue
+  \ifdim \@tempskipa <\z@ \@tempskipa -\@tempskipa \@afterindentfalse\fi
+  \if@nobreak \everypar{}\else
+  \addpenalty{\@secpenalty}\addvspace{\@tempskipa}\fi \@ifstar
+  {\@ssect{#3}{#4}{#5}{#6}{#6}}{\@dblarg{\@subsect{#1}{#2}{#3}{#4}{#5}{#6}}}}
+
+\def\@subsect#1#2#3#4#5#6[#7]#8{\ifnum #2>\c@secnumdepth
+  \def\@svsec{}\else
+  \refstepcounter{#1}\edef\@svsec{\csname the#1\endcsname\hskip 1em }\fi
+  \@tempskipa #5\relax
+  \ifdim \@tempskipa>\z@
+  \begingroup #6\relax
+  \@hangfrom{\hskip #3\relax{\rm \@svsec}}{\interlinepenalty \@M #8\par}%
+  \endgroup
+  \csname #1mark\endcsname{#7}\addcontentsline
+  {toc}{#1}{\ifnum #2>\c@secnumdepth \else
+    \protect\numberline{\csname the#1\endcsname}\fi
+    #7}\else
+  \def\@svsechd{#6\hskip #3\@svsec #8\csname #1mark\endcsname
+    {#7}\addcontentsline
+    {toc}{#1}{\ifnum #2>\c@secnumdepth \else
+      \protect\numberline{\csname the#1\endcsname}\fi
+      #7}}\fi
+  \@xsect{#5}}
+
+\renewcommand{\subsection}{\@startsubsection{subsection}{2}{\z@}{1.3ex plus .0ex}
+  {0.3ex plus .0ex}{\normalsize\itshape}}
+\renewcommand{\subsubsection}{\@startsubsubsection{subsubsection}{3}{\z@}{\baselineskip}
+  {-\baselineskip}{\normalsize\itshape}}
+\renewcommand{\figure}{\@float{figure} \let\@makecaption\@makefigurecaption \small
+  \let\footnoterule\relax
+  \let\contcaption\conttablecaption}
+
+\let\endfigure\end@float
+
+\long\def\@makefigurecaption#1#2{%
+  \vskip\abovecaptionskip
+  \sbox\@tempboxa{\textbf{#1.} #2}%
+  \ifdim \wd\@tempboxa >\hsize
+  \textbf{#1.} #2\par
+  \else
+  \global \@minipagefalse
+  \hb@xt@\hsize{\hfil\box\@tempboxa\hfil}%
+  \fi
+  \vskip\belowcaptionskip}
+\renewcommand{\table}{\@float{table} \let\@makecaption\@maketablecaption \small
+  \let\footnoterule\relax
+  \let\contcaption\conttablecaption}
+
+\let\endtable\end@float
+
+\long\def\@maketablecaption#1#2{%
+  \vskip\abovecaptionskip
+  \centering \textbf{#1} \par \it #2 \vskip 1 ex\hrule\vskip 0.2 ex\hrule
+  \vskip\belowcaptionskip}
+\renewcommand{\sidewaystable}{\@rotfloat{table} \let\@makecaption\@maketablecaption}
+\renewcommand{\sidewaysfigure}{\@rotfloat{figure} \let\@makecaption\@makefigurecaption}
+\newcommand{\th@bkathm}{\normalfont\itshape
+  \newcommand{\@begintheorem}[2]{%
+  \item[\hskip\labelsep \scshape ##1\ ##2.]}%
+  \newcommand{\@opargbegintheorem}[3]{%
+  \item[\hskip\labelsep \scshape ##1\ ##2.\ (##3)]}}
+
+\newcommand{\th@proof}{\normalfont\upshape
+  \newcommand{\@begintheorem}[2]{%
+    \item[\hskip\labelsep \itshape ##1.]}%
+ \newcommand{\@opargbegintheorem}[3]{%
+ \item[\hskip\labelsep \itshape ##1.\ (##3)]}}
+
+\newcommand{\th@bkaexa}{\normalfont\upshape
+  \newcommand{\@begintheorem}[2]{%
+  \item[\hskip\labelsep \itshape ##1\ ##2.]}%
+  \newcommand{\@opargbegintheorem}[3]{%
+  \item[\hskip\labelsep \itshape ##1\ ##2.\ (##3)]}}
+
+\theoremstyle{bkaexa} \newtheorem{Exa}{Example}
+\theoremstyle{bkaexa} \newtheorem{Rem}{Remark}
+\theoremstyle{bkathm} \newtheorem{Thm}{Theorem}
+\theoremstyle{bkathm} \newtheorem{Lem}{Lemma}
+\theoremstyle{proof}  \newtheorem{proof}{Proof}
+
+%
+% Citation stuff
+%
+%\newcommand{\@intcite}{\@ifnextchar
+%  [{\@tempswatrue\@citex}{\@tempswafalse\@citex[]}}
+%\newcommand{\@intcitep}{\@ifnextchar
+%  [{\@tempswatrue\@citexp}{\@tempswafalse\@citexp[]}}
+%\renewcommand{\cite}{\@ifstar{\shortcitefullp}{\shortcitefull}}
+%\newcommand{\fullcite}{\@ifstar{\citefullp}{\citefull}}
+%\newcommand{\citefull}{\def\bsccite##1##2##3{##1 (##3}\@intcite}
+%\newcommand{\citefullp}{\def\bsccite##1##2##3{##1, ##3}\@intcitep}
+%\newcommand{\shortcitefull}{\def\bsccite##1##2##3{##2 (##3}\@intcite}
+%\newcommand{\shortcitefullp}{\def\bsccite##1##2##3{##2, ##3}\@intcitep}
+%\newcommand{\citeyear}{\def\bsccite##1##2##3{##3}\@intcitep}
+
+%\newcommand{\citeA}{\def\bsccite##1##2##3{##2}\@intcitep}
+%\newcommand{\fullciteA}{\def\bsccite##1##2##3{##1}\@intcitep}
+%\renewcommand{\@citex}[2][default]{%
+%  \if@filesw\immediate\write\@auxout{\string\citation{#2}}\fi
+%  \def\@citea{}\@cite{\@for\@citeb:=#2\do
+%    {\@citea\def\@citea{), }\@ifundefined
+%      {b@\@citeb}{{\bf ?}\@warning
+%        {Citation `\@citeb' on page \thepage \space undefined}}%
+%      {\csname b@\@citeb\endcsname}}}{#1}}
+
+%\newcommand{\@citexp}[2][default]{%
+%  \if@filesw\immediate\write\@auxout{\string\citation{#2}}\fi
+%  \def\@citea{}\@citep{\@for\@citeb:=#2\do
+%    {\@citea\def\@citea{; }\@ifundefined
+%      {b@\@citeb}{{\bf ?}\@warning
+%        {Citation `\@citeb' on page \thepage \space undefined}}%
+%      {\csname b@\@citeb\endcsname}}}{#1}}
+
+%\renewcommand{\@cite}[2]{#1\if@tempswa , #2\fi)}
+%\newcommand{\@citep}[2]{#1\if@tempswa , #2\fi}
+%\renewcommand{\thebibliography}[1]{\section*{\sc\center%
+%    References\vskip 0.5 em \@mkboth{REFERENCES}{REFERENCES}}
+%  \list {\relax}{\setlength{\labelsep}{0em}
+%    \setlength{\itemindent}{-\bibhang}
+%    \setlength{\itemsep}{0pt}
+%    \setlength{\parsep}{0pt}
+%    \setlength{\leftmargin}{\bibhang}}
+%  \renewcommand{\newblock}{\hskip .11em plus .33em minus .07em}
+%  \sloppy\clubpenalty4000\widowpenalty4000
+%  \sfcode`\.=1000\relax}
+%\newlength{\bibhang}
+%\setlength{\bibhang}{1.4em}
+%\renewcommand{\@biblabel}[1]{}
+
+\newcounter{appendix}
+\@addtoreset{section}{appendix}
+
+\newcommand{\startappendix}{%
+  \@addtoreset{equation}{section}
+  \setcounter{section}{0}
+  \setcounter{subsection}{0}
+  \setcounter{equation}{0}
+  \renewcommand{\appendix}{\par
+    \addvspace{4ex}%
+    \@afterindentfalse
+    \secdef\bio@ppendix\bio@sppendix}
+
+  \newcommand{\bio@ppendix}[2][default]{
+    \ifnum \c@secnumdepth >\m@ne
+    \refstepcounter{appendix}%
+    \addcontentsline{toc}{appendix}{\theappendix\hspace{1em}##1}%
+    \else
+    \addcontentsline{toc}{appendix}{##1}%
+    \fi
+    {\parindent \z@ \raggedright
+      \interlinepenalty \@M
+      \normalfont
+      \ifnum \c@secnumdepth >\m@ne
+      \centering\scshape Appendix~\theappendix
+      \par\nobreak
+      \fi
+      \centering\itshape ##2%
+      \markboth{}{}\par}%
+    \nobreak
+    \vspace{2.3ex \@plus.2ex}%\vskip 3ex
+    \@afterheading}
+
+\newcommand{\bio@sppendix}[1]{%
+  \refstepcounter{appendix}%
+  { \centering\scshape Appendix\par
+    \parindent \z@ \raggedright
+    \interlinepenalty \@M
+    \normalfont
+    \centering\itshape ##1\par}%
+  \nobreak
+  \vspace{1.5ex \@plus .2ex}\par%
+  \@afterheading}
+
+  \renewcommand\theequation{\Alph{appendix}.\arabic{equation}}
+  \renewcommand\theappendix{\Alph{appendix}}
+  \renewcommand\thesection{\Alph{appendix}\arabic{section}}}
+\endinput
 %%
-%% End of file `biometrics.bst'.
+%% End of file `biometrics.cls'.
