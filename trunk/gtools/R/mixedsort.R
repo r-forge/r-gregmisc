@@ -35,7 +35,7 @@ mixedorder <- function(x)
     which.blanks <- which(x=="")
 
     x[ which.blanks ] <- -Inf
-    x[ which.nas ] <- "\377"
+    x[ which.nas ] <- Inf
 
     ####
     # - Convert each character string into an vector containing single
@@ -89,9 +89,11 @@ mixedorder <- function(x)
     
     rank.overall <- ifelse(is.na(rank.character),rank.numeric,rank.character)
 
-    order <- do.call("order",as.data.frame(rank.overall))
+    order.frame <- as.data.frame(rank.overall)
+    order.frame[which.nas,] <- Inf
+    retval <- do.call("order",order.frame)
 
-    return(order)
+    return(retval)
   }
 
 
