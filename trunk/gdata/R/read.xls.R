@@ -1,7 +1,11 @@
 # $Id$
 
 read.xls <- function(xls, sheet = 1, verbose=FALSE, ..., perl="perl")
-{
+  {
+
+  # Creating a temporary function to quote the string
+    dQuote.ascii <- function(x) paste('"',x,'"',sep='')
+
   ###
   # directories
   package.dir <- .path.package('gdata')
@@ -11,7 +15,8 @@ read.xls <- function(xls, sheet = 1, verbose=FALSE, ..., perl="perl")
 
   ###
   # files
-  xls <- dQuote(xls) # dQuote in case of spaces in path
+
+  xls <- dQuote.ascii(xls) # dQuote.ascii in case of spaces in path
   xls2csv <- file.path(perl.dir,'xls2csv.pl')
   csv <- paste(tempfile(), "csv", sep = ".")
   #
@@ -19,7 +24,7 @@ read.xls <- function(xls, sheet = 1, verbose=FALSE, ..., perl="perl")
 
   ###
   # execution command
-  cmd <- paste(perl, xls2csv, xls, dQuote(csv), sheet, sep=" ")
+  cmd <- paste(perl, xls2csv, xls, dQuote.ascii(csv), sheet, sep=" ")
   #
   ###
 

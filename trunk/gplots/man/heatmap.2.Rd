@@ -9,7 +9,7 @@
   restrictions imposed by the dendrogram is carried out.
 }
 \usage{
-heatmap.2 <- function (x,
+heatmap.2 (x,
 
                      # dendrogram control
                      Rowv=NULL,
@@ -173,7 +173,7 @@ heatmap.2 <- function (x,
     0.25.}
   % plot labels
   \item{main, xlab, ylab}{main, x- and y-axis titles; defaults to none.}
-  \item{\dots}{additional arguments passed on to \code{\link{image}} } %
+  \item{...}{additional arguments passed on to \code{\link{image}} } %
 }
 \details{
   If either \code{Rowv} or \code{Colv} are dendrograms they are honored
