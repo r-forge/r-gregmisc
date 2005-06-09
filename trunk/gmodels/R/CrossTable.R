@@ -1,4 +1,7 @@
-# $Id$
+# Revision 2.0 2005/04/27
+# Added 'format = "d"' to all table count output
+# so that large integers do not print in
+# scientific notation
 
 CrossTable <- function (x, y,
                         digits = 3,
@@ -168,7 +171,7 @@ CrossTable <- function (x, y,
 
       for (i in 1:nrow(t))
         {
-          cat(FirstCol[i], formatC(c(t[i, ], RS[i]), width = CWidth), 
+          cat(FirstCol[i], formatC(c(t[i, ], RS[i]), width = CWidth, format = "d"), 
               sep = " | ", collapse = "\n")
           if (expected) 
             cat(SpaceSep1, formatC(CST$expected[i, ], digits = digits, 
@@ -196,7 +199,7 @@ CrossTable <- function (x, y,
         }
       
       ## Print Column Totals
-      cat(ColTotal, formatC(c(CS, GT), width = CWidth), sep = " | ", 
+      cat(ColTotal, formatC(c(CS, GT), width = CWidth, format = "d"), sep = " | ", 
           collapse = "\n")
       if (prop.c) 
         cat(SpaceSep1, formatC(CS/GT, width = CWidth, digits = digits, 
@@ -228,7 +231,7 @@ CrossTable <- function (x, y,
       for (i in 1:nrow(t))
         {
           cat(cat(FirstCol[i], sep=" | ", collapse=""),
-              cat(formatC(c(t[i, ], RS[i]), width = CWidth-1),
+              cat(formatC(c(t[i, ], RS[i]), width = CWidth-1, format = "d"),
                   sep = "  | ", collapse = "\n"), sep="", collapse="")
 
           if (expected)
@@ -287,7 +290,7 @@ CrossTable <- function (x, y,
 
       ## Print Column Totals
       cat(cat(ColTotal,sep=" | ",collapse=""),
-          cat(formatC(c(CS, GT), width = CWidth-1), sep = "  | ",
+          cat(formatC(c(CS, GT), width = CWidth-1, format = "d"), sep = "  | ",
               collapse = "\n"),sep="",collapse="")
 
       if (prop.c)
@@ -333,7 +336,7 @@ CrossTable <- function (x, y,
               sep = " | ", collapse = "\n")
 
           cat(SpaceSep3, rep(RowSep, (end[i] - start[i]) + 1), sep = "|", collapse = "\n")
-          cat(SpaceSep2, formatC(t[, start[i]:end[i]], width = CWidth), sep = " | ", collapse = "\n")
+          cat(SpaceSep2, formatC(t[, start[i]:end[i]], width = CWidth, format = "d"), sep = " | ", collapse = "\n")
           cat(SpaceSep2, formatC(CPT[, start[i]:end[i]], width = CWidth, digits = digits, format = "f"),
               sep = " | ", collapse = "\n")
           cat(SpaceSep3, rep(RowSep, (end[i] - start[i]) + 1), sep = "|", collapse = "\n")
@@ -380,7 +383,7 @@ CrossTable <- function (x, y,
           cat(SpaceSep3, rep(RowSep, (end[i] - start[i]) +
                              1), sep = "|", collapse = "\n")
           cat(cat(SpaceSep2,sep=" | ",collapse=""),
-              cat(formatC(t[, start[i]:end[i]], width = CWidth-1),
+              cat(formatC(t[, start[i]:end[i]], width = CWidth-1, format = "d"),
                   sep = "  | ", collapse = "\n"),
               sep="",collapse="")
           cat(cat(SpaceSep2, sep=" | ",collapse=""),
