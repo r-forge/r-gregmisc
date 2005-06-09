@@ -1,7 +1,14 @@
 % $Id$
 %
 % $Log$
+% Revision 1.4  2005/06/09 14:20:28  nj7w
+% Updating the version number, and various help files to synchronize splitting of gregmisc bundle in 4 individual components.
+%
+% Revision 1.1.1.1  2005/05/25 22:15:30  nj7w
+% Initial submission as an individual package
+%
 % Revision 1.3  2002/04/09 00:51:31  warneg
+%
 % Checkin for version 0.5.3
 %
 % Revision 1.2  2001/08/25 05:46:21  warneg

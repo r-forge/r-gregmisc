@@ -31,7 +31,7 @@ coefFrame(mod, data, by = NULL, fit.on = TRUE, fitfun, keep.unused.levels = TRUE
     of \code{by}, even those which were excluded by
     \code{fit.on}. The default value \code{TRUE} should be left alone
     if you are going to go on to pass the result to \code{backFit}.}
-  \item{byvar.sep}{passed to \code{\link{frameApply}}, used to form the
+  \item{byvar.sep}{passed to frameApply, used to form the
     subsets of the data.}
   \item{...}{other arguments to pass to \code{fitfun}.}
 }
