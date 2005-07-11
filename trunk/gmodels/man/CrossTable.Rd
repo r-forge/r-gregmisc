@@ -1,3 +1,7 @@
+%% Revision 2.1 2005/06/26
+%% Added 'dnn' argument to enable specification of dimnames
+%% names as per table()
+
 %% Revision 2.0 2005/04/27
 %% Added attributions to Nitin Jain and
 %% and Dirk Enzmann for SPSS format
@@ -16,7 +20,7 @@ CrossTable(x, y, digits=3, max.width = 5, expected=FALSE, prop.r=TRUE, prop.c=TR
            prop.t=TRUE, prop.chisq=TRUE, chisq = FALSE, fisher=FALSE, mcnemar=FALSE,
            resid=FALSE, sresid=FALSE, asresid=FALSE,
            missing.include=FALSE,
-format=c("SAS","SPSS")),...
+           format=c("SAS","SPSS")), dnn = NULL, ...
 }
 \arguments{
   \item{x}{A vector or a matrix. If y is specified, x must be a vector}
@@ -46,7 +50,8 @@ format=c("SAS","SPSS")),...
    \item{asresid}{If \code{TRUE}, adjusted standardized residual will be included}
    \item{missing.include}{If \code{TRUE}, then remove any unused factor levels}
   \item{format}{Either SAS (default) or SPSS, depending on the type of
-  output desired.}
+    output desired.}
+  \item{dnn}{the names to be given to the dimensions in the result (the dimnames names).}
 
  }
 \details{
@@ -122,6 +127,7 @@ data(infert, package = "datasets")
 CrossTable(infert$education, infert$induced, expected = TRUE)
 CrossTable(infert$education, infert$induced, expected = TRUE, format="SAS")
 CrossTable(infert$education, infert$induced, expected = TRUE, format="SPSS")
+CrossTable(warpbreaks$wool, warpbreaks$tension, dnn = c("Wool", "Tension"))
 }
 \keyword{category}
 \keyword{univar}
