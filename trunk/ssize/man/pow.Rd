@@ -27,9 +27,11 @@ delta.plot (x, xlab = "Fold Change",
             marks = c(1.5, 2, 2.5, 3, 4, 6, 10), ...) 
 }
 \arguments{
-  \item{sd}{Vector of standard deviations for control samples}
+  \item{sd}{Vector of standard deviations for control samples, *on the
+    log2 scale*}
   \item{n}{Number of observations (per group)}
-  \item{delta}{Hypothetical True difference in expression.}
+  \item{delta}{Hypothetical True difference in expression, on
+        the log2 scale.}
   \item{sig.level}{Significance level (Type I error probability)}
   \item{power}{Power}
   \item{alpha.correct}{Type of correction for multiple comparison.  One
@@ -52,6 +54,10 @@ delta.plot (x, xlab = "Fold Change",
 
   Periods are printed for every 10 calculations so that the user can see
   that the computation is proceeding.
+}
+\note{
+This code was intended to be used with data are on the log2 scale, in which case
+the delta can be set to becomes log2(fold-change).
 }
 \value{
   \code{pow} returns a vector containing the power for each standard deviation.
