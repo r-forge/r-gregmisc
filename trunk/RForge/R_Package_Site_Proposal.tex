@@ -30,8 +30,9 @@
   %%\hypersetup{backref,colorlinks=false,pagebackref=true,hyperindex=true}
 \fi
 
-\title{Software Development Site for R packages\\
-       Version $ $Revision$ $ }
+\title{``RForge'' Software Development Site for R packages\\
+       \textbf{DRAFT} $ $Revision$ $ }
+\date{ $ $Date$ $ }
 \author{Gregory R. Warnes\\
   Associate Director\\
   Groton Nonclinical and Clinical Sciences Statistics\\
@@ -43,17 +44,19 @@
 
 \section{Introduction}
 
-The R statistical software environments are increasingly being used
-for data analysis within Pfizer.  A major attraction of this system is
+The R statistical software environment is increasingly being used
+for data analysis within regulated industries (e.g. pharmaceutical
+research and development).  A major attraction of the R system is
 the relative ease with which add-on packages can be developed and
-deployed, as well as the extensive set of packages that are already
-available.  (At the time of this writing, more than 400 add-on
-packages already available.)  As a consequence, add-on packages
-implementing advanced statistical methods often appear concurrent
-with--or even before--the publication of the manuscripts describing
-the methods themselves.  The combination of these factors has placed R
-as a premier tool for statistical computation in many quickly
-developing areas, including bioinformatics and systems biology.
+deployed, as well as the extensive set of packages that are
+already available.  (At the time of this writing, more than 400
+add-on packages are available from the R-project web site.)  As a
+consequence, add-on packages implementing advanced statistical
+methods often appear concurrent with--or even before--the
+publication of the manuscripts describing the methods themselves.
+The combination of these factors has placed R as a premier tool
+for statistical computation in many rapidly developing areas,
+including bioinformatics and systems biology.
 
 The core R environment, under the guidance of the R Core Team, is
 developed using a standard software model supported by software
@@ -96,7 +99,7 @@ packages for use in regulated environments.
 
 \section{Goals}
 
-This project has three goals:
+This project has three primary goals:
 
 \begin{enumerate}
 \item Enable and encourage the use of an appropriate software
@@ -129,13 +132,13 @@ developers will:
 \section{Mechanism}
 
 Create and support an internet portal for add-on package developers
-that provides software lifecycle tools.  These tools include
+that provides software lifecycle tools.  These tools will include:
 \begin{itemize}
-\item version control system (cvs/subversion)
+\item version control system (subversion)
+\item issue tracking system
 \item file release area
 \item web page
 \item news lists
-\item issue tracking system
 \end{itemize} for each individual package.
 
 This portal will support categorizing software releases as
@@ -177,8 +180,11 @@ Software reviewers will complete a standard review form developed by
 the community which will ensure that best practices are followed by
 both software authors and by reviewers.  This form will include a
 commentary on the software that will be published alongside the
-software itself once all revisions have been completed and the package
-has been accepted for publication.
+software itself once all revisions have been completed and the
+package has been accepted for publication.  This commentary will
+appear under the reviewers names, mirroring standard software
+reviews, ensuring that package reviewers also receive appropriate
+publication credit for their work.
 
 \section{Resources}
 
@@ -191,7 +197,7 @@ has been accepted for publication.
 
   This process should be a straightforward extension of existing
   sourceforge-style tools.  One particularly attractive option is
-  'GForge', available from \url{http://gforge.org/} and as a debian package.
+  'GForge', available from \url{http://gforge.org/} and as a Debian package.
 
   This will include
   \begin{itemize}
@@ -234,7 +240,57 @@ has been accepted for publication.
 
   \end{enumerate}
 
+
+\subsection{Total Resources}
+
+Under the preliminary resource estimates, funding a total of 1
+year of full-time-equivalent (FTE) in salary and benefits, plus a
+small additional cost for equipment and web hosting ($20K), should
+be sufficient to establish and maintain the R package development
+portal for 1 full year.  Future years should require only 1/2 FTE
+plus web hosting costs (~$500?).
+
 \end{itemize}
 
+\section{Funding}
+
+
+We propose that interested organizations (Pfizer, Insightful,
+Novartis, etc.) jointly fund the R Foundation
+(\url{http://www.r-project.org/foundation}) to perform the work
+required to create and then maintain the R package development
+site.
+
+There are a number of reasons for using the R Foundation to
+perform this work.  First and most importantly, the R Community
+must have confidence in the organization developing and
+maintaining the package development portal.  As the R core and key
+R developers are the primary members of the R Foundation, this
+ensures that they are involved in oversight of the development and
+maintenance of the portal.
+
+Second, funding the project through the R Foundation provides a
+straightforward mechanism for a multiple organizations to
+participate, potentially reducing the cost for individual
+participants, while creating a larger total funding pool.
+
+Third, the R Foundation is a logical organization to shepherd the
+continued operation of the R package development portal over the
+long term.  The continued operational costs can be funded through
+annual contributions from a variety of sources, potentially
+including government grants.
+
+Fourth, as an Austrian not-for-profit corporation, contributions
+are tax-deductible for European organizations.  With an
+appropriate filing (see
+\url{http://www.r-project.org/foundation/donations.html}),
+ this can also be arranged for US organizations.
+
+Finally, the R community would like to see the R Foundation serve
+as a resource accumulator for funding a variety of enchantments to
+the R software system that are not easily accomplished via the
+current contributed time model.  Funding the R package development
+portal via the R foundation will demonstrate the utility of this
+mechanism.
 
 \end{document}
