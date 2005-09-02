@@ -90,8 +90,8 @@ plotit <- defmacro( df, var, col="red", title="", expr=
 
 # Notes:
 # 1 - The macro expansion of 'col' will correctly replaces the
-# object name 'col' (right hand side of \code{col=col}) and not the argument
-# name (left hand side of \code{col=col}) in the function call to plot
+# object name 'col' (right hand side of col=col) and not the argument
+# name (left hand side of col=col) in the function call to plot
 # 2 - The plot's y axis label 
 
 plotit( d, V1)
@@ -104,7 +104,6 @@ plotit( d, V1, color, title="Crazy Plot")
   # An equivalent function is somewhat messier, since it must either explicitly
   # construct the y axis label, duplicating some of the work of the plot
   # function:
-\dontrun{
   plotit <- function( df, var, col="red", title="" )
   {
       dname <- deparse(substitute(df))
@@ -112,7 +111,6 @@ plotit( d, V1, color, title="Crazy Plot")
       plot( df[[vname]] ~ df$Grp, type="b", col=col, title=title,
             ylab=paste( dname, "$", vname, sep='' ) )
   }
-}
   # or we explicitly construct the call and then call eval.  The code for
   # the latter approach is # omiited since this is quite messy and
   # requires a lot of work.
