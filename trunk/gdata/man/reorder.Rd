@@ -68,7 +68,7 @@
    summary(trt)
    # Note that the levels are not in a meaningful order.
 
-
+   library(gtools)
    # Change the order to something useful
    # default "mixedsort" ordering
    trt2 <- reorder(trt)
