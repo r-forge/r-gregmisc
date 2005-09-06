@@ -2,6 +2,7 @@ Package: gdata
 Title: Various R programming tools for data manipulation
 Description: Various R programming tools for data manipulation
 Depends: R (>= 1.9.0)
+Suggests: gtools
 Version: 2.0.8
 Date: 2005-08-31
 Author: Gregory R. Warnes. Includes R source code and/or documentation
