@@ -1,4 +1,4 @@
-Package: gdata
+Package: gmodels
 Title: Various R programming tools for model fitting
 Description: Various R programming tools for model fitting
 Depends: R (>= 1.9.0)
