@@ -20,7 +20,7 @@ CrossTable(x, y, digits=3, max.width = 5, expected=FALSE, prop.r=TRUE, prop.c=TR
            prop.t=TRUE, prop.chisq=TRUE, chisq = FALSE, fisher=FALSE, mcnemar=FALSE,
            resid=FALSE, sresid=FALSE, asresid=FALSE,
            missing.include=FALSE,
-           format=c("SAS","SPSS")), dnn = NULL, ...
+           format=c("SAS","SPSS"), dnn = NULL, ...)
 }
 \arguments{
   \item{x}{A vector or a matrix. If y is specified, x must be a vector}
@@ -52,6 +52,7 @@ CrossTable(x, y, digits=3, max.width = 5, expected=FALSE, prop.r=TRUE, prop.c=TR
   \item{format}{Either SAS (default) or SPSS, depending on the type of
     output desired.}
   \item{dnn}{the names to be given to the dimensions in the result (the dimnames names).}
+\item{\dots}{optional arguments}
 
  }
 \details{
