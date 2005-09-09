@@ -10,7 +10,7 @@
 }
 \usage{
 balloonplot(x, ...)
-\method{balloonplot}{table}(x, xlab, ylab, zlab, ...)
+\method{balloonplot}{table}(x, xlab, ylab, zlab, show.zeroes=FALSE,show.margins=TRUE,...)
 \method{balloonplot}{default}(x, y, z,
     xlab = deparse(substitute(x)),
     ylab = deparse(substitute(y)), 
@@ -23,6 +23,8 @@ balloonplot(x, ...)
     rowsrt = par("srt"),
     colmar = 1,
     rowmar = 1,
+    show.zeroes=FALSE,
+    show.margins=FALSE,
      ...) 
 }
 \arguments{
@@ -52,6 +54,10 @@ balloonplot(x, ...)
   \item{rowsrt, colsrt}{Angle of rotation for row and column labels.}
   \item{rowmar, colmar}{Space allocated for row and column labels. Each
     unit is the width/height of one cell in the table.}
+  \item{show.zeroes}{boolean. if \code{TRUE} the cases with zero within
+                     are printed.}
+  \item{show.margins}{boolean. if \code{TRUE} margins are printed as sum of 
+                      the rows and the cols}
   \item{\dots}{ Additional arguments passed to \code{balloonplot.default}
     or \code{plot}, as appropriate.}
 }

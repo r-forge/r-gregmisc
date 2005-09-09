@@ -5,7 +5,8 @@ balloonplot <- function(x,...)
 
 
 
-balloonplot.table <- function(x, xlab, ylab, zlab, ... )
+balloonplot.table <- function(x, xlab, ylab, zlab, show.zeroes = FALSE, 
+                              show.margins = TRUE, ... )
   {
     obj <- x
     tmp <- as.data.frame(x)
@@ -18,7 +19,9 @@ balloonplot.table <- function(x, xlab, ylab, zlab, ... )
     if(missing(ylab)) ylab <- names(dimnames(obj))[2]
     if(missing(zlab)) zlab <- "Freq"
 
-    balloonplot.default(x, y, z, xlab=xlab, ylab=ylab, zlab=zlab, ...)
+    balloonplot.default(x, y, z, xlab=xlab, ylab=ylab, zlab=zlab, 
+                        show.zeroes = show.zeroes, 
+                        show.margins = show.margins, ...)
   }
 
 
@@ -38,6 +41,8 @@ balloonplot.default <- function(x,y,z,
                                 rowsrt=par("srt"),
                                 colmar=1,
                                 rowmar=1,
+                                show.zeroes=FALSE,
+                                show.margins=FALSE,
                                 ... )
 {
 
@@ -85,35 +90,85 @@ balloonplot.default <- function(x,y,z,
        xaxt="n", # no x axis lables
        yaxt="n", # no y axis lables
        bty="n",  # no box around the plot
+       xaxs = "i",
+       yaxs = "i",
        xlim=c(0.5-rowmar,nlevels(x)+0.5), # extra space on either end of plot
        ylim=c(0.5,nlevels(y)+1.5+colmar-1),  # so dots don't cross into margins,
        ...
      )
 
+  ny <- nlevels(y)
+  nx <- nlevels(x)
+     
+  sumz    <- sum(z)
+  
   # add text labels
   par(adj=0.5)
-  text(x=1:nlevels(x),
-       y=nlevels(y)+(colmar/2)+0.5,
-       labels=levels(x),
+
+       
+  if(show.margins){
+      ztab = z
+      dim(ztab) <- c(nx,ny)
+      rowsumz <- rowSums(ztab)
+      colsumz <- colSums(ztab)
+  
+      cx <- c(0, cumsum(rowsumz) / sumz)
+      rect(xleft   = 1:nx-0.5,
+           xright  = 1:nx+0.5,
+           ybottom = ny+0.5+cx[1:nx]*colmar,
+           ytop    = ny+0.5+cx[2:(nx+1)]*colmar,
+           col     = "gray",
+           border  = NA)
+
+      cy <- c(0, cumsum(colsumz) / sumz)
+      rect(xleft   = 0.5-rowmar+rowmar*cy[1:ny],
+           xright  = 0.5-rowmar+rowmar*cy[2:(ny+1)],
+           ybottom = 1:ny-0.5,
+           ytop    = 1:ny+0.5,
+           col     = "gray",
+           border  = NA)
+           
+  
+     tx <- paste(levels(x),"\n[",rowsumz,"]")
+     ty <- paste(levels(y),"\n[",colsumz,"]")
+  }
+  else{
+     tx <- levels(x)
+     ty <- levels(y)
+  }
+  
+  
+  text(x=1:nx,
+       y=ny+(colmar/2)+0.5,
+       labels=tx,
        srt=colsrt)
 
-  text(y=nlevels(y):1,
+  text(y=ny:1,
        x=-rowmar/2+0.5,
-       labels=levels(y),
+       labels=ty,
        srt=rowsrt)
-
+       
   # add borders between cells
-  abline(v=(0:nlevels(x)+0.5))
-  abline(h=(0:nlevels(y)+0.5))
+  abline(v=(0:nx+0.5))
+  abline(h=(0:ny+0.5))
 
+  segments(x0 = c(0.5-rowmar, 0.5 ),
+           x1 = c(0.5-rowmar, nx+0.5 ),
+           y0 = c(ny+0.5    , ny+0.5+colmar ),
+           y1 = c(0.5       , ny+0.5+colmar ) )
+  
   # annotate with actual values
-  if(label)
-    text(x=as.numeric(x),     # as.numeric give numeric values
-         y=nlevels(y) - as.numeric(y) + 1,
-         labels=format(z, digits=label.digits),       # label value
+  if(label){
+    indiv <- if(show.zeroes) 
+               1:length(y) 
+             else 
+               which(z != 0)
+    text(x=as.numeric(x[indiv]),     # as.numeric give numeric values
+         y=ny - as.numeric(y[indiv]) + 1,
+         labels=format(z[indiv], digits=label.digits),       # label value
          col="black", # textt color
          )
-
+  }
   # put a nice title
   title(main=main)
 }
