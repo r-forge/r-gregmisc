@@ -68,7 +68,7 @@ power.t.test.FDR <- function (sd=1, n=NULL, delta=NULL,
 
  ## compute n
  power.t.test.FDR(n=NULL, sd=1, power=.90, delta=1, FDR=0.05, pi0=0.975)
- power.t.test.FDR(n=NULL, power=.90, delta=1, pi0=0.975, alt="one.sided")
+ power.t.test.FDR(n=NULL, sd=1, power=.90, delta=1, FDR=0.05, pi0=0.975, alt="one.sided")
 
 
  ## compute sd

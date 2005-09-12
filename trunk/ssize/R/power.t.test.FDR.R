@@ -1,10 +1,12 @@
 crit.fn  <- function(crit, ratio, df, ncp, tside) 
   {
-    temp <- tside*pt(crit, df, lower=FALSE) /
-                  pt(crit, df, ncp=ncp, lower=FALSE)
-    retval <- (temp-ratio)^2
-    print(retval)
-    retval
+    lratio <- log(ratio)
+    
+    temp <- log(tside) +
+            log(pt(crit, df,          lower=FALSE )) - 
+            log(pt(crit, df, ncp=ncp, lower=FALSE ))
+
+    abs(temp-lratio)
   }
 
 power.t.test.FDR <- function (sd=1, n=NULL, delta=NULL,
@@ -48,7 +50,9 @@ power.t.test.FDR <- function (sd=1, n=NULL, delta=NULL,
     if (is.null(power)) 
         power <- eval(p.body)
     else if (is.null(n)) 
-        n <- uniroot(function(n) eval(p.body) - power, c(2, 1e+07))$root
+        n <- uniroot(function(n) eval(p.body) - power,
+                     interval=c(2, 1e+07),
+                     )$root
     else if (is.null(sd)) 
         sd <- uniroot(function(sd) eval(p.body) - power,
                       delta * c(1e-07, 1e+07))$root
