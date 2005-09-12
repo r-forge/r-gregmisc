@@ -69,7 +69,7 @@
   \code{\link{svd}} .
 }
 \author{Modifications by Gregory R. Warnes
-  \email{gregory\_r\_warnes@groton.pfizer.com} }
+  \email{gregory.r.warnes@pfizer.com} }
 
 \seealso{
     \code{\link[stats]{prcomp}}, \code{\link{svd}}, \code{\link{La.svd}}
