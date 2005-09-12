@@ -121,8 +121,8 @@ balloonplot.default <- function(x,y,z,
            border  = NA)
 
       cy <- c(0, cumsum(colsumz) / sumz)
-      rect(xleft   = 0.5-rowmar+rowmar*cy[1:ny],
-           xright  = 0.5-rowmar+rowmar*cy[2:(ny+1)],
+      rect(xleft   = 0.5-rowmar+rowmar*cy[ny:1],
+           xright  = 0.5-rowmar+rowmar*cy[(ny+1):2],
            ybottom = 1:ny-0.5,
            ytop    = 1:ny+0.5,
            col     = "gray",
@@ -172,4 +172,5 @@ balloonplot.default <- function(x,y,z,
   # put a nice title
   title(main=main)
 }
+
 
