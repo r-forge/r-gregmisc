@@ -12,11 +12,27 @@ defmacro(..., expr)
   \item{expr}{ macro body }
 }
 \details{
-  When evaluated, a macros created with \code{defmacro} substitutes the
-  provided arguments into the \emph{parsed} source code included in
-  \code{expr}, and then evaluates the results.  This is particularly
-  useful for programmatically creating new functions.
+  \code{defmacro} creates a macro from the expression given in
+  \code{expr}, with formal arguments given by the other elements of the
+  argument list.  When evaluated, the macro first substitutes its
+  arguments into the macro body (\code{expr}), and then evaluates the results. 
 
+  The special argument name \code{DOTS} is will be replaced by
+  \code{...} in the formal argument list of the macro so that \code{...}
+  in the body of the expression can be used to obtain any additional
+  arguments passed to the macro. [NB: This is necessary because of R's
+  parsing rules.}
+
+  Macros differ from functions in how the arguments are handled.  In a
+  function, formal arguments are simply variables that contains the
+  result of evaluating the expressions provided to the function call.
+  Macros, instead, modify the macro body by \code{replacing} the formal
+  arguments by expressions provided to the macro call.
+
+  \code{defmacro} is particularly useful for programmatically
+  creating new functions.
+}
+\note{
   "Note that because [the defmacro code] works on the parsed expression,
   not on a text string, defmacro avoids some of the problems with C
   preprocessor
@@ -41,7 +57,7 @@ defmacro(..., expr)
   Lumley T. "Programmer's Niche: Macros in {R}", R News, 2001, Vol 1,
   No. 3, pp 11--13, \url{http://CRAN.R-project.org/doc/Rnews/}
 }
-\author{ Thomas Lumley.  Packaged by Gregory R. Warnes
+\author{ Thomas Lumley.  Packaged and enhanced by Gregory R. Warnes
   \email{gregory.r.warnes@pfizer.com} }
 \seealso{
   \code{\link[base]{function}}
@@ -83,37 +99,39 @@ d
 ###
 # Macro for creating a plotting function
 ###
-plotit <- defmacro( df, var, col="red", title="", expr=
+plotit <- defmacro( df, var, DOTS, col="red", title="", expr=
   {
-    plot( df$var ~ df$Grp, type="b", col=col, main=title )
+    plot( df$var ~ df$Grp, type="b", col=col, main=title, ... )
   } )
 
 # Notes:
 # 1 - The macro expansion of 'col' will correctly replaces the
 # object name 'col' (right hand side of col=col) and not the argument
 # name (left hand side of col=col) in the function call to plot
-# 2 - The plot's y axis label 
+# 2 - The plot's y axis label will have the proper label
+# 3 - Note the use of 'DOTS' in place of '...'
 
 plotit( d, V1)
-plotit( d, V1, "blue" )
+plotit( d, V1, col="blue" )
+plotit( d, V1, lwd=4)  # use optional 'DOTS' argument
 
 # works with variables too
 color <- "cyan"
-plotit( d, V1, color, title="Crazy Plot")
+plotit( d, V1, col=color, title="Crazy Plot")
 
   # An equivalent function is somewhat messier, since it must either explicitly
   # construct the y axis label, duplicating some of the work of the plot
   # function:
-  plotit <- function( df, var, col="red", title="" )
+  plotit <- function( df, var, ..., col="red", title="" )
   {
       dname <- deparse(substitute(df))
       vname <- deparse(substitute(var))
       plot( df[[vname]] ~ df$Grp, type="b", col=col, title=title,
-            ylab=paste( dname, "$", vname, sep='' ) )
+            ylab=paste( dname, "$", vname, sep='' ), ... )
   }
   # or we explicitly construct the call and then call eval.  The code for
   # the latter approach is # omiited since this is quite messy and
   # requires a lot of work.
-  
+
 }
 \keyword{programming}
