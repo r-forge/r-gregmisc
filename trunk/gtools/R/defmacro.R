@@ -38,9 +38,6 @@ defmacro <- function(..., expr) #, DOTS=FALSE)
   names(a) <- nn
   a <- as.list(a)
 
-  #if(DOTS)
-  #  a <- c(a, formals( function(...){}) )
-
   ## this is where the work is done
   ff <- eval(substitute(
                         function()
