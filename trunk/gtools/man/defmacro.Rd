@@ -9,11 +9,12 @@
 }
 \usage{
 defmacro(..., expr)
-strmacro(..., expr)
+strmacro(..., expr, strexpr)
 }
 \arguments{
   \item{\dots}{ macro argument list }
-  \item{expr}{ macro body }
+  \item{expr}{ R expression defining the macro body }
+  \item{strexpr}{ character string defining the macro body }
 }
 \details{
 
@@ -75,32 +76,6 @@ strmacro(..., expr)
   \code{\link[base]{parse}},
 }
 \examples{
-
-###
-# Expression macro
-###
-plot.d <- defmacro( df, var, DOTS, col="red", title="", expr=
-  plot( df$var ~ df$Grp, type="b", col=col, main=title, ... )
-)
-
-plot.d( d, V1)
-plot.d( d, V1, col="blue" )
-plot.d( d, V1, lwd=4)  # use optional 'DOTS' argument
-
-###
-# String macro (note the quoted text in the calls below)
-#   (This style of macro can be useful when you are reading
-#    function arguments from a text file)
-###
-plot.s <- strmacro( DF, VAR, COL="'red'", TITLE="''", DOTS="", expr=
-  plot( DF$VAR ~ DF$Grp, type="b", col=COL, main=TITLE, DOTS)
-)
-
-plot.s( "d", "V1")
-plot.s( DF="d", VAR="V1", COL='"blue"' ) 
-plot.s( "d", "V1", DOTS='lwd=4')  # use optional 'DOTS' argument
-
-
 ####
 # macro for replacing a specified missing value indicator with NA
 # within a dataframe
@@ -122,6 +97,33 @@ d
 setNA(d, V1, 999)
 setNA(d, V2, 999)
 d
+
+
+###
+# Expression macro
+###
+plot.d <- defmacro( df, var, DOTS, col="red", title="", expr=
+  plot( df$var ~ df$Grp, type="b", col=col, main=title, ... )
+)
+
+plot.d( d, V1)
+plot.d( d, V1, col="blue" )
+plot.d( d, V1, lwd=4)  # use optional 'DOTS' argument
+
+###
+# String macro (note the quoted text in the calls below)
+# 
+# This style of macro can be useful when you are reading
+# function arguments from a text file
+###
+plot.s <- strmacro( DF, VAR, COL="'red'", TITLE="''", DOTS="", expr=
+  plot( DF$VAR ~ DF$Grp, type="b", col=COL, main=TITLE, DOTS)
+)
+
+plot.s( "d", "V1")
+plot.s( DF="d", VAR="V1", COL='"blue"' ) 
+plot.s( "d", "V1", DOTS='lwd=4')  # use optional 'DOTS' argument
+
 
 
 #######
