@@ -20,7 +20,7 @@ Numeric data is often summarized using rectangular tables. While
 these tables allow presentation of all of the relevant data, they do
 not lend themselves to rapid discovery of important patterns. The
 primary difficulty is that the visual impact of numeric values is
-not proportional to the scale of the nubmers represented
+not proportional to the scale of the numbers represented.
 
 We have developed a new graphical tool, the \code{balloonplot},
 which augments the numeric values in tables with colored circles
@@ -65,7 +65,7 @@ of the plot:
   \item method of scaling the balloon (by area or by radius)
   \item amount of space provided for row and column headers
   \item amount of space reserved for row and column entries
-  \item and the traditional graphics parameters (title, background. ..)
+  \item and the traditional graphics parameters (title, background ...)
 \end{itemize}
 
 \section*{Example using the \code{Titanic} data set}
@@ -116,7 +116,7 @@ that one must explicitly pay attention to the values in the cells in
 order to see any pattern in the data.
 
 Now, we redraw this same figure using light blue circles
-(Figure~\ref{figure:Surv.Pop}.  This is accomplished using the code:
+(Figure~\ref{figure:Surv.Pop}).  This is accomplished using the code:
 
 {\small
 \begin{verbatim}
@@ -177,9 +177,9 @@ Balloon plot of total population}
 
 Figure\ref{figure:Total.Pop} shows that the largest number of
 individuals are adult male crew (862), followed by adult males in
-3rd class (462).  Thus it is not surprising that a large number of
+$3^{rd}$ class (462).  Thus it is not surprising that a large number of
 adult male crew members survived.  However, we now see that survival
-among 3rd class adult males should have been high too...  So, let's
+among $3^{rd}$ class adult males should have been high too.  So, let us
 look at the fraction of passengers from each group who survived.
 
 {\small
@@ -210,16 +210,16 @@ now easily see from size of the circles that all the children in
 $1^{st}$ and $2^{nd}$ class survived, as did most of the women in
 $1^{st}$ and $2^{nd}$ class as well as female crew.  It is now clear
 that there is something distinctly different about survival among
-3rd class passengers: it is much lower than survival in any of the
+$3^{rd}$ class passengers: it is much lower than survival in any of the
 other classes.
 
 It turns out that there is a well known reason for this difference.
-Passengers in 1st and 2nd class, as well as crew members, had an
+Passengers in $1^{st}$ and $2^{nd}$ class, as well as crew members, had an
 easier time reaching the lifeboats.  Since there were too few
 lifeboats for the number of passengers and crew, most women and
 children among the first and second class passengers as well as
 female crew found space in a lifeboat, while many of the later
-arriving 3rd class women and children were too late: the lifeboats
+arriving $3^{rd}$  class women and children were too late: the lifeboats
 had already been filled and had moved away from the quickly sinking
 ship.
 
@@ -229,19 +229,16 @@ Using the well worn Titanic data, we have shown how balloonplots
 help to convey important aspects of tabular data, without obscuring
 the exact numeric values. We hope that this new approach to
 visualizing tabular data will assist other statiticians in more
-effectively understanding and presenting tabular data
+effectively understanding and presenting tabular data.
 
-We wish to thank .... and ... for the discussion on R-news which
-lead to the development of \code{balloonplot}.
+We wish to thank \emph{Ramon Alonso-Allende}
+\email{allende@cnb.uam.es} for the discussion on R-help which lead
+to the development of \code{balloonplot}.
 
 \address{Gregory R. Warnes, Pfizer Inc., USA\\
 \email{gregory.r.warnes@pfizer.com}\\
        Nitin Jain, Pfizer Inc., USA\\
 \email{nitin.jain@pfizer.com}}
-
-
-
-
 
 
 
