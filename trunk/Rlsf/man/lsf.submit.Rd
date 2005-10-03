@@ -52,7 +52,7 @@ lsf.submit(func, ..., savelist = c(), packages = NULL, ncpus = 1,
   \item{debug}{A boolean flag indicating whether debugging should be
     turned on or not. If debugging is turned on, then the standard
     output and standard error of the remote \R process invocation will be
-    placed in a file named Rlsf_job_output.<jobid>, where jobid is the
+    placed in a file named Rlsf\_job\_output.<jobid>, where jobid is the
     same as the LSF job id returned by \code{lsf.submit}}
 }
 \author{Chris Smith \email{csmith@platform.com}}

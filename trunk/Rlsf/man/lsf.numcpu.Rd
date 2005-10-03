@@ -13,7 +13,7 @@ lsf.numcpu()
   None.
 }
 \details{
-  This function determines the number of hosts present in the LSB_HOSTS
+  This function determines the number of hosts present in the LSB\_HOSTS
   environment variable.  If the environment variable does not exist or
   is empty, an error will be generated.
 }
@@ -26,7 +26,7 @@ lsf.numcpu()
 \examples{
 
    \testonly{
-     Sys.putenv("LSB_HOSTS"="host1 host2 host3 host4")
+     Sys.putenv("LSB\_HOSTS"="host1 host2 host3 host4")
    }
 
    # get the number of cpus, fail if unable to do so
