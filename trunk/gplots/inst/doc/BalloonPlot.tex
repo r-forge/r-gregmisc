@@ -1,9 +1,9 @@
 \documentclass[a4paper]{report}
 \usepackage{Rnews}
-\usepackage[round]{natbib}
-\usepackage{array}
+%\usepackage[round]{natbib}
+%\usepackage{array}
 \usepackage{graphicx}
-\bibliographystyle{abbrvnat}
+%\bibliographystyle{abbrvnat}
 
 \begin{document}
 
@@ -102,9 +102,9 @@ of the ocean liner ``Titanic'', summarized according to ticket type
 %%\end{table}
 %%
 %%
-\begin{figure}
+\begin{figure}[h]
 \includegraphics[width=\textwidth]{SurvivedPopWhite.pdf}
-\vspace*{-0.25in}
+\vspace{-0.65in}
 \caption{\label{figure:Surv.Pop.White}
 Tabular representation of surviving population}
 \end{figure}
@@ -137,9 +137,9 @@ mtext("(Area proportional to frequency)")
 \end{verbatim}
  }
 
-\begin{figure}
-%\vspace*{.1in}
+\begin{figure}[h]
 \includegraphics[width=\textwidth]{SurvivedPop.pdf}
+\vspace{-0.65in}
 \caption{\label{figure:Surv.Pop}
 Balloon plot of survived population}
 \end{figure}
@@ -148,8 +148,6 @@ With the addition of the blue ``spotlights'', it is easy to see that
 only adult females and adult male crew members survived in large
 numbers. Let us investigate further, by examining the number
 of individuals belonging to each category:
-
-\vspace{-0.25in}
 
 {\small
 \begin{verbatim}
@@ -168,9 +166,9 @@ mtext("(Area proportional to frequency)")
  }
 
 
-\begin{figure}
-%\vspace*{.1in}
+\begin{figure}[h]
 \includegraphics[width=\textwidth]{TotalPop.pdf}
+\vspace{-0.65in}
 \caption{\label{figure:Total.Pop}
 Balloon plot of total population}
 \end{figure}
@@ -199,9 +197,9 @@ mtext("(Area proportional to frequency)")
 }
 
 
-\begin{figure}
-%\vspace*{0.1in}
+\begin{figure}[h]
 \includegraphics[width=\textwidth]{SurvivedProp.pdf}
+\vspace{-0.65in}
 \caption{\label{figure:Surv.Prop}
 Balloon plot of proportion of people surviving}
 \end{figure}
@@ -221,9 +219,9 @@ The reasons for this are well known:
 \end{enumerate}
 Thus, most women and children among first and second class
 passengers and crew found space in a lifeboat, while most of the
-third class passengers never made it to lifeboats: the lifeboats had
-already been filled and had moved away from the quickly sinking
-ship.
+third class passengers never made it to lifeboats, since the
+lifeboats had already been filled and had moved away from the
+quickly sinking ship.
 
 \section*{Conclusion}
 
