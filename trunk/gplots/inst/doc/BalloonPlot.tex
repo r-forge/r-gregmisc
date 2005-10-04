@@ -24,7 +24,7 @@ not proportional to the scale of the numbers represented.
 
 We have developed a new graphical tool, the \code{balloonplot},
 which augments the numeric values in tables with colored circles
-with area proportional to the size of the corresponding table
+with circle area proportional to the size of the corresponding table
 entry. This visually highlights the prominent features of
 data, while preserving the details conveyed by the numeric values
 themselves.
@@ -42,9 +42,9 @@ y, z) of vectors representing the layout and contents of a matrix or
 table.  It then plots a graphical matrix, where each cell displays
 the appropriate numeric value plus a colored circle whose size
 reflects the relative magnitude of the corresponding component. The
-\emph{area} of each circle is proportional to the frequency of
-data. (The circles are scaled so that the circle for largest value
-fills the available space in the cell.)
+\emph{area} of each circle is proportional to the corresponding data
+value. The circles are scaled so that the circle for largest value
+fills the available space in the cell.
 
 As a consequence, the largest values in the table are ``spotlighted''
 by the biggest cicles, while the smaller values are displayed
@@ -56,7 +56,6 @@ Of course, when labels are present on the table or provided to the
 function, the graphical table is appropriately labeled.  In
 addition, options are provided to allow control of various visual features
 of the plot:
-
 \begin{itemize}
   \item rotation of the row and column headers
   \item balloon color (globally or individually) 
@@ -65,16 +64,18 @@ of the plot:
   \item method of scaling the balloon (by area or by radius)
   \item amount of space provided for row and column headers
   \item amount of space reserved for row and column entries
-  \item and the traditional graphics parameters (title, background ...)
 \end{itemize}
+Of course, all of the traditional graphics parameters (title,
+background ...) are also available.
+
 
 \section*{Example using the \code{Titanic} data set}
 
-For illustration purposes, we use the \code{Titanic} data set from
-the \code{datasets} package.  \code{Titanic} provides survival status
-for passengers on the tragic maiden voyage of the ocean liner
-``Titanic'', summarized according to economic status (class), sex, and
-age.
+We use the \code{Titanic} data set from the \code{datasets} package
+to illustrate the use of \code{balloonplot}.  \code{Titanic}
+provides survival status for passengers on the tragic maiden voyage
+of the ocean liner ``Titanic'', summarized according to ticket type
+(class), sex, and age.
 
 
 %Using \code{balloonplot}, we display the number of people surviving
@@ -102,20 +103,19 @@ age.
 %%
 %%
 \begin{figure}
-\includegraphics[width=\textwidth]{../figures/SurvivedPopWhite.pdf}
+\includegraphics[width=\textwidth]{SurvivedPopWhite.pdf}
 \vspace*{-0.25in}
 \caption{\label{figure:Surv.Pop.White}
 Tabular representation of surviving population}
 \end{figure}
 
-
 Figure~\ref{figure:Surv.Pop.White} displays a graphical table
-without balloons.  (This was created by calling balloonplot with
-the balloon color set to match the background color.)  Note
-that one must explicitly pay attention to the values in the cells in
-order to see any pattern in the data.
+without balloons.  (This was created by calling balloonplot with the
+balloon color set to match the background color.)  Note that one
+must explicitly focus on the individual cell values in order to see
+any pattern in the data.
 
-Now, we redraw this same figure using light blue circles
+Now we redraw this same figure using light blue circles
 (Figure~\ref{figure:Surv.Pop}).  This is accomplished using the code:
 
 {\small
@@ -139,15 +139,15 @@ mtext("(Area proportional to frequency)")
 
 \begin{figure}
 %\vspace*{.1in}
-\includegraphics[width=\textwidth]{../figures/SurvivedPop.pdf}
+\includegraphics[width=\textwidth]{SurvivedPop.pdf}
 \caption{\label{figure:Surv.Pop}
 Balloon plot of survived population}
 \end{figure}
 
-It is now easy to see that adult females and adult male crew
-members survived in large numbers. In order to investigate further,
-let us examine the number of individuals belonging to each
-category:
+With the addition of the blue ``spotlights'', it is easy to see that
+only adult females and adult male crew members survived in large
+numbers. Let us investigate further, by examining the number
+of individuals belonging to each category:
 
 \vspace{-0.25in}
 
@@ -170,17 +170,18 @@ mtext("(Area proportional to frequency)")
 
 \begin{figure}
 %\vspace*{.1in}
-\includegraphics[width=\textwidth]{../figures/TotalPop.pdf}
+\includegraphics[width=\textwidth]{TotalPop.pdf}
 \caption{\label{figure:Total.Pop}
 Balloon plot of total population}
 \end{figure}
 
 Figure\ref{figure:Total.Pop} shows that the largest number of
 individuals are adult male crew (862), followed by adult males in
-$3^{rd}$ class (462).  Thus it is not surprising that a large number of
-adult male crew members survived.  However, we now see that survival
-among $3^{rd}$ class adult males should have been high too.  So, let us
-look at the fraction of passengers from each group who survived.
+$3^{rd}$ class (462).  Thus it is not surprising that a large number
+of adult male crew members survived.  However, we now realize that
+survival among $3^{rd}$ class adult males should have been high too.
+So, let us look at the fraction of passengers from each group who
+survived.
 
 {\small
 \begin{verbatim}
@@ -200,27 +201,28 @@ mtext("(Area proportional to frequency)")
 
 \begin{figure}
 %\vspace*{0.1in}
-\includegraphics[width=\textwidth]{../figures/SurvivedProp.pdf}
+\includegraphics[width=\textwidth]{SurvivedProp.pdf}
 \caption{\label{figure:Surv.Prop}
 Balloon plot of proportion of people surviving}
 \end{figure}
 
-Figure\ref{figure:Surv.Prop} shows a diferent aspect of data. We can
-now easily see from size of the circles that all the children in
-$1^{st}$ and $2^{nd}$ class survived, as did most of the women in
-$1^{st}$ and $2^{nd}$ class as well as female crew.  It is now clear
-that there is something distinctly different about survival among
-$3^{rd}$ class passengers: it is much lower than survival in any of the
-other classes.
+From Figure \ref{figure:Surv.Prop} we can easily see that all the
+children in $1^{st}$ and $2^{nd}$ class survived, as did most of the
+women in $1^{st}$ and $2^{nd}$ class and among the crew.  It is also
+evident that survival among $3^{rd}$ class passengers is much lower
+than in any of the other classes.
 
-It turns out that there is a well known reason for this difference.
-Passengers in $1^{st}$ and $2^{nd}$ class, as well as crew members, had an
-easier time reaching the lifeboats.  Since there were too few
-lifeboats for the number of passengers and crew, most women and
-children among the first and second class passengers as well as
-female crew found space in a lifeboat, while many of the later
-arriving $3^{rd}$  class women and children were too late: the lifeboats
-had already been filled and had moved away from the quickly sinking
+The reasons for this are well known: 
+\begin{enumerate}
+  \item Third class passengers were berthed below decks and hence
+  had diffuclty reaching the life boat launches.
+  \item Once at the lifeboats, women and children had priority.
+  \item Titanic had too few lifeboats for the number of passengers and crew.
+\end{enumerate}
+Thus, most women and children among first and second class
+passengers and crew found space in a lifeboat, while most of the
+third class passengers never made it to lifeboats: the lifeboats had
+already been filled and had moved away from the quickly sinking
 ship.
 
 \section*{Conclusion}
