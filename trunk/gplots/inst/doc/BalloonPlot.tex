@@ -18,16 +18,15 @@
 
 Numeric data is often summarized using rectangular tables. While
 these tables allow presentation of all of the relevant data, they do
-not lend themselves to rapid discovery of important patterns. The
+not lend themselves to rapid discovery of patterns. The
 primary difficulty is that the visual impact of numeric values is
 not proportional to the scale of the numbers represented.
 
 We have developed a new graphical tool, the \code{balloonplot},
-which augments the numeric values in tables with colored circles
-with circle area proportional to the size of the corresponding table
-entry. This visually highlights the prominent features of
-data, while preserving the details conveyed by the numeric values
-themselves.
+which augments the numeric values in tables with colored circles of
+size proportional to the corresponding table entry. This visually
+highlights the prominent features of data, while preserving the
+details conveyed by the numeric values themselves.
 
 In this article, we describe the balloonplot, as
 implemented by the \code{balloonplot} function in the
@@ -58,7 +57,7 @@ addition, options are provided to allow control of various visual features
 of the plot:
 \begin{itemize}
   \item rotation of the row and column headers
-  \item balloon color (globally or individually) 
+  \item balloon color (global or individual) 
   \item balloon shape 
   \item number of displayed digits
   \item method of scaling the balloon (by area or by radius)
@@ -66,7 +65,7 @@ of the plot:
   \item amount of space reserved for row and column entries
 \end{itemize}
 Of course, all of the traditional graphics parameters (title,
-background ...) are also available.
+background, etc.) are also available.
 
 
 \section*{Example using the \code{Titanic} data set}
@@ -112,7 +111,7 @@ Tabular representation of surviving population}
 Figure~\ref{figure:Surv.Pop.White} displays a graphical table
 without balloons.  (This was created by calling balloonplot with the
 balloon color set to match the background color.)  Note that one
-must explicitly focus on the individual cell values in order to see
+must actively focus on the individual cell values in order to see
 any pattern in the data.
 
 Now we redraw this same figure using light blue circles
@@ -146,7 +145,9 @@ Balloon plot of survived population}
 
 With the addition of the blue ``spotlights'', it is easy to see that
 only adult females and adult male crew members survived in large
-numbers. Let us investigate further, by examining the number
+numbers.
+
+Let us investigate further, by examining the number
 of individuals belonging to each category:
 
 {\small
@@ -165,7 +166,6 @@ mtext("(Area proportional to frequency)")
 \end{verbatim}
  }
 
-
 \begin{figure}[h]
 \includegraphics[width=\textwidth]{TotalPop.pdf}
 \vspace{-0.65in}
@@ -173,8 +173,9 @@ mtext("(Area proportional to frequency)")
 Balloon plot of total population}
 \end{figure}
 
+\noindent 
 Figure\ref{figure:Total.Pop} shows that the largest number of
-individuals are adult male crew (862), followed by adult males in
+individuals on board were adult male crew (862), followed by adult males in
 $3^{rd}$ class (462).  Thus it is not surprising that a large number
 of adult male crew members survived.  However, we now realize that
 survival among $3^{rd}$ class adult males should have been high too.
