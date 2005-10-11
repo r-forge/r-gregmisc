@@ -3,8 +3,6 @@
 balloonplot <- function(x,...)
   UseMethod("balloonplot",x)
 
-
-
 balloonplot.table <- function(x, xlab, ylab, zlab, show.zeroes = FALSE, 
                               show.margins = TRUE, ... )
   {
@@ -59,6 +57,23 @@ balloonplot.default <- function(x,y,z,
       }
 
 
+  if(is.list(x))
+    {
+      xlabs <- x
+      x$sep=":"
+      x <- do.call(paste, x)
+    }
+  else
+    xlabs <- list(x)
+
+  if(is.list(y))
+    {
+      ylabs <- y
+      y$sep=":"
+      y <- do.call(paste, y)
+    }
+  else
+    ylabs <- list(y)
 
   x <- as.factor(x)
   y <- as.factor(y)
@@ -80,7 +95,10 @@ balloonplot.default <- function(x,y,z,
       X
     }
 
-  plot(x=as.numeric(x),
+  nlabels.x <- length(ylabs)
+  nlabels.y <- length(xlabs)
+  
+  plot(x=nlabels.x + as.numeric(x) - 1,
        y=nlevels(y) - as.numeric(y) + 1,
        cex=scale(z, max=dotsize, scale.method=scale.method),
        pch=dotchar, # plot character
@@ -92,8 +110,10 @@ balloonplot.default <- function(x,y,z,
        bty="n",  # no box around the plot
        xaxs = "i",
        yaxs = "i",
-       xlim=c(0.5-rowmar,nlevels(x)+0.5), # extra space on either end of plot
-       ylim=c(0.5,nlevels(y)+1.5+colmar-1),  # so dots don't cross into margins,
+       xlim=c(0.5-rowmar,nlevels(x)+nlabels.x-0.5), # extra space on either
+                                                    # end of plot for labels
+       ylim=c(0.5,nlevels(y)+nlabels.y+0.5+colmar-1),# and so dots don't cross
+                                                    # into margins,
        ...
      )
 
@@ -107,6 +127,7 @@ balloonplot.default <- function(x,y,z,
 
        
   if(show.margins){
+    stop("Broken.  Needs fixing.")
       ztab = z
       dim(ztab) <- c(nx,ny)
       rowsumz <- rowSums(ztab)
@@ -137,25 +158,31 @@ balloonplot.default <- function(x,y,z,
      ty <- levels(y)
   }
   
-  
-  text(x=1:nx,
-       y=ny+(colmar/2)+0.5,
-       labels=tx,
-       srt=colsrt)
+  for(i in 1:length(xlabs))
+    {
+      text(x=i + (1:nx)+1,
+           y=ny+(colmar/2)+0.5,
+           labels=levels(factor(xlabs[[i]])),
+           srt=colsrt
+           )
+    }
 
-  text(y=ny:1,
-       x=-rowmar/2+0.5,
-       labels=ty,
-       srt=rowsrt)
+  for(i in 1:length(ylabs))
+    {
+      text(y=ny:1,
+           x=i -rowmar/2-0.5,
+           labels=levels(factor(ylabs[[i]])),
+           srt=rowsrt)
+    }
        
   # add borders between cells
-  abline(v=(0:nx+0.5))
-  abline(h=(0:ny+0.5))
+  abline(v=(0:(nx+nlabels.x)+0.5))  # FIXME
+  abline(h=(0:(ny+nlabels.y-1)+ 0.5)) # FIXME
 
   segments(x0 = c(0.5-rowmar, 0.5 ),
-           x1 = c(0.5-rowmar, nx+0.5 ),
+           x1 = c(0.5-rowmar, nx+nlabels.x - 0.5 ),
            y0 = c(ny+0.5    , ny+0.5+colmar ),
-           y1 = c(0.5       , ny+0.5+colmar ) )
+           y1 = c(0.5       , ny+colmar+nlabels.y - 0.5 ) )
   
   # annotate with actual values
   if(label){
@@ -163,7 +190,7 @@ balloonplot.default <- function(x,y,z,
                1:length(y) 
              else 
                which(z != 0)
-    text(x=as.numeric(x[indiv]),     # as.numeric give numeric values
+    text(x=as.numeric(x[indiv])+ nlabels.x - 1,     # as.numeric give numeric values
          y=ny - as.numeric(y[indiv]) + 1,
          labels=format(z[indiv], digits=label.digits),       # label value
          col="black", # textt color
@@ -172,5 +199,3 @@ balloonplot.default <- function(x,y,z,
   # put a nice title
   title(main=main)
 }
-
-
