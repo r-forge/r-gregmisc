@@ -120,6 +120,13 @@ tab <- table(xnames, ynames)
 
 balloonplot(tab)
 
+# Example with the Titanic data
+library(datasets)
+data(Titanic)
+dframe <- as.data.frame(Titanic)
+attach(dframe)
+balloonplot.default(x=Class, y=list(Sex, Age, Survived), z=Freq)
+
 
 }
 \keyword{dplot}
