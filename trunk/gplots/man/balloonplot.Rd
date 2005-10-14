@@ -23,15 +23,18 @@ balloonplot(x, ...)
     rowsrt = par("srt"),
     colmar = 1,
     rowmar = 1,
-    show.zeroes=FALSE,
+    show.zeros=FALSE,
     show.margins=FALSE,
+    sorted=TRUE,
+    label.lines=TRUE,
      ...) 
 }
 \arguments{
-  \item{x}{Either a table object, or a vector of values for the first
-    (x) dimension of the plotted matrix.}
-  \item{y}{Vector of values for the second (y) dimension of the plotted
-    matrix.}
+  \item{x}{A table object, or either a vector or a list of several
+    categorical vectors containing grouping variables for the first 
+    (x) margin of the plotted matrix.}
+  \item{y}{Vector or list of vectors for grouping variabkes for the
+     second (y) dimension of the plotted matrix.}
   \item{z}{Vector of values for the size of the dots in the plotted matrix.}
   \item{xlab}{Text label for the x dimension. This will be displayed on the
     x axis and in the plot title.}
@@ -54,10 +57,19 @@ balloonplot(x, ...)
   \item{rowsrt, colsrt}{Angle of rotation for row and column labels.}
   \item{rowmar, colmar}{Space allocated for row and column labels. Each
     unit is the width/height of one cell in the table.}
-  \item{show.zeroes}{boolean. if \code{TRUE} the cases with zero within
-                     are printed.}
-  \item{show.margins}{boolean. if \code{TRUE} margins are printed as sum of 
-                      the rows and the cols}
+  \item{show.zeroes}{boolean. If \code{FALSE}, entries containing zero will be left
+    blank in the plotted matrix.  If \code{TRUE}, zeros will be
+    displayed.}
+  \item{show.margins}{boolean. If \code{TRUE}, row and column sums are
+    printed in the bottom and right margins, respectively.}
+  \item{plot.margins}{boolean. If \code{TRUE}, marginal fractions are
+    graphically presented in grey behind the row/column label area.}
+  \item{sorted}{boolean. If \code{TRUE}, the rows will be
+    arranged in sorted order by using the levels of the first y factor,
+    then the second y factor, etc. The same process is used for the
+    columns, based on the x factors}
+  \item{label.lines}{boolean. If \code{TRUE}, borders will be drawn for
+    row and column level headers.}
   \item{\dots}{ Additional arguments passed to \code{balloonplot.default}
     or \code{plot}, as appropriate.}
 }
@@ -82,7 +94,7 @@ balloonplot(x, ...)
 \references{Function inspired by question posed on R-help by Ramon
   Alonso-Allende \email{allende@cnb.uam.es}.}
 
-\author{ Gregory R. Warnes \email{Gregory\_R\_Warnes@groton.pfizer.com}}
+\author{ Gregory R. Warnes \email{Gregory\_R\_Warnes@groton.pfizer.com} }
 
 \seealso{ \code{\link{plot.table}} }
 
@@ -120,12 +132,29 @@ tab <- table(xnames, ynames)
 
 balloonplot(tab)
 
-# Example with the Titanic data
+# Example of multiple classification variabls using the Titanic data
 library(datasets)
 data(Titanic)
-dframe <- as.data.frame(Titanic)
+
+dframe <- as.data.frame(Titanic) # convert to 1 entry per row format
 attach(dframe)
-balloonplot.default(x=Class, y=list(Sex, Age, Survived), z=Freq)
+balloonplot.default(x=Class, y=list(Survived, Age, Sex), z=Freq, sort=TRUE)
+
+# colorize: surviors lightblue, non-survivors: grey
+Colors <- Titanic
+Colors[,,,"Yes"] <- "skyblue"
+Colors[,,,"No"] <- "grey"
+colors <- as.character(as.data.frame(Colors)$Freq)
+
+balloonplot.default(x=list(Age,Sex),
+                    y=list(Class=Class,
+                           Survived=reorder.factor(Survived,c(2,1))),
+                    z=Freq,
+                    zlab="Number of Passengers",
+                    sort=TRUE,
+                    dotcol = colors,
+                    show.zeros=TRUE,
+                    show.margins=TRUE)
 
 
 }
