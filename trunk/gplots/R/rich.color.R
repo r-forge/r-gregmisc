@@ -1,12 +1,12 @@
 # $Id$
 
-rich.colors <- function(n, palette=c("temperature", "blues"),
+rich.colors <- function(n, palette="temperature",
                         rgb.matrix=FALSE, plot.colors=FALSE)
 {
   if(n <= 0)
     return(character(0))
 
-  palette <- match.arg(palette)
+  palette <- match.arg(palette, c("temperature","blues"))
   x <- seq(0, 1, length=n)
 
   if(palette == "temperature") {
