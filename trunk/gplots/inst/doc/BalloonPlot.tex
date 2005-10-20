@@ -1,9 +1,9 @@
 \documentclass[a4paper]{report}
 \usepackage{Rnews}
-%\usepackage[round]{natbib}
-%\usepackage{array}
+\usepackage[round]{natbib}
+\usepackage{array}
 \usepackage{graphicx}
-%\bibliographystyle{abbrvnat}
+\bibliographystyle{abbrvnat}
 
 \begin{document}
 
@@ -18,22 +18,16 @@
 
 Numeric data is often summarized using rectangular tables. While
 these tables allow presentation of all of the relevant data, they do
-not lend themselves to rapid discovery of patterns. The
+not lend themselves to rapid discovery of important patterns. The
 primary difficulty is that the visual impact of numeric values is
 not proportional to the scale of the numbers represented.
 
-A number of authors have
-used contingency tables (~\cite{Friendly},~\cite{Hartigan})
-to display categorical data. However, the contingency tables do not
-show the prominent features of the data readily. Moreover,
-displaying the contingency tables with rectanges does not help in
-visualizing the data in same columns.
-
 We have developed a new graphical tool, the \code{balloonplot},
-which augments the numeric values in tables with colored circles of
-size proportional to the corresponding table entry. This visually
-highlights the prominent features of data, while preserving the
-details conveyed by the numeric values themselves.
+which augments the numeric values in tables with colored circles
+with area proportional to the size of the corresponding table
+entry. This visually highlights the prominent features of
+data, while preserving the details conveyed by the numeric values
+themselves.
 
 In this article, we describe the balloonplot, as
 implemented by the \code{balloonplot} function in the
@@ -48,9 +42,9 @@ y, z) of vectors representing the layout and contents of a matrix or
 table.  It then plots a graphical matrix, where each cell displays
 the appropriate numeric value plus a colored circle whose size
 reflects the relative magnitude of the corresponding component. The
-\emph{area} of each circle is proportional to the corresponding data
-value. The circles are scaled so that the circle for largest value
-fills the available space in the cell.
+\emph{area} of each circle is proportional to the frequency of
+data. (The circles are scaled so that the circle for largest value
+fills the available space in the cell.)
 
 As a consequence, the largest values in the table are ``spotlighted''
 by the biggest cicles, while the smaller values are displayed
@@ -62,26 +56,29 @@ Of course, when labels are present on the table or provided to the
 function, the graphical table is appropriately labeled.  In
 addition, options are provided to allow control of various visual features
 of the plot:
+
 \begin{itemize}
   \item rotation of the row and column headers
-  \item balloon color (global or individual) 
+  \item balloon color (globally or individually) 
   \item balloon shape 
   \item number of displayed digits
+  \item display entries with zero values
+  \item display margins
+  \item show the cumulative sum of rows and columns
+  \item display segments of horizontal and vertical lines in labels
   \item method of scaling the balloon (by area or by radius)
   \item amount of space provided for row and column headers
   \item amount of space reserved for row and column entries
+  \item and the traditional graphics parameters (title, background ...)
 \end{itemize}
-Of course, all of the traditional graphics parameters (title,
-background, etc.) are also available.
-
 
 \section*{Example using the \code{Titanic} data set}
 
-We use the \code{Titanic} data set from the \code{datasets} package
-to illustrate the use of \code{balloonplot}.  \code{Titanic}
-provides survival status for passengers on the tragic maiden voyage
-of the ocean liner ``Titanic'', summarized according to ticket type
-(class), sex, and age.
+For illustration purposes, we use the \code{Titanic} data set from
+the \code{datasets} package.  \code{Titanic} provides survival status
+for passengers on the tragic maiden voyage of the ocean liner
+``Titanic'', summarized according to economic status (class), sex, and
+age.
 
 
 %Using \code{balloonplot}, we display the number of people surviving
@@ -108,128 +105,166 @@ of the ocean liner ``Titanic'', summarized according to ticket type
 %%\end{table}
 %%
 %%
-\begin{figure}[h]
-\includegraphics[width=\textwidth]{SurvivedPopWhite.pdf}
-\vspace{-0.65in}
-\caption{\label{figure:Surv.Pop.White}
-Tabular representation of surviving population}
+
+%%\begin{figure}
+%%\includegraphics[width=\textwidth]{../figures/SurvivedPopWhite.pdf}
+%%\vspace*{-0.25in}
+%%\caption{\label{figure:Surv.Pop.White}
+%%Tabular representation of surviving population}
+%%\end{figure}
+%%
+%%
+%%Figure~\ref{figure:Surv.Pop.White} displays a graphical table
+%%without balloons.  (This was created by calling balloonplot with
+%%the balloon color set to match the background color.)  Note
+%%that one must explicitly pay attention to the values in the cells in
+%%order to see any pattern in the data.
+%%
+
+
+Typically, the number of survived passengers are shown in a
+tabular form, such as shown in Figure~\ref{figure:Table}.
+
+\begin{figure}
+\includegraphics[width=\textwidth]{../figures/Table.pdf}
+\caption{\label{figure:Table}
+Tabular representation of survived population by gender, age and class}
 \end{figure}
 
-Figure~\ref{figure:Surv.Pop.White} displays a graphical table
-without balloons.  (This was created by calling balloonplot with the
-balloon color set to match the background color.)  Note that one
-must actively focus on the individual cell values in order to see
-any pattern in the data.
+Similar table is needed to show the number of passengers who did
+not survive. Although such tabular representations convey the basic
+fact, they don't display the prominent aspects of the data clearly.
 
-Now we redraw this same figure using light blue circles
-(Figure~\ref{figure:Surv.Pop}).  This is accomplished using the code:
+Now, we redraw this same data (along with that of passengers who did
+not survive) using light green (survived) and orange (not survived) circles
+(Figure~\ref{figure:Figure1}).  This is accomplished using the code:
 
 {\small
 \begin{verbatim}
+
 library(gplots)
 data(Titanic)
+dframe <- as.data.frame(Titanic) 
+attach(dframe)
+Colors <- Titanic
+Colors[,,,"Yes"] <- "lightgreen"
+Colors[,,,"No"] <- "orange"
+colors <- as.character(as.data.frame(Colors)$Freq
 
-surv.pop <- cbind(Titanic[,,Age="Child", 
-                         survived="Yes"],
-                  Titanic[,,Age="Adult", 
-                         survived="Yes"])
-colnames(surv.pop) <- c("Child-M", "Child-F",
-                         "Adult-M", "Adult-F")
-balloonplot(as.table(surv.pop), xlab="", 
-            ylab="", main="")
-title("BalloonPlot : Surviving passengers by
- gender and age")
-mtext("(Area proportional to frequency)")
+balloonplot(x=Class, y=list(Survived, Age, Sex), 
+	    z=Freq, sort=TRUE, dotcol=colors)
+
+legend(0,10, legend=c("Not survived","Survived"),
+       col=c("orange","lightgreen"),
+       pch=20, cex=.8,pt.cex=0.8,
+       text.col=c("orange", "lightgreen"))
 \end{verbatim}
  }
 
-\begin{figure}[h]
-\includegraphics[width=\textwidth]{SurvivedPop.pdf}
-\vspace{-0.65in}
-\caption{\label{figure:Surv.Pop}
-Balloon plot of survived population}
+\begin{figure}
+\includegraphics[width=\textwidth]{../figures/Figure1.pdf}
+\caption{\label{figure:Figure1}
+Balloon plot of all the passengers stratified by survival, age, sex
+and class}
 \end{figure}
 
-With the addition of the blue ``spotlights'', it is easy to see that
-only adult females and adult male crew members survived in large
-numbers.
-
-Let us investigate further, by examining the number
-of individuals belonging to each category:
-
-{\small
-\begin{verbatim}
-total.pop <- cbind(apply(Titanic[,,Age="Child",],
-                         c(1,2), sum), 
-                   apply(Titanic[,,Age="Adult",], 
-                         c(1,2), sum))
-colnames(total.pop) <- c("Child-M", "Child-F", 
-                         "Adult-M", "Adult-F")
-balloonplot(as.table(total.pop), xlab="",
-            ylab="", main="")
-title("BalloonPlot : Total passengers by
- gender and age")
-mtext("(Area proportional to frequency)")
-\end{verbatim}
- }
-
-\begin{figure}[h]
-\includegraphics[width=\textwidth]{TotalPop.pdf}
-\vspace{-0.65in}
-\caption{\label{figure:Total.Pop}
-Balloon plot of total population}
-\end{figure}
-
-\noindent 
-Figure\ref{figure:Total.Pop} shows that the largest number of
-individuals on board were adult male crew (862), followed by adult males in
-$3^{rd}$ class (462).  Thus it is not surprising that a large number
-of adult male crew members survived.  However, we now realize that
-survival among $3^{rd}$ class adult males should have been high too.
-So, let us look at the fraction of passengers from each group who
-survived.
-
-{\small
-\begin{verbatim}
-
-surv.prop <- as.table(surv.pop/total.pop)
-
-surv.prop[is.na(surv.prop)] <- 0
-
-balloonplot(as.table(surv.prop), xlab="",
-            ylab="", main="")
-title("BalloonPlot : Surviving passengers
- by gender and age")
-mtext("(Area proportional to frequency)")
-\end{verbatim}
-}
+It is now easy to see that adult females and adult male crew members
+survived in large numbers. Figure~\ref{figure:Figure1} displays many
+features of the Titanic passengers. Passengers who survived are
+shown in green circles and passeengers who did not survive are shown
+in orange circles. Sums across rows and columns are represented in
+the numbers at the right and bottom respectively.  The shaded
+rectangular blocks show the density of data.  From the figure, it
+can be clearly seen that the largest number of individuals who did
+not survive are adult male crew (670). $1^{st}$ class adult females
+were among the group of people who survived the most. Since there
+were no child-crews and all the children survived, some fileds are
+left empty in the figure. 
 
 
-\begin{figure}[h]
-\includegraphics[width=\textwidth]{SurvivedProp.pdf}
-\vspace{-0.65in}
-\caption{\label{figure:Surv.Prop}
-Balloon plot of proportion of people surviving}
-\end{figure}
 
-From Figure \ref{figure:Surv.Prop} we can easily see that all the
-children in $1^{st}$ and $2^{nd}$ class survived, as did most of the
-women in $1^{st}$ and $2^{nd}$ class and among the crew.  It is also
-evident that survival among $3^{rd}$ class passengers is much lower
-than in any of the other classes.
 
-The reasons for this are well known: 
-\begin{enumerate}
-  \item Third class passengers were berthed below decks and hence
-  had diffuclty reaching the life boat launches.
-  \item Once at the lifeboats, women and children had priority.
-  \item Titanic had too few lifeboats for the number of passengers and crew.
-\end{enumerate}
-Thus, most women and children among first and second class
-passengers and crew found space in a lifeboat, while most of the
-third class passengers never made it to lifeboats, since the
-lifeboats had already been filled and had moved away from the
-quickly sinking ship.
+
+%%In order to investigate further,
+%%let us examine the number of individuals belonging to each
+%%category:
+%%
+%%\vspace{-0.25in}
+%%
+%%{\small
+%%\begin{verbatim}
+%%total.pop <- cbind(apply(Titanic[,,Age="Child",],
+%%                         c(1,2), sum), 
+%%                   apply(Titanic[,,Age="Adult",], 
+%%                         c(1,2), sum))
+%%colnames(total.pop) <- c("Child-M", "Child-F", 
+%%                         "Adult-M", "Adult-F")
+%%balloonplot(as.table(total.pop), xlab="",
+%%            ylab="", main="")
+%%title("BalloonPlot : Total passengers by
+%% gender and age")
+%%mtext("(Area proportional to frequency)")
+%%\end{verbatim}
+%% }
+%%
+%%
+%%\begin{figure}
+%%%\vspace*{.1in}
+%%\includegraphics[width=\textwidth]{../figures/TotalPop.pdf}
+%%\caption{\label{figure:Total.Pop}
+%%Balloon plot of total population}
+%%\end{figure}
+%%
+
+
+
+%% adult male crew (862), followed by adult males in
+%%$3^{rd}$ class (462).  Thus it is not surprising that a large number of
+%%adult male crew members survived.  However, we now see that survival
+%%among $3^{rd}$ class adult males should have been high too.  So, let us
+%%look at the fraction of passengers from each group who survived.
+%%
+%%{\small
+%%\begin{verbatim}
+%%
+%%surv.prop <- as.table(surv.pop/total.pop)
+%%
+%%surv.prop[is.na(surv.prop)] <- 0
+%%
+%%balloonplot(as.table(surv.prop), xlab="",
+%%            ylab="", main="")
+%%title("BalloonPlot : Surviving passengers
+%% by gender and age")
+%%mtext("(Area proportional to frequency)")
+%%\end{verbatim}
+%%}
+%%
+%%
+%%\begin{figure}
+%%%\vspace*{0.1in}
+%%\includegraphics[width=\textwidth]{../figures/SurvivedProp.pdf}
+%%\caption{\label{figure:Surv.Prop}
+%%Balloon plot of proportion of people surviving}
+%%\end{figure}
+%%
+
+%%Figure\ref{figure:Surv.Prop} shows a diferent aspect of data. We can
+%%now easily see from size of the circles that all the children in
+%%$1^{st}$ and $2^{nd}$ class survived, as did most of the women in
+%%$1^{st}$ and $2^{nd}$ class as well as female crew.  It is now clear
+%%that there is something distinctly different about survival among
+%%$3^{rd}$ class passengers: it is much lower than survival in any of the
+%%other classes.
+%%
+It turns out that there is a well known reason for this difference.
+Passengers in $1^{st}$ and $2^{nd}$ class, as well as crew members, had an
+easier time reaching the lifeboats.  Since there were too few
+lifeboats for the number of passengers and crew, most women and
+children among the first and second class passengers as well as
+female crew found space in a lifeboat, while many of the later
+arriving $3^{rd}$  class women and children were too late: the lifeboats
+had already been filled and had moved away from the quickly sinking
+ship.
 
 \section*{Conclusion}
 
@@ -241,34 +276,14 @@ effectively understanding and presenting tabular data.
 
 We wish to thank \emph{Ramon Alonso-Allende}
 \email{allende@cnb.uam.es} for the discussion on R-help which lead
-to the development of \code{balloonplot}.
+to the development of \code{balloonplot}. Ramon also added the code
+to display the row- and column sums.
 
 \address{Gregory R. Warnes, Pfizer Inc., USA\\
 \email{gregory.r.warnes@pfizer.com}\\
        Nitin Jain, Pfizer Inc., USA\\
 \email{nitin.jain@pfizer.com}}
 
-\begin{thebibliography}{99}
-\expandafter\ifx\csname natexlab\endcsname\relax\def\natexlab#1{#1}\fi
-\expandafter\ifx\csname url\endcsname\relax
-  \def\url#1{{\tt #1}}\fi
-
-
-\bibitem{Friendly}M. Friendly. 
-Mosaic displays for multi-way contingency tables.
-\newblock{\em Journal of the
-American Statistical Association}, 89:190-200, 1994.
-
-\bibitem{Hartigan}J.\ Hartigan and B.\ Kleiner. 
-\newblock Mosaics for contingency tables.
-In W. F. Eddy (Ed.), 
-\newblock{ \em Computer Science and
-Statistics: Proceedings of the 13th Symposium on the Interface.}
-268-273, 1981. New
-York: Springer-Verlag. 
-
-
-\end{thebibliography}
 
 
 \end{article}
