@@ -48,3 +48,21 @@ ci.lme <- function(x,confidence=0.95,alpha=1-confidence,...)
   rownames(retval)  <-  rownames(x$tTable)
   retval
 }
+
+ci.binom <- function(x, confidence=0.95,alpha=1-confidence,...)
+  {
+    if( !(all(x) %in% c(0,1)) ) stop("Binomial values must be either 0 or 1.")
+
+    est  <-  mean(x, na.rm=TRUE)
+    n <- nobs(x)
+    stderr <- sqrt(est*(1-est)/n)
+    ci.low  <- qbinom(p=alpha/2, prob=est, size=n)/n
+    ci.high <- qbinom(p=1-alpha/2, prob=est, size=n)/n
+
+    retval  <- cbind(Estimate=est,
+                     "CI lower"=ci.low,
+                     "CI upper"=ci.high,
+                     "Std. Error"= stderr
+                     )
+    retval
+  }
