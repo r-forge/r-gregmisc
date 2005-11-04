@@ -107,7 +107,7 @@ age.
 %%
 
 %%\begin{figure}
-%%\includegraphics[width=\textwidth]{../figures/SurvivedPopWhite.pdf}
+%%\includegraphics[width=\textwidth]{SurvivedPopWhite.pdf}
 %%\vspace*{-0.25in}
 %%\caption{\label{figure:Surv.Pop.White}
 %%Tabular representation of surviving population}
@@ -126,7 +126,7 @@ Typically, the number of survived passengers are shown in a
 tabular form, such as shown in Figure~\ref{figure:Table}.
 
 \begin{figure}
-\includegraphics[width=\textwidth]{../figures/Table.pdf}
+\includegraphics[width=\textwidth]{Table.pdf}
 \caption{\label{figure:Table}
 Tabular representation of survived population by gender, age and class}
 \end{figure}
@@ -152,7 +152,7 @@ Colors[,,,"No"] <- "orange"
 colors <- as.character(as.data.frame(Colors)$Freq
 
 balloonplot(x=Class, y=list(Survived, Age, Sex), 
-	    z=Freq, sort=TRUE, dotcol=colors)
+            z=Freq, sort=TRUE, dotcol=colors)
 
 legend(0,10, legend=c("Not survived","Survived"),
        col=c("orange","lightgreen"),
@@ -162,7 +162,7 @@ legend(0,10, legend=c("Not survived","Survived"),
  }
 
 \begin{figure}
-\includegraphics[width=\textwidth]{../figures/Figure1.pdf}
+\includegraphics[width=\textwidth]{Figure1.pdf}
 \caption{\label{figure:Figure1}
 Balloon plot of all the passengers stratified by survival, age, sex
 and class}
@@ -210,7 +210,7 @@ left empty in the figure.
 %%
 %%\begin{figure}
 %%%\vspace*{.1in}
-%%\includegraphics[width=\textwidth]{../figures/TotalPop.pdf}
+%%\includegraphics[width=\textwidth]{TotalPop.pdf}
 %%\caption{\label{figure:Total.Pop}
 %%Balloon plot of total population}
 %%\end{figure}
@@ -242,7 +242,7 @@ left empty in the figure.
 %%
 %%\begin{figure}
 %%%\vspace*{0.1in}
-%%\includegraphics[width=\textwidth]{../figures/SurvivedProp.pdf}
+%%\includegraphics[width=\textwidth]{SurvivedProp.pdf}
 %%\caption{\label{figure:Surv.Prop}
 %%Balloon plot of proportion of people surviving}
 %%\end{figure}
