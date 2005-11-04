@@ -236,32 +236,35 @@ balloonplot.default <- function(x,y,z,
   if(show.margins)
     {
       ## column totals
+      rowsumz <- c(sum(rowsumz), rowsumz)
       text(
-           x=(1:nx) + nlabels.y*rowmar + 0.25 - 1,
+           x=(1:nx) + nlabels.y*rowmar + 0.25 -1,
            y=0.25,
-           labels=rowsumz,
+           labels=format(rowsumz,digits=label.digits)[-1],
            font=1,
            cex=par("cex")*0.75,
            adj=c(0.5,0.0)
            )
 
       ## row totals
+      colsumz <- c(sum(colsumz), colsumz)
       text(
-           x=nx + nlabels.y*rowmar-0.25+strwidth("'"),
+           x=nx + nlabels.y*rowmar+0.25+strwidth("'"),
            y= (1:ny),
-           labels=rev(colsumz),
+           labels=format(colsumz, digits=label.digits)[-1],
            font=1,
            cex=par("cex")*0.75,
-           adj=c(0.0,0.5)           
+           adj=c(1.0,0.5)           
            )
 
+      ## overall total
       text(
            x=nx + nlabels.y*rowmar,
            y=0.25,
            labels=sum(colsumz),
            font=1,
            cex=par("cex")*0.75,
-           adj=c(0.0,0.0)           
+           adj=c(0.5,0.0)           
            )
     }
      
@@ -407,7 +410,8 @@ balloonplot.default <- function(x,y,z,
          y=ny - as.numeric(ztab$y[indiv]) + 1,
          labels=format(ztab$z[indiv], digits=label.digits),       # label value
          col="black", # text color
-         font=2
+         font=2,
+         adj=c(0.5,0.5)
          )
   }
   # put a nice title
