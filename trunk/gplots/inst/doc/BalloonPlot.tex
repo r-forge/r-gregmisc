@@ -37,11 +37,13 @@ implemenation.
 
 \section*{Function description}
 
-The function \code{balloonplot} accepts a table or a triplet (x,
-y, z) of vectors representing the layout and contents of a matrix or
-table.  It then plots a graphical matrix, where each cell displays
-the appropriate numeric value plus a colored circle whose size
-reflects the relative magnitude of the corresponding component. The
+The function \code{balloonplot} accepts a table or a triplet (x, y,
+z) of vectors representing the layout and contents of a matrix or
+table. The 2$^{nd}$ dimension (y) can also be a list of variables to
+display a grouping of variables. It then plots a graphical matrix,
+where each cell displays the appropriate numeric value plus a
+colored circle whose size reflects the relative magnitude of the
+corresponding component. The
 \emph{area} of each circle is proportional to the frequency of
 data. (The circles are scaled so that the circle for largest value
 fills the available space in the cell.)
@@ -64,6 +66,10 @@ of the plot:
   \item number of displayed digits
   \item display entries with zero values
   \item display margins
+  \item display cumulative histograms
+  \item sort the x- and y-axes
+  \item row and column margins 
+  \item grouping of variables in 2$^{nd}$ dimension (along y-axis) 
   \item show the cumulative sum of rows and columns
   \item display segments of horizontal and vertical lines in labels
   \item method of scaling the balloon (by area or by radius)
@@ -126,20 +132,60 @@ Typically, the number of survived passengers are shown in a
 tabular form, such as shown in Figure~\ref{figure:Table}.
 
 \begin{figure}
-\includegraphics[width=\textwidth]{Table.pdf}
-\caption{\label{figure:Table}
-Tabular representation of survived population by gender, age and class}
+\includegraphics[width=\textwidth]{Figure1.pdf}
+\caption{\label{figure:Figure1}
+Tabular representation of survived population by gender and age}
 \end{figure}
 
-Similar table is needed to show the number of passengers who did
-not survive. Although such tabular representations convey the basic
-fact, they don't display the prominent aspects of the data clearly.
+The table in figure~\ref{figure:Figure1} was generated using
+\emph{balloon plot}. Although this table conveys the basic fact, it
+doesn't display the prominent aspects of the data clearly.
 
-Now, we redraw this same data (along with that of passengers who did
-not survive) using light green (survived) and orange (not survived) circles
-(Figure~\ref{figure:Figure1}).  This is accomplished using the code:
+Now, we redraw the same data and superimpose the balloons on the
+numerical values as shown in figure~\ref{figure:Figure2}. The area
+of these balloons (circles) is proportional to the frequency of the
+number of passengers survived. Figure~\ref{figure:Figure2} makes it
+much easier to see passengers of which category survived most.
 
-{\small
+
+\begin{figure}
+\includegraphics[width=\textwidth]{Figure2.pdf}
+\caption{\label{figure:Figure2}
+Balloon plot of survived population by gender and age }
+\end{figure}
+
+Similar plot is needed to show the number of passengers who did
+not survive. This is accomplished by redrawing the same data (along
+with that of passengers who did not survive) and grouping them along
+y-axis, as displayed in figure~\ref{figure:Figure3}.
+In this figure, the balloons representing the passengers who did
+not are shown in orange color and those representing survived
+passengers are shown in light green circles.
+
+
+
+\begin{figure}
+\includegraphics[width=\textwidth]{Figure3.pdf}
+\caption{\label{figure:Figure3}
+Balloon plot of Titanic passengers by gender, age and class. Green
+circles represent passengers who survived and orange circles
+represent the passengers who did not survive.}
+\end{figure}
+
+As it can be seen that figure~\ref{figure:Figure3} conveys much more
+information than figures 1 and 2 without loss of clarity. Bigger
+circles of orange color make it clear that the number of passengers
+who did not survive is significantly bigger than that of passengers
+who survived.
+
+
+Still, to make further improvements in the display, we redraw the
+same data and add the cummulative sums accross each row and column,
+ histograms across each section, and legend, as shown in figure 4.
+  This is accomplished using the code:
+
+{
+\small
 \begin{verbatim}
 
 library(gplots)
@@ -149,27 +195,30 @@ attach(dframe)
 Colors <- Titanic
 Colors[,,,"Yes"] <- "lightgreen"
 Colors[,,,"No"] <- "orange"
-colors <- as.character(as.data.frame(Colors)$Freq
 
-balloonplot(x=Class, y=list(Survived, Age, Sex), 
-            z=Freq, sort=TRUE, dotcol=colors)
+colors <- as.character(as.data.frame(Colors)$Freq)
 
-legend(0,10, legend=c("Not survived","Survived"),
+balloonplot(x=Class, y=list(Survived, Age, Sex),
+            z=Freq, sort=TRUE, dotcol=colors,
+            show.zero=TRUE)
+
+legend(3,0.5, legend=c("Not survived","Survived"),
        col=c("orange","lightgreen"),
        pch=20, cex=.8,pt.cex=0.8,
-       text.col=c("orange", "lightgreen"))
+       text.col=c("orange", "lightgreen"),
+       horiz=TRUE, xadjust=0.5, bty="n")
 \end{verbatim}
  }
 
 \begin{figure}
-\includegraphics[width=\textwidth]{Figure1.pdf}
-\caption{\label{figure:Figure1}
-Balloon plot of all the passengers stratified by survival, age, sex
+\includegraphics[width=\textwidth]{Figure4.pdf}
+\caption{\label{figure:Figure4}
+Balloon plot of all the passengers of Titanic, stratified by survival, age, sex
 and class}
 \end{figure}
 
 It is now easy to see that adult females and adult male crew members
-survived in large numbers. Figure~\ref{figure:Figure1} displays many
+survived in large numbers. Figure~\ref{figure:Figure4} displays many
 features of the Titanic passengers. Passengers who survived are
 shown in green circles and passeengers who did not survive are shown
 in orange circles. Sums across rows and columns are represented in
@@ -283,8 +332,6 @@ to display the row- and column sums.
 \email{gregory.r.warnes@pfizer.com}\\
        Nitin Jain, Pfizer Inc., USA\\
 \email{nitin.jain@pfizer.com}}
-
-
 
 \end{article}
 
