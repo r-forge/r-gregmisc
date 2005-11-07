@@ -37,16 +37,19 @@ implemenation.
 
 \section*{Function description}
 
-The function \code{balloonplot} accepts a table or a triplet (x, y,
-z) of vectors representing the layout and contents of a matrix or
-table. The 2$^{nd}$ dimension (y) can also be a list of variables to
-display a grouping of variables. It then plots a graphical matrix,
+The \code{balloonplot} function accepts a table (to be displayed as
+found) or a vector or list of vectors for x (column category), y
+(row category) and z (data value) of vectors from which a table will
+be constructed.  
+
+The \code{balloonplot} function plots a graphical table,
 where each cell displays the appropriate numeric value plus a
 colored circle whose size reflects the relative magnitude of the
 corresponding component. The
 \emph{area} of each circle is proportional to the frequency of
 data. (The circles are scaled so that the circle for largest value
 fills the available space in the cell.)
+
 
 As a consequence, the largest values in the table are ``spotlighted''
 by the biggest cicles, while the smaller values are displayed
@@ -61,21 +64,15 @@ of the plot:
 
 \begin{itemize}
   \item rotation of the row and column headers
-  \item balloon color (globally or individually) 
-  \item balloon shape 
+  \item balloon color and shape (globally or individually)
   \item number of displayed digits
-  \item display entries with zero values
-  \item display margins
+  \item display of entries with zero values
+  \item display of marginal totals
   \item display cumulative histograms
-  \item sort the x- and y-axes
-  \item row and column margins 
-  \item grouping of variables in 2$^{nd}$ dimension (along y-axis) 
-  \item show the cumulative sum of rows and columns
-  \item display segments of horizontal and vertical lines in labels
-  \item method of scaling the balloon (by area or by radius)
-  \item amount of space provided for row and column headers
-  \item amount of space reserved for row and column entries
-  \item and the traditional graphics parameters (title, background ...)
+  \item x- and y-axes group sorting
+  \item formatting of row and column labels
+  \item as well as the traditional graphics parameters (title,
+    background, etc.)
 \end{itemize}
 
 \section*{Example using the \code{Titanic} data set}
@@ -128,8 +125,11 @@ age.
 %%
 
 
-Typically, the number of survived passengers are shown in a
-tabular form, such as shown in Figure~\ref{figure:Table}.
+Typically, the number of surviving passengers are shown in a tabular
+form, such as shown in Figure~\ref{figure:Table}.  (This was created
+by calling balloonplot with the balloon color set to match the
+background color.)  Note that one must actively focus on the
+individual cell values in order to see any pattern in the data.
 
 \begin{figure}
 \includegraphics[width=\textwidth]{Figure1.pdf}
@@ -137,46 +137,63 @@ tabular form, such as shown in Figure~\ref{figure:Table}.
 Tabular representation of survived population by gender and age}
 \end{figure}
 
-The table in figure~\ref{figure:Figure1} was generated using
-\emph{balloon plot}. Although this table conveys the basic fact, it
-doesn't display the prominent aspects of the data clearly.
 
-Now, we redraw the same data and superimpose the balloons on the
-numerical values as shown in figure~\ref{figure:Figure2}. The area
-of these balloons (circles) is proportional to the frequency of the
-number of passengers survived. Figure~\ref{figure:Figure2} makes it
-much easier to see passengers of which category survived most.
+Now, we redraw the table with light-blue circles ('balloons')
+superimposed over the numerical values
+(figure~\ref{figure:Figure2}).  This is accomplished using the code:
 
+{\small
+\begin{verbatim}
+library(gplots)
+library(datasets)
+
+data(Titanic)
+
+dframe <- as.data.frame(Titanic) # convert to 1 entry per row format
+
+survived <- dframe[dframe$Survived=="No",]
+attach(survived)
+
+balloonplot(x=Class, y=list(Age, Sex), z=Freq,
+            sort=TRUE, show.zeros=TRUE, cum.margins=FALSE,
+            main="BalloonPlot : Surviving passengers")
+mtext("by class, gender, and age")
+
+detach(survived)
+\end{verbatim}
+}
+%$
 
 \begin{figure}
 \includegraphics[width=\textwidth]{Figure2.pdf}
 \caption{\label{figure:Figure2}
-Balloon plot of survived population by gender and age }
+Balloon plot of surviving individuals by class, gender and age }
 \end{figure}
 
-Similar plot is needed to show the number of passengers who did
-not survive. This is accomplished by redrawing the same data (along
-with that of passengers who did not survive) and grouping them along
-y-axis, as displayed in figure~\ref{figure:Figure3}.
-In this figure, the balloons representing the passengers who did
-not are shown in orange color and those representing survived
-passengers are shown in light green circles.
+With the addition of the blue ``spotlights'', whose area is
+proportional to the magnitude of the data value, it is easy to see
+that only adult females and adult male crew members survived in
+large numbers.  Note that we also added row and column marginal
+totals.
 
-
+Of course, the number of surviving passengers is only half of the
+story.  We can create a similar plot showing the number of
+passengers who did not survive.  Alternatively, we can simply add
+surivival status as another variable to the display:
 
 \begin{figure}
 \includegraphics[width=\textwidth]{Figure3.pdf}
 \caption{\label{figure:Figure3}
-Balloon plot of Titanic passengers by gender, age and class. Green
-circles represent passengers who survived and orange circles
-represent the passengers who did not survive.}
+  Balloon plot of Titanic passengers by gender, age and class. Green
+  circles represent passengers who survived and magenta circles
+  represent the passengers who did not survive.}
 \end{figure}
 
-As it can be seen that figure~\ref{figure:Figure3} conveys much more
-information than figures 1 and 2 without loss of clarity. Bigger
-circles of orange color make it clear that the number of passengers
-who did not survive is significantly bigger than that of passengers
-who survived.
+Figure~\ref{figure:Figure3} conveys much more information than
+figures 1 and 2 without loss of clarity. Bigger circles of orange
+color make it clear that the number of passengers who did not
+survive is significantly bigger than that of passengers who
+survived.
 
 
 Still, to make further improvements in the display, we redraw the
