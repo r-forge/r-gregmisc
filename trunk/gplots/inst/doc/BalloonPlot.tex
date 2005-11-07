@@ -138,7 +138,7 @@ Tabular representation of survived population by gender and age}
 \end{figure}
 
 
-Now, we redraw the table with light-blue circles ('balloons')
+Now, we redraw the table with light-blue circles (`balloons')
 superimposed over the numerical values
 (figure~\ref{figure:Figure2}).  This is accomplished using the code:
 
@@ -149,14 +149,16 @@ library(datasets)
 
 data(Titanic)
 
-dframe <- as.data.frame(Titanic) # convert to 1 entry per row format
+dframe <- as.data.frame(Titanic)
+ ## convert to 1 entry per row format
 
 survived <- dframe[dframe$Survived=="No",]
 attach(survived)
 
 balloonplot(x=Class, y=list(Age, Sex), z=Freq,
-            sort=TRUE, show.zeros=TRUE, cum.margins=FALSE,
-            main="BalloonPlot : Surviving passengers")
+            sort=TRUE, show.zeros=TRUE,
+            cum.margins=FALSE, main=
+            "BalloonPlot : Surviving passengers")
 mtext("by class, gender, and age")
 
 detach(survived)
@@ -226,6 +228,7 @@ legend(3,0.5, legend=c("Not survived","Survived"),
        horiz=TRUE, xadjust=0.5, bty="n")
 \end{verbatim}
  }
+%$
 
 \begin{figure}
 \includegraphics[width=\textwidth]{Figure4.pdf}
