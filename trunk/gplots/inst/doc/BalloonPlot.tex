@@ -192,7 +192,7 @@ surivival status as another variable to the display:
 \end{figure}
 
 Figure~\ref{figure:Figure3} conveys much more information than
-figures 1 and 2 without loss of clarity. Bigger circles of orange
+figures 1 and 2 without loss of clarity. Bigger circles of magenta
 color make it clear that the number of passengers who did not
 survive is significantly bigger than that of passengers who
 survived.
@@ -211,21 +211,21 @@ library(gplots)
 data(Titanic)
 dframe <- as.data.frame(Titanic) 
 attach(dframe)
-Colors <- Titanic
-Colors[,,,"Yes"] <- "lightgreen"
-Colors[,,,"No"] <- "orange"
-
-colors <- as.character(as.data.frame(Colors)$Freq)
+colors <- ifelse( Survived=="Yes", "green", "magenta")
 
 balloonplot(x=Class, y=list(Survived, Age, Sex),
             z=Freq, sort=TRUE, dotcol=colors,
-            show.zero=TRUE)
+            show.zeros=TRUE, main="BalloonPlot :
+            Passenger Class by Survival, Age and Sex")
+
+title(main=list("Area is proportional to number of
+            passengers", cex=0.9), line=0.5)
 
 legend(3,0.5, legend=c("Not survived","Survived"),
-       col=c("orange","lightgreen"),
-       pch=20, cex=.8,pt.cex=0.8,
-       text.col=c("orange", "lightgreen"),
-       horiz=TRUE, xadjust=0.5, bty="n")
+       col=c("magenta","green"), pch=20, cex=.8,
+       pt.cex=0.8, text.col=c("magenta", "green"),
+       horiz=TRUE, xjust=0.5, bty="n")
+
 \end{verbatim}
  }
 %$
@@ -241,7 +241,7 @@ It is now easy to see that adult females and adult male crew members
 survived in large numbers. Figure~\ref{figure:Figure4} displays many
 features of the Titanic passengers. Passengers who survived are
 shown in green circles and passeengers who did not survive are shown
-in orange circles. Sums across rows and columns are represented in
+in magenta circles. Sums across rows and columns are represented in
 the numbers at the right and bottom respectively.  The shaded
 rectangular blocks show the density of data.  From the figure, it
 can be clearly seen that the largest number of individuals who did

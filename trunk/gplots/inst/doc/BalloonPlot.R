@@ -69,10 +69,8 @@ pdf("Figure3.pdf")
 balloonplot(x=Class,
             y=list(Survived,Age,Sex),
             z=Freq,
-            zlab="Number of Passengers",
             dotcol = colors,
             show.zeros=TRUE,
-            #show.margins=FALSE,
             cum.margins=FALSE,
             main="BalloonPlot : Passenger Class by Survival, Age and Sex"
             )
@@ -97,10 +95,9 @@ pdf("Figure4.pdf")
 balloonplot(x=Class,
             y=list(Survived, Age, Sex),
             z=Freq,
-            zlab="Number of Passengers",
             sort=TRUE,
             dotcol=colors,
-            show.zero=TRUE,
+            show.zeros=TRUE,
             main="BalloonPlot : Passenger Class by Survival, Age and Sex"
             )
 
