@@ -45,6 +45,7 @@ balloonplot.default <- function(x,y,z,
                                 sorted=TRUE,
                                 label.lines=TRUE,
                                 fun=function(x)sum(x,na.rm=T),
+                                hide.duplicates=TRUE,
                                 ... )
 {
 
@@ -261,7 +262,7 @@ balloonplot.default <- function(x,y,z,
       text(
            x=nx + nlabels.y*rowmar,
            y=0.25,
-           labels=sum(colsumz),
+           labels=sumz,
            font=1,
            cex=par("cex")*0.75,
            adj=c(0.5,0.0)           
@@ -315,13 +316,15 @@ balloonplot.default <- function(x,y,z,
            )
 
 
-  
-  undupe <- function(X) 
-    {
-      # convert duplicates into blanks
-      X <- as.character(X)
-      c(X[1], ifelse(X[-1] == X[-length(X)], "", X[-1]))
-    }
+  if(hide.duplicates)
+    undupe <- function(X) 
+      {
+                                        # convert duplicates into blanks
+        X <- as.character(X)
+        c(X[1], ifelse(X[-1] == X[-length(X)], "", X[-1]))
+      }
+  else
+    undupe <- function(X) X
 
   ### 
   ## Column labels
@@ -401,10 +404,10 @@ balloonplot.default <- function(x,y,z,
   ## annotate cells with actual values
   ####
   if(label){
-    indiv <- if(show.zeros) 
-               1:length(ztab$y) 
-             else 
-               which(ztab$z != 0)
+    if(show.zeros) 
+     indiv <- 1:length(ztab$y) 
+    else 
+      indiv <- which(ztab$z != 0)
     
     text(x=as.numeric(ztab$x[indiv])+ nlabels.y*rowmar - 0.75,     # as.numeric give numeric values
          y=ny - as.numeric(ztab$y[indiv]) + 1,
