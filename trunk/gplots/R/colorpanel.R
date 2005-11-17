@@ -11,35 +11,46 @@ colorpanel <- function(n,low,mid,high)
 
     # convert to rgb
     low <- col2rgb(low)
-    mid <- col2rgb(mid)
     high <- col2rgb(high)
 
-    # determine length of each component
-    lower <- floor(n/2)
-    upper <- n - lower
-
-    red  <- c(
-              seq(low[1,1], mid [1,1], length=lower),
-              seq(mid[1,1], high[1,1], length=upper)
-              )/255
-
-    green <- c(
-               seq(low[3,1], mid [3,1], length=lower),
-               seq(mid[3,1], high[3,1], length=upper)
-               )/255
-
-    blue <- c(
-              seq(low[2,1], mid [2,1], length=lower),
-              seq(mid[2,1], high[2,1], length=upper)
-              )/255
-
-    if(isodd)
+    if(!missing(mid)) # use a center color
       {
-        red   <- red  [-(lower+1)]
-        green <- green[-(lower+1)]
-        blue  <- blue [-(lower+1)]
-      }
+        mid <- col2rgb(mid)
 
+        ## determine length of each component
+        lower <- floor(n/2)
+        upper <- n - lower
+        
+        red  <- c(
+                  seq(low[1,1], mid [1,1], length=lower),
+                  seq(mid[1,1], high[1,1], length=upper)
+                  )/255
+        
+        green <- c(
+                   seq(low[3,1], mid [3,1], length=lower),
+                   seq(mid[3,1], high[3,1], length=upper)
+                   )/255
+        
+        blue <- c(
+                  seq(low[2,1], mid [2,1], length=lower),
+                  seq(mid[2,1], high[2,1], length=upper)
+                  )/255
+        
+        if(isodd)
+          {
+            red   <- red  [-(lower+1)]
+            green <- green[-(lower+1)]
+            blue  <- blue [-(lower+1)]
+          }
+      }
+    else # only use low and high
+      {
+        red    <- seq(low[1,1], high[1,1], length=n)/255
+        green  <- seq(low[3,1], high[3,1], length=n)/255
+        blue   <- seq(low[2,1], high[2,1], length=n)/255
+
+      }
+      
     rgb(red,blue,green)
   }
 
