@@ -3,7 +3,7 @@
 balloonplot <- function(x,...)
   UseMethod("balloonplot",x)
 
-balloonplot.table <- function(x, xlab, ylab, zlab, show.zeroes = FALSE, 
+balloonplot.table <- function(x, xlab, ylab, zlab, show.zeros = FALSE, 
                               show.margins = TRUE, ... )
   {
     obj <- x
