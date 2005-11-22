@@ -1,5 +1,6 @@
 
 export(
+       addLast,
        assert,
        combinations,
        ddirichlet,
