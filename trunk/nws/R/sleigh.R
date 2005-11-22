@@ -371,6 +371,9 @@ addLast <- function( fun )
       }
   }
 
+if(!isGeneric('close'))
+  setGeneric('close', function(con, ...) standardGeneric('close'))
+setMethod('close','sleigh',function(con, ...) stopSleigh(con) )
 
 setGeneric('stopSleigh', function(.Object) standardGeneric('stopSleigh'))
 setMethod('stopSleigh', 'sleigh', function(.Object) {
