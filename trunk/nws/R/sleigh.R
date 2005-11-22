@@ -1,6 +1,12 @@
-
+##
 ## Copyright (c) 2005, Scientific Computing Associates, Inc.
-## All rights reserved.
+##
+## This code is provided to you under the terms of the CDDL License version 1.0.   
+##
+## Please see the file COPYING or http://www.opensource.org/licenses/cddl1.php 
+## for details.
+##
+
 
 # We use alternating barriers to synchronize eachWorker
 # invocations. Their names are common to workers and sleighs.
@@ -113,44 +119,59 @@ sleigh <- function(...)
     new("sleigh",...)
   }
 
-# We side effect options here. at invocation, we generated a new env
-# if desired.
-blendOptions <- function(options, new) {
-  if (! is.null(new)) {
-    names <- names(new)
-    for (i in seq(along = new))
-      assign(names[i], new[[i]], env = options)
-  }
-  options
-}
-
 ####
 # sleighPending class
 #
 # represents a sleigh eachWorker/eachElem invocation in progress.
 setClass('sleighPending',
          representation(nws='netWorkSpace', numTasks='numeric',
-                        barrierName='character', sleighState='environment',
-                        state='environment'))
+                        barrierName='character', sleighState='list',
+                        state='list'))
 setMethod('initialize', 'sleighPending',
 function(.Object, nws, numTasks, bn, ss) {
   .Object@nws = nws
   .Object@numTasks = numTasks
   .Object@barrierName = bn
   .Object@sleighState = ss
-  .Object@state = new.env()
+  .Object@state = list()
   .Object@state$done = FALSE;
   .Object
 })
+
+
+
+showSleighPending <- function(object)
+  {
+    cat('\n')
+    cat('NWS Sleigh Pending Object\n')
+    show(object@nws)
+
+    cat('Tasks submitted:', object@numTasks,'\n',sep='')
+
+    status <- checkSleigh(object)
+    if(status==0)
+      message <- 'Work completed.'
+    else
+      message <- paste(status, 'jobs still pending.')
+
+    cat('Status:\t', message, '\n', sep='')
+    cat('\n')
+  }
+
+setMethod('show', 'sleighPending', showSleighPending)
+
+
 
 # return the number of results still outstanding.
 setGeneric('checkSleigh', function(.Object) standardGeneric('checkSleigh'))
 setMethod('checkSleigh', 'sleighPending',
 function(.Object) {
   if (.Object@state$done) return (0) # could argue either way here... .
-  
-  vl = scan(file=textConnection(nwsListVars(.Object@nws)),
-            what=list('', 1, 1, 1, ''), sep ='\t', quiet=TRUE)
+
+  tc <- textConnection(nwsListVars(.Object@nws))
+  vl = scan(file=tc, what=list('', 1, 1, 1, ''), sep ='\t', quiet=TRUE)
+  close(tc)
+
   for (x in 1:length(vl[[1]]))
     if ('result' == vl[[1]][x]) return (.Object@numTasks - vl[[2]][x])
 
@@ -199,7 +220,7 @@ setMethod('waitSleigh', 'sleighPending', function(.Object) {
 setClass('sleigh',
          representation(nodeList='character', nws='netWorkSpace',
                         nwsName='character', nwss='nwsServer',
-                        options='environment', state='environment',
+                        options='list', state='list',
                         workerCount='numeric'))
 
 # could this be a method --- it is invoked in the constructor?
@@ -224,32 +245,42 @@ addWorker <- function(machine, wsName, rank, options) {
   system(cmd)
 }
 
-setMethod('initialize', 'sleigh',
-function(.Object, nodeList=c('localhost', 'localhost', 'localhost'), ...) {
-  if (! exists('serialize') && ! require(serialize))
-    stop('the `serialize\' package is needed for sleigh.')
-
+initSleigh <- function(
+                       .Object,
+                       nodeList=c('localhost', 'localhost', 'localhost'),
+                       master = Sys.info()['nodename'],
+                       nwsWsName = 'sleigh_ride_%010d',
+                       nwsHost = Sys.getenv("RSleighNwsPort"),
+                       outfile = '/dev/null',
+                       nwsPort = Sys.getenv("RSleighNwsPort"),
+                       launch = sshcmd,
+                       scriptDir = file.path(.path.package('nws'),'bin'),
+                       user = Sys.info()['user']
+                       )
+{
   .Object@nodeList = nodeList
   .Object@workerCount = length(nodeList)
 
-  defaultSleighOptions <-
-    list(
-         master =  Sys.info()['nodename'],
-         nwsWsName = 'sleigh_ride_%010d',
-         nwsHost = Sys.info()['nodename'],
-         outfile = '/dev/null',
-         nwsPort = 8765,
-         launch = sshcmd,
-         # use something like this once sleigh is a package:
-         # scriptdir = .path.package('snow'),
-         scriptDir = getwd(),
-         user = Sys.info()['user'],
-         )
+  if(is.null(nwsHost) || nchar(nwsHost)<1)
+    nwsHost <- Sys.info()['nodename']
 
-  .Object@options = new.env()
-  blendOptions(.Object@options, defaultSleighOptions)
-  blendOptions(.Object@options, list(...))
-  opts = .Object@options
+  if(is.null(nwsPort) || nchar(nwsPort)<1)
+    nwsPort <- 8765
+  
+  opts <- list(
+               call = match.call(), # so we now how this object
+                                    # was created.
+               master = master, 
+               nwsWsName = nwsWsName,
+               nwsHost = nwsHost,
+               outfile = outfile,
+               nwsPort = nwsPort,
+               launch = launch,
+               scriptDir = scriptDir,
+               user = user
+               )
+
+  .Object@options <- opts
 
    # set up the sleigh's netWorkSpace.
   .Object@nwss = new('nwsServer', serverHost=opts$nwsHost, port=opts$nwsPort)
@@ -288,14 +319,58 @@ function(.Object, nodeList=c('localhost', 'localhost', 'localhost'), ...) {
   }
   else stop('unknown launch protocol.')
 
-  .Object@state = new.env()
+  .Object@state = list()
   .Object@state$bx = 1
   .Object@state$occupied = FALSE
   .Object@state$totalTasks = 0
 
+  { # define cleanup function
+    nwss <- .Object@nwss
+    nwsName <- .Object@nwsName
+    finalizeSleigh <- function(...)
+      {
+        cat("Cleaning up Sleigh", nwsName, "\n")
+        nwsDeleteWs(nwss, nwsName)
+      }
+  }
+
+  # register finalizer for R system exit
+  addLast( finalizeSleigh )
 
   .Object
-})
+}
+
+setMethod('initialize', 'sleigh', initSleigh)
+
+showSleigh <- function(object)
+  {
+    cat('\n')
+    cat('NWS Sleigh Object\n')
+    show(object@nws)
+    cat(object@workerCount, ' Worker Nodes:\t',
+        paste(object@nodeList, collapse=', '), '\n', sep='')
+    cat('\n')
+  }
+
+setMethod('show', 'sleigh', showSleigh)
+
+addLast <- function( fun )
+  {
+    if (!is.function(fun)) stop("`fun' must be a function")
+    if(!exists(".Last", env=.GlobalEnv))
+      assign(".Last", fun, env=.GlobalEnv)
+    else
+      {
+        Last <- get(".Last", env=.GlobalEnv)
+        newfun <- function(...)
+          {
+            fun()
+            Last()
+          }
+        assign(".Last", newfun, env=.GlobalEnv)
+      }
+  }
+
 
 setGeneric('stopSleigh', function(.Object) standardGeneric('stopSleigh'))
 setMethod('stopSleigh', 'sleigh', function(.Object) {
@@ -340,12 +415,12 @@ function(.Object, fun, ..., eo=NULL) {
   
   blocking = 1
   if (!is.null(eo)) {
-    if (is.environment(eo) || is.list(eo)) {
+    if (is.list(eo)) {
       blocking = eo$blocking;
       if (is.null(blocking)) blocking = 1
     }
     else {
-      print('options arg must be a list or environment.')
+      print("`arg' must be a list.")
       return(NULL)
     }
   }
@@ -407,7 +482,7 @@ function(.Object, fun, elementArgs=list(), fixedArgs=list(), eo=NULL) {
   blocking = 1
   lf = 0
   if (!is.null(eo)) {
-    if (is.environment(eo) || is.list(eo)) {
+    if (is.list(eo)) {
       argPermute = eo$argPermute
       blocking = eo$blocking;
       if (is.null(blocking)) blocking = 1
@@ -415,7 +490,7 @@ function(.Object, fun, elementArgs=list(), fixedArgs=list(), eo=NULL) {
       if (is.null(lf)) lf = 0
     }
     else {
-      print('options arg must be a list or environment.')
+      print("`arg' must be a list.")
       return(NULL)
     }
   }
