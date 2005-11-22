@@ -20,6 +20,7 @@ export(
        rdirichlet,
        running,
        scat,
+       setTCPNoDelay,
        strmacro
        )
 
