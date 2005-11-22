@@ -1,0 +1,54 @@
+#!/bin/sh
+
+D=`dirname $0`
+echo "Using NWS_SERVER_DIR: ${NWS_SERVER_DIR:=$D}"
+
+if [ ! -d ${NWS_SERVER_DIR} ]
+then
+    echo "Directory doesn't exist: ${NWS_SERVER_DIR}" 1>&2
+    exit 2
+fi
+
+if [ ! -w ${NWS_SERVER_DIR} ]
+then
+    echo "Directory isn't writable: ${NWS_SERVER_DIR}" 1>&2
+    exit 2
+fi
+
+case $# in
+0)
+    echo "usage: $0 [start|stop]" 1>&2
+    exit 1
+    ;;
+esac
+
+cd ${NWS_SERVER_DIR}
+
+case "$1" in
+start)
+    if [ -f twistd.pid ]
+    then
+        echo "twistd.pid file exists: is the server already running?" 1>&2
+        echo "(remove twistd.pid to force execution)" 1>&2
+	exit 3
+    fi
+    /bin/rm -f twistd.log _tmp*
+    echo "Starting the NWS server"
+    twistd -oy nwsServer.py
+    ;;
+stop)
+    if [ ! -f twistd.pid ]
+    then
+        echo "twistd.pid file doesn't exist: is the server really running?" 1>&2
+	exit 4
+    fi
+    echo "Stopping the NWS server"
+    kill `cat twistd.pid`
+    ;;
+*)
+    echo "usage: $0 [start|stop]" 1>&2
+    exit 1
+    ;;
+esac
+
+exit 0
