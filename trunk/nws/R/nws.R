@@ -25,16 +25,20 @@ nwsRecvN <- function(s, n) {
 setClass('nwsServer', representation(nwsSocket='ANY', port='numeric', serverHost='character'))
 
 setMethod('initialize', 'nwsServer',
-          function(.Object, serverHost='localhost', port=8765) {
+          function(.Object, serverHost='localhost', port=8765)
+          {
             .Object@serverHost = serverHost
             .Object@port = port			
-            # how do we de-nagle this socket?
+
             .Object@nwsSocket = make.socket(serverHost, port)
+            setTCPDelay(socket, value=FALSE) # de-nagle this socket!
+            
             # handshaking that does nothing at the moment.
             write.socket(.Object@nwsSocket, '0000')
             nwsRecvN(.Object@nwsSocket, 4)
             .Object
-	  })
+	  }
+          )
 
 setGeneric('nwsDeleteWs', function(.Object, wsName) standardGeneric('nwsDeleteWs'))
 setGeneric('nwsListWss', function(.Object) standardGeneric('nwsListWss'))
