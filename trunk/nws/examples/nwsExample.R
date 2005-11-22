@@ -1,9 +1,13 @@
-
+##
 ## Copyright (c) 2005, Scientific Computing Associates, Inc.
-## All rights reserved.
+##
+## This code is provided to you under the terms of the CDDL License version 1.0.   
+##
+## Please see the file COPYING or http://www.opensource.org/licenses/cddl1.php 
+## for details.
+##
 
-# assume that this has already been done nws.R 
-#source('nws.R')
+library(nws)
 
 ws = new('netWorkSpace', 'r place')
 cat('connected, listing contents of netWorkSpace (should be nothing there).\n', nwsListVars(ws), '\n')
