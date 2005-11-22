@@ -151,6 +151,23 @@ setMethod('initialize', 'netWorkSpace',
             .Object
 	  })
 
+
+showNetWorkSpace <- function(object)
+  {
+
+    nws <- object
+    server <- nws@server
+
+    cat('\n')
+    cat('NWS Host:\t', server@serverHost,
+        ':', server@port, '\n', sep='' )
+    cat('Workspace Name:\t', nws@wsName, '\n', sep='')
+    cat('\n')
+  }
+
+setMethod('show', 'netWorkSpace', showNetWorkSpace)
+
+
 setGeneric('nwsClose', function(.Object) standardGeneric('nwsClose'))
 setGeneric('nwsDeclare', function(.Object, xName, mode) standardGeneric('nwsDeclare'))
 setGeneric('nwsDeleteVar', function(.Object, xName) standardGeneric('nwsDeleteVar'))
