@@ -1,8 +1,8 @@
 \name{setTCPNoDelay}
 \alias{setTCPNoDelay}
-\title{Modify the TCP_NODELAY (`de-Nagle') flag for socket objects}
+\title{Modify the TCP\_NODELAY (`de-Nagle') flag for socket objects}
 \description{
-  Modify the TCP_NODELAY (`de-Nagele') flag for socket objects
+  Modify the TCP\_NODELAY (`de-Nagele') flag for socket objects
 }
 \usage{
 setTCPNoDelay(socket, value=TRUE)
@@ -44,7 +44,7 @@ setTCPNoDelay(socket, value=TRUE)
 \author{Gregory R. Warnes \email{gregory.r.warnes@pfizer.com}}
 \seealso{
   \code{\link[utils]{make.socket}},
-  \code{\link[utils]{socketConnection}
+  \code{\link[utils]{socketConnection}}
   }
 \examples{
 \dontrun{

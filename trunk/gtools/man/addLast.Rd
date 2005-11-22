@@ -20,7 +20,7 @@ addLast(fun)
 \value{
   None.
 }
-\author{Gregory R. Warnes \email{gregory_r_warnes@pfizer.com}
+\author{Gregory R. Warnes \email{gregory.r.warnes@pfizer.com}}
 \seealso{ \code{\link[base]{.Last}} }
 \examples{
 
