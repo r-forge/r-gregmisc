@@ -40,6 +40,7 @@ balloonplot(x=Class,
             y=list(Age, Sex),
             z=Freq,
             sort=TRUE,
+            dotcol="green",
             show.zeros=TRUE,
             cum.margins=FALSE,
             main="BalloonPlot : Surviving passengers"
