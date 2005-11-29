@@ -46,7 +46,7 @@ start)
     echo "Starting the NWS server..."
     ( 
       cd ${NWS_SERVER_DIR} ; 
-      ${TWISTD} -oy ${NWS_SERVER_DIR}/nwsServer.py 
+      ${TWISTD} -oy ${NWS_SERVER_DIR}/nwsServer.py --pidfile=${NWS_PID}
     )
     echo "Done."
 
