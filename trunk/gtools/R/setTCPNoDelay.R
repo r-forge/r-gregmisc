@@ -12,13 +12,12 @@ setTCPNoDelay <- function( socket, value=TRUE )
                  flag=as.integer(value),
                  status=integer(1),
                  status.str=as.character(buffer),
-                 status.len=as.integer(nchar(buffer))
-                 #,
-                 # package="gtools"
+                 status.len=as.integer(nchar(buffer)),
+                 package="gtools"
                  )
 
     if(retval$status != 0)
       stop( retval$status.str )
     else
-      invisible(retval)
+      invisible(retval$status.str)
   }
