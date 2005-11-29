@@ -7,12 +7,20 @@
 ## for details.
 ##
 
-src = function(...) {
-    source('nws.R')
-}
-tryCatch(library(nws), error=src)
+library(nws) # fail if not available
 
+## Create pid file If we've been passed a --pidfile argument
+argv <- commandArgs()
+myarg <- argv[grep("^--pidfile", argv)]
+pidfile <- gsub("^--pidfile","", myarg)
+if(length(pidfile)!=0)
+  cat(Sys.getpid(), file=pidfile)
+
+## start up translation services
 bws = new('netWorkSpace', 'R babelfish')
 while (1) {
   nwsStore(bws, 'doof', paste(capture.output(nwsFetch(bws, 'food')), collapse = '<p>'))
 }
+
+## remove pid file
+file.remove(pidfile)
