@@ -134,7 +134,7 @@ function(.Object, nws, numTasks, bn, ss) {
   .Object@numTasks = numTasks
   .Object@barrierName = bn
   .Object@sleighState = ss
-  .Object@state = env()
+  .Object@state = new.env()
   .Object@state$done = FALSE;
   .Object
 })
@@ -221,7 +221,7 @@ setMethod('waitSleigh', 'sleighPending', function(.Object) {
 setClass('sleigh',
          representation(nodeList='character', nws='netWorkSpace',
                         nwsName='character', nwss='nwsServer',
-                        options='list', state='list',
+                        options='list', state='environment',
                         workerCount='numeric'))
 
 # could this be a method --- it is invoked in the constructor?
@@ -320,7 +320,7 @@ initSleigh <- function(
   }
   else stop('unknown launch protocol.')
 
-  .Object@state = env()
+  .Object@state = new.env()
   .Object@state$bx = 1
   .Object@state$occupied = FALSE
   .Object@state$totalTasks = 0
@@ -403,9 +403,9 @@ storeTask <- function(nws, fun, args,
 # run fun once on each worker of the sleigh. pass in a val from the
 # range 1:#Workers
 setGeneric('eachWorker',
-           function(.Object, fun, ..., eo=NULL) standardGeneric('eachWorker'))
+           function(.Object, fun, ...) standardGeneric('eachWorker'))
 setMethod('eachWorker', 'sleigh',
-function(.Object, fun, ..., eo=NULL) {
+function(.Object, fun, blocking=1, ...) {
   if (.Object@state$occupied) {
     print('wait your turn.')
     # should throw some kind of exception here.
@@ -417,18 +417,7 @@ function(.Object, fun, ..., eo=NULL) {
   nws = .Object@nws
   wc = .Object@workerCount
   
-  blocking = 1
-  if (!is.null(eo)) {
-    if (is.list(eo)) {
-      blocking = eo$blocking;
-      if (is.null(blocking)) blocking = 1
-    }
-    else {
-      print("`arg' must be a list.")
-      return(NULL)
-    }
-  }
-  
+
   # use alternating barrier to sync eachWorker invocations with the workers.
   bx = .Object@state$bx
   bn = barrierNames[[bx]]
@@ -467,8 +456,42 @@ function(.Object, fun, ..., eo=NULL) {
 
 # run fun once for each element of a vector.
 
+getElement <- function(x, i, by=c("row","column","cell"))
+  {
+    by <- match.arg(by) # do partial mathing to get one of the options
+    
+    if(is.matrix(x) || is.data.frame(x))
+      switch(by,
+             "row"=x[i,],
+             "column"=x[,i],
+             "cell"=x[i]
+             )
+    else
+      x[[i]]
+  }
 
-eachElem.sleigh <- function(.Object, fun, elementArgs=list(), fixedArgs=list(), eo=NULL) {
+countElement <- function(x, by=c("row","column","cell"))
+  {
+    by <- match.arg(by) # do partial mathing to get one of the options
+    
+    if(is.matrix(x) || is.data.frame(x))
+      switch(by,
+             "row"=nrow(x),
+             "column"=ncol(x),
+             "cell"=length(x)
+             )
+    else
+      length(x)
+  }
+
+
+eachElem.sleigh <- function(.Object, fun,
+                            elementArgs=list(),
+                            fixedArgs=list(),
+                            argPermute=NULL,
+                            blocking=TRUE,
+                            by="row",
+                            lf=1) {
   if (.Object@state$occupied) {
     print('wait your turn.')
     # should throw some kind of exception here.
@@ -476,33 +499,16 @@ eachElem.sleigh <- function(.Object, fun, elementArgs=list(), fixedArgs=list(), 
   }
 
   fun <- fun # need to force the argument (NJC: why?)
-  numTasks <- length(elementArgs[[1]])
+
 
   nws = .Object@nws
   wc = .Object@workerCount
 
-  argPermute = NULL
-  blocking = 1
-  lf = 0
-  if (!is.null(eo)) {
-    if (is.list(eo)) {
-      argPermute = eo$argPermute
-      blocking = eo$blocking;
-      if (is.null(blocking)) blocking = 1
-      lf = eo$loadFactor;
-      if (is.null(lf)) lf = 0
-      by = eo$by
-      if (is.null(by)) by <- "row"
-    }
-    else {
-      print("`arg' must be a list.")
-      return(NULL)
-    }
-  }
+  numTasks <- countElement(elementArgs[[1]], by=by)
   taskLimit = numTasks
 
   if (blocking && wc < numTasks && lf > 0) {
-    taskLimit = eo$loadFactor * wc
+    taskLimit = lf * wc
     if (taskLimit < wc) {
       taskLimit = wc
     }
@@ -525,20 +531,6 @@ eachElem.sleigh <- function(.Object, fun, elementArgs=list(), fixedArgs=list(), 
   .Object@state$totalTasks <- .Object@state$totalTasks + numTasks
   nwsStore(.Object@nws, 'totalTasks', as.character(.Object@state$totalTasks))
 
-  getElement <- function(x, i, by=c("row","column","cell"))
-    {
-      by <- match.arg(by) # do partial mathing to get one of the options
-      
-      if(is.matrix(x) || is.data.frame(x))
-        case(by,
-             "row"=x[i,],
-             "column"=x[,i],
-             "cell"=x[i]
-             )
-      else
-        x[[i]]
-    }
-  
   # fill the pool
   for (i in 1:taskLimit) {
     
@@ -587,5 +579,6 @@ eachElem.sleigh <- function(.Object, fun, elementArgs=list(), fixedArgs=list(), 
 }
 
 setGeneric('eachElem',
-           function(.Object, fun, elementArgs=list(), fixedArgs=list(), eo=NULL) standardGeneric('eachElem'))
+           function(.Object, fun, elementArgs=list(), fixedArgs=list(), ...)
+           standardGeneric('eachElem'))
 setMethod('eachElem', 'sleigh', eachElem.sleigh)

@@ -1,6 +1,6 @@
 Package: nws
 Title: Parallel and distributed computing using netWorkSpaces
-Version: 1.2.0
+Version: 1.2.1
 Author: Nick Carriero <carriero@LindaSpaces.com> with support and
 	contributions from Gregory R. Warnes
 	<gregory.r.warnes@pfizer.com> of Pfizer, Inc.
