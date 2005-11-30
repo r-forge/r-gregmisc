@@ -82,7 +82,8 @@ workerLoop <- function(wsName) {
     # to debug a bit, uncomment the following.
     #print(value)
 
-    nwsStore(SleighNws, 'result', list(type = 'VALUE', value = value, tag = t$tag))
+    nwsStore(SleighNws, 'result',
+             list(type = 'VALUE', value = value, tag = t$tag))
 
     tasks <- tasks + 1
 
@@ -126,14 +127,14 @@ sleigh <- function(...)
 setClass('sleighPending',
          representation(nws='netWorkSpace', numTasks='numeric',
                         barrierName='character', sleighState='list',
-                        state='list'))
+                        state='environment'))
 setMethod('initialize', 'sleighPending',
 function(.Object, nws, numTasks, bn, ss) {
   .Object@nws = nws
   .Object@numTasks = numTasks
   .Object@barrierName = bn
   .Object@sleighState = ss
-  .Object@state = list()
+  .Object@state = env()
   .Object@state$done = FALSE;
   .Object
 })
@@ -250,9 +251,9 @@ initSleigh <- function(
                        nodeList=c('localhost', 'localhost', 'localhost'),
                        master = Sys.info()['nodename'],
                        nwsWsName = 'sleigh_ride_%010d',
-                       nwsHost = Sys.getenv("RSleighNwsPort"),
+                       nwsHost = Sys.getenv("RSleighNwsHost"),
                        outfile = '/dev/null',
-                       nwsPort = Sys.getenv("RSleighNwsPort"),
+                       nwsPort = as.numeric(Sys.getenv("RSleighNwsPort")),
                        launch = sshcmd,
                        scriptDir = file.path(.path.package('nws'),'bin'),
                        user = Sys.info()['user']
@@ -319,7 +320,7 @@ initSleigh <- function(
   }
   else stop('unknown launch protocol.')
 
-  .Object@state = list()
+  .Object@state = env()
   .Object@state$bx = 1
   .Object@state$occupied = FALSE
   .Object@state$totalTasks = 0
@@ -465,10 +466,9 @@ function(.Object, fun, ..., eo=NULL) {
 })
 
 # run fun once for each element of a vector.
-setGeneric('eachElem',
-           function(.Object, fun, elementArgs=list(), fixedArgs=list(), eo=NULL) standardGeneric('eachElem'))
-setMethod('eachElem', 'sleigh',
-function(.Object, fun, elementArgs=list(), fixedArgs=list(), eo=NULL) {
+
+
+eachElem.sleigh <- function(.Object, fun, elementArgs=list(), fixedArgs=list(), eo=NULL) {
   if (.Object@state$occupied) {
     print('wait your turn.')
     # should throw some kind of exception here.
@@ -491,6 +491,8 @@ function(.Object, fun, elementArgs=list(), fixedArgs=list(), eo=NULL) {
       if (is.null(blocking)) blocking = 1
       lf = eo$loadFactor;
       if (is.null(lf)) lf = 0
+      by = eo$by
+      if (is.null(by)) by <- "row"
     }
     else {
       print("`arg' must be a list.")
@@ -523,9 +525,24 @@ function(.Object, fun, elementArgs=list(), fixedArgs=list(), eo=NULL) {
   .Object@state$totalTasks <- .Object@state$totalTasks + numTasks
   nwsStore(.Object@nws, 'totalTasks', as.character(.Object@state$totalTasks))
 
+  getElement <- function(x, i, by=c("row","column","cell"))
+    {
+      by <- match.arg(by) # do partial mathing to get one of the options
+      
+      if(is.matrix(x) || is.data.frame(x))
+        case(by,
+             "row"=x[i,],
+             "column"=x[,i],
+             "cell"=x[i]
+             )
+      else
+        x[[i]]
+    }
+  
   # fill the pool
   for (i in 1:taskLimit) {
-    args = c(lapply(elementArgs, '[[', i), fixedArgs)
+    
+    args = c(lapply(elementArgs, getElement, i=i, by=by), fixedArgs)
     if (!is.null(argPermute)) { args = args[argPermute] }
     storeTask(nws, fun, args, tag=i, barrier=FALSE)
   }
@@ -567,4 +584,8 @@ function(.Object, fun, elementArgs=list(), fixedArgs=list(), eo=NULL) {
   }
 
   val
-})
+}
+
+setGeneric('eachElem',
+           function(.Object, fun, elementArgs=list(), fixedArgs=list(), eo=NULL) standardGeneric('eachElem'))
+setMethod('eachElem', 'sleigh', eachElem.sleigh)
