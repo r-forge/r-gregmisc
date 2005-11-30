@@ -188,6 +188,8 @@ setMethod('nwsClose', 'netWorkSpace',
             close.socket(.Object@server@nwsSocket)
 	  })
 
+setMethod('close','netWorkSpace', function(con) nwsClose(con))
+
 setMethod('nwsDeclare', 'netWorkSpace',
           function(.Object, xName, mode) {
             op = 'declare var'
