@@ -31,7 +31,7 @@ setMethod('initialize', 'nwsServer',
             .Object@port = port			
 
             .Object@nwsSocket = make.socket(serverHost, port)
-            setTCPDelay(socket, value=FALSE) # de-nagle this socket!
+            setTCPNoDelay(.Object@nwsSocket, value=FALSE) # de-nagle this socket!
             
             # handshaking that does nothing at the moment.
             write.socket(.Object@nwsSocket, '0000')
