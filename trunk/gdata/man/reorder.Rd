@@ -57,7 +57,7 @@
   A new factor with the levels ordered as specified.
 }
 
-\author{Gregory R. Warnes \email{Gregory\_R\_Warnes@groton.pfizer.com}}
+\author{Gregory R. Warnes \email{Gregory.R.Warnes@pfizer.com}}
 
 \seealso{ \code{\link{factor}}, \code{\link[stats]{reorder}} }
 
