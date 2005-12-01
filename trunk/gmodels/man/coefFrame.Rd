@@ -65,7 +65,7 @@ coefFrame(log(Signal) ~ log(Concentration),
 
 
 }
-\author{Jim Rogers \email{james\_a\_rogers@groton.pfizer.com}}
+\author{Jim Rogers \email{james.a.rogers@pfizer.com}}
 \keyword{models}
 
 

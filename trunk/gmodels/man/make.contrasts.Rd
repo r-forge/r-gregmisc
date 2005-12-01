@@ -31,7 +31,7 @@ make.contrasts(contr, how.many = ncol(contr))
   \code{\link{contrasts}} or to the \code{contrasts} argument of model
   functions (eg, \code{\link{lm}}).
 }
-\author{ Gregory R. Warnes \email{Gregory\_R\_Warnes@groton.pfizer.com}}
+\author{ Gregory R. Warnes \email{gregory.r.warnes@pfizer.com}}
 \seealso{ \code{\link{lm}}, \code{\link{contrasts}},
   \code{\link{contr.treatment}},  \code{\link{contr.poly}},
   Computation and testing of General Linear Hypothesis:

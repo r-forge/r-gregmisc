@@ -45,7 +45,7 @@ fit.contrast(model, varname, coeff, ... )
   specified lower and upper confidence limits are also returned.}
 \references{Venables & Ripley, Section 6.2}
   
-\author{ Gregory R. Warnes \email{Gregory\_R\_Warnes@groton.pfizer.com}}
+\author{ Gregory R. Warnes \email{gregory.r.warnes@pfizer.com}}
 
 \seealso{ \code{\link{lm}}, \code{\link{contrasts}},
   \code{\link{contr.treatment}},  \code{\link{contr.poly}},

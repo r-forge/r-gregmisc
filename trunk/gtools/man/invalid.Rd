@@ -17,7 +17,7 @@ invalid(x)
 \value{
   Logical value.
 }
-\author{Gregory R. Warnes \email{Gregory\_R\_Warnes@groton.pfizer.com} }
+\author{Gregory R. Warnes \email{gregory.r.warnes@pfizer.com} }
 \seealso{ \code{\link[base]{missing}}, \code{\link[base]{is.na}},
   \code{\link[base]{is.null}} }
 \examples{

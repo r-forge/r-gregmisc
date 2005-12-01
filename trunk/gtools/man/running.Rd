@@ -55,8 +55,8 @@ running(X, Y=NULL, fun=mean, width=min(length(X), 20),
   Note that this function will create a vector or matrix even for
   objects which are not simplified by \code{sapply}.
 }
-\author{ Gregory R. Warnes \email{Gregory\_R\_Warnes@groton.pfizer.com},
-         with contributions by Nintin Jain \email{nitin\_jain@groton.pfizer.com}.}
+\author{ Gregory R. Warnes \email{gregory.r.warnes@pfizer.com},
+         with contributions by Nitin Jain \email{nitin.jain@pfizer.com}.}
 \seealso{ \code{\link[gplots]{wapply}} to apply a function over an x-y window
   centered at each x point, \code{\link[base]{sapply}},
   \code{\link[base]{lapply}} }

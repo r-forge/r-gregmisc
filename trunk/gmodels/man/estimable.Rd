@@ -64,7 +64,7 @@ estimable(obj, cm, beta0, conf.int=NULL, joint.test=FALSE, show.beta0)
   1-alpha confidence intervals. 
 }
 \author{ BXC (Bendix Carstensen) \email{bxc\@novonordisk.com}, 
-  Gregory R. Warnes \email{Gregory\_R\_Warnes\@groton.pfizer.com}, and
+  Gregory R. Warnes \email{gregory.r.warnes@pfizer.com}, and
   Søren Højsgaard \email{sorenh@agrsci.dk}}
 \seealso{
   \code{\link{fit.contrast}},
