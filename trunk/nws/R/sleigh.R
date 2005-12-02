@@ -126,7 +126,7 @@ sleigh <- function(...)
 # represents a sleigh eachWorker/eachElem invocation in progress.
 setClass('sleighPending',
          representation(nws='netWorkSpace', numTasks='numeric',
-                        barrierName='character', sleighState='list',
+                        barrierName='character', sleighState='environment',
                         state='environment'))
 setMethod('initialize', 'sleighPending',
 function(.Object, nws, numTasks, bn, ss) {
@@ -402,17 +402,15 @@ storeTask <- function(nws, fun, args,
 
 # run fun once on each worker of the sleigh. pass in a val from the
 # range 1:#Workers
-setGeneric('eachWorker',
-           function(.Object, fun, ...) standardGeneric('eachWorker'))
-setMethod('eachWorker', 'sleigh',
-function(.Object, fun, blocking=1, ...) {
+eachWorker.sleigh <- 
+function(.Object, fun, ..., blocking=TRUE) {
   if (.Object@state$occupied) {
     print('wait your turn.')
     # should throw some kind of exception here.
     return (NULL)
   }
 
-  fun <- fun # need to force the argument (NJC: why?)
+  #fun <- fun # need to force the argument (NJC: why?)
 
   nws = .Object@nws
   wc = .Object@workerCount
@@ -423,7 +421,8 @@ function(.Object, fun, blocking=1, ...) {
   bn = barrierNames[[bx]]
   .Object@state$bx = bx%%2 + 1
 
-  nwsFetchTry(.Object@nws, bn)
+  # clear out old entries
+  while(!is.null(nwsFetchTry(.Object@nws, bn)))
 
   # update the total number of submitted tasks
   .Object@state$totalTasks <- .Object@state$totalTasks + wc
@@ -433,26 +432,22 @@ function(.Object, fun, blocking=1, ...) {
     storeTask(nws, fun, list(...), tag=i, barrier=TRUE)
   }
 
-  if (!blocking) {
-    .Object@state$occupied = TRUE
-    return (new('sleighPending', nws, wc, bn, .Object@state))
-  }
+  .Object@state$occupied = TRUE
+  tmp <- new('sleighPending', nws, wc, bn, .Object@state)
+  
+  if (blocking)
+    return waitSleigh(tmp)
+  else
+    return tmp
+}
 
-  val <- vector('list', length(wc))
-  for (i in 1:wc) {
-    r = nwsFetch(nws, 'result')
-    if (is.null(r)) {
-      print('abnormal shutdown of sleigh workers???')
-      return (NULL)
-    }
-    if (! is.null(r$value)) {
-      val[[r$tag]] = r$value
-    }
-  }
 
-  nwsStore(.Object@nws, bn, 1)
-  val
-})
+setGeneric('eachWorker',
+           function(.Object, fun, ...) standardGeneric('eachWorker'))
+setMethod('eachWorker', 'sleigh',
+          eachWorker.sleigh)
+
+
 
 # run fun once for each element of a vector.
 
@@ -557,7 +552,7 @@ eachElem.sleigh <- function(.Object, fun,
       if (! is.null(r$value)) {
         val[[r$tag]] = r$value
       }
-      args = c(lapply(elementArgs, '[[', i), fixedArgs)
+      args = c(lapply(elementArgs, getElement, i=i, by=by), fixedArgs)
       if (!is.null(argPermute)) { args = args[argPermute] }
       storeTask(nws, fun, args, tag=i, barrier=FALSE)
     }
