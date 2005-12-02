@@ -30,7 +30,7 @@ function(x, which = 1:5,
         hii <- lm.influence(x)$hat
         w <- weights(x)
         # r.w := weighted.residuals(x):
-        r.w <- if(is.null(w)) .Alias(r) else (sqrt(w)*r)[w!=0]
+        r.w <- if(is.null(w)) r else (sqrt(w)*r)[w!=0]
         rs <- r.w/(s * sqrt(1 - hii))
     }
     if (any(show[c(1,3)]))
@@ -95,7 +95,7 @@ function(x, which = 1:5,
 	sqrtabsr <- sqrt(abs(rs))
 	ylim <- c(0, max(sqrtabsr))
 	yl <- as.expression(substitute(sqrt(abs(YL)), list(YL=as.name(ylab23))))
-        yhn0 <- if(is.null(w)) .Alias(yh) else yh[w!=0]
+        yhn0 <- if(is.null(w)) yh else yh[w!=0]
 	plot(yhn0, sqrtabsr, xlab = l.fit, ylab = yl, main = main,
 	     ylim = ylim, type = "n", ...)
 	panel(yhn0, sqrtabsr, ...)
