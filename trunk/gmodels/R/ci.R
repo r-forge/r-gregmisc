@@ -18,6 +18,24 @@ ci.default <- function(x, confidence=0.95,alpha=1-confidence,na.rm=FALSE,...) {
   retval
 }
 
+ci.binom <- function(x, confidence=0.95,alpha=1-confidence,...)
+  {
+    if( !(all(x) %in% c(0,1)) ) stop("Binomial values must be either 0 or 1.")
+
+    est  <-  mean(x, na.rm=TRUE)
+    n <- nobs(x)
+    stderr <- sqrt(est*(1-est)/n)
+    ci.low  <- qbinom(p=alpha/2, prob=est, size=n)/n
+    ci.high <- qbinom(p=1-alpha/2, prob=est, size=n)/n
+
+    retval  <- cbind(Estimate=est,
+                     "CI lower"=ci.low,
+                     "CI upper"=ci.high,
+                     "Std. Error"= stderr
+                     )
+    retval
+  }
+
 ci.lm  <-  function(x,confidence=0.95,alpha=1-confidence,...)
 {
   x  <-  summary(x)
@@ -49,20 +67,19 @@ ci.lme <- function(x,confidence=0.95,alpha=1-confidence,...)
   retval
 }
 
-ci.binom <- function(x, confidence=0.95,alpha=1-confidence,...)
+ci.lmer <- function(x,confidence=0.95,alpha=1-confidence,...)
   {
-    if( !(all(x) %in% c(0,1)) ) stop("Binomial values must be either 0 or 1.")
-
-    est  <-  mean(x, na.rm=TRUE)
-    n <- nobs(x)
-    stderr <- sqrt(est*(1-est)/n)
-    ci.low  <- qbinom(p=alpha/2, prob=est, size=n)/n
-    ci.high <- qbinom(p=1-alpha/2, prob=est, size=n)/n
-
-    retval  <- cbind(Estimate=est,
-                     "CI lower"=ci.low,
-                     "CI upper"=ci.high,
-                     "Std. Error"= stderr
-                     )
-    retval
-  }
+  est  <-  fixef(x)
+  se <- sqrt(diag(vcov(x)))
+  df <- getFixDF(x)
+  ci.low  <- est + qt(alpha/2, df) * se
+  ci.high <- est - qt(alpha/2, df) * se
+  retval  <- cbind(Estimate=est,
+                   "CI lower"=ci.low,
+                   "CI upper"=ci.high,
+                   "Std. Error"= se,
+                   "DF" = df,
+                   "p-value" = 2*(1-pt(abs(est/se), df)))
+  rownames(retval)  <-  names(est)
+  retval
+}
