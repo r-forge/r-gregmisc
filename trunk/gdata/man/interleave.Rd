@@ -1,6 +1,12 @@
 % $Id$
 %
 % $Log$
+% Revision 1.7  2005/12/04 03:02:06  warnes
+% Andrew Burgess reported that interleave() converts 1-column matrixes
+% to vectors and provided a patch.  A slight modification of his patch
+% has been applied.  There is now a 'drop' argument, which controls
+% whether 'unnecessary' dimensions are dropped.  The default is FALSE.
+%
 % Revision 1.6  2005/09/12 15:42:45  nj7w
 % Updated Greg's email
 %
@@ -35,7 +41,7 @@
   Interleave rows of data frames or Matrices.
 }
 \usage{
-interleave(..., append.source=TRUE, sep=": ")
+interleave(..., append.source=TRUE, sep=": ", drop=FALSE)
 }
 \arguments{
   \item{\dots}{ objects to be interleaved }
@@ -43,6 +49,9 @@ interleave(..., append.source=TRUE, sep=": ")
     argument name will be appended to the row names to show the source of
     each row. }
   \item{sep}{Separator between the original row name and the object name.}
+  \item{should.drop} When merging should matrices be coerced to the
+    lowest possible dimension. See documentation for \link{Extract} for
+    details of drop.
 }
 \details{
   This function creates a new matrix or data frame from its arguments.
@@ -87,6 +96,16 @@ tab <- interleave( "Mean"=round(means,2),
                    "N"=ns, " " = blanks, sep=" " )
 
 print(tab, quote=FALSE)
+
+# Using drop to control coercion to a lower dimensions:
+
+m1 <- matrix(1:4)
+m2 <- matrix(5:8)
+
+interleave(m1, m2, drop=TRUE)  # This will be coerced to a vector
+
+interleave(m1, m2, drop=FALSE) # This will remain a matrix
+
 
 }
 \keyword{category}
