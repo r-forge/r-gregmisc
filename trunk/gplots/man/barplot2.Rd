@@ -11,6 +11,9 @@
 
 % $Id$
 %% $Log$
+%% Revision 1.11  2005/12/06 22:41:08  nj7w
+%% Fixed minor error in documentation of barplot2
+%%
 %% Revision 1.10  2005/06/09 14:20:28  nj7w
 %% Updating the version number, and various help files to synchronize splitting of gregmisc bundle in 4 individual components.
 %%
@@ -132,7 +135,7 @@
     degrees (counter-clockwise), for the bars or bar components.}
   \item{col}{a vector of colors for the bars or bar components.
     By default, grey is used if \code{height} is a vector, and
-    \code{heat.colors(nrow(height))} if \code{height} is a matrix.}
+    \code{grey.colors(nrow(height))} if \code{height} is a matrix.}
   \item{prcol}{the color to be used for the plot region.}
   \item{border}{the color to be used for the border of the bars.}
   \item{main, sub}{overall and sub titles for the plot.}
