@@ -1,17 +1,22 @@
 
 ##!!! BROKEN !!!
 
-plot.lm2 <-
-function(x, which = 1:5,
-         caption = c("Residuals vs Fitted", "Normal Q-Q plot",
-           "Scale-Location plot", "Cook's distance plot"),
-         panel = panel.smooth,
-         sub.caption = deparse(x$call), main = "",
-         ask = interactive() && nb.fig < length(which)
-         	&& .Device != "postscript",
-         ...,
-         id.n = 3, labels.id = names(residuals(x)), cex.id = 0.75,
-         band=TRUE,rug=TRUE)
+plot.lm2 <- function(
+                     x,
+                     which = 1:5,
+                     caption = c("Residuals vs Fitted", "Normal Q-Q plot",
+                       "Scale-Location plot", "Cook's distance plot"),
+                     panel = panel.smooth,
+                     sub.caption = deparse(x$call),
+                     main = "",
+                     ask = interactive() && nb.fig < length(which)
+                     && .Device != "postscript",
+                     ...,
+                     id.n = 3,
+                     labels.id = names(residuals(x)),
+                     cex.id = 0.75,
+                     band=TRUE,rug=TRUE
+                     )
 {
     if (!inherits(x, "lm"))
 	stop("Use only with 'lm' objects")
