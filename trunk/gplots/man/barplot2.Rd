@@ -11,6 +11,9 @@
 
 % $Id$
 %% $Log$
+%% Revision 1.12  2005/12/07 18:48:54  nj7w
+%% Changed the default grey colors to heat colors, if height is matrix
+%%
 %% Revision 1.11  2005/12/06 22:41:08  nj7w
 %% Fixed minor error in documentation of barplot2
 %%
@@ -135,7 +138,7 @@
     degrees (counter-clockwise), for the bars or bar components.}
   \item{col}{a vector of colors for the bars or bar components.
     By default, grey is used if \code{height} is a vector, and
-    \code{grey.colors(nrow(height))} if \code{height} is a matrix.}
+    \code{heat.colors(nrow(height))} if \code{height} is a matrix.}
   \item{prcol}{the color to be used for the plot region.}
   \item{border}{the color to be used for the border of the bars.}
   \item{main, sub}{overall and sub titles for the plot.}
