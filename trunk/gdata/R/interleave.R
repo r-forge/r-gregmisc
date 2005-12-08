@@ -1,6 +1,6 @@
 # $Id$
 
-interleave <- function(..., append.source=TRUE, sep=": ")
+interleave <- function(..., append.source=TRUE, sep=": ", drop=FALSE)
   {
     sources <- list(...)
 
@@ -16,14 +16,14 @@ interleave <- function(..., append.source=TRUE, sep=": ")
       stop("Arguments have differening numbers of rows.")
 
     sources <- lapply(sources, function(x)
-                      if(nrow(x)==1) x[rep(1,mrows),] else x )
+                      if(nrow(x)==1) x[rep(1,mrows),,drop=drop] else x )
 
     tmp <- do.call("rbind",sources)
 
     nsources <- length(sources)
     indexes <- outer( ( 0:(nsources-1) ) * mrows , 1:mrows, "+" )
 
-    retval <- tmp[indexes,]
+    retval <- tmp[indexes,,drop=drop]
 
     if(append.source && !is.null(names(sources) ))
       if(!is.null(row.names(tmp)) )
