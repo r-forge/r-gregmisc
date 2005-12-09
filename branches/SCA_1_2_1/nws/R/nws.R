@@ -23,8 +23,14 @@ setMethod('initialize', 'nwsServer',
           function(.Object, serverHost='localhost', port=8765) {
             .Object@serverHost = serverHost
             .Object@port = port			
-            # how do we de-nagle this socket?
+
             .Object@nwsSocket = make.socket(serverHost, port)
+            # try to de-nagle this socket
+            # XXX unable to really test this yet, since the gtools package
+            # XXX didn't contain the .so file
+            try({library(gtools); setTCPNoDelay(.Object@nwsSocket, value=FALSE)},
+                silent=TRUE)
+
             # handshaking that does nothing at the moment.
             write.socket(.Object@nwsSocket, '0000')
             nwsRecvN(.Object@nwsSocket, 4)
@@ -145,6 +151,18 @@ setMethod('initialize', 'netWorkSpace',
 
             .Object
 	  })
+
+showNetWorkSpace <- function(object) {
+    nws <- object
+    server <- nws@server
+
+    cat('\n')
+    cat('NWS Host:\t', server@serverHost, ':', server@port, '\n', sep='')
+    cat('Workspace Name:\t', nws@wsName, '\n', sep='')
+    cat('\n')
+}
+
+setMethod('show', 'netWorkSpace', showNetWorkSpace)
 
 setGeneric('nwsClose', function(.Object) standardGeneric('nwsClose'))
 setGeneric('nwsDeclare', function(.Object, xName, mode) standardGeneric('nwsDeclare'))

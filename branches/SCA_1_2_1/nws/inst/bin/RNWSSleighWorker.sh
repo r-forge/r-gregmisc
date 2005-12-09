@@ -24,7 +24,7 @@ export RCEPid=$!
 export RCEHost=`hostname`
 
 # start sentinel
-${RPROG:-R} --vanilla <<EOF > RSleighSentinelLog_$RSleighRank 2>&1
+${RPROG:-R} --vanilla <<EOF > RSleighSentinelLog_${UID}_${RSleighRank} 2>&1
 
 scriptDir = Sys.getenv('RSleighScriptDir')
 src = function(...) { source(sprintf('%s/nws.R', scriptDir)) }

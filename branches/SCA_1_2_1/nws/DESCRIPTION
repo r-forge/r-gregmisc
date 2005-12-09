@@ -1,11 +1,16 @@
 Package: nws
 Title: R functions for netWorkSpaces and Sleigh
-Version: 1.1
-Author: Nick Carriero <carriero@LindaSpaces.com>
-Description: Provides coordination and parallel execution facilities,
-           as well as limited cross-language data exchange for R
+Version: 1.2.1
+Author: Nick Carriero <carriero@LindaSpaces.com> with support and
+        contributions from Gregory R. Warnes
+        <gregory.r.warnes@pfizer.com> of Pfizer, Inc.
+Description: Provides coordination and parallel execution
+        facilities, as well as limited cross-language data exchange,
+        using the netWorkSpaces server developed by Scientific
+        Computing Associates, Inc.
 Maintainer: Nick Carriero <carriero@LindaSpaces.com>
-License: CDDL
+License: CDDL 1.0
 Depends: R (>= 2.1), methods
 SaveImage: true
-Packaged: Fri Nov 11 13:59:15 2005; daya
+URL: http://www.lindaspaces.com
+Packaged: Tue Dec  6 15:38:18 2005; daya

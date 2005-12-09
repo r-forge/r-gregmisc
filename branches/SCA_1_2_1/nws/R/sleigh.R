@@ -92,26 +92,27 @@ workerLoop <- function(wsName) {
 #  Sleigh code
 #
 
-sshcmd <- function(user, host)
-  {
+sshcmd <- function(user, host, options) {
+  wrapper <- file.path(options$scriptDir, 'SleighWorkerWrapper.sh')
+  if (file.access(wrapper) == 0) {
+    sprintf("%s ssh -f -x -l %s %s", wrapper, user, host)
+  }
+  else {
     sprintf("ssh -f -x -l %s %s", user, host)
   }
+}
 
-rshcmd <- function(user, host)
-  {
-    sprintf("rsh -l %s %s", user, host)
-  }
+rshcmd <- function(user, host, options) {
+  sprintf("rsh -l %s %s", user, host)
+}
 
-lsfcmd <- function(user, host)
-  {
-    "bsub"
-  }
+lsfcmd <- function(user, host, options) {
+  "bsub"
+}
 
-
-sleigh <- function(...)
-  {
-    new("sleigh",...)
-  }
+sleigh <- function(...) {
+  new("sleigh",...)
+}
 
 # We side effect options here. at invocation, we generated a new env
 # if desired.
@@ -143,14 +144,33 @@ function(.Object, nws, numTasks, bn, ss) {
   .Object
 })
 
+setMethod('show', 'sleighPending', function(object) {
+  cat('\n')
+  cat('NWS Sleigh Pending Object\n')
+  show(object@nws)
+
+  cat('Tasks submitted:', object@numTasks, '\n', sep='')
+
+  status <- checkSleigh(object)
+  if (status == 0)
+    message <- 'Work completed.'
+  else
+    message <- paste(status, 'jobs still pending.')
+
+  cat('Status:\t', message, '\n', sep='')
+  cat('\n')
+})
+
 # return the number of results still outstanding.
 setGeneric('checkSleigh', function(.Object) standardGeneric('checkSleigh'))
 setMethod('checkSleigh', 'sleighPending',
 function(.Object) {
   if (.Object@state$done) return (0) # could argue either way here... .
   
-  vl = scan(file=textConnection(nwsListVars(.Object@nws)),
-            what=list('', 1, 1, 1, ''), sep ='\t', quiet=TRUE)
+  tc = textConnection(nwsListVars(.Object@nws))
+  vl = scan(file=tc, what=list('', 1, 1, 1, ''), sep ='\t', quiet=TRUE)
+  close(tc)
+
   for (x in 1:length(vl[[1]]))
     if ('result' == vl[[1]][x]) return (.Object@numTasks - vl[[2]][x])
 
@@ -219,30 +239,44 @@ addWorker <- function(machine, wsName, rank, options) {
     ' RSleighName=', machine,
     sep='')
 
-  cmd = paste(options$launch(options$user, machine), 'env', envVars, script, "\n")
+  cmd = paste(options$launch(options$user, machine, options), 'env', envVars, script, "\n")
   cat("Executing command: ", cmd )
   system(cmd)
 }
 
 setMethod('initialize', 'sleigh',
 function(.Object, nodeList=c('localhost', 'localhost', 'localhost'), ...) {
-  if (! exists('serialize') && ! require(serialize))
-    stop('the `serialize\' package is needed for sleigh.')
-
   .Object@nodeList = nodeList
   .Object@workerCount = length(nodeList)
+
+  # compute default value for scriptDir
+  nwsDir = .path.package('nws', quiet=TRUE)
+  if (is.null(nwsDir)) {
+    scriptDir = getwd()
+  }
+  else {
+    scriptDir = file.path(nwsDir, 'bin')
+  }
+
+  # compute default value for nwsHost
+  nwsHost = Sys.getenv('RSleighNwsHost')
+  if (is.null(nwsHost) || (nchar(nwsHost) < 1))
+    nwsHost = Sys.info()['nodename']
+
+  # compute default value for nwsPort
+  nwsPort = Sys.getenv('RSleighNwsPort')
+  if (is.null(nwsPort) || (nchar(nwsPort) < 1))
+    nwsPort = 8765
 
   defaultSleighOptions <-
     list(
          master =  Sys.info()['nodename'],
          nwsWsName = 'sleigh_ride_%010d',
-         nwsHost = Sys.info()['nodename'],
+         nwsHost = nwsHost,
          outfile = '/dev/null',
-         nwsPort = 8765,
+         nwsPort = nwsPort,
          launch = sshcmd,
-         # use something like this once sleigh is a package:
-         # scriptdir = .path.package('snow'),
-         scriptDir = getwd(),
+         scriptDir = scriptDir,
          user = Sys.info()['user'],
          )
 
@@ -293,9 +327,21 @@ function(.Object, nodeList=c('localhost', 'localhost', 'localhost'), ...) {
   .Object@state$occupied = FALSE
   .Object@state$totalTasks = 0
 
-
   .Object
 })
+
+setMethod('show', 'sleigh', function(object) {
+  cat('\n')
+  cat('NWS Sleigh Object\n')
+  show(object@nws)
+  cat(object@workerCount, ' Worker Nodes:\t',
+      paste(object@nodeList, collapse=', '), '\n', sep='')
+  cat('\n')
+})
+
+if (! isGeneric('close'))
+  setGeneric('close', function(con, ...) standardGeneric('close'))
+setMethod('close', 'sleigh', function(con, ...) stopSleigh(con))
 
 setGeneric('stopSleigh', function(.Object) standardGeneric('stopSleigh'))
 setMethod('stopSleigh', 'sleigh', function(.Object) {
