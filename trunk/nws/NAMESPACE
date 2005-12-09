@@ -1,0 +1,49 @@
+exportClasses( nwsServer, netWorkSpace, sleigh, sleighPending)
+
+exportMethods(
+   nwsListWss,
+   nwsMktempWs,
+   nwsOpenWs,
+   nwsUseWs,
+   nwsDeleteWs,
+   nwsListWss,
+   nwsMktempWs,
+   nwsOpenWs,
+   nwsUseWs,
+   nwsClose,
+   nwsDeclare,
+   nwsDeleteVar,
+   nwsFetch,
+   nwsFetchTry,
+   nwsFind,
+   nwsFindTry,
+   nwsListVars,
+   nwsStore,
+   nwsWsName,
+   nwsClose,
+   nwsDeclare,
+   nwsDeleteVar,
+   nwsFetch,
+   nwsFetchTry,
+   nwsFind,
+   nwsFindTry,
+   nwsListVars,
+   nwsStore,
+   nwsWsName,
+   checkSleigh,
+   waitSleigh,
+   stopSleigh,
+   eachWorker,
+   eachElem
+)
+
+export(
+   openNwsWs,
+   sshcmd,
+   lsfcmd,
+   initialize,
+   sleigh,
+   workerLoop,
+   addWorker,
+   storeTask
+)
