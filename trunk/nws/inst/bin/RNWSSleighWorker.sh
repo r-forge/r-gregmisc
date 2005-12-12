@@ -1,13 +1,12 @@
 #! /bin/sh
 
-##
 ## Copyright (c) 2005, Scientific Computing Associates, Inc.
-##
-## This code is provided to you under the terms of the CDDL License version 1.0.   
-##
-## Please see the file COPYING or http://www.opensource.org/licenses/cddl1.php 
-## for details.
-##
+## All rights reserved.
+
+##!!FIXME: Assumes nws library in use is installed in the system ##
+## default location.  If it is installed in the system default
+## location, but we are using a different one, we'll get cross-version
+## issues.
 
 trap exit SIGCHLD
 
@@ -16,11 +15,14 @@ cd ${RNWSSleighWorkingDirectory:-/tmp}
 
 ${RPROG:-R} --vanilla <<EOF > ${RSleighWorkerOut:-/dev/null} 2>&1 &
 
+
 scriptDir = Sys.getenv('RSleighScriptDir')
 src = function(...) {
+    source(sprintf('%s/getElement.R', scriptDir))
     source(sprintf('%s/nws.R', scriptDir))
     source(sprintf('%s/sleigh.R', scriptDir))
 }
+
 tryCatch(library(nws), error=src)
 
 workerLoop()
@@ -30,7 +32,7 @@ export RCEPid=$!
 export RCEHost=`hostname`
 
 # start sentinel
-${RPROG:-R} --vanilla <<EOF > RSleighSentinelLog_$RSleighRank 2>&1
+${RPROG:-R} --vanilla <<EOF > RSleighSentinelLog_${UID}_${RSleighRank} 2>&1
 
 scriptDir = Sys.getenv('RSleighScriptDir')
 src = function(...) { source(sprintf('%s/nws.R', scriptDir)) }

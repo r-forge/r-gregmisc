@@ -34,7 +34,8 @@ exportMethods(
    waitSleigh,
    stopSleigh,
    eachWorker,
-   eachElem
+   eachElem,
+   close
 )
 
 export(

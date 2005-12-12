@@ -1,11 +1,6 @@
-##
+
 ## Copyright (c) 2005, Scientific Computing Associates, Inc.
-##
-## This code is provided to you under the terms of the CDDL License version 1.0.   
-##
-## Please see the file COPYING or http://www.opensource.org/licenses/cddl1.php 
-## for details.
-##
+## All rights reserved.
 
 # this is a manifest constant, how to approriately handle?
 nwsRFP = 3*2^24
@@ -25,20 +20,22 @@ nwsRecvN <- function(s, n) {
 setClass('nwsServer', representation(nwsSocket='ANY', port='numeric', serverHost='character'))
 
 setMethod('initialize', 'nwsServer',
-          function(.Object, serverHost='localhost', port=8765)
-          {
+          function(.Object, serverHost='localhost', port=8765) {
             .Object@serverHost = serverHost
             .Object@port = port			
 
             .Object@nwsSocket = make.socket(serverHost, port)
-            setTCPNoDelay(.Object@nwsSocket, value=FALSE) # de-nagle this socket!
-            
+            # try to de-nagle this socket
+            # XXX unable to really test this yet, since the gtools package
+            # XXX didn't contain the .so file
+            try({library(gtools); setTCPNoDelay(.Object@nwsSocket, value=FALSE)},
+                silent=TRUE)
+
             # handshaking that does nothing at the moment.
             write.socket(.Object@nwsSocket, '0000')
             nwsRecvN(.Object@nwsSocket, 4)
             .Object
-	  }
-          )
+	  })
 
 setGeneric('nwsDeleteWs', function(.Object, wsName) standardGeneric('nwsDeleteWs'))
 setGeneric('nwsListWss', function(.Object) standardGeneric('nwsListWss'))
@@ -155,22 +152,17 @@ setMethod('initialize', 'netWorkSpace',
             .Object
 	  })
 
-
-showNetWorkSpace <- function(object)
-  {
-
+showNetWorkSpace <- function(object) {
     nws <- object
     server <- nws@server
 
     cat('\n')
-    cat('NWS Host:\t', server@serverHost,
-        ':', server@port, '\n', sep='' )
+    cat('NWS Host:\t', server@serverHost, ':', server@port, '\n', sep='')
     cat('Workspace Name:\t', nws@wsName, '\n', sep='')
     cat('\n')
-  }
+}
 
 setMethod('show', 'netWorkSpace', showNetWorkSpace)
-
 
 setGeneric('nwsClose', function(.Object) standardGeneric('nwsClose'))
 setGeneric('nwsDeclare', function(.Object, xName, mode) standardGeneric('nwsDeclare'))

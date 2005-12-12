@@ -1,16 +1,15 @@
 Package: nws
-Title: Parallel and distributed computing using netWorkSpaces
-Version: 1.2.1
+Title: R functions for netWorkSpaces and Sleigh
+Version: 1.2.2
 Author: Nick Carriero <carriero@LindaSpaces.com> with support and
-	contributions from Gregory R. Warnes
-	<gregory.r.warnes@pfizer.com> of Pfizer, Inc.
+        contributions from Gregory R. Warnes
+        <gregory.r.warnes@pfizer.com> of Pfizer, Inc.
 Description: Provides coordination and parallel execution
         facilities, as well as limited cross-language data exchange,
         using the netWorkSpaces server developed by Scientific
-        Computing Associates, Inc. (included).
-Maintainer: Nick Carriero <carriero@LindaSpaces.com>
+        Computing Associates, Inc.
+Maintainer: Stephen B. Weston [weston@lindaspaces.com]
 License: CDDL 1.0
-Depends: R (>= 2.1), methods, gtools (>= 2.2.1)
+Depends: R (>= 2.1), methods
 SaveImage: true
 URL: http://www.lindaspaces.com
-

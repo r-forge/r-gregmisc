@@ -1,13 +1,6 @@
-##
-## Copyright (c) 2005, Scientific Computing Associates, Inc.
-##
-## This code is provided to you under the terms of the CDDL License version 1.0.   
-##
-## Please see the file COPYING or http://www.opensource.org/licenses/cddl1.php 
-## for details.
-##
 
-library(nws) # fail if not available
+## Copyright (c) 2005, Scientific Computing Associates, Inc.
+## All rights reserved.
 
 ## Create pid file If we've been passed a --pidfile argument
 argv <- commandArgs()
@@ -15,6 +8,12 @@ myarg <- argv[grep("^--pidfile", argv)]
 pidfile <- gsub("^--pidfile","", myarg)
 if(length(pidfile)!=0)
   cat(Sys.getpid(), file=pidfile)
+
+# load nws library
+src = function(...) {
+    source('nws.R')
+}
+tryCatch(library(nws), error=src)
 
 ## start up translation services
 bws = new('netWorkSpace', 'R babelfish')
