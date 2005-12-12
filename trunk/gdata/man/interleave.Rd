@@ -1,6 +1,9 @@
 % $Id$
 %
 % $Log$
+% Revision 1.8  2005/12/12 22:02:48  nj7w
+% Updated version number for CRAN release
+%
 % Revision 1.7  2005/12/04 03:02:06  warnes
 % Andrew Burgess reported that interleave() converts 1-column matrixes
 % to vectors and provided a patch.  A slight modification of his patch
@@ -49,9 +52,8 @@ interleave(..., append.source=TRUE, sep=": ", drop=FALSE)
     argument name will be appended to the row names to show the source of
     each row. }
   \item{sep}{Separator between the original row name and the object name.}
-  \item{should.drop} When merging should matrices be coerced to the
-    lowest possible dimension. See documentation for \link{Extract} for
-    details of drop.
+  \item{drop}{logical - If the number of columns in output matrix is 1, whether
+    matrix should be returned or a vector }
 }
 \details{
   This function creates a new matrix or data frame from its arguments.
