@@ -8,7 +8,7 @@ Description: Provides coordination and parallel execution
         facilities, as well as limited cross-language data exchange,
         using the netWorkSpaces server developed by Scientific
         Computing Associates, Inc.
-Maintainer: Stephen B. Weston [weston@lindaspaces.com]
+Maintainer: Stephen B. Weston <weston@lindaspaces.com>
 License: CDDL 1.0
 Depends: R (>= 2.1), methods
 SaveImage: true
