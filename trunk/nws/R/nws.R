@@ -180,6 +180,7 @@ setMethod('nwsClose', 'netWorkSpace',
             close.socket(.Object@server@nwsSocket)
 	  })
 
+setGeneric('close', function(con, ...) standardGeneric('close'))
 setMethod('close','netWorkSpace', function(con) nwsClose(con))
 
 setMethod('nwsDeclare', 'netWorkSpace',

@@ -2,10 +2,6 @@
 ## Copyright (c) 2005, Scientific Computing Associates, Inc.
 ## All rights reserved.
 
-# We use alternating barriers to synchronize eachWorker
-# invocations. Their names are common to workers and sleighs.
-barrierNames <- list('barrier0', 'barrier1')
-
 ############################################################################
 # Worker code.
 #
@@ -69,37 +65,49 @@ workerLoop <- function(verbose=FALSE) {
     t <- nwsFetch(SleighNws, 'task')
 
     if(verbose)
-      print(retval)
+      {
+        cat("Task:\n")
+        print(t)
+      }
 
     if (!is.list(t)) { break }
 
     ## unpack message
-    varArgs=t$data$args[[1]]
-    fixedArgs=t$data$args[[2]]
+    varArgs=t$data$varArgs
+    fixedArgs=t$data$fixedArgs
     by=t$by
     chunkSize=t$chunkSize
     fun=t$data$fun
     
     retval <- list()
 
-    # iterate over chuck contents, accumlating results
-    for(i in 1:countElement(varArgs[[1]], by=by, chunkSize=1))
+    if(!is.null(varArgs))
       {
-        varArgs <- lapply(varArgs, getElement, i=i, by=by, chunkSize=1)
-        allArgs <- c(varArgs,fixedArgs)
-        value[[i]] <- try(docall(t$data$fun, allArgs))
+        ## iterate over chuck contents, accumlating results
+        for(i in 1:countElement(varArgs[[1]], by=by, chunkSize=1))
+          {
+            varArgs <- lapply(varArgs, getElement, i=i, by=by, chunkSize=1)
+            allArgs <- c(varArgs,fixedArgs)
+            value[[i]] <- try(docall(fun, allArgs))
+          }
       }
-
+    else
+      {
+        value <- try(docall(fun, fixedArgs))
+      }
+    
     if(verbose)
-      print(value)
+      {
+        cat("Value:\n")
+        print(value)
+      }
 
     nwsStore(SleighNws, 'result', list(type='VALUE', value=value, tag=t$tag))
 
     tasks <- tasks + 1
 
-    if (t$barrier) {
-      nwsFind(SleighNws, barrierNames[[bx]])
-      bx <- bx%%2 + 1
+    if (!is.null(t$barrier)) {
+      nwsFind(SleighNws, t$barrier)
     }
   }
 }
@@ -381,7 +389,7 @@ storeTask <- function(
                       by="cell",
                       chunkSize=1,
                       tag = 'anon',
-                      barrier = FALSE,
+                      barrier = NULL,  ## NULL==No barrier
                       return = TRUE
                       )
   {
@@ -399,15 +407,18 @@ storeTask <- function(
 # run fun once on each worker of the sleigh. pass in a val from the
 # range 1:#Workers
 setGeneric('eachWorker',
-           function(.Object, fun, ..., eo=NULL) standardGeneric('eachWorker'))
+           function(.Object, fun, ..., eo=NULL, DEBUG=FALSE)
+           standardGeneric('eachWorker'))
 setMethod('eachWorker', 'sleigh',
-function(.Object, fun, ..., eo=NULL) {
+function(.Object, fun, ..., eo=NULL, DEBUG=FALSE) {
   if (.Object@state$occupied) {
     print('wait your turn.')
     # should throw some kind of exception here.
     return (NULL)
   }
 
+  if(DEBUG) browser()
+  
   fun <- fun # need to force the argument (NJC: why?)
 
   nws = .Object@nws
@@ -427,7 +438,7 @@ function(.Object, fun, ..., eo=NULL) {
   
   # use alternating barrier to sync eachWorker invocations with the workers.
   bx = .Object@state$bx
-  bn = barrierNames[[bx]]
+  bn = sprintf("barrier%d", bx)
   .Object@state$bx = bx%%2 + 1
 
   nwsFetchTry(.Object@nws, bn)
@@ -437,7 +448,8 @@ function(.Object, fun, ..., eo=NULL) {
   nwsStore(.Object@nws, 'totalTasks', as.character(.Object@state$totalTasks))
   
   for (i in 1:wc) {
-    storeTask(nws, fun, list(...), tag=i, barrier=TRUE)
+    storeTask(nws, fun, list(fixedArgs=list(...),varArgs=list()),
+              tag=i, barrier=bn)
   }
 
   if (!blocking) {
@@ -532,7 +544,7 @@ setMethod('eachElem', 'sleigh',
     args = list(lapply(elementArgs, getElement, i=i, by=by, chunkSize=chunkSize),
                     fixedArgs)
     if (!is.null(argPermute)) { args = args[argPermute] }
-    storeTask(nws, fun, args, tag=i, barrier=FALSE, by=by, chunkSize=chunkSize)
+    storeTask(nws, fun, args, tag=i, barrier=NULL, by=by, chunkSize=chunkSize)
   }
 
   if (!blocking) {
@@ -553,10 +565,11 @@ setMethod('eachElem', 'sleigh',
       if (! is.null(r$value)) {
         val[[r$tag]] = r$value
       }
-      args = list(lapply(elementArgs, getElement, i=i, by=by, chunkSize=chunkSize),
-                      fixedArgs)
+      args = list(varArgs=lapply(elementArgs, getElement, i=i, by=by,
+                                 chunkSize=chunkSize),
+                  fixedArgs=fixedArgs)
       if (!is.null(argPermute)) { args = args[argPermute] }
-      storeTask(nws, fun, args, tag=i, barrier=FALSE, by=by, chunkSize=chunkSize)
+      storeTask(nws, fun, args, tag=i, barrier=NULL, by=by, chunkSize=chunkSize)
     }
   }
 
