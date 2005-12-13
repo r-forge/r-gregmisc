@@ -1,3 +1,13 @@
+CHANGES IN gtools 2.2.2
+-----------------------
+
+ -  src/setTCPNoDelay.c: Add C source code for setTCPNoDelay.
+
+ -  NAMESPACE: Add UseDynLib to NAMESPACE so the shared library gets
+	       properly loaded.
+
+ - Updated Greg's email address. 
+
 CHANGES IN gtools 2.2.1
 -----------------------
 
