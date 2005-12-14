@@ -52,7 +52,7 @@ void checkStatus(int status,
       break;
     }
 
-  status_str[status_len-1] = 0x0;  // Just in case...
+  status_str[status_len-1] = 0x0;  /* Just in case... */
 }
 
 /* Function to de-nagle a TCP socket connection */
