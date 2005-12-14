@@ -1,5 +1,5 @@
 .libPaths("/home/jainn02/projects/papers/heatmap2/Rlib")
-setwd("/home/jainn02/projects/papers/heatmap2/code")
+#setwd("/home/jainn02/projects/papers/heatmap2/code")
 
 ##library(mva)
 library (stats)
