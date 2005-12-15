@@ -1,7 +1,9 @@
 #!/bin/sh
 
 case $# in
-0) exit 0
+0) 
+    echo "NO ARGUMENTS! Bailing Out!"
+    exit 1
 esac
 
 CMD=$1
