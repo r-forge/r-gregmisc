@@ -1,6 +1,17 @@
-# run fun once for each element of a vector.
+## Copyright (c) 2005, Pfizer, Inc.
+## All rights reserved.
 
-getElement <- function(x, i, by=c("row","column","cell"), chunkSize=1)
+# $Id$
+
+# This function extracts the i'th element (or chunk if chunkSize!=1)
+# When chunkSize==1 and x is a matrix or data.frame, we turn the
+# result into a simple vector, mirroring how apply() works (unless
+# drop is FALSE)
+
+getElement <- function(x, i,
+                       by=c("row","column","cell"),
+                       chunkSize=1,
+                       drop=FALSE)
   {
     by <- match.arg(by) # do partial mathing to get one of the options
 
@@ -23,19 +34,23 @@ getElement <- function(x, i, by=c("row","column","cell"), chunkSize=1)
         }
     
     if(is.matrix(x))
-      switch(by,
-             "row"=x[indexSet,,drop=FALSE],
-             "column"=x[,indexSet,drop=FALSE],
-             "cell"=x[indexSet]
-             )
+      retval <- switch(by,
+                       "row"=x[indexSet,,drop=drop],
+                       "column"=x[,indexSet,drop=drop],
+                       "cell"=x[indexSet]
+                       )
     else if(is.data.frame(x))
-      switch(by,
-             "row"=x[indexSet,,drop=FALSE],
-             "column"=x[,indexSet,drop=FALSE],
-             "cell"=dfGetElement(x,indexSet)
-             )
+      retval <- switch(by,
+                       "row"=x[indexSet,,drop=drop],
+                       "column"=x[,indexSet,drop=drop],
+                       "cell"=dfGetElement(x,indexSet)
+                       )
     else
-      x[[indexSet]]
+      retval <- x[indexSet]
+    if(drop && chunkSize==1 && class(x) %in% c("data.frame", "matrix"))
+      return(unlist(retval))
+    else
+      return(retval)
   }
 
 countElement <- function(x, by=c("row","column","cell"), chunkSize=1)
