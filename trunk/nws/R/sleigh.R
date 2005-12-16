@@ -40,8 +40,11 @@ addWorker <- function(machine, wsName, rank, options) {
     ' RSleighName=', machine,
     sep='')
 
-  cmd = paste(options$launch(options$user, machine, options), 'env', envVars, script, "\n")
+  cmd = paste(options$launch(options$user, machine, options), '/bin/env',
+              envVars, script, "\n")
+
   cat("Executing command: ", cmd )
+
   system(cmd)
 }
 
