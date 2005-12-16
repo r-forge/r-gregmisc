@@ -71,6 +71,7 @@ workerLoop <- function(verbose=FALSE) {
 
   # post some info about this worker.
   nwsStore(SleighNws, 'worker info', list(sysInfo=Sys.info(), pid=Sys.getpid()))
+  nwsStore(SleighNws, paste(nodename, 'info'), list(sysInfo=Sys.info(), pid=Sys.getpid()))  
 
   repeat {
     # update the number of tasks executed
