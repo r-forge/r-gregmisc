@@ -63,7 +63,47 @@ setMethod('nwsListWss', 'nwsServer',
             status = nwsRecvN(s, 4)
             desc = nwsRecvN(s, 20)
 
-            nwsRecvN(s, as.integer(nwsRecvN(s, 20)))
+            ret <- nwsRecvN(s, as.integer(nwsRecvN(s, 20)))
+
+            ## convert response into an R data frame
+            ret <- unlist(strsplit(ret, "\n"))
+            ret <- sapply(ret, strsplit, "\t")
+            expandLen <- function(x, len)
+              {
+                if (length(x)<len)
+                  c(x, rep("", len-length(x)))
+                else
+                  x
+              }
+            ret <- lapply(ret, expandLen, len=max(sapply(ret,length)))
+            names(ret) <- seq(along=ret)
+            ret <- do.call(rbind,ret)
+            ret[] <- trim(ret)
+            colnames(ret) <- c(
+                               "Name", "Owner", "Persistent", "Variables", "Variable List"
+                               )
+            
+            retval <- data.frame(ret[,1,drop=FALSE])
+            retval$Name <- ret[,"Name"]
+
+            default <- grep("^>", retval$Name, extended=TRUE)
+            retval$Default[default] <- TRUE
+            retval$Name <-gsub("^>","",retval$Name)
+
+            Owner <- ret[,"Owner"]
+
+            pattern <- "IPv4Address\\(TCP, '([0-9]+\\.[0-9]+\\.[0-9]+\\.[0-9]+)', ([0-9]+)\\) \\(([0-9]+)\\).*$"
+            retval$Host <- gsub(pattern, "\\1", Owner)
+            retval$Port <- gsub(pattern, "\\2", Owner)
+            retval$Pid  <- gsub(pattern, "\\3", Owner)
+
+            retval$Default <- FALSE
+            retval$Persistent <- as.logical(ret[,"Persistent"])
+            
+            retval$Variables <- as.integer(ret[,"Variables"])
+            retval$"Variable List" <- as.character(ret[,"Variable List"])
+
+            retval
 	  })
 
 setMethod('nwsMktempWs', 'nwsServer',
