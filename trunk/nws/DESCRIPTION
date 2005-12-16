@@ -1,6 +1,6 @@
 Package: nws
 Title: R functions for netWorkSpaces and Sleigh
-Version: 1.2.2
+Version: 1.3.0
 Author: Nick Carriero <carriero@LindaSpaces.com> with support and
         contributions from Gregory R. Warnes
         <gregory.r.warnes@pfizer.com> of Pfizer, Inc.
