@@ -1,9 +1,15 @@
 #include <R.h>
 #include <Rinternals.h>
 
-#include <sys/types.h>
-#include <sys/socket.h>
-#include <netinet/in.h>
+# include <sys/types.h>
+
+#ifdef WIN32
+/*# include <winsock2.h>*/
+#else
+# include <sys/socket.h>
+# include <netinet/in.h>
+#endif
+
 #include <errno.h>
 
 #define TCP_NODELAY 1
@@ -12,36 +18,51 @@
 void checkStatus(int status,
                  char* status_str,
                  int status_len)
+#ifdef WIN32
+{
+  error("checkStatus not supported on Win32");
+}
+#else
 {
   status_len = status_len>1000?1000:status_len;
 
   switch(status)
     {
+#ifdef EBADF
     case EBADF:
       strncpy( status_str,
                             "EBADF: Invalid descriptor.",
                             status_len);
       break;
+#endif
+#ifdef ENOTSOCK
     case ENOTSOCK:
       strncpy( status_str,
                "ENOTSOCK: Descriptor is a file, not a socket.",
                status_len);
       break;
+#endif
+#ifdef ENOPROTOOPT
     case ENOPROTOOPT:
       strncpy( status_str,
                "ENOPROTOOPT: The option is unknown at the level indicated.",
                status_len);
       break;
+#endif
+#ifdef EFAULT
     case EFAULT: 
       strncpy( status_str,
                "EFAULT: invalid pointer",
                status_len);
       break;
+#endif
+#ifdef EINVAL
     case EINVAL:
       strncpy( status_str,
                "EINVAL: optlen invalid in setsockopt",
                status_len);
       break;
+#endif
     case 0:
       strncpy( status_str,
                "SUCCESS",
@@ -54,6 +75,7 @@ void checkStatus(int status,
 
   status_str[status_len-1] = 0x0;  /* Just in case... */
 }
+#endif
 
 /* Function to de-nagle a TCP socket connection */
 void R_setTCPNoDelay(int *socket,
@@ -61,6 +83,11 @@ void R_setTCPNoDelay(int *socket,
                      int* status,
                      char** status_str,
                      int* status_len)
+#ifdef WIN32
+{
+  error("checkStatus not supported on Win32");
+}
+#else
 {
   int off;
   
@@ -80,7 +107,7 @@ void R_setTCPNoDelay(int *socket,
   
   return;
 }
-
+#endif
 
 /* function to check socket options */
 /* NOT USED...
