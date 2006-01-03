@@ -20,6 +20,7 @@ export(
        rename.vars,
        remove.vars,
        reorder.factor,
+       resample,
        trim,
        unmatrix,
        upperTriangle,
