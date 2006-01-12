@@ -1,6 +1,7 @@
 ####
 ## Figure 1
 ####
+.libPaths("~/Rlib")
 library(gplots)
 
 data(Titanic)
@@ -40,7 +41,7 @@ balloonplot(x=Class,
             y=list(Age, Sex),
             z=Freq,
             sort=TRUE,
-            dotcol="green",
+            #dotcol="green",
             show.zeros=TRUE,
             cum.margins=FALSE,
             main="BalloonPlot : Surviving passengers"
