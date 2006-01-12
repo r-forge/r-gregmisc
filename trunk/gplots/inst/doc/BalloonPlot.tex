@@ -29,10 +29,12 @@ entry. This visually highlights the prominent features of
 data, while preserving the details conveyed by the numeric values
 themselves.
 
-In this article, we describe the balloonplot, as
-implemented by the \code{balloonplot} function in the
-\code{gplots} package, and describe the features of our
-implementation.
+In this article, we describe the balloonplot, as implemented by the
+\code{balloonplot} function in the \code{gplots} package, and
+describe the features of our implementation.  We then provide an
+example using the ``Titanic'' passenger survival data.  We will
+conclude with some observations on the ballooonplot relative to the
+previously developed \code{mosaic plot}.
 
 
 \section*{Function description}
@@ -225,18 +227,45 @@ in a lifeboat, while many of the later arriving $3^{rd}$ class women
 and children were too late: the lifeboats had already been filled and
 had moved away from the quickly sinking ship.
 
+\section*{Discussion}
+
+Our goals in developing the balloonplot were twofold: First, to
+improve ability of viewers to quickly perceive trends. Second, to
+minimize the need for viewers to learn new idioms.  With these goals
+in mind, we have restricted ourselves to simple modifications of the
+standard tabular display.  
+
+Other researchers have pursued more general approaches to the visual
+display of tabular data. (For a review of that work, see Hartigan
+and Kleiner (1981) or the other references provided at the end of
+this article.)  One of the most popular methods developed by these
+researchers is the \code{mosaic plot} (Snee 1974).
+
+We have previously experimented with mosaic plots.  Unfortunately,
+we have found that they do not lend themselves to rapid
+ascertainment of trends by untrained users.  Even trained users find
+that they must pay careful attention in order to decode the visual
+information presented by the mosaic plot.  In contrast, balloonplots
+lend themselves to very quick perception of important trends, even
+for users who have never encountered them before.
+
+While there are, of course, tasks for which mosaic plot is
+preferable, we feel that the balloonplot serves admirably to allow
+high-levels patterns to be quickly perceived by untrained users.
+
 \section*{Conclusion}
 
 Using the well worn Titanic data, we have shown how balloonplots
 help to convey important aspects of tabular data, without obscuring
-the exact numeric values. We hope that this new approach to
+the exact numeric values.  We hope that this new approach to
 visualizing tabular data will assist other statisticians in more
 effectively understanding and presenting tabular data.
 
+
 We wish to thank \emph{Ramon Alonso-Allende}
 \email{allende@cnb.uam.es} for the discussion on R-help which lead
-to the development of \code{balloonplot}, as well as for the code for
-displaying the row and column sums.
+to the development of \code{balloonplot}, as well as for the code
+for displaying the row and column sums.
 
 \address{Gregory R. Warnes, Pfizer Inc., USA\\
 \email{gregory.r.warnes@pfizer.com}\\
