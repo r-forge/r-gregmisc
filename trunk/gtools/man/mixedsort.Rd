@@ -65,3 +65,6 @@ mixedsort(x)
 \keyword{manip}
 
 
+\concept{natural sort}
+\concept{dictionary sort}
+
