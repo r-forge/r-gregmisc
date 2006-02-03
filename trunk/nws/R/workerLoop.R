@@ -57,7 +57,7 @@ workerLoop <- function(verbose=FALSE) {
   setRNGSeed <- function()
     {
       now <- as.numeric(Sys.time())
-      seedval <- as.integer( (now * 2^SleighRank-1 )%% 2^31-1 )
+      seedval <- as.integer( SleighRank )
       set.seed(seedval)
       seedval
     }
