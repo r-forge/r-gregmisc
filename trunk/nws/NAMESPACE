@@ -42,6 +42,7 @@ export(
        openNwsWs,
        sshcmd,
        lsfcmd,
+       lsfSleigh,
        initialize,
        sleigh,
        workerLoop,
