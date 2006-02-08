@@ -1,0 +1,55 @@
+export(
+       balloonplot
+       bandplot
+       barplot2
+       bluered
+       boxplot.n
+       colorpanel
+       greenred
+       heatmap.2
+       hist2d
+       iapply
+       lowess
+       lowess
+       ooplot
+       overplot
+       panel.overplot
+       plotCI
+       plotmeans
+       qqnorm.aov
+       redblue
+       redgreen
+       residplot
+       rich.colors
+       rtPCR
+       sinkplot
+       smartlegend
+       space
+       textplot
+       wapply
+)
+
+importFrom(gtools, invalid)
+importFrom(gtools, odd)
+
+# Functions nobs is needed only in
+# one of the examples of textplot, so
+# the library gtools is loaded at that time.
+# No need to import the function nobs from gtools.
+importFrom(gtools, nobs)
+
+S3method(balloonplot.default)
+S3method(balloonplot.table)
+
+S3method(barplot2.default)
+
+S3method(lowess.default)
+S3method(lowess.formula)
+
+S3method(ooplot.default)
+
+S3method(textplot.character)
+S3method(textplot.data.frame)
+S3method(textplot.default)
+S3method(textplot.matrix)
+
