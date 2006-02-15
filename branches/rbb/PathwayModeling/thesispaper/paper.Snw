@@ -1,0 +1,63 @@
+\documentclass{elsart}
+% \documentclass[doublespacing]{elsart}
+\usepackage{graphicx}
+\usepackage[nogin]{/usr/local/lib/R/share/texmf/Sweave}
+\usepackage[numbers]{natbib} \bibliographystyle{plainnat}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{yfonts}
+\usepackage{amsfonts}
+\usepackage{subfig}
+\usepackage{tabls}
+\usepackage{url}
+\usepackage{pslatex}
+\usepackage{makeidx}
+\usepackage{dchem}
+\usepackage{color}
+
+\newcommand{\deriv}[2]{\ensuremath{\frac{\mathrm{d} #1}{\mathrm{d} #2}}}
+
+\begin{document}
+
+$ $Id$ $
+
+\begin{frontmatter}
+
+\title{Statistical Modeling of Biochemical Pathways}
+\author{Robert B. Burrows}
+\address{New England Biometrics, North Scituate, RI}
+\author{Gregory R. Warnes}
+\address{Pfizer, Inc., Groton, CT}
+\author{R. Choudary Hanumara}
+\address{University of Rhode Island, Kingston, RI}
+  
+\begin{abstract}
+The usefulness of Markov chain Monte Carlo methods for the modeling
+of biochemical reactions is examined. With simulated data, it is
+shown that mechanistic models can be fit to sequences of enzymatic
+reactions. These methods have the advantages of being relatively easy
+to use and producing probability distributions for the model
+parameters rather than point estimates.
+
+Three Markov chain Monte Carlo algorithms are used to fit models to
+data from a
+sequence of 4 enzymatic reactions. The algorithms 
+are evaluated with respect to
+the goodness-of-fit of the fitted models and the time to completion.
+It is shown that the algorithms produce essentially the same
+parameter distributions but the time to completion varies. 
+\end{abstract}
+
+\end{frontmatter}
+
+\SweaveInput{introduction}
+
+\SweaveInput{methods}
+
+\SweaveInput{results}
+
+\SweaveInput{discussion}
+
+\bibliography{./refs}
+
+\end{document}
