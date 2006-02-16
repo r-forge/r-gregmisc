@@ -1,7 +1,7 @@
 \documentclass{elsart}
 % \documentclass[doublespacing]{elsart}
 \usepackage{graphicx}
-\usepackage[nogin]{/usr/local/lib/R/share/texmf/Sweave}
+\usepackage[nogin]{Sweave}
 \usepackage[numbers]{natbib} \bibliographystyle{plainnat}
 \usepackage{amsmath}
 \usepackage{amssymb}

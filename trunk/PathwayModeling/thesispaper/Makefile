@@ -1,6 +1,6 @@
 #!/bin/sh
 all:
-	echo 'Sweave("paper.Snw")' | R --no-save --no-restore
+	echo 'Sweave("paper.Snw")' | R --slave --no-save --no-restore
 	pdflatex paper.tex
 	pdflatex paper.tex
 	bibtex paper
