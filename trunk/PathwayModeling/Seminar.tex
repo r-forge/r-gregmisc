@@ -6,7 +6,7 @@
 
 \title{
   Effective Simulation and Analysis of Biological Systems Through a
-  \emph{Synergistic} Combination of Deterministic Mathematical
+  {Synergistic} Combination of Deterministic Mathematical
   Modeling and Bayesian Statistical Techniques.
 }
 
@@ -25,8 +25,8 @@
 \frame{\tableofcontents}
 
 %% Abstract
-\abstract{ 
 \frame{  
+%\abstract{ 
   Historically, there are two fundamentally different approaches to
   modeling biological systems: deterministic models of mechanism, and
   statistical models of association. Both techniques have played a
@@ -46,11 +46,11 @@
   
   I will conclude with an overview of our future plans, along with
   some musings on the promises and perils of this approach.
-}
+%}
 }
 
 %% Context
-\section{What is the \emph{context}?  Medical research}
+\section{What is the {context}?  Medical research}
 
 \subsection{Medical research}
 
@@ -85,17 +85,17 @@ resolution.
   \item[Gene Expression] Past: 1-20 'probes', Present: 72K 'probesets'
     Future: >250K(?) splice variants
   \item[Proteins] Past: 1-5 Present: 1-5K, Future: >1M(?) 
-  \items[Metabolites] Past: 1-20:  Present: 50-500, Future: ??
-  \end{itemize}
+  \item[Metabolites] Past: 1-20:  Present: 50-500, Future: ??
+  \end{description}
 }
 
 So much so, that we can't keep track in our heads any more!
 
 \subsection{Systems Biology}
 \frame{
-  \frametitle{We need new abstractions $\right$ systems biology}
-  \begin{description}
-  \item[Core idea] Study the system, not the individual components.
+  \frametitle{We need new abstractions : systems biology}
+\begin{description}
+\item[Core idea] Study the system, not the individual components.
   \item[Potential benefits] 
     \begin{enumerate}
       \item Combine diverse data types (RNA, Protien, Metabolites)
@@ -107,7 +107,7 @@ So much so, that we can't keep track in our heads any more!
   \end{description}
 }
 
-\section{What is the \emph{problem}? Modeling complex biological systems}
+\section{What is the {problem}? Modeling complex biological systems}
 
 \subsection{What are the needs?}
 \frame{
@@ -124,8 +124,8 @@ Model that
 \end{itemize} 
 }
 \subsection{2 Traditions}
-
 \frame{
+
 \begin{description}
 \item[Deterministic models of mechanism] ~
   \begin{itemize}
@@ -147,7 +147,7 @@ Model that
     \item[+] Little information need be provided
     \item[+] Easy to construct
     \item[-] Based on association
-    \item[\~] Shorter history
+    \item Shorter history
     \item[+] Results tend to be robust to the structure of the model 
     \item[+] Amenable to fitting data
     \item[-] Little support for uncertaintly of inputs (generally only dependent variable)
@@ -156,9 +156,10 @@ Model that
     \item[-] Usually straightforwared to process mathematically
   \end{itemize}
 \end{description}
+
 }
 
-\section{What is the \emph{idea}? Combine deterministic mathematical models
+\section{What is the {idea}? Combine deterministic mathematical models
   and Bayesian statistics}
 \section{How was this idea implemented?}
 
