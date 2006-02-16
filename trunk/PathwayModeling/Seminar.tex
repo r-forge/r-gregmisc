@@ -1,5 +1,8 @@
-\documentclass{article}
-\usepackage{fullpage}
+\documentclass{beamer}
+\usepackage{beamerthemesplit}
+
+%\documentclass{article}
+%\usepackage{fullpage}
 
 \title{
   Effective Simulation and Analysis of Biological Systems Through a
@@ -10,12 +13,20 @@
 \author{Gregory R. Warnes - Pfizer Inc. and Yale Univ. \\ 
         Robert Burrows - Northeast Biometrics }
 
+\date{\today}
+
 \begin{document}
 
-\maketitle
+%% Title 
+\frame{\titlepage}
 
+%% Outline
+\section[Outline]{}
+\frame{\tableofcontents}
+
+%% Abstract
 \abstract{ 
-  
+\frame{  
   Historically, there are two fundamentally different approaches to
   modeling biological systems: deterministic models of mechanism, and
   statistical models of association. Both techniques have played a
@@ -35,15 +46,172 @@
   
   I will conclude with an overview of our future plans, along with
   some musings on the promises and perils of this approach.
-
 }
-  
+}
+
+%% Context
+\section{What is the \emph{context}?  Medical research}
+
+\subsection{Medical research}
+
+We have important questions...
+
+\frame{
+  \frametitle{Medical research: important questions}
+  \begin{description}
+    \item[Cause] What is the underlying cause of disease?
+    \item[Symptoms] What are the consequences of disease?
+    \item[System Understanding] How does the biological system work?
+    \item[Diagnosis] Does this individual have disease? (Biomarkers)
+    \item[Treatment Identification] What can we do to prevent/treat
+      disease/symptoms?
+    \item[Treatment Efficacy] Is the treatment working? (Biomarkers)
+    \item[Prediction] What is the future state of an individual? 
+    \item[Predictive Tox] What is the consequence of exposure to X?
+    \item[Elucidatio of Mechanism] P causes Q. Why?
+  \end{description}
+}
+
+\subsection{Too much data}
+
+Recent advances now give use huge volumes of data of unprecidented
+resolution.  
+
+\frame{
+  \frametitle{'high-resolution' biolog yields too much data}
+  \begin{description}
+  \item[Genetics] Past: 1-20 Markers, Present: 100K - 500K SNPs,
+    Future: 3B bases
+  \item[Gene Expression] Past: 1-20 'probes', Present: 72K 'probesets'
+    Future: >250K(?) splice variants
+  \item[Proteins] Past: 1-5 Present: 1-5K, Future: >1M(?) 
+  \items[Metabolites] Past: 1-20:  Present: 50-500, Future: ??
+  \end{itemize}
+}
+
+So much so, that we can't keep track in our heads any more!
+
+\subsection{Systems Biology}
+\frame{
+  \frametitle{We need new abstractions $\right$ systems biology}
+  \begin{description}
+  \item[Core idea] Study the system, not the individual components.
+  \item[Potential benefits] 
+    \begin{enumerate}
+      \item Combine diverse data types (RNA, Protien, Metabolites)
+      \item Permits prediction
+      \item Permits search for underlying causes
+      \item Allows abstraction of low-level facts into higher level
+        'systems'.
+    \end{enumerate}
+  \end{description}
+}
+
+\section{What is the \emph{problem}? Modeling complex biological systems}
+
+\subsection{What are the needs?}
+\frame{
+Model that 
+\begin{itemize}
+\item allows use of data of varying quality
+\item allows use of data at varying scales  
+\item allows fitting observed experimental data
+\item allows prediction
+\item is easy to understand
+\item is reliable
+\item handles and quantifies uncertaintly
+\item is reliable to errors in structure (missing or incorrect relationships)
+\end{itemize} 
+}
+\subsection{2 Traditions}
+
+\frame{
+\begin{description}
+\item[Deterministic models of mechanism] ~
+  \begin{itemize}
+    \item[+] Captures known relationships
+    \item[+] Easy to construct
+    \item[+] Based on causation
+    \item[+] Direct mechanistic interpretation
+    \item[+] Long history
+    \item[-] Results are very dependent on the structure of the model 
+    \item[-] Not amenable to fitting data
+    \item[-] No support for uncertaintly of inputs
+    \item[-] No support for quantifying uncertaintly of outputs
+    \item[-] Easy to adapt to new relationship structures
+    \item[-] Sometimes impossible to process mathematically
+  \end{itemize}
+\item[(Frequentist) Statistical models of association] ~
+  \begin{itemize}
+    \item[-] Little support for capturing known relationships
+    \item[+] Little information need be provided
+    \item[+] Easy to construct
+    \item[-] Based on association
+    \item[\~] Shorter history
+    \item[+] Results tend to be robust to the structure of the model 
+    \item[+] Amenable to fitting data
+    \item[-] Little support for uncertaintly of inputs (generally only dependent variable)
+    \item[+] Support for quantifying uncertaintly of outputs
+    \item[+] May be difficult to adapt to new relationship structures
+    \item[-] Usually straightforwared to process mathematically
+  \end{itemize}
+\end{description}
+}
+
+\section{What is the \emph{idea}? Combine deterministic mathematical models
+  and Bayesian statistics}
+\section{How was this idea implemented?}
+
+\frame{
+\begin{enumerate}
+\item Mathematical model
+\item Priors
+\item Experimental Data
+\item MCMC
+\end{enumerate}
+}
+\section{Well does it work?}
+
+\subsection{Example}
+
+5 reaction model
+\begin{enumerate}
+\item Specify true model parameters
+\item Simulate observed data (Gillespie method)
+\item Fit model
+\item Compare with true model
+\end{enumerate}
+
+\section{How does it compare to other solutions?}
+
+Other methods
+\begin{itemize}
+\item ODEs
+\item Michelson-Morley equations alone
+\item Statistics alone
+  \begin{itemize}
+  \item Maximum likelihood
+  \item Method of moments
+  \end{itemize}
+\item Manual
+\item[*] Relationship Graph
+\end{itemize}
+
+\section{What next?}
+
+\begin{itemize}
+\item Apply to polyol pathway (glucose - sorbitol - fructose)
+\item 
+\end{itemize}
+
+\appendix
+
 \section{introduction}
 
-  Historically, there are two fundamentally different approaches to
-  modeling biological systems: deterministic models of mechanism, and
-  statistical models of association. Both techniques have played a
-  fundamental role in learning about biology.
+Historically, there are two fundamentally different approaches to
+modeling biological systems: deterministic models of mechanism, and
+statistical models of association. Both techniques have played a
+fundamental role in learning about biology.
   
   Deterministic mathematical models (e.g systems of ordinary
   differential equations - ODEs) excel at representing direct
