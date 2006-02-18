@@ -1,14 +1,35 @@
 \section{METHODS}
 
+\begin{verbatim}
+$Id$
+\end{verbatim}
+
   \subsection{The Data}
   
     The data is generated with Gillespie's
     algorithm for stochastic simulation of chemical reactions
-    \cite{Gillespie77}. 
-    Four reaction sequences have been simulated: linear sequences of 3, 5,
-    and 7 reactions and a branched sequence of 7 reactions. However,
-    in this paper we present the results for the 5- reaction sequence
-    only. The sequence is
+    \cite{Gillespie77}. In this paper we present the results for a 
+    5-reaction sequence that is sampled at 12, 16, or 25 time points 
+    with 3 replicates at each time point. 
+<<data, echo=F, eval=F>>=1
+# gillespie.out - output from the Gillespie simulation
+source('R/getPaperData.R')
+source('R/getPaperRates.R')
+# trim the Gillespie output
+rawdata <- read.table('data/gillespie.out',header=T)[2528:7160,]
+# sampling times:
+# times12 <- c(16:19,20.5,21,seq(24,39,3))
+times16 <- c(16:19,20.5,21,seq(22,40,2))
+# times25 <- c(16:19,20.5,21:40)
+# generating the MCMC input files, e.g., input16.dat
+data <- getPaperData(rawdata,20,times16,npoints=3, varVector=c(50,70,60,40,40))
+rates <- getPaperRates(data,1:12,13:48)
+temp <- matrix(0,nrow=16,ncol=11)
+for (i in 1:16) temp[i,] <- (rates[3*i,]+rates[3*i-1,]+rates[3*i-2,])/3
+colnames(temp) <- colnames(rates)
+write.table(temp,file="data/input16.dat",row.names=F,quote=F)
+@  
+    The sequence is
     \begin{reaction} source \yields R1 \yields R2 \yields
       R3 \yields R4 \yields R5 \yields sink \end{reaction}
     and the the equations that were used in the Gillespie simulatiuon
@@ -38,7 +59,7 @@
     the perturbation of $R1$ at $time = 20$ results in the time
     courses plotted in Figure~\ref{pulse}.
 
-<<echo=F,eval=T>>=1
+<<echo=F,eval=T>>=2
 source("R/pulse.R")
 rawdata <- read.table("data/rawdata.dat",header=T)
 attach(rawdata)
