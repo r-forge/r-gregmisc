@@ -19,7 +19,9 @@
 
 \begin{document}
 
-$ $Id$ $
+\begin{verbatim}
+$Id$
+\end{verbatim}
 
 \begin{frontmatter}
 

@@ -1,5 +1,9 @@
 \section{Discussion}
 
+\begin{verbatim}
+$Id$
+\end{verbatim}
+
 We are interested in assessing the usefulness of Markov chain Monte Carlo 
 (MCMC) methods for the fitting of models of metabolic pathways. Fitting 
 these models can be difficult because the pathways are described by sets 
