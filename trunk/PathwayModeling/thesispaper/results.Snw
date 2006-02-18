@@ -14,7 +14,7 @@ generally were skewed to the right and had thicker
 tails than normal distributions as illustrated in
 Figure~\ref{densities}.
 
-<<fig4,echo=F,eval=T>>=3
+<<fig4,echo=F,eval=F>>=3
 source("R/plotDensities.R")
 source("R/getModes.R")
 output16 <- read.table("data/output16.AllComp.thinned")
@@ -40,7 +40,7 @@ par(mfrow=c(1,1))
 The effect of the number of data points on the parameter distributions
 can be seen in Figure~\ref{converged}.
 
-<<fig5,echo=F,eval=T>>=4
+<<fig5,echo=F,eval=F>>=4
 source("R/plotDensity.R")
 source("R/plotConverged.R")
 output12 <- read.table("data/output12.AllComp.thinned")
@@ -68,7 +68,7 @@ Figure~\ref{scatter} is an example of a bivariate scatterplot of the
 distributions. There is correlation between some pairs of parameters, e.g.,
 $d_1$ -- $d_2$, but no evidence of multi-modality.
 
-<<fig6, echo=F,eval=T>>=5
+<<fig6, echo=F,eval=F>>=5
 output16 <- read.table("data/output16.AllComp.thinned")
 mcmc.cor <- function(x,y) {
     par(usr=c(0,1,0,1))
@@ -99,7 +99,7 @@ intervals. The fits of the resulting models to the 16-point data set
 is shown in Figure~\ref{fits}. Quantitative measures of the fits for
 all the algorithms are given in Table~\ref{MSq}.
 
-<<fig7, echo=F, eval=T>>=6
+<<fig7, echo=F, eval=F>>=6
 source("R/paperSSQ.R")
 source("R/getModes.R")
 source("R/do.optim.R")
@@ -160,7 +160,7 @@ updated for each evaluation of the likelihood method whereas the
 all-component Metropolis and NKC algorithms update all the parameters
 for each likelihood evaluation.
 
-<<fig8, echo=F,eval=T>>=7
+<<fig8, echo=F,eval=F>>=7
 source("R/getMSDvsEvals.R")
 source("R/plotMSD16.R")
 source('R/paperSSQ.R')

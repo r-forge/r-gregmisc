@@ -59,7 +59,7 @@ write.table(temp,file="data/input16.dat",row.names=F,quote=F)
     the perturbation of $R1$ at $time = 20$ results in the time
     courses plotted in Figure~\ref{pulse}.
 
-<<echo=F,eval=T>>=2
+<<echo=F,eval=F>>=2
 source("R/pulse.R")
 rawdata <- read.table("data/rawdata.dat",header=T)
 attach(rawdata)
