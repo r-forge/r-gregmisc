@@ -14,14 +14,14 @@ generally were skewed to the right and had thicker
 tails than normal distributions as illustrated in
 Figure~\ref{densities}.
 
-<<fig4,echo=F,eval=F>>=3
+<<fig4,echo=F,eval=T>>=3
 source("R/plotDensities.R")
 source("R/getModes.R")
 output16 <- read.table("data/output16.AllComp.thinned")
 modes <- getModes(output16)
 SD <- numeric(9)
 for (i in 1:9) SD[i] <- sd(output16[,i])
-pdf(file="figures/densities.pdf",width=6,height=6)
+pdf(file="figures/tempDir/densities.pdf",width=6,height=6)
 par(mfrow=c(3,3))
 plotDensities(output16)
 dev.off()
@@ -29,7 +29,7 @@ par(mfrow=c(1,1))
 @
 \begin{figure}
   \centering
-  \includegraphics[scale=0.8]{figures/densities}
+  \includegraphics[scale=0.8]{figures/tempDir/densities}
   \caption[Histograms of the marginal probability distributions]{Histograms of the marginal probability distributions for
   the 5-reaction model generated with the all-components Metropolis
   algorithm and the 16-point dataset. The curves are normal densities with means equal to the
@@ -40,13 +40,13 @@ par(mfrow=c(1,1))
 The effect of the number of data points on the parameter distributions
 can be seen in Figure~\ref{converged}.
 
-<<fig5,echo=F,eval=F>>=4
+<<fig5,echo=F,eval=T>>=4
 source("R/plotDensity.R")
 source("R/plotConverged.R")
 output12 <- read.table("data/output12.AllComp.thinned")
 output16 <- read.table("data/output16.AllComp.thinned")
 output25 <- read.table("data/output25.AllComp.thinned")
-pdf(file="figures/converged.pdf",width=6,height=6)
+pdf(file="figures/tempDir/converged.pdf",width=6,height=6)
 par(mfrow=c(3,3))
 plotConverged()
 dev.off()
@@ -54,7 +54,7 @@ par(mfrow=c(1,1))
 @
 \begin{figure}
   \centering
-  \includegraphics[scale=0.9]{figures/converged}
+  \includegraphics[scale=0.9]{figures/tempDir/converged}
   \caption{Parameter distributions as functions of the number of data
   points for the all-components algorithm. (---------) prior
   distribution; ({\color{red} - - - -}) 12 points; ({\color{green}
@@ -68,7 +68,7 @@ Figure~\ref{scatter} is an example of a bivariate scatterplot of the
 distributions. There is correlation between some pairs of parameters, e.g.,
 $d_1$ -- $d_2$, but no evidence of multi-modality.
 
-<<fig6, echo=F,eval=F>>=5
+<<fig6, echo=F,eval=T>>=5
 output16 <- read.table("data/output16.AllComp.thinned")
 mcmc.cor <- function(x,y) {
     par(usr=c(0,1,0,1))
@@ -76,7 +76,7 @@ mcmc.cor <- function(x,y) {
     txt <- format(r,digits=2)
     text(0.5,0.5,txt,cex=1.4)
     }
-pdf(file="figures/scatterPlot.pdf",width=8,height=8)
+pdf(file="figures/tempDir/scatterPlot.pdf",width=8,height=8)
 par(pch='.')
 pairs(output16[sample(1:20000,2000),],labels=c('d1','d2','d3','d4','d5','d6','d7','d8','d9'),lower.panel=mcmc.cor)
 dev.off()
@@ -84,7 +84,7 @@ par(pch=1)
 @
 \begin{figure}
   \centering
-  \includegraphics[scale=0.6]{figures/scatterPlot}
+  \includegraphics[scale=0.6]{figures/tempDir/scatterPlot}
   \caption[Bivariate scatter plots of the parameter distributions]{Bivariate scatter plots of the parameter distributions for
   the 5-reaction model found with the all-components Metropolis
   algorithm (upper triangle); correlation coefficients (lower
@@ -99,7 +99,7 @@ intervals. The fits of the resulting models to the 16-point data set
 is shown in Figure~\ref{fits}. Quantitative measures of the fits for
 all the algorithms are given in Table~\ref{MSq}.
 
-<<fig7, echo=F, eval=F>>=6
+<<fig7, echo=F, eval=T>>=6
 source("R/paperSSQ.R")
 source("R/getModes.R")
 source("R/do.optim.R")
@@ -118,17 +118,17 @@ modes<-getModes(output16)
 temp<-do.optim(start=modes[-10],scail=modes[-10])
 temp<-do.optim(start=temp$par,scail=temp$par)
 paramsML<-temp
-pdf(file="figures/V%dfitted.pdf",onefile=FALSE,width=10,height=5.5)
+pdf(file="figures/tempDir/V%dfitted.pdf",onefile=FALSE,width=10,height=5.5)
 plotVi(Dsamp,input16)
 dev.off()
 detach(input16)
 @
 \begin{figure}
   \centering
-  \subfloat[v2]{\includegraphics[scale=0.35]{figures/V1fitted}}
-  \subfloat[v3]{\includegraphics[scale=0.35]{figures/V2fitted}}\\
-  \subfloat[v4]{\includegraphics[scale=0.35]{figures/V3fitted}}
-  \subfloat[v5]{\includegraphics[scale=0.35]{figures/V4fitted}}
+  \subfloat[v2]{\includegraphics[scale=0.35]{figures/tempDir/V1fitted}}
+  \subfloat[v3]{\includegraphics[scale=0.35]{figures/tempDir/V2fitted}}\\
+  \subfloat[v4]{\includegraphics[scale=0.35]{figures/tempDir/V3fitted}}
+  \subfloat[v5]{\includegraphics[scale=0.35]{figures/tempDir/V4fitted}}
   \caption{Curves fit to the 16-point data with the all-components
   algorithm}
   \label{fits}
@@ -160,7 +160,7 @@ updated for each evaluation of the likelihood method whereas the
 all-component Metropolis and NKC algorithms update all the parameters
 for each likelihood evaluation.
 
-<<fig8, echo=F,eval=F>>=7
+<<fig8, echo=F,eval=T>>=7
 source("R/getMSDvsEvals.R")
 source("R/plotMSD16.R")
 source('R/paperSSQ.R')
@@ -172,7 +172,7 @@ for (i in 1:10) {
 file <- sub('#',as.character(i),'NKC.MSD.dat#')
 assign(file, read.table(paste("data/",file,sep="")))
 }
-pdf(file='figures/MSR16.pdf',width=9,height=6)
+pdf(file='figures/tempDir/MSR16.pdf',width=9,height=6)
 plotMSD16()
 dev.off()
 detach(input16)
@@ -182,7 +182,7 @@ detach(input16)
 %  \subfloat[12 points]{
 %    \includegraphics[scale=0.5]{figures/MSR12}}
 %  \subfloat[16 points]{
-    \includegraphics[scale=0.5]{figures/MSR16}
+    \includegraphics[scale=0.5]{figures/tempDir/MSR16}
 %  \subfloat[25 points]{
 %    \includegraphics[scale=0.5]{figures/MSR25}}
   \caption[Mean squared residuals vs. number of likelihood

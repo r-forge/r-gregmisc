@@ -59,18 +59,18 @@ write.table(temp,file="data/input16.dat",row.names=F,quote=F)
     the perturbation of $R1$ at $time = 20$ results in the time
     courses plotted in Figure~\ref{pulse}.
 
-<<echo=F,eval=F>>=2
+<<echo=F,eval=T>>=2
 source("R/pulse.R")
 rawdata <- read.table("data/rawdata.dat",header=T)
 attach(rawdata)
-pdf(file="figures/pulse.pdf",width=9,height=5)
+pdf(file="figures/tempDir/pulse.pdf",width=9,height=5)
 pulse()
 dev.off()
 detach(rawdata)
 @
     \begin{figure}
       \centering
-      \includegraphics[scale=0.5]{figures/pulse}
+      \includegraphics[scale=0.5]{figures/tempDir/pulse}
       \caption[Reactant concentrations following a pulse of R1]{Reactant concentrations following a pulse of R1 at
       $time=20$ for the sequence of reactions $R1\rightarrow
       R2\rightarrow R3\rightarrow R4\rightarrow R5\rightarrow sink$.}
