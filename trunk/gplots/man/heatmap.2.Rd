@@ -12,8 +12,8 @@
 heatmap.2 (x,
 
                      # dendrogram control
-                     Rowv=NULL,
-                     Colv=if(symm)"Rowv" else NULL,
+                     Rowv=TRUE,
+                     Colv=if(symm)"Rowv" else TRUE,
                      distfun = dist,
                      hclustfun = hclust,
                      dendrogram = c("both","row","column","none"),
@@ -76,11 +76,15 @@ heatmap.2 (x,
 \arguments{
   % Dendogram Control
   \item{x}{numeric matrix of the values to be plotted. }
+
   \item{Rowv}{determines if and how the \emph{row} dendrogram should be
-    reordered.	Either a \code{\link{dendrogram}} or a vector of values
-    used to reorder the row dendrogram or \code{\link{FALSE}} to
-    suppress reordering or by default, \code{\link{NULL}}, see
-    \emph{Details} below.}
+    reordered.	By default, it is TRUE, which implies dendrogram is
+    computed and reordered based on row means. If NULL or FALSE, then no
+    dendrogram is computed and reordering is done. If a
+    \code{\link{dendrogram}}, then it is used "as-is", ie
+    without any reordering. If a vector of integers, then dendrogram is
+    computed and reordered based on the order of the vector.}
+  
   \item{Colv}{determines if and how the \emph{column} dendrogram should be
     reordered.	Has the options as the \code{Rowv} argument above and
     \emph{additionally} when \code{x} is a square matrix, \code{Colv =
@@ -91,7 +95,9 @@ heatmap.2 (x,
     when \code{Rowv} or \code{Colv} are not dendrograms.  Defaults to
     \code{\link{hclust}}.}
   \item{dendrogram}{character string indicating whether to draw 'none', 
-    'row', 'column' or 'both' dendrograms.  Defaults to 'both'.}
+    'row', 'column' or 'both' dendrograms.  Defaults to 'both'. However,
+  if Rowv (or Colv) is FALSE or NULL and dendrogram is 'both', then a
+  warning is issued and Rowv (or Colv) arguments are honoured.}
   \item{symm}{logical indicating if \code{x} should be treated
     \bold{symm}etrically; can only be true when \code{x} is a square matrix.}
   % data scaling

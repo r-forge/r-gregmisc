@@ -3,8 +3,8 @@
 heatmap.2 <- function (x,
 
                      # dendrogram control
-                     Rowv=NULL,
-                     Colv=if(symm)"Rowv" else NULL,
+                     Rowv = TRUE,
+                     Colv=if(symm)"Rowv" else TRUE,
                      distfun = dist,
                      hclustfun = hclust,
                      dendrogram = c("both","row","column","none"),
@@ -103,56 +103,112 @@ heatmap.2 <- function (x,
 
     if(missing(cellnote))
       cellnote <- matrix("", ncol=ncol(x), nrow=nrow(x))
+
+  ## Check if Rowv and dendrogram arguments are consistent
+  if ( ( (!isTRUE(Rowv)) || (is.null(Rowv))) && (dendrogram=="both") )
+  {
+    if (Colv)
+      dendrogram <- "column"
+    else
+      dedrogram <- "none"
     
-    ## by default order by row/col mean
-    if(is.null(Rowv)) Rowv <- rowMeans(x, na.rm = na.rm)
-    if(is.null(Colv)) Colv <- colMeans(x, na.rm = na.rm)
+    warning("Discrepancy: Rowv is FALSE, which does no reordering \n",
+             "and no display, whereas dendrogram is `both', which \n",
+             "displays both row and column dendrograms.\n",
+             "Using the arguments of Rowv and ignoring dendrogram=both\n")
+    
+  }
+
+ ## Check if Colv and dendrogram arguments are consistent
+  if ( ( (!isTRUE(Colv)) || (is.null(Colv))) && (dendrogram=="both") )
+   {
+     if (Rowv)
+       dendrogram <- "row"
+     else
+       dendrogram <- "none"
+     
+     warning("Discrepancy: Colv is FALSE, which does no reordering \n",
+             "and no display, whereas dendrogram is `both', which \n",
+             "displays both row and column dendrograms.\n",
+             "Using the arguments of Colv and ignoring dendrogram=both\n")
+   }
+
+  
+  
+  ## by default order by row/col mean
+  ## if(is.null(Rowv)) Rowv <- rowMeans(x, na.rm = na.rm)
+  ## if(is.null(Colv)) Colv <- colMeans(x, na.rm = na.rm)
 
     ## get the dendrograms and reordering indices
 
-    if( dendrogram %in% c("both","row") )
-      {
-        if(inherits(Rowv, "dendrogram"))
-          ddr <- Rowv
-        else {
-          hcr <- hclustfun(distfun(x))
-          ddr <- as.dendrogram(hcr)
-          if(!is.logical(Rowv) || Rowv)
-	    ddr <- reorder(ddr, Rowv)
-        }
-        rowInd <- order.dendrogram(ddr)
-        if(nr != length(rowInd))
-          stop("row dendrogram ordering gave index of wrong length")
-      }
-    else
-      {
-        rowInd <- order(Rowv)
-      }
+   ## if( dendrogram %in% c("both","row") )
+    ##  { ## dendrogram option is used *only* for display purposes
+  if(inherits(Rowv, "dendrogram"))
+    {
+      ddr <- Rowv ## use Rowv 'as-is', when it is dendrogram
+      rowInd <- order.dendrogram(ddr)      
+    }
+else if (is.integer(Rowv))
+    { ## Compute dendrogram and do reordering based on given vector
+      hcr <- hclustfun(distfun(x))
+      ddr <- as.dendrogram(hcr)
+      ddr <-  reorder(ddr, Rowv)
+      
+      rowInd <- order.dendrogram(ddr)
+      if(nr != length(rowInd))
+        stop("row dendrogram ordering gave index of wrong length")
+    }
+  else if (isTRUE(Rowv)) 
+    { ## If TRUE, compute dendrogram and do reordering based on rowMeans
+      Rowv <- rowMeans(x, na.rm = na.rm)
+      hcr <- hclustfun(distfun(x))
+      ddr <- as.dendrogram(hcr)
+      ddr <- reorder(ddr, Rowv)
+      
+      rowInd <- order.dendrogram(ddr)
+      if(nr != length(rowInd))
+        stop("row dendrogram ordering gave index of wrong length")
+    } else {
+      rowInd <- nr:1
+    }
+  
+  ## if( dendrogram %in% c("both","column") )
+  ##   {
+  if(inherits(Colv, "dendrogram"))
+    {
+      ddc <- Colv ## use Colv 'as-is', when it is dendrogram
+      colInd <- order.dendrogram(ddc)
+    }
+  else if(identical(Colv, "Rowv")) {
+    if(nr != nc)
+      stop('Colv = "Rowv" but nrow(x) != ncol(x)')
+    ddc <- ddr
+  } else if(is.integer(Colv))
+    {## Compute dendrogram and do reordering based on given vector
+      hcc <- hclustfun(distfun(if(symm)x else t(x)))
+      ddc <- as.dendrogram(hcc)
+      ddc <- reorder(ddc, Colv)
 
-    if( dendrogram %in% c("both","column") )
-      {
-        if(inherits(Colv, "dendrogram"))
-          ddc <- Colv
-        else if(identical(Colv, "Rowv")) {
-          if(nr != nc)
-            stop('Colv = "Rowv" but nrow(x) != ncol(x)')
-          ddc <- ddr
-        }
-        else {
-          hcc <- hclustfun(distfun(if(symm)x else t(x)))
-          ddc <- as.dendrogram(hcc)
-          if(!is.logical(Colv) || Colv)
-	    ddc <- reorder(ddc, Colv)
-        }
-        colInd <- order.dendrogram(ddc)
-        if(nc != length(colInd))
-          stop("column dendrogram ordering gave index of wrong length")
-      }
-    else
-      {
-        colInd <- order(Colv)
-      }
+      colInd <- order.dendrogram(ddc)
+      if(nc != length(colInd))
+        stop("column dendrogram ordering gave index of wrong length")
+    }
+else if (isTRUE(Colv))
+  {## If TRUE, compute dendrogram and do reordering based on rowMeans
+    Colv <- colMeans(x, na.rm = na.rm)
+    hcc <- hclustfun(distfun(if(symm)x else t(x)))
+    ddc <- as.dendrogram(hcc)
+    ddc <- reorder(ddc, Colv)
 
+    colInd <- order.dendrogram(ddc)
+    if(nc != length(colInd))
+      stop("column dendrogram ordering gave index of wrong length")
+  }
+else
+  {
+    colInd <- 1:nc
+  }
+  
     ## reorder x & cellnote
     x <- x[rowInd, colInd]
     x.unscaled <- x
@@ -343,7 +399,8 @@ heatmap.2 <- function (x,
       plot.new()
 
     par(mar = c(0, 0, if(!is.null(main)) 5 else 0, margins[2]))
-    if( dendrogram %in% c("both","column") )
+
+  if( dendrogram %in% c("both","column") )
       {
         plot(ddc, axes = FALSE, xaxs = "i", leaflab = "none")
       }
