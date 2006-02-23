@@ -50,9 +50,11 @@ heatmap.2 <- function (x,
 
                      # color key + density info
                      key = TRUE,
+                     keysize = 1.5,
                      density.info=c("histogram","density","none"),
                      denscol=tracecol,
-                     symkey = TRUE,
+                     #symkey = TRUE, # should be something like
+                     symkey = min(x < 0, na.rm=TRUE),
                      densadj = 0.25,
 
                      # plot labels
@@ -105,32 +107,28 @@ heatmap.2 <- function (x,
       cellnote <- matrix("", ncol=ncol(x), nrow=nrow(x))
 
   ## Check if Rowv and dendrogram arguments are consistent
-  if ( ( (!isTRUE(Rowv)) || (is.null(Rowv))) && (dendrogram=="both") )
+  if ( ( (!isTRUE(Rowv)) || (is.null(Rowv))) && (dendrogram %in% c("both","row") ) )
   {
     if (Colv)
       dendrogram <- "column"
     else
       dedrogram <- "none"
     
-    warning("Discrepancy: Rowv is FALSE, which does no reordering \n",
-             "and no display, whereas dendrogram is `both', which \n",
-             "displays both row and column dendrograms.\n",
-             "Using the arguments of Rowv and ignoring dendrogram=both\n")
+    warning("Discrepancy: Rowv is FALSE, while dendrogram is `",
+            dendrogram, "'. Omitting row dendogram.")
     
   }
 
  ## Check if Colv and dendrogram arguments are consistent
-  if ( ( (!isTRUE(Colv)) || (is.null(Colv))) && (dendrogram=="both") )
+  if ( ( (!isTRUE(Colv)) || (is.null(Colv))) && (dendrogram %in% c("both","column")) )
    {
      if (Rowv)
        dendrogram <- "row"
      else
        dendrogram <- "none"
      
-     warning("Discrepancy: Colv is FALSE, which does no reordering \n",
-             "and no display, whereas dendrogram is `both', which \n",
-             "displays both row and column dendrograms.\n",
-             "Using the arguments of Colv and ignoring dendrogram=both\n")
+    warning("Discrepancy: Colv is FALSE, while dendrogram is `",
+            dendrogram, "'. Omitting column dendogram.")
    }
 
   
@@ -262,7 +260,7 @@ else
 
     ## Calculate the plot layout
     lmat <- rbind(4:3, 2:1)
-    lwid <- lhei <- c(1, 4)
+    lhei <- lwid <- c(keysize, 4)
     if(!missing(ColSideColors)) { ## add middle row to layout
 	if(!is.character(ColSideColors) || length(ColSideColors) != nc)
 	    stop("'ColSideColors' must be a character vector of length ncol(x)")
