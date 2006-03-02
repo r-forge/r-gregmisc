@@ -1,7 +1,7 @@
 ####
 ## Figure 1
 ####
-.libPaths("~/Rlib")
+.libPaths("~warneg/Rlib")
 library(gplots)
 
 data(Titanic)
