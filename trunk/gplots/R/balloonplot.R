@@ -249,7 +249,7 @@ balloonplot.default <- function(x,y,z,
       ## row totals
       text(
            x=nx + nlabels.y*rowmar+0.25+strwidth("'"),
-           y= (1:ny),
+           y= (ny:1),
            labels=format(c(sumz, colsumz), digits=label.digits)[-1],
            font=1,
            cex=par("cex")*0.75,
