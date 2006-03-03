@@ -42,7 +42,7 @@ The \code{balloonplot} function accepts a table (to be displayed as
 found) or lists of vectors for x (column category), y (row category)
 and z (data value) from which a table will be constructed.
 
-The \code{balloonplot} function creates a graphical table,
+The \code{balloonplot} function creates a graphical table
 where each cell displays the appropriate numeric value plus a
 colored circle whose size reflects the relative magnitude of the
 corresponding component. The
@@ -149,9 +149,13 @@ totals.
 Of course, the number of surviving passengers is only half of the
 story.  We could create a similar plot showing the number of
 passengers who did not survive.  Alternatively, we can simply add
-survival status as another variable to the display, setting the color
-of the circles to green for passengers who survived, and magenta for
-those who did not (Figure 3).
+survival status as another variable to the display, setting the
+color of the circles to green for passengers who survived, and
+magenta for those who did not (Figure 3).  This conveys considerably
+more information than Figures 1 and 2 without substantial loss of
+clarity. The large magenta circles make it clear that most
+passengers did not survive.
+
 
 \begin{figure}
 \includegraphics[width=\textwidth]{Figure3.pdf}
@@ -161,18 +165,15 @@ those who did not (Figure 3).
   represent the passengers who did not survive.}
 \end{figure}
 
-Figure~\ref{figure:Figure3} conveys considerably more information than
-Figures 1 and 2 without substantial loss of clarity. The large magenta
-circles make it clear that most passengers did not survive.
 
-To further improve the display, we have added a visual
+To further improve the display, we add a visual
 representation of the row and column sums (Figure
 \ref{figure:Figure4}).  This is accomplished using light grey bars
 behind the row and column headers.  The length of each bar is
 proportional to the corresponding sum, allowing rapid visual
 ascertainment of their relative sizes.  We have also added
 appropriately colored markers adjacent to the headers under
-``Survived'' to emphasize the meaning of the colors.
+``Survived'' to emphasize the meaning of each color.
 
 {
 \small
