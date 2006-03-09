@@ -1,3 +1,4 @@
+.libPaths("~/Rlib")
 library(gplots)
 
 #source("/home/jainn02/projects/gregmisc/gplots/R/heatmap.2.R")
