@@ -124,7 +124,7 @@ heatmap.2 <- function (x,
 
  ## Check if Colv and dendrogram arguments are consistent
   if ( ( (!isTRUE(Colv)) || (is.null(Colv)))
-      && (Colv != "Rowv") && (dendrogram %in% c("both","column")) )
+      && (dendrogram %in% c("both","column")) )
    {
      if (is.logical(Rowv) && (Rowv))
        dendrogram <- "row"
