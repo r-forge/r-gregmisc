@@ -29,8 +29,11 @@ heatmap.2(x, Colv=FALSE, dendrogram="both") ## generate warning!
 
 heatmap.2(x,dendrogram="both", Rowv=FALSE) ## row and col reordering done, but only col dendrogram plotted 
 heatmap.2(x,dendrogram="row",  Rowv=FALSE) 
-heatmap.2(x,dendrogram="col",  Rowv=FALSE) 
+
+
+heatmap.2(x,dendrogram="col",  Rowv=FALSE)
 heatmap.2(x,dendrogram="none", Rowv=FALSE) 
+
 
 heatmap.2(x,dendrogram="both", Colv=FALSE) ## row and col reordering done, but only row dendrogram plotted
 heatmap.2(x,dendrogram="row",  Colv=FALSE)
