@@ -1,16 +1,14 @@
 \documentclass[a4paper]{report}
 \usepackage{Rnews}
 \usepackage[round]{natbib}
-\usepackage{array}
-\usepackage{graphicx}
-\bibliographystyle{plain}
+\bibliographystyle{abbrvnat}
 
 \begin{document}
 
 \begin{article}
-\author{by Nitin Jain and Gregory R. Warnes}
 \title{Balloon Plot}
 \subtitle{Graphical tool for displaying tabular data}
+\author{by Nitin Jain and Gregory R. Warnes}
 
 \maketitle
 
@@ -240,9 +238,9 @@ standard tabular display.
 
 Other researchers have pursued more general approaches to the visual
 display of tabular data. (For a review of that work, see
-Hartigan and Kleiner \cite{Hartigan.Kleiner.1981} or the other references provided at the
-end of this article.)  One of the most popular methods developed by
-these researchers is the \code{mosaic plot} \cite{Snee.1974}.
+Hartigan and Kleiner \citep{Hartigan.Kleiner.1981} or 
+Friendly \citep{Friendly.1992}.)  One of the most popular methods developed by
+these researchers is the \code{mosaic plot} \citep{Snee.1974}.
 
 We have previously experimented with mosaic plots.  Unfortunately,
 we found that they do not lend themselves to rapid ascertainment of
@@ -275,21 +273,34 @@ for displaying the row and column sums.
        Nitin Jain, Smith Hanley Inc, USA\\
 \email{nitin.jain@pfizer.com}}
 
-\end{article}
+\section*{References}
 
-\begin{thebibliography}{99}
+\begin{thebibliography}{3}
+\expandafter\ifx\csname natexlab\endcsname\relax\def\natexlab#1{#1}\fi
+\expandafter\ifx\csname url\endcsname\relax
+  \def\url#1{{\tt #1}}\fi
 
-\bibitem{Snee.1974} ``Graphical display of two-way contingency tables'' Snee, R.D.
-  (1974) \textit{ The American Statistician}, 28, 9-12.
+\bibitem[Friendly(1992)]{Friendly.1992}
+M.~Friendly.
+\newblock Graphical methods for categorical data.
+\newblock {\em Proceedings of SAS SUGI 17 Conference}, 1992.
 
-\bibitem{Hartigan.Kleiner.1981} ``Mosaics for contingency tables'' J.A.Hartigan and B.
-  Kleiner. (1981) \textit{ Computer Science and Statistics:
-    Proceedings of the 13th Symposium on the Interface}. New York:
-  Springer-Verlag.
+\bibitem[Hartigan and Kleiner(1981)]{Hartigan.Kleiner.1981}
+J.~A. Hartigan and B.~Kleiner.
+\newblock Mosaics for contingency tables.
+\newblock {\em Computer Science and Statistics: Proceedings of the 13th
+  Symposium on the Interface. New York: Springer-Verlag}, 1981.
 
-\bibitem{Friendly.1992} ``Graphical Methods for Categorical Data'' Friendly, M.
-  (1992) \textit{Proceedings of SAS SUGI 17 Conference}
+\bibitem[Snee(1974)]{Snee.1974}
+R.~D. Snee.
+\newblock Graphical display of two-way contingency tables.
+\newblock {\em The American Statistician}, 28:\penalty0 9--12, 1974.
 
 \end{thebibliography}
+
+  
+
+\end{article}
+
 
 \end{document}
