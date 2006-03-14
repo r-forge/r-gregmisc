@@ -33,5 +33,8 @@ importFrom(gtools, mixedsort)
 S3method(nobs,data.frame)
 S3method(nobs,default)
 S3method(nobs,lm)
+S3method(trim, character)
+S3method(trim, default)
+S3method(trim, factor)
 S3method(reorder,factor)
 
