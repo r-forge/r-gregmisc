@@ -1,4 +1,4 @@
-\section{METHODS}
+\section{Methods}
 
 \begin{verbatim}
 $Id$
@@ -59,7 +59,7 @@ write.table(temp,file="data/input16.dat",row.names=F,quote=F)
     the perturbation of $R1$ at $time = 20$ results in the time
     courses plotted in Figure~\ref{pulse}.
 
-<<echo=F,eval=T>>=2
+<<echo=F,eval=F>>=2
 source("R/pulse.R")
 rawdata <- read.table("data/rawdata.dat",header=T)
 attach(rawdata)
@@ -215,7 +215,7 @@ detach(rawdata)
       v_5 &\sim N\left(\frac{d_7R4}{d_8+R4} - d_9R5, \;\; \sigma^2\right)
     \end{align*}
     In this case there are 10 parameters to be estimated: the 9
-    coefficients $d_1$ -- $d_5$ and $\sigma^2$.
+    coefficients $d_1$ -- $d_9$ and $\sigma^2$.
 
     \subsubsection{MCMC sampling algorithms}
 
