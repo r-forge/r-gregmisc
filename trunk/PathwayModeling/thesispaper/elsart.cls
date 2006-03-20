@@ -22,7 +22,8 @@
  \def\RCSdate{#4}%
 }
 \readRCS
-$Header$
+%$Header$
+$Id$
 \def\@shortjnl{\relax}
  \def\esp@fileversion{2.18}
  \def\esp@filedate{2001/01/05}
