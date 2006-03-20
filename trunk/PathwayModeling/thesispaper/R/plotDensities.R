@@ -6,5 +6,6 @@ plotDensities <- function(output) {
         hist(output[,i],breaks=30,xlim=c(low,high),xlab=paste("d",i,sep=""),main="")
         par(new=T)
         plot(seq(low,high,step),dnorm(seq(low,high,step),modes[i],SD[i]),type='l',            xlim=c(low,high),xlab="",yaxt='n',ylab="")
+	abline(v=mcmcML[i],col=2)
     }
 }
