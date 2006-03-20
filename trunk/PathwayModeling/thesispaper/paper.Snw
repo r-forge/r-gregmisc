@@ -34,16 +34,16 @@ $Id$
 \address{University of Rhode Island, Kingston, RI}
   
 \begin{abstract}
-The usefulness of Markov chain Monte Carlo methods for the modeling
-of biochemical reactions is examined. With simulated data, it is
-shown that mechanistic models can be fit to sequences of enzymatic
+\textit{We have examined} the usefulness of \textit{Bayesian statistical methods} for the modeling
+of biochemical reactions. With simulated data, it is
+shown that mechanistic models can \textit{effectively} be fit to sequences of enzymatic
 reactions. These methods have the advantages of being relatively easy
 to use and producing probability distributions for the model
-parameters rather than point estimates.
+parameters rather than point estimates, \textit{allowing more informative statistical inferences to be drawn}.
 
 Three Markov chain Monte Carlo algorithms are used to fit models to
 data from a
-sequence of 4 enzymatic reactions. The algorithms 
+sequence of 4 enzymatic reactions. These algorithms 
 are evaluated with respect to
 the goodness-of-fit of the fitted models and the time to completion.
 It is shown that the algorithms produce essentially the same

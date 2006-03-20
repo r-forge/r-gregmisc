@@ -9,16 +9,37 @@ metabolic pathway has been estimated using MCMC simulation. Three
 algorithms were used for the simulations and they converged to similar
 distributions. 
 
-The marginal distributions for the parameters were mound-shaped. They
+The marginal distributions for the parameters were mound-shaped 
+(Figure~\ref{densities}). They
 generally were skewed to the right and had thicker
-tails than normal distributions as illustrated in
-Figure~\ref{densities}.
+tails than normal distributions. /textit{The modes of the distributions 
+turned out to be poor estimates of the maximum likelihood values for 
+the parameters. The maximum likelihood values were all larger than 
+the modes, and the difference increased as the position of the reaction 
+in the sequence increased. Correlated pairs of parameters 
+(e.g., $d_1$ --$d_2$ and $d_3$ --$d_4$, Figure~\ref{scatter}) were similar relative distances from their 
+modes. The significance of all this is not clear at this point.}
 
-<<fig4,echo=F,eval=T>>=3
-source("R/plotDensities.R")
+<<fig4,echo=F,eval=F>>=3
+source("R/paperSSQ.R")
 source("R/getModes.R")
+source("R/do.optim.R")
+source("R/plotDensities.R")
 output16 <- read.table("data/output16.AllComp.thinned")
-modes <- getModes(output16)
+input16 <- read.table("data/input16.dat", header=T)
+attach(input16)
+temp<-output16[sample(1:20000,5000),]
+temp2<-numeric(5000)
+for (i in 1:5000) temp2[i]<-paperSSQ(temp[i,])
+temp<-temp[order(temp2),]
+write.table(temp[1:4750,],file="figures/tempDir/Dsamp.dat",row.names=F,col.names=F)
+mcmcML <- as.numeric(temp[1,-10])
+write.table(mcmcML,file="figures/tempDir/mcmcML.dat",row.names=F,col.names=F)
+modes<-getModes(output16)
+temp<-do.optim(start=modes[-10],scail=modes[-10])
+temp<-do.optim(start=temp$par,scail=temp$par)
+optimML<-temp$par
+write.table(optimML,file="figures/tempDir/optimML.dat",row.names=F,col.names=F)
 SD <- numeric(9)
 for (i in 1:9) SD[i] <- sd(output16[,i])
 pdf(file="figures/tempDir/densities.pdf",width=6,height=6)
@@ -26,6 +47,7 @@ par(mfrow=c(3,3))
 plotDensities(output16)
 dev.off()
 par(mfrow=c(1,1))
+detach(input16)
 @
 \begin{figure}
   \centering
@@ -34,13 +56,14 @@ par(mfrow=c(1,1))
   the 5-reaction model generated with the all-components Metropolis
   algorithm and the 16-point dataset. The curves are normal densities with means equal to the
   medians of the distributions and variances equal to the variances of
-  the distributions.}
+  the distributions. \textit{Red vertical lines indicate the parameters values that 
+  minimize the mean squared residuals.}}
   \label{densities}
 \end{figure}
 The effect of the number of data points on the parameter distributions
 can be seen in Figure~\ref{converged}.
 
-<<fig5,echo=F,eval=T>>=4
+<<fig5,echo=F,eval=F>>=4
 source("R/plotDensity.R")
 source("R/plotConverged.R")
 output12 <- read.table("data/output12.AllComp.thinned")
@@ -55,7 +78,7 @@ par(mfrow=c(1,1))
 \begin{figure}
   \centering
   \includegraphics[scale=0.9]{figures/tempDir/converged}
-  \caption{Parameter distributions as functions of the number of data
+  \caption{\textit{Posterior distributions from different numbers} of data
   points for the all-components algorithm. (---------) prior
   distribution; ({\color{red} - - - -}) 12 points; ({\color{green}
   $\cdots\cdots$}) 16 points; ({\color{blue} -- $\cdot$ -- $\cdot$ --}) 25
@@ -63,12 +86,17 @@ par(mfrow=c(1,1))
   \label{converged}
 \end{figure}
 There is some narrowing of the distributions as the number of points
-increases from 16 to 25 but it is not pronounced. 
+increases from 16 to 25 but it is not pronounced. \textit{Overall, the 
+reduction in width varied from 18-fold for $d_9$ and 9-fold for $d_1$ to 
+1.5-fold for $d_4$}.
+
 Figure~\ref{scatter} is an example of a bivariate scatterplot of the
 distributions. There is correlation between some pairs of parameters, e.g.,
 $d_1$ -- $d_2$, but no evidence of multi-modality.
 
-<<fig6, echo=F,eval=T>>=5
+<<fig6, echo=F,eval=F>>=5
+source("R/paperPairs.R")
+mcmcML <-scan("figures/tempDir/mcmcML.dat")
 output16 <- read.table("data/output16.AllComp.thinned")
 mcmc.cor <- function(x,y) {
     par(usr=c(0,1,0,1))
@@ -78,7 +106,7 @@ mcmc.cor <- function(x,y) {
     }
 pdf(file="figures/tempDir/scatterPlot.pdf",width=8,height=8)
 par(pch='.')
-pairs(output16[sample(1:20000,2000),],labels=c('d1','d2','d3','d4','d5','d6','d7','d8','d9'),lower.panel=mcmc.cor)
+paperPairs(output16[sample(1:20000,2000),-10],labels=c('d1','d2','d3','d4','d5','d6','d7','d8','d9'),lower.panel=mcmc.cor)
 dev.off()
 par(pch=1)
 @
@@ -99,25 +127,19 @@ intervals. The fits of the resulting models to the 16-point data set
 is shown in Figure~\ref{fits}. Quantitative measures of the fits for
 all the algorithms are given in Table~\ref{MSq}.
 
-<<fig7, echo=F, eval=T>>=6
+<<fig7, echo=F, eval=F>>=6
 source("R/paperSSQ.R")
 source("R/getModes.R")
 source("R/do.optim.R")
 source("R/fitPaper.R")
 source("R/get95CI.R")
 source("R/plotVi.R")
+mcmcML <-scan("figures/tempDir/mcmcML.dat")
+optimML <-scan("figures/tempDir/optimML.dat")
 output16 <- read.table("data/output16.AllComp.thinned")
 input16 <- read.table("data/input16.dat",header=T)
 attach(input16)
-temp<-output16[sample(1:20000,5000),]
-temp2<-numeric(5000)
-for (i in 1:5000) temp2[i]<-paperSSQ(temp[i,])
-temp<-temp[order(temp2),]
-Dsamp<-as.matrix(temp[1:4750,])
-modes<-getModes(output16)
-temp<-do.optim(start=modes[-10],scail=modes[-10])
-temp<-do.optim(start=temp$par,scail=temp$par)
-paramsML<-temp
+Dsamp <- as.matrix(read.table("figures/tempDir/Dsamp.dat"))
 pdf(file="figures/tempDir/V%dfitted.pdf",onefile=FALSE,width=10,height=5.5)
 plotVi(Dsamp,input16)
 dev.off()
@@ -154,13 +176,17 @@ detach(input16)
 
 Rates of convergence are illustrated in Figure~\ref{SSQvsIter}. The
 mean sums of squared residuals (SSQ) are plotted vs. the number of
-likelihood evaluations for the three algorithms.
-For the 1-component Metropolis algorithm, one parameter is
-updated for each evaluation of the likelihood method whereas the
-all-component Metropolis and NKC algorithms update all the parameters
-for each likelihood evaluation.
+likelihood evaluations for the three algorithms. \textit{The relatively 
+long convergence time for the 1-component Metropolis algorithm is a result 
+of the high correlations between some of the parameters (Figure~\ref{scatter}).
+With the 1-component Metropolis algorithm, one parameter is
+updated for each evaluation of the likelihood method, i.e., the algorithm 
+searches the parameter space by moving parallel to the axes and thus 
+it can sample a density with a diagonal axis of symmetry very slowly. 
+This is not a problem with the all-component Metropolis and NKC 
+algorithms since they update all the parameters at each iteration}.
 
-<<fig8, echo=F,eval=T>>=7
+<<fig8, echo=F,eval=F>>=7
 source("R/getMSDvsEvals.R")
 source("R/plotMSD16.R")
 source('R/paperSSQ.R')
@@ -172,7 +198,7 @@ for (i in 1:10) {
 file <- sub('#',as.character(i),'NKC.MSD.dat#')
 assign(file, read.table(paste("data/",file,sep="")))
 }
-pdf(file='figures/tempDir/MSR16.pdf',width=9,height=6)
+pdf(file="figures/tempDir/MSR16.pdf",width=9,height=6)
 plotMSD16()
 dev.off()
 detach(input16)

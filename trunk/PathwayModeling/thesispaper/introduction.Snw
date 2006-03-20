@@ -12,7 +12,7 @@ of living systems and from developing more effective methods for
 altering the system behavior in beneficial ways.
 
 In order to gain some insight into the properties of biological
-systems, we would like to prepare quantitative models of sequences of
+systems, we would like to use quantitative models of sequences of
 reactions.
  Specifically, we would like to develop methods that can be used to
 deduce the kinetic parameters of the enzymes in a pathway. With this
@@ -58,7 +58,7 @@ about the behavior of the system.
 
 We will explore the utility of the the Bayesian approach using a
 simulation technique: First we will generate data for a model with
-known parameters, and then we will fit this data using our Bayesian
+known parameters, and then we will fit this data using Bayesian
 methods.
 The biochemical data is generated using Gillespie's
 stochastic simulation algorithm \cite{Gillespie77}. This algorithm is
