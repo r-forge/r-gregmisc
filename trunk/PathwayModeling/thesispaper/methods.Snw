@@ -11,7 +11,7 @@ $Id$
     \cite{Gillespie77}. In this paper we present the results for a 
     5-reaction sequence that is sampled at 12, 16, or 25 time points 
     with 3 replicates at each time point. 
-<<data, echo=F, eval=F>>=1
+<<data, echo=F, eval=T>>=1
 # gillespie.out - output from the Gillespie simulation
 source('R/getPaperData.R')
 source('R/getPaperRates.R')
@@ -59,7 +59,7 @@ write.table(temp,file="data/input16.dat",row.names=F,quote=F)
     the perturbation of $R1$ at $time = 20$ results in the time
     courses plotted in Figure~\ref{pulse}.
 
-<<echo=F,eval=F>>=2
+<<echo=F,eval=T>>=2
 source("R/pulse.R")
 rawdata <- read.table("data/rawdata.dat",header=T)
 attach(rawdata)

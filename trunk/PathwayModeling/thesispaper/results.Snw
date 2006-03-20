@@ -20,7 +20,7 @@ in the sequence increased. Correlated pairs of parameters
 (e.g., $d_1$ --$d_2$ and $d_3$ --$d_4$, Figure~\ref{scatter}) were similar relative distances from their 
 modes. The significance of all this is not clear at this point.}
 
-<<fig4,echo=F,eval=F>>=3
+<<fig4,echo=F,eval=T>>=3
 source("R/paperSSQ.R")
 source("R/getModes.R")
 source("R/do.optim.R")
@@ -63,7 +63,7 @@ detach(input16)
 The effect of the number of data points on the parameter distributions
 can be seen in Figure~\ref{converged}.
 
-<<fig5,echo=F,eval=F>>=4
+<<fig5,echo=F,eval=T>>=4
 source("R/plotDensity.R")
 source("R/plotConverged.R")
 output12 <- read.table("data/output12.AllComp.thinned")
@@ -94,7 +94,7 @@ Figure~\ref{scatter} is an example of a bivariate scatterplot of the
 distributions. There is correlation between some pairs of parameters, e.g.,
 $d_1$ -- $d_2$, but no evidence of multi-modality.
 
-<<fig6, echo=F,eval=F>>=5
+<<fig6, echo=F,eval=T>>=5
 source("R/paperPairs.R")
 mcmcML <-scan("figures/tempDir/mcmcML.dat")
 output16 <- read.table("data/output16.AllComp.thinned")
@@ -127,7 +127,7 @@ intervals. The fits of the resulting models to the 16-point data set
 is shown in Figure~\ref{fits}. Quantitative measures of the fits for
 all the algorithms are given in Table~\ref{MSq}.
 
-<<fig7, echo=F, eval=F>>=6
+<<fig7, echo=F, eval=T>>=6
 source("R/paperSSQ.R")
 source("R/getModes.R")
 source("R/do.optim.R")
@@ -186,7 +186,7 @@ it can sample a density with a diagonal axis of symmetry very slowly.
 This is not a problem with the all-component Metropolis and NKC 
 algorithms since they update all the parameters at each iteration}.
 
-<<fig8, echo=F,eval=F>>=7
+<<fig8, echo=F,eval=T>>=7
 source("R/getMSDvsEvals.R")
 source("R/plotMSD16.R")
 source('R/paperSSQ.R')
