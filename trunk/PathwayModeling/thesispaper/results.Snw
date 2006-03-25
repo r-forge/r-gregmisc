@@ -12,15 +12,15 @@ distributions.
 The marginal distributions for the parameters were mound-shaped 
 (Figure~\ref{densities}). They
 generally were skewed to the right and had thicker
-tails than normal distributions. /textit{The modes of the distributions 
+tails than normal distributions. The modes of the distributions 
 turned out to be poor estimates of the maximum likelihood values for 
 the parameters. The maximum likelihood values were all larger than 
 the modes, and the difference increased as the position of the reaction 
 in the sequence increased. Correlated pairs of parameters 
 (e.g., $d_1$ --$d_2$ and $d_3$ --$d_4$, Figure~\ref{scatter}) were similar relative distances from their 
-modes. The significance of all this is not clear at this point.}
+modes. The significance of all this is not clear at this point.
 
-<<fig4,echo=F,eval=T>>=3
+<<fig4,echo=F,eval=F>>=3
 source("R/paperSSQ.R")
 source("R/getModes.R")
 source("R/do.optim.R")
@@ -62,8 +62,7 @@ detach(input16)
 \end{figure}
 The effect of the number of data points on the parameter distributions
 can be seen in Figure~\ref{converged}.
-
-<<fig5,echo=F,eval=T>>=4
+<<fig5,echo=F,eval=F>>=4
 source("R/plotDensity.R")
 source("R/plotConverged.R")
 output12 <- read.table("data/output12.AllComp.thinned")
@@ -86,15 +85,14 @@ par(mfrow=c(1,1))
   \label{converged}
 \end{figure}
 There is some narrowing of the distributions as the number of points
-increases from 16 to 25 but it is not pronounced. \textit{Overall, the 
+increases from 16 to 25 but it is not pronounced. Overall, the 
 reduction in width varied from 18-fold for $d_9$ and 9-fold for $d_1$ to 
-1.5-fold for $d_4$}.
-
+1.5-fold for $d_4$.
 Figure~\ref{scatter} is an example of a bivariate scatterplot of the
 distributions. There is correlation between some pairs of parameters, e.g.,
 $d_1$ -- $d_2$, but no evidence of multi-modality.
 
-<<fig6, echo=F,eval=T>>=5
+<<fig6, echo=F,eval=F>>=5
 source("R/paperPairs.R")
 mcmcML <-scan("figures/tempDir/mcmcML.dat")
 output16 <- read.table("data/output16.AllComp.thinned")
@@ -127,7 +125,7 @@ intervals. The fits of the resulting models to the 16-point data set
 is shown in Figure~\ref{fits}. Quantitative measures of the fits for
 all the algorithms are given in Table~\ref{MSq}.
 
-<<fig7, echo=F, eval=T>>=6
+<<fig7, echo=F, eval=F>>=6
 source("R/paperSSQ.R")
 source("R/getModes.R")
 source("R/do.optim.R")
@@ -147,12 +145,12 @@ detach(input16)
 @
 \begin{figure}
   \centering
-  \subfloat[v2]{\includegraphics[scale=0.35]{figures/tempDir/V1fitted}}
-  \subfloat[v3]{\includegraphics[scale=0.35]{figures/tempDir/V2fitted}}\\
-  \subfloat[v4]{\includegraphics[scale=0.35]{figures/tempDir/V3fitted}}
-  \subfloat[v5]{\includegraphics[scale=0.35]{figures/tempDir/V4fitted}}
+  \subfloat[v2]{\includegraphics[scale=0.33]{figures/tempDir/V1fitted}}
+  \subfloat[v3]{\includegraphics[scale=0.33]{figures/tempDir/V2fitted}}\\
+  \subfloat[v4]{\includegraphics[scale=0.33]{figures/tempDir/V3fitted}}
+  \subfloat[v5]{\includegraphics[scale=0.33]{figures/tempDir/V4fitted}}
   \caption{Curves fit to the 16-point data with the all-components
-  algorithm}
+  algorithm. The green curves are drawn with the maximum likelihood estimates for the parameters found with the L-BFGS-B algorithm \cite{Byrd95} as implemented in the \textit{R optim()} function. }
   \label{fits}
 \end{figure}
 
@@ -176,7 +174,7 @@ detach(input16)
 
 Rates of convergence are illustrated in Figure~\ref{SSQvsIter}. The
 mean sums of squared residuals (SSQ) are plotted vs. the number of
-likelihood evaluations for the three algorithms. \textit{The relatively 
+likelihood evaluations for the three algorithms. The relatively 
 long convergence time for the 1-component Metropolis algorithm is a result 
 of the high correlations between some of the parameters (Figure~\ref{scatter}).
 With the 1-component Metropolis algorithm, one parameter is
@@ -184,9 +182,9 @@ updated for each evaluation of the likelihood method, i.e., the algorithm
 searches the parameter space by moving parallel to the axes and thus 
 it can sample a density with a diagonal axis of symmetry very slowly. 
 This is not a problem with the all-component Metropolis and NKC 
-algorithms since they update all the parameters at each iteration}.
+algorithms since they update all the parameters at each iteration.
 
-<<fig8, echo=F,eval=T>>=7
+<<fig8, echo=F,eval=F>>=7
 source("R/getMSDvsEvals.R")
 source("R/plotMSD16.R")
 source('R/paperSSQ.R')

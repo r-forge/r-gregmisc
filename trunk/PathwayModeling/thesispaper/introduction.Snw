@@ -5,20 +5,21 @@ $Id$
 \end{verbatim}
 
 We know a great deal about the individual components of living
-organisms but much less about how the properties of these components
-affect the systems of which they are a part. Our ignorance in this
+organisms but much less about the properties of the systems
+ of which they are a part. Our ignorance in this
 regard prevents us from developing a deeper theoretical understanding
 of living systems and from developing more effective methods for
 altering the system behavior in beneficial ways.
 
 In order to gain some insight into the properties of biological
-systems, we would like to use quantitative models of sequences of
-reactions.
+systems, we would like to use quantitative models that describe the processes at the molecular level.
  Specifically, we would like to develop methods that can be used to
-deduce the kinetic parameters of the enzymes in a pathway. With this
+deduce the kinetic parameters of enzyme-catalyzed reactions. With this
 information, it should be possible to identify the most effective
 control points in a pathway and modify the pathway behavior in
-predictable ways. For example, there are thought to be four mechanisms
+predictable ways.
+
+An example of how a model of a biochemical pathway could be used is in the elucidation of a mechanism for the pathology seen with diabetes. There are thought to be four mechanisms
 that explain hyperglycemic toxicity in diabetes
 \cite{Oates02,Brownlee01}. One mechanism is illustrated in
 Figure~\ref{glycolysis}.
@@ -37,14 +38,13 @@ glyceraldehyde-3-phosphate dehydrogenase (G3PDH) by about 50\% under
 these conditions. The inhibition of this
 enzyme then increases the concentration of glyceraldehyde-3-phosphate
 (G3P) and dihydroxyacetone phosphate
-(DHAP) which breaks down to form methylglyoxal. To test this
+(DHAP) which breaks down to form methylglyoxal, an active aldehyde which readily reacts with and inactivates proteins. To test this
 hypothesis we need to be able to answer
 questions such as: Is the observed inhibition of this enzyme by 50\% sufficient
 to explain the observed increase in methylglyoxal concentration? If
 not, then what other mechanisms might be operative? What is the most
 effective way to modulate these reactions?
-We address these questions by developing analytical methods that will allow us to characterize
-the intact systems at the molecular level.
+We address these questions by developing analytical methods that will allow us to characterize these types of biochemical systems at the molecular level.
 
 We will use a Bayesian modeling approach with fitting via Markov chain
 Monte Carlo (MCMC) simulation
@@ -82,13 +82,6 @@ experiment is quite feasible with cultured animal cells or suspensions
 of microbial cells such as yeast, and it yields information on the
 behavior of the pathway as a single system. The MCMC methods described
 here are very useful for analyzing this type of data.
-
-The MCMC results are compared to
-parameter estimates found by least squares fitting of the models to
-the data. The modes of the MCMC parameter distributions are
-essentially identical to the least squares parameter values, and this
-is taken as evidence that the MCMC simulation is producing valid
-estimates.
 
 MCMC simulation was found to be a very useful method for fitting
 systems of equations to data. It is capable of fitting several
