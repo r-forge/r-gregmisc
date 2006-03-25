@@ -17,7 +17,7 @@ function(Dsamp,input) {
     par(new=T)
     plot(times,temp2[[1]],ylim=c(low,high),type="l",xlab="",ylab="",col=2)
     abline(h=0)
-    legend(32,2000,c("data","fitted curve","95% CI"),lty=c(0,1,2),pch=c(1,NA,NA),col=c(1,2,2))
+    legend(32,2000,c("data","fitted curve","95% CI","ML"),lty=c(0,1,2,1),pch=c(1,NA,NA,NA),col=c(1,2,2,3))
     for (i in 3:5) {
         CI <- get95CI(i,input,1,Dsamp)
         low <-min(CI,-400)
