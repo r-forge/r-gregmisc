@@ -6,9 +6,9 @@ $Id$
 
 We are interested in assessing the usefulness of Markov chain Monte Carlo 
 (MCMC) methods for the fitting of models of metabolic pathways. Fitting 
-these models can be difficult because the pathways are described by sets 
+metabolic pathway models can be difficult because pathways are described by sets 
 of reaction rate equations with overlapping sets of parameters. We have 
-found that the MCMC algorithms handled this situation well, and produced 
+found that the MCMC algorithms handle this situation well, and produce 
 reasonable joint probability densities for the model parameters. 
 This output can be used 
 for the estimation of confidence intervals for the parameters and the 
@@ -37,31 +37,21 @@ from complex densities more efficiently than the other two algorithms.
 
  All three algorithms produced very similar results but the execution times 
 varied considerably depending on the size of the model and the algorithm. 
-The all-component Metropolis and NKC algorithms converged fairly easily 
-but the 1-component algorithm was quite slow. This is undoubtably due to 
+The all-component Metropolis and NKC algorithms converged quickly 
+but the 1-component algorithm was quite slow to converge. This is undoubtably due to 
 the high correlations between some parameters which is evident in 
 Figure~\ref{scatter}. The 1-component algorithm has trouble sampling from 
 this density because it is restricted to movements parallel to the axes. 
 This is less of a problem for the all-components and NKC algorithms since 
 they can move diagonally.
 
-The similarity of the results obtained with the different algorithms is 
-apparent from Table~\ref{MSq}. The mean squared residuals do not vary 
+Each of the algorithms produced essentially identical results. The mean squared residuals do not vary 
 much, nor do the calculated values for $R_{adj}^2$. These last values are 
 indicative of a useful fit of the models to the data. These results
 also demonstrate the usefulness of MCMC simulation. The derived
 probability densities can be used to find good estimates for the
 parameters as well as reveal the correlations between the parameters.
-The result is a well-fitted model with realistic confidence intervals (Figure~\ref{fitted}).
-
-It was of interest to see if the calculated parameter values could be used 
-to infer values for the underlying rate constants by fitting a simple 
-linear regression model. For this, expressions for the parameters as 
-polynomial functions of the rate constants were found by systematically 
-varying the rate constants according to a face-centered cubic experimental 
-design. It was found that the parameters are rather complex functions of 
-the rate constants, too complex to allow useful inferences concerning the 
-rate constants to be made given the parameter values using this method.
+The result is a well-fitted model with realistic confidence intervals (Figure~\ref{fits}).
 
 In this paper we have developed models of linear sequences of irreversible 
 biochemical reactions and shown that several Markov chain methods can be 

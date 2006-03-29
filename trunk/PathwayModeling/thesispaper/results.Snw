@@ -4,21 +4,10 @@
 $Id$
 \end{verbatim}
 
-The joint probability density for the parameters of a model of a
-metabolic pathway has been estimated using MCMC simulation. Three
-algorithms were used for the simulations and they converged to similar
-distributions. 
-
+All three algorithms converged to similar distributions and produced essentially the same metabolic pathway model.
 The marginal distributions for the parameters were mound-shaped 
-(Figure~\ref{densities}). They
-generally were skewed to the right and had thicker
-tails than normal distributions. The modes of the distributions 
-turned out to be poor estimates of the maximum likelihood values for 
-the parameters. The maximum likelihood values were all larger than 
-the modes, and the difference increased as the position of the reaction 
-in the sequence increased. Correlated pairs of parameters 
-(e.g., $d_1$ --$d_2$ and $d_3$ --$d_4$, Figure~\ref{scatter}) were similar relative distances from their 
-modes. The significance of all this is not clear at this point.
+(Figure~\ref{densities}), were skewed to the right and had thicker
+tails than normal distributions.
 
 <<fig4,echo=F,eval=F>>=3
 source("R/paperSSQ.R")
@@ -84,7 +73,7 @@ par(mfrow=c(1,1))
   points}
   \label{converged}
 \end{figure}
-There is some narrowing of the distributions as the number of points
+We see some improved precision as the number of points
 increases from 16 to 25 but it is not pronounced. Overall, the 
 reduction in width varied from 18-fold for $d_9$ and 9-fold for $d_1$ to 
 1.5-fold for $d_4$.
@@ -114,11 +103,11 @@ par(pch=1)
   \caption[Bivariate scatter plots of the parameter distributions]{Bivariate scatter plots of the parameter distributions for
   the 5-reaction model found with the all-components Metropolis
   algorithm (upper triangle); correlation coefficients (lower
-  triangle).}
+  triangle). The red lines indicate the maximum likelihood estimates of the parameters.}
   \label{scatter}
 \end{figure}
 
-The usefulness of the probability density for inference was assessed
+The value of the probability density for inference was assessed
 graphically. The probability density was used to find the maximum
 likelihood estimate for the model parameters and the 95\% confidence
 intervals. The fits of the resulting models to the 16-point data set
@@ -203,12 +192,7 @@ detach(input16)
 @
 \begin{figure}
   \centering
-%  \subfloat[12 points]{
-%    \includegraphics[scale=0.5]{figures/MSR12}}
-%  \subfloat[16 points]{
     \includegraphics[scale=0.5]{figures/tempDir/MSR16}
-%  \subfloat[25 points]{
-%    \includegraphics[scale=0.5]{figures/MSR25}}
   \caption[Mean squared residuals vs. number of likelihood
   evaluations]{Mean squared residuals vs. number of likelihood
     evaluations for the 5-reaction model}
