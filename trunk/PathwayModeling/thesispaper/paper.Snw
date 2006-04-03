@@ -1,5 +1,5 @@
-\documentclass{elsart}
-% \documentclass[doublespacing]{elsart}
+% \documentclass{elsart}
+\documentclass[doublespacing]{elsart}
 \usepackage{graphicx}
 \usepackage[nogin]{Sweave}
 \usepackage[numbers]{natbib} \bibliographystyle{plainnat}
@@ -26,7 +26,8 @@ $Id$
 \begin{frontmatter}
 
 \title{Statistical Modeling of Biochemical Pathways}
-\author{Robert B. Burrows}
+% \author{Robert B. Burrows}\footnote{corresponding author:\\Robert Burrows\\1506 Chopmist Hill Road\\North Scituate, RI 02857\\401-647-5290\\rbb@nebiometrics.com}
+\author{Robert B. Burrows}\footnote{corresponding author:\\Robert Burrows\\[-4mm]1506 Chopmist Hill Road\\[-4mm]North Scituate, RI 02857\\[-4mm]401-647-5290\\[-4mm]rbb@nebiometrics.com}
 \address{New England Biometrics, North Scituate, RI}
 \author{Gregory R. Warnes}
 \address{Pfizer, Inc., Groton, CT}
@@ -61,5 +62,43 @@ parameter distributions but the time to completion varies.
 \SweaveInput{discussion}
 
 \bibliography{./refs}
+
+\SweaveInput{table1}
+
+\clearpage
+
+\SweaveInput{table2}
+
+\clearpage
+
+\SweaveInput{figure1}
+
+\clearpage
+
+\SweaveInput{figure2}
+
+\clearpage
+
+\SweaveInput{figure3}
+
+\clearpage
+
+\SweaveInput{figure4}
+
+\clearpage
+
+\SweaveInput{figure5}
+
+\clearpage
+
+\SweaveInput{figure6}
+
+\clearpage
+
+\SweaveInput{figure7}
+
+\clearpage
+
+\SweaveInput{figure8}
 
 \end{document}

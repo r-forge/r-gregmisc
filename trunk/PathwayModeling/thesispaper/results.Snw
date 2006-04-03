@@ -9,70 +9,8 @@ The marginal distributions for the parameters were mound-shaped
 (Figure~\ref{densities}), were skewed to the right and had thicker
 tails than normal distributions.
 
-<<fig4,echo=F,eval=F>>=3
-source("R/paperSSQ.R")
-source("R/getModes.R")
-source("R/do.optim.R")
-source("R/plotDensities.R")
-output16 <- read.table("data/output16.AllComp.thinned")
-input16 <- read.table("data/input16.dat", header=T)
-attach(input16)
-temp<-output16[sample(1:20000,5000),]
-temp2<-numeric(5000)
-for (i in 1:5000) temp2[i]<-paperSSQ(temp[i,])
-temp<-temp[order(temp2),]
-write.table(temp[1:4750,],file="figures/tempDir/Dsamp.dat",row.names=F,col.names=F)
-mcmcML <- as.numeric(temp[1,-10])
-write.table(mcmcML,file="figures/tempDir/mcmcML.dat",row.names=F,col.names=F)
-modes<-getModes(output16)
-temp<-do.optim(start=modes[-10],scail=modes[-10])
-temp<-do.optim(start=temp$par,scail=temp$par)
-optimML<-temp$par
-write.table(optimML,file="figures/tempDir/optimML.dat",row.names=F,col.names=F)
-SD <- numeric(9)
-for (i in 1:9) SD[i] <- sd(output16[,i])
-pdf(file="figures/tempDir/densities.pdf",width=6,height=6)
-par(mfrow=c(3,3))
-plotDensities(output16)
-dev.off()
-par(mfrow=c(1,1))
-detach(input16)
-@
-\begin{figure}
-  \centering
-  \includegraphics[scale=0.8]{figures/tempDir/densities}
-  \caption[Histograms of the marginal probability distributions]{Histograms of the marginal probability distributions for
-  the 5-reaction model generated with the all-components Metropolis
-  algorithm and the 16-point dataset. The curves are normal densities with means equal to the
-  medians of the distributions and variances equal to the variances of
-  the distributions. \textit{Red vertical lines indicate the parameters values that 
-  minimize the mean squared residuals.}}
-  \label{densities}
-\end{figure}
 The effect of the number of data points on the parameter distributions
 can be seen in Figure~\ref{converged}.
-<<fig5,echo=F,eval=F>>=4
-source("R/plotDensity.R")
-source("R/plotConverged.R")
-output12 <- read.table("data/output12.AllComp.thinned")
-output16 <- read.table("data/output16.AllComp.thinned")
-output25 <- read.table("data/output25.AllComp.thinned")
-pdf(file="figures/tempDir/converged.pdf",width=6,height=6)
-par(mfrow=c(3,3))
-plotConverged()
-dev.off()
-par(mfrow=c(1,1))
-@
-\begin{figure}
-  \centering
-  \includegraphics[scale=0.9]{figures/tempDir/converged}
-  \caption{\textit{Posterior distributions from different numbers} of data
-  points for the all-components algorithm. (---------) prior
-  distribution; ({\color{red} - - - -}) 12 points; ({\color{green}
-  $\cdots\cdots$}) 16 points; ({\color{blue} -- $\cdot$ -- $\cdot$ --}) 25
-  points}
-  \label{converged}
-\end{figure}
 We see some improved precision as the number of points
 increases from 16 to 25 but it is not pronounced. Overall, the 
 reduction in width varied from 18-fold for $d_9$ and 9-fold for $d_1$ to 
@@ -81,85 +19,12 @@ Figure~\ref{scatter} is an example of a bivariate scatterplot of the
 distributions. There is correlation between some pairs of parameters, e.g.,
 $d_1$ -- $d_2$, but no evidence of multi-modality.
 
-<<fig6, echo=F,eval=F>>=5
-source("R/paperPairs.R")
-mcmcML <-scan("figures/tempDir/mcmcML.dat")
-output16 <- read.table("data/output16.AllComp.thinned")
-mcmc.cor <- function(x,y) {
-    par(usr=c(0,1,0,1))
-    r <- cor(x,y)
-    txt <- format(r,digits=2)
-    text(0.5,0.5,txt,cex=1.4)
-    }
-pdf(file="figures/tempDir/scatterPlot.pdf",width=8,height=8)
-par(pch='.')
-paperPairs(output16[sample(1:20000,2000),-10],labels=c('d1','d2','d3','d4','d5','d6','d7','d8','d9'),lower.panel=mcmc.cor)
-dev.off()
-par(pch=1)
-@
-\begin{figure}
-  \centering
-  \includegraphics[scale=0.6]{figures/tempDir/scatterPlot}
-  \caption[Bivariate scatter plots of the parameter distributions]{Bivariate scatter plots of the parameter distributions for
-  the 5-reaction model found with the all-components Metropolis
-  algorithm (upper triangle); correlation coefficients (lower
-  triangle). The red lines indicate the maximum likelihood estimates of the parameters.}
-  \label{scatter}
-\end{figure}
-
 The value of the probability density for inference was assessed
 graphically. The probability density was used to find the maximum
 likelihood estimate for the model parameters and the 95\% confidence
 intervals. The fits of the resulting models to the 16-point data set
 is shown in Figure~\ref{fits}. Quantitative measures of the fits for
 all the algorithms are given in Table~\ref{MSq}.
-
-<<fig7, echo=F, eval=F>>=6
-source("R/paperSSQ.R")
-source("R/getModes.R")
-source("R/do.optim.R")
-source("R/fitPaper.R")
-source("R/get95CI.R")
-source("R/plotVi.R")
-mcmcML <-scan("figures/tempDir/mcmcML.dat")
-optimML <-scan("figures/tempDir/optimML.dat")
-output16 <- read.table("data/output16.AllComp.thinned")
-input16 <- read.table("data/input16.dat",header=T)
-attach(input16)
-Dsamp <- as.matrix(read.table("figures/tempDir/Dsamp.dat"))
-pdf(file="figures/tempDir/V%dfitted.pdf",onefile=FALSE,width=10,height=5.5)
-plotVi(Dsamp,input16)
-dev.off()
-detach(input16)
-@
-\begin{figure}
-  \centering
-  \subfloat[v2]{\includegraphics[scale=0.33]{figures/tempDir/V1fitted}}
-  \subfloat[v3]{\includegraphics[scale=0.33]{figures/tempDir/V2fitted}}\\
-  \subfloat[v4]{\includegraphics[scale=0.33]{figures/tempDir/V3fitted}}
-  \subfloat[v5]{\includegraphics[scale=0.33]{figures/tempDir/V4fitted}}
-  \caption{Curves fit to the 16-point data with the all-components
-  algorithm. The green curves are drawn with the maximum likelihood estimates for the parameters found with the L-BFGS-B algorithm \cite{Byrd95} as implemented in the \textit{R optim()} function. }
-  \label{fits}
-\end{figure}
-
-\begin{table}[h]
-  \begin{center}
-    \caption{Mean squared residuals}
-    \begin{tabular}{c||c|c|c||c|c|c}
-       &
-       \multicolumn{3}{c||}{mean residual SSQ $\times 10^{-4}$} & \multicolumn{3}{c}{$R_{adj}^2$}\\
-      \cline{2-7}
-      algorithm & 12 pt. & 16 pt. & 25 pt. &
-      12 pt. & 16 pt. & 25 pt.\\
-      \hline
-       1-comp & 1.34 & 0.83 & 1.06 & 0.87 & 0.92 & 0.86\\
-       all-comp & 0.74 & 0.93 & 0.74 & 0.93 & 0.90 & 0.90 \\
-       NKC & 0.86 & 0.73 & 0.71 & 0.92 & 0.92 & 0.91
-    \end{tabular}
-    \label{MSq}
-  \end{center}
-\end{table}
 
 Rates of convergence are illustrated in Figure~\ref{SSQvsIter}. The
 mean sums of squared residuals (SSQ) are plotted vs. the number of
@@ -173,31 +38,6 @@ it can sample a density with a diagonal axis of symmetry very slowly.
 This is not a problem with the all-component Metropolis and NKC 
 algorithms since they update all the parameters at each iteration.
 
-<<fig8, echo=F,eval=F>>=7
-source("R/getMSDvsEvals.R")
-source("R/plotMSD16.R")
-source('R/paperSSQ.R')
-input16 <- read.table('data/input16.dat',header=T)
-attach(input16)
-OneComp.MSD.dat <- read.table("data/1comp.MSD.dat")
-AllComp.MSD.dat <- read.table("data/AllComp.MSD.dat")
-for (i in 1:10) {
-file <- sub('#',as.character(i),'NKC.MSD.dat#')
-assign(file, read.table(paste("data/",file,sep="")))
-}
-pdf(file="figures/tempDir/MSR16.pdf",width=9,height=6)
-plotMSD16()
-dev.off()
-detach(input16)
-@
-\begin{figure}
-  \centering
-    \includegraphics[scale=0.5]{figures/tempDir/MSR16}
-  \caption[Mean squared residuals vs. number of likelihood
-  evaluations]{Mean squared residuals vs. number of likelihood
-    evaluations for the 5-reaction model}
-  \label{SSQvsIter}
-\end{figure}
 The actual convergence times on a 3.2GHz P4 machine with 1GB of memory
 are 1--2 hours for the 1-component algorithm and about 1 minute for
 the all-components and Normal Kernel Coupler algorithms.
