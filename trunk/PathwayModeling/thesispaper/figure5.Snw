@@ -1,0 +1,22 @@
+<<fig5,echo=F,eval=F>>=4
+source("R/plotDensity.R")
+source("R/plotConverged.R")
+output12 <- read.table("data/output12.AllComp.thinned")
+output16 <- read.table("data/output16.AllComp.thinned")
+output25 <- read.table("data/output25.AllComp.thinned")
+pdf(file="figures/tempDir/converged.pdf",width=6,height=6)
+par(mfrow=c(3,3))
+plotConverged()
+dev.off()
+par(mfrow=c(1,1))
+@
+\begin{figure}
+  \centering
+  \includegraphics[scale=0.9]{figures/tempDir/converged}
+  \caption{\textit{Posterior distributions from different numbers} of data
+  points for the all-components algorithm. (---------) prior
+  distribution; ({\color{red} - - - -}) 12 points; ({\color{green}
+  $\cdots\cdots$}) 16 points; ({\color{blue} -- $\cdot$ -- $\cdot$ --}) 25
+  points}
+  \label{converged}
+\end{figure}

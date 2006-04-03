@@ -1,0 +1,25 @@
+<<fig8, echo=F,eval=F>>=7
+source("R/getMSDvsEvals.R")
+source("R/plotMSD16.R")
+source('R/paperSSQ.R')
+input16 <- read.table('data/input16.dat',header=T)
+attach(input16)
+OneComp.MSD.dat <- read.table("data/1comp.MSD.dat")
+AllComp.MSD.dat <- read.table("data/AllComp.MSD.dat")
+for (i in 1:10) {
+file <- sub('#',as.character(i),'NKC.MSD.dat#')
+assign(file, read.table(paste("data/",file,sep="")))
+}
+pdf(file="figures/tempDir/MSR16.pdf",width=9,height=6)
+plotMSD16()
+dev.off()
+detach(input16)
+@
+\begin{figure}
+  \centering
+    \includegraphics[scale=0.5]{figures/tempDir/MSR16}
+  \caption[Mean squared residuals vs. number of likelihood
+  evaluations]{Mean squared residuals vs. number of likelihood
+    evaluations for the 5-reaction model}
+  \label{SSQvsIter}
+\end{figure}
