@@ -33,7 +33,7 @@ permutations(n, r, v=1:n, set=TRUE, repeats.allowed=FALSE)
   \code{options} command for details on how to do this.
 }
 \value{
-  Returns a matrix where each row contains a vector of length \code{n}.
+  Returns a matrix where each row contains a vector of length \code{r}.
 }
 \references{Venables, Bill.  "Programmers Note", R-News, Vol 1/1,
   Jan. 2001. \url{http://cran.r-project.org/doc/Rnews} }
