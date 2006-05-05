@@ -3,6 +3,7 @@ useDynLib(gtools)
 export(
        addLast,
        assert,
+       capture,
        combinations,
        ddirichlet,
        defmacro,
@@ -23,6 +24,7 @@ export(
        running,
        scat,
        setTCPNoDelay,
+       sprint,
        strmacro
        )
 

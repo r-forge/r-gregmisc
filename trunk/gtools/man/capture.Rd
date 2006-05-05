@@ -1,7 +1,7 @@
 \name{capture}
 \alias{capture}
 \alias{sprint}
-\title{Capture printed output of an R expression in a string}.
+\title{Capture printed output of an R expression in a string}
 \description{ 
 Capture printed output of an R expression in a string
 }
