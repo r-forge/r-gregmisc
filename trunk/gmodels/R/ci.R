@@ -67,19 +67,19 @@ ci.lme <- function(x,confidence=0.95,alpha=1-confidence,...)
   retval
 }
 
-ci.lmer <- function(x,confidence=0.95,alpha=1-confidence,...)
-  {
-  est  <-  fixef(x)
-  se <- sqrt(diag(vcov(x)))
-  df <- getFixDF(x)
-  ci.low  <- est + qt(alpha/2, df) * se
-  ci.high <- est - qt(alpha/2, df) * se
-  retval  <- cbind(Estimate=est,
-                   "CI lower"=ci.low,
-                   "CI upper"=ci.high,
-                   "Std. Error"= se,
-                   "DF" = df,
-                   "p-value" = 2*(1-pt(abs(est/se), df)))
-  rownames(retval)  <-  names(est)
+ci.lmer <- function(x, confidence=0.95, alpha=1-confidence, sim.lmer=TRUE, n.sim=1000, ...) ################### changed this function
+{
+  if(!(require(coda, quietly=TRUE) & require(Matrix, quietly=TRUE)))
+    stop("coda and Matrix packages required for ci.lmer")
+  
+  x.effects <- fixef(x)
+  n <- length(x.effects)
+
+  retval <- est.lmer(obj = x, cm = diag(n), beta0 = rep(0, n),
+                     conf.int = confidence, show.beta0 = FALSE,
+                     n.sim = n.sim)[,c("Estimate", "Lower.CI", "Upper.CI", "Std. Error", "p value")]
+
+  colnames(retval)[c(2:3, 5)] <- c("CI lower", "CI upper", "p-value")
+  rownames(retval) <- names(x.effects)
   retval
 }
