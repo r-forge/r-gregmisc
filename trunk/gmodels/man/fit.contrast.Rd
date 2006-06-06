@@ -4,6 +4,7 @@
 \alias{fit.contrast}
 \alias{fit.contrast.lm}
 \alias{fit.contrast.lme}
+\alias{fit.contrast.lmer}
 \title{Compute and test arbitrary contrasts for regression objects}
 \description{
  Compute and test arbitrary contrasts for regression objects.
@@ -14,6 +15,8 @@ fit.contrast(model, varname, coeff, ... )
              conf.int=NULL, df=FALSE, ...)
 \method{fit.contrast}{lme}(model, varname, coeff, showall=FALSE,
              conf.int=NULL, df=FALSE, ...)
+\method{fit.contrast}{lmer}(model, varname, coeff, showall=FALSE,
+             conf.int=NULL, sim.lmer = TRUE, n.sim = 1000, ...)
 }
 \arguments{
   \item{model}{regression (lm,glm,aov,lme) object for which the
@@ -31,6 +34,10 @@ fit.contrast(model, varname, coeff, ... )
   \item{df}{boolean indicating whether to return a column containing the
     degrees of freedom.}
   \item{\dots}{optional arguments provided by methods.}
+  \item{sim.lmer}{Logical value. If TRUE p-values and confidence
+    intervals will be estimated using \code{\Link[Matrix]{mcmcsamp}}. This option only takes effect for lmer
+    objects.}
+  \item{n.sim}{Number of samples to use in \code{\Link[Matrix]{mcmcsamp}}.}
   }
   
 \details{

@@ -18,7 +18,9 @@
   \method{ci}{default}(x, confidence = 0.95, alpha = 1 - confidence, na.rm=FALSE)...)
   \method{ci}{binom}(x, confidence = 0.95, alpha = 1 - confidence,...)
   \method{ci}{lm}(x, confidence = 0.95, alpha = 1 - confidence,...)
-  \method{ci}{lme}(x, confidence = 0.95, alpha = 1 - confidence,...) 
+  \method{ci}{lme}(x, confidence = 0.95, alpha = 1 - confidence,...)
+  \method{ci}{lmer}(x, confidence = 0.95, alpha = 1 - confidence,
+                    sim.lmer=TRUE, n.sim=1000, ...) 
 }
 \arguments{
   \item{x}{ object from which to compute confidence intervals. }
@@ -27,6 +29,10 @@
   \item{na.rm}{boolean indicating whether missing values should be
     removed. Defaults to \code{FALSE}.}
   \item{\dots}{Arguments for methods}
+  \item{sim.lmer}{Logical value. If TRUE confidence
+    intervals will be estimated using \code{\Link[Matrix]{mcmcsamp}}. This option only takes effect for lmer
+    objects.}
+  \item{n.sim}{Number of samples to take in \code{\Link[Matrix]{mcmcsamp}}.}
 }
 %\details{
 %  ~~ If necessary, more details than the __description__  above ~~
