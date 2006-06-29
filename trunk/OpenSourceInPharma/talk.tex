@@ -1,25 +1,56 @@
-\documentclass[a4paper]{article}
-\usepackage[round]{natbib}
-\usepackage{array}
-\usepackage{graphicx}
-\usepackage{fullpage}
-\bibliographystyle{plain}
+\documentclass[10pt]{beamer} \usepackage{beamerthemesplit}
+\mode<presentation> { \usetheme{Warsaw}
+  % or ...
 
-\begin{document}
+  \setbeamercovered{transparent}
+  % or whatever (possibly just delete it)
+}
+%\setbeameroption{show notes}
+
+\usepackage[english]{babel} \usepackage[latin1]{inputenc}
+
+\usepackage{times} \usepackage[T1]{fontenc}
+
+% Delete this, if you do not want the table of contents to pop up at
+% the beginning of each subsection:
+%\AtBeginSubsection[]
+%{
+%  \begin{frame}<beamer>
+%    \frametitle{Outline}
+%    \tableofcontents[currentsection,currentsubsection]
+%  \end{frame}
+%}
+
+\setbeamersize{text margin left=0.5cm}
+\setbeamersize{text margin right=0.5cm}
+
 
 \title{Open Source Software in Pharmaceutical Research}
 
 \author{
-  Gregory R. Warnes\\
-  Pfizer Inc., USA\\
-  \texttt{gregory.r.warnes@pfizer.com}
+  Gregory R. Warnes\inst{1} \and 
+  James A. Rogers\inst{2} \and
+  A. Max Kuhn\inst{2}
 }
 
-\date{2006-02-08}
+\institute[U. Rochester, Pfizer]{
+  \inst{1}%
+  Department of Biostatistics and Computational Biology, University of Rochester \vspace{-5pt}
+  \and
+  \inst{2}%
+  Statistical Applications, Pfizer, Inc. \vspace{-5pt}
+}
 
-\maketitle
 
-\abstract{
+\date[2006 JSM]{Joint Statistical Meetings, Seattle, WA, Aug 6-9, 2006}
+
+\begin{document}
+\frame{\titlepage}
+
+\frame{
+\begin{abstract}
+\setbeamerfont{small}{size=\tiny}
+\usebeamerfont{small}
   
 Open-Source statistical software is being used with increasing
 frequency for the analysis of pharmaceutical data, particularly in
@@ -29,11 +60,15 @@ research, software used in any regulatory context must
 meet more rigorous requirements for documentation, training,
 software life-cycle management, and technical support.
 
+\vspace{1em}
+
 We will focus on R, a full-featured open-source statistical
 software package. We'll briefly outline the benefits it provides, as
 seen from the perspective of a discovery statistician, show some
 example areas in which it may be used, and then discuss the
 documentation, training, and support required for this class of use.
+
+\vspace{1em}
 
 Next we will discuss what is needed for organizations to be
 comfortable with employing open-source statistical software for
@@ -44,20 +79,187 @@ third-party commercial support for R, and evaluate how well they
 meet the requirements for use of R within both regulated and
 non-regulated contexts.
 
+\end{abstract}
 }
 
-%\section{Introduction}
+\frame{
+  \frametitle{Outline}
+  \tableofcontents[pausesections] 
+
+}
+
+\section{Introduction}
+
+\frame{
+  \frametitle{Introduction}
+
+  Open-Source statistical software is being used with increasing
+  frequency for the analysis of pharmaceutical data, particularly in
+  support of ``omics'' technologies within discovery. While it is
+  relatively straightforward to employ open-source tools for basic
+  research, software used in any regulatory context must meet more
+  rigorous requirements for documentation, training, software
+  life-cycle management, and technical support.
+}
+
+\section{Requirements}
+
+\frame{
+  \frametitle{Requirements}
+
+  Software used in mission critical and regulated contexts must
+  exhibit 7 key attributes:
+
+  \begin{enumerate}
+  \item Functional
+  \item Verifiable
+  \item Repeatable
+  \item Documentable
+  \item Auditable
+  \item Stable
+  \end{enumerate}
+}
+
+\frame{
+\frametitle{Requirements (detail)}
+
+\begin{description}[<+->]
+
+\item[Functional] Performs the reqiured tasks
+
+\item[Verifiable] Demonstrate that computer output is correct, or at least consustent..
+
+\item[Repeatable] Given the same data, the same results can be
+  obtained, potentially much later in time.
+
+\item[Documentable] Documentation is avaiable or can easily be
+  generated for the entire software lifecycle: Specification, Design,
+  Development. Testing, Deployment, Change Management
+
+\end{description}
+
+}
+
+\frame{
+  \frametitle{Requirements (detail, cont)}
+
+\begin{description}
+
+\item[Auditable] Track everything done to data and the system
+
+\item[Stable] Doesn't change too fast, so that there is enough time to
+  develop required documentation
+
+\item[Supported] Guaranteed (by \$\$) availability of external expense for
+  \begin{itemize}
+    \item installation
+    \item problem resolution
+    \item bug fixes
+    \item feature development
+    \item training
+    \item application development
+    \item consulting
+  \end{itemize}
+
+\end{description}
+}
+
+\section{What is R?}
+
+\frame{
+  \frametitle{What is R?}
+
+  \begin{itemize}
+    \item{foo}
+  \end{itemize}
+}
 
 
-%\section{Discussion}
+\section{ Status of R}
 
-%\section{Conclusion}
+\frame{
+  \frametitle{Status of R}
 
-%\begin{thebibliography}{99}
+\begin{description}
 
-%\bibitem{Friendly.1992} ``Graphical Methods for Categorical Data'' Friendly, M.
-%  (1992) \textit{Proceedings of SAS SUGI 17 Conference}
+\item[Functional] +++ This is R's strength, and is largely provided by
+  user-supplied add on packages.  R currently provides more
+  functionality than any other statistical software system and is
+  growing rapidly.
 
-%\end{thebibliography}
+\item[Verifiable] --- Most of the functionality of R comes from
+  user-developed add-on packages, but there is currently no formal
+  mechanism for evaluating the level of quality of these packages (eg:
+  development, test, production, peer reviewed, validated) or
+  documentation that they accomplish the required tasks.
+
+\item[Repeatable] --- 
+
+\item[Documentable] --- While the R core team has a well defined and
+  managed process for design, development, testing, release, and
+  change management, no formal documentation of this process appears
+  to exists (aside from the specifications of the language itself).
+  No centrally defined or managed process appears to exist for add-on
+  packages.
+\end{description}
+}
+
+\frame{
+
+  \frametitle{Status of R (cont)}
+
+\begin{description}
+
+\item[Auditable] --- R has no built-in no audit log, either for data
+  analysis steps or for changes to the system (e.g.: package updates,
+  patches)
+
+\item[Stable] --- The R core team releases minor (major.minor.patch)
+  versions twice a year.  Since bug fixes are currently applied only
+  to the latest released version of the system, it is difficult to
+  properly support embedded and validated systems where one may need
+  to resolve bugs in R, but must constrain the R version to remain
+  constant for long periods due to the burden of documentation and
+  testing that must be performed.
+
+\item[Supported] While there is an increasingly large pool of
+  statisticians and statistical consulting groups that have R
+  expertise, no organization formally supports R at this time.
+
+\end{description}
+}
+
+\section{ What needs to be done?}
+
+\frame{
+  \frametitle{Status of R (cont)}
+
+}
+
+\begin{frame}[allowframebreaks]
+  \frametitle<presentation>{For Further Reading}
+    
+  \begin{thebibliography}{10}
+    
+  \beamertemplatebookbibitems
+  % Start with overview books.
+
+  \bibitem{Author1990}
+    A.~Author.
+    \newblock {\em Handbook of Everything}.
+    \newblock Some Press, 1990.
+ 
+    
+  \beamertemplatearticlebibitems
+  % Followed by interesting articles. Keep the list short. 
+
+  \bibitem{Someone2000}
+    S.~Someone.
+    \newblock On this and that.
+    \newblock {\em Journal of This and That}, 2(1):50--100,
+    2000.
+  \end{thebibliography}
+\end{frame}
+
 
 \end{document}
