@@ -4,29 +4,24 @@
 %\VignettePackage{ssize}
 
 
-\documentclass[12pt]{article}
-\usepackage{url}
-\usepackage{amsmath}
-\usepackage{natbib}
-
-
-\newcommand{\Robject}[1]{{\texttt{#1}}}
-\newcommand{\Rfunction}[1]{{\texttt{#1}}}
-\newcommand{\Rpackage}[1]{{\textit{#1}}}
-\newcommand{\Rclass}[1]{{\textit{#1}}}
-\newcommand{\Rmethod}[1]{{\textit{#1}}}
-\newcommand{\code}[1]{\texttt{#1}}
+%\documentclass[letter]{report}
+\documentclass[a4paper]{report}
+\usepackage{/Library/Frameworks/R.framework/Resources/share/texmf/Sweave}
+\usepackage{Rnews}
+\usepackage[round]{natbib}
 
 \begin{document}
+\begin{article}
 
 \title{Sample Size Estimation for Microarray Experiments Using the
-	\code{ssize} package.}
+        \code{ssize} package.}
 \author{Gregory R. Warnes \\ 
-        email:\code{gregory.r.warnes@pfizer.com}}
+        email:\code{warnes@bst.rochester.edu}}
+\subtitle{ ~ }
 
 \maketitle
 
-\begin{abstract}
+\section*{abstract}
 
 RNA Expression Microarray technology is widely applied in biomedical
 and pharmaceutical research.  The huge number of RNA concentrations
@@ -39,20 +34,19 @@ implemented in the \code{ssize} R package, which is available from
 the Bioconductor project (\url{http://www.bioconductor.org}) web
 site.
 
-\end{abstract}
-
-\section{Note}
+\section*{Note}
 
 This document is a simplified version of the manuscript 
 \begin{quote}
-  Warnes, G. R., Liu, P. (2005)
-  Sample Size Estimation for Microarray Experiments, \emph{submitted
-  to} {\it Biometrics}.
+  Warnes, G. R., Liu, P. (2006) Sample Size Estimation for Microarray
+  Experiments, Technical Report, Department of Biostatisticsa and
+  Computational Biology, University of Rochester.
 \end{quote}
-Please refer to that document for a detailed discussion of the
-sample size estimation method.
+which has been available as a pre-publication manuscript since 2004.
+Please refer to that document for a detailed discussion of the sample
+size estimation method.
 
-\section{Introduction}
+\section*{Introduction}
 
 High-throughput microarray experiments allow the measurement of
 expression levels for tens of thousands of genes simultaneously.
@@ -72,9 +66,9 @@ expressions) may be measured on each individual chip, it is
 essential to take into account multiple testing and dependency among
 variables when calculating sample size.  
 
-\section{Method}
+\section*{Method}
 
-\subsection{Overview}
+\subsection*{Overview}
 
 \citet{Warnes05} provides a simple method for computing sample size
 for micrarray experiments, and reports on a sereies of simulations
@@ -89,7 +83,7 @@ consulting work, this latter use as a visual tool has been
 exceptionally valuable in helping scientific clients to make the
 difficult trade offs between experiment cost and statistical power.
 
-\subsection{Assumptions}
+\subsection*{Assumptions}
 
 In the current implementation, we assume that a microarray
 experiment is set up to compare gene expressions between one
@@ -112,7 +106,7 @@ versus
 where $\mu_{T}$ and $\mu_{C}$ are means of gene expressions for
 treatment and control group respectively.
 
-\subsection{Computations}
+\subsection*{Computations}
 
 The proposed procedure to estimate sample size is:
 
@@ -178,7 +172,7 @@ such plots are shown in Figures \ref{fig:CumPowerPlot} and
 \ref{fig:CumFoldChangePlot}.
 
 
-\section{Example}
+\section*{Example}
 
 First, we need to load the \code{ssize} library:
 
@@ -186,6 +180,7 @@ First, we need to load the \code{ssize} library:
 library(ssize)
 library(xtable)
 library(gdata) # for nobs()
+options(width=30)
 @
 
 As part of the \code{ssize} library, I've provided an example data
@@ -196,38 +191,40 @@ Average (RMA) method of \citet{Irizarry03}.
 
 <<>>=
 data(exp.sd)
-str(exp.sd)
+#str(exp.sd)
 @ 
 
 This data was calculated via something like
 
 \begin{verbatim}
 library(affy)
-setwd("/data/rstat-data/Standard_Affymetrix_Analysis/GT_methods_050316/WORK")
+setwd("~/GT_methods_050316/WORK")
 load("probeset_data.Rda")
 expression.values <- exprs(probeset.data)
 covariate.data <- pData(probeset.data)
-controls <- expression.values[,covariate.data$GROUP=="Control"] #$
+controls <- expression.values[,
+            covariate.data$GROUP=="Control"] #$
 exp.sd <- apply(controls, 1, sd) 
 \end{verbatim} 
 
 
 Lets see what the distribution looks like:
 
-\begin{figure}[h!]
-  \centering
-  \caption{Distribution of exp.sd}
-  \label{exp.sd.hist}
-<<fig=TRUE,width=12,height=6>>=
-     hist(exp.sd,n=20, col="cyan", border="blue", main="",
-          xlab="Standard Deviation (for data on the log scale)")
+%\begin{figure}[h!]
+%  \centering
+%  \caption{Distribution of exp.sd}
+%  \label{exp.sd.hist}
+%\end{figure}
+
+<<fig=TRUE,width=12,height=12>>=
+     xlab <- c("Standard Deviation", " (for data on the log scale)")
+     hist(exp.sd,n=20, col="cyan", border="blue", main="", xlab=xlab)
      dens <- density(exp.sd)
-     lines(dens$x, dens$y*par("usr")[4]/max(dens$y),col="red",lwd=2) #$
-     title("Histogram of Standard Deviations (log2 scale)")
+     scaled.y <- dens$y*par("usr")[4]/max(dens$y) 
+     lines(dens$x,scaled.y ,col="red",lwd=2) #$
+     title("Histogram of Standard Deviations")
 @  
-\end{figure}
-\begin{center}
-\end{center}
+
 
 Note that this distribution is right skewed, even though it is on
 the $\log_2$ scale.
@@ -241,24 +238,29 @@ exp.sd <- exp.sd[1:1000]
 @ 
 
 There are 6 functions available in the \code{ssize} package.  
-<<eval=FALSE>>=
-?pow
-@ 
 
 \begin{verbatim}
-     pow(sd, n, delta, sig.level, alpha.correct = "Bonferonni")
-     power.plot(x, xlab = "Power", ylab = "Proportion of Genes with Power >= x", 
-         marks = c(0.7, 0.8, 0.9), ...)
+ pow(sd, n, delta, sig.level, 
+   alpha.correct = "Bonferonni")
+ power.plot(x, xlab = "Power", 
+   ylab = "Proportion of Genes with"
+          " Power >= x", 
+   marks = c(0.7, 0.8, 0.9), ...)
 
-     ssize(sd, delta, sig.level, power, alpha.correct = "Bonferonni")
-     ssize.plot(x, xlab = "Sample Size (per group)",
-                ylab = "Proportion of Genes Needing Sample Size <= n",
-                marks = c(2, 3, 4, 5, 6, 8, 10, 20), ...)
+ ssize(sd, delta, sig.level, power, 
+   alpha.correct = "Bonferonni")
+ ssize.plot(x, 
+   xlab = "Sample Size (per group)",
+   ylab = "Proportion of Genes Needing Sample"
+          " Size <= n",
+   marks = c(2, 3, 4, 5, 6, 8, 10, 20), ...)
 
-     delta(sd, n, power, sig.level, alpha.correct = "Bonferonni")
-     delta.plot (x, xlab = "Fold Change",
-                 ylab = "Proportion of Genes with Power >= 80\% at Fold Change=delta",
-                 marks = c(1.5, 2, 2.5, 3, 4, 6, 10), ...) 
+ delta(sd, n, power, sig.level, 
+   alpha.correct = "Bonferonni")
+ delta.plot (x, xlab = "Fold Change",
+   ylab = "Proportion of Genes with "
+          "Power >= 80\% at Fold Change=delta",
+   marks = c(1.5, 2, 2.5, 3, 4, 6, 10), ...) 
 \end{verbatim}
 
 You will note that there are three pairs.  
@@ -297,10 +299,7 @@ sig.level<-0.05
 \item What is the power for 6 patients per group with  $\delta=1.0$,
  $\alpha=0.05$?
 
-\begin{figure}[h!]
-  \caption{Effect of Sample Size on Power} \label{fig:CumNPlot}
-  \centering
-<<fig=TRUE,width=12,height=6>>=
+<<fig=TRUE,width=12,height=12>>=
 all.power <- pow(sd=exp.sd, n=n, delta=log2(fold.change),
                  sig.level=sig.level)
 
@@ -314,18 +313,16 @@ legend(x=xmax, y=ymax,
        xjust=1, yjust=1, cex=1.0)
 title("Power to Detect 2-Fold Change")
 @  
-\end{figure}
-
+%\begin{figure}[h!]
+%  \caption{Effect of Sample Size on Power} \label{fig:CumNPlot}
+%  \centering
+%\end{figure}
 
 \item What is the necessary per-group sample size for $80\%$ power
       when $\delta=1.0$, and $\alpha=0.05$?
 
 
-\begin{figure}[h!]
-  \caption{Sample size required to detect a 2-fold treatment effect.}
-  \label{fig:CumPowerPlot}
-  \centering
-<<fig=TRUE,width=12,height=6>>=
+<<fig=TRUE,width=12,height=12>>=
 all.size  <- ssize(sd=exp.sd, delta=log2(fold.change),
                    sig.level=sig.level, power=power)
 ssize.plot(all.size, lwd=2, col="magenta", xlim=c(1,20))
@@ -339,21 +336,27 @@ legend(x=xmax, y=ymin,
        xjust=1, yjust=0, cex=1.0)
 title("Sample Size to Detect 2-Fold Change")
 @ 
-\end{figure}
+%\begin{figure}[h!]
+%  \caption{Sample size required to detect a 2-fold treatment effect.}
+%  \label{fig:CumPowerPlot}
+%  \centering
+%\end{figure}
 
-\clearpage
+%\clearpage
 
 \item What is necessary fold change to achieve $80\%$ with  $n=6$
 patients per group, when $\delta=1.0$ and $\alpha=0.05$?
 
-\begin{figure}[h!]
-  \caption[Given Sample Size, Fold Change (Effect Size) Necessary to
-    Achieving a Specified Power]{Given sample size, this plot allows
-    visualization of the fraction of genes achieving the specified
-    power for different fold changes.}
-  \label{fig:CumFoldChangePlot}
-  \centering
-<<fig=TRUE,width=12,height=6>>=
+%\begin{figure}[h!]
+%  \caption[Given Sample Size, Fold Change (Effect Size) Necessary to
+%    Achieving a Specified Power]{Given sample size, this plot allows
+%    visualization of the fraction of genes achieving the specified
+%    power for different fold changes.}
+%  \label{fig:CumFoldChangePlot}
+%  \centering
+%\end{figure}
+
+<<fig=TRUE,width=12,height=12>>=
 all.delta  <- delta(sd=exp.sd, power=power, n=n,
                     sig.level=sig.level)
 delta.plot(all.delta, lwd=2, col="magenta", xlim=c(1,10))
@@ -366,11 +369,10 @@ legend(x=xmax, y=ymin,
        xjust=1, yjust=0, cex=1.0)
 title("Fold Change to Achieve 80\% Power")
 @ 
-\end{figure}
 
 \end{enumerate}
 
-\section{Modifications}
+\section*{Modifications}
 
 While the \code{ssize} package has been implemented using the simple
 2-sample pooled t-test, you can easily modify the code for other
@@ -379,13 +381,13 @@ each of the functions \code{pow},\code{ssize},\code{delta} with the
 appropriate computation for the desired experimental design.
 
 
-\section{Future Work}
+\section*{Future Work}
 
 Peng Liu is currently developing methods and code for substituting
 False Discovery Rate for the Bonferonni multiple comparison
 adjustment.
 
-\section{Contributions}
+\section*{Contributions}
 
 Contributions and discussion are welcome.
 
@@ -452,4 +454,6 @@ This work was supported by Pfizer Global Research and Development.
   653-667.
 
 \end{thebibliography}
+
+\end{article}
 \end{document}
