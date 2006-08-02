@@ -23,7 +23,7 @@ make.density(m, data)
   An R function, which accepts a vector of parameter values and returns
   a log-likelihood.
 }
-\author{Gregory R. Warnes \email{gregory.r.warnes@pfizer.com}}
+\author{Gregory R. Warnes \email{warnes@bst.rochester.edu}}
 %\seealso{ ~~objects to See Also as \code{\link{~~fun~~}}, ~~~ }
 \examples{
 

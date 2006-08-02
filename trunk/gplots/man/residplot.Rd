@@ -20,5 +20,5 @@ residplot(model, formula, ...)
  These functions are undocumented.  Some are internal and not intended
    for direct use.  Others simply haven't been documented yet.
    }
-\author{Gregory R. Warnes \email{gregory.r.warnes@pfizer.com}}
+\author{Gregory R. Warnes \email{warnes@bst.rochester.edu}}
 \keyword{misc}

@@ -3,7 +3,7 @@ Title: Read from and write to Excel, Save graphs into PowerPoint
 Version: 0.8.1
 Date: 2004-08-12
 Author: Steven Novick <steven.j.novick@gsk.com> with some packaging help from 
-            Gregory R. Warnes <gregory_r_warnes@groton.pfizer.com>
+            Gregory R. Warnes <warnes@bst.rochester.edu>
 Maintainer: Steven Novick <steven.j.novick@gsk.com>
 Depends: RDCOMClient, lattice
 Description: Functions for reading and writing data stored by Excel

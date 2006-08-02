@@ -26,7 +26,7 @@
 \value{
   Invisibly returns the original object.
 }
-\author{Gregory R. Warnes <gregory\_r\_warnes@groton.pfizer.com}
+\author{Gregory R. Warnes \email{warnes@bst.rochester.edu}}
 \seealso{ \code{\link{qvalue}}, \code{\link{qplot}},
   \code{\link{qwrite}} }
 \examples{

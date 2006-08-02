@@ -42,7 +42,7 @@ inv.logit(x, min = 0, max = 1)
 \value{
   Transformed value(s).
 }
-\author{ Gregory R. Warnes \email{gregory.r.warnes@pfizer.com} }
+\author{ Gregory R. Warnes \email{warnes@bst.rochester.edu} }
 \seealso{ \code{\link[car]{logit}}, \code{\link[moc]{inv.glogit}} }
 \examples{
 

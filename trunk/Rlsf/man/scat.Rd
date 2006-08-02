@@ -18,7 +18,7 @@ scat(...)
 \value{
   NULL (invisibly)
 }
-\author{Gregory R. Warnes \email{gregory\_r\_warnes@groton.pfizer.com}}
+\author{Gregory R. Warnes \email{warnes@bst.rochester.edu}}
 \seealso{ \code{\link[base]{cat}}}
 \examples{
 options(DEBUG=NULL) # makee sure DEBUG isn't set

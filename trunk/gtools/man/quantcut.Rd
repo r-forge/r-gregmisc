@@ -34,7 +34,7 @@ quantcut(x, q=seq(0,1,by=0.25), na.rm=TRUE, ...)
   Factor variable with one level for each quantile interval given by \code{q}.
 }
 
-\author{Gregory R. Warnes \email{gregory.r.warnes@pfizer.com}}
+\author{Gregory R. Warnes \email{warnes@bst.rochester.edu}}
 
 \seealso{ \code{\link{cut}}, \code{\link{quantile}} }
 

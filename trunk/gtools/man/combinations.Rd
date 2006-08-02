@@ -40,7 +40,7 @@ permutations(n, r, v=1:n, set=TRUE, repeats.allowed=FALSE)
 \author{ Original versions by Bill Venables
   \email{Bill.Venables@cmis.csiro.au}.  Extended to handle
   \code{repeats.allowed} by Gregory R. Warnes
-  \email{gregory.r.warnes@pfizer.com}.
+  \email{warnes@bst.rochester.edu}.
   }
 \seealso{ \code{\link[base]{choose}}, \code{\link[base]{options}} }
 \examples{

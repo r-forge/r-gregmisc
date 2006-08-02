@@ -80,7 +80,8 @@ RF(ycl, x, classwt=NULL, Vote=2, mtry=NULL, ntree=1000, ndsize=1,
     \item{nodestatus}{terminal indicator for each node}
 }
 %\references{ ~put references to the literature/web site here ~ }
-\author{Baolin Wu, R package by Gregory R. Warnes \email{Gregory.R.Warnes@Pfizer.com}}
+\author{Baolin Wu, R package by Gregory R. Warnes
+  \email{warnes@bst.rochester.edu}}
 %\note{ ~~further notes~~ }
 %\seealso{ ~~objects to See Also as \code{\link{~~fun~~}}, ~~~ }
 \examples{

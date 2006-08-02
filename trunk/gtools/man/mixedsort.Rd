@@ -36,7 +36,7 @@ mixedsort(x)
   \code{mixedorder} returns a vector giving the sort order of the input
   elements. \code{mixedsort} returns the sorted vector.
 }
-\author{ Gregory R. Warnes \email{gregory.r.warnes@pfizer.com} }
+\author{ Gregory R. Warnes \email{warnes@bst.rochester.edu} }
 \seealso{ \code{\link[base]{sort}}, \code{\link[base]{order}} }
 \examples{
 # compound & dose labels

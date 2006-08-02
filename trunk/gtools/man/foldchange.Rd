@@ -37,7 +37,7 @@ foldchange2logratio(foldchange, base=2)
   A vector or matrix of the same dimensions as the input containing the
   converted values.
 }
-\author{ Gregory R. Warnes \email{gregory.r.warnes@pfizer.com} }
+\author{ Gregory R. Warnes \email{warnes@bst.rochester.edu} }
 \examples{
 
   a <- 1:21

@@ -3,7 +3,7 @@ Title: Interface to the LSF Queuing System
 Date: 2005-10-03
 Version: 1.0.0
 Author: Chris Smith <csmith@platform.com> and
-        Gregory Warnes <gregory.r.warnes@pfizer.com>
+        Gregory Warnes <warnes@bst.rochester.edu>
 Description: This package provides functions for using R with the
              LSF cluster/grid queuing system.  
 Depends: snow, gdata

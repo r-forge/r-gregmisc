@@ -18,7 +18,7 @@ permute(x)
 \value{
   Vector with the original items reordered.
 }
-\author{ Gregory R. Warnes \email{gregory.r.warnes@pfizer.com} }
+\author{ Gregory R. Warnes \email{warnes@bst.rochester.edu} }
 \seealso{ \code{\link{sample}} }
 
 \examples{

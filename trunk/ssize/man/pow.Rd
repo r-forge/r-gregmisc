@@ -76,7 +76,7 @@ Warnes GR and Fasheng Li
   American Statistical Association, Bethesda, MD, Sept 18-19, 2003.
   \url{http://www.warnes.net/Research/PresentationFolder/SampleSize.pdf}
 }
-\author{Gregory R. Warnes \email{Gregory\_R\_Warnes\@groton.pfizer.com}}
+\author{Gregory R. Warnes \email{warnes@bst.rochester.edu}}
 \seealso{
   \code{\link{ssize}},
   \code{\link{ssize.plot}},

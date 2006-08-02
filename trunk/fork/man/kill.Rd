@@ -28,7 +28,7 @@ killall(signal = 15)
   \code{killall} does not return a value.
 }
 \references{"kill" and "waitpid"  man pages}
-\author{ Gregory R. Warnes \email{gregory\_r\_warnes\@groton.pfizer.com}}
+\author{ Gregory R. Warnes \email{warnes@bst.rochester.edu}}
 \seealso{\code{\link{getpid}}, \code{\link{exit}}, \code{\link{wait}},
          \code{\link{kill}}, \code{\link{killall}} }
 \examples{

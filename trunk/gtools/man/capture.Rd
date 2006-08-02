@@ -30,7 +30,7 @@ sprint(x,...)
 \section{WARNING}{R 1.7.0+ includes \code{capture.output}, which
   duplicates the functionality of \code{capture}.  Thus, \code{capture}
   is depreciated.}
-\author{Gregory R. Warnes \email{gregory\_r\_warnes@groton.pfizer.com} }
+\author{Gregory R. Warnes \email{warnes@bst.rochester.edu} }
 \seealso{\code{\link[session]{texteval}}, \code{\link[base]{capture.output}}}}
 \examples{
 

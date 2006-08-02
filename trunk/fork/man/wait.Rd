@@ -33,7 +33,7 @@ wait(pid, nohang=FALSE, untraced=FALSE)
   and the meanings of the status indicator.
 }
 \references{"wait" and "waitpid"  man pages}
-\author{ Gregory R. Warnes \email{gregory\_r\_warnes\@groton.pfizer.com}}
+\author{ Gregory R. Warnes \email{warnes\@bst.rochester.edu}}
 \seealso{\code{\link{fork}}, \code{\link{exit}}, \code{\link{getpid}},
          \code{\link{kill}}, \code{\link{killall}}}
 \examples{

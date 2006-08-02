@@ -5,7 +5,7 @@ Date: 2005-09-12
 Author: Gregory R. Warnes, Peng Liu, and Fasheng Li
 Description: Functions for computing and displaying sample size
              information for gene expression arrays.
-Maintainer: Gregory R. Warnes <Gregory.R.Warnes@pfizer.com>
+Maintainer: Gregory R. Warnes <warnes@bst.rochester.edu>
 Depends: gdata, xtable
 License: LGPL
 

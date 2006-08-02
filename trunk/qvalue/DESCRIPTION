@@ -2,7 +2,7 @@ Package: qvalue
 Title: Software for calculating q-values in multiple testing situations
 Version: 1.0.0
 Author: John D. Storey <storey@stat.berkeley.edu>. R packaging by
-        Gregory R. Warnes <gregory_r_warnes@groton.pfizer.com)
+        Gregory R. Warnes <warnes@bst.rochester.edu)
 Description: This package takes a list of p-values resulting from the
         simultaneous testing of many hypotheses and estimates their
         q-values. The q-value of a test measures the proportion of
@@ -15,7 +15,7 @@ Description: This package takes a list of p-values resulting from the
         conservative accuracy of the estimated q-values from this
         software. The software can be applied to problems in genomics,
         brain imaging, astrophysics, and data mining.
-Maintainer: Gregory R. Warnes <gregory_r_warnes@groton.pfizer.com>
+Maintainer: Gregory R. Warnes <warnes@bst.rochester.edu>
 License: Please send the original author, John D. Storey
         <storey@stat.berkeley.edu> an email with "qvalue download" in
         the subject line.

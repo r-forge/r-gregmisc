@@ -22,7 +22,7 @@ factor \code{s} trims \code{\link{levels}}. There are also methods for
 \value{
   \code{s} with all leading and traling spaces removed in its elements.
 }
-\author{ Gregory R. Warnes \email{gregory.r.warnes@pfizer.com} }
+\author{ Gregory R. Warnes \email{warnes@bst.rochester.edu} }
 \seealso{ \code{\link[base]{sub}}, \code{\link[base]{gsub}} }
 \examples{
 s <- "    this is an example string    "

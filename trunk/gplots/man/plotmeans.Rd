@@ -137,7 +137,7 @@ plotmeans(formula, data=NULL, subset, na.action,
   
 }
 
-\author{Gregory R. Warnes \email{gregory.r.warnes@pfizer.com}}
+\author{Gregory R. Warnes \email{warnes@bst.rochester.edu}}
 
 \seealso{\code{\link{plotCI}}, \code{\link{boxplot}}}
 

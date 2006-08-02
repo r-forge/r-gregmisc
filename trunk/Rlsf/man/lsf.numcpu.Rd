@@ -21,7 +21,7 @@ lsf.numcpu()
   The number of CPUs assigned the R process by LSF.
 }
 %\references{ ~put references to the literature/web site here ~ }
-\author{Gregory R. Warnes \email{gregory\_r\_warnes@groton.pfizer.com}}
+\author{Gregory R. Warnes \email{warnes@bst.rochester.edu}}
 %\seealso{ ~~objects to See Also as \code{\link{~~fun~~}}, ~~~ }
 \examples{
 
