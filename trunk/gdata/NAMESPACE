@@ -3,7 +3,6 @@ export(
        Args,
        aggregate.table,
        combine,
-       combineLevels,
        ConvertMedUnits,
        drop.levels,
        elem,
@@ -15,7 +14,6 @@ export(
        ll,
        lowerTriangle,
        "lowerTriangle<-",
-       mapFactor,
        matchcols,
        nobs,
        read.xls,
@@ -26,7 +24,16 @@ export(
        trim,
        unmatrix,
        upperTriangle,
-       "upperTriangle<-"
+       "upperTriangle<-",
+
+       ## mapLevels stuff
+       mapLevels,
+       as.levelsMap,
+       as.listLevelsMap,
+       is.levelsMap,
+       is.listLevelsMap,
+       sort.levelsMap, ## remove in R 2.4
+       "mapLevels<-"
 )
 
 importFrom(stats, reorder, na.omit)
@@ -46,3 +53,25 @@ S3method(drop.levels, default)
 S3method(drop.levels, factor)
 S3method(drop.levels, list)
 S3method(drop.levels, data.frame)
+
+S3method(mapLevels, default)
+S3method(mapLevels, character)
+S3method(mapLevels, factor)
+S3method(mapLevels, list)
+S3method(mapLevels, data.frame)
+
+S3method(print, levelsMap)
+S3method(print, listLevelsMap)
+
+S3method("[", levelsMap)
+S3method("[", listLevelsMap)
+
+S3method(c, levelsMap)
+S3method(c, listLevelsMap)
+
+S3method(unique, levelsMap)
+## S3method(sort, levelsMap) ## uncomment in R 2.4
+
+S3method("mapLevels<-", default)
+S3method("mapLevels<-", list)
+S3method("mapLevels<-", data.frame)
