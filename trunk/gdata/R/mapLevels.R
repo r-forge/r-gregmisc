@@ -2,7 +2,7 @@
 ###------------------------------------------------------------------------
 ### What: Mapping levels
 ### $Id: mapLevels.R,v 1.1 2006/03/29 13:47:15 ggorjan Exp ggorjan $
-### Time-stamp: <2006-08-31 02:24:45 ggorjan>
+### Time-stamp: <2006-09-10 03:54:56 ggorjan>
 ###------------------------------------------------------------------------
 
 ### {{{ mapLevels
@@ -25,7 +25,7 @@ mapLevels.default <- function(x, codes=TRUE, sort=TRUE, drop=FALSE,
 mapLevels.character <- function(x, codes=TRUE, sort=TRUE, drop=FALSE,
                                 combine=FALSE, ...)
 {
-  return(mapLevels.factor(x=x, codes=codes, sort=sort, drop=drop, ...))
+  mapLevels.factor(x=x, codes=codes, sort=sort, drop=drop, ...)
 }
 
 ## Could coerce character to factor and then use factor method, but that
@@ -57,7 +57,7 @@ mapLevels.factor <- function(x, codes=TRUE, sort=TRUE, drop=FALSE,
     map[1:nlevs] <- levs
   }
   class(map) <- "levelsMap"
-  return(map)
+  map
 }
 
 mapLevels.list <- function(x, codes=TRUE, sort=TRUE, drop=FALSE,
@@ -72,14 +72,13 @@ mapLevels.list <- function(x, codes=TRUE, sort=TRUE, drop=FALSE,
       stop(sprintf("can not combine integer %s", dQuote("levelsMaps")))
     }
   }
-  return(map)
+  map
 }
 
 mapLevels.data.frame <- function(x, codes=TRUE, sort=TRUE, drop=FALSE,
                                  combine=FALSE, ...)
 {
-  return(mapLevels.list(x, codes=codes, sort=sort, drop=drop,
-                        combine=combine, ...))
+  mapLevels.list(x, codes=codes, sort=sort, drop=drop, combine=combine, ...)
 }
 
 ### }}}
@@ -122,7 +121,7 @@ print.listLevelsMap <- function(x, ...)
   class(x) <- "list"
   x <- x[i]
   class(x) <- classX
-  return(x)
+  x
 }
 
 "[.listLevelsMap" <- function(x, i)
@@ -131,7 +130,7 @@ print.listLevelsMap <- function(x, ...)
   class(x) <- "list"
   x <- x[i]
   class(x) <- classX
-  return(x)
+  x
 }
 
 ### }}}
@@ -162,7 +161,7 @@ as.levelsMap <- function(x, check=TRUE, ...)
   if(check)
     gdata:::.checkLevelsMap(x, method="raw")
   class(x) <- "levelsMap"
-  return(unique(x, ...))
+  unique(x, ...)
 }
 
 as.listLevelsMap <- function(x, check=TRUE)
@@ -170,7 +169,7 @@ as.listLevelsMap <- function(x, check=TRUE)
   if(check)
     gdata:::.checkListLevelsMap(x, method="raw")
   class(x) <- "listLevelsMap"
-  return(x)
+  x
 }
 
 ### }}}
@@ -215,7 +214,7 @@ c.levelsMap <- function(..., sort=TRUE, recursive=FALSE)
 {
   x <- list(...)
   class(x) <- "listLevelsMap"
-  return(c(x, sort=sort, recursive=TRUE))
+  c(x, sort=sort, recursive=TRUE)
 }
 
 c.listLevelsMap <- function(..., sort=TRUE, recursive=FALSE)
@@ -235,7 +234,7 @@ c.listLevelsMap <- function(..., sort=TRUE, recursive=FALSE)
     if(sort) x <- sort.levelsMap(x)
     x <- unique(x)
   }
-  return(x)
+  x
 }
 
 ### }}}
@@ -243,7 +242,7 @@ c.listLevelsMap <- function(..., sort=TRUE, recursive=FALSE)
 ###------------------------------------------------------------------------
 
 sort.levelsMap <- function(x, decreasing=FALSE, na.last=TRUE, ...)
-  return(x[order(names(x), na.last=na.last, decreasing=decreasing)])
+  x[order(names(x), na.last=na.last, decreasing=decreasing)]
 
 ### }}}
 ### {{{ unique
@@ -277,7 +276,7 @@ unique.levelsMap <- function(x, incomparables=FALSE, ...)
       x <- x[!test]
     }
   }
-  return(x)
+  x
 }
 
 ### }}}
@@ -317,8 +316,7 @@ unique.levelsMap <- function(x, incomparables=FALSE, ...)
       stop(sprintf("can not apply character %s to %s",
                    dQuote("levelsMap"), dQuote("integer")))
   }
-
-  return(x)
+  x
 }
 
 "mapLevels<-.list" <- function(x, value)
@@ -339,13 +337,13 @@ unique.levelsMap <- function(x, incomparables=FALSE, ...)
   }
   x <- mapply(FUN="mapLevels<-", x=x, value=value, SIMPLIFY=FALSE)
   if(isNamed) names(x) <- namesX
-  return(x)
+  x
 }
 
 "mapLevels<-.data.frame" <- function(x, value)
 {
   x[] <- "mapLevels<-.list"(x, value)
-  return(x)
+  x
 }
 
 ### }}}
