@@ -1,0 +1,41 @@
+RUNIT TEST PROTOCOL -- Wed Sep 13 14:16:43 2006 
+*********************************************** 
+Number of test functions: 10 
+Number of errors: 0 
+Number of failures: 1 
+
+ 
+1 Test Suite : 
+gdata unit testing - 10 test functions, 0 errors, 1 failure
+FAILURE in test.trim: Error in checkIdentical(trim(dfTrim), dfTrimR) : 
+	FALSE 
+
+
+
+Details 
+*************************** 
+Test Suite: gdata unit testing 
+Test function regexp: ^test.+ 
+Test file regexp: ^runit.+\.[rR]$ 
+Involved directory: 
+/Users/warnes/src/r-gregmisc/gdata/tests/../inst/unitTests 
+--------------------------- 
+Test file: /Users/warnes/src/r-gregmisc/gdata/tests/../inst/unitTests/runit.drop.levels.R 
+test.drop.levels: ... OK (0.17 seconds)
+--------------------------- 
+Test file: /Users/warnes/src/r-gregmisc/gdata/tests/../inst/unitTests/runit.mapLevels.R 
+test.cLevelsMap: ... OK (0.09 seconds)
+test.checkLevelsMap: ... OK (0.02 seconds)
+test.mapLevels: ... OK (0.05 seconds)
+test.mapLevels<-: ... OK (0.15 seconds)
+test.uniqueLevelsMap: ... OK (0 seconds)
+--------------------------- 
+Test file: /Users/warnes/src/r-gregmisc/gdata/tests/../inst/unitTests/runit.trim.R 
+test.trim: FAILURE !! (check number 4)
+Error in checkIdentical(trim(dfTrim), dfTrimR) : 
+	FALSE 
+--------------------------- 
+Test file: /Users/warnes/src/r-gregmisc/gdata/tests/../inst/unitTests/runit.unknown.R 
+test.NAToUnknown: ... OK (0.36 seconds)
+test.isUnknown: ... OK (0.02 seconds)
+test.unknownToNA: ... OK (0.05 seconds)
