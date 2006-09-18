@@ -1,8 +1,8 @@
-## doRUnit.R
+### doRUnit.R
 ###------------------------------------------------------------------------
-## What: Run RUnit tests
-## $Id$
-## Time-stamp: <2006-08-09 23:27:21 ggorjan>
+### What: Run RUnit tests
+### $Id$
+### Time-stamp: <2006-09-18 13:14:34 ggorjan>
 ###------------------------------------------------------------------------
 
 if(require("RUnit", quietly=TRUE)) {
@@ -46,4 +46,4 @@ if(require("RUnit", quietly=TRUE)) {
 }
 
 ###------------------------------------------------------------------------
-## doRUnit.R ends here
+### doRUnit.R ends here

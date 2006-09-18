@@ -20,8 +20,8 @@ test.trim <- function()
   sTrim <- "    this is an example string    "
   sTrimR <- "this is an example string"
 
-  fTrim <- c(sTrim, sTrim, " A", " B ", "  C ", "D ")
-  fTrimR <- c(sTrimR, sTrimR, "A", "B", "C", "D")
+  fTrim <- factor(c(sTrim, sTrim, " A", " B ", "  C ", "D "))
+  fTrimR <- factor(c(sTrimR, sTrimR, "A", "B", "C", "D"))
 
   lTrim <- list(s=rep(sTrim, times=6), f=fTrim, i=1:6)
   lTrimR <- list(s=rep(sTrimR, times=6), f=fTrimR, i=1:6)
@@ -31,6 +31,10 @@ test.trim <- function()
 
   checkIdentical(trim(sTrim), sTrimR)
   checkIdentical(trim(fTrim), fTrimR)
+  checkIdentical(
+                 levels(trim(fTrim, recode.factor=FALSE)),
+                 c("this is an example string", "C", "A", "B", "D")
+                 )
   checkIdentical(trim(lTrim), lTrimR)
   checkIdentical(trim(dfTrim), dfTrimR)
 }
