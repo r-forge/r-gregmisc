@@ -17,6 +17,9 @@ if(FALSE) {
 
 test.trim <- function()
 {
+  tmp <- Sys.getlocale(category="LC_COLLATE")
+  Sys.setlocale(category="LC_COLLATE", locale="C")
+
   sTrim <- "    this is an example string    "
   sTrimR <- "this is an example string"
 
@@ -37,6 +40,8 @@ test.trim <- function()
                  )
   checkIdentical(trim(lTrim), lTrimR)
   checkIdentical(trim(dfTrim), dfTrimR)
+
+  Sys.setlocale(category="LC_COLLATE", locale=tmp)  
 }
 
 ### }}}
