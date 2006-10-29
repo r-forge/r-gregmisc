@@ -2,7 +2,7 @@
 ###------------------------------------------------------------------------
 ### What: Tests for Change given unknown value to NA and vice versa methods
 ### $Id$
-### Time-stamp: <2006-09-07 15:33:50 ggorjan>
+### Time-stamp: <2006-10-29 17:06:04 ggorjan>
 ###------------------------------------------------------------------------
 
 ### {{{ --- Test setup ---
@@ -125,7 +125,7 @@ names(xListNUnk1) <- c("int", "cha", "num", "fac")
 xDFUnk1 <- as.data.frame(xListNUnk1)
 xDFUnk1$cha <- as.character(xDFUnk1$cha)
 xDFUnk1Test <- as.data.frame(xListUnk1Test)
-colnames(xDFUnk1Test) <- names(xListNUnk1)
+names(xDFUnk1Test) <- names(xListNUnk1)
 
 unkC2 <- c(0, "notAvail")
 xListUnk2 <- list(as.integer(c(unkC2[1], 1, 2, unkC2[1], 5, 6, 7, 8, 9)),
@@ -163,6 +163,20 @@ xList2a <- list(xListUnk2a[[1]],
                 c("A", "B", NA, "C", NA, "-", "7", "8", "9"),
                 xListUnk2a[[3]],
                 factor(c("A", NA, NA, "NA", "NA", 9999, NA, "-", NA)))
+
+### }}}
+### {{{ --- Matrix ---
+
+matUnk <- 9999
+mat        <- matrix(1:25, nrow=5, ncol=5)
+mat[1, 2] <- NA; mat[1, 4] <- NA; mat[2, 2] <- NA;
+mat[3, 2] <- NA; mat[3, 5] <- NA; mat[5, 4] <- NA;
+matUnk1       <- mat
+matUnk1[1, 2] <- matUnk; matUnk1[1, 4] <- matUnk; matUnk1[2, 2] <- matUnk;
+matUnk1[3, 2] <- matUnk; matUnk1[3, 5] <- matUnk; matUnk1[5, 4] <- matUnk;
+matUnkTest <- matUnk1Test <- is.na(mat)
+
+matUnk2Test <- matUnkTest | mat == 1
 
 ### }}}
 ### {{{ --- Use of unknown=list(.default=, ...) or similarly named vector ---
@@ -280,6 +294,11 @@ test.isUnknown <- function()
   ## list(.default=, 99) ERROR as we do not know where to apply 99
   checkException(isUnknown(x=xListNUnk, unknown=unkLND2E))
 
+  ## --- matrix ---
+
+  checkIdentical(isUnknown(x=mat, unknown=NA), matUnkTest)
+  checkIdentical(isUnknown(x=matUnk1, unknown=matUnk), matUnkTest)
+  checkIdentical(isUnknown(x=matUnk1, unknown=c(1, matUnk)), matUnk2Test)
 }
 
 ### }}}
@@ -310,8 +329,7 @@ test.unknownToNA <- function()
 
   ## Date-time classes
   checkIdentical(unknownToNA(xDateUnk, unknown=dateUnk), xDate)
-  ## FIXME uncomment in R 2.4
-  ## checkIdentical(unknownToNA(xPOSIXltUnk, unknown=POSIXltUnk), xPOSIXlt)
+  checkIdentical(unknownToNA(xPOSIXltUnk, unknown=POSIXltUnk), xPOSIXlt)
   checkIdentical(unknownToNA(xPOSIXctUnk, unknown=POSIXctUnk), xPOSIXct)
 
   ## --- lists and data.frames ---
@@ -368,6 +386,10 @@ test.unknownToNA <- function()
   checkIdentical(unknownToNA(x=xListNUnkD3, unknown=unkLND3), xListN)
   ## list(.default=, 99) ERROR as we do not know where to apply 99
   checkException(unknownToNA(x=xListNUnk, unknown=unkLND2E))
+
+  ## --- matrix ---
+
+  checkEquals(unknownToNA(x=matUnk1, unknown=matUnk), mat)
 }
 
 ### }}}
@@ -405,7 +427,7 @@ test.NAToUnknown <- function()
 
   ## Date-time classes
   checkIdentical(NAToUnknown(xDate, unknown=dateUnk), xDateUnk)
-  ## FIXME uncomment in R 2.4
+  ## FIXME
   ## checkIdentical(NAToUnknown(xPOSIXlt, unknown=POSIXltUnk), xPOSIXltUnk)
   checkIdentical(NAToUnknown(xPOSIXct, unknown=POSIXctUnk), xPOSIXctUnk)
 
@@ -464,6 +486,9 @@ test.NAToUnknown <- function()
   ## list(.default=, 99) ERROR as we do not know where to apply 99
   checkException(NAToUnknown(x=xListN, unknown=unkLND2E))
 
+  ## --- matrix ---
+
+  checkEquals(NAToUnknown(x=mat, unknown=matUnk), matUnk1)
 }
 
 ### }}}

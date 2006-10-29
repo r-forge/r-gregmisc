@@ -10,6 +10,8 @@ CHANGES IN 2.3.1 (2006-10-29)
 
 - trim() gains ... argument.
 
+- Added "unknown" methods for matrices.
+
 CHANGES FROM 2.1.X to 2.3.0 (2006-09-19)
 ---------------------------------------
 

@@ -2,7 +2,7 @@
 %--------------------------------------------------------------------------
 % What: Change given unknown value to NA and vice versa man page
 % $Id$
-% Time-stamp: <2006-09-07 15:38:12 ggorjan>
+% Time-stamp: <2006-10-15 03:52:48 ggorjan>
 %--------------------------------------------------------------------------
 
 \name{unknownToNA}
@@ -12,6 +12,7 @@
 \alias{isUnknown.POSIXlt}
 \alias{isUnknown.list}
 \alias{isUnknown.data.frame}
+\alias{isUnknown.matrix}
 
 \alias{unknownToNA}
 \alias{unknownToNA.default}
@@ -39,8 +40,8 @@ values to \code{NA} and vice versa.
 \usage{
 
 isUnknown(x, unknown=NA, \ldots)
-unknownToNA(x, unknown, warning=FALSE)
-NAToUnknown(x, unknown, force=FALSE, call.=FALSE)
+unknownToNA(x, unknown, warning=FALSE, \ldots)
+NAToUnknown(x, unknown, force=FALSE, call.=FALSE, \ldots)
 
 }
 
@@ -49,7 +50,8 @@ NAToUnknown(x, unknown, force=FALSE, call.=FALSE)
   \item{unknown}{generic, value used instead of \code{NA}}
   \item{warning}{logical, issue warning if \code{x} already has \code{NA}}
   \item{force}{logical, force to apply already existing value in \code{x}}
-  \item{\ldots}{arguments pased to as.character POSIXlt method}
+  \item{\ldots}{arguments pased to other methods (as.character for POSIXlt
+    in case of isUnknown)}
   \item{call.}{logical, look in \code{\link{warning}}}
 }
 
@@ -65,8 +67,8 @@ for the opposite and would usually be used prior to export of data from
 All functions are generic and the following classes were tested to work
 with latest version: \dQuote{integer}, \dQuote{numeric},
 \dQuote{character}, \dQuote{factor}, \dQuote{Date}, \dQuote{POSIXct},
-\dQuote{POSIXlt}, \dQuote{list}, \dQuote{data.frame}. For others default
-method might work just fine.
+\dQuote{POSIXlt}, \dQuote{list}, \dQuote{data.frame} and
+\dQuote{matrix}. For others default method might work just fine.
 
 \code{unknownToNA} and \code{isUnknown} can cope with multiple values in
 \code{unknown}, but those should be given as a \dQuote{vector}. If not,
