@@ -8,6 +8,8 @@ CHANGES IN 2.3.1 (2006-10-29)
 
   reorder(trt, new.order=c("PLACEBO", "300 MG", "600 MG", "1200 MG"))
 
+- trim() gains ... argument.
+
 CHANGES FROM 2.1.X to 2.3.0 (2006-09-19)
 ---------------------------------------
 
