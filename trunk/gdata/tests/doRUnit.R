@@ -2,7 +2,7 @@
 ###------------------------------------------------------------------------
 ### What: Run RUnit tests
 ### $Id$
-### Time-stamp: <2006-09-18 13:14:34 ggorjan>
+### Time-stamp: <2006-10-29 16:37:40 ggorjan>
 ###------------------------------------------------------------------------
 
 if(require("RUnit", quietly=TRUE)) {
@@ -26,8 +26,7 @@ if(require("RUnit", quietly=TRUE)) {
   ## --- Testing ---
 
   ## Define tests
-  testSuite <- defineTestSuite(name=paste(pkg, "unit testing"),
-                                           dirs=path)
+  testSuite <- defineTestSuite(name=paste(pkg, "unit testing"), dirs=path)
   ## Run
   tests <- runTestSuite(testSuite)
 
