@@ -3,31 +3,26 @@
 # Reorder the levels of a factor.
 
 reorder.factor <- function(x,
-                           order,
                            X,
                            FUN,
-                           sort=mixedsort,
-                           make.ordered = is.ordered(x),
-                           ... )
-  {
-    constructor <- if (make.ordered) ordered else factor
+                           ...,
+                           order=is.ordered(x),
+                           new.order,
+                           sort=mixedsort)
+{
+    constructor <- if (order) ordered else factor
 
-    if (!missing(order))
+    if (!missing(new.order))
       {
-        if (is.numeric(order))
-          order = levels(x)[order]
+        if (is.numeric(new.order))
+          new.order <- levels(x)[new.order]
         else
-          order = order
+          new.order <- new.order
       }
     else if (!missing(FUN))
-      order = names(sort(tapply(X, x, FUN, ...)))
+      new.order <- names(sort(tapply(X, x, FUN, ...)))
     else
-      order = sort(levels(x))
+      new.order <- sort(levels(x))
 
-    constructor( x, levels=order)
-
-  }
-
-
-
-
+    constructor(x, levels=new.order)
+}
