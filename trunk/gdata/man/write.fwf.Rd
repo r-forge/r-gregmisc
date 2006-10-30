@@ -2,7 +2,7 @@
 %--------------------------------------------------------------------------
 % What: Write fixed width format man page
 % $Id$
-% Time-stamp: <2006-10-30 20:01:16 ggorjan>
+% Time-stamp: <2006-10-30 23:52:00 ggorjan>
 %--------------------------------------------------------------------------
 
 \name{write.fwf}
@@ -179,21 +179,22 @@ following columns:
   formatInfo <- write.fwf(x=testData, file=file, formatInfo=TRUE)
 
   ## Read exported data back to R (note +1 due to separator)
+  ## ... without header
+  read.fwf(file=file, widths=formatInfo$width + 1, header=FALSE, skip=1,
+           strip.white=TRUE)
+
+  ## ... with header - via postimport modfication
   tmp <- read.fwf(file=file, widths=formatInfo$width + 1, skip=1,
                   strip.white=TRUE)
-  colnames(tmp) <- unlist(strsplit(readLines(con=file, n=1), split=" "))
+  colnames(tmp) <- read.table(file=file, nrow=1, as.is=TRUE)
   tmp
 
-  \dontrun{
-  ## How to persuade read.fwf to accept header properly?
-  read.fwf(file=file, widths=formatInfo$width + 1, header=TRUE)
+  ## ... with header - persuading read.fwf to accept header properly
+  ## (thanks to Marc Schwartz)
+  read.fwf(file=file, widths=formatInfo$width + 1, strip.white=TRUE,
+           skip=1, col.names=read.table(file=file, nrow=1, as.is=TRUE))
 
-  }
-
-  ## This works, but without header
-  read.fwf(file=file, widths=formatInfo$width + 1, header=FALSE, skip=1)
-
-  ## This works, but we have to use quotes
+  ## ... with header - with the use of quotes
   write.fwf(x=testData, file=file, quote=TRUE)
   read.table(file=file, header=TRUE, strip.white=TRUE)
 
