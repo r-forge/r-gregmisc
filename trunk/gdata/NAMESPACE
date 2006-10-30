@@ -25,7 +25,7 @@ export(
        unmatrix,
        upperTriangle,
        "upperTriangle<-",
-##       write.fwf,
+       write.fwf,
 
        ## mapLevels stuff
        mapLevels,
@@ -85,7 +85,7 @@ S3method(isUnknown, default)
 S3method(isUnknown, POSIXlt)
 S3method(isUnknown, list)
 S3method(isUnknown, data.frame)
-## S3method(isUnknown, matrix)
+S3method(isUnknown, matrix)
 
 S3method(unknownToNA, default)
 S3method(unknownToNA, factor)
