@@ -2,7 +2,7 @@
 ###------------------------------------------------------------------------
 ### What: Tests for Change given unknown value to NA and vice versa methods
 ### $Id$
-### Time-stamp: <2006-10-29 17:06:04 ggorjan>
+### Time-stamp: <2006-10-30 17:46:21 ggorjan>
 ###------------------------------------------------------------------------
 
 ### {{{ --- Test setup ---
@@ -48,28 +48,31 @@ xFacUnkLev <- factor(c("A", "0", 0, "NA", "NA", intUnk, numUnk, "-", "A"))
 xFacUnkLevTest <-    c(1,    0,  0, 0,    0,    0,      0,      0,   1)
 xFacUnkLevTest <- as.logical(xFacUnkLevTest)
 
-dateUnk <- as.Date("1900-1-1")
-xDate     <- c(as.Date("2006-08-31"), NA)
-xDateUnk  <- c(as.Date("2006-08-31"), dateUnk)
-xDateTest <- c(FALSE,                 TRUE)
+dateUnk <- as.Date("2006-08-14")
+tmp <- as.Date("2006-08-15")
+xDate     <- c(tmp, NA)
+xDateUnk  <- c(tmp,   dateUnk)
+xDateTest <- c(FALSE, TRUE)
 
-xDate1Unk  <- c(as.Date("2006-08-31"), dateUnk, NA)
-xDate1Test <- c(FALSE,                 TRUE,    FALSE)
+xDate1Unk  <- c(tmp,   dateUnk, NA)
+xDate1Test <- c(FALSE, TRUE,    FALSE)
 
-POSIXltUnk <- strptime("1900-1-1", format="%Y-%m-%d")
-xPOSIXlt     <- c(strptime("2006-08-31", format="%Y-%m-%d"), NA)
-xPOSIXltUnk  <- c(strptime("2006-08-31", format="%Y-%m-%d"), POSIXltUnk)
-xPOSIXltTest <- c(FALSE,                                     TRUE)
+POSIXltUnk <- strptime("2006-08-14", format="%Y-%m-%d")
+tmp <- strptime("2006-08-15", format="%Y-%m-%d")
+xPOSIXlt     <- c(tmp, NA)
+xPOSIXltUnk  <- c(tmp,   POSIXltUnk)
+xPOSIXltTest <- c(FALSE, TRUE)
 
-xPOSIXlt1Unk  <- c(strptime("2006-08-31", format="%Y-%m-%d"), POSIXltUnk, NA)
-xPOSIXlt1Test <- c(FALSE,                                     TRUE,       FALSE)
+xPOSIXlt1Unk  <- c(tmp,   POSIXltUnk, NA)
+xPOSIXlt1Test <- c(FALSE, TRUE,       FALSE)
 
-POSIXctUnk <- as.POSIXct(strptime("1900-1-1 01:01:01", format="%Y-%m-%d %H:%M:%S"))
-xPOSIXct     <- c(as.POSIXct(strptime("2006-08-31 01:01:01", format="%Y-%m-%d %H:%M:%S")), NA)
-xPOSIXctUnk  <- c(as.POSIXct(strptime("2006-08-31 01:01:01", format="%Y-%m-%d %H:%M:%S")), POSIXctUnk)
+POSIXctUnk <- as.POSIXct(strptime("2006-08-14 01:01:01", format="%Y-%m-%d %H:%M:%S"))
+tmp <- as.POSIXct(strptime("2006-08-15 01:01:01", format="%Y-%m-%d %H:%M:%S"))
+xPOSIXct     <- c(tmp, NA)
+xPOSIXctUnk  <- c(tmp, POSIXctUnk)
 xPOSIXctTest <- xPOSIXltTest
 
-xPOSIXct1Unk  <- c(as.POSIXct(strptime("2006-08-31 01:01:01", format="%Y-%m-%d %H:%M:%S")), POSIXctUnk, NA)
+xPOSIXct1Unk  <- c(tmp, POSIXctUnk, NA)
 xPOSIXct1Test <- xPOSIXlt1Test
 
 ### }}}
@@ -427,8 +430,7 @@ test.NAToUnknown <- function()
 
   ## Date-time classes
   checkIdentical(NAToUnknown(xDate, unknown=dateUnk), xDateUnk)
-  ## FIXME
-  ## checkIdentical(NAToUnknown(xPOSIXlt, unknown=POSIXltUnk), xPOSIXltUnk)
+  checkIdentical(NAToUnknown(xPOSIXlt, unknown=POSIXltUnk), xPOSIXltUnk)
   checkIdentical(NAToUnknown(xPOSIXct, unknown=POSIXctUnk), xPOSIXctUnk)
 
   ## --- lists and data.frames ---

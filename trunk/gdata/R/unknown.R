@@ -1,12 +1,11 @@
 ### unknown.R
 ###------------------------------------------------------------------------
 ### What: Change given unknown value to NA and vice versa
-### $Id$
-### Time-stamp: <2006-10-29 17:08:21 ggorjan>
+### $Id:$
+### Time-stamp: <2006-10-30 18:06:17 ggorjan>
 ###------------------------------------------------------------------------
 
 ### {{{ isUnknown
-
 ###------------------------------------------------------------------------
 
 isUnknown <- function(x, unknown=NA, ...)
@@ -34,10 +33,7 @@ isUnknown.POSIXlt <- function(x, unknown=NA, ...)
 
 isUnknown.list <- function(x, unknown=NA, ...) {
   unknown <- gdata:::.unknownList(x=x, unknown=unknown)
-  ## FIXME - do I still need attributes here; R 2.4
-  ## attrX <- attributes(x)
   x <- mapply(FUN="isUnknown", x=x, unknown=unknown, ..., SIMPLIFY=FALSE)
-  ## attributes(x) <- attrX
   x
 }
 
@@ -53,7 +49,6 @@ isUnknown.matrix <- function(x, unknown=NA, ...)
 
 ### }}}
 ### {{{ unknownToNA
-
 ###------------------------------------------------------------------------
 
 unknownToNA <- function(x, unknown, warning=FALSE, ...)
@@ -87,11 +82,8 @@ unknownToNA.factor <- function(x, unknown, warning=FALSE, ...)
 unknownToNA.list <- function(x, unknown, warning=FALSE, ...)
 {
   unknown <- gdata:::.unknownList(x=x, unknown=unknown)
-  ## FIXME - do I still need attributes here; R 2.4
-  ## attrX <- attributes(x)
   x <- mapply(FUN="unknownToNA", x=x, unknown=unknown, warning=warning,
               SIMPLIFY=FALSE)
-  ## attributes(x) <- attrX
   return(x)
 }
 
@@ -103,7 +95,6 @@ unknownToNA.data.frame <- function(x, unknown, warning=FALSE, ...)
 
 ### }}}
 ### {{{ NAToUnknown
-
 ###------------------------------------------------------------------------
 
 NAToUnknown <- function(x, unknown, force=FALSE, call.=FALSE, ...)
@@ -148,11 +139,8 @@ NAToUnknown.factor <- function(x, unknown, force=FALSE, call.=FALSE, ...)
 NAToUnknown.list <- function(x, unknown, force=FALSE, call.=FALSE, ...)
 {
   unknown <- gdata:::.unknownList(x=x, unknown=unknown)
-  ## FIXME - do I still need attributes here; R 2.4
-  ## attrX <- attributes(x)
   x <- mapply(FUN="NAToUnknown", x=x, unknown=unknown, force=force,
               call.=call., SIMPLIFY=FALSE)
-  ## attributes(x) <- attrX
   x
 }
 
