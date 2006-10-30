@@ -41,7 +41,7 @@ export(
        NAToUnknown
 )
 
-importFrom(stats, reorder, na.omit)
+importFrom(stats, reorder)
 importFrom(gtools, mixedsort)
 
 S3method(nobs, data.frame)
