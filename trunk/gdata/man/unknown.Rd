@@ -2,7 +2,7 @@
 %--------------------------------------------------------------------------
 % What: Change given unknown value to NA and vice versa man page
 % $Id$
-% Time-stamp: <2006-10-15 03:52:48 ggorjan>
+% Time-stamp: <2006-11-01 00:15:08 ggorjan>
 %--------------------------------------------------------------------------
 
 \name{unknownToNA}
@@ -60,9 +60,10 @@ NAToUnknown(x, unknown, force=FALSE, call.=FALSE, \ldots)
 This functions were written to handle different variants of
 \dQuote{other \code{NA}} like representations that are usually used in
 various external data sources. \code{unknownToNA} can help to change
-unknown values to NA for work in \R, while \code{NAToUnknown} is meant
-for the opposite and would usually be used prior to export of data from
-\R. \code{isUnknown} is utility function for testing for unknown values.
+unknown values to \code{NA} for work in \R, while \code{NAToUnknown} is
+meant for the opposite and would usually be used prior to export of data
+from \R. \code{isUnknown} is utility function for testing for unknown
+values.
 
 All functions are generic and the following classes were tested to work
 with latest version: \dQuote{integer}, \dQuote{numeric},
@@ -75,10 +76,10 @@ with latest version: \dQuote{integer}, \dQuote{numeric},
 coercing to vector is applied. Argument \code{unknown} can be feed also
 with \dQuote{list} in \dQuote{list} and \dQuote{data.frame} methods.
 
-If names \dQuote{list} or \dQuote{vector} is passed to argument
+If named \dQuote{list} or \dQuote{vector} is passed to argument
 \code{unknown} and \code{x} is also named, matching of names will occur.
 
-Recycling occours in all \dQuote{list} and \dQuote{data.frame} methods,
+Recycling occurs in all \dQuote{list} and \dQuote{data.frame} methods,
 when \code{unknown} argument is not of the same length as \code{x} and
 \code{unknown} is not named.
 
