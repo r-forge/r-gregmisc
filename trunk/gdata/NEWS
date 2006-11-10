@@ -14,7 +14,7 @@ CHANGES IN 2.3.1 (2006-10-29)
 
 - Added c() method for factors based on mapLevels() functions.
 
-- Added write.fwf, which writes file in *F*ixed *W*idth *f*ormat.
+- Added write.fwf, which writes file in *F*ixed *W*idth *F*ormat.
 
 CHANGES FROM 2.1.X to 2.3.0 (2006-09-19)
 ---------------------------------------
