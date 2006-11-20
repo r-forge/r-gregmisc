@@ -3,83 +3,87 @@
 %\VignetteKeywords{Expression Analysis, Sample Size}
 %\VignettePackage{ssize}
 
-
 %\documentclass[letter]{report}
 \documentclass[a4paper]{report}
-\usepackage{/Library/Frameworks/R.framework/Resources/share/texmf/Sweave}
 \usepackage{Rnews}
+\usepackage{/Library/Frameworks/R.framework/Resources/share/texmf/Sweave}
 \usepackage[round]{natbib}
+\usepackage{here}
 
 \begin{document}
+
+\setkeys{Gin}{width=0.9\textwidth} 
+
 \begin{article}
 
 \title{Sample Size Estimation for Microarray Experiments Using the
         \code{ssize} package.}
 \author{Gregory R. Warnes \\ 
         email:\code{warnes@bst.rochester.edu}}
-\subtitle{ ~ }
+%\subtitle{ ~ }
 
 \maketitle
 
 \section*{abstract}
 
-RNA Expression Microarray technology is widely applied in biomedical
-and pharmaceutical research.  The huge number of RNA concentrations
+mRNA Expression Microarray technology is widely applied in biomedical
+and pharmaceutical research.  The huge number of mRNA concentrations
 estimated for each sample make it difficult to apply traditional
 sample size calculation techniques and has left most practitioners
 to rely on rule-of-thumb techniques.  In this paper, we briefly
 describe and then demonstrate a simple method for performing and
 visualizing sample size calculations for microarray experiments as
-implemented in the \code{ssize} R package, which is available from
-the Bioconductor project (\url{http://www.bioconductor.org}) web
-site.
+implemented in the \code{ssize} R package.
 
 \section*{Note}
 
 This document is a simplified version of the manuscript 
 \begin{quote}
   Warnes, G. R., Liu, P. (2006) Sample Size Estimation for Microarray
-  Experiments, Technical Report, Department of Biostatisticsa and
+  Experiments, Technical Report, Department of Biostatistics and
   Computational Biology, University of Rochester.
 \end{quote}
 which has been available as a pre-publication manuscript since 2004.
 Please refer to that document for a detailed discussion of the sample
-size estimation method.
+size estimation method and an evaluation of its performance.
 
 \section*{Introduction}
 
 High-throughput microarray experiments allow the measurement of
 expression levels for tens of thousands of genes simultaneously.
 These experiments have been used in many disciplines of biological
-research, including as neuroscience \citep{Mandel03},
-pharmacogenomic research, genetic disease and cancer diagnosis
-\citep{Heller02}.  As a tool for estimating gene expression and
-single nucleotide polymorphism (SNP) genotyping, microarrays produce
-huge amounts of data which are providing important new insights.
+research, including neuroscience \citep{Mandel03}, pharmacogenomic
+research, genetic disease and cancer diagnosis \citep{Heller02}.  As a
+tool for estimating gene expression and single nucleotide polymorphism
+(SNP) genotyping, microarrays produce huge amounts of data which can
+providing important new insights.
 
 Microarray experiments are rather costly in terms of materials (RNA
 sample, reagents, chip, etc), laboratory manpower, and data analysis
 effort.  It is critical, therefore, to perform proper experimental
-design, including sample size estimation, before carrying out
-microarray experiments. Since tens of thousands of variables (gene
-expressions) may be measured on each individual chip, it is
-essential to take into account multiple testing and dependency among
-variables when calculating sample size.  
+design, including sample size estimation, before carrying out these
+experiments. Since tens of thousands of variables (gene expressions)
+may be measured on each individual chip, it is essential appropriately
+take into account multiple testing and dependency among variables when
+calculating sample size.
 
 \section*{Method}
 
 \subsection*{Overview}
 
-\citet{Warnes05} provides a simple method for computing sample size
-for micrarray experiments, and reports on a sereies of simulations
-demonstrating the performinace of the method. The key component of
-this method is the generation of cumulative plot of the proportion
-of genes achieving a desired power as a function of sample size,
-based on simple gene-by-gene calculations.  While this mechanism can
-be used to select a sample size numerically based on pre-specified
-conditions, its real utility is as a visual tool for helping clients
-to understand the trade off between sample size and power.  In our
-consulting work, this latter use as a visual tool has been
+\citet{Warnes05} provide a simple method for computing sample size for
+microarray experiments, and reports on a series of simulations
+demonstrating its performance. Surprisingly, despite its simplicity,
+the method performs exceptionally well even for data with very high
+correlation between measurements.
+
+The key component of this method is the generation of a cumulative
+plot of the proportion of genes achieving a desired power as a
+function of sample size, based on simple gene-by-gene calculations.
+While this mechanism can be used to select a sample size numerically
+based on pre-specified conditions, its real utility is as a visual
+tool for understanding the trade off between sample size and power.
+In our consulting work, this latter use as a visual tool has been
 exceptionally valuable in helping scientific clients to make the
 difficult trade offs between experiment cost and statistical power.
 
@@ -112,8 +116,11 @@ The proposed procedure to estimate sample size is:
 
 \begin{enumerate}
 \item{Estimate standard deviation ($\sigma$) for each gene based on
-    \emph{control samples} from existing studies performed on the
-    same biological system.}
+    \emph{control samples} from existing studies performed on the same
+    biological system. (While samples from the study to be performed
+    are not, of course, generally available, control samples from
+    other studies using the same biological system are often readily
+    available.) }
 
 \item{Specify values for
     \begin{enumerate}
@@ -162,7 +169,7 @@ genes with power greater than or equal to the specified power
 the relationship between power for all genes and required sample
 size in a single display.  A sample size can thus be selected for a
 proposed microarray experiment based on user-defined criterion. For
-the plot in Figure \ref{fig:CumNPlot}, for example, requiring $70\%$
+the plot in Figure \ref{fig:CumNPlot}, for example, requiring $80\%$
 of genes to achieve the $80\%$ power yields a sample size of 10.
 
 Similar plots can be generated by fixing the sample size and
@@ -171,73 +178,9 @@ varying one of the other parameters, namely, significance level
 such plots are shown in Figures \ref{fig:CumPowerPlot} and
 \ref{fig:CumFoldChangePlot}.
 
+\subsection{Functions}
 
-\section*{Example}
-
-First, we need to load the \code{ssize} library:
-
-<<results=hide>>=
-library(ssize)
-library(xtable)
-library(gdata) # for nobs()
-options(width=30)
-@
-
-As part of the \code{ssize} library, I've provided an example data
-set containing gene expression values for smooth muscle cells from a
-control group of untreated healthy volunteers processed using
-Affymetrix U95 chips and normalized per the Robust Multi-array
-Average (RMA) method of \citet{Irizarry03}.  
-
-<<>>=
-data(exp.sd)
-#str(exp.sd)
-@ 
-
-This data was calculated via something like
-
-\begin{verbatim}
-library(affy)
-setwd("~/GT_methods_050316/WORK")
-load("probeset_data.Rda")
-expression.values <- exprs(probeset.data)
-covariate.data <- pData(probeset.data)
-controls <- expression.values[,
-            covariate.data$GROUP=="Control"] #$
-exp.sd <- apply(controls, 1, sd) 
-\end{verbatim} 
-
-
-Lets see what the distribution looks like:
-
-%\begin{figure}[h!]
-%  \centering
-%  \caption{Distribution of exp.sd}
-%  \label{exp.sd.hist}
-%\end{figure}
-
-<<fig=TRUE,width=12,height=12>>=
-     xlab <- c("Standard Deviation", " (for data on the log scale)")
-     hist(exp.sd,n=20, col="cyan", border="blue", main="", xlab=xlab)
-     dens <- density(exp.sd)
-     scaled.y <- dens$y*par("usr")[4]/max(dens$y) 
-     lines(dens$x,scaled.y ,col="red",lwd=2) #$
-     title("Histogram of Standard Deviations")
-@  
-
-
-Note that this distribution is right skewed, even though it is on
-the $\log_2$ scale.
-
-To make the computations run faster, we'll only use the standard
-deviations for the first 1000 genes on the chip.  Everything will
-work if you skip this, but it will take longer.
-
-<<>>=
-exp.sd <- exp.sd[1:1000]
-@ 
-
-There are 6 functions available in the \code{ssize} package.  
+There are three pairs of functions available in the \code{ssize} package.  
 
 \begin{verbatim}
  pow(sd, n, delta, sig.level, 
@@ -259,15 +202,14 @@ There are 6 functions available in the \code{ssize} package.
    alpha.correct = "Bonferonni")
  delta.plot (x, xlab = "Fold Change",
    ylab = "Proportion of Genes with "
-          "Power >= 80\% at Fold Change=delta",
+          "Power >= 80\% at\\n"
+	  "Fold Change=delta",
    marks = c(1.5, 2, 2.5, 3, 4, 6, 10), ...) 
 \end{verbatim}
 
-You will note that there are three pairs.  
-
 \begin{description}
 
-\item[pow, power.sd] compute and display a cumulative plot of the
+\item[pow, power.plot] compute and display a cumulative plot of the
 fraction of genes achieving a specified power for a fixed sample
 size (\code{n}), effect size (\code{delta}), and significance level
 (\code{sig.level}).
@@ -284,9 +226,71 @@ for a specified sample size (\code{n}), and significance level
 
 \end{description}
 
-So, now lets see the functions in action.
 
-First, lets define the values for which we will be investigating:
+
+
+\section*{Example}
+
+First, we need to load the \code{ssize} library:
+
+<<results=hide>>=
+library(ssize)
+library(xtable)
+library(gdata) # for nobs()
+options(width=30)
+@
+
+The \code{ssize} library provides an example data set containing gene
+expression values for smooth muscle cells from a control group of
+untreated healthy volunteers processed using Affymetrix U95 chips and
+normalized per the Robust Multi-array Average (RMA) method of
+\citet{Irizarry03}.
+
+<<>>=
+# Load the example data
+data(exp.sd)
+
+# Use only the first 1000, 
+# so examples run faster
+exp.sd <- exp.sd[1:1000] 
+@ 
+
+This data was calculated via:
+\begin{verbatim}
+library(affy)
+load("probeset_data.Rda")
+expression.values <- exprs(probeset.data)
+covariate.data <- pData(probeset.data)
+controls <- expression.values[,
+            covariate.data$GROUP=="Control"] #$
+exp.sd <- apply(controls, 1, sd) 
+\end{verbatim} 
+
+Lets see what the distribution looks like:
+<<label=SDPlot,fig=TRUE,include=F,results=hide,width=12,height=12>>=
+par(cex=2)
+xlab <- c("Standard Deviation", "(for data on the log scale)")
+hist(exp.sd,n=40, col="cyan", border="blue", main="", xlab=xlab, log="x")
+dens <- density(exp.sd)
+scaled.y <- dens$y*par("usr")[4]/max(dens$y) 
+lines(dens$x,scaled.y ,col="red",lwd=2) #$
+@  
+\begin{figure}[H] 
+  \caption{Standard deviations for of logged example data}
+  \label{fig:SDPlot}
+  \begin{center} 
+    \includegraphics{ssize-SDPlot}
+  \end{center} 
+\end{figure}
+
+
+As is often the case, this distribution is extremely right skewed,
+even though the standard deviations were computed on the $\log_2$
+scale.
+
+
+So, now lets see the functions in action. First, define the parameter
+values we will be investigating:
 <<>>=
 n<-6
 fold.change<-2.0
@@ -294,37 +298,18 @@ power<-0.8
 sig.level<-0.05
 @ 
 
+Now, the functions provided by the \code{ssize} package can be used to
+address several questions:
+
 \begin{enumerate}
-
-\item What is the power for 6 patients per group with  $\delta=1.0$,
- $\alpha=0.05$?
-
-<<fig=TRUE,width=12,height=12>>=
-all.power <- pow(sd=exp.sd, n=n, delta=log2(fold.change),
-                 sig.level=sig.level)
-
-power.plot(all.power, lwd=2, col="blue")
-xmax <- par("usr")[2]-0.05; ymax <- par("usr")[4]-0.05
-legend(x=xmax, y=ymax,
-       legend= strsplit( paste("n=",n,",",
-         "fold change=",fold.change,",",
-         "alpha=", sig.level, ",",
-         "# genes=", nobs(exp.sd), sep=''), "," )[[1]],
-       xjust=1, yjust=1, cex=1.0)
-title("Power to Detect 2-Fold Change")
-@  
-%\begin{figure}[h!]
-%  \caption{Effect of Sample Size on Power} \label{fig:CumNPlot}
-%  \centering
-%\end{figure}
 
 \item What is the necessary per-group sample size for $80\%$ power
       when $\delta=1.0$, and $\alpha=0.05$?
 
-
-<<fig=TRUE,width=12,height=12>>=
+<<label=CumNPlot,fig=TRUE,include=F>>=
 all.size  <- ssize(sd=exp.sd, delta=log2(fold.change),
                    sig.level=sig.level, power=power)
+par(cex=1.3)
 ssize.plot(all.size, lwd=2, col="magenta", xlim=c(1,20))
 xmax <- par("usr")[2]-1; 
 ymin <- par("usr")[3] + 0.05
@@ -333,42 +318,89 @@ legend(x=xmax, y=ymin,
          "alpha=", sig.level, ",",
          "power=",power,",",
          "# genes=", nobs(exp.sd), sep=''), "," )[[1]],
-       xjust=1, yjust=0, cex=1.0)
+       xjust=1, yjust=0, cex=0.90)
 title("Sample Size to Detect 2-Fold Change")
 @ 
-%\begin{figure}[h!]
-%  \caption{Sample size required to detect a 2-fold treatment effect.}
-%  \label{fig:CumPowerPlot}
-%  \centering
-%\end{figure}
+\begin{figure}[H] 
+  \caption{Sample size required to detect a 2-fold treatment effect.}
+  \label{fig:CumPowerPlot}
+  \begin{center} 
+    \includegraphics{ssize-CumNPlot}
+  \end{center} 
+\end{figure}
 
 %\clearpage
 
-\item What is necessary fold change to achieve $80\%$ with  $n=6$
-patients per group, when $\delta=1.0$ and $\alpha=0.05$?
+This plot illustrates that a sample size of 10 is required to ensure
+that at least 80\% of genes have power greater than 80\%.  It also
+shows that a sample size of 6 is sufficient if only 60\% of the genes
+need to achieve 80\% power.
 
-%\begin{figure}[h!]
-%  \caption[Given Sample Size, Fold Change (Effect Size) Necessary to
-%    Achieving a Specified Power]{Given sample size, this plot allows
-%    visualization of the fraction of genes achieving the specified
-%    power for different fold changes.}
-%  \label{fig:CumFoldChangePlot}
-%  \centering
-%\end{figure}
+\item What is the power for 6 patients per group with $\delta=1.0$,
+  and $\alpha=0.05$?
 
-<<fig=TRUE,width=12,height=12>>=
+<<label=CumPowerPlot,fig=TRUE,include=F>>=
+all.power <- pow(sd=exp.sd, n=n, delta=log2(fold.change),
+                 sig.level=sig.level)
+
+par(cex=1.3)
+power.plot(all.power, lwd=2, col="blue")
+xmax <- par("usr")[2]-0.05; ymax <- par("usr")[4]-0.05
+legend(x=xmax, y=ymax,
+       legend= strsplit( paste("n=",n,",",
+         "fold change=",fold.change,",",
+         "alpha=", sig.level, ",",
+         "# genes=", nobs(exp.sd), sep=''), "," )[[1]],
+       xjust=1, yjust=1, cex=0.90)
+title("Power to Detect 2-Fold Change")
+@  
+\begin{figure}[H] 
+  \caption{Effect of Sample Size on Power} 
+  \label{fig:CumNPlot}
+  \begin{center} 
+    \includegraphics{ssize-CumPowerPlot}
+  \end{center} 
+\end{figure}
+
+This plot shows that only 52\% of genes achieve at 80\% power at this
+sample size and significance level.
+
+\item How large does a fold-change need to be for 80\% of genes to
+achieve 80\% power for an experiment for $n=6$ patients per group and
+$\alpha=0.05$?
+
+<<label=CumFoldChangePlot,fig=TRUE,include=F>>=
 all.delta  <- delta(sd=exp.sd, power=power, n=n,
                     sig.level=sig.level)
-delta.plot(all.delta, lwd=2, col="magenta", xlim=c(1,10))
+par(cex=1.3, mar=c(5.1,5.1,4,2))
+delta.plot(all.delta, lwd=2, col="magenta", xlim=c(1,10),
+	   ylab = paste("Proportion of Genes with ",
+	        	"Power >= 80\% \n",
+			"at Fold Change of \delta")
+)
 xmax <- par("usr")[2]-1; ymin <- par("usr")[3] + 0.05
 legend(x=xmax, y=ymin,
        legend= strsplit( paste("n=",n,",",
          "alpha=", sig.level, ",",
          "power=",power,",",
          "# genes=", nobs(exp.sd), sep=''), "," )[[1]],
-       xjust=1, yjust=0, cex=1.0)
+       xjust=1, yjust=0, cex=0.90)
 title("Fold Change to Achieve 80\% Power")
 @ 
+\begin{figure}[H] 
+  \caption[Given Sample Size, Fold Change (Effect Size) Necessary to
+    Achieving a Specified Power]{Given sample size, this plot allows
+    visualization of the fraction of genes achieving the specified
+    power for different fold changes.}
+  \label{fig:CumFoldChangePlot}
+  \begin{center}
+    \includegraphics{ssize-CumFoldChangePlot}
+  \end{center}
+\end{figure}
+
+This plot shows that for a fold change of 2.0, only 60\% of genes
+achieve 80\% power, while a fold change of 3.0 will be detected with
+80\% power for 80\% of genes.
 
 \end{enumerate}
 
@@ -439,9 +471,10 @@ This work was supported by Pfizer Global Research and Development.
   A direct approach to false discovery rates, {\it Journal of Royal
   Statistical Society B}, {\bf 64:3}, 479-498.
 
-\bibitem[Warnes and Liu, 2005]{Warnes05} Warnes, G. R., Liu, P. (2005)
+\bibitem[Warnes and Liu, 2006]{Warnes05} Warnes, G. R., Liu, P. (2006)
   Sample Size Estimation for Microarray Experiments, \emph{submitted
-  to} {\it Biometrics}.
+  to} Technical Report, Department of Biostatistics and
+  Computational Biology, University of Rochester.
 
 \bibitem[Yang {\it et~al.}, 2003]{Yang03} Yang, M. C. K., Yang,
   J. J., McIndoe, R. A., She, J. X. (2003) Microarray experimental
