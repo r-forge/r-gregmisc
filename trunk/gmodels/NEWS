@@ -1,5 +1,18 @@
-CHANGES IN GMODELS 2.12.0
--------------------------
+Version 2.13.1
+--------------
+
+Bug Fixes:
+
+- Problem: estimable() was failing for lmer objects.
+  Solution: Add estimable.lmer() to the exported methods list in NAMESPACE
+
+
+Version 2.13.0
+--------------
+
+
+Version 2.12.0
+--------------
 
 - Updated Greg's email address.
 
@@ -14,11 +27,11 @@ CHANGES IN GMODELS 2.12.0
         estimable(reg, c(    0,   1,	 0,   -1)) 
   which should make estimable() much easier to use for large models.
 
-CHANGES IN GMODELS 2.1.0
-------------------------
+Version 2.1.0
+-------------
 
-CHANGES IN GMODELS 2.0.8
------------------------
+Version 2.0.8
+-------------
 
  - Added DESCRIPTION and removed DESCRIPTION.in
 
