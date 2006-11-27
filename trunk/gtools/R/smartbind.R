@@ -10,7 +10,13 @@ smartbind <- function(...)
     data <- list(...)
     if(is.null(names(data)))
       names(data) <- as.character(1:length(data))
-    data <- lapply(data, function(x) if(is.matrix(x) || is.data.frame(x)) x else data.frame(as.list(x)) )
+    data <- lapply(data,
+                   function(x)
+                   if(is.matrix(x) || is.data.frame(x))
+                     x
+                   else
+                     data.frame(as.list(x))
+                   )
 
     #retval <- new.env()
     retval <- list()
@@ -33,7 +39,10 @@ smartbind <- function(...)
           {
             if( !(col %in% names(retval)))
               {
-                if(verbose) cat("Start:", start, "  End:", end, "  Column:", col, "\n", sep="")
+                if(verbose) cat("Start:", start,
+                                "  End:", end,
+                                "  Column:", col,
+                                "\n", sep="")
                 if(class(block[,col])=="factor")
                   newclass <- "character"
                 else
@@ -53,38 +62,3 @@ smartbind <- function(...)
     return(retval)
   }
 
-testfun <- function(n=10,s=10)
-  {
-    names <- unlist(outer(LETTERS,letters, paste, sep=""))
-    
-    Z <- list()
-    for(i in 1:n)
-      {
-        X <- data.frame(A=sample(letters,s,replace=T),
-                        B=1:s,
-                        C=rnorm(s) )
-        names(X) <- c("A",sample(names[1:s*2],2,replace=F))
-        Z[[i]] <- X
-      }
-
-
-
-    #ut2 <- unix.time(
-    #          retval2 <- do.call("rbind",Z)
-    #                )
-    #
-    #cat("rbind used",ut2[3], "seconds.\n")   
-
-    
-    ut1 <- unix.time(
-              retval1 <- do.call("smartbind",Z)
-                    )
-
-    cat("smartbind used",ut1[3], "seconds.\n")
-
-
-    invisible(retval1)
-  }
-    
-              
-              
