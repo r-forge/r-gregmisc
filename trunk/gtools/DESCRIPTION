@@ -2,9 +2,8 @@ Package: gtools
 Title: Various R programming tools
 Description: Various R programming tools
 Depends: R (>= 1.9.0)
-Version: 2.2.3
-Date: 2005-12-21
+Version: 2.2.4
 Author: Gregory R. Warnes. Includes R source code and/or documentation
         contributed by Ben Bolker and Thomas Lumley
-Maintainer: Nitin Jain <nitin.jain@pfizer.com>
+Maintainer: Gregory R. Warnes <warnes@bst.rochester.edu>
 License: LGPL 2.1
