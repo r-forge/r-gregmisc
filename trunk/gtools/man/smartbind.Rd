@@ -53,7 +53,7 @@ smartbind(...)
   Z <- list()
   for(i in 1:n)
     {
-      X <- data.frame(A=sample(letters,s,replace=T),
+      X <- data.frame(A=sample(letters,s,replace=TRUE),
                       B=letters[1:s],
                       C=rnorm(s) )
       colnames(X) <- c("A",sample(names,2,replace=F))
