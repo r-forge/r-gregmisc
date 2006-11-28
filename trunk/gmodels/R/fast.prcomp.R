@@ -30,7 +30,7 @@ if(exists("is.R") && is.R()==TRUE)
         s$d <- s$d/sqrt(max(1, nrow(x) - 1))
 
         dimnames(s$vt) <- list(paste("PC", seq(len = nrow(s$vt)), sep = ""),
-                               colnames(x), )
+                               colnames(x) )
         r <- list(sdev = s$d, rotation = t(s$vt) )
         if (retx)
             r$x <- x %*% t(s$vt)

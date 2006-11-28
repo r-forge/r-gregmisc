@@ -12,7 +12,7 @@ ci.default <- function(x, confidence=0.95,alpha=1-confidence,na.rm=FALSE,...) {
                Estimate=est,
                "CI lower"=ci.low,
                "CI upper"=ci.high,
-               "Std. Error"=stderr,
+               "Std. Error"=stderr
                )
 
   retval
