@@ -56,7 +56,7 @@ smartbind(...)
       X <- data.frame(A=sample(letters,s,replace=TRUE),
                       B=letters[1:s],
                       C=rnorm(s) )
-      colnames(X) <- c("A",sample(names,2,replace=F))
+      colnames(X) <- c("A",sample(names,2,replace=FALSE))
       Z[[i]] <- X
     }
 
