@@ -2,16 +2,21 @@
 %
 \name{estimable}
 \alias{estimable}
+\alias{estimable.default}
 \alias{estimable.lmer}
 %\alias{.wald}
 %\alias{.to.est}
 \title{Contrasts and estimable linear functions of model coefficients}
-\description{Compute and test contrasts and other estimable linear
+\description{
+  Compute and test contrasts and other estimable linear
   functions of model coefficients for for lm, glm, lme, lmer, and geese
-  objects}
+  objects
+}
 \usage{
-estimable(obj, cm, beta0, conf.int=NULL, joint.test=FALSE, show.beta0)
-\method{estimable}{lmer}(obj, cm, beta0, conf.int = NULL, show.beta0, sim.lmer = TRUE, n.sim = 1000)         %%%%%%%%%%% added this line
+estimable(obj, cm, beta0, conf.int=NULL,  show.beta0, ...)
+\method{estimable}{default} (obj, cm, beta0, conf.int=NULL, show.beta0, joint.test=FALSE, ...)
+\method{estimable}{lmer}(obj, cm, beta0, conf.int=NULL,
+               show.beta0, sim.lmer=TRUE, n.sim=1000, ...) 
 %.wald(obj, cm,beta0=rep(0, ifelse(is.null(nrow(cm)), 1, nrow(cm))))
 %.to.est(obj, params)
 }
@@ -30,9 +35,13 @@ estimable(obj, cm, beta0, conf.int=NULL, joint.test=FALSE, show.beta0)
    \item{show.beta0}{Logical value. If TRUE a column for beta0 will be
      included in the output table.  Defaults to TRUE when beta0 is
      specified, FALSE otherwise.}
-   \item{sim.lmer}{Logical value. If TRUE p-values and confidence                 %%%
-     intervals will be estimated using \code{\Link[Matrix]{mcmcsamp}}.}           %%% Added these sections
-   \item{n.sim}{Number of MCMC samples to take in \code{\Link[Matrix]{mcmcsamp}}.}%%%
+   \item{sim.lmer}{Logical value. If TRUE p-values and confidence
+     intervals will be estimated using \code{\Link[Matrix]{mcmcsamp}}.
+   }
+   \item{n.sim}{Number of MCMC samples to take in
+     \code{\Link[Matrix]{mcmcsamp}}.
+   }
+   \item{...}{ignored}
 }
 \details{
   \code{estimable} computes an estimate, test statitic, significance
