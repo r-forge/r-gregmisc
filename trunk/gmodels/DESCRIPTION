@@ -6,7 +6,7 @@ Author: Gregory R. Warnes. Includes R source code and/or documentation
 Maintainer: Gregory R. Warnes <warnes@bst.rochester.edu>
 Description: Various R programming tools for model fitting
 Depends: R (>= 1.9.0)
-Suggests: gplots
+Suggests: gplots, Matrix, nlme, lme4, coda
 Imports: MASS, gdata
 License: GPL (version 2 or later).  Contributions from Randall C
 	 Johnson are Copyright (2005) SAIC-Frederick, Inc. Funded by
