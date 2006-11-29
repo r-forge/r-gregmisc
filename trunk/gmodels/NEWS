@@ -3,8 +3,17 @@ Version 2.13.1
 
 Bug Fixes:
 
+- Problem: R CMD check errors under development version of R 2.5.0
+  Solution:
+	- Add additional packages to 'Suggests' list in DESCRIPTION
+	- Remove extra trailing comma in function calls
+	- fix various code/doc inconsistencies
+
 - Problem: estimable() was failing for lmer objects.
-  Solution: Add estimable.lmer() to the exported methods list in NAMESPACE
+  Solution: 
+	- Create a generic estimable()
+	- Move old function to estimable.default()
+	- Add  estimable.lmer() to the exported methods list in NAMESPACE
 
 
 Version 2.13.0
