@@ -1,8 +1,8 @@
 ### unknown.R
 ###------------------------------------------------------------------------
 ### What: Change given unknown value to NA and vice versa
-### $Id:$
-### Time-stamp: <2006-10-30 18:06:17 ggorjan>
+### $Id$
+### Time-stamp: <2006-11-28 15:02:19 ggorjan>
 ###------------------------------------------------------------------------
 
 ### {{{ isUnknown
@@ -184,7 +184,7 @@ NAToUnknown.data.frame <- function(x, unknown, force=FALSE, call.=FALSE, ...)
 
   if(unkN < n) {
     if(unkNamesNullTest | defInNames) {
-      if(defInNames) {
+      if(defInNames) { # handling .default
         names(def) <- NULL
         unknownDef <- rep(def, length=(n - unkN))
         names(unknownDef) <- namesX[!(namesX %in% unkNames)]
