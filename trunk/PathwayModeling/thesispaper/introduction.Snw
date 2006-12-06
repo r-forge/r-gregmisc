@@ -23,6 +23,9 @@ An example of how a model of a biochemical pathway could be used is in the eluci
 that explain hyperglycemic toxicity in diabetes
 \cite{Oates02,Brownlee01}. One mechanism is illustrated in
 Figure~\ref{glycolysis}.
+
+\SweaveInput{figure1}
+
 Some of the damage to tissue components seen in diabetes is thought
 to be the result of reactions with glycolytic intermediates such as
 methylglyoxal. Nishikawa et al. \cite{Nishikawa00} have

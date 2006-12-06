@@ -1,4 +1,4 @@
-<<fig6, echo=F,eval=F>>=5
+<<fig6, echo=F,eval=T>>=5
 source("R/paperPairs.R")
 mcmcML <-scan("figures/tempDir/mcmcML.dat")
 output16 <- read.table("data/output16.AllComp.thinned")
@@ -8,15 +8,22 @@ mcmc.cor <- function(x,y) {
     txt <- format(r,digits=2)
     text(0.5,0.5,txt,cex=1.4)
     }
-pdf(file="figures/tempDir/scatterPlot.pdf",width=8,height=8)
+# pdf(file="figures/tempDir/scatterPlot.pdf",width=8,height=8)
+# postscript(file="figures/tempDir/scatterPlot.eps",width=8,height=8)
+pdf(file="figures/tempDir/scatterPlot_nocolor.pdf",width=8,height=8)
 par(pch='.')
-paperPairs(output16[sample(1:20000,2000),-10],labels=c('d1','d2','d3','d4','d5','d6','d7','d8','d9'),lower.panel=mcmc.cor)
-dev.off()
+paperPairs(output16[sample(1:20000,2000),-10],color=F,labels=c('d1','d2','d3','d4','d5','d6','d7','d8','d9'),lower.panel=mcmc.cor)
+N <- dev.off()
+postscript(file="figures/tempDir/scatterPlot_nocolor.eps",width=8,height=8)
+par(pch='.')
+paperPairs(output16[sample(1:20000,2000),-10],color=F,labels=c('d1','d2','d3','d4','d5','d6','d7','d8','d9'),lower.panel=mcmc.cor)
+N <- dev.off()
 par(pch=1)
 @
 \begin{figure}
   \centering
-  \includegraphics[scale=0.6]{figures/tempDir/scatterPlot}
+%  \includegraphics[scale=0.6]{figures/tempDir/scatterPlot}
+  \includegraphics[scale=0.6]{figures/tempDir/scatterPlot_nocolor}
   \caption[Bivariate scatter plots of the parameter distributions]{Bivariate scatter plots of the parameter distributions for
   the 5-reaction model found with the all-components Metropolis
   algorithm (upper triangle); correlation coefficients (lower

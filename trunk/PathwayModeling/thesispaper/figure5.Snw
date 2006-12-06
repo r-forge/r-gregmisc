@@ -1,22 +1,33 @@
-<<fig5,echo=F,eval=F>>=4
-source("R/plotDensity.R")
-source("R/plotConverged.R")
+<<fig5,echo=F,eval=T>>=4
+# source("R/plotDensity.R")
+# source("R/plotConverged.R")
+source("R/plotDensity_nocolor.R")
+source("R/plotConverged_nocolor.R")
 output12 <- read.table("data/output12.AllComp.thinned")
 output16 <- read.table("data/output16.AllComp.thinned")
 output25 <- read.table("data/output25.AllComp.thinned")
-pdf(file="figures/tempDir/converged.pdf",width=6,height=6)
+# pdf(file="figures/tempDir/converged.pdf",width=6,height=6)
+# postscript(file="figures/tempDir/converged.eps",width=6,height=6)
+pdf(file="figures/tempDir/converged_nocolor.pdf",width=6,height=6)
 par(mfrow=c(3,3))
-plotConverged()
-dev.off()
+# plotConverged()
+plotConverged_nocolor()
+postscript(file="figures/tempDir/converged_nocolor.eps",width=6,height=6)
+par(mfrow=c(3,3))
+# plotConverged()
+plotConverged_nocolor()
+N <- dev.off()
+N <- dev.off()
 par(mfrow=c(1,1))
 @
 \begin{figure}
   \centering
-  \includegraphics[scale=0.9]{figures/tempDir/converged}
-  \caption{\textit{Posterior distributions from different numbers} of data
+%  \includegraphics[scale=0.9]{figures/tempDir/converged}
+  \includegraphics[scale=0.9]{figures/tempDir/converged_nocolor}
+  \caption{Posterior distributions from different numbers of data
   points for the all-components algorithm. (---------) prior
-  distribution; ({\color{red} - - - -}) 12 points; ({\color{green}
-  $\cdots\cdots$}) 16 points; ({\color{blue} -- $\cdot$ -- $\cdot$ --}) 25
+  distribution; ( - - - -) 12 points; (
+  $\cdots\cdots$) 16 points; (-- $\cdot$ -- $\cdot$ --) 25
   points}
   \label{converged}
 \end{figure}

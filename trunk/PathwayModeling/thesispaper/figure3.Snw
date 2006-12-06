@@ -1,12 +1,13 @@
     \begin{figure}
       \centering
-      \subfloat[1-component]{\includegraphics[scale=0.50]{figures/1comp}
+      \subfloat[1-component]{\includegraphics[scale=0.45]{figures/1comp}
       \label{1comp}}
       \qquad
-      \subfloat[all-components]{\includegraphics[scale=0.50]{figures/allcomp}
+      \subfloat[all-components]{\includegraphics[scale=0.45]{figures/allcomp}
       \label{allComp}}
       \qquad
-      \subfloat[NKC]{\includegraphics[scale=0.50]{figures/nkc}\label{nkc}}
+      \subfloat[NKC]{\includegraphics[scale=0.45]{figures/nkc}\label{nkc}}
+      \qquad
       \caption[Movement of Markov chains with the
        Metropolis algorithms]{Movement of Markov chains with the component-wise and
       all-components Metropolis algorithms. Movement in a

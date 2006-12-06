@@ -9,8 +9,12 @@ The marginal distributions for the parameters were mound-shaped
 (Figure~\ref{densities}), were skewed to the right and had thicker
 tails than normal distributions.
 
+\SweaveInput{figure4}
+
+
 The effect of the number of data points on the parameter distributions
 can be seen in Figure~\ref{converged}.
+\SweaveInput{figure5}
 We see some improved precision as the number of points
 increases from 16 to 25 but it is not pronounced. Overall, the 
 reduction in width varied from 18-fold for $d_9$ and 9-fold for $d_1$ to 
@@ -18,17 +22,24 @@ reduction in width varied from 18-fold for $d_9$ and 9-fold for $d_1$ to
 Figure~\ref{scatter} is an example of a bivariate scatterplot of the
 distributions. There is correlation between some pairs of parameters, e.g.,
 $d_1$ -- $d_2$, but no evidence of multi-modality.
+\SweaveInput{figure6}
 
 The value of the probability density for inference was assessed
 graphically. The probability density was used to find the maximum
 likelihood estimate for the model parameters and the 95\% confidence
 intervals. The fits of the resulting models to the 16-point data set
 is shown in Figure~\ref{fits}. Quantitative measures of the fits for
+\SweaveInput{figure7}
 all the algorithms are given in Table~\ref{MSq}.
+\SweaveInput{table2}
+These measures of model fit could be used to compare the
+usefulness of different models though we have 
+not done this for this paper.
 
 Rates of convergence are illustrated in Figure~\ref{SSQvsIter}. The
+\SweaveInput{figure8}
 mean sums of squared residuals (SSQ) are plotted vs. the number of
-likelihood evaluations for the three algorithms. The relatively 
+likelihood evaluations for the three algorithms.  The relatively 
 long convergence time for the 1-component Metropolis algorithm is a result 
 of the high correlations between some of the parameters (Figure~\ref{scatter}).
 With the 1-component Metropolis algorithm, one parameter is

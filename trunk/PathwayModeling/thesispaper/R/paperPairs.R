@@ -1,4 +1,4 @@
-paperPairs <- function(x, ...) UseMethod("pairs")
+paperPairs <- function(x, color=F, ...) UseMethod("pairs")
 
 pairs.formula <-
 function(formula, data = NULL, ..., subset, na.action = stats::na.pass)
@@ -10,7 +10,7 @@ function(formula, data = NULL, ..., subset, na.action = stats::na.pass)
     m$na.action <- na.action # force in even if  default
     m[[1]] <- as.name("model.frame")
     mf <- eval(m, parent.frame())
-    pairs(mf, ...)
+    pairs(mf, color, ...)
 }
 
 #################################################
@@ -20,7 +20,7 @@ function(formula, data = NULL, ..., subset, na.action = stats::na.pass)
 #################################################
 
 pairs.default <-
-function (x, labels, panel = points, ...,
+function (x, labels, panel = points, color, ...,
           lower.panel = panel, upper.panel = panel,
           diag.panel = NULL, text.panel = textPanel,
           label.pos = 0.5 + has.diag/3,
@@ -82,8 +82,14 @@ function (x, labels, panel = points, ...,
             localPlot(x[, j], x[, i], xlab = "", ylab = "",
                       axes = FALSE, type = "n", ...)
 	    if (i<j) {
-	        abline(v=mcmcML[j],col=2)
-	        abline(h=mcmcML[i],col=2)
+		if (color == "T") {
+	            abline(v=mcmcML[j],col=2)
+	            abline(h=mcmcML[i],col=2)
+		}
+		else {
+	            abline(v=mcmcML[j],col=1)
+	            abline(h=mcmcML[i],col=1)
+		}
 	    }
             if(i == j || (i < j && has.lower) || (i > j && has.upper) ) {
                 box()
