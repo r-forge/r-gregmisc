@@ -1,5 +1,3 @@
-# $Id$
-
 keep <- function(..., list=character(0), sure=FALSE)
 {
   if(missing(...) && missing(list))
@@ -8,9 +6,13 @@ keep <- function(..., list=character(0), sure=FALSE)
   list <- c(list, names)
   keep.elements <- match(list, ls(1))
 
-  if(sure == FALSE)
-    return(ls(1)[-keep.elements])
-  else
+  if(any(is.na(keep.elements)))
+    stop("You tried to keep \"", list[which(is.na(keep.elements))[1]],
+         "\" which doesn't exist in workspace. Nothing was removed.", sep="")
+
+  if(sure)
     rm(list=ls(1)[-keep.elements], pos=1)
+  else
+    return(ls(1)[-keep.elements])
 }
 
