@@ -15,8 +15,8 @@ signal(signal, action = c("ignore", "default"))
 \details{
   It is occasionally necessary to instruct the R process to ignore
   certain signals.  This function allows changing the status of a signal
-  to either igore the signal (SIG_IGN="ignore") or to the OS's default
-  handler (SIG_DFL="default")  
+  to either igore the signal (SIG\_IGN="ignore") or to the OS's default
+  handler (SIG\_DFL="default")  
 }
 \value{
   Nothing of interest.
@@ -29,7 +29,7 @@ signal(signal, action = c("ignore", "default"))
 }
 \seealso{  \code{\link{sigval}}, \code{\link{fork}} }
 \examples{
-
+\dontrun{
 # Ignore child termination signals for forked processes
 signal("SIGCHLD","ignore")
 
@@ -42,7 +42,7 @@ signal("SIGCHLD","ignore")
       exit() # force process to die
     } 
  } 
-
+}
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
