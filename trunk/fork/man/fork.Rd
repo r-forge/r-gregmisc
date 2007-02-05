@@ -162,10 +162,12 @@ recieve <- function()
      close(con2)
   }
 
+\dontrun{
 # Important: if we aren't going to explicitly wait() for the child
 # process to exit, we need to tell the OS that we are ignoring child
 # process signals so it will let us die cleanly.
 signal("SIGCHLD","ignore")
+}
 
 # fork off the process
 pid <- fork(recieve)
