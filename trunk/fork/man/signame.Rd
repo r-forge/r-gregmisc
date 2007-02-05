@@ -22,7 +22,7 @@ siglist()
   compile time.
 }
 \value{
-  A vector (\code{signame}, \code{sigval}) or data frame
+  A list (\code{signame}, \code{sigval}) or data frame
   (\code{siglist}) containing the components:
   \item{name}{Symbolic name}
   \item{val}{Integer value}

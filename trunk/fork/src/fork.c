@@ -266,3 +266,15 @@ SEXP Rfork_siglist()
   return list; 
 } 
 
+void Rfork_signal(int *sig, int *action)
+{
+  sig_t func;
+
+  if(*action==0)
+    func = SIG_IGN;
+  else
+    func = SIG_DFL;
+
+  signal( *sig, func );
+}
+   

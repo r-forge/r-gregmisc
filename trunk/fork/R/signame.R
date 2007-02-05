@@ -20,7 +20,8 @@ sigval <- function(name)
                  val=integer(1),
                  desc=character(1),
                  PACKAGE="fork")
-    unlist(retval)
+    #retval <- unlist(retval)
+    retval
   }
 
 siglist <- function()
