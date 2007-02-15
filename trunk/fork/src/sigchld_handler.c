@@ -17,7 +17,7 @@ int installed=0;      // Has our sigcld signal hander already been installed?
 struct sigaction sa ; // our sigcld signal handler
 struct sigaction osa; // original (R) signal hander
 
-void sigchld_hander(int dummy) 
+void sigchld_handler(int dummy) 
 {
   int st;
   while (wait3(&st, WNOHANG, NULL) > 0);
@@ -31,8 +31,7 @@ void R_install_sigcld_handler()
   if(installed==0)
     {
       Rprintf ("Installing SIGCHLD signal handler...");
-      //sa.sa_handler = sigchld_handler;
-      sa.sa_handler = waiter;
+      sa.sa_handler = sigchld_handler;
       //sigfillset (&sa.sa_mask);
       //sa.sa_flags = SA_RESTART;
       ret = sigaction (SIGCHLD, &sa, &osa);
