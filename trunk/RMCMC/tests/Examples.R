@@ -1,3 +1,4 @@
+library(RMCMC)
 
 #######
 # Sample abstract Model
@@ -109,9 +110,9 @@ Example.Model <- model(
 #########
 
 Proposal.Model <- model(
-    Beta <- N(Beta,30),
-    sigma.2 <- InvGamma( 25, 1)
-)
+                        Beta <- N(Beta,30),
+                        sigma.2 <- InvGamma( 25, 1)
+                        )
 
 # -->  proposalGenerator <- function(Beta,sigma^2) 
 #      { 
@@ -150,41 +151,48 @@ Proposal.Model <- model(
 ########
 
     
-# Convert model code + data into R functions
-makeDensity.model <- function(model, data)
-{
-    # returns a function for <logDensity> = fun(current=<current state>)
-    #   <OR> a set of functions, one for each model parameter 
-    # parse model into 'tree'
-    # manipulate tree
-    # convert tree to output
-    density.function <- function(current.state) {}
-    density.function
+## Convert model code + data into R functions
+#makeDensity.model <- function(model, data)
+#{
+#    # returns a function for <logDensity> = fun(current=<current state>)
+#    #   <OR> a set of functions, one for each model parameter 
+#    # parse model into 'tree'
+#    # manipulate tree
+#    # convert tree to output
+#    density.function <- function(current.state) {}
+#    density.function
 
     
-}
+#}
 
-# For Gibb Sampler
+## For Gibb Sampler
 
-MakeGibbsProposal.model <- function(model)
-{
-    # returns a function for <new state> = fun(current=<current state>)
-}
+#MakeGibbsProposal.model <- function(model)
+#{
+#    # returns a function for <new state> = fun(current=<current state>)
+#}
 
-# For Metropolis Proposal
-
-
-# Covert proposal model to functions
-
-MakeProposalGenrator <- function(model, data)
-{
-    # returns a function for <new state> = fun(current=<current state>)
-}
-
-MakeProposalDensity <- function(model, data)
-{
-    # returns a function for <logDensity> = fun(current=<current state>, proposed=<proposaed state>)
-}
+## For Metropolis Proposal
 
 
+## Covert proposal model to functions
 
+#MakeProposalGenrator <- function(model, data)
+#{
+#    # returns a function for <new state> = fun(current=<current state>)
+#}
+
+#MakeProposalDensity <- function(model, data)
+#{
+#    # returns a function for <logDensity> = fun(current=<current state>, proposed=<proposaed state>)
+#}
+
+
+
+library(MCMCpack)
+tmp <- make.density(Example.Model, Example.Data)
+tmp(Beta=rep(1,10), sigma.2=1)
+
+
+b.bb.model <- model(
+                    )
