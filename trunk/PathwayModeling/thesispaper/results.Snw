@@ -12,8 +12,8 @@ tails than normal distributions.
 \SweaveInput{figure4}
 
 
-The effect of the number of data points on the parameter distributions
-can be seen in Figure~\ref{converged}.
+The effect of the number of data points within a fixed time window on
+the parameter distributions can be seen in Figure~\ref{converged}.
 \SweaveInput{figure5}
 We see some improved precision as the number of points
 increases from 16 to 25 but it is not pronounced. Overall, the 

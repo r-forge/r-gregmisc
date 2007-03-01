@@ -24,8 +24,10 @@
 \begin{doublespace}
 
 \title{Statistical Modeling of Biochemical Pathways}
-\author{Robert B. Burrows$^{\ast}\dagger$, Gregory
-Warnes$\ddagger^1$, and R. Choudary Hanumara$\S$}
+\author{
+	Robert B. Burrows$^{\ast}\dagger$, 
+	Gregory Warnes$\ddagger^1$, 
+	and R. Choudary Hanumara$\S$}
 
 \maketitle
 
@@ -33,9 +35,11 @@ Warnes$\ddagger^1$, and R. Choudary Hanumara$\S$}
 $Id$
 \end{verbatim}
 
-\footnotetext[1]{current address: Dept. of Biostatistics and
-Computational Biology, University of Rochester Medical
-Center, Rochester, NY 14642, gregory\_warnes@urmc.rochester.edu}
+\footnotetext[1]{current address: 
+	Dept. of Biostatistics and Computational Biology, 
+	University of Rochester Medical Center, 
+	Rochester, NY 14642, 
+	gregory\_warnes@urmc.rochester.edu}
 
 \begin{center}
   $\dagger$New England Biometrics, North Scituate, RI,
@@ -47,20 +51,20 @@ Center, Rochester, NY 14642, gregory\_warnes@urmc.rochester.edu}
   $\ast$Corresponding author. Email: rbb@nebiometrics.com
 \end{center}
   
-We have examined the usefulness of Bayesian statistical methods for the modeling
-of biochemical reactions. With simulated data, it is
-shown that these methods can effectively fit mechanistic models of sequences of enzymatic
-reactions to experimental data. These methods have the advantages of being relatively easy
-to use and producing probability distributions for the model
-parameters rather than point estimates, allowing more informative inferences to be drawn.
+We have examined the usefulness of Bayesian statistical methods for
+the modeling of biochemical reactions. With simulated data, it is
+shown that these methods can effectively fit mechanistic models of
+sequences of enzymatic reactions to experimental data. These methods
+have the advantages of being relatively easy to use and producing
+probability distributions for the model parameters rather than point
+estimates, allowing more informative inferences to be drawn.
 
 Three Markov chain Monte Carlo algorithms are used to fit models to
-data from a
-sequence of 4 enzymatic reactions. The algorithms 
-are evaluated with respect to
-the goodness-of-fit of the fitted models and the time to completion.
-It is shown that the algorithms produce essentially the same
-parameter distributions but the time to completion varies. 
+data from a sequence of 4 enzymatic reactions. The algorithms are
+evaluated with respect to the goodness-of-fit of the fitted models and
+the time to completion.  It is shown that the algorithms produce
+essentially the same parameter distributions but the time to
+completion varies.
 
 \SweaveInput{introduction}
 

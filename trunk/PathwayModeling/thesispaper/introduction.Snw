@@ -63,7 +63,7 @@ firmer physical basis than alternative methods based on differential equations. 
 also naturally incorporates the fluctuations that result from the
 probabilistic nature of chemical reactions.
 The algorithm has been validated with data from many chemical
-reactions and has been been used in many biochemical simulators, e.g.,
+reactions and has been used in many biochemical simulators, e.g.,
 \cite{Vcell,Arkin98}. While the algorithm appears to give good
 results with biochemical reactions, it should be borne in mind that
 the underlying kinetic theory assumes well-mixed, freely diffusing
