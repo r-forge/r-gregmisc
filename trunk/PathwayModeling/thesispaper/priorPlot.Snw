@@ -2,7 +2,7 @@
   \centering
 <<priorPlot,echo=F,eval=T,fig=T,width=3,height=3>>=4
 
-f20 <- function(x) dchisq(3*x/20, df=5)
+f <- function(x, mu=20) dchisq(3*x/mu, df=5)
 plot( f, from=0, to=150, xlab=expression(mu[i]), ylab="density", lwd=2)
 abline(v=20,lty=2,lwd=2)
 mtext(text="20", side=1, at=20, line=0.5)
