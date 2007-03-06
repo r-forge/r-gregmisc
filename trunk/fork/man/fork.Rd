@@ -162,12 +162,11 @@ recieve <- function()
      close(con2)
   }
 
-\dontrun{
-# Important: if we aren't going to explicitly wait() for the child
-# process to exit, we need to tell the OS that we are ignoring child
-# process signals so it will let us die cleanly.
-signal("SIGCHLD","ignore")
-}
+## Important: if we aren't going to explicitly wait() for the child
+## process to exit, we need to set up a dummy signal handler to collect
+## (and then throw away) the exit status so that child processes will not
+## become zombies when they exit
+handleSIGCLD()
 
 # fork off the process
 pid <- fork(recieve)
@@ -175,6 +174,9 @@ pid <- fork(recieve)
 # start sending...
 send()
 }
+
+## restore SIGCLD signal handling to the previous state
+restoreSIGCLD()
 }
 \keyword{programming}
 

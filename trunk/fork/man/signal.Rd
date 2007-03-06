@@ -26,11 +26,23 @@ signal(signal, action = c("ignore", "default"))
 \note{
   Be very careful with this function.  It can be used to totally
   confuse the R process.
+
+  On sytems derived from BSD UNIX, setting the SIGCHLD signal to
+  'ignore' will allow child processes to exit cleanly without becoming
+  zombies.  This also prevents the parent process from checking the exit
+  status of children, since this information is no longer available once
+  child process disappears. On systems derived from SysV UNIX, setting
+  SIGCHLD to 'ignore' has no effect on the status of child processes
+  that exit, and they will still become zombies unless the exit status
+  is checked.  See the \code{handleSIGCLD} function for a mechanism that
+  will prevent child processes from becoming zombies on both SYSV and
+  (hopefully) BSD-derived systems.
 }
-\seealso{  \code{\link{sigval}}, \code{\link{fork}} }
+\seealso{  \code{\link{sigval}}, \code{\link{fork}}, \code{\link{handleSIGCLD}} }
 \examples{
 \dontrun{
-# Ignore child termination signals for forked processes
+## Ignore child termination signals for forked processes NOTE: This
+## mechanism only works on UNIX SYSV-derived systems. See Note above.
 signal("SIGCHLD","ignore")
 
 # Fork off a child process to say "Hi!".
