@@ -8,7 +8,3 @@ source("checkZombies.R")
 
 nZombies <- checkZombies()
 
-if(nZombies)
-  stop("Zombie processes created")
-else
-  cat("Success!\n")

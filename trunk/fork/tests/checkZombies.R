@@ -32,6 +32,7 @@ checkZombies <- function()
     if(length(zombies)>50)
       {
         retval = TRUE
+        warning(length(zombies), " Zombie Processes Present!\n")
         cat(length(zombies), " Zombie Processes Present!\n")
       }
     else
