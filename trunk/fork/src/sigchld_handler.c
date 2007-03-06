@@ -20,6 +20,7 @@ struct sigaction osa; // original (R) signal hander
 void sigchld_handler(int dummy) 
 {
   int st;
+  // wait3 returns 0 when no signal is present to retrieve
   while (wait3(&st, WNOHANG, NULL) > 0);
 }
 
