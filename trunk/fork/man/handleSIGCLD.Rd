@@ -46,8 +46,6 @@ for(i in 1:100)
         ## don't do anything useful 
         exit() 
       }
-    else
-      pidList[i] <- pid
   }
 
 ## remove the dummy signal handler
