@@ -5,6 +5,6 @@
 
 handleSIGCLD <- function()
   {
-    .C("R_install_sigcld_handler")
+    .C("R_install_sigcld_handler", PACKAGE="fork")
     invisible(NULL)
   }
