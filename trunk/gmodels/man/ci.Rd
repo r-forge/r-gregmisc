@@ -42,7 +42,7 @@
   \code{Estimate}, \code{CI lower}, \code{CI upper}, \code{Std. Error},
   \code{DF} (for lme objects only), and \code{p-value}.
 }
-\author{ Gregory R. Warnes \email{Gregory\_R\_Warnes\@groton.pfizer.com}
+\author{ Gregory R. Warnes \email{warnes@bst.rochester.edu}
 }
 \seealso{
   \code{\link[stats]{confint}},

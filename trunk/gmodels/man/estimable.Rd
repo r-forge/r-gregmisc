@@ -93,7 +93,7 @@ estimable(obj, cm, beta0, conf.int=NULL,  show.beta0, ...)
 }
 \author{
   BXC (Bendix Carstensen) \email{bxc\@novonordisk.com}, 
-  Gregory R. Warnes \email{Gregory\_R\_Warnes\@groton.pfizer.com}, 
+  Gregory R. Warnes \email{warnes@bst.rochester.edu},
   Søren Højsgaard \email{sorenh@agrsci.dk}, and
   Randall C Johnson \email{rjohnson@ncifcrf.gov}
 }
