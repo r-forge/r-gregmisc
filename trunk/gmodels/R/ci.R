@@ -49,7 +49,7 @@ ci.lm  <-  function(x,confidence=0.95,alpha=1-confidence,...)
                      "Std. Error"= coef(x)[,2],
                      "p-value" = coef(x)[,4])
     
-    reqtval
+    retval
   }
 
 ci.lme <- function(x,confidence=0.95,alpha=1-confidence,...)
