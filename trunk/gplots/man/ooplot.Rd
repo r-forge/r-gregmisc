@@ -9,7 +9,7 @@
 }
 \usage{
 ooplot(data, ...)
-ooplot.default(data, width=1, space=NULL, names.arg=NULL, 
+\method{ooplot}{default}(data, width=1, space=NULL, names.arg=NULL, 
                            legend.text=NULL, horiz=FALSE, 
                            density=NULL, angle=45, kmg="fpnumkMGTP", 
                            kmglim=TRUE, 
