@@ -66,5 +66,13 @@ data(state)
 reg  <-  lm(Area ~ Population, data=as.data.frame(state.x77))
 ci(reg) 
 
+\dontrun{
+# lmer example
+library(lme4)
+fm2 <- lmer(Reaction ~ Days + (1|Subject) + (0+Days|Subject), sleepstudy)
+ci(fm2)
+}
+
+
 }
 \keyword{ regression }
