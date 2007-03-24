@@ -25,7 +25,7 @@ exit(status = 0)
   argument, so it is usually not necessary to directly call exit().
   }
 \references{"\_exit" man page}
-\author{ Gregory R. Warnes \email{warnes@bst.rochester.edu}}
+\author{ Gregory R. Warnes \email{greg@random-technologies-llc.com}}
 \seealso{\code{\link{fork}}, \code{\link{getpid}}, \code{\link{wait}},
          \code{\link{kill}}, \code{\link{killall}} }
 \examples{

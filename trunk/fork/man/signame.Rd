@@ -29,7 +29,7 @@ siglist()
   \item{desc}{Description}
 }
 \references{Unix "signal" man page.}
-\author{ Gregory R. Warnes \email{warnes@bst.rochester.edu}}
+\author{ Gregory R. Warnes \email{greg@random-technologies-llc.com}}
 \seealso{\code{\link{getpid}}, \code{\link{exit}}, \code{\link{wait}},
          \code{\link{kill}}, \code{\link{killall}} }
 \examples{
