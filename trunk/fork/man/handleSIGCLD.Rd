@@ -30,7 +30,10 @@ restoreSIGCLD()
   }
 \references{W.R. Stevens and S.A. Rago, Advanced Programming in the UNIX
   environment, 2nd ed. (c) 2005, Pearson Education, pp 308-310.}
-\author{Gregory R. Warnes \email{gregory.warnes@rochester.edu} }
+\author{Gregory R. Warnes \email{greg@random-technologies-llc.com},
+  with financial support from Metrum Research Group, LLC
+  \url{http://www.metrumrg.com}.
+}
 \seealso{ \code{\link{fork}}, \code{\link{wait}}, \code{\link{signal}} }
 \examples{
 
