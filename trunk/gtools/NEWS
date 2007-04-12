@@ -1,3 +1,9 @@
+SVN
+----
+
+- Add ask() function to prompt the user and collect a single response.
+
+
 gtools 2.3.0
 ------------
 

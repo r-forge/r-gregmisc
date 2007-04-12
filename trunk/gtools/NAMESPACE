@@ -2,6 +2,7 @@ useDynLib(gtools)
 
 export(
        addLast,
+       ask,
        assert,
        capture,
        combinations,
