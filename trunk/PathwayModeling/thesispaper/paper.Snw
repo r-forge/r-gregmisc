@@ -79,6 +79,8 @@ completion varies.
 
 \SweaveInput{discussion}
 
+\SweaveInput{acknowledgment}
+
 %\bibliography{./refs}
 \SweaveInput{bibliography}
 

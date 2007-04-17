@@ -1,7 +1,8 @@
 `plotConverged_nocolor` <- function()
 {
     oldpar <- par(no.readonly=TRUE)
-    par(mfrow=c(1,3))
+    #par(mfrow=c(1,3))
+    par(mfrow=c(3,1))
     par(mar=c(4, 3, 0.75, 0.75) + 0.1)
 
     maxY <- 0.0012

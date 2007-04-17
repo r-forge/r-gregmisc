@@ -9,13 +9,13 @@ output25 <- read.table("data/output25.AllComp.thinned")
 # pdf(file="figures/tempDir/converged.pdf",width=6,height=6)
 # postscript(file="figures/tempDir/converged.eps",width=6,height=6)
 
-pdf(file="figures/tempDir/converged_nocolor.pdf",width=6,height=2)
+pdf(file="figures/tempDir/converged_nocolor.pdf",width=6,height=6)
 # plotConverged()
 plotConverged_nocolor()
 N <- dev.off()
 
 
-postscript(file="figures/tempDir/converged_nocolor.eps",width=3*6,height=3*2)
+postscript(file="figures/tempDir/converged_nocolor.eps",width=6,height=6)
 # plotConverged()
 plotConverged_nocolor()
 N <- dev.off()
