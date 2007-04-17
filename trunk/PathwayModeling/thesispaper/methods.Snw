@@ -6,9 +6,11 @@
 
   \subsection{The Pathway}
   
-  While we examined several pathway structures, in this paper we
-  present the results for a 5-reaction sequence that is sampled at 12,
-  16, or 25 time points with 3 replicates at each time point. The
+  We examined pathways containing 3, 5, 7, and 9 reactions with both
+  linear and branched structures using two sets of parameter values.
+  As essentially identical modeling performance was obtained for each,
+  we present only the results for a 5-reaction sequence, sampled at
+  12, 16, or 25 time points with 3 replicates at each time point. The
   units for time and concentration are arbitrary; for the purpose of
   illustration we will use minutes as the unit of time and
   micromoles/liter ($\mu$M) as the unit of concentration.
@@ -112,7 +114,7 @@ write.table(temp,file="data/input16.dat",row.names=F,quote=F)
       half-maximal velocity}
     \end{eqnarray*}
     This form of the equation is very useful because $v$ and $S$ are
-    usually measureable and $V_{max}$ and $K_m$ can be obtained by
+    usually measurable and $V_{max}$ and $K_m$ can be obtained by
     fitting  equation 3 to the data. In contrast, modeling $v$ as a
     function of the individual rate constants is less useful because
     that requires the measurement of the concentration of the
@@ -236,38 +238,39 @@ write.table(temp,file="data/input16.dat",row.names=F,quote=F)
     
     The Normal Kernel Coupler (NKC) algorithm operates on multiple
     chains, so that there are several ``current'' states. The NKC uses
-    a normal kernel density estimate as the proposal distribution for
-    choosing candidate states. The estimate is generated using the
-    entire set of current points.  Since the algorithm uses the entire
-    set of current points it can move over areas of low probability in
-    the parameter space, especially if the user takes care to seed
-    each mode with a few points in the starting set.
+    a normal kernel density estimate based on the entire set of
+    current states as the proposal distribution for choosing candidate
+    states. Since the algorithm uses the entire set of current points
+    it can move over areas of low probability in the parameter space,
+    especially if the user takes care to seed the starting set with a
+    few points in each mode.
 
  \subsection{Computation}
 
   \subsubsection{Tuning}
 
   All three MCMC algorithms require an appropriate covariance matrix
-  to move efficiently through the paramter space. The optimal
-  covaraince matrix for each method is a scaled version of the true
-  covarance matrix. To obtain this covariance matrix, we performed
+  to move efficiently through the parameter space. The optimal
+  covariance matrix for each method is a scaled version of the true
+  covariance matrix. To obtain this covariance matrix, we performed
   several runs of the all-components algorithm. After each run, two
   calculations were performed.  First, an estimate of the posterior
   covariance matrix was computed from the MCMC output to be used in
   the next run.  Second, \textit{mcgibbsit} (see \ref{convergence}
   below) was used to estimate the necessary length of the next
-  run. Only three runs were required to achieve both an acceptible
+  run. Only three runs were required to achieve both an acceptable
   estimate according to \textit{mcgibbsit} and a covariance matrix
   with good performance for all three algorithms.
 
   \subsubsection{Execution}
 
   To enable a ``fair'' comparison between the methods, each MCMC
-  algorithm was started at the same starting point (jittered for
-  the multiple starting states of the NKC) and the proposal covariance
-  was set to an appropriately scaled version of the posterior
-  covariance matrix described above. With this covariance matrix, each
-  of the algorithms demonstrated an appropriate acceptance rate.
+  algorithm was started at the same starting point (jittered to
+  provide the multiple starting states of the NKC) and the proposal
+  covariance was set to an appropriately scaled version of the
+  posterior covariance matrix described above. With this covariance
+  matrix, each of the algorithms demonstrated an appropriate
+  acceptance rate.
 
   \subsubsection{Convergence}
   \label{convergence}
@@ -275,10 +278,10 @@ write.table(temp,file="data/input16.dat",row.names=F,quote=F)
   The MCMC simulations were run until the Markov chains have reached
   stable distributions as assessed by the \textit{mcgibbsit}
   algorithm \cite{Warnes00}. \textit{mcgibbsit} calculates the
-  number of iterations necessary to estimate a user-specfied quantile
+  number of iterations necessary to estimate a user-specified quantile
   $q$ to within $\pm r$ with probability $s$, i.e.,
   \textit{mcgibbsit} indicates when the MCMC sampler has run long
-  enough to provide good confidence interval estimates. The defaults,
+  enough to provide good credible interval estimates. The defaults,
   which are used in this paper, are $q=0.025$, $r=0.0125$, and
   $s=0.95$. These values generate estimates of the 2.5\% and 97.5\%
   quantiles to $\pm$ 0.0125 quantiles with probability 0.95.
@@ -290,7 +293,7 @@ write.table(temp,file="data/input16.dat",row.names=F,quote=F)
   be heavily influenced by the initial starting point, and can result
   in bias in the computed estimates.  We adopted an alternative
   approach to avoiding bias in our estimates; each MCMC sampler was
-  run until \textit{mcgibbsit} was satistified that the quantile
+  run until \textit{mcgibbsit} was satisfied that the quantile
   estimates were properly estimated.  One necessary condition for
   \textit{mcgibbsit} to declare that these quantiles are properly
   estimated is stability of these estimates.  This will only occur
@@ -299,7 +302,7 @@ write.table(temp,file="data/input16.dat",row.names=F,quote=F)
   posterior distribution.
 
   Likewise, the high serial correlation of most MCMC samples has
-  induced many MCMC papers to recommend \emph{thinning} the ouput of
+  induced many MCMC papers to recommend \emph{thinning} the output of
   the MCMC sampler by discarding all but 1 out of,say, every 10 or 100
   generated values. While this does not improve in the quality of
   estimates obtained from the MCMC run itself, it can dramatically

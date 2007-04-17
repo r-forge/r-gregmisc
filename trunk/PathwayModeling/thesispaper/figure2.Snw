@@ -21,12 +21,18 @@ N <- dev.off()
 N <- dev.off()
 detach(rawdata.trimmed)
 @
-    \begin{figure}
+
+\begin{figure*}
+
       \centering
 %      \includegraphics[scale=0.5]{figures/tempDir/pulse}
       \includegraphics[scale=0.5]{figures/tempDir/pulse_nocolor}
-      \caption[Reactant concentrations following a pulse of R1]{Reactant concentrations following a pulse of R1 at
-      $time=20$ for the sequence of reactions $R1\rightarrow
-      R2\rightarrow R3\rightarrow R4\rightarrow R5\rightarrow sink$.}
+      \caption[Reactant concentrations following a pulse of R1]{
+	Reactant concentrations following a pulse of R1 at
+        $time=20$ for the sequence of reactions $R1\rightarrow
+        R2\rightarrow R3\rightarrow R4\rightarrow R5\rightarrow sink$.
+      }
       \label{pulse}
-    \end{figure}
+
+\end{figure*}
+

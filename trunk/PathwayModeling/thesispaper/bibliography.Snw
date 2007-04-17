@@ -58,7 +58,4 @@
     Byrd, R.H., Lu, P., Nocedal, J., and Zhu, C., 1995, A limited
     memory algorithm for bound constrained optimization, \emph{SIAM J.
     Sci. Comput.}, \textbf{16}, 1190--1208.
-  \bibitem{Geyer}%16
-    Geyer, CJ, (no date), \emph{Burn-In is Unnecessary}, web site, 
-    http://www.stat.umn.edu/~charlie/mcmc/burn.html    
 \end{thebibliography}

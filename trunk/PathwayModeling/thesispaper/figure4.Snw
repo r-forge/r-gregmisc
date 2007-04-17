@@ -36,17 +36,24 @@ N <- dev.off()
 par(mfrow=c(1,1))
 detach(input16)
 @
-\begin{figure}
+
+\begin{figure*}
+
   \centering
 %  \includegraphics[scale=0.8]{figures/tempDir/densities}
   \includegraphics[scale=0.8]{figures/tempDir/densities_nocolor}
-  \caption[Histograms of the marginal probability distributions]{Histograms of the marginal probability distributions for
-  the 5-reaction model generated with the all-components Metropolis
-  algorithm and the 16-point dataset. The curves are normal densities with means equal to the
-  medians of the distributions and variances equal to the variances of
-  the distributions. Broken 
+  \caption[Histograms of the marginal probability distributions]{
+
+    Histograms of the marginal probability distributions for
+    the 5-reaction model generated with the all-components Metropolis
+    algorithm and the 16-point dataset. The curves are normal
+    densities with means equal to the medians of the distributions and
+    variances equal to the variances of the distributions. Broken 
   % Red 
-vertical lines indicate the parameters values that 
-  minimize the mean squared residuals.}
+    vertical lines indicate the parameters values that minimize the
+    mean squared residuals.
+  }
   \label{densities}
-\end{figure}
+
+\end{figure*}
+

@@ -25,7 +25,7 @@ model. In contrast, Bayesian methods incorporate our prior knowledge
 of the system and use the experimental data to refine the estimates
 (Figure~\ref{converged}). Thus the model fitting procedure described
 here lends itself to iterative experimentation where the experimental
-results, even if they consit of a single datum, can be used to update
+results, even if they consist of a single datum, can be used to update
 the prior for the next experiment.
 
 The models used here have the form of the Hill function,
@@ -53,7 +53,7 @@ All three algorithms produced very similar results but the execution
 times varied considerably depending on the size of the model.  The
 all-component Metropolis and NKC algorithms converged quickly while
 the 1-component algorithm was quite slow to converge. This is
-undoubtably due to the high correlations between some parameters (see
+undoubtedly due to the high correlations between some parameters (see
 Figure~\ref{scatter}). The 1-component algorithm has trouble sampling
 from this density because it is restricted to moves parallel to the
 coordinate axes.  This is less of a problem for the all-components and

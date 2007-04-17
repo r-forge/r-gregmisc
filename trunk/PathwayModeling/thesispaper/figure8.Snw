@@ -30,7 +30,7 @@ plotMSD16_nocolor()
 N <- dev.off()
 detach(input16)
 @
-\begin{figure}
+\begin{figure*}
   \centering
 %    \includegraphics[scale=0.5]{figures/tempDir/MSR16}
     \includegraphics[scale=0.5]{figures/tempDir/MSR16_nocolor}
@@ -38,4 +38,4 @@ detach(input16)
   evaluations]{Mean squared residuals vs. number of likelihood
     evaluations for the 5-reaction model}
   \label{SSQvsIter}
-\end{figure}
+\end{figure*}

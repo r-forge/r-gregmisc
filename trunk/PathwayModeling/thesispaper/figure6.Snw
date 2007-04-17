@@ -20,14 +20,14 @@ paperPairs(output16[sample(1:20000,2000),-10],color=F,labels=c('d1','d2','d3','d
 N <- dev.off()
 par(pch=1)
 @
-\begin{figure}
+\begin{figure*}
   \centering
 %  \includegraphics[width=1.0\textwidth]{figures/tempDir/scatterPlot}
   \includegraphics[width=1.0\textwidth]{figures/tempDir/scatterPlot_nocolor}
   \caption[Bivariate scatter plots of the parameter distributions]{Bivariate scatter plots of the parameter distributions for
   the 5-reaction model found with the all-components Metropolis
   algorithm (upper triangle); correlation coefficients (lower
-  triangle). The veritcal and horizontal lines indicate the maximum
+  triangle). The vertical and horizontal lines indicate the maximum
   likelihood estimates of the parameters.}
   \label{scatter}
-\end{figure}
+\end{figure*}

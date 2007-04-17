@@ -23,7 +23,7 @@ plotVi_nocolor(Dsamp,input16)
 N <- dev.off()
 detach(input16)
 @
-\begin{figure}
+\begin{figure*}
   \centering
 %  \subfloat[v2]{\includegraphics[scale=0.30]{figures/tempDir/V1fitted}}
 %  \subfloat[v3]{\includegraphics[scale=0.30]{figures/tempDir/V2fitted}}\\
@@ -42,4 +42,4 @@ detach(input16)
     function.  
   }
   \label{fits}
-\end{figure}
+\end{figure*}

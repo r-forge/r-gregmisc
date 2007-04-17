@@ -15,6 +15,7 @@
 \usepackage{dchem}
 %\usepackage{color}
 \usepackage{setspace}
+\usepackage{endfloat}
 \bibliographystyle{vancouver}
 
 \newcommand{\deriv}[2]{\ensuremath{\frac{\mathrm{d} #1}{\mathrm{d} #2}}}

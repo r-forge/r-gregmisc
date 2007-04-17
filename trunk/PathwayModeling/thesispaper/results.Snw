@@ -15,14 +15,16 @@ tails than normal distributions.
 
 The effect of the number of data points within a fixed time window on
 the parameter distributions can be seen in Figure~\ref{converged}.
+%
 \SweaveInput{figure5}
-We see some improved precision as the number of points
-increases from 16 to 25 but it is not pronounced. Overall, the 
-reduction in width varied from 18-fold for $d_9$ and 9-fold for $d_1$ to 
-1.5-fold for $d_4$.
-Figure~\ref{scatter} is an example of a bivariate scatterplot of the
-distributions. There is correlation between some pairs of parameters, e.g.,
-$d_1$ -- $d_2$, but no evidence of multi-modality.
+%
+We see some improved precision as the number of
+points increases from 16 to 25 but it is not pronounced. Overall, the
+reduction in width varied from 18-fold for $d_9$ and 9-fold for $d_1$
+to 1.5-fold for $d_4$.  Figure~\ref{scatter} is an example of a
+bivariate scatterplot of the distributions. There is strong
+correlation between some pairs of parameters, e.g., $d_1$ -- $d_2$,
+but no evidence of multi-modality.
 \SweaveInput{figure6}
 
 The value of the posterior probability density for inference was
@@ -30,7 +32,7 @@ assessed graphically. The posterior density was used to find the
 maximum posterior density estimate for the model parameters and the
 95\% credible intervals. The fits of the resulting models to the
 16-point data set is shown in Figure~\ref{fits}. Quantitative measures
-of the fits for 
+of the fits for
 %
 \SweaveInput{figure7}
 %
