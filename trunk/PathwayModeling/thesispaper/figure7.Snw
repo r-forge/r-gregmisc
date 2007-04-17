@@ -33,7 +33,13 @@ detach(input16)
   \subfloat[v3]{\includegraphics[scale=0.30]{figures/tempDir/V2fitted_nocolor}}\\
   \subfloat[v4]{\includegraphics[scale=0.30]{figures/tempDir/V3fitted_nocolor}}
   \subfloat[v5]{\includegraphics[scale=0.30]{figures/tempDir/V4fitted_nocolor}}
-  \caption{Curves fit to the 16-point data with the all-components
-  algorithm. The fitted curves are drawn with the maximum likelihood estimates for the parameters found with the L-BFGS-B algorithm \cite{Byrd95} as implemented in the \textit{R optim()} function. }
+  \caption{ 
+    Maximum Posterior Density and 95\% Posterior Credible
+    Region Curves obtained for the 16-point data using the
+    all-components algorithm.  The solid curve shows the maximum
+    likelihood estimate for the same model obtained with the L-BFGS-B
+    algorithm \cite{Byrd95} as implemented in the \textit{R optim()}
+    function.  
+  }
   \label{fits}
 \end{figure}

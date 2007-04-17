@@ -1,4 +1,4 @@
-<<fig2,echo=F,eval=T>>=2
+<<fig2,echo=F,eval=F>>=2
 # source("R/pulse.R")
 # rawdata <- read.table("data/rawdata.dat",header=T)
 # attach(rawdata)

@@ -1,11 +1,12 @@
 \section{Results}
 
-\begin{verbatim}
-$Id$
-\end{verbatim}
+%% \begin{verbatim}
+%% $Id$
+%% \end{verbatim}
 
-All three algorithms converged to similar distributions and produced essentially the same metabolic pathway model.
-The marginal distributions for the parameters were mound-shaped 
+All three algorithms converged to similar distributions and produced
+essentially the same metabolic pathway model.  The marginal
+distributions for the parameters were mound-shaped
 (Figure~\ref{densities}), were skewed to the right and had thicker
 tails than normal distributions.
 
@@ -24,17 +25,22 @@ distributions. There is correlation between some pairs of parameters, e.g.,
 $d_1$ -- $d_2$, but no evidence of multi-modality.
 \SweaveInput{figure6}
 
-The value of the probability density for inference was assessed
-graphically. The probability density was used to find the maximum
-likelihood estimate for the model parameters and the 95\% confidence
-intervals. The fits of the resulting models to the 16-point data set
-is shown in Figure~\ref{fits}. Quantitative measures of the fits for
+The value of the posterior probability density for inference was
+assessed graphically. The posterior density was used to find the
+maximum posterior density estimate for the model parameters and the
+95\% credible intervals. The fits of the resulting models to the
+16-point data set is shown in Figure~\ref{fits}. Quantitative measures
+of the fits for 
+%
 \SweaveInput{figure7}
-all the algorithms are given in Table~\ref{MSq}.
+%
+all the algorithms are given in Table~\ref{MSq}.  
+%
 \SweaveInput{table2}
-These measures of model fit could be used to compare the
-usefulness of different models though we have 
-not done this for this paper.
+%
+These measures of model fit
+could be used to compare the usefulness of different models though we
+have not done this for this paper.
 
 Rates of convergence are illustrated in Figure~\ref{SSQvsIter}. The
 \SweaveInput{figure8}
@@ -45,10 +51,11 @@ of the high correlations between some of the parameters (Figure~\ref{scatter}).
 With the 1-component Metropolis algorithm, one parameter is
 updated for each evaluation of the likelihood method, i.e., the algorithm 
 searches the parameter space by moving parallel to the axes and thus 
-it can sample a density with a diagonal axis of symmetry very slowly. 
+it samples a density with a diagonal axis of symmetry very slowly. 
 This is not a problem with the all-component Metropolis and NKC 
 algorithms since they update all the parameters at each iteration.
 
-The actual convergence times on a 3.2GHz P4 machine with 1GB of memory
-are 1--2 hours for the 1-component algorithm and about 1 minute for
-the all-components and Normal Kernel Coupler algorithms.
+We performed all MCMC runs on on a 3.2GHz P4 machine with 1GB of
+memory.  The 1-component algorithm required 1--2 hours to achieve
+appropriate estimates, while only 1 minute was required for the
+all-components and Normal Kernel Coupler algorithms.

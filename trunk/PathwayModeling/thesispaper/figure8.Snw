@@ -1,4 +1,4 @@
-<<fig8, echo=F,eval=T>>=7
+<<fig8, echo=F,eval=F>>=7
 source("R/getMSDvsEvals.R")
 # source("R/plotMSD16.R")
 source("R/plotMSD16_nocolor.R")

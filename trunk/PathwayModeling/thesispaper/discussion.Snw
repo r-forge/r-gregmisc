@@ -1,8 +1,8 @@
 \section{Discussion}
 
-\begin{verbatim}
-$Id$
-\end{verbatim}
+%% \begin{verbatim}
+%% $Id$
+%% \end{verbatim}
 
 We are interested in assessing the usefulness of Markov chain Monte
 Carlo (MCMC) methods for the fitting of models of metabolic
@@ -49,23 +49,24 @@ is not too much structure in the joint density. The third algorithm, the
 Normal Kernel Coupler, is more computationally intensive but it can sample 
 from complex densities more efficiently than the other two algorithms.
 
- All three algorithms produced very similar results but the execution times 
-varied considerably depending on the size of the model and the algorithm. 
-The all-component Metropolis and NKC algorithms converged quickly 
-but the 1-component algorithm was quite slow to converge. This is undoubtably due to 
-the high correlations between some parameters which is evident in 
-Figure~\ref{scatter}. The 1-component algorithm has trouble sampling from 
-this density because it is restricted to movements parallel to the axes. 
-This is less of a problem for the all-components and NKC algorithms since 
-they can move diagonally.
+All three algorithms produced very similar results but the execution
+times varied considerably depending on the size of the model.  The
+all-component Metropolis and NKC algorithms converged quickly while
+the 1-component algorithm was quite slow to converge. This is
+undoubtably due to the high correlations between some parameters (see
+Figure~\ref{scatter}). The 1-component algorithm has trouble sampling
+from this density because it is restricted to moves parallel to the
+coordinate axes.  This is less of a problem for the all-components and
+NKC algorithms since they can move diagonally.
 
-Each of the algorithms produced essentially identical results. The mean squared residuals do not vary 
-much, nor do the calculated values for $R_{adj}^2$. These last values are 
-indicative of a useful fit of the models to the data. These results
-also demonstrate the usefulness of MCMC simulation. The derived
-probability densities can be used to find good estimates for the
-parameters as well as reveal the correlations between the parameters.
-The result is a well-fitted model with realistic confidence intervals (Figure~\ref{fits}).
+Each of the algorithms produced essentially identical results. The
+mean squared residuals are very similar, as are the calculated values
+for $R_{adj}^2$. These values are indicative of a useful fit of the
+models to the data, demonstrating the usefulness of the MCMC
+approach. The derived probability densities can be used both to obtain
+good parameter estimates as well as reveal the joint covariance of the
+parameters.  The result is a well-fitted model with realistic
+confidence intervals (Figure~\ref{fits}).
 
 In this paper we have developed models of linear sequences of irreversible 
 biochemical reactions and shown that several Markov chain methods can be 

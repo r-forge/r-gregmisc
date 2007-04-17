@@ -1,4 +1,4 @@
-<<fig6, echo=F,eval=T>>=5
+<<fig6, echo=F,eval=F>>=5
 source("R/paperPairs.R")
 mcmcML <-scan("figures/tempDir/mcmcML.dat")
 output16 <- read.table("data/output16.AllComp.thinned")
@@ -22,11 +22,12 @@ par(pch=1)
 @
 \begin{figure}
   \centering
-%  \includegraphics[scale=0.6]{figures/tempDir/scatterPlot}
-  \includegraphics[scale=0.6]{figures/tempDir/scatterPlot_nocolor}
+%  \includegraphics[width=1.0\textwidth]{figures/tempDir/scatterPlot}
+  \includegraphics[width=1.0\textwidth]{figures/tempDir/scatterPlot_nocolor}
   \caption[Bivariate scatter plots of the parameter distributions]{Bivariate scatter plots of the parameter distributions for
   the 5-reaction model found with the all-components Metropolis
   algorithm (upper triangle); correlation coefficients (lower
-  triangle). The red lines indicate the maximum likelihood estimates of the parameters.}
+  triangle). The veritcal and horizontal lines indicate the maximum
+  likelihood estimates of the parameters.}
   \label{scatter}
 \end{figure}

@@ -1,4 +1,4 @@
-<<fig5,echo=F,eval=T>>=4
+<<fig5,echo=F,eval=F>>=4
 # source("R/plotDensity.R")
 # source("R/plotConverged.R")
 source("R/plotDensity_nocolor.R")
@@ -9,15 +9,13 @@ output25 <- read.table("data/output25.AllComp.thinned")
 # pdf(file="figures/tempDir/converged.pdf",width=6,height=6)
 # postscript(file="figures/tempDir/converged.eps",width=6,height=6)
 
-pdf(file="figures/tempDir/converged_nocolor.pdf",width=6,height=6)
-par(mfrow=c(3,3))
+pdf(file="figures/tempDir/converged_nocolor.pdf",width=2*6,height=2*2)
 # plotConverged()
 plotConverged_nocolor()
 N <- dev.off()
 
 
-postscript(file="figures/tempDir/converged_nocolor.eps",width=6,height=6)
-par(mfrow=c(3,3))
+postscript(file="figures/tempDir/converged_nocolor.eps",width=3*6,height=3*2)
 # plotConverged()
 plotConverged_nocolor()
 N <- dev.off()
@@ -26,16 +24,15 @@ par(mfrow=c(1,1))
 @
 \begin{figure}
   \centering
-%  \includegraphics[scale=0.9]{figures/tempDir/converged}
-  \includegraphics[scale=0.9]{figures/tempDir/converged_nocolor}
-  \caption{
-	Posterior distributions from different numbers of data
-	points evenly spaced across the same time window for the
-	 all-components algorithm. \\
-	 (---------) 0 points / prior distribution; \\
-	 ( - - - -) 12 points; \\
-	 ( $\cdots\cdots$) 16 points; \\
-	 (-- $\cdot$ -- $\cdot$ --) 25 points
-	}
+  \includegraphics[width=1.0\textwidth]{figures/tempDir/converged_nocolor}
+  \caption{%
+    Posterior distributions for selected parameters fitte1d using the %
+    all-components algorithm.  For each parameter, the model was fitted %
+    with 4 different time point granularities across the fixed time interval: %
+    --------- prior distribution (0 points), %
+    - - - - - 12 points,  %
+    $\cdots\cdots\cdot$ 16 points, %
+    -- $\cdot$ -- $\cdot$ -- 25 points %
+  }
   \label{converged}
 \end{figure}

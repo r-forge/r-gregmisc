@@ -25,33 +25,37 @@
 
 \title{Statistical Modeling of Biochemical Pathways}
 \author{
-	Robert B. Burrows$^{\ast}\dagger$, 
-	Gregory Warnes$\ddagger^1$, 
+	Robert B. Burrows$\dagger$, 
+	Gregory Warnes$^{\ast}\ddagger$, 
 	and R. Choudary Hanumara$\S$}
 
 \maketitle
 
-\begin{verbatim}
-$Id$
-\end{verbatim}
-
-\footnotetext[1]{current address: 
-	Dept. of Biostatistics and Computational Biology, 
-	University of Rochester Medical Center, 
-	Rochester, NY 14642, 
-	gregory\_warnes@urmc.rochester.edu}
-
+%% \begin{verbatim}
+%% $Id$
+%% \end{verbatim}
+ 
 \begin{center}
-  $\dagger$New England Biometrics, North Scituate, RI,
-  rbb@nebiometrics.com\\
-  $\ddagger$Pfizer, Inc., Groton, CT, gregory.r.warnes@pfizer.com\\
+  $\dagger$New England Biometrics, North Scituate, RI, rbb@nebiometrics.com\\
+  $\ddagger$Pfizer, Inc., Groton, CT\\
   $\S$University of Rhode Island, Kingston, RI, rch@cs.uri.edu
   
   \bigskip
-  $\ast$Corresponding author. Email: rbb@nebiometrics.com
+
+  \footnotetext[1]{
+        Corresponding author. Current address: 
+	Dept. of Biostatistics and Computational Biology, 
+	University of Rochester Medical Center, 
+	Rochester, NY 14642, 
+	email: gregory.warnes@rochester.edu \emph{and}
+ 	Random Technologies, LLC., 
+	20 Wandering Trail, 
+	Pittsford, NY, 14534
+	email: greg@random-technologies-llc.com
+      }	
 \end{center}
   
-We have examined the usefulness of Bayesian statistical methods for
+We examine the usefulness of Bayesian statistical methods for
 the modeling of biochemical reactions. With simulated data, it is
 shown that these methods can effectively fit mechanistic models of
 sequences of enzymatic reactions to experimental data. These methods
