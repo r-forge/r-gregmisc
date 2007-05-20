@@ -1,77 +1,29 @@
-%\documentclass[10pt,handout]{beamer}   %% One slide per page (no animation)
-\documentclass[10pt]{beamer}           %% Multi-slides per page for animation
-\usepackage{beamerthemesplit}
-\mode<presentation> { \usetheme{Warsaw}
-  % or ...
+\documentclass{asaproc}
+\usepackage{inputenc}
+\usepackage{graphics}
 
-  \setbeamercovered{transparent}
-  % or whatever (possibly just delete it)
-}
-%\setbeameroption{show notes}
-
-\newcommand{\numpackages}{1200}
-
-
-\usepackage[english]{babel} \usepackage[latin1]{inputenc}
-
-\usepackage{times} \usepackage[T1]{fontenc}
-
-% Delete this, if you do not want the table of contents to pop up at
-% the beginning of each subsection:
-%\AtBeginSubsection[]
-%{
-%  \begin{frame}<beamer>
-%    \frametitle{Outline}
-%    \tableofcontents[currentsection,currentsubsection]
-%  \end{frame}
-%}
-
-\setbeamersize{text margin left=0.5cm}
-\setbeamersize{text margin right=0.5cm}
-
+\usepackage{times} \usepackage{fontenc}
 
 \title{Open Source Software in Pharmaceutical Research}
 
 \author{
-  Gregory R. Warnes\inst{1}\inst{2}\inst{3} \and 
-  James A. Rogers\inst{2} \and
-  Max Kuhn\inst{2}
-}
-
-\institute{
- \inst{1}%
-  Center for Biodefense Immune Modeling, University of Rochester
-  %\includegraphics*[width=0.8\textwidth]{CBIM.jpg}
-  \vspace{-5pt}
-  \and
- \inst{2}%
+  Gregory R. Warnes$^{1,2,3}$, James A. Rogers$^4$ Max Kuhn$^4$ 
+\\
+  Center for Biodefense Immune Modeling, University of Rochester $^1$ \\
   Department of Biostatistics and Computational Biology, 
-  University of Rochester
-  \vspace{-5pt}
-  \and
- \inst{3}%
-  Random Technologies LLC
-  %\includegraphics*[width=0.2\textwidth]{RandomTechLogoNarrow.jpg}
-  \vspace{-5pt}
-  \and
- \inst{4}%
-  Research Statistics, Pfizer, Inc. \vspace{-5pt}
+  University of Rochester $^2$ \\
+  REvolution Computing, Inc. $^3$ \\
+  Research Statistics, Pfizer, Inc. $^4$
 }
-
-
-\date[2007 MBSW]{Midwest Biopharmaceutical Statistics Workshop, May 21-23, 2007, Ball State University, Muncie, Indiana}
-%\date[UseR! 2006]{UseR! 2006, Vienna, Austria, June 15-19, 2006}
 
 \begin{document}
-\frame{\titlepage}
 
-\frame{
+\maketitle
+
 \begin{abstract}
-\setbeamerfont{small}{size=\tiny}
-\usebeamerfont{small}
   
 Open-Source statistical software is being used with increasing
-frequency for data mining of pharmaceutical data, particularly in
+frequency for the analysis of pharmaceutical data, particularly in
 support of ``omics'' technologies within discovery. While it is
 relatively straightforward to employ open-source tools for basic
 research, software used in any regulatory context must
@@ -97,19 +49,15 @@ third-party commercial support for \textsc{R}, and evaluate how well they
 meet the requirements for use of \textsc{R} within both regulated and
 non-regulated contexts.
 
+\vskip6pt
+
+
+{{\bf \noindent Keywords}: Text, Text.}
+
+
 \end{abstract}
-}
-
-\frame{
-  \frametitle{Outline}
-  \tableofcontents%[pausesections] 
-
-}
 
 \section{Introduction}
-
-\frame{
-  \frametitle{Introduction}
 
   Open-Source statistical software is being used with increasing
   frequency for the analysis of pharmaceutical data, particularly in
@@ -118,70 +66,39 @@ non-regulated contexts.
   research, software used in any regulatory context must meet more
   rigorous requirements for documentation, training, software
   life-cycle management, and technical support.
-}
 
 \section{Requirements}
-
-\frame{
-  \frametitle{Requirements}
 
   Software used in mission critical and regulated contexts must
   exhibit 7 key attributes:
 
-  \begin{enumerate}
-  \item Functional
-  \item Verifiable
-  \item Repeatable
-  \item Documentable
-  \item Auditable
-  \item Stable
-  \item Supported
-  \end{enumerate}
-}
+\begin{description}
 
-\frame{
-\frametitle{Requirements: Details (I)}
+\item Performs the required tasks
 
-\begin{description}[<+->]
+\item Demonstrate that computer output is correct, or at least consistent..
 
-\item[Functional] Performs the required tasks
-
-\item[Verifiable] Demonstrate that computer output is correct, or at least consistent..
-
-\item[Repeatable] Given the same data, the same results can be
+\item Given the same data, the same results can be
   obtained, potentially much later in time.
 
-\item[Documentable] Documentation is available or can easily be
+\item Documentation is available or can easily be
   generated for the entire software life-cycle: Specification, Design,
   Development. Testing, Deployment, Change Management
 
+\item Track everything done to data and the system
 
-\end{description}
-}
-
-\frame{
-\frametitle{Requirements: Details (II)}
-
-\begin{description}[<+->]
-
-\item[Auditable] Track everything done to data and the system
-
-\item[Stable] Doesn't change too fast, so that there is enough time to
+\item Doesn't change too fast, so that there is enough time to
   develop required documentation
   
-\item[Supported] Guaranteed (by \$\$) availability of external expense
+\item Guaranteed (by \$\$) availability of external expense
   for installation, problem resolution, bug fixes, feature
   development, training, application development, consulting
 
 \end{description}
-}
 
 \section{What is \textsc{R}?}
 
-\frame{
-  \frametitle{What is \textsc{R}?}
-  
-  \begin{itemize}[<+->]
+  \begin{itemize}
 
     \item System for statistical computing and graphics
 
@@ -189,7 +106,7 @@ non-regulated contexts.
       
     \item Full featured support for statistical and graphical techniques:
 
-      \begin{itemize}[<1->]
+      \begin{itemize}
       \item linear and nonlinear modeling,
       \item classical statistical tests,
       \item time-series analysis,
@@ -200,82 +117,60 @@ non-regulated contexts.
 
     \item Highly extensible with good development tools
       
-    \item \emph{Huge} library of user-contributed add-on packages: $>\numpackages$ ! 
+    \item \emph{Huge} library of user-contributed add-on packages: $>850$ ! 
       
     \item Source code is freely available
 
 \end{itemize}
-}
 
 \section{Status of \textsc{R}}
 
-\frame{
-  \frametitle{Status of \textsc{R} (I)}
+\begin{description}
 
-\begin{description}[<+->]
-
-\item[Functional] +++ This is \textsc{R}'s strength. Largely provided by
-  the $>\numpackages$ user-supplied add-on packages.  \textsc{R} currently provides more
+\item +++ This is \textsc{R}'s strength. Largely provided by
+  the $>850$ user-supplied add-on packages.  \textsc{R} currently provides more
   functionality than any other statistical software system and is
   growing rapidly.
 
-\item[Verifiable] --- Most of the functionality of \textsc{R} comes from
-  user-developed add-on packages ($>\numpackages$!), but there is currently no formal
+\item --- Most of the functionality of \textsc{R} comes from
+  user-developed add-on packages ($>850$!), but there is currently no formal
   mechanism for evaluating the level of quality of these packages (e.g.:
   development, test, production, peer reviewed, validated) or
   documentation that they accomplish the required tasks.
   
-\item[Repeatable] --- Currently, add on packages do not display
+\item --- Currently, add on packages do not display
   version information when loaded, making it difficult to know what
   versions were utilized for a given analysis, and thus impossible to
   reliably replicated.
 
-\end{description}
-}
-\frame{
-\frametitle{Status of \textsc{R} (II)}
-
-\begin{description}[<+->]
-
-\item[Documentable] --- While the \textsc{R} core team has a well defined and
+\item --- While the \textsc{R} core team has a well defined and
   managed process for design, development, testing, release, and
   change management, no formal documentation of this process appears
   to exists (aside from the specifications of the language itself).
   No centrally defined or managed process appears to exist for add-on
   packages.
 
-\item[Auditable] --- \textsc{R} has no built-in no audit log, either for data
+\item --- \textsc{R} has no built-in no audit log, either for data
   analysis steps or for changes to the system (e.g.: package updates,
   patches)
-
-\end{description}
-}
-\frame{
-\frametitle{Status of \textsc{R} (III)}
-
-\begin{description}[<+->]
-
-\item[Stable] --- The \textsc{R} core team releases minor (major.minor.patch)
+  
+\item --- The \textsc{R} core team releases minor (major.minor.patch)
   versions twice a year.  Since bug fixes are currently applied only
   to the latest released version of the system, it is difficult to
   properly support embedded and validated systems where one may need
-  to resolve bugs in \textsc{R}, but must constrain the \textsc{R} version to remain
-  constant for long periods due to the burden of documentation and
-  testing that must be performed.
+  to resolve bugs in \textsc{R}, but must constrain the \textsc{R}
+  version to remain constant for long periods due to the burden of
+  documentation and testing that must be performed.
 
-\item[Supported] --- While there is an increasingly large pool of
+\item --- While there is an increasingly large pool of
   statisticians and statistical consulting groups that have \textsc{R}
   expertise, no organization formally supports \textsc{R} at this time.
 
 \end{description}
-}
 
 \section{Moving Forward}
 
-\frame{
-  \frametitle{Moving Forward (I)}
-
-\begin{description}[<+->]
+\begin{description}
   \item[Functional] Already a strength. Continue!
   \item[Verifiable] \textsc{RForge} proposal
     \begin{enumerate}
@@ -288,7 +183,7 @@ non-regulated contexts.
 %        \item news lists
 %        \end{itemize} for each individual package.
       \item Support package status categories, including clear standards
-        \begin{itemize}[<1->]
+        \begin{itemize}
         \item development,
         \item testing,
         \item production, or
@@ -296,15 +191,6 @@ non-regulated contexts.
         \end{itemize}
       \end{enumerate}
   \item[Repeatable] Display versions of packages on load
-
-\end{description}
-}
-
-\frame{
-  \frametitle{Moving Forward (II)}
-
-\begin{description}[<+->]
-
   \item[Documentable] ~ 
     \begin{enumerate}
     \item Formally document the development process used for \textsc{R}
@@ -319,29 +205,21 @@ non-regulated contexts.
     previous versions.
   \item[Supported] Encourage commercial vendors to formally support \textsc{R}.
 \end{description}
-}
 
-\section{News Flash!}
+\section{News Flash! \textsc{RPro} from \emph{REvolution Computing} }
 
-\frame{
-  \frametitle{News Flash!: \textsc{RPro} from \emph{Random Technologies} }
-
-  \setbeamerfont{small}{size=\small}
-  \usebeamerfont{small}
-  
-  
-  \emph{Random Technologies LLC}
+\begin{quote}
+  2006-08-01 {\bf New Haven, CT}: \emph{REvolution Computing}
   announces the immediate availability of \textsc{RPro}, an enterprise-strength
   statistical computing environment providing the strengths of the
   open source \textsc{R} statistical software system from the R-Project coupled
   with the enterprise-level support and high-performance computing
-  expertise of \emph{Random Technologies LLC}. 
+  expertise of \emph{REvolution Computing}.
+\end{quote}
 
   \vspace{1em}
 
-  \begin{columns}[c] 
-    \begin{column}{0.50\textwidth} 
-      Additions to \textsc{R}:
+  Additions to \textsc{R}:
       
       \begin{itemize}
         
@@ -358,77 +236,137 @@ non-regulated contexts.
       \item Consulting and Services
         
       \end{itemize}
-      
-    \end{column} 
-    \begin{column}{0.50\textwidth} 
-      \begin{center}
-        \includegraphics*[width=1in]{RPRo.jpg} \\
-        \includegraphics*[width=1in]{RandomTechLogoNarrow.jpg}
-      \end{center}
-    \end{column} 
-  \end{columns} 
-  
-}
+    
+\begin{quote}
+
+  2006-08-01 {\bf New Haven, CT}: \emph{REvolution Computing}
+  announces the immediate availability of \textsc{NetWorkSpaces} for
+  \textsc{RPro} (\textsc{NWS}). \textsc{NWS} enables calculations to
+  be automatically distributed across multiple processors in clusters.
+  Distributing the data and/or work across multiple processors permits
+  a dramatic decrease in time to completion of large computational
+  tasks or permits a dramatic increase in those calculations size,
+  length or complexity.  \textsc{NWS} fully supports Microsoft Windows
+  Compute Cluster Server 2003 (\textsc{CCS}), which provides a
+  security enhanced and affordable high performance computing
+  solution.
+
+\end{quote}
+
+  \includegraphics*{MicrosoftWindowsClusterComputeServer2003.pdf}
+  \includegraphics*{RevolutionComputingInfo.pdf}
 
 \section{More Information}
-
-\frame{
-  \frametitle<presentation>{Contact Information}
 
 \begin{itemize}
   \item Personal:
     \begin{description}
-    \item[Email] greg@warnes.net
-    \item[Web] http://www.warnes.net/Research
+    \item greg@warnes.net
+    \item http://www.warnes.net/Research
     \end{description}
     \vspace{1em}
 
   \item University of Rochester:
     \begin{description}
-    \item[Email] warnes@bst.rochester.edu
-    \item[Web] http://www.urmc.rochester.edu/smd/biostat
+    \item warnes@bst.rochester.edu
+    \item http://www.urmc.rochester.edu/smd/biostat
     \end{description}
-    \vspace{2em}
-  \item ~ \\%Random Technologies:
-    \vspace{-2.0em} 
-    \includegraphics*[height=0.15\textheight]{RandomTechLogoNarrow.jpg} \\
-    \vspace{-2.5em} ~\hspace{10em}~:
-
     \vspace{1em}
-
+    
+  \item REvolution Computing:
     \begin{description}
-    \item[Email] greg@random-technologies-llc.com
-    \item[Web] http://www.random-technologies-llc.com
+    \item greg@revolution-computing.com
+    \item http://www.revolution-computing.com
     \end{description}
-
     \vspace{1em}
 
   \end{itemize}
-  
-}
 
-% \frame{
-%  \begin{thebibliography}{10}
-    
-%  \beamertemplatebookbibitems
-%  % Start with overview books.
+\section*{References}
+\end{document}
+{\footnotesize\begin{description}\itemsep=3pt
 
-%  \bibitem{Warnes2006}
-%    G.~Warnes.
-%    \newblock {\em Handbook of Everything}.
-%    \newblock Some Press, 1990.
- 
-    
-%  \beamertemplatearticlebibitems
-%  % Followed by interesting articles. Keep the list short. 
+\item {\em Annual Book of ASTM Standards, Volume 4.10}, Committee D-7,
 
-%  \bibitem{Someone2000}
-%    S.~Someone.
-%    \newblock On this and that.
-%    \newblock {\em Journal of This and That}, 2(1):50--100,
-%    2000.
-%  \end{thebibliography}
-%
-% }
+American Society for Testing and Materials, West Conshohocken, Pennsylvania.
+
+\item Cochran, W.G. (1957),  ``Analysis of Covariance: Its Nature and Uses,''
+
+{\em Biometrics}, {\bf 13}, 261-281.
+
+\item Cox, D.R. (1957),  ``The Use of a Concomitant Variable in Selecting an
+
+Experimental Design,''  {\em Biometrika}, {\bf 44}, 150-158.
+
+\item David, H.A. and Gunnik, J.L. (1997), ``The Paired {\em t} Test
+
+Under Artificial Pairing,'' {\em The American Statistician}, {\bf 51},
+
+9--12.
+
+\item Gibbons, R.D. (1994), {\em Statistical Methods for Groundwater
+
+Monitoring},
+
+John Wiley and Sons, New York.
+
+\item Guttman, I. (1970), {\em Statistical Tolerance Regions:
+
+Classical and Bayesian}, Hafner Publishing Company, Darien,
+
+Connecticut.
+
+\item Michigan DEQ (1994), {\em Guidance Document, Verification of
+
+Soil Remediation}, Hazardous Waste Program Section, Waste Management
+
+Division, Michigan Department of Environmental Quality, Lansing, Michigan.
+
+\item Owen, D.B. (1963), {\em Factors for one-sided tolerance limits
+
+and for variable sampling plans}, Sandia Corporation Monograph No.
+
+SCR-607 (19th edn).
+
+\item {\em MIL-HDBK-17-1, Composite Materials Handbook, Volume 1,
+
+Guidelines for Characterization of Structural Materials}, Department
+
+of Defense Single Stock Point, Philadelphia, Pennsylvania
+
+(http://www.dodssp.daps.mil).
+
+\item Verrill, S.P. (1993),  ``Predictor Sort Sampling, Tight
+
+{\em T}'s, and the Analysis of Covariance,'' {\em Journal of the American
+
+Statistical Association}, {\bf 88}, 119--124.
+
+\item Verrill, S.P. (1999),  ``When Good Confidence Intervals Go Bad:
+
+Predictor Sort Experiments and ANOVA,'' {\em The American
+
+Statistician}, {\bf 53}, 38--42.
+
+\item Verrill, S.P., Herian, V.L., and Green, D.W. (2002a), ``Predictor
+
+Sort Sampling and Confidence Bounds on Quantiles I: Asymptotic Theory,''
+
+under review.
+
+\item Verrill, S.P., Herian, V.L., and Green, D.W. (2002b), ``Predictor
+
+Sort Sampling and Confidence Bounds on Quantiles II: $k$'s for Small
+
+Samples,'' in preparation.
+
+\item Warren, W.G., and Madsen, B. (1977),  ``Computer-Assisted Experimental Design
+
+in Forest Products Research: A Case Study Based on Testing the 
+
+Duration-of-Load Effect,''  {\em Forest Products Journal}, {\bf 27}, 45-50.
+
+\end{description}}
 
 \end{document}
+
