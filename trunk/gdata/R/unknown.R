@@ -2,14 +2,15 @@
 ###------------------------------------------------------------------------
 ### What: Change given unknown value to NA and vice versa
 ### $Id$
-### Time-stamp: <2006-11-28 15:02:19 ggorjan>
+### Time-stamp: <2007-04-26 13:16:10 ggorjan>
 ###------------------------------------------------------------------------
 
 ### {{{ isUnknown
+
 ###------------------------------------------------------------------------
 
 isUnknown <- function(x, unknown=NA, ...)
-  UseMethod("isUnknown", x=x)
+  UseMethod("isUnknown")
 
 isUnknown.default <- function(x, unknown=NA, ...)
 {
@@ -49,6 +50,7 @@ isUnknown.matrix <- function(x, unknown=NA, ...)
 
 ### }}}
 ### {{{ unknownToNA
+
 ###------------------------------------------------------------------------
 
 unknownToNA <- function(x, unknown, warning=FALSE, ...)
@@ -95,6 +97,7 @@ unknownToNA.data.frame <- function(x, unknown, warning=FALSE, ...)
 
 ### }}}
 ### {{{ NAToUnknown
+
 ###------------------------------------------------------------------------
 
 NAToUnknown <- function(x, unknown, force=FALSE, call.=FALSE, ...)

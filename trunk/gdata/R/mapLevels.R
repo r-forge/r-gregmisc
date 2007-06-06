@@ -2,7 +2,7 @@
 ###------------------------------------------------------------------------
 ### What: Mapping levels
 ### $Id$
-### Time-stamp: <2006-10-29 16:45:20 ggorjan>
+### Time-stamp: <2007-04-26 13:16:18 ggorjan>
 ###------------------------------------------------------------------------
 
 ### {{{ mapLevels
@@ -12,7 +12,7 @@
 mapLevels <- function(x, codes=TRUE, sort=TRUE, drop=FALSE,
                       combine=FALSE, ...)
 {
-  UseMethod("mapLevels", x=x)
+  UseMethod("mapLevels")
 }
 
 mapLevels.default <- function(x, codes=TRUE, sort=TRUE, drop=FALSE,
@@ -282,6 +282,7 @@ unique.levelsMap <- function(x, incomparables=FALSE, ...)
 
 ### }}}
 ### {{{ mapLevels<-
+
 ###------------------------------------------------------------------------
 
 "mapLevels<-" <- function(x, value)
