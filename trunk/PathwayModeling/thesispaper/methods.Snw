@@ -289,7 +289,7 @@ write.table(temp,file="data/input16.dat",row.names=F,quote=F)
   \subsubsection{Burn-in and Thinning}
 
   Many MCMC papers recommend the removal of an initial ``burn-in''
-  segment of the MCMC run since these initial MCMC samples can can
+  segment of the MCMC run since these initial MCMC samples can
   be heavily influenced by the initial starting point, and can result
   in bias in the computed estimates.  We adopted an alternative
   approach to avoiding bias in our estimates; each MCMC sampler was
