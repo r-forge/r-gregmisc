@@ -21,7 +21,7 @@ permutations(n, r, v=1:n, set=TRUE, repeats.allowed=FALSE)
   \item{set}{ Logical flag indicating whether duplicates should be
     removed from the source vector \code{v}. Defaults to \code{TRUE}.}
   \item{repeats.allowed}{ Logical flag indicating whether the
-    constructed vectors nay include duplicated values.  Defaults to
+    constructed vectors may include duplicated values.  Defaults to
     \code{FALSE}.  }
 }
 \details{
