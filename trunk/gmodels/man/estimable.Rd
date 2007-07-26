@@ -4,6 +4,7 @@
 \alias{estimable}
 \alias{estimable.default}
 \alias{estimable.lmer}
+\alias{estimable.mlm}
 %\alias{.wald}
 %\alias{.to.est}
 \title{Contrasts and estimable linear functions of model coefficients}
@@ -17,11 +18,12 @@ estimable(obj, cm, beta0, conf.int=NULL,  show.beta0, ...)
 \method{estimable}{default} (obj, cm, beta0, conf.int=NULL, show.beta0, joint.test=FALSE, ...)
 \method{estimable}{lmer}(obj, cm, beta0, conf.int=NULL,
                show.beta0, sim.lmer=TRUE, n.sim=1000, ...) 
+\method{estimable}{mlm}(obj, cm, beta0, conf.int=NULL,  show.beta0, ...)
 %.wald(obj, cm,beta0=rep(0, ifelse(is.null(nrow(cm)), 1, nrow(cm))))
 %.to.est(obj, params)
 }
 \arguments{
-   \item{obj}{Regression (lm,glm,lme,lmer) object. }
+   \item{obj}{Regression (lm,glm,lme,lmer,mlm) object. }
    \item{cm}{Vector, List, or Matrix specifying estimable linear functions or
      contrasts.  See below for details.}
    \item{beta0}{Vector of null hypothesis values}

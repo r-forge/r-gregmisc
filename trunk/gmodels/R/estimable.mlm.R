@@ -1,5 +1,5 @@
 `estimable.mlm` <-
-  function (object, ...) 
+  function (obj, cm, beta0, conf.int=NULL,  show.beta0, ...)
 {
   coef <- coef(object)
   ny <- ncol(coef)
@@ -23,7 +23,7 @@
     object$fitted.values <- fitted[, i]
     object$effects <- effects[, i]
     object$call$formula[[2]] <- object$terms[[2]] <- as.name(ynames[i])
-    value[[i]] <- estimable(object, ...)
+    value[[i]] <- estimable(obj, cm, beta0, conf.int=NULL,  show.beta0, ...)
   }
   class(value) <- "listof"
   value
