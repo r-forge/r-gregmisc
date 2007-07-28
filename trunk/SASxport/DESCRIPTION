@@ -1,0 +1,11 @@
+Package: SASxport
+Type: Package
+Title: Read and write SAS export files
+Version: 1.0
+Date: 2007-07-28
+Author: Gregory R. Warnes <greg@random-technologies-llc.com>
+Maintainer: Gregory R. Warnes <greg@random-technologies-llc.com>
+Description: This package provides functions to list the contents of,
+        read, and write SAS export files.
+License: GPL 2.0 or later
+Depends: gtools, foreign
