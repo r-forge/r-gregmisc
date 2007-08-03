@@ -1,6 +1,7 @@
 export(
+       assert,
+       toSAS,
        write.xport,
-       toSAS
        )
 
 S3method(toSAS,numeric)
