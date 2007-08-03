@@ -1,5 +1,14 @@
 export(
-       write.xport
+       write.xport,
+       toSAS
        )
+
+S3method(toSAS,numeric)
+S3method(toSAS,logical)
+S3method(toSAS,character)
+S3method(toSAS,factor)
+S3method(toSAS,POSIXt)
+S3method(toSAS,Date)
+S3method(toSAS,default)
 
 useDynLib(SASxport)

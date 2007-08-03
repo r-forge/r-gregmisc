@@ -33,13 +33,8 @@ xport.namestr <- function(
     else
       varLength <- 8
 
-#  if(missing(varLabel) || is.null(varLabel) )
-#    {
-#      varLabel <- attr(var, "label")
-#      if(is.null(varLabel))
-#        varLabel <- varName
-#    }
-  varLabel=""
+  if( missing(varLabel) || is.null(varLabel) )
+    varLabel <- ""    
 
   just <- match.arg(just)
   if(just=="left")

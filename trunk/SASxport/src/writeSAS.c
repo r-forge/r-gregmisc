@@ -328,7 +328,6 @@ void fill_numeric_NA()
   static char numeric_NA[8] = {0x2e,0x00,0x00,0x00,0x00,0x00,0x00,0x00};
 
   memcpy(raw_buffer, numeric_NA, 8);
-  REVERSE(raw_buffer, 8);
   raw_buffer_used = 8;
 
   return;

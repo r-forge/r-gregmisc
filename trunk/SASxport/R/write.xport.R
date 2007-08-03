@@ -88,8 +88,13 @@ write.xport <- function( ... ,
             scat("", i , "...")
             var <- df[[i]]
 
-            # Convert factors to character strings
-            if(is.factor(var)) df[[i]] <- var <- as.character(var)
+            # get attribute information before any transformations!"
+            varLabel <- attr(var, "label")
+            varFormat <- attr(var, "format")
+            varIFormat <- attr(var, "iformat")
+
+            # Convert R object to SAS object
+            df[[i]] <- var <- toSAS(var)
 
             # compute variable length
             if(is.character(var))
@@ -100,12 +105,33 @@ write.xport <- function( ... ,
             # fill in variable offset and length information
             offsetTable[i, "len"]    <- varLen
             offsetTable[i, "offset"] <- lenIndex
+
+
+            
+
+            # parse format and iformat
+            formatInfo  <- parseFormat( varFormat)
+            iFormatInfo <- parseFormat( varIFormat)
+            
+            
             
             # write the entry
-            out( xport.namestr(
-                               var=var, varName=i, varNum=varIndex, varPos=lenIndex,
-                               varLength=varLen
-                               ) )
+            out(
+                xport.namestr(
+                              var=var,
+                              varName=i,
+                              varNum=varIndex,
+                              varPos=lenIndex,
+                              varLength=varLen,
+                              varLabel=varLabel,        
+                              fName = formatInfo$name,
+                              fLength = formatInfo$len,
+                              fDigits = formatInfo$digits,
+                              iName = iFormatInfo$name,
+                              iLength = iFormatInfo$len,
+                              iDigits = iFormatInfo$digits,
+                              )
+                )
 
             # increment our counters
             lenIndex <- lenIndex + varLen
@@ -115,7 +141,8 @@ write.xport <- function( ... ,
         scat("Done.")
 
         # Space-fill to 80 character record end
-        fillSize <- spaceUsed %% 80
+        fillSize <- 80 - (spaceUsed %% 80)
+        if(fillSize==80) fillSize <- 0        
         out( xport.fill( TRUE, fillSize ) ) 
 
         scat("Write header for data block ...")
@@ -123,7 +150,6 @@ write.xport <- function( ... ,
         scat("Done")
 
         scat("Write data ... ");
-        counter <- 1
         spaceUsed <- 0
         for(i in 1:nrow(df) )
           for(j in 1:ncol(df) )
@@ -140,8 +166,10 @@ write.xport <- function( ... ,
 
             spaceUsed <- spaceUsed + valLen
           }
-        fillSize <- spaceUsed %% 80
-        out( xport.fill(FALSE, fillSize ) )
+        
+        fillSize <- 80 - (spaceUsed %% 80)
+        if(fillSize==80) fillSize <- 0
+        out( xport.fill(TRUE, fillSize ) )
         
         scat("Done.")
       }

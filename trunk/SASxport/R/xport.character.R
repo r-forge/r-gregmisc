@@ -1,6 +1,8 @@
 xport.character <- function( value, width )
   {
     if(length(value)!=1) stop("Only a single character value is permitted.")
+
+    if(is.na(value)) value <- ""
     
     .C("fill_character_field",
        value = as.character(value),
