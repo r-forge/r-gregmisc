@@ -1,7 +1,11 @@
+useDynLib(SASxport, .registration=TRUE)
+
 export(
        assert,
        toSAS,
-       write.xport,
+       lookup.xport,
+       read.xport,
+       write.xport
        )
 
 S3method(toSAS,numeric)
@@ -12,4 +16,4 @@ S3method(toSAS,POSIXt)
 S3method(toSAS,Date)
 S3method(toSAS,default)
 
-useDynLib(SASxport)
+

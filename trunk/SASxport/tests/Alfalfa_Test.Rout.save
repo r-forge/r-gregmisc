@@ -1,0 +1,50 @@
+
+R version 2.4.1 (2006-12-18)
+Copyright (C) 2006 The R Foundation for Statistical Computing
+ISBN 3-900051-07-0
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+*******************************************************
+** This copy of RPro is licensed to:                 **
+** Gregory R. Warnes                                 **
+*******************************************************
+
+
+> invisible(options(echo = TRUE))
+> ## This test demonstrates that write.xport can exactly duplicate an
+> ## existing SAS xport file "Alfalfa.xpt"
+> 
+> library(SASxport)
+> 
+> # existing data file
+> SPEC <- read.xport("Alfalfa.xpt")
+> 
+> ## Write it out again, pretending to be the same OS, SAS version, and creation date
+> write.xport(SPEC,
++             filename="Alfalfa2.xpt",
++             cDate=strptime("10DEC99:15:56:30", format="%d%b%y:%H:%M:%S"),
++             osType="OSF1",
++             sasVer="7.00"
++             )
+> 
+> ## Load both files back in as raw data
+> a.1 <- readBin( con="Alfalfa.xpt",  what=raw(), n=3600 )
+> a.2 <- readBin( con="Alfalfa2.xpt", what=raw(), n=3600 )
+> 
+> ## Test that the files are identical
+> assert( all(a.1 == a.2) )
+> 
+> proc.time()
+[1] 0.939 0.103 1.212 0.000 0.000
+> 

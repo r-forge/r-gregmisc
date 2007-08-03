@@ -23,8 +23,10 @@
 
 
 #ifndef WRITESAS_H
-
 #define WRITESAS_H
+
+#include <R.h>
+#include <Rinternals.h>
 
 /*****
  * Useful constants 
@@ -130,7 +132,8 @@ void zeroFill(char *target, int len);
 void zeroCopy(char *target, int len, char *source);
 
 void fill_file_header(char **cDate, char **mDate, char **sasVer, char **osType);
-void fill_member_header(char **dfName, char **sasVer, char **osType, char **cDate, char **mDate);
+void fill_member_header(char **dfName, char **sasVer, char **osType, char **cDate, 
+			char **mDate);
 
 void fill_namestr(int  *isChar, int  *nlng, int  *nvar0, char **nname, char **nlabel, 
 		  char **nform, int  *nfl, int  *nfd, int  *nfj, char **niform, 
@@ -142,5 +145,11 @@ void fill_obs_header();
 void fill_numeric_field(double *value);
 void fill_character_field(char **value, int *width); 
 
+void fill_numeric_NA();
+void fill_space(int *type, int *width);
+
+SEXP getRawBuffer();
+
+void doTest();
 
 #endif /* FIELDS_H */

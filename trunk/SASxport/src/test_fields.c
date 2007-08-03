@@ -151,7 +151,7 @@ int test_zeroCopy(int bufsize)
   return 0;
 }
 
-int doTest()
+void doTest()
 {
   /* small buffer */
   test_blankFill(SMALL);

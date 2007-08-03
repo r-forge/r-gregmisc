@@ -30,6 +30,7 @@
 extern int cnxptiee(char *from, int fromtype, char *to, int totype);
 
 #include "writeSAS.h"
+//#include "cnxptiee.h"
 
 
 

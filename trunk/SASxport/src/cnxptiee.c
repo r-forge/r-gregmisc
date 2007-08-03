@@ -6,13 +6,11 @@
 
 #if !defined(DEFINE_REVERSE) && !defined(REVERSE)
 #define DEFINE_REVERSE
-void REVERSE(); 
+void REVERSE(char *intp, int l); 
 #endif 
 
 #ifdef DEFINE_REVERSE
-void REVERSE(intp,l) 
-char *intp; 
-int l;
+void REVERSE(char *intp, int l) 
 {
 int i,j;
 char save;
@@ -168,10 +166,10 @@ unsigned char *ieee;
       return;
       }
 
-   memcpy(((char *)&xport1)+sizeof(unsigned long)-4,temp,4);   
-   REVERSE(&xport1,sizeof(unsigned long));
-   memcpy(((char *)&xport2)+sizeof(unsigned long)-4,temp+4,4);   
-   REVERSE(&xport2,sizeof(unsigned long));
+   memcpy(( (char *) &xport1)+sizeof(unsigned long)-4,temp,4);   
+   REVERSE( (char *) &xport1,sizeof(unsigned long));
+   memcpy(( (char *) &xport2)+sizeof(unsigned long)-4,temp+4,4);   
+   REVERSE( (char *) &xport2,sizeof(unsigned long));
 
    /**************************************************************/
    /* Translate IBM format floating point numbers into IEEE      */
@@ -271,9 +269,9 @@ unsigned char *ieee;
     (((((long)(*temp & 0x7f) - 65) << 2) + shift + 1023) << 20) |
                        (xport1 & 0x80000000);
 
-    REVERSE(&ieee1,sizeof(unsigned long)); 
+    REVERSE( (char*) &ieee1,sizeof(unsigned long)); 
     memcpy(ieee,((char *)&ieee1)+sizeof(unsigned long)-4,4);
-    REVERSE(&ieee2,sizeof(unsigned long)); 
+    REVERSE( (char*) &ieee2,sizeof(unsigned long)); 
     memcpy(ieee+4,((char *)&ieee2)+sizeof(unsigned long)-4,4);
     return;
 
@@ -304,10 +302,10 @@ unsigned char *xport;    /* ptr to xport format (8 bytes)          */
    memcpy(ieee8,ieee,8);
 
    /*------get 2 longs for shifting------------------------------*/
-   memcpy(((char *)&ieee1)+sizeof(unsigned long)-4,ieee8,4);   
-   REVERSE(&ieee1,sizeof(unsigned long)); 
-   memcpy(((char *)&ieee2)+sizeof(unsigned long)-4,ieee8+4,4); 
-   REVERSE(&ieee2,sizeof(unsigned long)); 
+   memcpy(( (char *) &ieee1)+sizeof(unsigned long)-4,ieee8,4);   
+   REVERSE( (char *) &ieee1,sizeof(unsigned long)); 
+   memcpy(( (char *) &ieee2)+sizeof(unsigned long)-4,ieee8+4,4); 
+   REVERSE( (char *) &ieee2,sizeof(unsigned long)); 
 
    memset(xport,0,8);
 
@@ -448,9 +446,9 @@ unsigned char *xport;    /* ptr to xport format (8 bytes)          */
 
 doret:
    if (-260 <= ieee_exp && ieee_exp <= 248) {
-      REVERSE(&xport1,sizeof(unsigned long)); 
+     REVERSE( (char *) &xport1,sizeof(unsigned long)); 
       memcpy(xport,((char *)&xport1)+sizeof(unsigned long)-4,4);
-      REVERSE(&xport2,sizeof(unsigned long)); 
+      REVERSE( (char *) &xport2,sizeof(unsigned long)); 
       memcpy(xport+4,((char *)&xport2)+sizeof(unsigned long)-4,4);
       return;
       }

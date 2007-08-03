@@ -9,4 +9,5 @@ Description: This package provides functions to read, list contents of, and
              write SAS export files.  The creation of this package was funded
              by Metrum Institute <http://metruminstitute.org>.
 License: GPL 2.0 or later
-Depends: foreign
+Imports: methods
+

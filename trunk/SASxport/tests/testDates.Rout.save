@@ -1,0 +1,66 @@
+
+R version 2.4.1 (2006-12-18)
+Copyright (C) 2006 The R Foundation for Statistical Computing
+ISBN 3-900051-07-0
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+*******************************************************
+** This copy of RPro is licensed to:                 **
+** Gregory R. Warnes                                 **
+*******************************************************
+
+
+[Previously saved workspace restored]
+
+> invisible(options(echo = TRUE))
+> library(SASxport)
+> 
+> ## Create a small data set containing dates, times, and date-times
+> 
+> dates <- c("02/27/92", "02/27/92", "01/14/92", "02/28/92", "02/01/92")
+> times <- c("23:03:20", "22:29:56", "01:03:30", "18:21:03", "16:56:26")
+>  
+> 
+> temp <- data.frame(x=c(1, 2, 3, 4, 5 ),
++                    y=c('a', 'B', 'c', 'd', 'e' ),
++                    dates=strptime(dates, "%m/%d/%y"),
++                    datetimes=strptime( paste(dates,times), "%m/%d/%y %H:%M:%S")
++ )
+> 
+> print(temp)
+  x y      dates           datetimes
+1 1 a 1992-02-27 1992-02-27 23:03:20
+2 2 B 1992-02-27 1992-02-27 22:29:56
+3 3 c 1992-01-14 1992-01-14 01:03:30
+4 4 d 1992-02-28 1992-02-28 18:21:03
+5 5 e 1992-02-01 1992-02-01 16:56:26
+> 
+> write.xport( DATETIME=temp, filename="datetime.xpt")
+> temp2 <- read.xport(file="datetime.xpt")
+> 
+> print(temp2)
+  X Y      DATES   DATETIME
+1 1 a 1014768000 1014851000
+2 2 B 1014768000 1014848996
+3 3 c 1010966400 1010970210
+4 4 d 1014854400 1014920463
+5 5 e 1012521600 1012582586
+> 
+> 
+> identical(temp, temp2)
+[1] FALSE
+> 
+> proc.time()
+[1] 0.889 0.099 0.999 0.000 0.000
+> 
