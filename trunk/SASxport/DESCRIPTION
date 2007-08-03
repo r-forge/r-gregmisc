@@ -1,7 +1,7 @@
 Package: SASxport
 Type: Package
 Title: Read and write SAS export files
-Version: 1.0
+Version: 0.99.1
 Date: 2007-07-28
 Author: Gregory R. Warnes <greg@random-technologies-llc.com>
 Maintainer: Gregory R. Warnes <greg@random-technologies-llc.com>
