@@ -1,12 +1,12 @@
 \name{toSAS.default}
-alias{toSAS}
-alias{toSAS.numeric}
-alias{toSAS.logical}
-alias{toSAS.character}
-alias{toSAS.factor}
-alias{toSAS.POSIXt}
-alias{toSAS.Date}
-alias{toSAS.default}
+\alias{toSAS}
+\alias{toSAS.numeric}
+\alias{toSAS.logical}
+\alias{toSAS.character}
+\alias{toSAS.factor}
+\alias{toSAS.POSIXt}
+\alias{toSAS.Date}
+\alias{toSAS.default}
 \title{Convert R data object for storage in SAS xport file}
 \description{
   The \code{toSAS} methods control how R objects and data types are

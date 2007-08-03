@@ -27,11 +27,9 @@
 #include <R.h>
 #include <Rinternals.h>
 
-//#import "cnxptiee.h"
-
 extern int cnxptiee(char *from, int fromtype, char *to, int totype);
 
-#import "writeSAS.h"
+#include "writeSAS.h"
 
 
 

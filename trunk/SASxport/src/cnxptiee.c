@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <string.h>
-#import "cnxptiee.h"
+#include "cnxptiee.h"
 
 
 
