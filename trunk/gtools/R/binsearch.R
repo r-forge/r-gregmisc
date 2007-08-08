@@ -105,7 +105,7 @@ binsearch <- function(fun, range, ..., target=0,
           warning("Maximum number of iterations reached")
           retval$flag="Maximum number of iterations reached"
           retval$where=c(lo,hi)
-          retval$value=c(fun.lo,fun.hi)
+          retval$value=c(val.lo,val.hi)
         }
       else if( val.lo==target )
         {
