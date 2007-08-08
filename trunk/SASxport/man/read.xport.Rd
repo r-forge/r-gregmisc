@@ -1,43 +1,190 @@
 \name{read.xport}
 \alias{read.xport}
-\title{Read a SAS XPORT Format Library}
+\title{Import SAS XPORT files}
 \description{
-  Reads a file as a SAS XPORT format library and returns a list of
-  data.frames.
+  Read a SAS XPORT format file and return the contained dataset(s).
 }
 \usage{
-read.xport(file)
+read.xport(file,
+           force.integer=TRUE,
+           formats=NULL,
+           name.chars=NULL,
+           names.tolower=TRUE,
+           keep=NULL,
+           drop=NULL,
+           as.is=0.95,
+           verbose=FALSE
+           )
 }
 \arguments{
- \item{file}{character variable with the name of the file to read.  The
-   file must be in SAS XPORT format.}
+  \item{file}{name of a file containing the SAS transport file. May be a
+    URL beginning with \code{http://}. 
+  }
+  \item{force.integer}{Logical flag indicating whether integer-valued
+    variables should be returned as integers (\code{TRUE}) or doubles
+    (\code{FALSE}). Variables outside the supported integer range
+    (\code{.Machine$integer.max}) will always be converted to
+    doubles. 
+  }
+  \item{formats}{a data frame or list (like that created by
+    \code{foreign:::read.xport}) containing \code{PROC FORMAT}
+    output, if such output is not stored in the main transport
+    file.
+  }
+  \item{name.chars}{Vector of additional characters permissible in
+    variable names. By default, only the alpha and numeric
+    characters ([A-Za-z0-9]) and periods ('.') are permitted. All
+    other characters are converted into periods ('.').   
+  }
+  \item{names.tolower}{Logical indicating whether variable and dataset
+    names should be converted to lowercase (\code{TRUE}) or left
+    uppercase (\code{FALSE})
+  }
+  \item{keep}{a vector of names of SAS datasets to process.  This list
+    must include \code{PROC FORMAT} dataset if it is present for
+    datasets to use use any of its value label formats.
+  } 
+  \item{drop}{a vector of names of SAS datasets to ignore (original SAS
+    upper case names)
+  }
+  \item{as.is}{
+    Either a logical flag indicating whether SAS character variables should
+    be preserved as character objects (\code{TRUE}) or factor
+    objects (\code{FALSE}), or a fractional cutoff between 0 and 1.
+    
+    When a fractional cutoff is provided, character variables
+    containing a more than this fraction of unique values will be
+    stored as a character variables. This is done in order to
+    preserve space, since factors must store both the integer factor
+    codes and the character factor labels.
+  }
+  \item{verbose}{Logical indicating whether progress should be printed
+    during the data loading and conversion process.}
 }
 \value{
-  If there is a more than one dataset in the XPORT format library, a named
-  list of data frames, otherwise a data frame.  The columns of the data
-  frames will be either numeric (corresponding to numeric in SAS) or
-  factor (corresponding to character in SAS).  All SAS numeric missing
-  values (including special missing values represented by \code{._},
-  \code{.A} to \code{.Z} by SAS) are mapped to \R \code{NA}.
+  If there is more than one dataset in the transport file other than the
+  \code{PROC FORMAT} file, the result is a list of data frames
+  containing all the non-\code{PROC FORMAT} datasets.  Otherwise the
+  result a single data frame.
+}
 
-  Trailing blanks are removed from character columns before conversion to
-  a factor.  Some sources claim that character missing values in SAS are
-  represented by \code{' '} or \code{''}: these are not treated as \R
-  missing values.
+\details{
+
+  \itemize{
+    \item variable names are converted to lower case
+    
+    \item SAS date, time, and date/time variables are converted respectively to \code{Date}, 
+    POSIX, or \code{chron} objects
+    
+    \item SAS labels are stored in "label" attributes on each variables
+    
+    \item SAS formats are stored in "format" attributes on each variable
+    
+    \item SAS integer variables are stored as integers unless
+      \code{force.integer} is \code{FALSE}
+  }
+
+  If the file incoudes the output of \code{PROC FORMAT CNTLOUT=},
+  variables having customized label formats will be converted to \code{factor}
+  objects with appropriate labels.
 }
-\references{
-  SAS Technical Support document TS-140:
-  ``The Record Layout of a Data Set in SAS Transport (XPORT) Format''
-  available at
-  \url{http://ftp.sas.com/techsup/download/technote/ts140.html}.
+\author{ Gregory R. Warnes \email{greg@random-technologies-llc.com}
+  based on \code{Hmisc:::sasxport.get} by Frank E. Harrell, Jr.}  
+\section{Note}{
+  This code provides a subset of the functionality of the
+  \code{sasxport.get} function in the Hmisc library.
 }
-\author{Saikat DebRoy \email{<saikat@stat.wisc.edu>}}
 \seealso{
-  \code{\link{lookup.xport}}
+  \code{\link[foreign]{read.xport}},
+  \code{\link{label}},
+  \code{\link[Hmisc]{sas.get}},
+  \code{\link[Hmisc]{sasxport.get}},  
+  \code{\link{Dates}},
+  \code{\link{DateTimeClasses}},
+  \code{\link[chron]{chron}},
+  \code{\link[foreign]{lookup.xport}},
+  \code{\link[Hmisc]{contents}},
+  \code{\link[Hmisc]{describe}}
 }
 \examples{
 \dontrun{
-read.xport("transport")
+# -------
+# SAS code to generate test dataset:
+# -------
+# libname y SASV5XPT "test2.xpt";
+#
+# PROC FORMAT; VALUE race 1=green 2=blue 3=purple; RUN;
+# PROC FORMAT CNTLOUT=format;RUN;  * Name, e.g. 'format', unimportant;
+# data test;
+# LENGTH race 3 age 4;
+# age=30; label age="Age at Beginning of Study";
+# race=2;
+# d1='3mar2002'd ;
+# dt1='3mar2002 9:31:02'dt;
+# t1='11:13:45't;
+# output;
+#
+# age=31;
+# race=4;
+# d1='3jun2002'd ;
+# dt1='3jun2002 9:42:07'dt;
+# t1='11:14:13't;
+# output;
+# format d1 mmddyy10. dt1 datetime. t1 time. race race.;
+# run;
+# data z; LENGTH x3 3 x4 4 x5 5 x6 6 x7 7 x8 8;
+#    DO i=1 TO 100;
+#        x3=ranuni(3);
+#        x4=ranuni(5);
+#        x5=ranuni(7);
+#        x6=ranuni(9);
+#        x7=ranuni(11);
+#        x8=ranuni(13);
+#        output;
+#        END;
+#    DROP i;
+#    RUN;
+# PROC MEANS; RUN;
+# PROC COPY IN=work OUT=y;SELECT test format z;RUN; *Creates test2.xpt;
+# ------
+
+# Read this dataset from a local file:
+w <- read.xport('test2.xpt')
+
+\dontshow{
+library(Hmisc)
+w2 <- sasxport.get('test2.xpt')
+SASxport:::assert(identical(w,w2))
 }
+
+# Or read a copy of test2.xpt available on the web:
+url <- 'http://biostat.mc.vanderbilt.edu/cgi-bin/viewvc.cgi/*checkout*/Hmisc/trunk/tests/test2.xpt'
+w <- read.xport(url)
+
+\dontshow{ ## For testing only
+SASxport:::assert(identical(w2,w))
 }
-\keyword{file}
+
+\dontrun{
+## The Hmisc library provides many useful functions for interacting with
+## data imported from SAS via read.xport()
+library(Hmisc)
+
+describe(w$test)   # see labels, format names for dataset test
+
+lapply(w, describe)# see descriptive stats for both datasets
+
+contents(w$test)   # another way to see variable attributes
+lapply(w, contents)# show contents of both datasets
+
+options(digits=7)  # compare the following matrix with PROC MEANS output
+t(sapply(w$z, function(x)
+ c(Mean=mean(x),SD=sqrt(var(x)),Min=min(x),Max=max(x))))
+
+}
+
+}
+
+}
+\keyword{interface}
+\keyword{manip}
