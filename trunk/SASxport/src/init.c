@@ -22,8 +22,8 @@
 #include <Rinternals.h>
 #include <R_ext/Rdynload.h>
 #include "writeSAS.h"
-#include "foreign.h"
-#include "SASxport.h"
+//#include "foreign.h"
+//#include "SASxport.h"
 
 #define ARGTYPE static R_NativePrimitiveArgType
 
@@ -54,8 +54,8 @@ static const R_CMethodDef CEntries[]  = {
 
 #define CALLDEF(name, n)  {#name, (DL_FUNC) &name, n}
 static const R_CallMethodDef CallEntries[] = {
-    CALLDEF(xport_info, 1),
-    CALLDEF(xport_read, 2),
+//    CALLDEF(xport_info, 1),
+//    CALLDEF(xport_read, 2),
     CALLDEF(getRawBuffer, 0),
     {NULL, NULL, 0}
 };
