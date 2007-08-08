@@ -4,6 +4,7 @@ export(
        addLast,
        ask,
        assert,
+       binsearch,
        capture,
        combinations,
        ddirichlet,
