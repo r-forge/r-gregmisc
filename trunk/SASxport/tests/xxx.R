@@ -18,11 +18,10 @@ write.xport(abc,
             )
 
 # read the original SAS data file
-abc.SAS <- read.xport("xxx.xpt")
+abc.SAS <- read.xport("xxx.xpt", names.tolower=FALSE)
 
-## read.xport currently doesn't store the format and label attributes...
+## read.xport currently doesn't store the format attribute...
 attr(abc.SAS$X, 'format') <- 'date7.'
-attr(abc.SAS$Y, 'label')  <- 'character variable'
 
 # create a SAS XPORT file from the SAS data
 write.xport(abc=abc.SAS,
@@ -48,7 +47,7 @@ a.3 <- readBin( con="xxx3.xpt", what=raw(), n=1e5 )
 a.1[1089] <- as.raw("0x2e")
 
 ## Test that the files are otherwise identical
-assert( all(a.1 == a.2) )
-assert( all(a.1 == a.3) )
+SASxport:::assert( all(a.1 == a.2) )
+SASxport:::assert( all(a.1 == a.3) )
 
 

@@ -31,7 +31,7 @@ Type 'q()' to quit R.
 > .C("doTest",PACKAGE="SASxport")
 list()
 > 
-> ## Successful completion means all assertions have been met
+> ## Successful completion means all SASxport:::assertions have been met
 > 
 > proc.time()
 [1] 0.843 0.093 0.925 0.000 0.000

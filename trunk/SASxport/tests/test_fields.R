@@ -4,4 +4,4 @@ library(SASxport)
 
 .C("doTest",PACKAGE="SASxport")
 
-## Successful completion means all assertions have been met
+## Successful completion means all SASxport:::assertions have been met

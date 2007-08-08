@@ -43,7 +43,7 @@ Type 'q()' to quit R.
 > a.2 <- readBin( con="Alfalfa2.xpt", what=raw(), n=3600 )
 > 
 > ## Test that the files are identical
-> assert( all(a.1 == a.2) )
+> SASxport:::assert( all(a.1 == a.2) )
 > 
 > proc.time()
 [1] 0.939 0.103 1.212 0.000 0.000

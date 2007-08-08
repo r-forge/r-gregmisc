@@ -19,4 +19,4 @@ a.1 <- readBin( con="Alfalfa.xpt",  what=raw(), n=3600 )
 a.2 <- readBin( con="Alfalfa2.xpt", what=raw(), n=3600 )
 
 ## Test that the files are identical
-assert( all(a.1 == a.2) )
+SASxport:::assert( all(a.1 == a.2) )

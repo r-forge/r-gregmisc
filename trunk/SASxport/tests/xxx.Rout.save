@@ -74,8 +74,8 @@ Type 'q()' to quit R.
 > a.1[1089] <- as.raw("0x2e")
 > 
 > ## Test that the files are otherwise identical
-> assert( all(a.1 == a.2) )
-> assert( all(a.1 == a.3) )
+> SASxport:::assert( all(a.1 == a.2) )
+> SASxport:::assert( all(a.1 == a.3) )
 > 
 > 
 > 

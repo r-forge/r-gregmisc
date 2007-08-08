@@ -15,7 +15,7 @@ temp <- data.frame(x=c(1, 2, 3, 4, 5 ),
 print(temp)
 
 write.xport( DATETIME=temp, filename="datetime.xpt")
-temp2 <- read.xport(file="datetime.xpt")
+temp2 <- read.xport(file="datetime.xpt", names.tolower=FALSE)
 
 print(temp2)
 
