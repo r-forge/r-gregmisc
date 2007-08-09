@@ -1,6 +1,6 @@
 
-R version 2.4.1 (2006-12-18)
-Copyright (C) 2006 The R Foundation for Statistical Computing
+R version 2.6.0 Under development (unstable) (2007-08-04 r42421)
+Copyright (C) 2007 The R Foundation for Statistical Computing
 ISBN 3-900051-07-0
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
@@ -15,16 +15,16 @@ Type 'demo()' for some demos, 'help()' for on-line help, or
 'help.start()' for an HTML browser interface to help.
 Type 'q()' to quit R.
 
-*******************************************************
-** This copy of RPro is licensed to:                 **
-** Gregory R. Warnes                                 **
-*******************************************************
-
-
-[Previously saved workspace restored]
-
-> invisible(options(echo = TRUE))
 > library(SASxport)
+
+Attaching package: 'SASxport'
+
+
+	The following object(s) are masked from package:base :
+
+	 units,
+	 units<- 
+
 > 
 > ## manually create a data set
 > abc <- data.frame( x=c(1, 2, NA, NA ), y=c('a', 'B', NA, '*' ) )
@@ -44,11 +44,10 @@ Type 'q()' to quit R.
 +             )
 > 
 > # read the original SAS data file
-> abc.SAS <- read.xport("xxx.xpt")
+> abc.SAS <- read.xport("xxx.xpt", names.tolower=FALSE)
 > 
-> ## read.xport currently doesn't store the format and label attributes...
+> ## read.xport currently doesn't store the format attribute...
 > attr(abc.SAS$X, 'format') <- 'date7.'
-> attr(abc.SAS$Y, 'label')  <- 'character variable'
 > 
 > # create a SAS XPORT file from the SAS data
 > write.xport(abc=abc.SAS,
@@ -78,7 +77,4 @@ Type 'q()' to quit R.
 > SASxport:::assert( all(a.1 == a.3) )
 > 
 > 
-> 
-> proc.time()
-[1] 0.873 0.096 1.027 0.000 0.000
 > 

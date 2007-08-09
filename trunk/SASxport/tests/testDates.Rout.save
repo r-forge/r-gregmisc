@@ -1,6 +1,6 @@
 
-R version 2.4.1 (2006-12-18)
-Copyright (C) 2006 The R Foundation for Statistical Computing
+R version 2.6.0 Under development (unstable) (2007-08-04 r42421)
+Copyright (C) 2007 The R Foundation for Statistical Computing
 ISBN 3-900051-07-0
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
@@ -15,16 +15,16 @@ Type 'demo()' for some demos, 'help()' for on-line help, or
 'help.start()' for an HTML browser interface to help.
 Type 'q()' to quit R.
 
-*******************************************************
-** This copy of RPro is licensed to:                 **
-** Gregory R. Warnes                                 **
-*******************************************************
-
-
-[Previously saved workspace restored]
-
-> invisible(options(echo = TRUE))
 > library(SASxport)
+
+Attaching package: 'SASxport'
+
+
+	The following object(s) are masked from package:base :
+
+	 units,
+	 units<- 
+
 > 
 > ## Create a small data set containing dates, times, and date-times
 > 
@@ -47,7 +47,7 @@ Type 'q()' to quit R.
 5 5 e 1992-02-01 1992-02-01 16:56:26
 > 
 > write.xport( DATETIME=temp, filename="datetime.xpt")
-> temp2 <- read.xport(file="datetime.xpt")
+> temp2 <- read.xport(file="datetime.xpt", names.tolower=FALSE)
 > 
 > print(temp2)
   X Y      DATES   DATETIME
@@ -60,7 +60,4 @@ Type 'q()' to quit R.
 > 
 > identical(temp, temp2)
 [1] FALSE
-> 
-> proc.time()
-[1] 0.889 0.099 0.999 0.000 0.000
 > 
