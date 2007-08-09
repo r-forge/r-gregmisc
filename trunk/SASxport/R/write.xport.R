@@ -51,10 +51,10 @@ write.xport <- function( ... ,
     scat("Done")
 
     if(file==stdout())
-      out <- function(what)
+      out <- function(...)
         {
-          cat("ASCII: ", rawToDisplay(what), "")
-          cat("HEX:   ", what, "")
+          cat("ASCII: ", rawToDisplay(...), "")
+          cat("HEX:   ", ..., "")
         }
     else
       out <- function(...) writeBin( ..., raw(), con=file)

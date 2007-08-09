@@ -21,17 +21,19 @@ read.xport <- function(file,
     sastimeform     <- toupper(c("hhmm","hour","mmss","time"))
     sasdatetimeform <- toupper(c("datetime","tod"))
 
-    if(length(grep('http://', file))) {
-      tf <- tempfile()
-      download.file(file, tf, mode='wb', quiet=TRUE)
-      file <- tf
-    }
-
     if(verbose)
       {
         oldOptionsDebug <- options("DEBUG")
         options(DEBUG=TRUE)
         on.exit(options(DEBUG=oldOptionsDebug))
+      }
+
+    if(length(grep('http://', file))>0 || length(grep('ftp://', file))>0 )
+      {
+        scat("Downloading file...")        
+        tf <- tempfile()
+        download.file(file, tf, mode='wb', quiet=TRUE)
+        file <- tf
       }
 
     scat("Extracting data file information...")

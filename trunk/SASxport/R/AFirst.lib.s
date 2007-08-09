@@ -17,3 +17,9 @@ if(!exists('existsFunction')) {
   existsFunction <- function(...) exists(..., mode='function')
 }
 
+if(.R.) {  
+  ## create some function definitions just to avoid R CMD CHECK warnings
+  timeDate <- function(...) stop("Not Implemented")
+  dates <- function(...) stop("Not Implemented")
+}
+
