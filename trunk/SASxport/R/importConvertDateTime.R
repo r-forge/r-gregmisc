@@ -1,3 +1,9 @@
+##
+## Code originally from Frank Harrell's 'Hmisc' library: 
+##   http://biostat.mc.vanderbilt.edu/twiki/bin/view/Main/Hmisc
+## Copied with permission on 2007-08-04
+##
+
 importConvertDateTime <- 
   function(x, type=c('date','time','datetime'),
            input=c('sas','spss','dataload'), form)

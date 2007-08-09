@@ -1,3 +1,9 @@
+##
+## Code originally from Frank Harrell's 'Hmisc' library: 
+##   http://biostat.mc.vanderbilt.edu/twiki/bin/view/Main/Hmisc
+## Copied with permission on 2007-08-04
+##
+
 makeNames <- function(names, unique=FALSE, allow=NULL)
 {
   ## Runs make.names with exceptions in vector allow

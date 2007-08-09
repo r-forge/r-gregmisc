@@ -1,3 +1,8 @@
+##
+## Code originally from Frank Harrell's 'Hmisc' library: 
+##   http://biostat.mc.vanderbilt.edu/twiki/bin/view/Main/Hmisc
+## Copied with permission on 2007-08-04
+##
 
 ## Determine if variable is a date, time, or date/time variable in R
 ## or S-Plus.  The following 2 functions are used by describe.vector
