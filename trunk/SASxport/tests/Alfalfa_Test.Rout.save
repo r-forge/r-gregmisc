@@ -1,6 +1,6 @@
 
-R version 2.4.1 (2006-12-18)
-Copyright (C) 2006 The R Foundation for Statistical Computing
+R version 2.6.0 Under development (unstable) (2007-08-04 r42421)
+Copyright (C) 2007 The R Foundation for Statistical Computing
 ISBN 3-900051-07-0
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
@@ -15,17 +15,19 @@ Type 'demo()' for some demos, 'help()' for on-line help, or
 'help.start()' for an HTML browser interface to help.
 Type 'q()' to quit R.
 
-*******************************************************
-** This copy of RPro is licensed to:                 **
-** Gregory R. Warnes                                 **
-*******************************************************
-
-
-> invisible(options(echo = TRUE))
 > ## This test demonstrates that write.xport can exactly duplicate an
 > ## existing SAS xport file "Alfalfa.xpt"
 > 
 > library(SASxport)
+
+Attaching package: 'SASxport'
+
+
+	The following object(s) are masked from package:base :
+
+	 units,
+	 units<- 
+
 > 
 > # existing data file
 > SPEC <- read.xport("Alfalfa.xpt")
@@ -44,7 +46,4 @@ Type 'q()' to quit R.
 > 
 > ## Test that the files are identical
 > SASxport:::assert( all(a.1 == a.2) )
-> 
-> proc.time()
-[1] 0.939 0.103 1.212 0.000 0.000
 > 

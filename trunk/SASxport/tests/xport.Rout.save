@@ -27,40 +27,19 @@ Attaching package: 'SASxport'
 
 > 
 > lookup.xport("Alfalfa.xpt")
-$SPEC
-$SPEC$headpad
-[1] 1360
 
-$SPEC$type
-[1] "character" "numeric"   "numeric"   "numeric"   "numeric"   "numeric"  
+SAS xport file
+--------------
+Filename: `Alfalfa.xpt'
 
-$SPEC$width
-[1] 8 8 8 8 8 8
-
-$SPEC$index
-[1] 1 2 3 4 5 6
-
-$SPEC$position
-[1]  0  8 16 24 32 40
-
-$SPEC$name
-[1] "POP"    "SAMPLE" "REP"    "SEEDWT" "HARV1"  "HARV2" 
-
-$SPEC$label
-[1] "" "" "" "" "" ""
-
-$SPEC$format
-[1] "" "" "" "" "" ""
-
-$SPEC$sexptype
-[1] 16 14 14 14 14 14
-
-$SPEC$tailpad
-[1] 0
-
-$SPEC$length
-[1] 40
-
+Variables in data set `SPEC':
+            dataset   name      type format width label nobs
+SPEC.POP       SPEC    POP character            8         40
+SPEC.SAMPLE    SPEC SAMPLE   numeric            8         40
+SPEC.REP       SPEC    REP   numeric            8         40
+SPEC.SEEDWT    SPEC SEEDWT   numeric            8         40
+SPEC.HARV1     SPEC  HARV1   numeric            8         40
+SPEC.HARV2     SPEC  HARV2   numeric            8         40
 
 > 
 > Alfalfa <- read.xport("Alfalfa.xpt")
@@ -84,40 +63,15 @@ $SPEC$length
 > ## test data provided by FRohde@birchdavis.com
 > 
 > lookup.xport("test.xpt")
-$TEST
-$TEST$headpad
-[1] 800
 
-$TEST$type
-[1] "numeric" "numeric"
+SAS xport file
+--------------
+Filename: `test.xpt'
 
-$TEST$width
-[1] 8 8
-
-$TEST$index
-[1] 1 2
-
-$TEST$position
-[1] 0 8
-
-$TEST$name
-[1] "I" "K"
-
-$TEST$label
-[1] "" ""
-
-$TEST$format
-[1] "" ""
-
-$TEST$sexptype
-[1] 14 14
-
-$TEST$tailpad
-[1] 48
-
-$TEST$length
-[1] 12
-
+Variables in data set `TEST':
+       dataset name    type format width label nobs
+TEST.I    TEST    I numeric            8         12
+TEST.K    TEST    K numeric            8         12
 
 > testdata <- read.xport("test.xpt")
 > summary(testdata)
