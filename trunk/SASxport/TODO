@@ -1,0 +1,17 @@
+- Write replacements for SAS's REVERSE function, which corrects for
+  differences in endianness, and cnxptieee function, which is used to
+  convert from the IBM floating point representation to the IEEE
+  representation.
+
+- Write test routines for very large files, particulary very large
+  files with columns contiaining almost all missing values.
+
+- Test that created files are properly read by SAS, particulary when
+  the SAS version and OS version are set to the default values I've
+  provided.
+
+- Check function for 64 bit versions of R.  I suspect that there may
+  be variable size issues for some int fields for write.xport().
+
+- 
+

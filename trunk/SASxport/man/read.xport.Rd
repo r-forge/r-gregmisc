@@ -17,8 +17,8 @@ read.xport(file,
            )
 }
 \arguments{
-  \item{file}{name of a file containing the SAS transport file. May be a
-    URL beginning with \code{http://}. 
+  \item{file}{Character string specifying the name or URL of a SAS XPORT
+    file.
   }
   \item{force.integer}{Logical flag indicating whether integer-valued
     variables should be returned as integers (\code{TRUE}) or doubles

@@ -39,3 +39,7 @@ S3method("units<-", default)
 S3method("formats<-", default)
 S3method("iformat<-", default)
 
+S3method(print, lookup.xport)
+S3method(summary, lookup.xport)
+S3method(print, summary.lookup.xport)
+
