@@ -36,6 +36,13 @@ read.xport <- function(file,
         file <- tf
       }
 
+    scat("Checking if the specified file has the appropriate header")
+    xport.file.header <- "HEADER RECORD*******LIBRARY HEADER RECORD!!!!!!!000000000000000000000000000000  "
+    file.header <- readBin( file, what=character(0), n=1, size=nchar(xport.file.header) )
+    file.header <- substr(file.header, start=1, stop=nchar(xport.file.header) )
+    if( !identical(xport.file.header, file.header) )
+      stop("The specified file does not start with a SAS xport file header!")
+           
     scat("Extracting data file information...")
     dsinfo <- foreign:::lookup.xport(file)
 
