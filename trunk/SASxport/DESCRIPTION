@@ -6,14 +6,21 @@ Date: 2007-07-28
 Author: Gregory R. Warnes <greg@random-technologies-llc.com>,
         includes code from Frank E. Harrell, Jr.'s Hmisc package.   
 Maintainer: Gregory R. Warnes <greg@random-technologies-llc.com>
-Description: This package provides functions to read, list contents of, and  
-             write SAS export files.  This package was created by Random 
-             Technologies LLC <http://random-technologies-llc.com> with funding
-             by Metrum Institute <http://metruminstitute.org>. 
+Description: This package provides functions for both reading, listing
+	     contents of, and writing SAS xport format files. Reading
+	     and writing of both individual and sets of data frames
+	     are supported.   Further, a mechanism has been provided
+	     for customizing how variables of different data types are
+	     stored.
+	     .
+	     This package was created by Random Technologies LLC
+	     <http://random-technologies-llc.com> with funding by
+	     Metrum Institute <http://metruminstitute.org>.  
              .
              Technical support contracts and other services for for R, this 
              package, and other packages are available from Random Technologies
              LLC <http://random-technologies-llc.com>.
+
 License: GPL 2.0 or later
 Imports: methods, foreign, chron
 
