@@ -4,7 +4,10 @@ Title: Read and write SAS export files
 Version: 0.99.1
 Date: 2007-07-28
 Author: Gregory R. Warnes <greg@random-technologies-llc.com>,
-        includes code from Frank E. Harrell, Jr.'s Hmisc package.   
+        includes code from Frank E. Harrell, Jr.'s Hmisc package,
+        and floating point conversion code from SAS techical support
+        document TS-140 "THE RECORD LAYOUT OF A DATA SET IN SAS"
+        TRANSPORT (XPORT) FORMAT.
 Maintainer: Gregory R. Warnes <greg@random-technologies-llc.com>
 Description: This package provides functions for both reading, listing
 	     contents of, and writing SAS xport format files. Reading
@@ -20,7 +23,6 @@ Description: This package provides functions for both reading, listing
              Technical support contracts and other services for for R, this 
              package, and other packages are available from Random Technologies
              LLC <http://random-technologies-llc.com>.
-
 License: GPL 2.0 or later
 Imports: methods, foreign, chron
 

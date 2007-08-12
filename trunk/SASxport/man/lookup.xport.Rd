@@ -10,12 +10,12 @@
 \usage{
 lookup.xport(file)
 \method{print}{lookup.xport}(x, ...)
-\method{summary}{lookup.xport}(x, ...)
+\method{summary}{lookup.xport}(object, ...)
 \method{print}{summary.lookup.xport}(x, ...)
 }
 \arguments{
   \item{file}{Character string specifying the name or URL of a SAS XPORT file.}
-  \item{x}{Object to be printed or summarized}
+  \item{x, object}{Object to be printed or summarized}
   \item{...}{Optional arguments}
 }
 \value{
