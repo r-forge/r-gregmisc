@@ -23,13 +23,13 @@ void ieee2xpt(unsigned char *ieee,  unsigned char *xport);
 int get_native(); 
 #endif 
 
-#ifdef BIG_ENDIAN
-#define REVERSE(a,b) 
-#endif 
+/* #ifdef BIG_ENDIAN */
+/* #define REVERSE(a,b)  */
+/* #endif  */
 
-#ifdef LITTLE_ENDIAN 
-#define DEFINE_REVERSE
-void REVERSE();
-#endif 
+/* #ifdef LITTLE_ENDIAN  */
+/* #define DEFINE_REVERSE */
+/* void REVERSE(); */
+/* #endif  */
 
 #endif /* CNXPTIEE */

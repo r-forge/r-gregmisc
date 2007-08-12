@@ -151,6 +151,8 @@ int test_zeroCopy(int bufsize)
   return 0;
 }
 
+
+
 void doTest()
 {
   /* small buffer */
@@ -167,5 +169,9 @@ void doTest()
 
   test_blankCopy(BIG);
   test_zeroCopy(BIG);
+
+
+  /* test reverse */
+  test_reverse();
 }
   

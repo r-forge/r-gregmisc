@@ -27,12 +27,27 @@
 
 #include <R.h>
 #include <Rinternals.h>
+#include <sys/types.h>
+
 
 /*****
  * Useful constants 
  *****/
 
 #define MISSING 0x2e000000  /* Standard SAS missing value: '.' */
+
+/*****
+  REVERSE macro, used as a wrapper for the reverse() function to avoid
+  compiling/calling it on little-endian.
+ *****/
+
+#ifdef BIG_ENDIAN
+#  define REVERSE(a,b) reverse( (u_char*) a, (size_t) b)
+#elif defined(LITTLE_ENDIAN)
+#  define REVERSE(a,b) 
+#else 
+#  define REVERSE(a,b) reverse( (u_char*) a, (size_t) b)
+#endif
 
 /*****
  * Useful macro functions
@@ -151,5 +166,8 @@ void fill_space(int *type, int *width);
 SEXP getRawBuffer();
 
 void doTest();
+
+void reverse( u_char *intp, size_t size);
+
 
 #endif /* FIELDS_H */
