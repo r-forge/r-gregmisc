@@ -75,7 +75,7 @@ balloonplot.default <- function(x,y,z,
   
   scale.method <- match.arg(scale.method)
 
-  if( any(z < 0 ) )
+  if( any(z < 0, na.rm=TRUE ) )
     warning("z value(s) below zero detected.",
             " No balloons will be displayed for these cells.")
   
