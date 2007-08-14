@@ -31,9 +31,13 @@ balloonplot.default <- function(x,y,z,
                                 dotsize=2/max(strwidth(19),strheight(19)),
                                 dotchar=19,
                                 dotcolor="skyblue",
+                                text.size=1,
+                                text.color=par("fg"),
                                 main,
                                 label=TRUE,
                                 label.digits=2,
+                                label.size=1,
+                                label.color=par("fg"),
                                 scale.method=c("volume","diameter"),
                                 colsrt=par("srt"),
                                 rowsrt=par("srt"),
@@ -146,7 +150,7 @@ balloonplot.default <- function(x,y,z,
   ####
   ## Function to scale circles to fill the containing box
   ####
-  scale <- function(X, min=0, max=16, scale.method)
+  myscale <- function(X, min=0, max=16, scale.method)
     {
       if(scale.method=="volume")
         {
@@ -154,7 +158,12 @@ balloonplot.default <- function(x,y,z,
           X <- sqrt(X)
         }
 
-      X <- min + (X/max(X, na.rm=TRUE) * (max - min) )
+      # put min to 0
+      X <- (X-min(X, na.rm=TRUE))
+      # put max to 1
+      X <- X / max(X, na.rm=TRUE )
+      # now to [min,max]
+      X <- min + X  * (max - min) 
       cin.x <- par("cin")[1]
       cin.y <- par("cin")[2]
       if(cin.x < cin.y) X <- X * cin.x/cin.y
@@ -205,7 +214,7 @@ balloonplot.default <- function(x,y,z,
   
   plot(x=nlabels.y*rowmar+0.25 + as.numeric(ztab$x) - 1,
        y=nlevels(y) - as.numeric(ztab$y) + 1,
-       cex=scale(ztab$z, max=dotsize, scale.method=scale.method),
+       cex=myscale(ztab$z, max=dotsize, scale.method=scale.method),
        pch=dotchar, # plot character
        col=as.character(ztab$dotcolor), # dot color
        xlab="",
@@ -237,7 +246,9 @@ balloonplot.default <- function(x,y,z,
            labels=format(c(sumz, rowsumz), digits=label.digits)[-1],
            font=1,
            cex=par("cex")*0.75,
-           adj=c(0.5,0.0)
+           adj=c(0.5,0.0),
+           col=text.color,
+           cex=text.size
            )
 
       ## row totals
@@ -249,7 +260,9 @@ balloonplot.default <- function(x,y,z,
            labels=rowlabs,
            font=1,
            cex=par("cex")*0.75,
-           adj=c(1.0,0.5)           
+           adj=c(1.0,0.5),
+           col=text.color,
+           cex=text.size           
            )
 
       ## overall total
@@ -259,7 +272,9 @@ balloonplot.default <- function(x,y,z,
            labels=sumz,
            font=1,
            cex=par("cex")*0.75,
-           adj=c(1.0,0.0)           
+           adj=c(1.0,0.0),
+           col=text.color,
+           cex=text.size           
            )
     }
      
@@ -331,7 +346,9 @@ balloonplot.default <- function(x,y,z,
            y= y,
            labels=undupe(xlabs[,i]),
            srt=colsrt,
-           font=1
+           font=1,
+           col=text.color,
+           cex=text.size
            )
     }
 
@@ -345,7 +362,9 @@ balloonplot.default <- function(x,y,z,
            x= (i-0.5)*rowmar-0.5,
            labels=undupe(ylabs[,i]),
            srt=rowsrt,
-           font=1
+           font=1,
+           col=text.color,
+           cex=text.size
            )
     }
 
@@ -359,7 +378,9 @@ balloonplot.default <- function(x,y,z,
          labels=ynames,
          srt=colsrt,
          font=2,
-         adj=c(0.5,0.0)
+         adj=c(0.5,0.0),
+         col=text.color,
+         cex=text.size
          )
   else
     text( 
@@ -368,7 +389,9 @@ balloonplot.default <- function(x,y,z,
          labels=ylab,
          srt=colsrt,
          font=2,
-         adj=c(0.5,0.0)
+         adj=c(0.5,0.0),
+         col=text.color,
+         cex=text.size
          )
 
   ####
@@ -381,7 +404,9 @@ balloonplot.default <- function(x,y,z,
          labels=xnames,
          srt=colsrt,
          font=2,
-         adj=c(1,0.5)
+         adj=c(1,0.5),
+         col=text.color,
+         cex=text.size
          )
   else
     text(
@@ -390,7 +415,9 @@ balloonplot.default <- function(x,y,z,
          labels=xlab,
          srt=colsrt,
          font=2,
-         adj=c(1,0.5)
+         adj=c(1,0.5),
+         col=text.color,
+         cex=text.size
          )
 
   ###
@@ -426,9 +453,10 @@ balloonplot.default <- function(x,y,z,
     text(x=as.numeric(ztab$x[indiv])+ nlabels.y*rowmar - 0.75,     # as.numeric give numeric values
          y=ny - as.numeric(ztab$y[indiv]) + 1,
          labels=format(ztab$z[indiv], digits=label.digits),       # label value
-         col="black", # text color
          font=2,
-         adj=c(0.5,0.5)
+         adj=c(0.5,0.5),
+         col=label.color,
+         cex=label.size
          )
   }
   # put a nice title

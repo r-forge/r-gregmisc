@@ -18,9 +18,13 @@ balloonplot(x, ...)
                                 dotsize=2/max(strwidth(19),strheight(19)),
                                 dotchar=19,
                                 dotcolor="skyblue",
+                                text.size=1,
+                                text.color=par("fg"),
                                 main,
                                 label=TRUE,
                                 label.digits=2,
+                                label.size=1,
+                                label.color=par("fg"),
                                 scale.method=c("volume","diameter"),
                                 colsrt=par("srt"),
                                 rowsrt=par("srt"),
@@ -54,10 +58,13 @@ balloonplot(x, ...)
     page for the points function for symbol codes.}
   \item{dotcolor}{Scalar or vector specifying the color(s) of the dots in
     the plot.}
+  \item{text.size, text.color}{Character size and color for row and
+    column headers}
   \item{main}{Plot title text.}
   \item{label}{Boolean flag indicating whether the actual value of the
     elements should be shown on the plot.}
   \item{label.digits}{Number of digits used in formatting value labels.}
+  \item{label.size, label.color}{ Character size and color for value labels.}
   \item{scale.method}{Method of scaling the sizes of the dot, either
     "volume" or "diameter". See below.}
   \item{rowsrt, colsrt}{Angle of rotation for row and column labels.}
