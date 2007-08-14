@@ -65,12 +65,6 @@ balloonplot.default <- function(x,y,z,
   else
      ynames <- names(y)
 
-  if(missing(xlab))
-    xlab <-  paste( xnames, collapse=", " )
-
-  if(missing(ylab))
-    ylab <-  paste( ynames, collapse=", " )
-  
   ####
   ## Handle arguments
   ####
@@ -358,26 +352,46 @@ balloonplot.default <- function(x,y,z,
   ####
   ## Column headers for row labels
   ####
-  text(
-       x=((1:length(ylabs))-0.5)*rowmar-0.5,
-       y=ny+0.5,
-       labels=ynames,
-       srt=colsrt,
-       font=2,
-       adj=c(0.5,0.0)
-       )
+  if(missing(ylab))
+    text(
+         x=((1:length(ylabs))-0.5)*rowmar-0.5,
+         y=ny+0.5,
+         labels=ynames,
+         srt=colsrt,
+         font=2,
+         adj=c(0.5,0.0)
+         )
+  else
+    text( 
+         x=((1:length(ylab))-0.5)*rowmar-0.5,
+         y=ny+0.5,
+         labels=ylab,
+         srt=colsrt,
+         font=2,
+         adj=c(0.5,0.0)
+         )
 
   ####
   ## Row headers for column labels
   ####
-  text(
-       x= nlabels.y*rowmar - 0.25 - strwidth(','),
-       y= ny + 0.75 + ((nlabels.x:1) - 1 + .5)*colmar,
-       labels=xnames,
-       srt=colsrt,
-       font=2,
-       adj=c(1,0.5)
-       )
+  if(missing(xlab))
+    text(
+         x= nlabels.y*rowmar - 0.25 - strwidth(','),
+         y= ny + 0.75 + ((nlabels.x:1) - 1 + .5)*colmar,
+         labels=xnames,
+         srt=colsrt,
+         font=2,
+         adj=c(1,0.5)
+         )
+  else
+    text(
+         x= nlabels.y*rowmar - 0.25 - strwidth(','),
+         y= ny + 0.75 + ((length(xlab):1) - 1 + .5)*colmar,
+         labels=xlab,
+         srt=colsrt,
+         font=2,
+         adj=c(1,0.5)
+         )
 
   ###
   ## add borders to row and column headers
