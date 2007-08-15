@@ -13,10 +13,12 @@ Author: Gregory R. Warnes <greg@random-technologies-llc.com>,
   includes code from Frank E. Harrell, Jr.'s Hmisc package,
   and floating point conversion code from SAS techical support
   document TS-140 "THE RECORD LAYOUT OF A DATA SET IN SAS
-  TRANSPORT (XPORT) FORMAT." -- 
+  TRANSPORT (XPORT) FORMAT." 
+  -- 
   Unless otherwise noted, the contents of this package are
   (c) 2007 by Random Technologies LLC 
-  <http://random-technologies-llc.com>  --
+  <http://random-technologies-llc.com>  
+  --
   This creation of this package was funded by
   Metrum Institute <http://metruminstitute.org>. 
 Maintainer: Gregory R. Warnes <greg@random-technologies-llc.com>
