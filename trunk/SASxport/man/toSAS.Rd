@@ -7,7 +7,7 @@
 \alias{toSAS.POSIXt}
 \alias{toSAS.Date}
 \alias{toSAS.default}
-\title{Convert R data object for storage in SAS xport file}
+\title{Convert R Data Object for Storage in a SAS XPORT File}
 \description{
   The \code{toSAS} methods control how R objects and data types are
   represented when stored into a SAS xport format file using
@@ -30,13 +30,15 @@ toSAS(x, format)
 \details{
   To add support for a new object type, create an appropriate
   \code{toSAS} method.  This method must convert the object data to
-  either an object of type "numeric" or type "character", and should add
-  an attribute named "format" to the object providing an appropriate SAS
-  format string or "" (indicating the default SAS format).
+  either an object of type "numeric" (double-precision floating point)
+  or type "character", the only basic types permitted by the xport
+  format, and should add an attribute named "format" to the object
+  providing an appropriate SAS format string or "" (indicating the
+  default SAS format).
 }
 \value{
   A vector of type "character" or of type "numeric", with an attribute
-  named "lable" containing the SAS format specification.
+  named "label" containing the SAS format specification.
 }
 \author{ Gregory R. Warnes \email{greg@random-technologies-llc.com} }
 \seealso{
@@ -47,14 +49,23 @@ toSAS(x, format)
 \examples{
 
 ####
-## See how an R date object will be stored in a SAS xport file:
+## See how an R date/time object will be stored in a SAS xport file:
 ####
 
-dateObj <- ISOdate(2007,08,01,10,14,37)
+# Date and time
+dateTimeObj <- ISOdate(2007,08,01,10,14,37)
+class(dateTimeObj)
+dateTimeObj
+
+sasDateTimeObj <- toSAS(dateTimeObj)
+sasDateTimeObj
+
+# Now just the date portion
+dateObj <- as.Date(dateTimeObj)
 dateObj
 
-sasObj <- toSAS(dateObj)
-str(sasObj)
+sasDateObj <- toSAS(dateObj)
+sasDateObj
 
 ####
 ## Create a new R object class based on factor to hold color names
@@ -68,11 +79,10 @@ colorFactor <- function(x) # constructor
 
 ## create one and look at it
 cf <- colorFactor( c("Red","Red","Blue",NA) )
-
+cf
 
 ## See how it will be represented in a SAS xport file
 toSAS(cf)
-class(toSAS(cf))
 
 ## Create a new conversion function to store as a RGB hex value
 toSAS.colorFactor <- function(x, format="")

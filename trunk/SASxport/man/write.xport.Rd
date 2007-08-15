@@ -1,6 +1,6 @@
 \name{write.xport}
 \alias{write.xport}
-\title{Write data to a SAS XPORT file}
+\title{Write Data to a SAS XPORT File}
 \description{
   This function writes one or more data frames into a SAS XPORT format
   library file.
@@ -28,35 +28,47 @@ write.xport(..., filename = "", verbose = FALSE, sasVer = "7.00",
       0-9, and '\_' are converted to '\_'.
     \item Factor and character variables are stored as
       characters.
-    \item All numeric variables are stored as floating point values.
+    \item All numeric variables are stored as double-precision floating
+      point values utilizing the IBM mainframe double precision floating
+      point format (see the reference).
+    \item Date and time variables are either converted to number of days since
+      1960-01-01 (date only), or number of seconds since
+      1960-01-01:00:00:00 GMT (date-time variables).  
     \item Missing values are converted to the standard SAS missing value
       '.'
   }
 
   In addition, the SAS XPORT format allows each variable to have a
   corresponding label, display format, and input format.  To set these
-  values, add the   attribute 'label', 'format', or 'iformat' to data
-  frame variables. (See the example section.) 
+  values, add the   attribute 'label', 'format', or 'iformat' to
+  individual data frame variables. (See the example section.)
+
+  The actual translation of R objects to objects appropriate for SAS is
+  handled by the \code{\link{toSAS}} generic and associated methods.   
 }
 \value{
   No return value
 }
 \references{
   SAS Technical Support document TS-140: ``The Record Layout of a
-  Data Set in SAS Transport (XPORT) Format'' available at <URL:
-  http://ftp.sas.com/techsup/download/technote/ts140.html>.
+  Data Set in SAS Transport (XPORT) Format'' available at
+  \url{http://ftp.sas.com/techsup/download/technote/ts140.html}.
 }
 \author{Gregory R. Warnes \email{greg@random-technologies-llc.com}}
 \note{
-  Creation of this code was funded by Metrum Research.
+   This package was created by Random Technologies LLC
+   \url{http://random-technologies-llc.com}
+   with funding by Metrum Institute
+   \url{http://metruminstitute.org}. 
 
   Technical support contracts for this and other R packages are available
   from Random Technologies LLC \url{http://random-technologies-llc.com}.
 
 }
 \seealso{
-  \code{\link[foreign]{read.xport}},
-  \code{\link[foreign]{lookup.xport}}  
+  \code{\link{toSAS}},
+  \code{\link{lookup.xport}},
+  \code{\link{read.xport}}
 }
 \examples{
 

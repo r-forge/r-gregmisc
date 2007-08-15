@@ -1,6 +1,6 @@
 \name{read.xport}
 \alias{read.xport}
-\title{Import SAS XPORT files}
+\title{Import a SAS XPORT File}
 \description{
   Read a SAS XPORT format file and return the contained dataset(s).
 }
@@ -76,7 +76,7 @@ read.xport(file,
     \item SAS date, time, and date/time variables are converted respectively to \code{Date}, 
     POSIX, or \code{chron} objects
     
-    \item SAS labels are stored in "label" attributes on each variables
+    \item SAS labels are stored in "label" attributes on each variable
     
     \item SAS formats are stored in "format" attributes on each variable
     
@@ -84,7 +84,7 @@ read.xport(file,
       \code{force.integer} is \code{FALSE}
   }
 
-  If the file incoudes the output of \code{PROC FORMAT CNTLOUT=},
+  If the file includes the output of \code{PROC FORMAT CNTLOUT=},
   variables having customized label formats will be converted to \code{factor}
   objects with appropriate labels.
 }

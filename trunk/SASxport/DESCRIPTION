@@ -1,28 +1,26 @@
 Package: SASxport
 Type: Package
-Title: Read and write SAS export files
-Version: 0.99.1
-Date: 2007-07-28
+Title: Read and Write SAS XPORT Files
+Version: 0.99.2
+Date: 2007-08-15
+Description: This package provides functions for reading, listing
+  the contents of, and writing SAS xport format files. 
+  The functions support reading and writing of either
+  individual data frames or sets of data frames.  Further,
+  a mechanism has been provided for customizing how
+  variables of different data types are stored. 
 Author: Gregory R. Warnes <greg@random-technologies-llc.com>,
-        includes code from Frank E. Harrell, Jr.'s Hmisc package,
-        and floating point conversion code from SAS techical support
-        document TS-140 "THE RECORD LAYOUT OF A DATA SET IN SAS"
-        TRANSPORT (XPORT) FORMAT.
+  includes code from Frank E. Harrell, Jr.'s Hmisc package,
+  and floating point conversion code from SAS techical support
+  document TS-140 "THE RECORD LAYOUT OF A DATA SET IN SAS
+  TRANSPORT (XPORT) FORMAT." -- 
+  Unless otherwise noted, the contents of this package are
+  (c) 2007 by Random Technologies LLC 
+  <http://random-technologies-llc.com>  --
+  This creation of this package was funded by
+  Metrum Institute <http://metruminstitute.org>. 
 Maintainer: Gregory R. Warnes <greg@random-technologies-llc.com>
-Description: This package provides functions for both reading, listing
-	     contents of, and writing SAS xport format files. Reading
-	     and writing of both individual and sets of data frames
-	     are supported.   Further, a mechanism has been provided
-	     for customizing how variables of different data types are
-	     stored.
-	     .
-	     This package was created by Random Technologies LLC
-	     <http://random-technologies-llc.com> with funding by
-	     Metrum Institute <http://metruminstitute.org>.  
-             .
-             Technical support contracts and other services for for R, this 
-             package, and other packages are available from Random Technologies
-             LLC <http://random-technologies-llc.com>.
 License: GPL 2.0 or later
-Imports: methods, foreign, chron
-
+Imports: foreign, chron
+Enhances: foreign
+URL: http://random-technologies-llc.com, http://metruminstitute.org

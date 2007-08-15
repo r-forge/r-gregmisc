@@ -3,9 +3,9 @@
 \alias{print.lookup.xport}
 \alias{summary.lookup.xport}
 \alias{print.summary.lookup.xport}
-\title{Lookup Information on a SAS XPORT Format Library}
+\title{Describe the Contents of an SAS XPORT File}
 \description{
-  Describe the contents of an SAS XPORT format file.
+  Describe the contents of an SAS XPORT file.
 }
 \usage{
 lookup.xport(file)
@@ -19,11 +19,10 @@ lookup.xport(file)
   \item{...}{Optional arguments}
 }
 \value{
-  \code{lookup.xport} returs a list with one component for each dataset
+  \code{lookup.xport} returns a list with one component for each dataset
   in the XPORT format library.
 
-  \code{summary.lookup.xport} returns a
-  single data frame containing the following component 
+  \code{summary.lookup.xport} returns a single data frame containing:
   \item{dataset}{ Dataset name,}
   \item{name}{ Variable name,}
   \item{type}{ Type of variable (one of 'character' or 'numeric'),}
@@ -36,9 +35,9 @@ lookup.xport(file)
 \details{
   The   \code{lookup.xport} function is a simple wrapper for the
   \code{\link[foreign]{lookup.xport}} function  provided by the
-  \code{foreign} library.  The wrapped adds the ability to handle URL's,
+  \code{foreign} library.  The wrapper adds the ability to handle URL's,
   and returns an object of class  \code{lookup.xport} for which
-  appropriate \code{print}, and \code{summary} functions are provide. 
+  appropriate \code{print}, and \code{summary} functions are provided. 
 } 
 \seealso{
   For complete documentation of \code{lookup.xport} see the manual page
@@ -54,7 +53,7 @@ lookup.xport("xxx.xpt")
 url <- 'http://biostat.mc.vanderbilt.edu/cgi-bin/viewvc.cgi/*checkout*/Hmisc/trunk/tests/test2.xpt'
 w <- lookup.xport(url)
 
-# display the infromation (calls 'print.lookup.xport')
+# display the information (calls 'print.lookup.xport')
 w
 
 # names of data sets

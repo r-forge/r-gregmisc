@@ -22,7 +22,7 @@
 
 
 \title{
-Set or Retreive the label, format, iformat, or units Attribute of a Vector  
+Set or Retreive the 'label', 'format', 'iformat', or 'units' Attribute of a Vector  
 }
 \description{
   Sets or retrieves the \code{"label"}, \code{"format"},
@@ -59,7 +59,8 @@ iformat(x) <- value
 }
 \author{Gregory R. Warnes \email{greg@random-techologies-llc.com} based
   on code from the \code{Hmisc} library by Frank E. Harrell, Jr.}
-\seealso{\code{\link{label}}}
+%\seealso{
+%}
 \examples{
 
 fail.time <- c(10,20)
