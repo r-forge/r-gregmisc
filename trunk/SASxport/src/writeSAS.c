@@ -2,7 +2,9 @@
  *
  *    writeSAS.c: Routines for writing SAS XPT formatted files
  *
- *    Copyright (C) 2007  Gregory R. Warnes
+ *    Author:  Gregory R. Warnes <greg@random-technologies-llc.com>
+ *
+ *    Copyright (C) 2007  Random Technologies LLC
  * 
  *    This program is free software; you can redistribute it and/or modify
  *    it under the terms of the GNU General Public License as published by
@@ -27,10 +29,8 @@
 #include <R.h>
 #include <Rinternals.h>
 
-extern int cnxptiee(char *from, int fromtype, char *to, int totype);
-
 #include "writeSAS.h"
-//#include "cnxptiee.h"
+
 
 
 
@@ -38,7 +38,9 @@ extern int cnxptiee(char *from, int fromtype, char *to, int totype);
 /* Fill <target> buffer with <len> blanks without any terminating nulls */
 void blankFill(char *target, int len)
 {
-  for(int i=0; i<(len); i++) 
+  int i;
+
+  for(i=0; i<(len); i++) 
     target[i]=' ';
 }
 
@@ -52,7 +54,7 @@ void blankCopy(char *target, int len, char *source)
   int i;
   for(i=0; i<copyLen; i++)
     target[i] = source[i];
-  for(;i<len;i++)
+  for(;i<len;i++)  /* Pick up the existing value if i */
     target[i] = ' ';
 }
 
@@ -60,7 +62,9 @@ void blankCopy(char *target, int len, char *source)
 /* Fill <target> buffer with <len> blanks without any terminating nulls */
 void zeroFill(char *target, int len)
 {
-  for(int i=0; i<(len); i++) 
+  int i;
+
+  for(i=0; i<(len); i++) 
     target[i]=0;
 }
 
@@ -74,7 +78,7 @@ void zeroCopy(char *target, int len, char *source)
   int i;
   for(i=0; i<copyLen; i++)
     target[i] = source[i];
-  for(;i<len;i++)
+  for(;i<len;i++)   /* Pick up the existing value if i */
     target[i] = 0;
 }
 
@@ -299,7 +303,11 @@ void fill_numeric_field(
 			) 
 {
   /* convert to IBM floating point */
-  cnxptiee( (char *) value, 0, raw_buffer , 1 );
+  
+  reverse( (unsigned char*) value, sizeof(double) );
+  ieee2ibm( (unsigned char *) raw_buffer, (unsigned char *) value, 1);
+
+  //cnxptiee( (char *) value, 0, raw_buffer , 1 );
 
   /* Set size for return */
   raw_buffer_used = 8;

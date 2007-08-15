@@ -37,12 +37,6 @@
    The \code{write.xport} function also allows the user to override the
    operating system type and SAS version information, as well as object
    creation and modification times.
-  
-   This package was created by Random Technologies LLC
-   \url{http://random-technologies-llc.com} 
-   with funding from Metrum Institute
-   \url{http://metruminstitute.org}. 
-
 }
 \section{Index}{
 \preformatted{
@@ -51,22 +45,34 @@ lookup.xport            Lookup Information on a SAS XPORT Format
 read.xport              Import SAS XPORT files
 toSAS.default           Convert R data object for storage in SAS 
                         xport file
-units                   Set or Retreive the label, format, 
+units                   Set or Retrieve the label, format, 
                         iformat, or units Attribute of a Vector
 write.xport             Write data to a SAS XPORT file
 }
 }
 \author{
-  Gregory R. Warnes \email{greg@random-technologies-llc.com},
-  includes code from Frank E. Harrell, Jr.'s Hmisc package,
-  and from  SAS techical support document TS-140
-  "THE RECORD LAYOUT OF A DATA SET IN
-  SAS TRANSPORT (XPORT) FORMAT"
-  \url{http://support.sas.com/techsup/technote/ts140.html}
+  Unless otherwise noted, the contents of this package were written by
+  Gregory R. Warnes \email{greg@random-technologies-llc.com}, are
+  Copyright (c) 2007 by Random Technologies LLC
+  \url{http://random-technologies-llc.com}, and are provided under the
+  terms of the GNU General Public License, version 2.0 or later. 
+
+  The file 'htond.c' is extracted from BRL-CAD
+  \url{http://www.brlcad.org/}, written by Michael John Muuss, and is 
+  Copyright (c) 2004-2007 United States Government as represented by
+  the U.S. Army Research Laboratory, and is utilized and redistributed
+  under the terms of the  GNU Lesser General Public License, version 2.1.
+
+  The files 'AFirst.lib.s', 'all.is.numeric.R',
+  'importConvertDateTime.R', 'in.opererator.R', 'makeNames.R', 
+  'read.xport.R', and 'testDateTime.R' are copied or adapted from the
+  'Hmisc' package created by Frank E. Harrell, Jr. 
+  \email{f.harrell@vanderbilt.edu}, and are utilized and redistributed under
+  the terms of the GNU General Public License, version 2.0 or later.
   }
-\section{Copyright}{
-  Unless otherwise noted, the contents of this package are
-  (c) 2007 by Random Technologies LLC.
+\section{Funding}{
+  This creation of this package was funded by Metrum Institute
+  \url{http://metruminstitute.org}.
   }
 \section{Maintainer}{
   Gregory R. Warnes \email{greg@random-technologies-llc.com}

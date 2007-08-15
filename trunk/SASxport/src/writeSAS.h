@@ -2,7 +2,9 @@
  *
  *    writeSAS.h: Routines for writing SAS XPT formatted files
  *
- *    Copyright (C) 2007  Gregory R. Warnes
+ *    Author:  Gregory R. Warnes <greg@random-technologies-llc.com>
+ *
+ *    Copyright (C) 2007  Random Technologies LLC
  * 
  *    This program is free software; you can redistribute it and/or modify
  *    it under the terms of the GNU General Public License as published by
@@ -35,6 +37,19 @@
  *****/
 
 #define MISSING 0x2e000000  /* Standard SAS missing value: '.' */
+
+/*****
+  REVERSE macro, used as a wrapper for the reverse() function to avoid
+  compiling/calling it on little-endian.
+ *****/
+
+/* #ifdef BIG_ENDIAN */
+/* #  define REVERSE(a,b)  */
+/* #elif defined(LITTLE_ENDIAN) */
+/* #  define REVERSE(a,b) reverse( (unsigned char*) a, (size_t) b) */
+/* #else  */
+#  define REVERSE(a,b) reverse( (unsigned char*) a, (size_t) b)
+/*#endif*/
 
 /*****
  * Useful macro functions
@@ -153,5 +168,8 @@ void fill_space(int *type, int *width);
 SEXP getRawBuffer();
 
 void doTest();
+
+void reverse( unsigned char *intp, size_t size);
+void ieee2ibm(register unsigned char *out, register const unsigned char *in, int count);
 
 #endif /* FIELDS_H */
