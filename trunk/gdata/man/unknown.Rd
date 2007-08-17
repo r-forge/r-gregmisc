@@ -2,7 +2,7 @@
 %--------------------------------------------------------------------------
 % What: Change given unknown value to NA and vice versa man page
 % $Id$
-% Time-stamp: <2006-11-01 00:15:08 ggorjan>
+% Time-stamp: <2007-08-17 01:05:36 ggorjan>
 %--------------------------------------------------------------------------
 
 \name{unknownToNA}
@@ -46,7 +46,7 @@ NAToUnknown(x, unknown, force=FALSE, call.=FALSE, \ldots)
 }
 
 \arguments{
-  \item{x}{generic, object with \code{NA}}
+  \item{x}{generic, object with unknown value(s)}
   \item{unknown}{generic, value used instead of \code{NA}}
   \item{warning}{logical, issue warning if \code{x} already has \code{NA}}
   \item{force}{logical, force to apply already existing value in \code{x}}
@@ -155,6 +155,7 @@ isUnknown(xList, unknown=tmp)
 }
 
 \keyword{manip}
+\keyword{NA}
 
 %--------------------------------------------------------------------------
 % unknown.Rd ends here
