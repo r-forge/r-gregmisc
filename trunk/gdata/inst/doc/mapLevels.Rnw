@@ -9,7 +9,7 @@
 \bibliographystyle{abbrvnat}
 
 \usepackage{Sweave}
-
+\SweaveOpts{strip.white=all, keep.source=TRUE}
 
 \begin{document}
 
@@ -49,23 +49,11 @@ or \code{listLevelsMap} otherwise - for \code{list} and \code{data.frame}
 classes. The following example shows the creation and printout of such a
 ``map''.
 
-\begin{Schunk}
-\begin{Sinput}
-> library(gdata)
-> (fac <- factor(c("B", "A", "Z", "D")))
-\end{Sinput}
-\begin{Soutput}
-[1] B A Z D
-Levels: A B D Z
-\end{Soutput}
-\begin{Sinput}
-> (map <- mapLevels(x=fac))
-\end{Sinput}
-\begin{Soutput}
-A B D Z 
-1 2 3 4 
-\end{Soutput}
-\end{Schunk}
+<<ex01>>=
+library(gdata)
+(fac <- factor(c("B", "A", "Z", "D")))
+(map <- mapLevels(x=fac))
+@
 
 If we have to work with internal integer codes, we can transform factor to
 integer and still get ``back the original factor'' with ``map'' used as
@@ -73,28 +61,12 @@ argument in \code{mapLevels<-} function as shown bellow. \code{mapLevels<-}
 is also an (S3) generic function and works on same classes as
 \code{mapLevels} plus \code{integer} atomic class.
 
-\begin{Schunk}
-\begin{Sinput}
-> (int <- as.integer(fac))
-\end{Sinput}
-\begin{Soutput}
-[1] 2 1 4 3
-\end{Soutput}
-\begin{Sinput}
-> mapLevels(x=int) <- map
-> int
-\end{Sinput}
-\begin{Soutput}
-[1] B A Z D
-Levels: A B D Z
-\end{Soutput}
-\begin{Sinput}
-> identical(fac, int)
-\end{Sinput}
-\begin{Soutput}
-[1] TRUE
-\end{Soutput}
-\end{Schunk}
+<<ex02>>=
+(int <- as.integer(fac))
+mapLevels(x=int) <- map
+int
+identical(fac, int)
+@
 
 Internally ``map'' (\code{levelsMap} class) is a \code{list} (see bellow),
 but its print method unlists it for ease of inspection. ``Map'' from
@@ -103,19 +75,9 @@ example has all components of length 1. This is not mandatory as
 \code{levels<-} and the later can accept \code{list} with components of
 various lengths.
 
-\begin{Schunk}
-\begin{Sinput}
-> str(map)
-\end{Sinput}
-\begin{Soutput}
-List of 4
- $ A: int 1
- $ B: int 2
- $ D: int 3
- $ Z: int 4
- - attr(*, "class")= chr "levelsMap"
-\end{Soutput}
-\end{Schunk}
+<<ex03>>=
+str(map)
+@
 
 Although not of primary importance, this ``map'' can also be used to remap
 factor levels as shown bellow.  Components ``later'' in the map take over
@@ -123,25 +85,13 @@ the ``previous'' ones. Since this is not optimal I would rather recommend
 other approaches for ``remapping'' the levels of a \code{factor}, say
 \code{recode} in \pkg{car} package \citep{FoxCar}.
 
-\begin{Schunk}
-\begin{Sinput}
-> map[[2]] <- as.integer(c(1, 2))
-> map
-\end{Sinput}
-\begin{Soutput}
-A B B D Z 
-1 1 2 3 4 
-\end{Soutput}
-\begin{Sinput}
-> int <- as.integer(fac)
-> mapLevels(x=int) <- map
-> int
-\end{Sinput}
-\begin{Soutput}
-[1] B B Z D
-Levels: A B D Z
-\end{Soutput}
-\end{Schunk}
+<<ex04>>=
+map[[2]] <- as.integer(c(1, 2))
+map
+int <- as.integer(fac)
+mapLevels(x=int) <- map
+int
+@
 
 Up to now examples showed ``map'' with internal integer codes for values
 and levels for names. I call this integer ``map''. On the other hand
@@ -152,22 +102,10 @@ you have a factor that is for some reason split into two factors \code{f1}
 and \code{f2} and that each factor does not have all levels. This is not
 uncommon situation.
 
-\begin{Schunk}
-\begin{Sinput}
-> (f1 <- factor(c("A", "D", "C")))
-\end{Sinput}
-\begin{Soutput}
-[1] A D C
-Levels: A C D
-\end{Soutput}
-\begin{Sinput}
-> (f2 <- factor(c("B", "D", "C")))
-\end{Sinput}
-\begin{Soutput}
-[1] B D C
-Levels: B C D
-\end{Soutput}
-\end{Schunk}
+<<ex05>>=
+(f1 <- factor(c("A", "D", "C")))
+(f2 <- factor(c("B", "D", "C")))
+@
 
 If we work with this factors, we need to be careful as they do not have the
 same set of levels. This can be solved with appropriately specifying
@@ -175,34 +113,22 @@ same set of levels. This can be solved with appropriately specifying
   "C", "D")} or with proper use of \code{levels<-} function. I say proper
 as it is very tempting to use:
 
-\begin{Schunk}
-\begin{Sinput}
-> fTest <- f1
-> levels(fTest) <- c("A", "B", "C", "D")
-> fTest
-\end{Sinput}
-\begin{Soutput}
-[1] A C B
-Levels: A B C D
-\end{Soutput}
-\end{Schunk}
+<<ex06>>=
+fTest <- f1
+levels(fTest) <- c("A", "B", "C", "D")
+fTest
+@
 
 Above example extends set of levels, but also changes level of 2nd and 3rd
 element in \code{fTest}! Proper use of \code{levels<-} (as shown in
 \code{levels} help page) would be:
 
-\begin{Schunk}
-\begin{Sinput}
-> fTest <- f1
-> levels(fTest) <- list(A="A", B="B",
-+                       C="C", D="D")
-> fTest
-\end{Sinput}
-\begin{Soutput}
-[1] A D C
-Levels: A B C D
-\end{Soutput}
-\end{Schunk}
+<<ex07>>=
+fTest <- f1
+levels(fTest) <- list(A="A", B="B",
+                      C="C", D="D")
+fTest
+@
 
 Function \code{mapLevels} with character ``map'' can help us in such
 scenarios to unify levels and internal integer codes across several
@@ -221,43 +147,17 @@ factors in a \code{list} or \code{data.frame} and use arguments
 \code{codes=FALSE} and \code{combine=TRUE}. Such map can then be used to
 unify levels and internal integer codes.
 
-\begin{Schunk}
-\begin{Sinput}
-> (bigMap <- mapLevels(x=list(f1, f2),
-+                      codes=FALSE,
-+                      combine=TRUE))
-\end{Sinput}
-\begin{Soutput}
-  A   B   C   D 
-"A" "B" "C" "D" 
-\end{Soutput}
-\begin{Sinput}
-> mapLevels(f1) <- bigMap
-> mapLevels(f2) <- bigMap
-> f1
-\end{Sinput}
-\begin{Soutput}
-[1] A D C
-Levels: A B C D
-\end{Soutput}
-\begin{Sinput}
-> f2
-\end{Sinput}
-\begin{Soutput}
-[1] B D C
-Levels: A B C D
-\end{Soutput}
-\begin{Sinput}
-> cbind(as.character(f1), as.integer(f1),
-+       as.character(f2), as.integer(f2))
-\end{Sinput}
-\begin{Soutput}
-     [,1] [,2] [,3] [,4]
-[1,] "A"  "1"  "B"  "2" 
-[2,] "D"  "4"  "D"  "4" 
-[3,] "C"  "3"  "C"  "3" 
-\end{Soutput}
-\end{Schunk}
+<<ex08>>=
+(bigMap <- mapLevels(x=list(f1, f2),
+                     codes=FALSE,
+                     combine=TRUE))
+mapLevels(f1) <- bigMap
+mapLevels(f2) <- bigMap
+f1
+f2
+cbind(as.character(f1), as.integer(f1),
+      as.character(f2), as.integer(f2))
+@
 
 If we do not specify \code{combine=TRUE} (which is the default behaviour)
 and \code{x} is a \code{list} or \code{data.frame}, \code{mapLevels}
