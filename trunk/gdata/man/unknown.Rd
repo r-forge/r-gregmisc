@@ -2,7 +2,7 @@
 %--------------------------------------------------------------------------
 % What: Change given unknown value to NA and vice versa man page
 % $Id$
-% Time-stamp: <2007-08-17 01:05:36 ggorjan>
+% Time-stamp: <2007-08-17 20:18:54 ggorjan>
 %--------------------------------------------------------------------------
 
 \name{unknownToNA}
@@ -25,6 +25,8 @@
 \alias{NAToUnknown.factor}
 \alias{NAToUnknown.list}
 \alias{NAToUnknown.data.frame}
+
+\concept{missing}
 
 \title{Change unknown values to NA and vice versa}
 
