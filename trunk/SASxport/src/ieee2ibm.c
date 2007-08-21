@@ -1,11 +1,13 @@
-/*                         H T O N D . C
- * BRL-CAD
+/*
+ * File: SASxport/src/ibm2ieee.c
+ *
+ * Originally from BRL-CAD, file /brlcad/src/libbu/htond.c
  *
  * Copyright (c) 2004-2007 United States Government as represented by
  * the U.S. Army Research Laboratory.
  *
  * Minor changes (c) 2007 Random Technologies LLC by Gregory R. Warnes
- *   <greg@random-technologies-llc.com>
+ * <greg@random-technologies-llc.com>
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public License
@@ -24,36 +26,21 @@
 #include "writeSAS.h"
 #include <stdio.h>
 
-/****************************/
-/** NB: htond code ommitted */
-/****************************/
-
 /****************************
- * NB: The ntohd code assumes that 'in' points to a vector BIG-ENDIAN IEEE
- *   double precision value of length 'count'. This extracted routine
- *   returns IBM/360 format double precision values in *out
+ * ieee2ibm
+ *
+ *  Convert an array of BIG-ENDIAN IEEE double precision value at *in
+ *  of length 'count'to IBM/360 format double precision values at *out
+ *
+ *  This code was extracted from the "ntohd" function, original author
+ *  Michael John Muuss
+ *
+ *  Note that neither the input or output buffers need be word aligned,
+ *  for greatest flexability in converting data, even though this
+ *  imposes a speed penalty here.
+ *
  ***************************/
 
-
-void R_ntohd(double out[], double in[], int *count)
-{
-  int i;
-  int j;
-  unsigned char tmp;
-  unsigned char *cptr;
-
-  /* Flip byte order from little endian to big endian */
-  for(i=0; i<*count; i++)
-    reverse( (unsigned char*) &(in[i]), sizeof(double) );
-  ieee2ibm( (unsigned char *) out, (unsigned char *) in, *count );
-}
-
-/**
- *			N T O H D
- *
- *  @brief Network to Host Doubles
- */
-// Original function name: "ntohd"
 void ieee2ibm(register unsigned char *out, register const unsigned char *in, int count)
 {
 	/*

@@ -1,6 +1,6 @@
 /*******
  *
- *    init.c: Routines to register writeSAS.c routines with R
+ *    init.c: Routines to register SASxport C routines with R
  *
  *    Author:  Gregory R. Warnes <greg@random-technologies-llc.com>
  *
@@ -57,8 +57,6 @@ static const R_CMethodDef CEntries[]  = {
 
 #define CALLDEF(name, n)  {#name, (DL_FUNC) &name, n}
 static const R_CallMethodDef CallEntries[] = {
-//    CALLDEF(xport_info, 1),
-//    CALLDEF(xport_read, 2),
     CALLDEF(getRawBuffer, 0),
     {NULL, NULL, 0}
 };

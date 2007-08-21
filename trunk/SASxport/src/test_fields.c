@@ -181,7 +181,6 @@ int test_zeroCopy(int bufsize)
 }
 
 
-
 void doTest()
 {
   /* small buffer */

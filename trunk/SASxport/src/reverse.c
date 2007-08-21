@@ -3,8 +3,8 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
-#import  <assert.h>
-#import  <sys/types.h>
+#include <assert.h>
+#include <sys/types.h>
 
 /* reverse: convert current byte order to big endian */
 void reverse( unsigned char *intp, size_t size)
