@@ -50,6 +50,7 @@ lookup.xport("xxx.xpt")
 }
 
 ## Or read a copy of test2.xpt available on the web:
+\dontrun{
 url <- 'http://biostat.mc.vanderbilt.edu/cgi-bin/viewvc.cgi/*checkout*/Hmisc/trunk/tests/test2.xpt'
 w <- lookup.xport(url)
 
@@ -68,6 +69,7 @@ wS # same display
 
 # variable names within all data sets
 wS$name 
+}
 
 }
 \keyword{file}

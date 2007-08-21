@@ -157,12 +157,14 @@ w2 <- sasxport.get('test2.xpt')
 SASxport:::assert(identical(w,w2))
 }
 
+\dontrun{
 # Or read a copy of test2.xpt available on the web:
 url <- 'http://biostat.mc.vanderbilt.edu/cgi-bin/viewvc.cgi/*checkout*/Hmisc/trunk/tests/test2.xpt'
 w <- read.xport(url)
 
 \dontshow{ ## For testing only
 SASxport:::assert(identical(w2,w))
+}
 }
 
 \dontrun{
