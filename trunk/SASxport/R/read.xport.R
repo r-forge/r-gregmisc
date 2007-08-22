@@ -8,7 +8,7 @@ read.xport <- function(file,
                        force.integer=TRUE,
                        formats=NULL,
                        name.chars=NULL,
-                       names.tolower=TRUE,
+                       names.tolower=FALSE,
                        keep=NULL,
                        drop=NULL,
                        as.is=0.95, # Prevent factor conversion if 95% or more unique

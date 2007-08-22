@@ -9,7 +9,7 @@ read.xport(file,
            force.integer=TRUE,
            formats=NULL,
            name.chars=NULL,
-           names.tolower=TRUE,
+           names.tolower=FALSE,
            keep=NULL,
            drop=NULL,
            as.is=0.95,
@@ -107,7 +107,7 @@ read.xport(file,
   \code{\link[Hmisc]{describe}}
 }
 \examples{
-\dontrun{
+
 # -------
 # SAS code to generate test dataset:
 # -------
@@ -149,23 +149,14 @@ read.xport(file,
 # ------
 
 # Read this dataset from a local file:
+\dontrun{
 w <- read.xport('test2.xpt')
-
-\dontshow{
-library(Hmisc)
-w2 <- sasxport.get('test2.xpt')
-SASxport:::assert(identical(w,w2))
 }
 
-\dontrun{
+
 # Or read a copy of test2.xpt available on the web:
 url <- 'http://biostat.mc.vanderbilt.edu/cgi-bin/viewvc.cgi/*checkout*/Hmisc/trunk/tests/test2.xpt'
 w <- read.xport(url)
-
-\dontshow{ ## For testing only
-SASxport:::assert(identical(w2,w))
-}
-}
 
 \dontrun{
 ## The Hmisc library provides many useful functions for interacting with
@@ -173,18 +164,14 @@ SASxport:::assert(identical(w2,w))
 library(Hmisc)
 
 describe(w$test)   # see labels, format names for dataset test
-
-lapply(w, describe)# see descriptive stats for both datasets
+lapply(w, describe)# see descriptive stats in more detaiil for each variable
 
 contents(w$test)   # another way to see variable attributes
-lapply(w, contents)# show contents of both datasets
+lapply(w, contents)# show contents of individual items in more detail
 
 options(digits=7)  # compare the following matrix with PROC MEANS output
 t(sapply(w$z, function(x)
  c(Mean=mean(x),SD=sqrt(var(x)),Min=min(x),Max=max(x))))
-
-}
-
 }
 
 }
