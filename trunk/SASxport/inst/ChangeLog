@@ -1,0 +1,222 @@
+2007-08-22 18:11  warnes
+
+	* R/read.xport.R, man/read.xport.Rd, tests/xport.Rout.save: Modify
+	  read.xport to preserve case of SAS names by default, as well as
+	  updating the example code.
+
+2007-08-22 01:19  warnes
+
+	* src/reverse.c: sprintf() was being used where printf() was
+	  intended.
+
+2007-08-21 18:16  warnes
+
+	* DESCRIPTION: Slight improvement to credits for BRL-CAD
+
+2007-08-21 18:13  warnes
+
+	* TODO, man/lookup.xport.Rd, man/read.xport.Rd: Commit previous
+	  updates
+
+2007-08-21 18:12  warnes
+
+	* src/htond.c, src/ibm2ieee.c, src/ieee2ibm.c, src/init.c,
+	  src/reverse.c, src/test_fields.c: Commit previous updates
+
+2007-08-15 07:02  warnes
+
+	* DESCRIPTION, man/SASxport-package.Rd, src/cnxptiee.c,
+	  src/cnxptiee.h, src/htond.c, src/init.c, src/reverse.c,
+	  src/test_fields.c, src/writeSAS.c, src/writeSAS.h: Remove
+	  dependency on SAS code
+
+2007-08-15 06:06  warnes
+
+	* src/reverse.c: Fix reverse.c because we need to swap everything
+	  to match Big-Endian, rather than Little-Endian. Also, dont' call
+	  the macro.
+
+2007-08-15 06:04  warnes
+
+	* src/reverse.c: Restore reverse.c
+
+2007-08-15 03:17  warnes
+
+	* DESCRIPTION: Minor reformatting
+
+2007-08-15 03:14  warnes
+
+	* DESCRIPTION, inst/doc/SAS_TS140.txt, inst/doc/index.html,
+	  inst/doc/r2xpt.doc, man/SASxport-package.Rd, man/lookup.xport.Rd,
+	  man/read.xport.Rd, man/toSAS.Rd, man/units.Rd,
+	  man/write.xport.Rd: Make corrections for typos noted by Metrum
+	  folks
+
+2007-08-12 03:22  warnes
+
+	* DESCRIPTION, man/lookup.xport.Rd, src/cnxptiee.h,
+	  src/test_fields.c, src/writeSAS.h: More updates
+
+2007-08-12 03:13  warnes
+
+	* src/B8.h, src/IEEEtoIBM.c, src/MASKS.h, src/main.c,
+	  src/reverse.c: Remove new stuff... use SAS's code instead
+
+2007-08-12 03:12  warnes
+
+	* src/B8.h, src/IEEEtoIBM.c, src/MASKS.h, src/cnxptiee.h,
+	  src/main.c, src/reverse.c, src/test_fields.c, src/writeSAS.h: 1st
+	  attempt at rewriting cnxptiee.[ch]
+
+2007-08-11 23:48  warnes
+
+	* R/read.xport.R: Explicitly check file header
+
+2007-08-11 00:03  warnes
+
+	* DESCRIPTION, man/SASxport-package.Rd: Improve package description
+
+2007-08-09 23:29  warnes
+
+	* DESCRIPTION, NAMESPACE, TODO, man/lookup.xport.Rd,
+	  man/read.xport.Rd, man/units.Rd: More changes, esp to
+	  lookup.xport() and friends
+
+2007-08-09 23:28  warnes
+
+	* tests/Alfalfa_Test.Rout.save, tests/cars.Rout.save,
+	  tests/xport.Rout.save: More changes, esp to lookup.xport() and
+	  friends
+
+2007-08-09 23:28  warnes
+
+	* R/AFirst.lib.s, R/all.is.numeric.R, R/in.opererator.R,
+	  R/lookup.xport.R, R/read.xport.R, R/write.xport.R: More changes,
+	  esp to lookup.xport() and friends
+
+2007-08-09 19:02  warnes
+
+	* src/swap_bytes.h: Remove unused swap_bytes.h
+
+2007-08-09 19:02  warnes
+
+	* man/SASxport-package.Rd: Add package description page
+
+2007-08-09 16:54  warnes
+
+	* R/importConvertDateTime.R, R/makeNames.R, R/read.xport.R,
+	  R/testDateTime.R: Add comment header indicating the source of
+	  code from Hmisc
+
+2007-08-09 16:53  warnes
+
+	* tests/testDates.Rout.save, tests/test_fields.Rout.save,
+	  tests/xport.Rout.save, tests/xxx.Rout.save: Update saved output
+	  of test scripts
+
+2007-08-08 18:54  warnes
+
+	* DESCRIPTION, NAMESPACE: Updates
+
+2007-08-08 18:54  warnes
+
+	* tests/Alfalfa_Test.R, tests/Alfalfa_Test.Rout.save, tests/cars.R,
+	  tests/cars.Rout.save, tests/datetime.xpt, tests/testDates.R,
+	  tests/test_fields.R, tests/test_fields.Rout.save, tests/xport.R,
+	  tests/xxx.R, tests/xxx.Rout.save: Updates
+
+2007-08-08 18:54  warnes
+
+	* src/SASxport.c, src/SASxport.h, src/foreign.h, src/init.c:
+	  Updates
+
+2007-08-08 18:53  warnes
+
+	* R/AFirst.lib.s, R/formats.R, R/iformat.R,
+	  R/importConvertDateTime.R, R/label.R, R/lookup.xport.R,
+	  R/makeNames.R, R/read.xport.R, R/testDateTime.R, R/units.R,
+	  R/xport.R: Updates
+
+2007-08-08 18:53  warnes
+
+	* man/assert.Rd, man/read.xport.Rd, man/units.Rd: Updates.
+
+2007-08-03 04:44  warnes
+
+	* DESCRIPTION, NAMESPACE, R/scat.R, R/xport.R, R/zzz.R,
+	  man/lookup.xport.Rd, man/read.xport.Rd, src/SASxport.c,
+	  src/SASxport.h, src/cnxptiee.c, src/cnxptiee.h, src/foreign.h,
+	  src/init.c, src/swap_bytes.h, src/test_fields.c, src/writeSAS.c,
+	  src/writeSAS.h, tests/Alfalfa_Test.Rout.save,
+	  tests/cars.Rout.save, tests/datetime.xpt, tests/test.xpt,
+	  tests/testDates.Rout.save, tests/test_fields.Rout.save,
+	  tests/xport.R, tests/xport.Rout.save, tests/xxx.Rout.save: Add
+	  code from package foreign and gtools to make SASxport stand alone
+
+2007-08-03 01:46  warnes
+
+	* R/.Rhistory: Remove stray .Rhistory file
+
+2007-08-03 01:45  warnes
+
+	* DESCRIPTION: Acknowledge MetrumI support
+
+2007-08-03 01:45  warnes
+
+	* NAMESPACE: Add "assert" function
+
+2007-08-03 01:44  warnes
+
+	* R/assert.R, man/assert.Rd: Add "assert" function to avoid
+	  dependenct on gtools.
+
+2007-08-03 01:29  warnes
+
+	* man/toSAS.Rd, src/cnxptiee.c, src/writeSAS.c: Correct some typos.
+
+2007-08-03 00:40  warnes
+
+	* DESCRIPTION: Drop version number to 0.99 until testing
+	  integration and is complete
+
+2007-08-03 00:39  warnes
+
+	* tests/test_fields.R: Add R test file to run c-level tests
+
+2007-08-03 00:36  warnes
+
+	* src/SASxport.so: Remove .so from svn
+
+2007-08-03 00:35  warnes
+
+	* NAMESPACE, R/fromSASDate.R, R/parseFormat.R, R/toSAS.R,
+	  R/write.xport.R, R/xport.character.R, R/xport.file.header.R,
+	  R/xport.member.header.R, R/xport.namestr.R, man/toSAS.Rd,
+	  src/SASxport.so, src/writeSAS.c: More modifications. Should now
+	  work for most R data types
+
+2007-08-03 00:35  warnes
+
+	* tests/cars.R, tests/datetime.xpt, tests/testDates.R, tests/xxx.R:
+	  Add more tests
+
+2007-07-29 01:15  warnes
+
+	* tests/Alfalfa2.xpt, tests/cars.sas, tests/cars.xpt,
+	  tests/xxx.sas, tests/xxx.xpt: Add SAS code to create xport data
+	  files for testing
+
+2007-07-28 08:47  warnes
+
+	* ., DESCRIPTION, NAMESPACE, R, R/.Rhistory, R/blanks.R,
+	  R/rawToDisplay.R, R/write.xport.R, R/xport.NA.R,
+	  R/xport.character.R, R/xport.dateFMT.R, R/xport.file.header.R,
+	  R/xport.fill.R, R/xport.member.header.R, R/xport.namestr.R,
+	  R/xport.namestr.header.R, R/xport.numeric.R,
+	  R/xport.obs.header.R, R/zzz.R, inst, inst/doc,
+	  inst/doc/SAS_TS140.txt, inst/doc/index.html, inst/doc/r2xpt.doc,
+	  man, man/write.xport.Rd, src, src/SASxport.so, src/cnxptiee.c,
+	  src/cnxptiee.h, src/test_fields.c, src/writeSAS.c,
+	  src/writeSAS.h, tests, tests/Alfalfa.xpt, tests/Alfalfa2.xpt,
+	  tests/Alfalfa_Test.R: Add SVNxport package
+

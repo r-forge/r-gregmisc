@@ -1,0 +1,40 @@
+Beta 3 - 2007-08-10
+-------------------
+
+New features:
+
+- read.xport's names.tolower argument now defaults to FALSE so that
+  variable (and data set) names are now left as uppercase. 
+
+- Improved crediting of BRL-CAD source code
+
+Bug fixes:
+
+- Correct call to sprintf where printf was intended in src/ieee2ibm.c
+
+Other:
+
+- Augmented ieee2ibm code with corresponding ibm2ieee code for 
+  completeness.
+
+
+Beta 2 - 2007-08-10
+-------------------
+
+New Features:
+
+- Replaced IEEE to IBM translation code with GPL'ed version from BPL-CAD. 
+
+Bug Fixes:
+
+- Changes to C code should correct the C99 usage errors
+
+- Correct documentation typos, including those reported by Tim.
+
+
+Beta 1 - 2007-08-10
+-------------------
+
+Initial version of the SASxport package.
+
+
