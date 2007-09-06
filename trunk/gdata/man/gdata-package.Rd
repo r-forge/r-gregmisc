@@ -31,4 +31,4 @@ The following are sources of information on \pkg{gdata} package:
 
 }
 
-\keyword{misc}
+\keyword{package}
