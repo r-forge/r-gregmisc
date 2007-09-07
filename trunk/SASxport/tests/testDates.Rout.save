@@ -1,5 +1,5 @@
 
-R version 2.6.0 Under development (unstable) (2007-08-04 r42421)
+R version 2.5.1 (2007-06-27)
 Copyright (C) 2007 The R Foundation for Statistical Computing
 ISBN 3-900051-07-0
 
@@ -46,7 +46,7 @@ Attaching package: 'SASxport'
 4 4 d 1992-02-28 1992-02-28 18:21:03
 5 5 e 1992-02-01 1992-02-01 16:56:26
 > 
-> write.xport( DATETIME=temp, filename="datetime.xpt")
+> write.xport( DATETIME=temp, file="datetime.xpt")
 > temp2 <- read.xport(file="datetime.xpt", names.tolower=FALSE)
 > 
 > print(temp2)

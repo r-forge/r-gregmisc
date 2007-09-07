@@ -1,5 +1,5 @@
 
-R version 2.6.0 Under development (unstable) (2007-08-04 r42421)
+R version 2.5.1 (2007-06-27)
 Copyright (C) 2007 The R Foundation for Statistical Computing
 ISBN 3-900051-07-0
 
@@ -50,7 +50,7 @@ Attaching package: 'SASxport'
  Datsun:4                                                                   
 > 
 > write.xport(cars,
-+             filename="cars2.xpt",
++             file="cars2.xpt",
 +             cDate=strptime("28JUL07: 20:59:49", format="%d%b%y:%H:%M:%S"),
 +             osType="SunOS",
 +             sasVer="9.1"

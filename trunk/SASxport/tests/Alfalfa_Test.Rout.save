@@ -1,5 +1,5 @@
 
-R version 2.6.0 Under development (unstable) (2007-08-04 r42421)
+R version 2.5.1 (2007-06-27)
 Copyright (C) 2007 The R Foundation for Statistical Computing
 ISBN 3-900051-07-0
 
@@ -34,7 +34,7 @@ Attaching package: 'SASxport'
 > 
 > ## Write it out again, pretending to be the same OS, SAS version, and creation date
 > write.xport(SPEC,
-+             filename="Alfalfa2.xpt",
++             file="Alfalfa2.xpt",
 +             cDate=strptime("10DEC99:15:56:30", format="%d%b%y:%H:%M:%S"),
 +             osType="OSF1",
 +             sasVer="7.00"
