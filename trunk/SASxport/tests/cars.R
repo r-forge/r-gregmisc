@@ -10,7 +10,7 @@ head(cars, n=5)
 summary(cars)
 
 write.xport(cars,
-            filename="cars2.xpt",
+            file="cars2.xpt",
             cDate=strptime("28JUL07: 20:59:49", format="%d%b%y:%H:%M:%S"),
             osType="SunOS",
             sasVer="9.1"

@@ -8,7 +8,7 @@ SPEC <- read.xport("Alfalfa.xpt")
 
 ## Write it out again, pretending to be the same OS, SAS version, and creation date
 write.xport(SPEC,
-            filename="Alfalfa2.xpt",
+            file="Alfalfa2.xpt",
             cDate=strptime("10DEC99:15:56:30", format="%d%b%y:%H:%M:%S"),
             osType="OSF1",
             sasVer="7.00"

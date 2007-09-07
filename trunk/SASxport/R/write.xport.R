@@ -1,5 +1,5 @@
 write.xport <- function( ... ,
-                        filename="",
+                        file="",
                         verbose=FALSE,
                         sasVer="7.00",
                         osType,
@@ -26,7 +26,7 @@ write.xport <- function( ... ,
       
     ## capture names of data frame, but don't clobber explicitly provided names
     mc <- match.call()
-    mc$filename <- NULL
+    mc$file <- NULL
     mc$verbose <- NULL
     mc$sasVer <- NULL
     mc$osType <- NULL
@@ -41,11 +41,11 @@ write.xport <- function( ... ,
     names(dfList) <- dfNames    
 
     scat("opening file ...")
-    if (is.character(filename)) 
-      if (filename == "") 
+    if (is.character(file)) 
+      if (file == "") 
         file <- stdout()
       else {
-        file <- file(description=filename, open="wb")
+        file <- file(description=file, open="wb")
         on.exit(close(file))
       }
     scat("Done")
@@ -175,8 +175,8 @@ write.xport <- function( ... ,
       }
 
     scat("Closing file ...")
-    if (is.character(filename)) 
-      if (filename != "")
+    if (is.character(file)) 
+      if (file != "")
         {        
           close(file)
           on.exit()

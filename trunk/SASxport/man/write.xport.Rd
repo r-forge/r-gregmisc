@@ -6,12 +6,12 @@
   library file.
 }
 \usage{
-write.xport(..., filename = "", verbose = FALSE, sasVer = "7.00", 
+write.xport(..., file = "", verbose = FALSE, sasVer = "7.00", 
             osType, cDate = Sys.time())
 }
 \arguments{
   \item{\dots}{One or more data frames to be stored}  
-  \item{filename}{Filename or connection object. Use "" to view the raw data}
+  \item{file}{File name or connection object. Use "" to view the raw data}
   \item{verbose}{Logical flag controlling whether status is reported
     during processing}
   \item{sasVer}{SAS version string}

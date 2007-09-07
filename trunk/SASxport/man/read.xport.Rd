@@ -71,8 +71,6 @@ read.xport(file,
 \details{
 
   \itemize{
-    \item variable names are converted to lower case
-    
     \item SAS date, time, and date/time variables are converted respectively to \code{Date}, 
     POSIX, or \code{chron} objects
     

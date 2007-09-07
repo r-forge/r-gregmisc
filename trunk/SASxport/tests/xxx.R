@@ -11,7 +11,7 @@ attr(abc$y, 'label')  <- 'character variable'
 
 # create a SAS XPORT file from our local data fram
 write.xport(abc,
-            filename="xxx2.xpt",
+            file="xxx2.xpt",
             cDate=strptime("28JUL07:21:08:06 ", format="%d%b%y:%H:%M:%S"),
             osType="SunOS",
             sasVer="9.1"
@@ -25,7 +25,7 @@ attr(abc.SAS$X, 'format') <- 'date7.'
 
 # create a SAS XPORT file from the SAS data
 write.xport(abc=abc.SAS,
-            filename="xxx3.xpt",
+            file="xxx3.xpt",
             cDate=strptime("28JUL07:21:08:06 ", format="%d%b%y:%H:%M:%S"),
             osType="SunOS",
             sasVer="9.1"
