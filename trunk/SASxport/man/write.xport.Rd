@@ -95,7 +95,7 @@ str(temp)
 abc <- temp
 
 # create a SAS XPORT file 
-write.xport( abc, filename="xxx.dat" )
+write.xport( abc, file="xxx.dat" )
 
 # list the contents of the file
 lookup.xport("xxx.dat")
