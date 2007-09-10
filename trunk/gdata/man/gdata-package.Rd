@@ -1,6 +1,7 @@
 
 \name{gdata-package}
 \alias{gdata-package}
+\alias{gdata}
 
 \docType{package}
 
