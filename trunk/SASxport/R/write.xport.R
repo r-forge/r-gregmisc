@@ -1,5 +1,5 @@
 write.xport <- function(...,
-                        list=c(),
+                        list=base::list(),
                         file = stop("'file' must be specified"), 
                         verbose=FALSE,
                         sasVer="7.00",
@@ -7,15 +7,8 @@ write.xport <- function(...,
                         cDate=Sys.time()
                         ) 
   {
-    #if(missing(list))
-    #  {
-        list <- c(base::list(...), list)
-        dfNames <- names(list)
-                                        #  }
-    #else
-    #  {
-    #    dfNames <- names(list)
-    #  }
+    list <- c(base::list(...), list)
+    dfNames <- names(list)
 
     if(missing(osType))
       osType <- paste("R ", R.version$major, ".", R.version$minor, sep="")
