@@ -12,7 +12,8 @@ read.xport <- function(file,
                        keep=NULL,
                        drop=NULL,
                        as.is=0.95, # Prevent factor conversion if 95% or more unique
-                       verbose=FALSE
+                       verbose=FALSE,
+                       as.list=FALSE
                        )
   {
     sasdateform <-
@@ -23,9 +24,9 @@ read.xport <- function(file,
 
     if(verbose)
       {
-        oldOptionsDebug <- options("DEBUG")
+        oldOptions <- options("DEBUG")
         options(DEBUG=TRUE)
-        on.exit(options(DEBUG=oldOptionsDebug))
+        on.exit(options(oldOptions))
       }
 
     if(length(grep('http://', file))>0 || length(grep('ftp://', file))>0 )
@@ -55,6 +56,14 @@ read.xport <- function(file,
     scat("Reading the data file...")
     ds <- foreign:::read.xport(file)
 
+    if(any(duplicated(names(dsinfo))))  # only true if file contains has more than one data set
+       {
+         warning("Duplicate data set names in file.  Data set names have been made unique.")
+         names(dsinfo) <- make.unique(names(dsinfo))
+         names(ds) <- make.unique(names(ds))
+       }
+
+    
     if( (length(keep)>0 || length(drop)>0) )
       ds <- ds[whichds]
 
@@ -124,11 +133,9 @@ read.xport <- function(file,
     else
       names.tolower <- function(x) x
     
-    if(nds > 1)
-      {
-        res <- vector('list', nds)
-        names(res) <- gsub('_','.',dsn)
-      }
+    res <- vector('list', nds)
+    names(res) <- gsub('_','.',dsn)
+
 
     possiblyConvertChar <- (is.logical(as.is) && !as.is) ||
     (is.numeric(as.is) && as.is > 0)
@@ -197,14 +204,14 @@ read.xport <- function(file,
         }
 
         lz <- lab[nam[i]]
-        if(lz != '') {
+        if(!is.null(lz) && length(lz)>0 && !is.na(lz) && lz != '') {
           names(lz) <- NULL
           label(x)  <- lz
           changed   <- TRUE
         }
 
         fmt <- fmt[nam[i]]; 
-        if( !is.null(fmt) && !is.na(fmt) && fmt > '') {
+        if( !is.null(fmt) && length(fmt)>0 && !is.na(fmt) && fmt > '') {
           names(fmt) <- NULL
           formats(x) <- fmt
           changed <- TRUE
@@ -216,14 +223,13 @@ read.xport <- function(file,
 
       scat('.')
 
-      if(nds>1)
-        res[[j]] <- w
+      res[[j]] <- w
     }
 
     scat("Done")
     
-    
-    if(nds > 1)
+    if(nds > 1 || as.list)
       res
-    else w
+    else
+      w
   }

@@ -13,7 +13,8 @@ read.xport(file,
            keep=NULL,
            drop=NULL,
            as.is=0.95,
-           verbose=FALSE
+           verbose=FALSE,
+           as.list=FALSE
            )
 }
 \arguments{
@@ -60,12 +61,14 @@ read.xport(file,
   }
   \item{verbose}{Logical indicating whether progress should be printed
     during the data loading and conversion process.}
+  \item{as.list}{Logical indicating whether to return a list even if
+    the SAS xport file contains only only one dataset.}
 }
 \value{
-  If there is more than one dataset in the transport file other than the
-  \code{PROC FORMAT} file, the result is a list of data frames
-  containing all the non-\code{PROC FORMAT} datasets.  Otherwise the
-  result a single data frame.
+  If there the trasport file only contains one dataset (not counting any
+  \code{PROC FORMAT} datasets) and \code{as.list=FALSE}, the result is a
+  single data set.  Otherwise the result is a list 
+  containing all the non-\code{PROC FORMAT} datasets.
 }
 
 \details{
@@ -155,6 +158,14 @@ w <- read.xport('test2.xpt')
 # Or read a copy of test2.xpt available on the web:
 url <- 'http://biostat.mc.vanderbilt.edu/cgi-bin/viewvc.cgi/*checkout*/Hmisc/trunk/tests/test2.xpt'
 w <- read.xport(url)
+
+
+# We can also get the dataset wrapped in a list
+w <- read.xport(url, as.list=TRUE)
+
+\dontshow{
+assert( is.data.frame(w)==FALSE && is.list(w)==TRUE )
+}
 
 \dontrun{
 ## The Hmisc library provides many useful functions for interacting with
