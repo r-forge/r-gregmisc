@@ -1,13 +1,21 @@
-write.xport <- function( ... ,
-                        file="",
+write.xport <- function(...,
+                        list=c(),
+                        file = stop("'file' must be specified"), 
                         verbose=FALSE,
                         sasVer="7.00",
                         osType,
                         cDate=Sys.time()
                         ) 
   {
-    dfList <- list(...)
-    dfNames <- names(dfList)
+    #if(missing(list))
+    #  {
+        list <- c(base::list(...), list)
+        dfNames <- names(list)
+                                        #  }
+    #else
+    #  {
+    #    dfNames <- names(list)
+    #  }
 
     if(missing(osType))
       osType <- paste("R ", R.version$major, ".", R.version$minor, sep="")
@@ -24,7 +32,8 @@ write.xport <- function( ... ,
     on.exit( options(DEBUG=oldDebug) )
 
       
-    ## capture names of data frame, but don't clobber explicitly provided names
+    ## capture names of data frames from function call, but don't
+    ## clobber explicitly provided names 
     mc <- match.call()
     mc$file <- NULL
     mc$verbose <- NULL
@@ -38,8 +47,68 @@ write.xport <- function( ... ,
         dfNames <- mc
       }
     dfNames[dfNames==""] <- mc[dfNames==""]
-    names(dfList) <- dfNames    
+    names(list) <- dfNames    
 
+
+#    #######
+#    ## If no file argument is found, check if there is a single string
+#    ## argument.  If so, assume that it is the destation filename
+#    if(missing(file))
+#      {
+#        string.arg <- which(sapply(list,is.character))
+#        if(length(string.arg)==1)
+#          {
+#            file <- list[[string.arg]]
+#            list[[string.arg]] <- NULL
+#            dfNames <- dfNames[-string.arg]
+#          }
+#      }
+#    ##
+#    #######
+
+    #######
+    ##
+    scat("Ensure all objects to be stored are data.frames...\n")
+    not.df <- which(!sapply(list,is.data.frame))
+    if(any(not.df))
+      if(length(not.df)==1)
+        stop(paste("'", dfNames[not.df], "'"),
+             " is not a data.frame object.")
+      else 
+        stop(paste("'", dfNames[not.df], "'", sep="", collapse=", "),
+             " are not data.frame objects.")
+    ##
+    #######
+
+
+    #######
+    ##
+    scat("Check length of object names...\n")
+    long.names <- which(nchar(dfNames)>8)
+    if(length(long.names)>0)
+      {
+        old.names <- dfNames[long.names]
+        new.names <- substr(old.names, 1, 8 )
+        
+        warning("Truncating object names with more than 8 characters. ",
+                paste(long.names,
+                      ":'",
+                      old.names,
+                      "' --> '",
+                      new.names,
+                      "'",
+                      sep="",
+                      collapse=", " ))
+        
+        dfNames[long.names] <- new.names
+      }
+
+    scat("Ensure object names are unique...\n")
+    if(any(duplicated(dfNames)))
+       stop("object names are not unique: ", paste(1:length(dfNames),":'",dfNames,"'",sep="",collapse=", " ))
+
+    
+    
     scat("opening file ...")
     if (is.character(file)) 
       if (file == "") 
@@ -66,7 +135,7 @@ write.xport <- function( ... ,
     for(i in dfNames)
       {
         
-        df <- dfList[[i]]
+        df <- list[[i]]
         varNames <- colnames(df)
         offsetTable <- data.frame("name"=varNames, "len"=NA, "offset"=NA )
         rownames(offsetTable) <- offsetTable[,"name"]
@@ -83,7 +152,7 @@ write.xport <- function( ... ,
         lenIndex <- 0
         varIndex <- 1
         spaceUsed <- 0
-        for(i in colnames(dfList[[i]]) )
+        for(i in colnames(list[[i]]) )
           {
             scat("", i , "...")
             var <- df[[i]]

@@ -6,11 +6,17 @@
   library file.
 }
 \usage{
-write.xport(..., file = "", verbose = FALSE, sasVer = "7.00", 
-            osType, cDate = Sys.time())
+write.xport(...,
+            list=base::list(),
+            file = stop("'file' must be specified"),
+            verbose=FALSE,
+            sasVer="7.00",
+            osType,
+            cDate=Sys.time() )
 }
 \arguments{
   \item{\dots}{One or more data frames to be stored}  
+  \item{list}{A list containing data frames to be stored.}
   \item{file}{File name or connection object. Use "" to view the raw data}
   \item{verbose}{Logical flag controlling whether status is reported
     during processing}
