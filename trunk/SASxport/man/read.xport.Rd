@@ -164,7 +164,7 @@ w <- read.xport(url)
 w <- read.xport(url, as.list=TRUE)
 
 \dontshow{
-assert( is.data.frame(w)==FALSE && is.list(w)==TRUE )
+SASxport:::assert( is.data.frame(w)==FALSE && is.list(w)==TRUE )
 }
 
 \dontrun{
