@@ -1,9 +1,4 @@
-\name{units}
-
-\alias{units}
-\alias{units.default}
-\alias{units<-}
-\alias{units<-.default}
+\name{label}
 
 \alias{label}
 \alias{label.default}
@@ -22,19 +17,16 @@
 
 
 \title{
-Set or Retreive the 'label', 'format', 'iformat', or 'units' Attribute of a Vector  
+Set or Retreive the 'label', 'format', or 'iformat' Attribute of a Vector  
 }
 \description{
-  Sets or retrieves the \code{"label"}, \code{"format"},
-  \code{"iformat"}, or \code{"units"} attribute of an object.
+  Sets or retrieves the \code{"label"}, \code{"format"}, or
+  \code{"iformat"} attribute of an object.
 
-  More comprehensive support for object labels, formats, and units are
+  More comprehensive support for object labels, and formats, are
   available in Frank Harrell's \code{Hmisc} package.
 }
 \usage{
-units(x, default)
-units(x) <- value
-
 label(x, default)
 label(x) <- value
 
@@ -47,15 +39,15 @@ iformat(x) <- value
 }
 \arguments{
 \item{x}{any object}
-\item{value}{new value for the  \code{"label"}, \code{"format"},
-  \code{"iformat"}, or \code{"units"} attribute of an object.}
+\item{value}{new value for the  \code{"label"}, \code{"format"}, or
+  \code{"iformat"} attribute of an object.}
 \item{default}{value to return when no appropriate attribute is
   found.  The usual return value is NULL.}
 }
 \value{
-  the contents of the \code{"label"}, \code{"format"}, \code{"iformat"}, or
-  \code{"units"} attribute of x, if any; otherwise, the value provided by
-  \code{default}.    
+  the contents of the \code{"label"}, \code{"format"}, or
+  \code{"iformat"} attribute of x, if any; otherwise, the value provided
+  by \code{default}.    
 }
 \author{Gregory R. Warnes \email{greg@random-techologies-llc.com} based
   on code from the \code{Hmisc} library by Frank E. Harrell, Jr.}
@@ -66,13 +58,11 @@ iformat(x) <- value
 fail.time <- c(10,20)
 
 # set attributes
-units(fail.time) <- 'Day'
 label(fail.time) <- 'Failure Time'
 formats(fail.time) <- 'Numeric2'
 iformat(fail.time) <- 'Numeric2'
 
 # display individual attributes
-units(fail.time)
 label(fail.time)
 formats(fail.time)
 iformat(fail.time)
@@ -91,7 +81,7 @@ library(Hmisc)
 describe(fail.time)
 
 f <- cph(Surv(fail.time, event) ~ xx)
-plot(xx,xx2,xlab=paste(label(xx),", ",units(xx),"s",sep=""))
+plot(xx,xx2,xlab=label(xx),"s",sep=""))
 }
 
 }
