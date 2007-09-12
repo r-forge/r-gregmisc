@@ -11,9 +11,6 @@ export(
        "label",
        "label<-",
        
-       "units",
-       "units<-",
-       
        "formats",
        "formats<-",
        
@@ -30,12 +27,10 @@ S3method(toSAS, Date)
 S3method(toSAS, default)
 
 S3method(label, default)
-S3method(units, default)
 S3method(formats, default)
 S3method(iformat, default)
 
 S3method("label<-", default)
-S3method("units<-", default)
 S3method("formats<-", default)
 S3method("iformat<-", default)
 
