@@ -260,7 +260,7 @@ W..2...X8  W..2..   X8 numeric            8        100
 > names(w) <- NULL
 > write.xport(list=w,file="a.xpt")
 Warning message:
-Fewer names than datasets.  Creating default names in: write.xport(list = w, file = "a.xpt") 
+Fewer names than datasets.  Creating default names. in: write.xport(list = w, file = "a.xpt") 
 > lookup.xport("a.xpt")
 
 SAS xport file
@@ -356,7 +356,7 @@ rd.xpr> ## Don't show:
 rd.xpr> SASxport:::assert( is.data.frame(w)==FALSE && is.list(w)==TRUE )
 > write.xport(list=base::list(w$test,w$z),file="a.xpt")
 Warning message:
-Fewer names than datasets.  Creating default names in: write.xport(list = base::list(w$test, w$z), file = "a.xpt") 
+Fewer names than datasets.  Creating default names. in: write.xport(list = base::list(w$test, w$z), file = "a.xpt") 
 > lookup.xport("a.xpt")
 
 SAS xport file
@@ -442,7 +442,7 @@ rd.xpr> SASxport:::assert( is.data.frame(w)==FALSE && is.list(w)==TRUE )
 > names(w) <- NULL
 > write.xport(list=w,file="a.xpt")
 Warning message:
-Fewer names than datasets.  Creating default names in: write.xport(list = w, file = "a.xpt") 
+Fewer names than datasets.  Creating default names. in: write.xport(list = w, file = "a.xpt") 
 > lookup.xport("a.xpt")
 
 SAS xport file
@@ -528,7 +528,7 @@ rd.xpr> SASxport:::assert( is.data.frame(w)==FALSE && is.list(w)==TRUE )
 > colnames(w[[2]]) <- c()
 > write.xport(list=w,file="a.xpt")
 Warning messages:
-1: Unnamed variables detected. Creating default variable names in: write.xport(list = w, file = "a.xpt") 
+1: Unnamed variables detected. Creating defalut variable names. in: write.xport(list = w, file = "a.xpt") 
 2: Variable names modified to obey SAS rules in: write.xport(list = w, file = "a.xpt") 
 > lookup.xport("a.xpt")
 
