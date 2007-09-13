@@ -124,15 +124,15 @@ read.xport <- function(file,
     nods <- length(whichds)
     nds  <- nods - (length(formats) == 0 && length(finfo) > 0)
     which.regular <- setdiff(whichds, fds)
-    dsn <- tolower(which.regular)
-
 
     ## Handle lowercase name conversions
     if(names.tolower)
       names.tolower <- tolower
     else
       names.tolower <- function(x) x
-    
+
+    dsn <- tolower(which.regular)
+
     res <- vector('list', nds)
     names(res) <- gsub('_','.',dsn)
 
