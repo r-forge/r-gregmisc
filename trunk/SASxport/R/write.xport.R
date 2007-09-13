@@ -34,11 +34,18 @@ write.xport <- function(...,
     mc$osType <- NULL
     mc$cDate <- NULL
     mc[[1]] <- NULL
+    
     mc <- as.character(mc)
     if(is.null(dfNames))
       {
         dfNames <- mc
       }
+    if(length(dfNames) < length(list))
+      {
+        warning("Fewer names than datasets.  Creating default names.")
+        dfNames[length(dfNames):length(list)] = "NONAME"
+      }
+    
     dfNames[dfNames==""] <- mc[dfNames==""]
     names(list) <- dfNames    
 
@@ -96,9 +103,11 @@ write.xport <- function(...,
         dfNames[long.names] <- new.names
       }
 
-    scat("Ensure object names are unique...\n")
-    if(any(duplicated(dfNames)))
-       stop("object names are not unique: ", paste(1:length(dfNames),":'",dfNames,"'",sep="",collapse=", " ))
+    scat("Ensure object names are valid and unique...\n")
+    dfNames <- substr(make.names(dfNames, unique=TRUE),1,8)
+    if( all(names(list)!=dfNames))
+      warning("Data frame names modified to obey SAS rules")
+    names(list) <- dfNames
 
     
     
@@ -129,7 +138,26 @@ write.xport <- function(...,
       {
         
         df <- list[[i]]
-        varNames <- colnames(df)
+
+        if(is.null(colnames(df)))
+           colnames(df) <- list(length=ncol(df))
+
+        emptyFlag <- ( colnames(df)=="" | is.na(colnames(df)) )
+        if(any(emptyFlag))
+          {
+            warning("Unnamed variables detected. Creating defalut variable names.")
+            colnames(df)[emptyFlag] = "NONAME"
+            list[[i]] <- df
+          }
+
+        varNames <- substr(make.names(colnames(df), unique=TRUE),1,8)
+        if( any(colnames(df)!=varNames))
+          {
+            warning("Variable names modified to obey SAS rules")
+            colnames(df) <- varNames
+            list[[i]] <- df
+          }
+
         offsetTable <- data.frame("name"=varNames, "len"=NA, "offset"=NA )
         rownames(offsetTable) <- offsetTable[,"name"]
 
