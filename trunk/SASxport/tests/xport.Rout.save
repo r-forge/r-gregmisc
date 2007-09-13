@@ -1,5 +1,5 @@
 
-R version 2.5.1 (2007-06-27)
+R version 2.5.0 Under development (unstable) (2007-01-25 r40572)
 Copyright (C) 2007 The R Foundation for Statistical Computing
 ISBN 3-900051-07-0
 
@@ -16,15 +16,6 @@ Type 'demo()' for some demos, 'help()' for on-line help, or
 Type 'q()' to quit R.
 
 > library(SASxport)
-
-Attaching package: 'SASxport'
-
-
-	The following object(s) are masked from package:base :
-
-	 units,
-	 units<- 
-
 > 
 > lookup.xport("Alfalfa.xpt")
 

@@ -1,5 +1,5 @@
 
-R version 2.5.1 (2007-06-27)
+R version 2.5.0 Under development (unstable) (2007-01-25 r40572)
 Copyright (C) 2007 The R Foundation for Statistical Computing
 ISBN 3-900051-07-0
 
@@ -19,15 +19,6 @@ Type 'q()' to quit R.
 > ## existing SAS xport file "Alfalfa.xpt"
 > 
 > library(SASxport)
-
-Attaching package: 'SASxport'
-
-
-	The following object(s) are masked from package:base :
-
-	 units,
-	 units<- 
-
 > 
 > # existing data file
 > SPEC <- read.xport("Alfalfa.xpt")
