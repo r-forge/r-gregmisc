@@ -1,0 +1,26 @@
+
+R version 2.5.0 Under development (unstable) (2007-01-25 r40572)
+Copyright (C) 2007 The R Foundation for Statistical Computing
+ISBN 3-900051-07-0
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> library(SASxport)
+> 
+> ## Call C-level test routines
+> 
+> .C("doTest",PACKAGE="SASxport")
+list()
+> 
+> ## Successful completion means all SASxport:::assertions have been met
+> 

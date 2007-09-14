@@ -1,0 +1,40 @@
+useDynLib(SASxport, .registration=TRUE)
+
+importFrom(foreign, read.xport, lookup.xport)
+importFrom(chron, chron)
+
+export(
+       toSAS,
+       lookup.xport,
+       read.xport,
+       write.xport,
+       "label",
+       "label<-",
+       
+       "formats",
+       "formats<-",
+       
+       "iformat",
+       "iformat<-"
+       )
+
+S3method(toSAS, numeric)
+S3method(toSAS, logical)
+S3method(toSAS, character)
+S3method(toSAS, factor)
+S3method(toSAS, POSIXt)
+S3method(toSAS, Date)
+S3method(toSAS, default)
+
+S3method(label, default)
+S3method(formats, default)
+S3method(iformat, default)
+
+S3method("label<-", default)
+S3method("formats<-", default)
+S3method("iformat<-", default)
+
+S3method(print, lookup.xport)
+S3method(summary, lookup.xport)
+S3method(print, summary.lookup.xport)
+
