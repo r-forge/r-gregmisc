@@ -14,7 +14,8 @@ read.xport(file,
            drop=NULL,
            as.is=0.95,
            verbose=FALSE,
-           as.list=FALSE
+           as.list=FALSE,
+           include.formats=FALSE
            )
 }
 \arguments{
@@ -63,14 +64,18 @@ read.xport(file,
     during the data loading and conversion process.}
   \item{as.list}{Logical indicating whether to return a list even if
     the SAS xport file contains only only one dataset.}
+  \item{include.formats}{Logical indicating whether to include SAS
+    format information (if present) in the returned list} 
 }
 \value{
-  If there the trasport file only contains one dataset (not counting any
-  \code{PROC FORMAT} datasets) and \code{as.list=FALSE}, the result is a
-  single data set.  Otherwise the result is a list 
-  containing all the non-\code{PROC FORMAT} datasets.
-}
+  If only a single dataset is present (after removing \code{PROC FORMAT}
+  data when \code{include.formats=FALSE}), the return value is a single
+  dataframe  object. Otherwise the return is a list of dataframe objects. 
 
+  Note that if \code{include.formats=TRUE}, the returned list will
+  contain a dataframe named "FORMATS" containing any available 'PROC FORMAT'
+  information.
+}
 \details{
 
   \itemize{
@@ -162,6 +167,9 @@ w <- read.xport(url)
 
 # We can also get the dataset wrapped in a list
 w <- read.xport(url, as.list=TRUE)
+
+# And we can ask for the format information to be included as well.
+w <- read.xport(url, as.list=TRUE, include.formats=TRUE)
 
 \dontshow{
 SASxport:::assert( is.data.frame(w)==FALSE && is.list(w)==TRUE )

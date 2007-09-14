@@ -1,3 +1,94 @@
+2007-09-13 01:55  warnes
+
+	* tests/TestUnnamedComponents.Rout.save: Update test output to
+	  match recent changes.
+
+2007-09-13 01:19  warnes
+
+	* R/write.xport.R: Add checking and handling for unnamed data
+	  frames or variables
+
+2007-09-13 01:14  warnes
+
+	* tests/Alfalfa_Test.Rout.save, tests/TestUnnamedComponents.R,
+	  tests/TestUnnamedComponents.Rout.save, tests/Theoph.Rout.save,
+	  tests/cars.Rout.save, tests/testDates.Rout.save,
+	  tests/test_fields.Rout.save, tests/xport.Rout.save,
+	  tests/xxx.Rout.save: Update tests now that 'units' and 'units<-'
+	  functions no longer are included
+
+2007-09-12 22:27  warnes
+
+	* NAMESPACE: Remove units() and units<-() functions since they
+	  arene't ever used.
+
+2007-09-12 22:25  warnes
+
+	* R/units.R, man/label.Rd, man/units.Rd: Remove units() and
+	  units<-() functions since they arene't ever used.
+
+2007-09-12 22:24  warnes
+
+	* man/units.Rd: Remove units from manual page
+
+2007-09-11 23:08  warnes
+
+	* man/read.xport.Rd: Add assertion to test that read.xport(..,
+	  as.list=TRUE) works properly
+
+2007-09-11 23:05  warnes
+
+	* R/write.xport.R: Forgot to save buffer before svn commit.
+
+2007-09-11 21:22  warnes
+
+	* R/read.xport.R, man/read.xport.Rd: Correct error in handling
+	  'verbose' argument, error when more than one dataset has the same
+	  name, and add 'as.list' argument to ensure return value is a
+	  list, even if there is only one dataset in the file
+
+2007-09-11 21:21  warnes
+
+	* R/write.xport.R, man/write.xport.Rd: Improve handling of list
+	  argument. Also check that names are proper and unique.
+
+2007-09-07 16:47  warnes
+
+	* tests/Theoph.R, tests/Theoph.Rout.save: Add round-trip test for
+	  Theoph data set
+
+2007-09-07 16:32  warnes
+
+	* tests/Alfalfa_Test.Rout.save, tests/cars.Rout.save,
+	  tests/testDates.Rout.save, tests/xxx.Rout.save: Change argument
+	  name in write.xport from 'filename' to 'file' to match read.xport
+
+2007-09-07 16:25  warnes
+
+	* man/write.xport.Rd: Change argument name in write.xport from
+	  'filename' to 'file' to match read.xport
+
+2007-09-07 16:23  warnes
+
+	* R/write.xport.R, man/read.xport.Rd, man/write.xport.Rd,
+	  tests/Alfalfa_Test.R, tests/cars.R, tests/testDates.R,
+	  tests/xxx.R: Change argument name in write.xport from 'filename'
+	  to 'file' to match read.xport
+
+2007-09-07 16:21  warnes
+
+	* DESCRIPTION: Fix typo
+
+2007-08-29 02:24  warnes
+
+	* DESCRIPTION: Update Version to 1.0, depend on current version of
+	  foreign
+
+2007-08-22 19:21  warnes
+
+	* ChangeLog, NEWS, inst/ChangeLog, inst/NEWS: Update ChangeLog and
+	  NEWS files
+
 2007-08-22 18:11  warnes
 
 	* R/read.xport.R, man/read.xport.Rd, tests/xport.Rout.save: Modify

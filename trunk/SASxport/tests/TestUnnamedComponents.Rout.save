@@ -74,6 +74,9 @@ rd.xpr> w <- read.xport(url)
 rd.xpr> # We can also get the dataset wrapped in a list
 rd.xpr> w <- read.xport(url, as.list=TRUE)
 
+rd.xpr> # And we can ask for the format information to be included as well.
+rd.xpr> w <- read.xport(url, as.list=TRUE, include.formats=TRUE)
+
 rd.xpr> ## Don't show: 
 rd.xpr> SASxport:::assert( is.data.frame(w)==FALSE && is.list(w)==TRUE )
 > write.xport(w$test,file="a.xpt")
@@ -228,6 +231,30 @@ Z.X6       Z   X6 numeric            8        100
 Z.X7       Z   X7 numeric            8        100
 Z.X8       Z   X8 numeric            8        100
 
+Variables in data set `FORMATS':
+                 dataset     name      type format width label nobs
+FORMATS.FMTNAME  FORMATS  FMTNAME character            8          3
+FORMATS.START    FORMATS    START character           16          3
+FORMATS.END      FORMATS      END character           16          3
+FORMATS.LABEL    FORMATS    LABEL character            8          3
+FORMATS.MIN      FORMATS      MIN   numeric            8          3
+FORMATS.MAX      FORMATS      MAX   numeric            8          3
+FORMATS.DEFAULT  FORMATS  DEFAULT   numeric            8          3
+FORMATS.LENGTH   FORMATS   LENGTH   numeric            8          3
+FORMATS.FUZZ     FORMATS     FUZZ   numeric            8          3
+FORMATS.PREFIX   FORMATS   PREFIX character            8          3
+FORMATS.MULT     FORMATS     MULT   numeric            8          3
+FORMATS.FILL     FORMATS     FILL character            8          3
+FORMATS.NOEDIT   FORMATS   NOEDIT   numeric            8          3
+FORMATS.TYPE     FORMATS     TYPE character            8          3
+FORMATS.SEXCL    FORMATS    SEXCL character            8          3
+FORMATS.EEXCL    FORMATS    EEXCL character            8          3
+FORMATS.HLO      FORMATS      HLO character            8          3
+FORMATS.DECSEP   FORMATS   DECSEP character            8          3
+FORMATS.DIG3SEP  FORMATS  DIG3SEP character            8          3
+FORMATS.DATATYPE FORMATS DATATYPE character            8          3
+FORMATS.LANGUAGE FORMATS LANGUAGE character            8          3
+
 > 
 > names(w) <- NULL
 > write.xport(w[[1]],w[[2]],file="a.xpt")
@@ -283,6 +310,30 @@ NONAME.1.X5 NONAME.1   X5 numeric            8        100
 NONAME.1.X6 NONAME.1   X6 numeric            8        100
 NONAME.1.X7 NONAME.1   X7 numeric            8        100
 NONAME.1.X8 NONAME.1   X8 numeric            8        100
+
+Variables in data set `NONAME.2':
+                   dataset     name      type format width label nobs
+NONAME.2.FMTNAME  NONAME.2  FMTNAME character            8          3
+NONAME.2.START    NONAME.2    START character           16          3
+NONAME.2.END      NONAME.2      END character           16          3
+NONAME.2.LABEL    NONAME.2    LABEL character            8          3
+NONAME.2.MIN      NONAME.2      MIN   numeric            8          3
+NONAME.2.MAX      NONAME.2      MAX   numeric            8          3
+NONAME.2.DEFAULT  NONAME.2  DEFAULT   numeric            8          3
+NONAME.2.LENGTH   NONAME.2   LENGTH   numeric            8          3
+NONAME.2.FUZZ     NONAME.2     FUZZ   numeric            8          3
+NONAME.2.PREFIX   NONAME.2   PREFIX character            8          3
+NONAME.2.MULT     NONAME.2     MULT   numeric            8          3
+NONAME.2.FILL     NONAME.2     FILL character            8          3
+NONAME.2.NOEDIT   NONAME.2   NOEDIT   numeric            8          3
+NONAME.2.TYPE     NONAME.2     TYPE character            8          3
+NONAME.2.SEXCL    NONAME.2    SEXCL character            8          3
+NONAME.2.EEXCL    NONAME.2    EEXCL character            8          3
+NONAME.2.HLO      NONAME.2      HLO character            8          3
+NONAME.2.DECSEP   NONAME.2   DECSEP character            8          3
+NONAME.2.DIG3SEP  NONAME.2  DIG3SEP character            8          3
+NONAME.2.DATATYPE NONAME.2 DATATYPE character            8          3
+NONAME.2.LANGUAGE NONAME.2 LANGUAGE character            8          3
 
 > 
 > ### Check that we catch invalid parameters
@@ -351,6 +402,9 @@ rd.xpr> w <- read.xport(url)
 
 rd.xpr> # We can also get the dataset wrapped in a list
 rd.xpr> w <- read.xport(url, as.list=TRUE)
+
+rd.xpr> # And we can ask for the format information to be included as well.
+rd.xpr> w <- read.xport(url, as.list=TRUE, include.formats=TRUE)
 
 rd.xpr> ## Don't show: 
 rd.xpr> SASxport:::assert( is.data.frame(w)==FALSE && is.list(w)==TRUE )
@@ -437,6 +491,9 @@ rd.xpr> w <- read.xport(url)
 rd.xpr> # We can also get the dataset wrapped in a list
 rd.xpr> w <- read.xport(url, as.list=TRUE)
 
+rd.xpr> # And we can ask for the format information to be included as well.
+rd.xpr> w <- read.xport(url, as.list=TRUE, include.formats=TRUE)
+
 rd.xpr> ## Don't show: 
 rd.xpr> SASxport:::assert( is.data.frame(w)==FALSE && is.list(w)==TRUE )
 > names(w) <- NULL
@@ -465,6 +522,30 @@ NONAME.1.X5 NONAME.1   X5 numeric            8        100
 NONAME.1.X6 NONAME.1   X6 numeric            8        100
 NONAME.1.X7 NONAME.1   X7 numeric            8        100
 NONAME.1.X8 NONAME.1   X8 numeric            8        100
+
+Variables in data set `NONAME.2':
+                   dataset     name      type format width label nobs
+NONAME.2.FMTNAME  NONAME.2  FMTNAME character            8          3
+NONAME.2.START    NONAME.2    START character           16          3
+NONAME.2.END      NONAME.2      END character           16          3
+NONAME.2.LABEL    NONAME.2    LABEL character            8          3
+NONAME.2.MIN      NONAME.2      MIN   numeric            8          3
+NONAME.2.MAX      NONAME.2      MAX   numeric            8          3
+NONAME.2.DEFAULT  NONAME.2  DEFAULT   numeric            8          3
+NONAME.2.LENGTH   NONAME.2   LENGTH   numeric            8          3
+NONAME.2.FUZZ     NONAME.2     FUZZ   numeric            8          3
+NONAME.2.PREFIX   NONAME.2   PREFIX character            8          3
+NONAME.2.MULT     NONAME.2     MULT   numeric            8          3
+NONAME.2.FILL     NONAME.2     FILL character            8          3
+NONAME.2.NOEDIT   NONAME.2   NOEDIT   numeric            8          3
+NONAME.2.TYPE     NONAME.2     TYPE character            8          3
+NONAME.2.SEXCL    NONAME.2    SEXCL character            8          3
+NONAME.2.EEXCL    NONAME.2    EEXCL character            8          3
+NONAME.2.HLO      NONAME.2      HLO character            8          3
+NONAME.2.DECSEP   NONAME.2   DECSEP character            8          3
+NONAME.2.DIG3SEP  NONAME.2  DIG3SEP character            8          3
+NONAME.2.DATATYPE NONAME.2 DATATYPE character            8          3
+NONAME.2.LANGUAGE NONAME.2 LANGUAGE character            8          3
 
 > 
 > # remove variable names
@@ -523,6 +604,9 @@ rd.xpr> w <- read.xport(url)
 rd.xpr> # We can also get the dataset wrapped in a list
 rd.xpr> w <- read.xport(url, as.list=TRUE)
 
+rd.xpr> # And we can ask for the format information to be included as well.
+rd.xpr> w <- read.xport(url, as.list=TRUE, include.formats=TRUE)
+
 rd.xpr> ## Don't show: 
 rd.xpr> SASxport:::assert( is.data.frame(w)==FALSE && is.list(w)==TRUE )
 > colnames(w[[2]]) <- c()
@@ -552,5 +636,29 @@ Z.NONAME_1       Z NONAME_1 numeric            8        100
 Z.NONAME_2       Z NONAME_2 numeric            8        100
 Z.NONAME_3       Z NONAME_3 numeric            8        100
 Z.NONAME_4       Z NONAME_4 numeric            8        100
+
+Variables in data set `FORMATS':
+                 dataset     name      type format width label nobs
+FORMATS.FMTNAME  FORMATS  FMTNAME character            8          3
+FORMATS.START    FORMATS    START character           16          3
+FORMATS.END      FORMATS      END character           16          3
+FORMATS.LABEL    FORMATS    LABEL character            8          3
+FORMATS.MIN      FORMATS      MIN   numeric            8          3
+FORMATS.MAX      FORMATS      MAX   numeric            8          3
+FORMATS.DEFAULT  FORMATS  DEFAULT   numeric            8          3
+FORMATS.LENGTH   FORMATS   LENGTH   numeric            8          3
+FORMATS.FUZZ     FORMATS     FUZZ   numeric            8          3
+FORMATS.PREFIX   FORMATS   PREFIX character            8          3
+FORMATS.MULT     FORMATS     MULT   numeric            8          3
+FORMATS.FILL     FORMATS     FILL character            8          3
+FORMATS.NOEDIT   FORMATS   NOEDIT   numeric            8          3
+FORMATS.TYPE     FORMATS     TYPE character            8          3
+FORMATS.SEXCL    FORMATS    SEXCL character            8          3
+FORMATS.EEXCL    FORMATS    EEXCL character            8          3
+FORMATS.HLO      FORMATS      HLO character            8          3
+FORMATS.DECSEP   FORMATS   DECSEP character            8          3
+FORMATS.DIG3SEP  FORMATS  DIG3SEP character            8          3
+FORMATS.DATATYPE FORMATS DATATYPE character            8          3
+FORMATS.LANGUAGE FORMATS LANGUAGE character            8          3
 
 > 

@@ -44,10 +44,12 @@ lookup.xport(file)
   for \code{\link[foreign]{lookup.xport}}.
 }
 \examples{
-\dontrun{
-## Get information on a local file
-lookup.xport("xxx.xpt")
+\dontshow{
+setwd(file.path(.path.package("SASxport"),"data"))
 }
+## Get information on a local file
+lookup.xport("Alfalfa.xpt")
+
 
 ## Or read a copy of test2.xpt available on the web:
 \dontrun{

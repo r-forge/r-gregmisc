@@ -13,7 +13,8 @@ read.xport <- function(file,
                        drop=NULL,
                        as.is=0.95, # Prevent factor conversion if 95% or more unique
                        verbose=FALSE,
-                       as.list=FALSE
+                       as.list=FALSE,
+                       include.formats=FALSE
                        )
   {
     sasdateform <-
@@ -84,40 +85,9 @@ read.xport <- function(file,
     finfo <- NULL
     if(length(formats) || length(fds)) {
       if(length(formats))
-        finfo <- formats
+        finfo <- process.formats(formats)
       else
-        finfo <- ds[[fds]]
-
-      ## Remove leading $ from char format names
-      ##  fmtname <- sub('^\\$','',as.character(finfo$FMTNAME))
-      fmtname <- as.character(finfo$FMTNAME)
-      finfo <- split(finfo[c('START','END','LABEL')], fmtname)
-      finfo <- lapply(finfo,
-                      function(f)
-                      {
-                        rb <- function(a)
-                        {  # remove leading + trailing blanks
-                          a <- sub('[[:space:]]+$', '', as.character(a))
-                          sub('^[[:space:]]+', '', a)
-                        }
-
-                        st <- rb(f$START)
-                        en <- rb(f$END)
-                        lab <- rb(f$LABEL)
-                        ##j <- is.na(st) | is.na(en)
-                        ##  st %in% c('','.','NA') | en %in% c('','.','NA')
-                        j <- is.na(st) | is.na(en) | st == '' | en == ''
-                        if(any(j)) {
-                          warning('NA in code in FORMAT definition; removed')
-                          st <- st[!j]; en <- en[!j]; lab <- lab[!j]
-                        }
-
-                        if(!all(st==en))
-                          return(NULL)
-
-                        list(value = all.is.numeric(st, 'vector'),
-                             label = lab)
-                      })
+        finfo <- process.formats(ds[[fds]])
     }
 
     ## Number of non-format datasets
@@ -165,7 +135,8 @@ read.xport <- function(file,
       for(i in 1:length(w)) {
         changed <- FALSE
         x  <- w[[i]]
-        fi <- fmt[nam[i]]; names(fi) <- NULL
+        fi <- fmt[nam[i]];
+        names(fi) <- NULL
         if(fi != '' && length(finfo) && (fi %in% names(finfo))) {
           f <- finfo[[fi]]
           if(length(f)) {  ## may be NULL because had a range in format
@@ -227,6 +198,13 @@ read.xport <- function(file,
     }
 
     scat("Done")
+
+    if(include.formats)
+      {
+        nds <- nds+1
+        res$"FORMATS" <- ds[[fds]]
+      }
+
     
     if(nds > 1 || as.list)
       res
