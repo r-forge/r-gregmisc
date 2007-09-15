@@ -1,3 +1,34 @@
+2007-09-15 04:55  warnes
+
+	* tests/TestUnnamedComponents.R: Changes so test
+	  TestUnnamedCompontents.R runs under R 2.4.1 on Win32
+
+2007-09-15 04:01  warnes
+
+	* DESCRIPTION, R/make.formats.R, R/toSAS.R, R/write.xport.R,
+	  R/xport.character.R, man/Alfalfa.Rd, man/lookup.xport.Rd,
+	  man/toSAS.Rd, man/write.xport.Rd, tests/Alfalfa_Test.R,
+	  tests/Alfalfa_Test.Rout.save,
+	  tests/TestUnnamedComponents.Rout.save, tests/Theoph.Rout.save,
+	  tests/cars.R, tests/cars.Rout.save, tests/test.xpt,
+	  tests/testDates.Rout.save, tests/test_fields.Rout.save,
+	  tests/xport.Rout.save, tests/xxx.R, tests/xxx.Rout.save: Add
+	  support for auto-generating SAS formats for factor objects.
+	  Refactor argument name handling to improve code clarity.
+
+2007-09-14 15:35  warnes
+
+	* R/process.formats.R, R/read.xport.R, data, data/Alfalfa.R,
+	  data/Alfalfa.xpt, inst/ChangeLog, man/Alfalfa.Rd,
+	  man/lookup.xport.Rd, man/read.xport.Rd,
+	  tests/TestUnnamedComponents.Rout.save: Add option to read.xport()
+	  that permits inclusion of PROC CONTENTS format information in the
+	  returned list
+
+2007-09-13 17:36  warnes
+
+	* R/read.xport.R: Ensure 'names.tolower' applies to dataset names
+
 2007-09-13 01:55  warnes
 
 	* tests/TestUnnamedComponents.Rout.save: Update test output to
