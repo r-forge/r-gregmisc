@@ -54,6 +54,6 @@ lookup.xport("a.xpt")
 
 # remove variable names
 example(read.xport)
-colnames(w[[2]]) <- c()
+colnames(w[[2]]) <- rep("", length=ncol(w[[2]]))
 write.xport(list=w,file="a.xpt")
 lookup.xport("a.xpt")
