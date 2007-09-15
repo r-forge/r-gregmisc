@@ -1,5 +1,5 @@
 
-R version 2.5.0 Under development (unstable) (2007-01-25 r40572)
+R version 2.5.1 (2007-06-27)
 Copyright (C) 2007 The R Foundation for Statistical Computing
 ISBN 3-900051-07-0
 
@@ -44,7 +44,8 @@ Type 'q()' to quit R.
 +             file="cars2.xpt",
 +             cDate=strptime("28JUL07: 20:59:49", format="%d%b%y:%H:%M:%S"),
 +             osType="SunOS",
-+             sasVer="9.1"
++             sasVer="9.1",
++             autogen.formats=FALSE            
 + )
 > 
 > 

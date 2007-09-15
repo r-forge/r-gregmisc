@@ -1,5 +1,5 @@
 
-R version 2.5.0 Under development (unstable) (2007-01-25 r40572)
+R version 2.5.1 (2007-06-27)
 Copyright (C) 2007 The R Foundation for Statistical Computing
 ISBN 3-900051-07-0
 
@@ -44,11 +44,11 @@ Variable names modified to obey SAS rules in: write.xport(DATETIME = temp, file 
 > 
 > print(temp2)
   X Y      DATES   DATETIME
-1 1 a 1014768000 1014851000
-2 2 B 1014768000 1014848996
-3 3 c 1010966400 1010970210
-4 4 d 1014854400 1014920463
-5 5 e 1012521600 1012582586
+1 1 2 1014768000 1014851000
+2 2 1 1014768000 1014848996
+3 3 3 1010966400 1010970210
+4 4 4 1014854400 1014920463
+5 5 5 1012521600 1012582586
 > 
 > 
 > identical(temp, temp2)

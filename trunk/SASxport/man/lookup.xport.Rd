@@ -50,7 +50,6 @@ setwd(file.path(.path.package("SASxport"),"data"))
 ## Get information on a local file
 lookup.xport("Alfalfa.xpt")
 
-
 ## Or read a copy of test2.xpt available on the web:
 \dontrun{
 url <- 'http://biostat.mc.vanderbilt.edu/cgi-bin/viewvc.cgi/*checkout*/Hmisc/trunk/tests/test2.xpt'

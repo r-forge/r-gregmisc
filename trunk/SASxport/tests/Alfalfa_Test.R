@@ -11,7 +11,8 @@ write.xport(SPEC,
             file="Alfalfa2.xpt",
             cDate=strptime("10DEC99:15:56:30", format="%d%b%y:%H:%M:%S"),
             osType="OSF1",
-            sasVer="7.00"
+            sasVer="7.00",
+            autogen.formats=FALSE
             )
 
 ## Load both files back in as raw data

@@ -1,5 +1,5 @@
 
-R version 2.5.0 Under development (unstable) (2007-01-25 r40572)
+R version 2.5.1 (2007-06-27)
 Copyright (C) 2007 The R Foundation for Statistical Computing
 ISBN 3-900051-07-0
 
@@ -28,7 +28,8 @@ Type 'q()' to quit R.
 +             file="Alfalfa2.xpt",
 +             cDate=strptime("10DEC99:15:56:30", format="%d%b%y:%H:%M:%S"),
 +             osType="OSF1",
-+             sasVer="7.00"
++             sasVer="7.00",
++             autogen.formats=FALSE
 +             )
 > 
 > ## Load both files back in as raw data

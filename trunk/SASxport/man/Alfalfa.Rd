@@ -13,7 +13,7 @@
     \item{\code{POP}}{Population, a factor with levels \code{MAX} amd \code{min}}
     \item{\code{SAMPLE}}{Sample ID (0:5)}
     \item{\code{REP}}{Replicate (always 1)}
-    \item{\code{SEEDWT}}{Sed weight}
+    \item{\code{SEEDWT}}{Seed weight}
     \item{\code{HARV1}}{Harvest 1 volume}
     \item{\code{HARV2}}{Harvest 2 volume}
   }

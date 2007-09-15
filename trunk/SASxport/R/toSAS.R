@@ -1,14 +1,14 @@
-toSAS <- function(x, format)
+toSAS <- function(x, format, format.info=NULL)
   UseMethod("toSAS")
 
-toSAS.numeric <- function(x, format="")
+toSAS.numeric <- function(x, format=formats(x), format.info=NULL)
   {
     retval <- as.numeric(x)
     attr(retval, "format")=format
     retval
   }
 
-toSAS.logical <- function(x, format="")
+toSAS.logical <- function(x, format=formats(x), format.info=NULL)
   {
     retval <- as.character(x)
     attr(retval, "format")=format
@@ -16,21 +16,31 @@ toSAS.logical <- function(x, format="")
   }
   
 
-toSAS.character <- function(x, format="")
+toSAS.character <- function(x, format=formats(x), format.info=NULL)
   {
     retval <- as.character(x)
     attr(retval, "format")=format
     retval
   }
 
-toSAS.factor <- function(x, format="")
+toSAS.factor <- function(x, format=formats(x), format.info=NULL)
   {
-    retval <- as.character(x)
+    finfo <- process.formats(format.info)
+    if( (length(format>0)) && (format %in% names(finfo)) )
+      {
+        labels <- finfo[[formats(x)]]$label
+        values <- finfo[[formats(x)]]$value
+        retval <- values[match( x, labels)]
+      }
+    else
+      {
+        retval <- as.character(x)
+      }
     attr(retval, "format")=format
     retval
   }
 
-toSAS.POSIXt <- function( x, format="DATETIME16." )
+toSAS.POSIXt <- function( x, format="DATETIME16.", format.info=NULL)
   {
     sasBaseSeconds <- as.numeric(ISOdatetime(1960,1,1,0,0,0))
     retval <- unclass(as.POSIXct(x))  - sasBaseSeconds  # sasBaseSeconds is negative
@@ -38,7 +48,7 @@ toSAS.POSIXt <- function( x, format="DATETIME16." )
     retval
   }
 
-toSAS.Date <- function(x, format="DATE9." )
+toSAS.Date <- function(x, format="DATE9.", format.info=NULL )
   {
     sasBase <- as.Date(strptime("01/01/1960", "%m/%d/%Y", tz="GMT")) # days
     retval <- as.numeric( as.Date(x) - sasBase)
@@ -46,7 +56,7 @@ toSAS.Date <- function(x, format="DATE9." )
     retval
   }
 
-toSAS.default <- function(x, format="")
+toSAS.default <- function(x, format=formats(x), format.info=NULL)
   {
     retval <- as.character(x)
     attr(retval, "format")=format

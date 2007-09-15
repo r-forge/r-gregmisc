@@ -14,18 +14,19 @@
   \code{write.xport}.  
 }
 \usage{
-toSAS(x, format)
-\method{toSAS}{default}(x, format="")
-\method{toSAS}{numeric}(x, format="")
-\method{toSAS}{logical}(x, format="")
-\method{toSAS}{character}(x, format="")
-\method{toSAS}{factor}(x, format="")
-\method{toSAS}{POSIXt}( x, format="DATETIME16." )
-\method{toSAS}{Date}(x, format="DATE9." )
+toSAS(x, format, format.info=NULL)
+\method{toSAS}{default}(x, format=formats(x), format.info=NULL)
+\method{toSAS}{numeric}(x, format=formats(x), format.info=NULL)
+\method{toSAS}{logical}(x, format=formats(x), format.info=NULL)
+\method{toSAS}{character}(x, format=formats(x), format.info=NULL)
+\method{toSAS}{factor}(x, format=formats(x), format.info=NULL)
+\method{toSAS}{POSIXt}( x, format="DATETIME16.", format.info=NULL)
+\method{toSAS}{Date}(x, format="DATE9.", format.info=NULL)
 }
 \arguments{
   \item{x}{ Object to be converted }
   \item{format}{SAS format name}
+  \item{format.info}{Table of SAS format information}
 }
 \details{
   To add support for a new object type, create an appropriate
@@ -35,6 +36,9 @@ toSAS(x, format)
   format, and should add an attribute named "format" to the object
   providing an appropriate SAS format string or "" (indicating the
   default SAS format).
+
+  
+  
 }
 \value{
   A vector of type "character" or of type "numeric", with an attribute

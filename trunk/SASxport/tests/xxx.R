@@ -9,12 +9,13 @@ attr(abc$x, 'format') <- 'date7.'
 ## add a variable label (not used by R)
 attr(abc$y, 'label')  <- 'character variable'
 
-# create a SAS XPORT file from our local data fram
+# create a SAS XPORT file from our local data frame
 write.xport(abc,
             file="xxx2.xpt",
             cDate=strptime("28JUL07:21:08:06 ", format="%d%b%y:%H:%M:%S"),
             osType="SunOS",
-            sasVer="9.1"
+            sasVer="9.1",
+            autogen.formats=FALSE
             )
 
 # read the original SAS data file
@@ -28,7 +29,8 @@ write.xport(abc=abc.SAS,
             file="xxx3.xpt",
             cDate=strptime("28JUL07:21:08:06 ", format="%d%b%y:%H:%M:%S"),
             osType="SunOS",
-            sasVer="9.1"
+            sasVer="9.1",
+            autogen.formats=FALSE            
             )
 
 

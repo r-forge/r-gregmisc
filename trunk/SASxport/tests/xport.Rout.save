@@ -1,5 +1,5 @@
 
-R version 2.5.0 Under development (unstable) (2007-01-25 r40572)
+R version 2.5.1 (2007-06-27)
 Copyright (C) 2007 The R Foundation for Statistical Computing
 ISBN 3-900051-07-0
 
@@ -59,19 +59,22 @@ SAS xport file
 --------------
 Filename: `test.xpt'
 
-Variables in data set `TEST':
-       dataset name    type format width label nobs
-TEST.I    TEST    I numeric            8         12
-TEST.K    TEST    K numeric            8         12
+Variables in data set `W.TEST':
+            dataset name      type format width                     label nobs
+W.TEST.RACE  W.TEST RACE character   RACE     8                              2
+W.TEST.AGE   W.TEST  AGE   numeric            8 Age at Beginning of Study    2
+W.TEST.D1    W.TEST   D1   numeric            8                              2
+W.TEST.DT1   W.TEST  DT1   numeric            8                              2
+W.TEST.T1    W.TEST   T1   numeric            8                              2
 
 > testdata <- read.xport("test.xpt")
 > summary(testdata)
-       I              K    
- Min.   :1.00   Min.   :1  
- 1st Qu.:1.75   1st Qu.:1  
- Median :2.50   Median :2  
- Mean   :2.50   Mean   :2  
- 3rd Qu.:3.25   3rd Qu.:3  
- Max.   :4.00   Max.   :3  
+   RACE        AGE              D1             DT1                  T1       
+     :1   Min.   :30.00   Min.   :15402   Min.   :1.331e+09   Min.   :40425  
+ blue:1   1st Qu.:30.25   1st Qu.:15425   1st Qu.:1.333e+09   1st Qu.:40432  
+          Median :30.50   Median :15448   Median :1.335e+09   Median :40439  
+          Mean   :30.50   Mean   :15448   Mean   :1.335e+09   Mean   :40439  
+          3rd Qu.:30.75   3rd Qu.:15471   3rd Qu.:1.337e+09   3rd Qu.:40446  
+          Max.   :31.00   Max.   :15494   Max.   :1.339e+09   Max.   :40453  
 > 
 > q()

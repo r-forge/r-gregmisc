@@ -12,7 +12,10 @@ write.xport(...,
             verbose=FALSE,
             sasVer="7.00",
             osType,
-            cDate=Sys.time() )
+            cDate=Sys.time(),
+            formats=NULL,
+            autogen.formats=TRUE
+ )
 }
 \arguments{
   \item{\dots}{One or more data frames to be stored}  
@@ -24,6 +27,9 @@ write.xport(...,
   \item{osType}{Opererating system, defaults to "R X.Y.Z" for
     appropriate values of X, Y, and Z}
   \item{cDate}{Date object specifying dataset creation date}
+  \item{formats}{Optional data frame containing SAS format information.}
+  \item{autogen.formats}{Logical indiciating whether SAS formats should be
+    auto-generated for factor variables.}
 }
 \details{
   The function creates a SAS XPORT data file (see reference) from one or
@@ -32,8 +38,10 @@ write.xport(...,
     \item Data set and variable names are truncated to 8 characters and
       converted to upper case.  All characters outside of the set A-Z,
       0-9, and '\_' are converted to '\_'.
-    \item Factor and character variables are stored as
-      characters.
+    \item Character variables are stored as characters.
+    \item If \code{make.formats=TRUE} (the default), factor variables are stored as numeric with an appropriate SAS
+      format specification. If \code{make.formats=FALSE}, factor
+      variables are stored as characters.
     \item All numeric variables are stored as double-precision floating
       point values utilizing the IBM mainframe double precision floating
       point format (see the reference).

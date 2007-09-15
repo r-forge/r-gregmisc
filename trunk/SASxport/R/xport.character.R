@@ -1,6 +1,6 @@
 xport.character <- function( value, width )
   {
-    if(length(value)!=1) stop("Only a single character value is permitted.")
+    if(length(value)!=1) stop("Only a single character value is permitted: '", value, "'")
 
     if(is.na(value)) value <- ""
     

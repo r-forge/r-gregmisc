@@ -13,7 +13,8 @@ write.xport(cars,
             file="cars2.xpt",
             cDate=strptime("28JUL07: 20:59:49", format="%d%b%y:%H:%M:%S"),
             osType="SunOS",
-            sasVer="9.1"
+            sasVer="9.1",
+            autogen.formats=FALSE            
 )
 
 

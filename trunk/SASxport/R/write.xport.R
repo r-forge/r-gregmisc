@@ -4,15 +4,13 @@ write.xport <- function(...,
                         verbose=FALSE,
                         sasVer="7.00",
                         osType,
-                        cDate=Sys.time()
+                        cDate=Sys.time(),
+                        formats=NULL,
+                        autogen.formats=TRUE
                         ) 
   {
-    list <- c(base::list(...), list)
-    dfNames <- names(list)
 
-    if(missing(osType))
-      osType <- paste("R ", R.version$major, ".", R.version$minor, sep="")
-
+    ## Handle verbose option ##
     oldDebug <- getOption("DEBUG")
     if(verbose)
       {
@@ -24,52 +22,59 @@ write.xport <- function(...,
       }
     on.exit( options(DEBUG=oldDebug) )
 
-      
-    ## capture names of data frames from function call, but don't
-    ## clobber explicitly provided names 
-    mc <- match.call()
-    mc$file <- NULL
-    mc$verbose <- NULL
-    mc$sasVer <- NULL
-    mc$osType <- NULL
-    mc$cDate <- NULL
-    mc[[1]] <- NULL
-    
-    mc <- as.character(mc)
-    if(is.null(dfNames))
-      {
-        dfNames <- mc
-      }
-    if(length(dfNames) < length(list))
-      {
-        warning("Fewer names than datasets.  Creating default names.")
-        dfNames[length(dfNames):length(list)] = "NONAME"
-      }
-    
-    dfNames[dfNames==""] <- mc[dfNames==""]
-    names(list) <- dfNames    
+    ## Handle osType default value ##
+    if(missing(osType))
+      osType <- paste("R ", R.version$major, ".", R.version$minor, sep="")
 
+    ## Handle '...' ##
+    dotList <- base::list(...)
+    dotNames <- names(dotList)
+    if(is.null(dotNames)) dotNames <- rep("", length(dotList))
 
-#    #######
-#    ## If no file argument is found, check if there is a single string
-#    ## argument.  If so, assume that it is the destation filename
-#    if(missing(file))
-#      {
-#        string.arg <- which(sapply(list,is.character))
-#        if(length(string.arg)==1)
-#          {
-#            file <- list[[string.arg]]
-#            list[[string.arg]] <- NULL
-#            dfNames <- dfNames[-string.arg]
-#          }
-#      }
-#    ##
-#    #######
+    if(length(dotList)>0) 
+      {
+        ## Get data frame names from ... in function call, but don't
+        ## clobber any explicitly provided names 
+        mc <- match.call()
+        mc$file <- NULL
+        mc$verbose <- NULL
+        mc$sasVer <- NULL
+        mc$osType <- NULL
+        mc$cDate <- NULL
+        mc$list <- NULL
+        mc$autogen.formats <- NULL
+        mc[[1]] <- NULL
+        # note we *do not* mask off format argument so it will get
+        # magically included if present.  
+    
+        mc <- as.character(mc)
+
+        badNames <- which(is.na(dotNames) | dotNames<="")
+        dotNames[badNames] <- mc[badNames]
+      }
+
+    ## Join explicit 'list' argument to '...' arguments ##
+    listNames <- names(list)
+    if(is.null(listNames))
+      listNames <- rep("", length(list))
+    dfList  <- c(dotList, list)
+    dfNames <- c(dotNames, listNames)
+    
+    ## check for and handle <NA> or empty names ##
+    badNames <- which(is.na(dfNames) | dfNames<="")
+    if(length(badNames)>0)
+      {
+        warning("Replacing missing or invalid dataset names")
+        dfNames[badNames] = paste("DATA",badNames,sep="")
+      }
+
+    ## put revised names back ##
+    names(dfList) <- dfNames
 
     #######
     ##
     scat("Ensure all objects to be stored are data.frames...\n")
-    not.df <- which(!sapply(list,is.data.frame))
+    not.df <- which(!sapply(dfList,is.data.frame))
     if(any(not.df))
       if(length(not.df)==1)
         stop(paste("'", dfNames[not.df], "'"),
@@ -103,14 +108,33 @@ write.xport <- function(...,
         dfNames[long.names] <- new.names
       }
 
+    #######
+    ##
     scat("Ensure object names are valid and unique...\n")
     dfNames <- substr(make.names(dfNames, unique=TRUE),1,8)
-    if( all(names(list)!=dfNames))
+    if( all(names(dfList)!=dfNames))
       warning("Data frame names modified to obey SAS rules")
-    names(list) <- dfNames
+    names(dfList) <- dfNames
+    ##
+    #######
 
-    
-    
+    #######
+    ## Generate formats for factor variables
+    if(autogen.formats)
+      {
+        dfList <- make.formats(dfList, formats=formats)
+        dfNames <- names(dfList)
+        formats <- dfList$FORMATS
+      }
+
+    if(is.null(formats) || length(formats)<1 || nrow(formats)<1)
+      {
+        formats <- NULL
+        dfList$FORMATS <- NULL
+        dfNames <- names(dfList)
+      }
+
+    #######
     scat("opening file ...")
     if (is.character(file)) 
       if (file == "") 
@@ -137,17 +161,17 @@ write.xport <- function(...,
     for(i in dfNames)
       {
         
-        df <- list[[i]]
+        df <- dfList[[i]]
 
         if(is.null(colnames(df)))
-           colnames(df) <- list(length=ncol(df))
+           colnames(df) <- rep("", length=ncol(df))
 
         emptyFlag <- ( colnames(df)=="" | is.na(colnames(df)) )
         if(any(emptyFlag))
           {
-            warning("Unnamed variables detected. Creating defalut variable names.")
-            colnames(df)[emptyFlag] = "NONAME"
-            list[[i]] <- df
+            warning("Unnamed variables detected, using default names")
+            colnames(df)[emptyFlag] = paste("VAR",1:length(emptyFlag),sep="")
+            dfList[[i]] <- df
           }
 
         varNames <- substr(make.names(colnames(df), unique=TRUE),1,8)
@@ -155,7 +179,7 @@ write.xport <- function(...,
           {
             warning("Variable names modified to obey SAS rules")
             colnames(df) <- varNames
-            list[[i]] <- df
+            dfList[[i]] <- df
           }
 
         offsetTable <- data.frame("name"=varNames, "len"=NA, "offset"=NA )
@@ -173,7 +197,7 @@ write.xport <- function(...,
         lenIndex <- 0
         varIndex <- 1
         spaceUsed <- 0
-        for(i in colnames(list[[i]]) )
+        for(i in colnames(dfList[[i]]) )
           {
             scat("", i , "...")
             var <- df[[i]]
@@ -184,11 +208,11 @@ write.xport <- function(...,
             varIFormat <- attr(var, "iformat")
 
             # Convert R object to SAS object
-            df[[i]] <- var <- toSAS(var)
+            df[[i]] <- var <- toSAS(var, format.info=formats)
 
             # compute variable length
             if(is.character(var))
-              varLen <- max(8, max( nchar(var) ) )
+              varLen <- max(c(8,nchar(var) ) )
             else
               varLen <- 8
 
@@ -200,8 +224,8 @@ write.xport <- function(...,
             
 
             # parse format and iformat
-            formatInfo  <- parseFormat( varFormat)
-            iFormatInfo <- parseFormat( varIFormat)
+            formatInfo  <- parseFormat(varFormat)
+            iFormatInfo <- parseFormat(varIFormat)
             
             
             
@@ -247,10 +271,11 @@ write.xport <- function(...,
             val <- df[i,j]
             valLen <- offsetTable[j,"len"]
 
-            #scat("i=", i, " j=", j, " value=", val, " len=", valLen, "");
-
+            scat("i=", i, " j=", j, " value=", val, " len=", valLen, "");
             if(is.character( val ))
-              out(xport.character(val, width=valLen ) )
+              {
+                out(xport.character(val, width=valLen ) )
+              }
             else
               out( xport.numeric( val ) )
 
