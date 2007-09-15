@@ -161,7 +161,10 @@ w <- read.xport('test2.xpt')
 
 
 # Or read a copy of test2.xpt available on the web:
-url <- 'http://biostat.mc.vanderbilt.edu/cgi-bin/viewvc.cgi/*checkout*/Hmisc/trunk/tests/test2.xpt'
+host <- 'http://biostat.mc.vanderbilt.edu'
+path <- '/cgi-bin/viewvc.cgi/*checkout*/Hmisc/trunk/tests/test2.xpt'
+url <- paste(host,path,sep="")
+
 w <- read.xport(url)
 
 

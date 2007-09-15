@@ -53,7 +53,7 @@ write.xport             Write data to a SAS XPORT file
 \author{
   Unless otherwise noted, the contents of this package were written by
   Gregory R. Warnes \email{greg@random-technologies-llc.com}, are
-  Copyright (c) 2007 by Random Technologies LLC
+  Copyright (c) 2007 by Random Technologies LLC \cr
   \url{http://random-technologies-llc.com}, and are provided under the
   terms of the GNU General Public License, version 2.0 or later. 
 

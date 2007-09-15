@@ -52,7 +52,10 @@ lookup.xport("Alfalfa.xpt")
 
 ## Or read a copy of test2.xpt available on the web:
 \dontrun{
-url <- 'http://biostat.mc.vanderbilt.edu/cgi-bin/viewvc.cgi/*checkout*/Hmisc/trunk/tests/test2.xpt'
+host <- 'http://biostat.mc.vanderbilt.edu'
+path <- '/cgi-bin/viewvc.cgi/*checkout*/Hmisc/trunk/tests/test2.xpt'
+url <- paste(host,path,sep="")
+
 w <- lookup.xport(url)
 
 # display the information (calls 'print.lookup.xport')

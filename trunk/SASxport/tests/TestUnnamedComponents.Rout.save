@@ -67,7 +67,11 @@ rd.xpr> ##D w <- read.xport('test2.xpt')
 rd.xpr> ## End(Not run)
 rd.xpr> 
 rd.xpr> # Or read a copy of test2.xpt available on the web:
-rd.xpr> url <- 'http://biostat.mc.vanderbilt.edu/cgi-bin/viewvc.cgi/*checkout*/Hmisc/trunk/tests/test2.xpt'
+rd.xpr> host <- 'http://biostat.mc.vanderbilt.edu'
+
+rd.xpr> path <- '/cgi-bin/viewvc.cgi/*checkout*/Hmisc/trunk/tests/test2.xpt'
+
+rd.xpr> url <- paste(host,path,sep="")
 
 rd.xpr> w <- read.xport(url)
 
@@ -420,7 +424,11 @@ rd.xpr> ##D w <- read.xport('test2.xpt')
 rd.xpr> ## End(Not run)
 rd.xpr> 
 rd.xpr> # Or read a copy of test2.xpt available on the web:
-rd.xpr> url <- 'http://biostat.mc.vanderbilt.edu/cgi-bin/viewvc.cgi/*checkout*/Hmisc/trunk/tests/test2.xpt'
+rd.xpr> host <- 'http://biostat.mc.vanderbilt.edu'
+
+rd.xpr> path <- '/cgi-bin/viewvc.cgi/*checkout*/Hmisc/trunk/tests/test2.xpt'
+
+rd.xpr> url <- paste(host,path,sep="")
 
 rd.xpr> w <- read.xport(url)
 
@@ -508,7 +516,11 @@ rd.xpr> ##D w <- read.xport('test2.xpt')
 rd.xpr> ## End(Not run)
 rd.xpr> 
 rd.xpr> # Or read a copy of test2.xpt available on the web:
-rd.xpr> url <- 'http://biostat.mc.vanderbilt.edu/cgi-bin/viewvc.cgi/*checkout*/Hmisc/trunk/tests/test2.xpt'
+rd.xpr> host <- 'http://biostat.mc.vanderbilt.edu'
+
+rd.xpr> path <- '/cgi-bin/viewvc.cgi/*checkout*/Hmisc/trunk/tests/test2.xpt'
+
+rd.xpr> url <- paste(host,path,sep="")
 
 rd.xpr> w <- read.xport(url)
 
@@ -645,7 +657,11 @@ rd.xpr> ##D w <- read.xport('test2.xpt')
 rd.xpr> ## End(Not run)
 rd.xpr> 
 rd.xpr> # Or read a copy of test2.xpt available on the web:
-rd.xpr> url <- 'http://biostat.mc.vanderbilt.edu/cgi-bin/viewvc.cgi/*checkout*/Hmisc/trunk/tests/test2.xpt'
+rd.xpr> host <- 'http://biostat.mc.vanderbilt.edu'
+
+rd.xpr> path <- '/cgi-bin/viewvc.cgi/*checkout*/Hmisc/trunk/tests/test2.xpt'
+
+rd.xpr> url <- paste(host,path,sep="")
 
 rd.xpr> w <- read.xport(url)
 
@@ -657,7 +673,7 @@ rd.xpr> w <- read.xport(url, as.list=TRUE, include.formats=TRUE)
 
 rd.xpr> ## Don't show: 
 rd.xpr> SASxport:::assert( is.data.frame(w)==FALSE && is.list(w)==TRUE )
-> colnames(w[[2]]) <- c()
+> colnames(w[[2]]) <- rep("", length=ncol(w[[2]]))
 > write.xport(list=w,file="a.xpt")
 Warning message:
 Unnamed variables detected, using default names in: write.xport(list = w, file = "a.xpt") 

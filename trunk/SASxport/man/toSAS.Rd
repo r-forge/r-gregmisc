@@ -91,7 +91,8 @@ toSAS(cf)
 ## Create a new conversion function to store as a RGB hex value
 toSAS.colorFactor <- function(x, format="")
 {
-   retval <- ifelse(x=="Red", "#FF0000", ifelse(x=="Green", "#00FF00", "#0000FF") )
+   retval <- ifelse(x=="Red", "#FF0000",
+                    ifelse(x=="Green", "#00FF00", "#0000FF") )
    attr(retval, "format") <- format
    retval
 }
