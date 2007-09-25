@@ -71,7 +71,7 @@ write.xport             Write data to a SAS XPORT file
   the terms of the GNU General Public License, version 2.0 or later.
   }
 \section{Funding}{
-  This creation of this package was funded by Metrum Institute
+  This creation of this package was partially funded by Metrum Institute
   \url{http://metruminstitute.org}.
   }
 \section{Maintainer}{

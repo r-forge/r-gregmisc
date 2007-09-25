@@ -72,7 +72,7 @@ write.xport(...,
 \note{
    This package was created by Random Technologies LLC
    \url{http://random-technologies-llc.com}
-   with funding by Metrum Institute
+   with partial funding by Metrum Institute
    \url{http://metruminstitute.org}. 
 
   Technical support contracts for this and other R packages are available
