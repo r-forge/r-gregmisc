@@ -1,5 +1,5 @@
 
-R version 2.5.1 (2007-06-27)
+R version 2.6.0 beta (2007-09-24 r42966)
 Copyright (C) 2007 The R Foundation for Statistical Computing
 ISBN 3-900051-07-0
 
@@ -16,6 +16,12 @@ Type 'demo()' for some demos, 'help()' for on-line help, or
 Type 'q()' to quit R.
 
 > library(SASxport)
+
+Loaded SASxport version 1.1.1 (2007-09-25).
+
+  Updates and technical support available from Random Technologies, LLC
+  <http://random-technologies-llc.com/contact>
+
 > 
 > 
 > ##tests
@@ -85,7 +91,8 @@ rd.xpr> ## Don't show:
 rd.xpr> SASxport:::assert( is.data.frame(w)==FALSE && is.list(w)==TRUE )
 > write.xport(w$test,file="a.xpt")
 Warning message:
-Data frame names modified to obey SAS rules in: write.xport(w$test, file = "a.xpt") 
+In write.xport(w$test, file = "a.xpt") :
+  Data frame names modified to obey SAS rules
 > lookup.xport("a.xpt")
 
 SAS xport file
@@ -161,7 +168,8 @@ Z.X8       Z   X8 numeric            8        100
 > 
 > write.xport(w$test,w$z,file="a.xpt")
 Warning message:
-Data frame names modified to obey SAS rules in: write.xport(w$test, w$z, file = "a.xpt") 
+In write.xport(w$test, w$z, file = "a.xpt") :
+  Data frame names modified to obey SAS rules
 > lookup.xport("a.xpt")
 
 SAS xport file
@@ -263,7 +271,8 @@ FORMATS.LANGUAGE FORMATS LANGUAGE character            8          3
 > names(w) <- NULL
 > write.xport(w[[1]],w[[2]],file="a.xpt")
 Warning message:
-Data frame names modified to obey SAS rules in: write.xport(w[[1]], w[[2]], file = "a.xpt") 
+In write.xport(w[[1]], w[[2]], file = "a.xpt") :
+  Data frame names modified to obey SAS rules
 > lookup.xport("a.xpt")
 
 SAS xport file
@@ -291,7 +300,8 @@ W..2...X8  W..2..   X8 numeric            8        100
 > names(w) <- NULL
 > write.xport(list=w,file="a.xpt")
 Warning message:
-Replacing missing or invalid dataset names in: write.xport(list = w, file = "a.xpt") 
+In write.xport(list = w, file = "a.xpt") :
+  Replacing missing or invalid dataset names
 > lookup.xport("a.xpt")
 
 SAS xport file
@@ -366,12 +376,13 @@ FORMATS.LANGUAGE FORMATS LANGUAGE character            8         20
 > 
 > ### Check that we catch invalid parameters
 > failure <- try( write.xport(5,"a.xpt") )
-Error in write.xport(5, "a.xpt") : '5', 'a.xpt' are not data.frame objects.
+Error in write.xport(5, "a.xpt") : 
+  '5', 'a.xpt' are not data.frame objects.
 > SASxport:::assert( "try-error" %in% class(failure) )
 > 
 > failure <- try( write.xport(list(a=5,b=6),"a.xpt") )
 Error in write.xport(list(a = 5, b = 6), "a.xpt") : 
-	'list(a = 5, b = 6)', 'a.xpt' are not data.frame objects.
+  'list(a = 5, b = 6)', 'a.xpt' are not data.frame objects.
 > SASxport:::assert( "try-error" %in% class(failure) )
 > 
 > 
@@ -442,7 +453,8 @@ rd.xpr> ## Don't show:
 rd.xpr> SASxport:::assert( is.data.frame(w)==FALSE && is.list(w)==TRUE )
 > write.xport(list=base::list(w$test,w$z),file="a.xpt")
 Warning message:
-Replacing missing or invalid dataset names in: write.xport(list = base::list(w$test, w$z), file = "a.xpt") 
+In write.xport(list = base::list(w$test, w$z), file = "a.xpt") :
+  Replacing missing or invalid dataset names
 > lookup.xport("a.xpt")
 
 SAS xport file
@@ -535,7 +547,8 @@ rd.xpr> SASxport:::assert( is.data.frame(w)==FALSE && is.list(w)==TRUE )
 > names(w) <- NULL
 > write.xport(list=w,file="a.xpt")
 Warning message:
-Replacing missing or invalid dataset names in: write.xport(list = w, file = "a.xpt") 
+In write.xport(list = w, file = "a.xpt") :
+  Replacing missing or invalid dataset names
 > lookup.xport("a.xpt")
 
 SAS xport file
@@ -676,7 +689,8 @@ rd.xpr> SASxport:::assert( is.data.frame(w)==FALSE && is.list(w)==TRUE )
 > colnames(w[[2]]) <- rep("", length=ncol(w[[2]]))
 > write.xport(list=w,file="a.xpt")
 Warning message:
-Unnamed variables detected, using default names in: write.xport(list = w, file = "a.xpt") 
+In write.xport(list = w, file = "a.xpt") :
+  Unnamed variables detected, using default names
 > lookup.xport("a.xpt")
 
 SAS xport file

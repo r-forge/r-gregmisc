@@ -1,5 +1,5 @@
 
-R version 2.5.1 (2007-06-27)
+R version 2.6.0 beta (2007-09-24 r42966)
 Copyright (C) 2007 The R Foundation for Statistical Computing
 ISBN 3-900051-07-0
 
@@ -16,6 +16,12 @@ Type 'demo()' for some demos, 'help()' for on-line help, or
 Type 'q()' to quit R.
 
 > library(SASxport)
+
+Loaded SASxport version 1.1.1 (2007-09-25).
+
+  Updates and technical support available from Random Technologies, LLC
+  <http://random-technologies-llc.com/contact>
+
 > 
 > lookup.xport("Alfalfa.xpt")
 
