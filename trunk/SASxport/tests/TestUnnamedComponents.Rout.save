@@ -1,6 +1,6 @@
 
-R version 2.6.0 beta (2007-09-24 r42966)
-Copyright (C) 2007 The R Foundation for Statistical Computing
+R version 2.4.1 (2006-12-18)
+Copyright (C) 2006 The R Foundation for Statistical Computing
 ISBN 3-900051-07-0
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
@@ -22,77 +22,30 @@ Loaded SASxport version 1.1.1 (2007-09-25).
   Updates and technical support available from Random Technologies, LLC
   <http://random-technologies-llc.com/contact>
 
+  Type `?SASxport' for usage information.
+
 > 
 > 
 > ##tests
 > example(read.xport)
 
-rd.xpr> # -------
-rd.xpr> # SAS code to generate test dataset:
-rd.xpr> # -------
-rd.xpr> # libname y SASV5XPT "test2.xpt";
-rd.xpr> #
-rd.xpr> # PROC FORMAT; VALUE race 1=green 2=blue 3=purple; RUN;
-rd.xpr> # PROC FORMAT CNTLOUT=format;RUN;  * Name, e.g. 'format', unimportant;
-rd.xpr> # data test;
-rd.xpr> # LENGTH race 3 age 4;
-rd.xpr> # age=30; label age="Age at Beginning of Study";
-rd.xpr> # race=2;
-rd.xpr> # d1='3mar2002'd ;
-rd.xpr> # dt1='3mar2002 9:31:02'dt;
-rd.xpr> # t1='11:13:45't;
-rd.xpr> # output;
-rd.xpr> #
-rd.xpr> # age=31;
-rd.xpr> # race=4;
-rd.xpr> # d1='3jun2002'd ;
-rd.xpr> # dt1='3jun2002 9:42:07'dt;
-rd.xpr> # t1='11:14:13't;
-rd.xpr> # output;
-rd.xpr> # format d1 mmddyy10. dt1 datetime. t1 time. race race.;
-rd.xpr> # run;
-rd.xpr> # data z; LENGTH x3 3 x4 4 x5 5 x6 6 x7 7 x8 8;
-rd.xpr> #    DO i=1 TO 100;
-rd.xpr> #        x3=ranuni(3);
-rd.xpr> #        x4=ranuni(5);
-rd.xpr> #        x5=ranuni(7);
-rd.xpr> #        x6=ranuni(9);
-rd.xpr> #        x7=ranuni(11);
-rd.xpr> #        x8=ranuni(13);
-rd.xpr> #        output;
-rd.xpr> #        END;
-rd.xpr> #    DROP i;
-rd.xpr> #    RUN;
-rd.xpr> # PROC MEANS; RUN;
-rd.xpr> # PROC COPY IN=work OUT=y;SELECT test format z;RUN; *Creates test2.xpt;
-rd.xpr> # ------
-rd.xpr> 
-rd.xpr> # Read this dataset from a local file:
-rd.xpr> ## Not run: 
-rd.xpr> ##D w <- read.xport('test2.xpt')
-rd.xpr> ## End(Not run)
-rd.xpr> 
-rd.xpr> # Or read a copy of test2.xpt available on the web:
-rd.xpr> host <- 'http://biostat.mc.vanderbilt.edu'
+rd.xpr> host <- "http://biostat.mc.vanderbilt.edu"
 
-rd.xpr> path <- '/cgi-bin/viewvc.cgi/*checkout*/Hmisc/trunk/tests/test2.xpt'
+rd.xpr> path <- "/cgi-bin/viewvc.cgi/*checkout*/Hmisc/trunk/tests/test2.xpt"
 
-rd.xpr> url <- paste(host,path,sep="")
+rd.xpr> url <- paste(host, path, sep = "")
 
 rd.xpr> w <- read.xport(url)
 
-rd.xpr> # We can also get the dataset wrapped in a list
-rd.xpr> w <- read.xport(url, as.list=TRUE)
+rd.xpr> w <- read.xport(url, as.list = TRUE)
 
-rd.xpr> # And we can ask for the format information to be included as well.
-rd.xpr> w <- read.xport(url, as.list=TRUE, include.formats=TRUE)
+rd.xpr> w <- read.xport(url, as.list = TRUE, include.formats = TRUE)
 
-rd.xpr> ## Don't show: 
-rd.xpr> SASxport:::assert( is.data.frame(w)==FALSE && is.list(w)==TRUE )
+rd.xpr> SASxport:::assert(is.data.frame(w) == FALSE && is.list(w) == 
+    TRUE)
 > write.xport(w$test,file="a.xpt")
 Warning message:
-In write.xport(w$test, file = "a.xpt") :
-  Data frame names modified to obey SAS rules
+Data frame names modified to obey SAS rules in: write.xport(w$test, file = "a.xpt") 
 > lookup.xport("a.xpt")
 
 SAS xport file
@@ -168,8 +121,7 @@ Z.X8       Z   X8 numeric            8        100
 > 
 > write.xport(w$test,w$z,file="a.xpt")
 Warning message:
-In write.xport(w$test, w$z, file = "a.xpt") :
-  Data frame names modified to obey SAS rules
+Data frame names modified to obey SAS rules in: write.xport(w$test, w$z, file = "a.xpt") 
 > lookup.xport("a.xpt")
 
 SAS xport file
@@ -271,8 +223,7 @@ FORMATS.LANGUAGE FORMATS LANGUAGE character            8          3
 > names(w) <- NULL
 > write.xport(w[[1]],w[[2]],file="a.xpt")
 Warning message:
-In write.xport(w[[1]], w[[2]], file = "a.xpt") :
-  Data frame names modified to obey SAS rules
+Data frame names modified to obey SAS rules in: write.xport(w[[1]], w[[2]], file = "a.xpt") 
 > lookup.xport("a.xpt")
 
 SAS xport file
@@ -300,8 +251,7 @@ W..2...X8  W..2..   X8 numeric            8        100
 > names(w) <- NULL
 > write.xport(list=w,file="a.xpt")
 Warning message:
-In write.xport(list = w, file = "a.xpt") :
-  Replacing missing or invalid dataset names
+Replacing missing or invalid dataset names in: write.xport(list = w, file = "a.xpt") 
 > lookup.xport("a.xpt")
 
 SAS xport file
@@ -376,85 +326,35 @@ FORMATS.LANGUAGE FORMATS LANGUAGE character            8         20
 > 
 > ### Check that we catch invalid parameters
 > failure <- try( write.xport(5,"a.xpt") )
-Error in write.xport(5, "a.xpt") : 
-  '5', 'a.xpt' are not data.frame objects.
+Error in write.xport(5, "a.xpt") : '5', 'a.xpt' are not data.frame objects.
 > SASxport:::assert( "try-error" %in% class(failure) )
 > 
 > failure <- try( write.xport(list(a=5,b=6),"a.xpt") )
 Error in write.xport(list(a = 5, b = 6), "a.xpt") : 
-  'list(a = 5, b = 6)', 'a.xpt' are not data.frame objects.
+	'list(a = 5, b = 6)', 'a.xpt' are not data.frame objects.
 > SASxport:::assert( "try-error" %in% class(failure) )
 > 
 > 
 > # Check with different list construction function *name*
 > example(read.xport)
 
-rd.xpr> # -------
-rd.xpr> # SAS code to generate test dataset:
-rd.xpr> # -------
-rd.xpr> # libname y SASV5XPT "test2.xpt";
-rd.xpr> #
-rd.xpr> # PROC FORMAT; VALUE race 1=green 2=blue 3=purple; RUN;
-rd.xpr> # PROC FORMAT CNTLOUT=format;RUN;  * Name, e.g. 'format', unimportant;
-rd.xpr> # data test;
-rd.xpr> # LENGTH race 3 age 4;
-rd.xpr> # age=30; label age="Age at Beginning of Study";
-rd.xpr> # race=2;
-rd.xpr> # d1='3mar2002'd ;
-rd.xpr> # dt1='3mar2002 9:31:02'dt;
-rd.xpr> # t1='11:13:45't;
-rd.xpr> # output;
-rd.xpr> #
-rd.xpr> # age=31;
-rd.xpr> # race=4;
-rd.xpr> # d1='3jun2002'd ;
-rd.xpr> # dt1='3jun2002 9:42:07'dt;
-rd.xpr> # t1='11:14:13't;
-rd.xpr> # output;
-rd.xpr> # format d1 mmddyy10. dt1 datetime. t1 time. race race.;
-rd.xpr> # run;
-rd.xpr> # data z; LENGTH x3 3 x4 4 x5 5 x6 6 x7 7 x8 8;
-rd.xpr> #    DO i=1 TO 100;
-rd.xpr> #        x3=ranuni(3);
-rd.xpr> #        x4=ranuni(5);
-rd.xpr> #        x5=ranuni(7);
-rd.xpr> #        x6=ranuni(9);
-rd.xpr> #        x7=ranuni(11);
-rd.xpr> #        x8=ranuni(13);
-rd.xpr> #        output;
-rd.xpr> #        END;
-rd.xpr> #    DROP i;
-rd.xpr> #    RUN;
-rd.xpr> # PROC MEANS; RUN;
-rd.xpr> # PROC COPY IN=work OUT=y;SELECT test format z;RUN; *Creates test2.xpt;
-rd.xpr> # ------
-rd.xpr> 
-rd.xpr> # Read this dataset from a local file:
-rd.xpr> ## Not run: 
-rd.xpr> ##D w <- read.xport('test2.xpt')
-rd.xpr> ## End(Not run)
-rd.xpr> 
-rd.xpr> # Or read a copy of test2.xpt available on the web:
-rd.xpr> host <- 'http://biostat.mc.vanderbilt.edu'
+rd.xpr> host <- "http://biostat.mc.vanderbilt.edu"
 
-rd.xpr> path <- '/cgi-bin/viewvc.cgi/*checkout*/Hmisc/trunk/tests/test2.xpt'
+rd.xpr> path <- "/cgi-bin/viewvc.cgi/*checkout*/Hmisc/trunk/tests/test2.xpt"
 
-rd.xpr> url <- paste(host,path,sep="")
+rd.xpr> url <- paste(host, path, sep = "")
 
 rd.xpr> w <- read.xport(url)
 
-rd.xpr> # We can also get the dataset wrapped in a list
-rd.xpr> w <- read.xport(url, as.list=TRUE)
+rd.xpr> w <- read.xport(url, as.list = TRUE)
 
-rd.xpr> # And we can ask for the format information to be included as well.
-rd.xpr> w <- read.xport(url, as.list=TRUE, include.formats=TRUE)
+rd.xpr> w <- read.xport(url, as.list = TRUE, include.formats = TRUE)
 
-rd.xpr> ## Don't show: 
-rd.xpr> SASxport:::assert( is.data.frame(w)==FALSE && is.list(w)==TRUE )
+rd.xpr> SASxport:::assert(is.data.frame(w) == FALSE && is.list(w) == 
+    TRUE)
 > write.xport(list=base::list(w$test,w$z),file="a.xpt")
 Warning message:
-In write.xport(list = base::list(w$test, w$z), file = "a.xpt") :
-  Replacing missing or invalid dataset names
+Replacing missing or invalid dataset names in: write.xport(list = base::list(w$test, w$z), file = "a.xpt") 
 > lookup.xport("a.xpt")
 
 SAS xport file
@@ -482,73 +382,24 @@ DATA2.X8   DATA2   X8 numeric            8        100
 > # remove names
 > example(read.xport)
 
-rd.xpr> # -------
-rd.xpr> # SAS code to generate test dataset:
-rd.xpr> # -------
-rd.xpr> # libname y SASV5XPT "test2.xpt";
-rd.xpr> #
-rd.xpr> # PROC FORMAT; VALUE race 1=green 2=blue 3=purple; RUN;
-rd.xpr> # PROC FORMAT CNTLOUT=format;RUN;  * Name, e.g. 'format', unimportant;
-rd.xpr> # data test;
-rd.xpr> # LENGTH race 3 age 4;
-rd.xpr> # age=30; label age="Age at Beginning of Study";
-rd.xpr> # race=2;
-rd.xpr> # d1='3mar2002'd ;
-rd.xpr> # dt1='3mar2002 9:31:02'dt;
-rd.xpr> # t1='11:13:45't;
-rd.xpr> # output;
-rd.xpr> #
-rd.xpr> # age=31;
-rd.xpr> # race=4;
-rd.xpr> # d1='3jun2002'd ;
-rd.xpr> # dt1='3jun2002 9:42:07'dt;
-rd.xpr> # t1='11:14:13't;
-rd.xpr> # output;
-rd.xpr> # format d1 mmddyy10. dt1 datetime. t1 time. race race.;
-rd.xpr> # run;
-rd.xpr> # data z; LENGTH x3 3 x4 4 x5 5 x6 6 x7 7 x8 8;
-rd.xpr> #    DO i=1 TO 100;
-rd.xpr> #        x3=ranuni(3);
-rd.xpr> #        x4=ranuni(5);
-rd.xpr> #        x5=ranuni(7);
-rd.xpr> #        x6=ranuni(9);
-rd.xpr> #        x7=ranuni(11);
-rd.xpr> #        x8=ranuni(13);
-rd.xpr> #        output;
-rd.xpr> #        END;
-rd.xpr> #    DROP i;
-rd.xpr> #    RUN;
-rd.xpr> # PROC MEANS; RUN;
-rd.xpr> # PROC COPY IN=work OUT=y;SELECT test format z;RUN; *Creates test2.xpt;
-rd.xpr> # ------
-rd.xpr> 
-rd.xpr> # Read this dataset from a local file:
-rd.xpr> ## Not run: 
-rd.xpr> ##D w <- read.xport('test2.xpt')
-rd.xpr> ## End(Not run)
-rd.xpr> 
-rd.xpr> # Or read a copy of test2.xpt available on the web:
-rd.xpr> host <- 'http://biostat.mc.vanderbilt.edu'
+rd.xpr> host <- "http://biostat.mc.vanderbilt.edu"
 
-rd.xpr> path <- '/cgi-bin/viewvc.cgi/*checkout*/Hmisc/trunk/tests/test2.xpt'
+rd.xpr> path <- "/cgi-bin/viewvc.cgi/*checkout*/Hmisc/trunk/tests/test2.xpt"
 
-rd.xpr> url <- paste(host,path,sep="")
+rd.xpr> url <- paste(host, path, sep = "")
 
 rd.xpr> w <- read.xport(url)
 
-rd.xpr> # We can also get the dataset wrapped in a list
-rd.xpr> w <- read.xport(url, as.list=TRUE)
+rd.xpr> w <- read.xport(url, as.list = TRUE)
 
-rd.xpr> # And we can ask for the format information to be included as well.
-rd.xpr> w <- read.xport(url, as.list=TRUE, include.formats=TRUE)
+rd.xpr> w <- read.xport(url, as.list = TRUE, include.formats = TRUE)
 
-rd.xpr> ## Don't show: 
-rd.xpr> SASxport:::assert( is.data.frame(w)==FALSE && is.list(w)==TRUE )
+rd.xpr> SASxport:::assert(is.data.frame(w) == FALSE && is.list(w) == 
+    TRUE)
 > names(w) <- NULL
 > write.xport(list=w,file="a.xpt")
 Warning message:
-In write.xport(list = w, file = "a.xpt") :
-  Replacing missing or invalid dataset names
+Replacing missing or invalid dataset names in: write.xport(list = w, file = "a.xpt") 
 > lookup.xport("a.xpt")
 
 SAS xport file
@@ -624,73 +475,24 @@ FORMATS.LANGUAGE FORMATS LANGUAGE character            8         20
 > # remove variable names
 > example(read.xport)
 
-rd.xpr> # -------
-rd.xpr> # SAS code to generate test dataset:
-rd.xpr> # -------
-rd.xpr> # libname y SASV5XPT "test2.xpt";
-rd.xpr> #
-rd.xpr> # PROC FORMAT; VALUE race 1=green 2=blue 3=purple; RUN;
-rd.xpr> # PROC FORMAT CNTLOUT=format;RUN;  * Name, e.g. 'format', unimportant;
-rd.xpr> # data test;
-rd.xpr> # LENGTH race 3 age 4;
-rd.xpr> # age=30; label age="Age at Beginning of Study";
-rd.xpr> # race=2;
-rd.xpr> # d1='3mar2002'd ;
-rd.xpr> # dt1='3mar2002 9:31:02'dt;
-rd.xpr> # t1='11:13:45't;
-rd.xpr> # output;
-rd.xpr> #
-rd.xpr> # age=31;
-rd.xpr> # race=4;
-rd.xpr> # d1='3jun2002'd ;
-rd.xpr> # dt1='3jun2002 9:42:07'dt;
-rd.xpr> # t1='11:14:13't;
-rd.xpr> # output;
-rd.xpr> # format d1 mmddyy10. dt1 datetime. t1 time. race race.;
-rd.xpr> # run;
-rd.xpr> # data z; LENGTH x3 3 x4 4 x5 5 x6 6 x7 7 x8 8;
-rd.xpr> #    DO i=1 TO 100;
-rd.xpr> #        x3=ranuni(3);
-rd.xpr> #        x4=ranuni(5);
-rd.xpr> #        x5=ranuni(7);
-rd.xpr> #        x6=ranuni(9);
-rd.xpr> #        x7=ranuni(11);
-rd.xpr> #        x8=ranuni(13);
-rd.xpr> #        output;
-rd.xpr> #        END;
-rd.xpr> #    DROP i;
-rd.xpr> #    RUN;
-rd.xpr> # PROC MEANS; RUN;
-rd.xpr> # PROC COPY IN=work OUT=y;SELECT test format z;RUN; *Creates test2.xpt;
-rd.xpr> # ------
-rd.xpr> 
-rd.xpr> # Read this dataset from a local file:
-rd.xpr> ## Not run: 
-rd.xpr> ##D w <- read.xport('test2.xpt')
-rd.xpr> ## End(Not run)
-rd.xpr> 
-rd.xpr> # Or read a copy of test2.xpt available on the web:
-rd.xpr> host <- 'http://biostat.mc.vanderbilt.edu'
+rd.xpr> host <- "http://biostat.mc.vanderbilt.edu"
 
-rd.xpr> path <- '/cgi-bin/viewvc.cgi/*checkout*/Hmisc/trunk/tests/test2.xpt'
+rd.xpr> path <- "/cgi-bin/viewvc.cgi/*checkout*/Hmisc/trunk/tests/test2.xpt"
 
-rd.xpr> url <- paste(host,path,sep="")
+rd.xpr> url <- paste(host, path, sep = "")
 
 rd.xpr> w <- read.xport(url)
 
-rd.xpr> # We can also get the dataset wrapped in a list
-rd.xpr> w <- read.xport(url, as.list=TRUE)
+rd.xpr> w <- read.xport(url, as.list = TRUE)
 
-rd.xpr> # And we can ask for the format information to be included as well.
-rd.xpr> w <- read.xport(url, as.list=TRUE, include.formats=TRUE)
+rd.xpr> w <- read.xport(url, as.list = TRUE, include.formats = TRUE)
 
-rd.xpr> ## Don't show: 
-rd.xpr> SASxport:::assert( is.data.frame(w)==FALSE && is.list(w)==TRUE )
+rd.xpr> SASxport:::assert(is.data.frame(w) == FALSE && is.list(w) == 
+    TRUE)
 > colnames(w[[2]]) <- rep("", length=ncol(w[[2]]))
 > write.xport(list=w,file="a.xpt")
 Warning message:
-In write.xport(list = w, file = "a.xpt") :
-  Unnamed variables detected, using default names
+Unnamed variables detected, using default names in: write.xport(list = w, file = "a.xpt") 
 > lookup.xport("a.xpt")
 
 SAS xport file
