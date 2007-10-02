@@ -8,6 +8,8 @@ loadMessage <- function()
   cat("  Updates and technical support available from Random Technologies, LLC\n")
   cat("  <http://random-technologies-llc.com/contact>\n")
   cat("\n")
+  cat("  Type `?SASxport' for usage information.\n")
+  cat("\n")
 }
 
 
