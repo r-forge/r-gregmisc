@@ -2,6 +2,7 @@ useDynLib(SASxport, .registration=TRUE)
 
 importFrom(foreign, read.xport, lookup.xport)
 importFrom(chron, chron)
+importFrom(utils, packageDescription)
 
 export(
        toSAS,
