@@ -1,6 +1,5 @@
 Package: bwRF
-Version: 0.1.0
-Date: 2004-10-21
+Version: 0.1.1
 Title: Efficent Random Forests models
 Author: Baolin Wu <baolin@biostat.umn.edu>, 
         R port by warnes@bst.rochester.edu>

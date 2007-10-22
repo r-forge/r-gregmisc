@@ -7,4 +7,4 @@ Version: 2.3.1
 Author: Gregory R. Warnes. Includes R source code and/or documentation
         contributed by Ben Bolker, Gregor Gorjanc, and Thomas Lumley
 Maintainer: Gregory Warnes <gregory_warnes@urmc.rochester.edu>
-License: GPL (version 2 or later)
+License: GPL-2

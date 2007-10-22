@@ -12,4 +12,4 @@ Description:
 	MCMC algorithms, including the general Metropolis-Hastings and
 	Metropolis algorithms.
 Maintainer: Gregory R. Warnes <warnes@bst.rochester.edu>
-License: GPL
+License: GPL-2

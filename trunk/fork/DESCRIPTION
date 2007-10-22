@@ -11,4 +11,4 @@ Description: These functions  provides simple wrappers around the Unix process
     processes.  Commercial support for this package available from 
     Random Technologies, LLC <http://www.random-technologies-llc.com>
 Maintainer: Gregory R. Warnes <greg@random-technologies-llc.com>
-License: GPL
+License: GPL-2

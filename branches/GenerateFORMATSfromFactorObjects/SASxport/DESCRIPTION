@@ -32,7 +32,7 @@ Author:
   The creation of this package was funded by Metrum Institute
   <http://metruminstitute.org>.  
 Maintainer: Gregory R. Warnes <greg@random-technologies-llc.com>
-License: GPL 2.0 or later
+License: GPL-2
 Imports: foreign (>= 0.8-20), chron
 Enhances: foreign
 URL: http://random-technologies-llc.com, http://metruminstitute.org

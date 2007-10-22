@@ -32,7 +32,7 @@ Author:
   The creation of this package was partially funded by Metrum Institute
   <http://metruminstitute.org>.  
 Maintainer: Gregory R. Warnes <greg@random-technologies-llc.com>
-License: GPL 2.0 or later
+License: GPL-2
 Depends: R (>= 2.4.0)
 Imports: foreign (>= 0.8-20), chron
 Enhances: foreign

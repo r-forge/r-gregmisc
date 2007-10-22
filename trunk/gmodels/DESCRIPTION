@@ -8,8 +8,8 @@ Description: Various R programming tools for model fitting
 Depends: R (>= 1.9.0)
 Suggests: gplots, Matrix, nlme, lme4, coda
 Imports: MASS, gdata
-License: GPL (version 2 or later).  Contributions from Randall C
-	 Johnson are Copyright (2005) SAIC-Frederick, Inc. Funded by
+License: GPL-2.  Contributions from Randall C. Johnson are 
+	 Copyright (2005) SAIC-Frederick, Inc. Funded by
 	 the Intramural Research Program, of the NIH, National
 	 Cancer Institute, Center for Cancer Research under NCI
 	 Contract NO1-CO-12400.

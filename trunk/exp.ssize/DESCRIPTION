@@ -8,5 +8,5 @@ Description: Functions for evaluating the performance microarray
              Bioinformatics, Jan 2005
 Maintainer: Peng Liu <peng_liu@groton.pfizer.com>
 Depends: gdata, ssize
-License: GPL
+License: GPL-2
 
