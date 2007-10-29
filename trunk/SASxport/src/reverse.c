@@ -18,7 +18,7 @@ void reverse( unsigned char *intp, size_t size)
   if( (short) *endianTest != 1 ) 
     {  
       /* The native byte order is big endian, so do nothing */
-      printf("Big Endian Machine!\n");
+      //printf("Big Endian Machine!\n");
       return;  
     }
 #endif
