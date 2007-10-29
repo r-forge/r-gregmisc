@@ -50,8 +50,8 @@ void ieee2ibm(register unsigned char *out, register const unsigned char *in, int
 	 */
 	register int	i;
 	for( i=count-1; i >= 0; i-- )  {
-		register unsigned long left, right;
-		register int fix, exp, signbit;
+	  register unsigned long left, right;
+	  register int fix, exp, signbit;
 
 		left  = (in[0]<<24) | (in[1]<<16) | (in[2]<<8) | in[3];
 		right = (in[4]<<24) | (in[5]<<16) | (in[6]<<8) | in[7];
@@ -59,6 +59,7 @@ void ieee2ibm(register unsigned char *out, register const unsigned char *in, int
 
 		exp = ((left >> 20) & 0x7FF);
 		signbit = (left & 0x80000000) >> 24;
+
 		if( exp == 0 || exp == 0x7FF )  {
 ibm_undef:		*out++ = 0;		/* IBM zero.  No NAN */
 			*out++ = 0;
@@ -88,7 +89,8 @@ ibm_undef:		*out++ = 0;		/* IBM zero.  No NAN */
 			right <<= fix;
 		}
 
-		if( signbit )  {
+		/* if( 0 && signbit )  { */
+		if( 0 )  {
 			/* The IBM actually uses complimented mantissa
 			 * and exponent.
 			 */
@@ -108,7 +110,6 @@ ibm_undef:		*out++ = 0;		/* IBM zero.  No NAN */
 			left &= 0x00FFFFFF;
 			exp = (~exp) & 0x7F;
 		}
-
 
 		/*  Not actually required, but for comparison purposes,
 		 *  normalize the number.  Remove for production speed.

@@ -86,7 +86,9 @@ void ibm2ieee(register unsigned char *out, register const unsigned char *in, int
 
 		signbit = left & 0x80000000;
 		left &= 0x00FFFFFF;
-		if( signbit )  {
+
+		/*if( signbit )  {*/
+		if( 0 )  {
 			/* The IBM uses 2's compliment on the mantissa,
 			 * and IEEE does not.
 			 */
