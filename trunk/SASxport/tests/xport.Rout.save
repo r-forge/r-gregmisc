@@ -1,6 +1,6 @@
 
-R version 2.4.1 (2006-12-18)
-Copyright (C) 2006 The R Foundation for Statistical Computing
+R version 2.6.0 (2007-10-03)
+Copyright (C) 2007 The R Foundation for Statistical Computing
 ISBN 3-900051-07-0
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
@@ -17,7 +17,7 @@ Type 'q()' to quit R.
 
 > library(SASxport)
 
-Loaded SASxport version 1.1.1 (2007-09-25).
+Loaded SASxport version 1.2.0 (2007-11-01).
 
   Updates and technical support available from Random Technologies, LLC
   <http://random-technologies-llc.com/products/SASxport>
@@ -32,13 +32,20 @@ SAS xport file
 Filename: `Alfalfa.xpt'
 
 Variables in data set `SPEC':
-            dataset   name      type format width label nobs
-SPEC.POP       SPEC    POP character            8         40
-SPEC.SAMPLE    SPEC SAMPLE   numeric            8         40
-SPEC.REP       SPEC    REP   numeric            8         40
-SPEC.SEEDWT    SPEC SEEDWT   numeric            8         40
-SPEC.HARV1     SPEC  HARV1   numeric            8         40
-SPEC.HARV2     SPEC  HARV2   numeric            8         40
+            dataset   name      type format flength fdigits iformat iflength
+SPEC.POP       SPEC    POP character              0       0                0
+SPEC.SAMPLE    SPEC SAMPLE   numeric              0       0                0
+SPEC.REP       SPEC    REP   numeric              0       0                0
+SPEC.SEEDWT    SPEC SEEDWT   numeric              0       0                0
+SPEC.HARV1     SPEC  HARV1   numeric              0       0                0
+SPEC.HARV2     SPEC  HARV2   numeric              0       0                0
+            ifdigits label nobs
+SPEC.POP           0         40
+SPEC.SAMPLE        0         40
+SPEC.REP           0         40
+SPEC.SEEDWT        0         40
+SPEC.HARV1         0         40
+SPEC.HARV2         0         40
 
 > 
 > Alfalfa <- read.xport("Alfalfa.xpt")
@@ -68,12 +75,18 @@ SAS xport file
 Filename: `test.xpt'
 
 Variables in data set `W.TEST':
-            dataset name      type format width                     label nobs
-W.TEST.RACE  W.TEST RACE character   RACE     8                              2
-W.TEST.AGE   W.TEST  AGE   numeric            8 Age at Beginning of Study    2
-W.TEST.D1    W.TEST   D1   numeric            8                              2
-W.TEST.DT1   W.TEST  DT1   numeric            8                              2
-W.TEST.T1    W.TEST   T1   numeric            8                              2
+            dataset name      type format flength fdigits iformat iflength
+W.TEST.RACE  W.TEST RACE character   RACE       0       0                0
+W.TEST.AGE   W.TEST  AGE   numeric              0       0                0
+W.TEST.D1    W.TEST   D1   numeric              0       0                0
+W.TEST.DT1   W.TEST  DT1   numeric              0       0                0
+W.TEST.T1    W.TEST   T1   numeric              0       0                0
+            ifdigits                     label nobs
+W.TEST.RACE        0                              2
+W.TEST.AGE         0 Age at Beginning of Study    2
+W.TEST.D1          0                              2
+W.TEST.DT1         0                              2
+W.TEST.T1          0                              2
 
 > testdata <- read.xport("test.xpt")
 > summary(testdata)

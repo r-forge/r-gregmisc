@@ -4,10 +4,10 @@ library(SASxport)
 abc <- data.frame( x=c(1, 2, NA, NA ), y=c('a', 'B', NA, '*' ) )
 
 ## add a format specifier (not used by R)
-attr(abc$x, 'format') <- 'date7.'
+SASformat(abc$x) <- 'date7.'
 
 ## add a variable label (not used by R)
-attr(abc$y, 'label')  <- 'character variable'
+label(abc$y)  <- 'character variable'
 
 # create a SAS XPORT file from our local data frame
 write.xport(abc,
@@ -21,8 +21,8 @@ write.xport(abc,
 # read the original SAS data file
 abc.SAS <- read.xport("xxx.xpt", names.tolower=FALSE)
 
-## read.xport currently doesn't store the format attribute...
-attr(abc.SAS$X, 'format') <- 'date7.'
+## read.xport currently doesn't properly load the format attribute *length*...
+#SASformat(abc.SAS$X) <- 'date7.'
 
 # create a SAS XPORT file from the SAS data
 write.xport(abc=abc.SAS,

@@ -1,6 +1,6 @@
 
-R version 2.4.1 (2006-12-18)
-Copyright (C) 2006 The R Foundation for Statistical Computing
+R version 2.6.0 (2007-10-03)
+Copyright (C) 2007 The R Foundation for Statistical Computing
 ISBN 3-900051-07-0
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
@@ -17,7 +17,7 @@ Type 'q()' to quit R.
 
 > library(SASxport)
 
-Loaded SASxport version 1.1.1 (2007-09-25).
+Loaded SASxport version 1.2.0 (2007-11-01).
 
   Updates and technical support available from Random Technologies, LLC
   <http://random-technologies-llc.com/products/SASxport>
@@ -29,10 +29,10 @@ Loaded SASxport version 1.1.1 (2007-09-25).
 > abc <- data.frame( x=c(1, 2, NA, NA ), y=c('a', 'B', NA, '*' ) )
 > 
 > ## add a format specifier (not used by R)
-> attr(abc$x, 'format') <- 'date7.'
+> SASformat(abc$x) <- 'date7.'
 > 
 > ## add a variable label (not used by R)
-> attr(abc$y, 'label')  <- 'character variable'
+> label(abc$y)  <- 'character variable'
 > 
 > # create a SAS XPORT file from our local data frame
 > write.xport(abc,
@@ -46,8 +46,8 @@ Loaded SASxport version 1.1.1 (2007-09-25).
 > # read the original SAS data file
 > abc.SAS <- read.xport("xxx.xpt", names.tolower=FALSE)
 > 
-> ## read.xport currently doesn't store the format attribute...
-> attr(abc.SAS$X, 'format') <- 'date7.'
+> ## read.xport currently doesn't properly load the format attribute *length*...
+> #SASformat(abc.SAS$X) <- 'date7.'
 > 
 > # create a SAS XPORT file from the SAS data
 > write.xport(abc=abc.SAS,
