@@ -1,3 +1,81 @@
+Version 1.2.0
+-------------------------
+
+New Features:
+
+- SAS format and iformat information is now accessed via 'SASformat()'
+  and 'SASiformat()' functions instead of 'formats' and 'iformat'.  The
+  information accessed by these functions is now stored in attributes
+  with the same name.  This avoids conflicts with the use of 'format'
+  by chron objects.
+
+- Copies of the code for foreign::read.xport and foreign::lookup.xport
+  is now part of the SASxport package, permitting extension to these
+  functions as needed, and removing the dependency on the foreign
+  package. 
+
+- Overflow of SASxport numeric format values, which have a smaller
+  range than IEEE 754 numeric values now standard,  now generates NAN
+  instead of 0.0.  
+
+
+Bug Fixes:
+
+- Fix for problem storing negative numbers.
+
+- SAS format length and digit information is now properly captured 
+  by read.xport().  This is supported by an improved version of
+  lookup.xport(). 
+
+- SAS format information was not being properly utilized when more 
+  than one format was present.
+
+- Improved handling of SAS date formats
+ 
+
+Other:
+
+- Test routines added to test handling of numeric values.
+
+
+Version 1.1.1
+-------------------------
+
+-  Display support information at package startup
+
+
+Version 1.1.0 - 
+-------------------------
+
+New Features:
+
+- Add support for autogeneration of SAS FORMAT information as a PROC
+  CONTENTS fmtin= dataset.   This enables R factors to be handled
+  properly on the receiving system.
+
+Bug Fixes:
+
+
+Other:
+
+
+
+Version 1.0.0
+-------------
+
+New Fetures:
+
+
+
+Bug Fixes:
+
+
+
+Other:
+
+
+
+
 Beta 3 - 2007-08-10
 -------------------
 
