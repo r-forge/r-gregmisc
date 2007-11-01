@@ -1,3 +1,92 @@
+2007-11-01 20:18  warnes
+
+	* R/overplot.R, man/overplot.Rd: Minor reformatting of overplot
+	  code and docs
+
+2007-10-22 02:24  warnes
+
+	* branches/GenerateFORMATSfromFactorObjects/SASxport/DESCRIPTION,
+	  trunk/MSOfficeUtil/DESCRIPTION, trunk/RMCMC/DESCRIPTION,
+	  trunk/Rlsf/DESCRIPTION, trunk/SASxport/DESCRIPTION,
+	  trunk/bwRF/DESCRIPTION, trunk/exp.ssize/DESCRIPTION,
+	  trunk/fork/DESCRIPTION, trunk/gdata/DESCRIPTION,
+	  trunk/gmodels/DESCRIPTION, DESCRIPTION,
+	  trunk/gregmisc/DESCRIPTION, trunk/ssize/DESCRIPTION: Clarify GPL
+	  version
+
+2007-08-14 19:14  warnes
+
+	* R/balloonplot.R: Correct error in balloonplot when z contains NA
+	  values.
+
+2007-08-14 18:48  warnes
+
+	* R/balloonplot.R, man/balloonplot.Rd: Augment balloonplot() with
+	  control of character size and color for text and label items
+
+2007-08-14 18:11  warnes
+
+	* R/balloonplot.R: Correct balloonplot.default to properly show
+	  specified x and y axis labels when explicitly provided
+
+2007-03-09 09:05  ggorjan
+
+	* man/ooplot.Rd: use of \method in Rd markup - issues a warning
+	  with _R_CHECK_RD_STYLE_=TRUE env. variable with R 2.5.0
+
+2007-02-08 23:05  warnes
+
+	* DESCRIPTION: Bump version number
+
+2007-02-08 22:03  warnes
+
+	* man/textplot.Rd: Update documentation for textplot()
+
+2007-02-08 21:56  warnes
+
+	* R/col2hex.R, man/col2hex.Rd: Add col2rgb() function to convert
+	  color names to rgb hex codes
+
+2007-02-08 21:32  warnes
+
+	* R/textplot.R: Add paramaeters 'col.data', 'col.rows', and
+	  'col.columns' to
+	  textplot.matrix to allow specification of the color of the matrix
+	  data, rows, and columns.
+
+2007-02-08 16:56  warnes
+
+	* R/bandplot.R: Add parameters to control line width and line type.
+
+2006-11-14 22:25  ggorjan
+
+	* trunk/gdata/man/combine.Rd, trunk/gdata/man/frameApply.Rd,
+	  trunk/gmodels/R/ci.R, trunk/gmodels/R/fast.prcomp.R,
+	  trunk/gmodels/man/ci.Rd, R/bandplot.R, R/boxplot.n.R, R/lowess.R,
+	  R/plot.lm.R, R/plotCI.R, R/plotmeans.R, R/residplot.R,
+	  R/wapply.R, man/boxplot.n.Rd, man/plotCI.Rd, man/plotmeans.Rd,
+	  trunk/gtools/R/combinations.R, trunk/gtools/R/running.R,
+	  trunk/gtools/man/ELISA.Rd, trunk/gtools/man/combinations.Rd:
+	  Removed executable property
+
+2006-11-14 18:29  warnes
+
+	* tests/heatmap2Test.Rout.save: Update output file to match
+	  (trivial) changes in the test code.
+
+2006-11-14 18:07  warnes
+
+	* ChangeLog, NEWS: Update ChangeLog and NEWS files for release
+	  2.3.2.
+
+2006-11-14 17:59  warnes
+
+	* DESCRIPTION: Update version number
+
+2006-11-14 17:57  warnes
+
+	* DESCRIPTION: Update version number and maintainer
+
 2006-11-14 17:56  warnes
 
 	* man/heatmap.2.Rd: Correct problem with labeled correlation matrix

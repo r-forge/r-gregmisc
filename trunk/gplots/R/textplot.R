@@ -182,9 +182,11 @@ textplot.character <- function (object,
                                 cspace=1,
                                 lspace=1,
                                 mar=c(0,0,3,0)+0.1,
+                                tab.width=8,
                                 ...)
   {
     object <- paste(object,collapse="\n",sep="")
+    object <- replaceTabs(object, width=tab.width)
 
     halign = match.arg(halign)
     valign = match.arg(valign)
