@@ -1,3 +1,111 @@
+2007-11-01 06:43  warnes
+
+	* man/SASxport-package.Rd, man/label.Rd, man/read.xport.Rd,
+	  man/toSAS.Rd, man/write.xport.Rd: Update to match changes to
+	  functions
+
+2007-11-01 06:42  warnes
+
+	* DESCRIPTION: Update to match package changes
+
+2007-11-01 06:42  warnes
+
+	* tests/Alfalfa_Test.Rout.save, tests/TestUnnamedComponents.R,
+	  tests/TestUnnamedComponents.Rout.save, tests/Theoph.Rout.save,
+	  tests/cars.Rout.save, tests/testDates.Rout.save,
+	  tests/testNegative.Rout.save, tests/testNumeric.R,
+	  tests/testNumeric.Rout.save, tests/test_fields.Rout.save,
+	  tests/xport.Rout.save, tests/xxx.R, tests/xxx.Rout.save: Update
+	  stored test output to match package changes
+
+2007-11-01 06:41  warnes
+
+	* inst/NEWS: Update for new release
+
+2007-11-01 06:16  warnes
+
+	* NAMESPACE: Remove dependency on foreign
+
+2007-11-01 06:15  warnes
+
+	* src/ieee2ibm.c, src/init.c, src/swap_bytes.h: Copy code from
+	  foreign for lookup.xport() and read.xport(), extend
+	  lookup.xport() to show information about SAS format and iformat
+
+2007-11-01 06:14  warnes
+
+	* R/SASformat.R, R/SASiformat.R, R/formats.R, R/fstr.R,
+	  R/iformat.R, R/lookup.xport.R, R/make.formats.R, R/read.xport.R,
+	  R/toSAS.R, R/write.xport.R: - Use of the attribute named 'format'
+	  caused problems with chron
+	  objects. Consequently, the format information is now stored in
+	  the
+	  'SASformat' attribute. For consistency, the input format
+	  information
+	  is now stored in the 'SASiformat' attribute.
+	  
+	  - The functions for extracting and setting the format and iformat
+	  information have been renamed to 'SASformat' and 'SASiformat',
+	  etc.
+	  
+	  - In order to properly handle SAS format information, we now use
+	  a
+	  locally modified version of foreign::lookup.xport and
+	  foreign::read.xport.
+	  
+	  - Various typo corrections
+	  
+	  - Creation of a new function fstr() to generate sas format name
+	  strings
+	  using name, length, and digits information.
+	  
+	  - Addion of a toSAS method for chron() objects
+
+2007-11-01 06:01  warnes
+
+	* R/xport.R, src/SASxport.c, src/SASxport.h: Copy code from foreign
+	  for lookup.xport() and read.xport(), extend lookup.xport() to
+	  show information about SAS format and iformat
+
+2007-11-01 05:59  warnes
+
+	* R/importConvertDateTime.R: Improve handling of SAS data and time
+	  formats, simplify code
+
+2007-10-29 15:37  warnes
+
+	* DESCRIPTION, R/xport.numeric.R, inst/ChangeLog, src/ibm2ieee.c,
+	  src/ieee2ibm.c, tests/testNegative.R: Fixes to correct handling
+	  storage of negative numbers
+
+2007-10-29 15:35  warnes
+
+	* R/zzz.R: Belatedly commit change to startup message to give path
+	  to SASxport product page rather than contact page
+
+2007-10-29 15:34  warnes
+
+	* src/reverse.c: Comment out debugging message in reverse()
+
+2007-10-29 15:32  warnes
+
+	* tests/Alfalfa_Test.Rout.save,
+	  tests/TestUnnamedComponents.Rout.save, tests/Theoph.Rout.save,
+	  tests/cars.Rout.save, tests/testDates.Rout.save,
+	  tests/test_fields.Rout.save, tests/xport.Rout.save,
+	  tests/xxx.Rout.save: Commit changes to stored output to match
+	  changed package load message
+
+2007-10-22 02:24  warnes
+
+	* branches/GenerateFORMATSfromFactorObjects/SASxport/DESCRIPTION,
+	  trunk/MSOfficeUtil/DESCRIPTION, trunk/RMCMC/DESCRIPTION,
+	  trunk/Rlsf/DESCRIPTION, DESCRIPTION, trunk/bwRF/DESCRIPTION,
+	  trunk/exp.ssize/DESCRIPTION, trunk/fork/DESCRIPTION,
+	  trunk/gdata/DESCRIPTION, trunk/gmodels/DESCRIPTION,
+	  trunk/gplots/DESCRIPTION, trunk/gregmisc/DESCRIPTION,
+	  trunk/ssize/DESCRIPTION: Clarify GPL version
+
 2007-10-02 22:34  warnes
 
 	* inst/ChangeLog, tests/Alfalfa_Test.Rout.save,
