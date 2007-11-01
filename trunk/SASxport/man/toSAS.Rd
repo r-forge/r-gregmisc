@@ -15,11 +15,11 @@
 }
 \usage{
 toSAS(x, format, format.info=NULL)
-\method{toSAS}{default}(x, format=formats(x), format.info=NULL)
-\method{toSAS}{numeric}(x, format=formats(x), format.info=NULL)
-\method{toSAS}{logical}(x, format=formats(x), format.info=NULL)
-\method{toSAS}{character}(x, format=formats(x), format.info=NULL)
-\method{toSAS}{factor}(x, format=formats(x), format.info=NULL)
+\method{toSAS}{default}(x, format=SASformat(x), format.info=NULL)
+\method{toSAS}{numeric}(x, format=SASformat(x), format.info=NULL)
+\method{toSAS}{logical}(x, format=SASformat(x), format.info=NULL)
+\method{toSAS}{character}(x, format=SASformat(x), format.info=NULL)
+\method{toSAS}{factor}(x, format=SASformat(x), format.info=NULL)
 \method{toSAS}{POSIXt}( x, format="DATETIME16.", format.info=NULL)
 \method{toSAS}{Date}(x, format="DATE9.", format.info=NULL)
 }
@@ -33,7 +33,7 @@ toSAS(x, format, format.info=NULL)
   \code{toSAS} method.  This method must convert the object data to
   either an object of type "numeric" (double-precision floating point)
   or type "character", the only basic types permitted by the xport
-  format, and should add an attribute named "format" to the object
+  format, and should add an attribute named "SASformat" to the object
   providing an appropriate SAS format string or "" (indicating the
   default SAS format).
 
@@ -93,7 +93,7 @@ toSAS.colorFactor <- function(x, format="")
 {
    retval <- ifelse(x=="Red", "#FF0000",
                     ifelse(x=="Green", "#00FF00", "#0000FF") )
-   attr(retval, "format") <- format
+   attr(retval, "SASformat") <- format
    retval
 }
 

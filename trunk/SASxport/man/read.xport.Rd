@@ -159,7 +159,6 @@ read.xport(file,
 w <- read.xport('test2.xpt')
 }
 
-
 # Or read a copy of test2.xpt available on the web:
 host <- 'http://biostat.mc.vanderbilt.edu'
 path <- '/cgi-bin/viewvc.cgi/*checkout*/Hmisc/trunk/tests/test2.xpt'
@@ -177,6 +176,7 @@ w <- read.xport(url, as.list=TRUE, include.formats=TRUE)
 \dontshow{
 SASxport:::assert( is.data.frame(w)==FALSE && is.list(w)==TRUE )
 }
+
 
 \dontrun{
 ## The Hmisc library provides many useful functions for interacting with

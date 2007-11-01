@@ -54,7 +54,7 @@ write.xport(...,
 
   In addition, the SAS XPORT format allows each variable to have a
   corresponding label, display format, and input format.  To set these
-  values, add the   attribute 'label', 'format', or 'iformat' to
+  values, add the   attribute 'label', 'SASformat', or 'SASiformat' to
   individual data frame variables. (See the example section.)
 
   The actual translation of R objects to objects appropriate for SAS is
@@ -97,7 +97,7 @@ temp <- data.frame( x=c(1, 2, NA, NA ), y=c('a', 'B', NA, '*' ) )
 temp
 
 ## add a format specifier (not used by R)
-attr(temp$x, 'format') <- 'date7.'
+attr(temp$x, 'SASformat') <- 'date7.'
 
 ## add a variable label (not used by R)
 attr(temp$y, 'label')  <- 'character variable'

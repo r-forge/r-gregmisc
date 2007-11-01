@@ -32,7 +32,7 @@
    converting its argument to either a simple floating point or
    character variable (the only basic types permitted by the xport
    format) and adding the appropriate SAS format code in the
-   \code{"format"} attribute.
+   \code{"SASformat"} attribute.
 
    The \code{write.xport} function also allows the user to override the
    operating system type and SAS version information, as well as object
@@ -45,8 +45,8 @@ lookup.xport            Lookup Information on a SAS XPORT Format
 read.xport              Import SAS XPORT files
 toSAS.default           Convert R data object for storage in SAS 
                         xport file
-units                   Set or Retrieve the label, format, 
-                        iformat, or units Attribute of a Vector
+units                   Set or Retrieve the label, SASformat, 
+                        SASiformat, or units Attribute of a Vector
 write.xport             Write data to a SAS XPORT file
 }
 }
