@@ -43,6 +43,9 @@
 
 void ieee2ibm(register unsigned char *out, register const unsigned char *in, int count)
 {
+  static char numeric_NA[8] = {0x2e,0x00,0x00,0x00,0x00,0x00,0x00,0x00};
+
+
 	/*
 	 *  IBM Format.
 	 *  7-bit exponent, base 16.
@@ -61,7 +64,7 @@ void ieee2ibm(register unsigned char *out, register const unsigned char *in, int
 		signbit = (left & 0x80000000) >> 24;
 
 		if( exp == 0 || exp == 0x7FF )  {
-ibm_undef:		*out++ = 0;		/* IBM zero.  No NAN */
+		        *out++ = 0;		/* IBM zero.  No NAN */
 			*out++ = 0;
 			*out++ = 0;
 			*out++ = 0;
@@ -79,9 +82,10 @@ ibm_undef:		*out++ = 0;		/* IBM zero.  No NAN */
 		exp /= 4;		/* excess 32, base 16 */
 		exp += (64-32+1);	/* excess 64, base 16, plus fudge */
 		if( (exp & ~0xFF) != 0 )  {
-		  //WARNING("ntohd:  IBM exponent overflow");
-			fprintf(stderr,"ntohd:  IBM exponent overflow\n");
-			goto ibm_undef;
+			warning("IBM exponent overflow, generating NA\n");
+			memcpy(out, numeric_NA, 8);
+			out+= 8;
+			continue;
 		}
 
 		if( fix )  {

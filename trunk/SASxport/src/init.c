@@ -55,9 +55,14 @@ static const R_CMethodDef CEntries[]  = {
   { NULL, NULL, 0}
 };
 
+SEXP xport_info(SEXP xportFile);
+SEXP xport_read(SEXP xportFile, SEXP xportInfo);
+
 #define CALLDEF(name, n)  {#name, (DL_FUNC) &name, n}
 static const R_CallMethodDef CallEntries[] = {
-    CALLDEF(getRawBuffer, 0),
+    CALLDEF(getRawBuffer, 0), 
+    CALLDEF(xport_info, 1),
+    CALLDEF(xport_read, 2),
     {NULL, NULL, 0}
 };
 
