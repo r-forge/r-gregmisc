@@ -204,8 +204,8 @@ write.xport <- function(...,
 
             # get attribute information before any transformations!"
             varLabel <- attr(var, "label")
-            varFormat <- attr(var, "format")
-            varIFormat <- attr(var, "iformat")
+            varFormat <- attr(var, "SASformat")
+            varIFormat <- attr(var, "SASiformat")
 
             # Convert R object to SAS object
             df[[i]] <- var <- toSAS(var, format.info=formats)
@@ -233,15 +233,15 @@ write.xport <- function(...,
             out(
                 xport.namestr(
                               var=var,
-                              varName=i,
-                              varNum=varIndex,
-                              varPos=lenIndex,
-                              varLength=varLen,
-                              varLabel=varLabel,        
-                              fName = formatInfo$name,
+                              varName   = i,
+                              varNum    = varIndex,
+                              varPos    = lenIndex,
+                              varLength = varLen,
+                              varLabel  = varLabel,        
+                              fName   = formatInfo$name,
                               fLength = formatInfo$len,
                               fDigits = formatInfo$digits,
-                              iName = iFormatInfo$name,
+                              iName   = iFormatInfo$name,
                               iLength = iFormatInfo$len,
                               iDigits = iFormatInfo$digits,
                               )

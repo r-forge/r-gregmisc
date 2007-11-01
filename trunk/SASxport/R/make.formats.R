@@ -1,9 +1,9 @@
 ## Take a list of data frames and process factor objects:
 ##
 ## For each factor object
-##   1) generate SAS format infromation
+##   1) generate SAS format information
 ##   2) add the "factor" attribute to these factors with the name of the generated SAS format
-##   3) add this SAS format information to the FORMATS datafram, creating it if necessary.
+##   3) add this SAS format information to the FORMATS dataframe, creating it if necessary.
 ##
 ## Then return a new list of dataframe containing
 ##   1) The (potentially modified) data frames
@@ -34,7 +34,7 @@ make.formats <- function( dfList, formats=NULL )
         for(varName in colnames(df))
           {
             var <- df[[varName]]
-            if(is.factor(var) && is.null(formats(var)) )
+            if(is.factor(var) && is.null(SASformat(var)) )
               {
                 # We need unique format names, but SAS restricts
                 # format names alpha characters.  To create a unique
@@ -50,7 +50,7 @@ make.formats <- function( dfList, formats=NULL )
                                  make.format.factor(var, formatName )
                                  )
                 
-                formats(var) <- formatName
+                SASformat(var) <- formatName
                 df[[varName]] <- var
             }
           }

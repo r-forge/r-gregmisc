@@ -46,16 +46,15 @@ read.xport <- function(file,
       stop("The specified file does not start with a SAS xport file header!")
            
     scat("Extracting data file information...")
-    dsinfo <- foreign:::lookup.xport(file)
+    dsinfo <- lookup.xport.inner(file)
 
     if(length(keep))
       whichds <- toupper(keep)
     else
-
       whichds <- setdiff(names(dsinfo), c(toupper(drop),'_CONTENTS_','_contents_'))
 
     scat("Reading the data file...")
-    ds <- foreign:::read.xport(file)
+    ds <- read.xport.inner(file)
 
     if(any(duplicated(names(dsinfo))))  # only true if file contains has more than one data set
        {
@@ -128,10 +127,17 @@ read.xport <- function(file,
       nam      <- names.tolower(makeNames(names(w), allow=name.chars))
       names(w) <- nam
       dinfo    <- dsinfo[[k]]
+
       fmt      <- sub('^\\$','',dinfo$format)
+      formats  <- fstr( fmt, dinfo$flength, dinfo$fdigits)
+
+      ifmt     <- sub('^\\$','',dinfo$iformat)
+      iformats <- fstr( ifmt, dinfo$iflength, dinfo$ifdigits)
+
       lab      <- dinfo$label
+      
       ndinfo   <- names.tolower(makeNames(dinfo$name, allow=name.chars))
-      names(lab) <- names(fmt) <- ndinfo
+      names(lab) <- names(fmt) <- names(formats) <- names(iformats) <- ndinfo
       for(i in 1:length(w)) {
         changed <- FALSE
         x  <- w[[i]]
@@ -141,7 +147,7 @@ read.xport <- function(file,
           f <- finfo[[fi]]
           if(length(f)) {  ## may be NULL because had a range in format
             x <- factor(x, f$value, f$label)
-            attr(x, 'format') <- fi
+            attr(x, 'SASformat') <- fi
             changed <- TRUE
           }
         }
@@ -181,13 +187,18 @@ read.xport <- function(file,
           changed   <- TRUE
         }
 
-        fmt <- fmt[nam[i]]; 
-        if( !is.null(fmt) && length(fmt)>0 && !is.na(fmt) && fmt > '') {
-          names(fmt) <- NULL
-          formats(x) <- fmt
-          changed <- TRUE
-        }
-        
+        if( formats[nam[i]] > "" )
+          {
+            SASformat(x) <- formats[[nam[i]]]
+            changed <- TRUE
+          }
+      
+        if( iformats[nam[i]] > "" )
+          {
+            SASformat(x) <- formats[[nam[i]]]
+            changed <- TRUE
+          }
+
         if(changed)
           w[[i]] <- x
       }
@@ -199,10 +210,13 @@ read.xport <- function(file,
 
     scat("Done")
 
-    if(include.formats)
+    if( include.formats )
       {
         nds <- nds+1
-        res$"FORMATS" <- ds[[fds]]
+        if( length(fds)>0 ) 
+          res$"FORMATS" <- ds[[fds]]
+        else
+          res$FORMATS <- empty.format.table()
       }
 
     

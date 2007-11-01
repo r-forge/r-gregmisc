@@ -11,7 +11,7 @@ lookup.xport <- function(file)
         file <- tf
       }
 
-    ret <- foreign:::lookup.xport(file)
+    ret <- lookup.xport.inner(file)
     attr(ret, "call") <- match.call()
     attr(ret, "file") <- fname
     class(ret) <- c("lookup.xport", "list")
@@ -30,7 +30,13 @@ summary.lookup.xport <- function(object, ...)
     subFun <- function(XX)
       {
         df <- object[[XX]]
-        ret <- as.data.frame(df[c("name","type","format","width","label")])
+        ret <- as.data.frame(df[c(
+                                  "name", "type",
+                                  "format", "flength", "fdigits",
+                                  "iformat", "iflength", "ifdigits",
+                                  "label"
+                                  )
+                                ])
         cbind(dataset=XX, ret, nobs=df$length)
       }
     
