@@ -34,6 +34,5 @@ Author:
 Maintainer: Gregory R. Warnes <greg@random-technologies-llc.com>
 License: GPL-2
 Depends: R (>= 2.4.0)
-Imports: foreign (>= 0.8-20), chron
-Enhances: foreign
+Imports: chron
 URL: http://random-technologies-llc.com, http://metruminstitute.org
