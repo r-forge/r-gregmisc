@@ -17,7 +17,8 @@ textplot(object, halign="center", valign="center", cex, ...)
          valign=c("center", "top", "bottom"), cex, ... )
 \method{textplot}{character}(object, halign = c("center", "left", "right"),
          valign = c("center", "top", "bottom"), cex, fixed.width=TRUE,
-         cspace=1, lspace=1, mar, ...)
+         cspace=1, lspace=1, mar=c(0, 0, 3, 0) + 0.1,
+         tab.width = 8, ...)
 \method{textplot}{data.frame}(object, halign = c("center", "left", "right"),
          valign = c("center", "top", "bottom"), cex, ...)
 \method{textplot}{matrix}(object, halign = c("center", "left", "right"),
@@ -57,10 +58,10 @@ textplot(object, halign="center", valign="center", cex, ...)
     provided, all data elements will be the same color.  If a matrix
     matching the dimensions of the data is provided, each data element
     will receive the specified color.}
-  \item{col.col.rownames, col.colnames}{Colors for row names and column
+  \item{col.rownames, col.colnames}{Colors for row names and column
     names, respectively.  Either may be specified as a scalar or a
     vector of appropriate length.}
-  }
+  \item{tab.width}{Width of a single tab stop, in characters}
   \item{\dots}{ Optional arguments passed to the text plotting command
     or specialied object methods}
 }
@@ -116,13 +117,30 @@ title("Regression of Sepal Length by Species")
 
 par(mfrow=c(1,1))
 
-# color control example
+### Show how to control text color
 cols <- c("red", "green", "magenta", "forestgreen")
 mat <- cbind(name=cols, t(col2rgb(cols)), hex=col2hex(cols))
 
 textplot(mat,
          col.data=matrix(cols, nrow=length(cols), byrow=FALSE, ncol=5),
          )
+
+### Show how to manually tune the character size
+data(iris)
+reg <- lm( Sepal.Length ~ Species, data=iris )
+text <- capture.output(summary(reg))
+
+# do the plot and capture the character size used
+textplot(text, valign="top")
+
+# see what size was used
+cex
+
+# now redo the plot at 80\% size
+textplot( text, valign="top", cex=cex*0.80)
+
+
+
 }
 }
 \keyword{hplot}
