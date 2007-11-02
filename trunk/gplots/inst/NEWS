@@ -1,5 +1,45 @@
-Release 2.3.2
--------------
+Release 2.5.0 - 2007-11-02
+--------------------------
+
+New Features:
+
+- textplot() now converts tab characters to spaces before processing to
+  avoid problems with computing height and width of text that includes 
+  tabs.
+
+- Add col2rgb() function to convert color names to rgb hex codes
+
+Bug Fixes:
+
+- Correct balloonplot.default to properly show specified x and y axis
+  labels when explicitly provided 
+
+- R/balloonplot.R: Correct error in balloonplot when z contains NA values.
+
+- Fix typos and code/doc mismatches identified by the latest R CMD check
+
+Other:
+
+- Clarify GPL version
+  
+Release 2.4.0 - 2007-02-08
+--------------------------
+
+New Features:
+
+- Add parameters to bandplot() to control line width and type.
+
+- Add paramaeters to textplot.matrix() to allow specification of the
+   color of the matrix data, rows, and column
+
+Bug Fixes:
+
+
+Other: 
+
+
+Release 2.3.2 - 2006-11-14
+--------------------------
 
 - heatmap.2.Rd: Fix example that was broken by changes in 2.3.0.
 
