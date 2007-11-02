@@ -1,3 +1,10 @@
+2007-11-01 20:20  warnes
+
+	* ChangeLog, DESCRIPTION, R/replaceTabs.R, R/textplot.R: in
+	  textplot(), convert tab characters to spaces before processing to
+	  avoid problems with computing height and width of text including
+	  tabs when using pdf()
+
 2007-11-01 20:18  warnes
 
 	* R/overplot.R, man/overplot.Rd: Minor reformatting of overplot
