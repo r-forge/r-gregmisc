@@ -1,4 +1,13 @@
-Version 1.2.0
+Version 1.2.1 2007-11-05
+-------------------------
+
+Other:
+
+- Correct warning message due to extraneous ';' charcters after
+  function closing braces.
+
+
+Version 1.2.0 2007-11-01
 -------------------------
 
 New Features:

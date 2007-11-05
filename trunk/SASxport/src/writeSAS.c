@@ -184,7 +184,7 @@ void fill_member_header(
   raw_buffer_used = 320;
 
   return;
-};
+}
 
 
 void fill_namestr_header(
@@ -206,7 +206,7 @@ void fill_namestr_header(
   raw_buffer_used = 80;
 
   return;
-};
+}
 
 void fill_namestr(
 		  int  *isChar,             /* Bool: Is this a character varible   */
