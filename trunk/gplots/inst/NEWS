@@ -7,7 +7,7 @@ New Features:
   avoid problems with computing height and width of text that includes 
   tabs.
 
-- Add col2rgb() function to convert color names to rgb hex codes
+- Add col2hex() function to convert color names to rgb hex codes
 
 Bug Fixes:
 
