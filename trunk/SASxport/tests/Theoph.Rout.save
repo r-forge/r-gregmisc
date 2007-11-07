@@ -22,7 +22,7 @@ Type 'q()' to quit R.
 > 
 > library(SASxport)
 
-Loaded SASxport version 1.2.0 (2007-11-01).
+Loaded SASxport version 1.2.2 (2007-11-07).
 
   Updates and technical support available from Random Technologies, LLC
   <http://random-technologies-llc.com/products/SASxport>
