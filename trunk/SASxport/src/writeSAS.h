@@ -56,6 +56,11 @@
  *****/
 
 #define MIN(x,y)  (x>y?y:x)
+#ifdef DO_TEST
+#define ASSERT(x) assert(x)
+#else
+#define ASSERT(x) if(!(x)) error("Assertion failed: x")
+#endif
 
 
 /*****
@@ -128,7 +133,7 @@ struct NAMESTR_RECORD {
   short   nifl;               /* INFORMAT LENGTH ATTRIBUTE           */
   short   nifd;               /* INFORMAT NUMBER OF DECIMALS         */
 
-  long    npos;               /* POSITION OF VALUE IN OBSERVATION    */
+  int     npos;               /* POSITION OF VALUE IN OBSERVATION    */
   
   char    rest[52];           /* remaining fields are irrelevant     */
 };

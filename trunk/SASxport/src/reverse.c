@@ -1,4 +1,4 @@
-//#include "writeSAS.h"
+#include "writeSAS.h"
 
 #include <stdio.h>
 #include <string.h>
@@ -34,7 +34,6 @@ void reverse( unsigned char *intp, size_t size)
   return;
 }
 
-
 /* test code */
 void test_reverse()
 {
@@ -54,28 +53,25 @@ void test_reverse()
 
   /* byte */
   reverse( &byte_value, sizeof(unsigned char) );
-  assert( (unsigned char) *byte_pattern == byte_value );
+  ASSERT( (unsigned char) *byte_pattern == byte_value );
 
   /* short */
   reverse( (unsigned char*) &short_value, sizeof(short) );
-  assert( *((short *) short_pattern) == short_value );
+  ASSERT( *((short *) short_pattern) == short_value );
 
   /* int */
   reverse( (unsigned char*) &int_value, sizeof(int) );
-  assert( *((int *) int_pattern) == int_value );
+  ASSERT( *((int *) int_pattern) == int_value );
 
   /* long */
   reverse( (unsigned char*) &long_value, sizeof(long) );
-  assert( *((long*) long_pattern) == long_value );
+  ASSERT( *((long*) long_pattern) == long_value );
 
 }
-
 
 #ifdef DO_TEST
 int main(int argc, char *argv)
 {
   test_reverse();
 }
-
-
 #endif

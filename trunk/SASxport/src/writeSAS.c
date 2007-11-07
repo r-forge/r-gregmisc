@@ -250,14 +250,14 @@ void fill_namestr(
   blankCopy(namestr_record.niform,  8, niform[0]); /* NAME OF INPUT FORMAT                */
   namestr_record.nifl  = (short) *nifl;            /* INFORMAT LENGTH ATTRIBUTE           */
   namestr_record.nifd  = (short) *nifd;            /* INFORMAT NUMBER OF DECIMALS         */
-  namestr_record.npos  = (long)  *npos;            /* POSITION OF VALUE IN OBSERVATION    */
+  namestr_record.npos  = (int)  *npos;            /* POSITION OF VALUE IN OBSERVATION    */
 
   zeroFill(namestr_record.rest, 52);               /* remaining fields are irrelevant     */
 
 
   /* Flip byte order if necessary */
 #define SHORTREV(a) REVERSE( &a, sizeof(short) )
-#define LONGREV(a)  REVERSE( &a, sizeof(long)  )
+#define INTREV(a)  REVERSE( &a, sizeof(int)  )
 
   SHORTREV( namestr_record.ntype );
   SHORTREV( namestr_record.nhfun );
@@ -269,7 +269,7 @@ void fill_namestr(
   SHORTREV( namestr_record.nifl  );
   SHORTREV( namestr_record.nifd  );
 
-  LONGREV ( namestr_record.npos  );
+  INTREV ( namestr_record.npos  );
 
   /* copy filled struct to return area */
   memcpy( raw_buffer, &namestr_record, sizeof(namestr_record) );
