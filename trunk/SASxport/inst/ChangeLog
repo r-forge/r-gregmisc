@@ -1,16 +1,57 @@
+2007-11-09 19:59  warnes
+
+	* [r1226] src/ibm2ieee.c, src/ieee2ibm.c: Apply patches to fix
+	  problems on 64 bit platforms, as sumitted by Brian Ripley.
+
+2007-11-07 19:01  warnes
+
+	* [r1225] tests/Alfalfa_Test.Rout.save,
+	  tests/TestUnnamedComponents.Rout.save, tests/Theoph.Rout.save,
+	  tests/cars.Rout.save, tests/testDates.Rout.save,
+	  tests/testNegative.Rout.save, tests/testNumeric.Rout.save,
+	  tests/test_fields.Rout.save, tests/xport.Rout.save,
+	  tests/xxx.Rout.save: Update version number
+
+2007-11-07 18:59  warnes
+
+	* [r1224] DESCRIPTION: Bump version number
+
+2007-11-07 18:14  warnes
+
+	* [r1223] src/ibm2ieee.c, src/reverse.c, src/writeSAS.c,
+	  src/writeSAS.h: Apply patches to fix problems on 64 bit
+	  platforms, as sumitted by Brian Ripley, and to replace assert()
+	  calls with calls a macro that maps to error() unless standalone
+	  testing is being done, in which case assert() is used.
+
+2007-11-05 15:25  warnes
+
+	* [r1220] DESCRIPTION, inst/NEWS, src/writeSAS.c: Remove extraneous
+	  ';' characters after function closing brace
+
+2007-11-01 16:42  warnes
+
+	* [r1211] DESCRIPTION: Remove dependency on foreign, since the
+	  necessary functionality is now provided internally.
+
+2007-11-01 06:44  warnes
+
+	* [r1210] TODO, inst/ChangeLog: Update TODO file
+
 2007-11-01 06:43  warnes
 
-	* man/SASxport-package.Rd, man/label.Rd, man/read.xport.Rd,
+	* [r1209] man/SASxport-package.Rd, man/label.Rd, man/read.xport.Rd,
 	  man/toSAS.Rd, man/write.xport.Rd: Update to match changes to
 	  functions
 
 2007-11-01 06:42  warnes
 
-	* DESCRIPTION: Update to match package changes
+	* [r1208] DESCRIPTION: Update to match package changes
 
 2007-11-01 06:42  warnes
 
-	* tests/Alfalfa_Test.Rout.save, tests/TestUnnamedComponents.R,
+	* [r1207] tests/Alfalfa_Test.Rout.save,
+	  tests/TestUnnamedComponents.R,
 	  tests/TestUnnamedComponents.Rout.save, tests/Theoph.Rout.save,
 	  tests/cars.Rout.save, tests/testDates.Rout.save,
 	  tests/testNegative.Rout.save, tests/testNumeric.R,
@@ -20,21 +61,21 @@
 
 2007-11-01 06:41  warnes
 
-	* inst/NEWS: Update for new release
+	* [r1206] inst/NEWS: Update for new release
 
 2007-11-01 06:16  warnes
 
-	* NAMESPACE: Remove dependency on foreign
+	* [r1205] NAMESPACE: Remove dependency on foreign
 
 2007-11-01 06:15  warnes
 
-	* src/ieee2ibm.c, src/init.c, src/swap_bytes.h: Copy code from
-	  foreign for lookup.xport() and read.xport(), extend
+	* [r1204] src/ieee2ibm.c, src/init.c, src/swap_bytes.h: Copy code
+	  from foreign for lookup.xport() and read.xport(), extend
 	  lookup.xport() to show information about SAS format and iformat
 
 2007-11-01 06:14  warnes
 
-	* R/SASformat.R, R/SASiformat.R, R/formats.R, R/fstr.R,
+	* [r1203] R/SASformat.R, R/SASiformat.R, R/formats.R, R/fstr.R,
 	  R/iformat.R, R/lookup.xport.R, R/make.formats.R, R/read.xport.R,
 	  R/toSAS.R, R/write.xport.R: - Use of the attribute named 'format'
 	  caused problems with chron
@@ -63,33 +104,33 @@
 
 2007-11-01 06:01  warnes
 
-	* R/xport.R, src/SASxport.c, src/SASxport.h: Copy code from foreign
-	  for lookup.xport() and read.xport(), extend lookup.xport() to
-	  show information about SAS format and iformat
+	* [r1202] R/xport.R, src/SASxport.c, src/SASxport.h: Copy code from
+	  foreign for lookup.xport() and read.xport(), extend
+	  lookup.xport() to show information about SAS format and iformat
 
 2007-11-01 05:59  warnes
 
-	* R/importConvertDateTime.R: Improve handling of SAS data and time
-	  formats, simplify code
+	* [r1201] R/importConvertDateTime.R: Improve handling of SAS data
+	  and time formats, simplify code
 
 2007-10-29 15:37  warnes
 
-	* DESCRIPTION, R/xport.numeric.R, inst/ChangeLog, src/ibm2ieee.c,
-	  src/ieee2ibm.c, tests/testNegative.R: Fixes to correct handling
-	  storage of negative numbers
+	* [r1200] DESCRIPTION, R/xport.numeric.R, inst/ChangeLog,
+	  src/ibm2ieee.c, src/ieee2ibm.c, tests/testNegative.R: Fixes to
+	  correct handling storage of negative numbers
 
 2007-10-29 15:35  warnes
 
-	* R/zzz.R: Belatedly commit change to startup message to give path
-	  to SASxport product page rather than contact page
+	* [r1199] R/zzz.R: Belatedly commit change to startup message to
+	  give path to SASxport product page rather than contact page
 
 2007-10-29 15:34  warnes
 
-	* src/reverse.c: Comment out debugging message in reverse()
+	* [r1198] src/reverse.c: Comment out debugging message in reverse()
 
 2007-10-29 15:32  warnes
 
-	* tests/Alfalfa_Test.Rout.save,
+	* [r1197] tests/Alfalfa_Test.Rout.save,
 	  tests/TestUnnamedComponents.Rout.save, tests/Theoph.Rout.save,
 	  tests/cars.Rout.save, tests/testDates.Rout.save,
 	  tests/test_fields.Rout.save, tests/xport.Rout.save,
@@ -98,7 +139,8 @@
 
 2007-10-22 02:24  warnes
 
-	* branches/GenerateFORMATSfromFactorObjects/SASxport/DESCRIPTION,
+	* [r1196]
+	  branches/GenerateFORMATSfromFactorObjects/SASxport/DESCRIPTION,
 	  trunk/MSOfficeUtil/DESCRIPTION, trunk/RMCMC/DESCRIPTION,
 	  trunk/Rlsf/DESCRIPTION, DESCRIPTION, trunk/bwRF/DESCRIPTION,
 	  trunk/exp.ssize/DESCRIPTION, trunk/fork/DESCRIPTION,
@@ -108,7 +150,7 @@
 
 2007-10-02 22:34  warnes
 
-	* inst/ChangeLog, tests/Alfalfa_Test.Rout.save,
+	* [r1195] inst/ChangeLog, tests/Alfalfa_Test.Rout.save,
 	  tests/TestUnnamedComponents.Rout.save, tests/Theoph.Rout.save,
 	  tests/cars.Rout.save, tests/testDates.Rout.save,
 	  tests/test_fields.Rout.save, tests/xport.Rout.save,
@@ -117,16 +159,16 @@
 
 2007-10-02 22:30  warnes
 
-	* R/zzz.R: Add information on how to get help to the startup
-	  message
+	* [r1194] R/zzz.R: Add information on how to get help to the
+	  startup message
 
 2007-10-02 21:21  warnes
 
-	* NAMESPACE: Add dependenct on utils::packageDescription
+	* [r1193] NAMESPACE: Add dependenct on utils::packageDescription
 
 2007-10-01 20:09  warnes
 
-	* tests/Alfalfa_Test.Rout.save,
+	* [r1192] tests/Alfalfa_Test.Rout.save,
 	  tests/TestUnnamedComponents.Rout.save, tests/Theoph.Rout.save,
 	  tests/cars.Rout.save, tests/testDates.Rout.save,
 	  tests/test_fields.Rout.save, tests/xport.Rout.save,
@@ -135,42 +177,45 @@
 
 2007-09-25 19:58  warnes
 
-	* DESCRIPTION, inst/ChangeLog: Update version number and date
+	* [r1191] DESCRIPTION, inst/ChangeLog: Update version number and
+	  date
 
 2007-09-25 19:54  warnes
 
-	* man/SASxport-package.Rd, man/write.xport.Rd: Indicate that Metrum
-	  partially funded development
+	* [r1190] man/SASxport-package.Rd, man/write.xport.Rd: Indicate
+	  that Metrum partially funded development
 
 2007-09-25 19:53  warnes
 
-	* R/zzz.R: Display version and support information on package load
+	* [r1189] R/zzz.R: Display version and support information on
+	  package load
 
 2007-09-18 17:42  warnes
 
-	* DESCRIPTION: Spent more time than Metrum paid for
+	* [r1188] DESCRIPTION: Spent more time than Metrum paid for
 
 2007-09-15 06:17  warnes
 
-	* man/SASxport-package.Rd, man/lookup.xport.Rd, man/read.xport.Rd,
-	  man/toSAS.Rd, tests/TestUnnamedComponents.Rout.save: Improve
-	  formatting for pdf output
+	* [r1187] man/SASxport-package.Rd, man/lookup.xport.Rd,
+	  man/read.xport.Rd, man/toSAS.Rd,
+	  tests/TestUnnamedComponents.Rout.save: Improve formatting for pdf
+	  output
 
 2007-09-15 05:06  warnes
 
-	* inst/ChangeLog: Update changelog
+	* [r1186] inst/ChangeLog: Update changelog
 
 2007-09-15 04:55  warnes
 
-	* tests/TestUnnamedComponents.R: Changes so test
+	* [r1185] tests/TestUnnamedComponents.R: Changes so test
 	  TestUnnamedCompontents.R runs under R 2.4.1 on Win32
 
 2007-09-15 04:01  warnes
 
-	* DESCRIPTION, R/make.formats.R, R/toSAS.R, R/write.xport.R,
-	  R/xport.character.R, man/Alfalfa.Rd, man/lookup.xport.Rd,
-	  man/toSAS.Rd, man/write.xport.Rd, tests/Alfalfa_Test.R,
-	  tests/Alfalfa_Test.Rout.save,
+	* [r1184] DESCRIPTION, R/make.formats.R, R/toSAS.R,
+	  R/write.xport.R, R/xport.character.R, man/Alfalfa.Rd,
+	  man/lookup.xport.Rd, man/toSAS.Rd, man/write.xport.Rd,
+	  tests/Alfalfa_Test.R, tests/Alfalfa_Test.Rout.save,
 	  tests/TestUnnamedComponents.Rout.save, tests/Theoph.Rout.save,
 	  tests/cars.R, tests/cars.Rout.save, tests/test.xpt,
 	  tests/testDates.Rout.save, tests/test_fields.Rout.save,
@@ -180,8 +225,8 @@
 
 2007-09-14 15:35  warnes
 
-	* R/process.formats.R, R/read.xport.R, data, data/Alfalfa.R,
-	  data/Alfalfa.xpt, inst/ChangeLog, man/Alfalfa.Rd,
+	* [r1183] R/process.formats.R, R/read.xport.R, data,
+	  data/Alfalfa.R, data/Alfalfa.xpt, inst/ChangeLog, man/Alfalfa.Rd,
 	  man/lookup.xport.Rd, man/read.xport.Rd,
 	  tests/TestUnnamedComponents.Rout.save: Add option to read.xport()
 	  that permits inclusion of PROC CONTENTS format information in the
@@ -189,21 +234,23 @@
 
 2007-09-13 17:36  warnes
 
-	* R/read.xport.R: Ensure 'names.tolower' applies to dataset names
+	* [r1180] R/read.xport.R: Ensure 'names.tolower' applies to dataset
+	  names
 
 2007-09-13 01:55  warnes
 
-	* tests/TestUnnamedComponents.Rout.save: Update test output to
-	  match recent changes.
+	* [r1179] tests/TestUnnamedComponents.Rout.save: Update test output
+	  to match recent changes.
 
 2007-09-13 01:19  warnes
 
-	* R/write.xport.R: Add checking and handling for unnamed data
-	  frames or variables
+	* [r1178] R/write.xport.R: Add checking and handling for unnamed
+	  data frames or variables
 
 2007-09-13 01:14  warnes
 
-	* tests/Alfalfa_Test.Rout.save, tests/TestUnnamedComponents.R,
+	* [r1177] tests/Alfalfa_Test.Rout.save,
+	  tests/TestUnnamedComponents.R,
 	  tests/TestUnnamedComponents.Rout.save, tests/Theoph.Rout.save,
 	  tests/cars.Rout.save, tests/testDates.Rout.save,
 	  tests/test_fields.Rout.save, tests/xport.Rout.save,
@@ -212,125 +259,125 @@
 
 2007-09-12 22:27  warnes
 
-	* NAMESPACE: Remove units() and units<-() functions since they
-	  arene't ever used.
+	* [r1176] NAMESPACE: Remove units() and units<-() functions since
+	  they arene't ever used.
 
 2007-09-12 22:25  warnes
 
-	* R/units.R, man/label.Rd, man/units.Rd: Remove units() and
+	* [r1175] R/units.R, man/label.Rd, man/units.Rd: Remove units() and
 	  units<-() functions since they arene't ever used.
 
 2007-09-12 22:24  warnes
 
-	* man/units.Rd: Remove units from manual page
+	* [r1174] man/units.Rd: Remove units from manual page
 
 2007-09-11 23:08  warnes
 
-	* man/read.xport.Rd: Add assertion to test that read.xport(..,
-	  as.list=TRUE) works properly
+	* [r1173] man/read.xport.Rd: Add assertion to test that
+	  read.xport(.., as.list=TRUE) works properly
 
 2007-09-11 23:05  warnes
 
-	* R/write.xport.R: Forgot to save buffer before svn commit.
+	* [r1172] R/write.xport.R: Forgot to save buffer before svn commit.
 
 2007-09-11 21:22  warnes
 
-	* R/read.xport.R, man/read.xport.Rd: Correct error in handling
-	  'verbose' argument, error when more than one dataset has the same
-	  name, and add 'as.list' argument to ensure return value is a
-	  list, even if there is only one dataset in the file
+	* [r1171] R/read.xport.R, man/read.xport.Rd: Correct error in
+	  handling 'verbose' argument, error when more than one dataset has
+	  the same name, and add 'as.list' argument to ensure return value
+	  is a list, even if there is only one dataset in the file
 
 2007-09-11 21:21  warnes
 
-	* R/write.xport.R, man/write.xport.Rd: Improve handling of list
-	  argument. Also check that names are proper and unique.
+	* [r1170] R/write.xport.R, man/write.xport.Rd: Improve handling of
+	  list argument. Also check that names are proper and unique.
 
 2007-09-07 16:47  warnes
 
-	* tests/Theoph.R, tests/Theoph.Rout.save: Add round-trip test for
-	  Theoph data set
+	* [r1167] tests/Theoph.R, tests/Theoph.Rout.save: Add round-trip
+	  test for Theoph data set
 
 2007-09-07 16:32  warnes
 
-	* tests/Alfalfa_Test.Rout.save, tests/cars.Rout.save,
+	* [r1166] tests/Alfalfa_Test.Rout.save, tests/cars.Rout.save,
 	  tests/testDates.Rout.save, tests/xxx.Rout.save: Change argument
 	  name in write.xport from 'filename' to 'file' to match read.xport
 
 2007-09-07 16:25  warnes
 
-	* man/write.xport.Rd: Change argument name in write.xport from
-	  'filename' to 'file' to match read.xport
+	* [r1165] man/write.xport.Rd: Change argument name in write.xport
+	  from 'filename' to 'file' to match read.xport
 
 2007-09-07 16:23  warnes
 
-	* R/write.xport.R, man/read.xport.Rd, man/write.xport.Rd,
+	* [r1164] R/write.xport.R, man/read.xport.Rd, man/write.xport.Rd,
 	  tests/Alfalfa_Test.R, tests/cars.R, tests/testDates.R,
 	  tests/xxx.R: Change argument name in write.xport from 'filename'
 	  to 'file' to match read.xport
 
 2007-09-07 16:21  warnes
 
-	* DESCRIPTION: Fix typo
+	* [r1163] DESCRIPTION: Fix typo
 
 2007-08-29 02:24  warnes
 
-	* DESCRIPTION: Update Version to 1.0, depend on current version of
-	  foreign
+	* [r1161] DESCRIPTION: Update Version to 1.0, depend on current
+	  version of foreign
 
 2007-08-22 19:21  warnes
 
-	* ChangeLog, NEWS, inst/ChangeLog, inst/NEWS: Update ChangeLog and
-	  NEWS files
+	* [r1160] ChangeLog, NEWS, inst/ChangeLog, inst/NEWS: Update
+	  ChangeLog and NEWS files
 
 2007-08-22 18:11  warnes
 
-	* R/read.xport.R, man/read.xport.Rd, tests/xport.Rout.save: Modify
-	  read.xport to preserve case of SAS names by default, as well as
-	  updating the example code.
+	* [r1159] R/read.xport.R, man/read.xport.Rd, tests/xport.Rout.save:
+	  Modify read.xport to preserve case of SAS names by default, as
+	  well as updating the example code.
 
 2007-08-22 01:19  warnes
 
-	* src/reverse.c: sprintf() was being used where printf() was
-	  intended.
+	* [r1158] src/reverse.c: sprintf() was being used where printf()
+	  was intended.
 
 2007-08-21 18:16  warnes
 
-	* DESCRIPTION: Slight improvement to credits for BRL-CAD
+	* [r1157] DESCRIPTION: Slight improvement to credits for BRL-CAD
 
 2007-08-21 18:13  warnes
 
-	* TODO, man/lookup.xport.Rd, man/read.xport.Rd: Commit previous
-	  updates
+	* [r1156] TODO, man/lookup.xport.Rd, man/read.xport.Rd: Commit
+	  previous updates
 
 2007-08-21 18:12  warnes
 
-	* src/htond.c, src/ibm2ieee.c, src/ieee2ibm.c, src/init.c,
+	* [r1155] src/htond.c, src/ibm2ieee.c, src/ieee2ibm.c, src/init.c,
 	  src/reverse.c, src/test_fields.c: Commit previous updates
 
 2007-08-15 07:02  warnes
 
-	* DESCRIPTION, man/SASxport-package.Rd, src/cnxptiee.c,
+	* [r1146] DESCRIPTION, man/SASxport-package.Rd, src/cnxptiee.c,
 	  src/cnxptiee.h, src/htond.c, src/init.c, src/reverse.c,
 	  src/test_fields.c, src/writeSAS.c, src/writeSAS.h: Remove
 	  dependency on SAS code
 
 2007-08-15 06:06  warnes
 
-	* src/reverse.c: Fix reverse.c because we need to swap everything
-	  to match Big-Endian, rather than Little-Endian. Also, dont' call
-	  the macro.
+	* [r1145] src/reverse.c: Fix reverse.c because we need to swap
+	  everything to match Big-Endian, rather than Little-Endian. Also,
+	  dont' call the macro.
 
 2007-08-15 06:04  warnes
 
-	* src/reverse.c: Restore reverse.c
+	* [r1144] src/reverse.c: Restore reverse.c
 
 2007-08-15 03:17  warnes
 
-	* DESCRIPTION: Minor reformatting
+	* [r1143] DESCRIPTION: Minor reformatting
 
 2007-08-15 03:14  warnes
 
-	* DESCRIPTION, inst/doc/SAS_TS140.txt, inst/doc/index.html,
+	* [r1142] DESCRIPTION, inst/doc/SAS_TS140.txt, inst/doc/index.html,
 	  inst/doc/r2xpt.doc, man/SASxport-package.Rd, man/lookup.xport.Rd,
 	  man/read.xport.Rd, man/toSAS.Rd, man/units.Rd,
 	  man/write.xport.Rd: Make corrections for typos noted by Metrum
@@ -338,96 +385,98 @@
 
 2007-08-12 03:22  warnes
 
-	* DESCRIPTION, man/lookup.xport.Rd, src/cnxptiee.h,
+	* [r1138] DESCRIPTION, man/lookup.xport.Rd, src/cnxptiee.h,
 	  src/test_fields.c, src/writeSAS.h: More updates
 
 2007-08-12 03:13  warnes
 
-	* src/B8.h, src/IEEEtoIBM.c, src/MASKS.h, src/main.c,
+	* [r1137] src/B8.h, src/IEEEtoIBM.c, src/MASKS.h, src/main.c,
 	  src/reverse.c: Remove new stuff... use SAS's code instead
 
 2007-08-12 03:12  warnes
 
-	* src/B8.h, src/IEEEtoIBM.c, src/MASKS.h, src/cnxptiee.h,
+	* [r1136] src/B8.h, src/IEEEtoIBM.c, src/MASKS.h, src/cnxptiee.h,
 	  src/main.c, src/reverse.c, src/test_fields.c, src/writeSAS.h: 1st
 	  attempt at rewriting cnxptiee.[ch]
 
 2007-08-11 23:48  warnes
 
-	* R/read.xport.R: Explicitly check file header
+	* [r1135] R/read.xport.R: Explicitly check file header
 
 2007-08-11 00:03  warnes
 
-	* DESCRIPTION, man/SASxport-package.Rd: Improve package description
+	* [r1134] DESCRIPTION, man/SASxport-package.Rd: Improve package
+	  description
 
 2007-08-09 23:29  warnes
 
-	* DESCRIPTION, NAMESPACE, TODO, man/lookup.xport.Rd,
+	* [r1133] DESCRIPTION, NAMESPACE, TODO, man/lookup.xport.Rd,
 	  man/read.xport.Rd, man/units.Rd: More changes, esp to
 	  lookup.xport() and friends
 
 2007-08-09 23:28  warnes
 
-	* tests/Alfalfa_Test.Rout.save, tests/cars.Rout.save,
+	* [r1132] tests/Alfalfa_Test.Rout.save, tests/cars.Rout.save,
 	  tests/xport.Rout.save: More changes, esp to lookup.xport() and
 	  friends
 
 2007-08-09 23:28  warnes
 
-	* R/AFirst.lib.s, R/all.is.numeric.R, R/in.opererator.R,
+	* [r1131] R/AFirst.lib.s, R/all.is.numeric.R, R/in.opererator.R,
 	  R/lookup.xport.R, R/read.xport.R, R/write.xport.R: More changes,
 	  esp to lookup.xport() and friends
 
 2007-08-09 19:02  warnes
 
-	* src/swap_bytes.h: Remove unused swap_bytes.h
+	* [r1130] src/swap_bytes.h: Remove unused swap_bytes.h
 
 2007-08-09 19:02  warnes
 
-	* man/SASxport-package.Rd: Add package description page
+	* [r1129] man/SASxport-package.Rd: Add package description page
 
 2007-08-09 16:54  warnes
 
-	* R/importConvertDateTime.R, R/makeNames.R, R/read.xport.R,
+	* [r1128] R/importConvertDateTime.R, R/makeNames.R, R/read.xport.R,
 	  R/testDateTime.R: Add comment header indicating the source of
 	  code from Hmisc
 
 2007-08-09 16:53  warnes
 
-	* tests/testDates.Rout.save, tests/test_fields.Rout.save,
+	* [r1127] tests/testDates.Rout.save, tests/test_fields.Rout.save,
 	  tests/xport.Rout.save, tests/xxx.Rout.save: Update saved output
 	  of test scripts
 
 2007-08-08 18:54  warnes
 
-	* DESCRIPTION, NAMESPACE: Updates
+	* [r1126] DESCRIPTION, NAMESPACE: Updates
 
 2007-08-08 18:54  warnes
 
-	* tests/Alfalfa_Test.R, tests/Alfalfa_Test.Rout.save, tests/cars.R,
-	  tests/cars.Rout.save, tests/datetime.xpt, tests/testDates.R,
-	  tests/test_fields.R, tests/test_fields.Rout.save, tests/xport.R,
-	  tests/xxx.R, tests/xxx.Rout.save: Updates
+	* [r1125] tests/Alfalfa_Test.R, tests/Alfalfa_Test.Rout.save,
+	  tests/cars.R, tests/cars.Rout.save, tests/datetime.xpt,
+	  tests/testDates.R, tests/test_fields.R,
+	  tests/test_fields.Rout.save, tests/xport.R, tests/xxx.R,
+	  tests/xxx.Rout.save: Updates
 
 2007-08-08 18:54  warnes
 
-	* src/SASxport.c, src/SASxport.h, src/foreign.h, src/init.c:
-	  Updates
+	* [r1124] src/SASxport.c, src/SASxport.h, src/foreign.h,
+	  src/init.c: Updates
 
 2007-08-08 18:53  warnes
 
-	* R/AFirst.lib.s, R/formats.R, R/iformat.R,
+	* [r1123] R/AFirst.lib.s, R/formats.R, R/iformat.R,
 	  R/importConvertDateTime.R, R/label.R, R/lookup.xport.R,
 	  R/makeNames.R, R/read.xport.R, R/testDateTime.R, R/units.R,
 	  R/xport.R: Updates
 
 2007-08-08 18:53  warnes
 
-	* man/assert.Rd, man/read.xport.Rd, man/units.Rd: Updates.
+	* [r1122] man/assert.Rd, man/read.xport.Rd, man/units.Rd: Updates.
 
 2007-08-03 04:44  warnes
 
-	* DESCRIPTION, NAMESPACE, R/scat.R, R/xport.R, R/zzz.R,
+	* [r1119] DESCRIPTION, NAMESPACE, R/scat.R, R/xport.R, R/zzz.R,
 	  man/lookup.xport.Rd, man/read.xport.Rd, src/SASxport.c,
 	  src/SASxport.h, src/cnxptiee.c, src/cnxptiee.h, src/foreign.h,
 	  src/init.c, src/swap_bytes.h, src/test_fields.c, src/writeSAS.c,
@@ -439,41 +488,42 @@
 
 2007-08-03 01:46  warnes
 
-	* R/.Rhistory: Remove stray .Rhistory file
+	* [r1118] R/.Rhistory: Remove stray .Rhistory file
 
 2007-08-03 01:45  warnes
 
-	* DESCRIPTION: Acknowledge MetrumI support
+	* [r1117] DESCRIPTION: Acknowledge MetrumI support
 
 2007-08-03 01:45  warnes
 
-	* NAMESPACE: Add "assert" function
+	* [r1116] NAMESPACE: Add "assert" function
 
 2007-08-03 01:44  warnes
 
-	* R/assert.R, man/assert.Rd: Add "assert" function to avoid
+	* [r1115] R/assert.R, man/assert.Rd: Add "assert" function to avoid
 	  dependenct on gtools.
 
 2007-08-03 01:29  warnes
 
-	* man/toSAS.Rd, src/cnxptiee.c, src/writeSAS.c: Correct some typos.
+	* [r1114] man/toSAS.Rd, src/cnxptiee.c, src/writeSAS.c: Correct
+	  some typos.
 
 2007-08-03 00:40  warnes
 
-	* DESCRIPTION: Drop version number to 0.99 until testing
+	* [r1113] DESCRIPTION: Drop version number to 0.99 until testing
 	  integration and is complete
 
 2007-08-03 00:39  warnes
 
-	* tests/test_fields.R: Add R test file to run c-level tests
+	* [r1112] tests/test_fields.R: Add R test file to run c-level tests
 
 2007-08-03 00:36  warnes
 
-	* src/SASxport.so: Remove .so from svn
+	* [r1111] src/SASxport.so: Remove .so from svn
 
 2007-08-03 00:35  warnes
 
-	* NAMESPACE, R/fromSASDate.R, R/parseFormat.R, R/toSAS.R,
+	* [r1110] NAMESPACE, R/fromSASDate.R, R/parseFormat.R, R/toSAS.R,
 	  R/write.xport.R, R/xport.character.R, R/xport.file.header.R,
 	  R/xport.member.header.R, R/xport.namestr.R, man/toSAS.Rd,
 	  src/SASxport.so, src/writeSAS.c: More modifications. Should now
@@ -481,18 +531,18 @@
 
 2007-08-03 00:35  warnes
 
-	* tests/cars.R, tests/datetime.xpt, tests/testDates.R, tests/xxx.R:
-	  Add more tests
+	* [r1109] tests/cars.R, tests/datetime.xpt, tests/testDates.R,
+	  tests/xxx.R: Add more tests
 
 2007-07-29 01:15  warnes
 
-	* tests/Alfalfa2.xpt, tests/cars.sas, tests/cars.xpt,
+	* [r1107] tests/Alfalfa2.xpt, tests/cars.sas, tests/cars.xpt,
 	  tests/xxx.sas, tests/xxx.xpt: Add SAS code to create xport data
 	  files for testing
 
 2007-07-28 08:47  warnes
 
-	* ., DESCRIPTION, NAMESPACE, R, R/.Rhistory, R/blanks.R,
+	* [r1106] ., DESCRIPTION, NAMESPACE, R, R/.Rhistory, R/blanks.R,
 	  R/rawToDisplay.R, R/write.xport.R, R/xport.NA.R,
 	  R/xport.character.R, R/xport.dateFMT.R, R/xport.file.header.R,
 	  R/xport.fill.R, R/xport.member.header.R, R/xport.namestr.R,
