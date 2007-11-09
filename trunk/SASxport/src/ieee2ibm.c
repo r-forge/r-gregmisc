@@ -53,7 +53,7 @@ void ieee2ibm(register unsigned char *out, register const unsigned char *in, int
 	 */
 	register int	i;
 	for( i=count-1; i >= 0; i-- )  {
-	  register unsigned long left, right;
+	  register unsigned int left, right;
 	  register int fix, exp, signbit;
 
 		left  = (in[0]<<24) | (in[1]<<16) | (in[2]<<8) | in[3];
