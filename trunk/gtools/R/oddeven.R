@@ -1,5 +1,5 @@
 # $Id$
 
 # detect odd/even integers
-odd <- function(x) x!=as.integer(x/2)*2
-even <- function(x) x==as.integer(x/2)*2
+odd <- function(x) x %% 2 == 1
+even <- function(x) x %% 2 == 0 
