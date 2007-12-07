@@ -23,7 +23,7 @@ estimable(obj, cm, beta0, conf.int=NULL,  show.beta0, ...)
 %.to.est(obj, params)
 }
 \arguments{
-   \item{obj}{Regression (lm,glm,lme,lmer,mlm) object. }
+   \item{obj}{Regression (lm, glm, lme, lmer, mlm) object. }
    \item{cm}{Vector, List, or Matrix specifying estimable linear functions or
      contrasts.  See below for details.}
    \item{beta0}{Vector of null hypothesis values}
@@ -80,7 +80,7 @@ estimable(obj, cm, beta0, conf.int=NULL,  show.beta0, ...)
   %is not intended for direct use.
 }
 \note{
-  The estimated fixed effect parameter of \code{lme} objects may have
+  The estimated fixed effect parameters of \code{lme} objects may have
   different degrees of freedom.  If a specified contrast includes
   nonzero coefficients for parameters with differing degrees of freedom,
   the smallest number of degrees of freedom is used and a warning
