@@ -81,7 +81,7 @@ heatmap.2 (x,
   \item{Rowv}{determines if and how the \emph{row} dendrogram should be
     reordered.	By default, it is TRUE, which implies dendrogram is
     computed and reordered based on row means. If NULL or FALSE, then no
-    dendrogram is computed and reordering is done. If a
+    dendrogram is computed and no reordering is done. If a
     \code{\link{dendrogram}}, then it is used "as-is", ie
     without any reordering. If a vector of integers, then dendrogram is
     computed and reordered based on the order of the vector.}
