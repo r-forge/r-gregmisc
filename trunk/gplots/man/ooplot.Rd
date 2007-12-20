@@ -229,6 +229,8 @@ ooplot(data, ...)
      ooplot(test3f,type="stackbar",col=c("red","blue","green"))
      ooplot(test5r,type="stackbar",col=c("red","blue","green"))
 
+     # restore default layout (1 plot/page)
+     layout(1)
 }
 \keyword{hplot}
 
