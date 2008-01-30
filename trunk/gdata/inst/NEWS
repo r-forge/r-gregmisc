@@ -1,5 +1,40 @@
+CHANGES IN 2.4.0 (2008-01-30)
+-----------------------------
+
+- The keep() function now includes an 'all' argument to specify how
+  objects with names starting with '.' are handled. 
+
+- keep() now shows an informative warning message when a requested
+  object does not exist
+
+- New vignette "Mapping Levels of a Factor" describing the use of
+  mapLevels().
+
+- New vignette "Working with Unknown Values" describing the use of
+  isUnknown() and unknownToNA().
+
+- Several enhancements to read.xls() (thanks to Gabor Grothendieck):
+
+  - New function xls2csv(), which handles converting an xls file
+    to a csv file and returns a connection to the
+    temporary csv file
+
+  - xls2csv() and read.xls() both allow a file or a url to be specified
+
+  - read.xls() has a new 'pattern' argument which, if supplied,
+    will ignore everything prior to the first line in th csv file
+    that matches the pattern.  This is typically used if there
+    are a variable number of comment lines prior to the header
+    in which case one can specify one of the column
+    headings as the pattern.  read.xls should
+    be compatible with the old read.xls.
+
+- Minor fixes to drop.levels(), is.what().
+
+- Implementation of unit tests for most functions.
+
 CHANGES IN 2.3.1 (2006-10-29)
----------------------------------------
+-----------------------------
 
 - Arguments as well as their position of reorder.factor have been changed
   to conform with reorder.factor method in stats package, due to collision
