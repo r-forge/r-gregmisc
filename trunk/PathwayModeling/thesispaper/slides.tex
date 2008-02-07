@@ -3,10 +3,7 @@
 \mode<presentation>
 {
   \usetheme{Warsaw}
-  % or ...
-
   \setbeamercovered{transparent}
-  % or whatever (possibly just delete it)
 }
 %\setbeameroption{show notes}
 
@@ -20,7 +17,6 @@
 % \documentclass[doublespacing]{elsart}
 \usepackage{graphicx}
 \usepackage[nogin]{Sweave}
-\usepackage[numbers]{natbib} \bibliographystyle{plainnat}
 \usepackage{amsmath}
 \usepackage{amssymb}
 \usepackage{yfonts}
@@ -32,18 +28,20 @@
 \usepackage{makeidx}
 \usepackage{dchem}
 \usepackage{color}
+\usepackage[numbers]{natbib} 
+\bibliographystyle{plainnat}
 
 \newcommand{\deriv}[2]{\ensuremath{\frac{\mathrm{d} #1}{\mathrm{d} #2}}}
 
 \title{Statistical Modeling of Biochemical Pathways}
-\author{Robert B. Burrows\inst{1} \and Gregory R. Warnes\inst{2,3} }
+\author{Gregory R. Warnes\inst{1,2,3} }
 \institute{ 
   \inst{1}%
-  New England Biometrics\\
-  North Scituate, RI
+  Biostatistics and Computational Biology \\
+  University of Rochester
   \and
   \inst{2}%
-  Biostatistics and Computational Biology \\
+  Center for Biodefense Immune Modeling \\
   University of Rochester
   \and
   \inst{3}%
@@ -56,37 +54,56 @@
 $ $Id$ $
 }
 
-%\begin{abstract}
-%The usefulness of Markov chain Monte Carlo methods for the modeling
-%of biochemical reactions is examined. With simulated data, it is
-%shown that mechanistic models can be fit to sequences of enzymatic
-%reactions. These methods have the advantages of being relatively easy
-%to use and producing probability distributions for the model
-%parameters rather than point estimates.
-
-%Three Markov chain Monte Carlo algorithms are used to fit models to
-%data from a
-%sequence of 4 enzymatic reactions. The algorithms 
-%are evaluated with respect to
-%the goodness-of-fit of the fitted models and the time to completion.
-%It is shown that the algorithms produce essentially the same
-%parameter distributions but the time to completion varies. 
-%\end{abstract}
 
 \frame{
   \maketitle
 }
 
+%%\section[Abstract]{}
+%%\begin{abstract}
+%\frame{
+%  \frametitle{Abstract}
+%    \small
+%    We examine the usefulness of Bayesian statistical methods for
+%    the modeling of biochemical reactions. With simulated data, it is
+%    shown that these methods can effectively fit mechanistic models of
+%    sequences of enzymatic reactions to experimental data. This 
+%    approach has the advantages of being flexible, relatively easy to use,
+%    and producing full probability distributions for the model parameters 
+%    rather than point estimates, thus allowing more informative inferences 
+%    (including relationships between parameters) to be drawn.  Further,
+%    these methods perform well even when the mechanistic model leads 
+%    to multiple solution regions, high parameter correlations, and other 
+%    'unfriendly' behavior.    
+
+%    The presentation will include a brief overview of Bayesian statistical
+%    methods for those unfamiliar with these techniques, as well as a brief
+%    discussion of the computational methods utilized.
+%}
+%%\end{abstract}
+
 \section[Outline]{}
 \frame{
   \frametitle{Outline}
-  \tableofcontents
+
+%  \tableofcontents
+
+ \begin{columns}
+      \begin{column}{0.5\textwidth}
+        \tableofcontents[sections={1-4}]
+      \end{column}
+      \begin{column}{0.5\textwidth}
+        \tableofcontents[sections={5-8}]
+      \end{column}
+    \end{columns}
+
 }
 
 \section{Overview}
+\subsection{Goal}
 \frame{
   \frametitle{Overview}
-  \begin{block}{Goal:}
+  \begin{block}{Goal: Model Biochemical Pathways}
     Estimate key rate parameters of biological pathways, e.g
 
     \includegraphics[width=0.75\textwidth]{figures/glycolysis} 
@@ -95,15 +112,86 @@ $ $Id$ $
     changes, and understand the system.
   \end{block}
 }
+
+\subsection{Components}
 \frame{
   \frametitle{Overview}
-  \begin{block}{Method:}
-    ``Wrap'' standard deterministic mathematical model
-    within a Bayesian statistical model 
+  \begin{block}{Combine 3 components:}
+    \begin{tabular}{ll}
+     Biochemistry        & Biochemical components \& relationships \\
+     Mathematical Model  & Strucure of relationships between components \\
+     Bayesian Statistics & Relationship between previous information, \\
+                         & model and measured data \\
+    \end{tabular}
+
+%  \begin{block}{Method:}
+%    \begin{center}
+%    ``Wrap'' standard deterministic mathematical model describing a
+%    biochemical pathway within a Bayesian statistical model 
+%    \end{center}
   \end{block}
+
 }  
 
+\subsection{Intro to Bayesian Statistics}
+\frame{
+  \frametitle{Intro to Bayesian Statistics (1/2)}
+  \begin{enumerate}
+  \item Based on Decision Theory
+  \item Modeling Process:
+    \begin{enumerate}
+    \item Costruct a model for observed data: {\color{blue} ``Likelihood'':
+      $L(\mathit{Data}|\theta)$ }
+    \item Describe current information about model parameters:
+      { \color{green} ``Prior distribution'' $\pi(\theta)$ }
+    \item Run experiment \& collect data
+    \item Apply Bayes Rule $\to$ {\color{red}``Posterior distribution''}
+
+\begin{equation}\label{BayesRule}
+{\color{red}\pi(\theta|\mathit{Data})} = \frac{{\color{blue}L(\mathit{Data}|\theta)} {\color{green}\pi(\theta)}}{\int {L(\mathit{Data}|\theta) \pi(\theta)}d\theta}
+\end{equation}
+
+    \item Draw conclusions using Posterior
+    \end{enumerate}
+  \end{enumerate}
+}
+
+\frame{
+  \frametitle{Intro to Bayesian Statistics (2/2)}
+  \begin{itemize}
+  \item Strengths
+    \begin{itemize}
+    \item Very flexible
+    \item Consistent with human thinking
+    \item Allows inclusion of existing domain knowledge
+    \end{itemize}
+  \item Weaknesses
+    \begin{itemize}
+    \item Characterization of ``current information'' can be
+      controversial
+    \item Computationaly expensive 
+    \item Less popular than Frequentist statistics
+    \end{itemize}
+  \end{itemize}
+}
+
+
+
 \section{Evaluation Approach}
+
+\frame{
+  \frametitle{Overview}
+  \begin{block}{Goal: Model Biochemical Pathways}
+    Estimate key rate parameters of biological pathways, e.g
+
+    \includegraphics[width=0.75\textwidth]{figures/glycolysis} 
+
+    in order to estimate rate parameters, predict responses to
+    changes, and understand the system.
+  \end{block}
+}
+
+
 \frame{
   \frametitle{Evaluation Approach}
   \begin{enumerate}
@@ -124,7 +212,7 @@ $ $Id$ $
     R3 \yields R4 \yields R5 \yields sink \end{reaction}
 
   Chemical Equations:
-  \begin{chemarray*} \small
+  \begin{chemarray*}
     source &\yields^{k_1}& R1\\
     R1 + E1 &\eqbm^{k_2}_{k_3}& R1E1 \yields^{k_4} R2 + E1\\
     R2 + E2 &\eqbm^{k_5}_{k_6}& R2E2 \yields^{k_7} R3 + E2\\
@@ -324,7 +412,43 @@ $ $Id$ $
 }
 
 \frame{
-  \frametitle{Convergence Rates}
+\begin{block}{What is Markov Chain Monte Carlo?}
+
+\textcolor{blue}{Markov Chain Monte Carlo (MCMC)} is a technique for
+generating \textcolor{red}{dependent} samples (a Markov Chain) from a
+distribution without needing the \textcolor{blue}{normalizing constant}.
+
+\end{block}
+\begin{block}{When is MCMC useful?}
+
+\textcolor{blue}{MCMC} is useful when it is \textcolor{red}{difficult} to
+\textcolor{blue}{simulate} from the target distribution, such as when the
+\textcolor{blue}{normalizing constant} is difficult or impossible to
+compute and \textcolor{blue}{rejection sampling} is not possible.
+
+Examples:
+\begin{itemize}
+  \item Sampling from \textcolor{blue}{Bayesian Posterior Distributions}
+  \item Computing \textcolor{blue}{Maximum-Likelihood tests for intractable
+    likelihoods}
+\end{itemize}
+
+\end{block}
+
+}
+
+\frame{
+\frametitle{MCMC In pictures}
+\begin{center}
+\includegraphics[height=0.75\textheight]{MCMC-Picture}
+\hfill
+\includegraphics[height=0.75\textheight]{MCMC-Histogram}
+\end{center}
+}
+
+
+\frame{
+  \frametitle{Convergence Rates (1/2)}
   \begin{center}
     Mean Squared Residuals \\
     ~
@@ -342,6 +466,16 @@ $ $Id$ $
     \end{tabular}
   \end{center}
 }
+
+\frame{
+  \frametitle{Convergence Rates (2/2)}
+  \begin{center}
+    \includegraphics[scale=0.5]{figures/MSR16}
+  \end{center}
+
+
+}
+
 
 \section{Results}
 \frame{
@@ -377,22 +511,77 @@ $ $Id$ $
   \end{center}
 }
 
-\section[]{References}
+\section{Acknowledgments}
 \frame{
-  \frametitle{For More Information}
-  \begin{itemize}
-  \item Greg Warnes \
-    \begin{itemize}
-    \item Email: \texttt{warnes@bst.rochester.edu}
-    \item Personal Web Page: \texttt{http://www.warnes.net}
-    \item Research Web Page: \texttt{http://research.warnes.net}
-    \end{itemize}
-  \item Robert Burrows 
-    \begin{itemize}
-    \item Email: \texttt{rbb@nebiometrics.com}
-    \item Web Page: \texttt{http://www.nebiometrics.com}
-    \end{itemize}
-  \end{itemize}
+  \frametitle{Acknowledgments}
+
+  Robert "Bing" Burrows, Ph.D., who was primarily responsible for work
+  described here passed away unexpectedly on December 27, 2006.
+
+\begin{quote}
+\tiny
+  BURROWS, ROBERT BERNARD, II, 63, of North Scituate [Rhode Island],
+  died Wednesday, December 27, 2006. He was a long time resident of
+  Lexington, MA before moving to Rhode Island in 2001. After
+  graduating from Lexington High School, Dr. Burrows earned his
+  Bachelor of Arts from Northeastern University, a Ph.D. in
+  Biochemistry from the Massachusetts Institute of Technology, and a
+  Master of Science in Statistics from the University of Rhode Island.
+  He was a self-employed Research Biochemist and previously worked for
+  the Boston Biomedical Research Institute. He leaves his sister Ellen
+  Conner and her husband Donald of Coventry, his dearest friend Sally
+  Glanz of North Scituate and many cousins. (\emph{The Providence Journal/Evening
+      Bulletin} 2006 Dec. 31; Sec. B5)
+\end{quote}
 }
+
+\section[]{Reference \& Contact Information}
+\frame{
+  \frametitle{Reference \& Contact Information}
+  \begin{block}{Manuscript}
+    Burrows~RB, Warnes~GR, Hanumara~RC, ``Statistical Modeling of Biochemical Pathways'',
+    \emph{IET Systems Biology}, IET Syst. Biol. 1, 353 (2007)
+  \end{block}
+  \begin{block}{Contact Information}
+    \begin{itemize}
+    \item Email:              \texttt{greg@warnes.net}
+    \item Personal Web Page:  \texttt{http://www.warnes.net}
+    \item CBIM Web Page:      \texttt{https://cbim.urmc.rochester.edu}
+    \item UR Biostat Web Page \texttt{http://www.urmc.rochester.edu/smd/biostat}
+    \end{itemize}
+  \end{block}
+}
+
+%%\bibliography{./refs}
+%\begin{thebibliography}{99}
+%  \bibitem{Oates02}%1
+%    Oates,~P.J., 2002, Polyol pathway and diabetic peripheral
+%    neuropathy, \emph{Int. Rev. Neurobiol.},
+%    \textbf{50}, 325--392.
+%  \bibitem{Gilks95} %5
+%    Gilkes,~W.R., Richardson,~S., and Spiegelhalter,~D.J. (Ed.),
+%    \emph{Markov Chain Monte Carlo in Practice} (Boca Raton, FL:
+%    Chapman \& Hall/CRC)
+%  \bibitem{R}%9
+%    R Development Team, \emph{R: A Language and Environment for
+%    Statistical Computing}, http://www.r-project.org (accessed 7 Nov 06)
+%  \bibitem{Michaelis13} %10
+%    Michaelis, L. and Menten, M.L., 1913, Die kinetic der
+%    invertinwirkung, \emph{Biochem. Zeit.}, \textbf{49},
+%    333--369.
+%  \bibitem{Hydra}%13
+%    Warnes, G.R., Hydra {MCMC} {L}ibrary,
+%    http://www.sourceforge.net/projects/hydra-mcmc 
+%  \bibitem{Warnes00} %14
+%    Warnes, G.R., 2000, The {N}ormal {K}ernel {C}oupler: {A}n adaptive
+%    {M}arkov chain {M}onte {C}arlo method for efficiently sampling
+%    from multi-modal distributions, thesis, University of Washington.
+%  \bibitem{projo}%16
+%    OBITUARIES-SCITUATE-BURROWS. \emph{The Providence Journal/Evening
+%      Bulletin} 2006 Dec. 31; Sec. B5
+%\end{thebibliography}
+
+
+
 
 \end{document}
