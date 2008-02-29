@@ -39,8 +39,8 @@ write.xport(...,
       converted to upper case.  All characters outside of the set A-Z,
       0-9, and '\_' are converted to '\_'.
     \item Character variables are stored as characters.
-    \item If \code{make.formats=TRUE} (the default), factor variables are stored as numeric with an appropriate SAS
-      format specification. If \code{make.formats=FALSE}, factor
+    \item If \code{autogen.formats=TRUE} (the default), factor variables are stored as numeric with an appropriate SAS
+      format specification. If \code{autogen.formats=FALSE}, factor
       variables are stored as characters.
     \item All numeric variables are stored as double-precision floating
       point values utilizing the IBM mainframe double precision floating
