@@ -1,3 +1,11 @@
+Version 1.2.3 2008-02-29
+------------------------
+
+Bug fixes:
+
+- Fix typo in manual page for write.xport() reported by Yinlai Meng.
+
+
 Version 1.2.2 2007-11-09
 ------------------------
 

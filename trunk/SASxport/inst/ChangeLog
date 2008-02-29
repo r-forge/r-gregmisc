@@ -1,3 +1,12 @@
+2008-02-29 15:37  warnes
+
+	* [r1244] man/write.xport.Rd: Correct typo in write.xport man page
+
+2007-11-09 22:45  warnes
+
+	* [r1227] inst/ChangeLog, inst/NEWS: Update NEWS and ChangeLog for
+	  1.2.2
+
 2007-11-09 19:59  warnes
 
 	* [r1226] src/ibm2ieee.c, src/ieee2ibm.c: Apply patches to fix
