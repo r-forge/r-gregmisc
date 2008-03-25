@@ -13,7 +13,7 @@ use FileHandle;
 use Carp;
 
 # The package version, both in 1.23 style *and* usable by MakeMaker:
-$VERSION = substr q$Revision$, 10;
+$VERSION = "2.110";
 
 
 #------------------------------
@@ -208,6 +208,12 @@ $Id$
     
 
 =head1 AUTHOR
+
+=item Primary Maintainer
+
+David F. Skoll (F<dfs@roaringpenguin.com>).
+
+=item Original Author
 
 Eryq (F<eryq@zeegee.com>).
 President, ZeeGee Software Inc (F<http://www.zeegee.com>).
