@@ -348,7 +348,7 @@ else
     if(!missing(rowsep))
       for(rsep in rowsep)
         rect(xleft =0,          ybottom= (ncol(x)+1-rsep)-0.5,
-             xright=ncol(x)+1,  ytop   = (ncol(x)+1-rsep)-0.5 - sepwidth[2],
+             xright=nrow(x)+1,  ytop   = (ncol(x)+1-rsep)-0.5 - sepwidth[2],
              lty=1, lwd=1, col=sepcolor, border=sepcolor)
 
   
