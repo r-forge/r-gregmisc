@@ -1,3 +1,51 @@
+2008-04-07 16:47  warnes
+
+	* [r1252] R/heatmap.2.R, man/heatmap.2.Rd: Add ability to control
+	  location of individual heatmap.2 components
+
+2008-03-27 22:36  warnes
+
+	* [r1251] R/heatmap.2.R: Fix bug in handling rowsep, per suggestion
+	  by Steven Paugh
+
+2008-01-04 18:59  warnes
+
+	* [r1238] man/overplot.Rd: Fix examples for overplot()
+
+2008-01-02 16:58  warnes
+
+	* [r1237] man/barplot2.Rd: Update Marc's email address
+
+2007-12-20 22:48  warnes
+
+	* [r1235] man/heatmap.2.Rd: Two letter clarification of help text
+	  for heatmap.2()
+
+2007-12-20 22:24  warnes
+
+	* [r1234] man/ooplot.Rd: Restore plot layout at end of ooplot()
+	  example
+
+2007-11-06 16:24  warnes
+
+	* [r1222] man/hist2d.Rd: Remove extraneous closing brace in the
+	  hist2d documentation file
+
+2007-11-05 15:32  warnes
+
+	* [r1221] inst/NEWS: Fix typo in NEWS: col2hex() is the new
+	  function, not col2rgb() which is part of grDevices
+
+2007-11-02 19:32  warnes
+
+	* [r1219] DESCRIPTION, NAMESPACE, inst/ChangeLog, inst/NEWS:
+	  Updates for gplots 2.5.0
+
+2007-11-02 19:32  warnes
+
+	* [r1218] tests/heatmap2Test.Rout.save: Update saved test output
+	  due to changes in how R reports warnings
+
 2007-11-02 18:22  warnes
 
 	* [r1217] ChangeLog, NEWS: Create soft links of gmodels/ChangeLog

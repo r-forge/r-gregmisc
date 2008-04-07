@@ -1,3 +1,23 @@
+Release 2.6.0 - 2008-04-07
+--------------------------
+
+New Features: 
+
+- heatmap() now allows control of the location of individual plot components
+   (e.g. color key)
+
+Bug Fixes:
+
+- Fix bug in handling rowsep, per suggestion by Steven Paugh
+
+- Fix examples for overplot()
+
+- Two letter clarification of help text for heatmap.2()
+
+- Restore plot layout settings to default state at end of ooplot() example
+
+- Various typo fixes 
+
 Release 2.5.0 - 2007-11-02
 --------------------------
 
