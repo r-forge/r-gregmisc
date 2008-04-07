@@ -62,6 +62,11 @@ heatmap.2 <- function (x,
                      xlab = NULL,
                      ylab = NULL,
 
+                     # plot layout
+                     lmat = NULL,
+                     lhei = NULL,
+                     lwid = NULL,
+
                      # extras
                      ...
                      )
@@ -270,22 +275,44 @@ else
     x[] <- ifelse(x<min.breaks, min.breaks, x)
     x[] <- ifelse(x>max.breaks, max.breaks, x)
 
+
+
+  
+
+  
     ## Calculate the plot layout
-    lmat <- rbind(4:3, 2:1)
-    lhei <- lwid <- c(keysize, 4)
-    if(!missing(ColSideColors)) { ## add middle row to layout
-	if(!is.character(ColSideColors) || length(ColSideColors) != nc)
-	    stop("'ColSideColors' must be a character vector of length ncol(x)")
-	lmat <- rbind(lmat[1,]+1, c(NA,1), lmat[2,]+1)
-	lhei <- c(lhei[1], 0.2, lhei[2])
-    }
-    if(!missing(RowSideColors)) { ## add middle column to layout
-	if(!is.character(RowSideColors) || length(RowSideColors) != nr)
-	    stop("'RowSideColors' must be a character vector of length nrow(x)")
-	lmat <- cbind(lmat[,1]+1, c(rep(NA, nrow(lmat)-1), 1), lmat[,2]+1)
-	lwid <- c(lwid[1], 0.2, lwid[2])
-    }
-    lmat[is.na(lmat)] <- 0
+    if( missing(lhei) || is.null(lhei) )
+      lhei <- c(keysize, 4)
+
+    if( missing(lwid) || is.null(lwid) )
+       lwid <- c(keysize, 4)
+
+    if( missing(lmat) || is.null(lmat) )
+       {
+         lmat <- rbind(4:3, 2:1)
+         
+         if(!missing(ColSideColors)) { ## add middle row to layout
+           if(!is.character(ColSideColors) || length(ColSideColors) != nc)
+             stop("'ColSideColors' must be a character vector of length ncol(x)")
+           lmat <- rbind(lmat[1,]+1, c(NA,1), lmat[2,]+1)
+           lhei <- c(lhei[1], 0.2, lhei[2])
+         }
+
+         if(!missing(RowSideColors)) { ## add middle column to layout
+           if(!is.character(RowSideColors) || length(RowSideColors) != nr)
+             stop("'RowSideColors' must be a character vector of length nrow(x)")
+           lmat <- cbind(lmat[,1]+1, c(rep(NA, nrow(lmat)-1), 1), lmat[,2]+1)
+           lwid <- c(lwid[1], 0.2, lwid[2])
+         }
+
+         lmat[is.na(lmat)] <- 0
+       }
+       
+     if(length(lhei) != nrow(lmat))
+       stop("lhei must have length = nrow(lmat) = ", nrow(lmat))
+
+     if(length(lwid) != ncol(lmat))
+       stop("lwid must have length = ncol(lmat) =", ncol(lmat))
 
     ## Graphics `output' -----------------------
 
