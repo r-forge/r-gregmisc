@@ -11,8 +11,7 @@
 \description{ Compute and display confidence intervals for model
   estimates.  Methods are provided for the mean of a numeric vector
   \code{ci.default}, the probability of a binomial vector
-  \code{ci.binom}, and for \code{lm}, \code{lme}, and \code{lmer} objects are
-  provided. }
+  \code{ci.binom}, and for \code{lm}, \code{lme}, and \code{lmer} objects. }
 \synopsis{
   ci(x, confidence = 0.95, alpha = 1 - confidence,...)
   \method{ci}{default}(x, confidence = 0.95, alpha = 1 - confidence, na.rm=FALSE)...)
