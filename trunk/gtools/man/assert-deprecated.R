@@ -1,8 +1,12 @@
-\name{assert}
+\name{assert-deprecated}
+\alias{assert-deprecated}
 \alias{assert}
-\title{Generate an error if an expression is not true.}
+\title{DEPRECATED: Generate an error if an expression is not true.}
 \description{
   Generate an error if an expression is not true.
+}
+\note{
+  This function is deprecated in favor of \code{\link[base]{stopifnot}}
 }
 \usage{
 assert(FLAG)
@@ -22,7 +26,10 @@ assert(FLAG)
   None.  Evaluated only for its side effect.
 }
 \author{Gregory R. Warnes \email{warnes@bst.rochester.edu} }
-\seealso{ \code{\link[base]{stop}}, \code{\link[base]{warning}} }
+\seealso{
+  \code{\link[base]{stopifnot}}, \code{\link[base]{stop}},
+  \code{\link[base]{warning}}
+}  
 \examples{
 
 ## Trivial example

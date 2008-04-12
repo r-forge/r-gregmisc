@@ -1,3 +1,9 @@
+gtools SVN VERSION $Id$
+-----------------------
+
+- Modify odd() and even() to use modulus operator instead of division.
+  (Doesn't seem to change the results, but looks more elegant!)
+
 gtools 2.4.0
 ------------
 
