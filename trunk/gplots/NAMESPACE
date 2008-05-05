@@ -31,6 +31,7 @@ export(
 importFrom(gtools, invalid)
 importFrom(gtools, odd)
 importFrom(gdata, nobs)
+importFrom(gdata, reorder.factor)
 
 importFrom(stats, reorder)
 importFrom(stats, na.omit)
