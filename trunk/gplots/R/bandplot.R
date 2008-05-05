@@ -6,9 +6,10 @@ bandplot  <-  function(x,y,
                        sd=c(-2:2),
                        sd.col=c("lightblue","blue","red",
                                  "blue","lightblue"),
-                       sd.lwd=c(1,2,3,2,1),
+                       sd.lwd=c(2,2,3,2,2),
                        sd.lty=c(2,1,1,1,2),
                        method="frac", width=1/5,
+                       use.runsd=TRUE,
                        n=50
                        )
   {
@@ -16,7 +17,6 @@ bandplot  <-  function(x,y,
     if(length(sd.col)<length(sd)) sd <-rep(sd.col,length=length(sd))
     if(length(sd.lwd)<length(sd)) sd <-rep(sd.lwd,length=length(sd))
     if(length(sd.lty)<length(sd)) sd <-rep(sd.lty,length=length(sd))    
-
     if(!add)
       {
         m <- match.call(expand.dots = TRUE)
@@ -37,7 +37,18 @@ bandplot  <-  function(x,y,
 
     sdplot <- function(S, COL, LWD, LTY)
                   {
-                    where <- wapply(x,y,CL,sd=S,width=width,method=method,n=n)
+                    if(use.runsd)
+                      {
+                        ord <- order(x)
+                        myx <- x[ord]
+                        myy <- y[ord]
+                        sd <- runsd(myy, k=floor(length(x)*width))
+                        where <- list()
+                        where$x <- myx
+                        where$y <- runmean(myy, k=floor(length(x)*width) ) + S * sd
+                      }
+                    else
+                      where <- wapply(x,y,CL,sd=S,width=width,method=method,n=n)
                     lines(where,col=COL,lwd=LWD,lty=LTY,...)
                     where
                   }
