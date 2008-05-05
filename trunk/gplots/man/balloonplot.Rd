@@ -26,6 +26,7 @@ balloonplot(x, ...)
                                 label.size=1,
                                 label.color=par("fg"),
                                 scale.method=c("volume","diameter"),
+                                scale.range=c("absolute","relative"),
                                 colsrt=par("srt"),
                                 rowsrt=par("srt"),
                                 colmar=1,
@@ -67,6 +68,11 @@ balloonplot(x, ...)
   \item{label.size, label.color}{ Character size and color for value labels.}
   \item{scale.method}{Method of scaling the sizes of the dot, either
     "volume" or "diameter". See below.}
+  \item{scale.range}{Method for scaling original data to compute
+  circle diameter.  \code{scale.range="absolute"} scales the data
+  relative to 0 (i.e, maps [0,max(z)] --> [0,1]), while
+  \code{scale.range="relative"} scales the data relative to min(z)
+  (i.e. maps [min(z), max(z)] --> [0,1]).}
   \item{rowsrt, colsrt}{Angle of rotation for row and column labels.}
   \item{rowmar, colmar}{Space allocated for row and column labels. Each
     unit is the width/height of one cell in the table.}
@@ -166,7 +172,7 @@ colors <- as.character(as.data.frame(Colors)$Freq)
 
 balloonplot(x=list(Age,Sex),
             y=list(Class=Class,
-            Survived=reorder.factor(Survived,c(2,1))),
+            Survived=gdata::reorder.factor(Survived,c(2,1))),
             z=Freq,
             zlab="Number of Passengers",
             sort=TRUE,

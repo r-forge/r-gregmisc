@@ -39,6 +39,7 @@ balloonplot.default <- function(x,y,z,
                                 label.size=1,
                                 label.color=par("fg"),
                                 scale.method=c("volume","diameter"),
+                                scale.range=c("absolute","relative"),
                                 colsrt=par("srt"),
                                 rowsrt=par("srt"),
                                 colmar=1,
@@ -74,6 +75,7 @@ balloonplot.default <- function(x,y,z,
   ####
   
   scale.method <- match.arg(scale.method)
+  scale.range  <- match.arg(scale.range)
 
   if( any(z < 0, na.rm=TRUE ) )
     warning("z value(s) below zero detected.",
@@ -150,7 +152,7 @@ balloonplot.default <- function(x,y,z,
   ####
   ## Function to scale circles to fill the containing box
   ####
-  myscale <- function(X, min=0, max=16, scale.method)
+  myscale <- function(X, min=0, max=16, scale.method, scale.range)
     {
       if(scale.method=="volume")
         {
@@ -158,12 +160,11 @@ balloonplot.default <- function(x,y,z,
           X <- sqrt(X)
         }
 
-      # put min to 0
-      X <- (X-min(X, na.rm=TRUE))
-      # put max to 1
-      X <- X / max(X, na.rm=TRUE )
-      # now to [min,max]
-      X <- min + X  * (max - min) 
+      if(scale.range=="relative")
+          X <- (X-min(X, na.rm=TRUE)) # put min to 0
+      X <- X / max(X, na.rm=TRUE )    # put max to 1
+      X <- min + X  * (max - min)     # now to [min,max]
+
       cin.x <- par("cin")[1]
       cin.y <- par("cin")[2]
       if(cin.x < cin.y) X <- X * cin.x/cin.y
@@ -200,21 +201,21 @@ balloonplot.default <- function(x,y,z,
     {
       xlim=c(-0.5,nlevels(x)+nlabels.y*rowmar-0.25)   # extra space on either
                                                       # end of plot for labels
-      ylim=c(0.50,nlevels(y)+nlabels.x*colmar+1) # and so dots don't cross
+      ylim=c(0.50,nlevels(y)+nlabels.x*colmar+1)      # and so dots don't cross
                                                       # into margins,
     }
   else
     {
-      xlim=c(-0.5,nlevels(x)+nlabels.y*rowmar+1)   # extra space on either
+      xlim=c(-0.5,nlevels(x)+nlabels.y*rowmar+1)      # extra space on either
                                                       # end of plot for labels
-      ylim=c(0,nlevels(y)+nlabels.x*colmar+1) # and so dots don't cross
+      ylim=c(0,nlevels(y)+nlabels.x*colmar+1)         # and so dots don't cross
                                                       # into margins,
     }
 
   
   plot(x=nlabels.y*rowmar+0.25 + as.numeric(ztab$x) - 1,
        y=nlevels(y) - as.numeric(ztab$y) + 1,
-       cex=myscale(ztab$z, max=dotsize, scale.method=scale.method),
+       cex=myscale(ztab$z, max=dotsize, scale.method=scale.method, scale.range=scale.range),
        pch=dotchar, # plot character
        col=as.character(ztab$dotcolor), # dot color
        xlab="",
@@ -245,7 +246,6 @@ balloonplot.default <- function(x,y,z,
            y=0.25,
            labels=format(c(sumz, rowsumz), digits=label.digits)[-1],
            font=1,
-           cex=par("cex")*0.75,
            adj=c(0.5,0.0),
            col=text.color,
            cex=text.size
@@ -259,7 +259,6 @@ balloonplot.default <- function(x,y,z,
            y= (ny:1),
            labels=rowlabs,
            font=1,
-           cex=par("cex")*0.75,
            adj=c(1.0,0.5),
            col=text.color,
            cex=text.size           
@@ -271,7 +270,6 @@ balloonplot.default <- function(x,y,z,
            y=0.25,
            labels=sumz,
            font=1,
-           cex=par("cex")*0.75,
            adj=c(1.0,0.0),
            col=text.color,
            cex=text.size           
@@ -371,7 +369,7 @@ balloonplot.default <- function(x,y,z,
   ####
   ## Column headers for row labels
   ####
-  if(missing(ylab))
+  if(missing(ylab) || length(ylab)==0)
     text(
          x=((1:length(ylabs))-0.5)*rowmar-0.5,
          y=ny+0.5,
@@ -397,7 +395,7 @@ balloonplot.default <- function(x,y,z,
   ####
   ## Row headers for column labels
   ####
-  if(missing(xlab))
+  if(missing(xlab) || length(xlab)==0)
     text(
          x= nlabels.y*rowmar - 0.25 - strwidth(','),
          y= ny + 0.75 + ((nlabels.x:1) - 1 + .5)*colmar,
