@@ -4,8 +4,8 @@ bandplot  <-  function(x,y,
                        ...,
                        add=FALSE,
                        sd=c(-2:2),
-                       sd.col=c("lightblue","blue","red",
-                                 "blue","lightblue"),
+                       sd.col=c("magenta","blue","red",
+                                 "blue","magenta"),
                        sd.lwd=c(2,2,3,2,2),
                        sd.lty=c(2,1,1,1,2),
                        method="frac", width=1/5,
@@ -35,32 +35,22 @@ bandplot  <-  function(x,y,
       else
         mean(x)+sd*sqrt(var(x))
 
-    sdplot <- function(S, COL, LWD, LTY)
-                  {
-                    if(use.runsd)
-                      {
-                        ord <- order(x)
-                        myx <- x[ord]
-                        myy <- y[ord]
-                        sd <- runsd(myy, k=floor(length(x)*width))
-                        where <- list()
-                        where$x <- myx
-                        where$y <- runmean(myy, k=floor(length(x)*width) ) + S * sd
-                      }
-                    else
-                      where <- wapply(x,y,CL,sd=S,width=width,method=method,n=n)
-                    lines(where,col=COL,lwd=LWD,lty=LTY,...)
-                    where
-                  }
+    ord <- order(x)
+    myx <- x[ord]
+    myy <- y[ord]
+    sdVec <- runsd(myy, k=floor(length(x)*width))
+    meanVec <- runmean(myy, k=floor(length(x)*width) )
 
     stdevs <- list()
     for( i in 1:length(sd) )
-      stdevs[[as.character(sd[i])]] <- sdplot(
-                                              sd[i],
-                                              COL=sd.col[i],
-                                              LWD=sd.lwd[i],
-                                              LTY=sd.lty[i]
-                                              )
+      {
+          lines(myx,
+                meanVec + sdVec * sd[i],
+                col=sd.col[i],
+                lwd=sd.lwd[i],
+                lty=sd.lty[i]
+                )
 
-    invisible( stdevs )
+      }
+    
   }
