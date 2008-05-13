@@ -1,4 +1,4 @@
-## $Id$
+## s$Id$
 
 ## Creating a temporary function to quote the string
 dQuote.ascii <- function(x) paste('"',x,'"',sep='')
@@ -86,7 +86,15 @@ read.xls <- function(xls, sheet = 1, verbose=FALSE, pattern, ..., perl="perl") {
         if (inherits(con, "connection") && isOpen(con)) close(con)
         if (file.exists(tfn)) file.remove(tfn)
    })
+
+   ## expand file path, translating ~ to user's home directory, etc.
+   xls <- path.expand(xls)
+
+
+   ## translate from xls to csv format (returns csv file name)
    con <- xls2csv(xls, sheet, verbose=verbose, ..., perl = perl)
+
+   ## load the csv file
    open(con)
    tfn <- summary(con)$description
    if (missing(pattern))
