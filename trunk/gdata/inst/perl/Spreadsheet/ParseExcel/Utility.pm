@@ -32,11 +32,6 @@ sub ExcelFmt {
 $sFmt = '@' if ($sFmt eq "GENERAL");
 
 #1. Get Condition
-if($sFmt=~/^\[([<>=][^\]]+)\](.*)$/) {
-$sCond = $1;
-
-
-#1. Get Condition
     if($sFmt=~/^\[([<>=][^\]]+)\](.*)$/) {
         $sCond = $1;
         $sFmt = $2;
