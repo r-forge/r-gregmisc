@@ -89,13 +89,13 @@ read.xls <- function(xls, sheet = 1, verbose=FALSE, pattern, ..., perl="perl") {
    con <- xls2csv(xls, sheet, verbose=verbose, ..., perl = perl)
    open(con)
    tfn <- summary(con)$description
-      if (missing(pattern))
+   if (missing(pattern))
         {
           if(verbose)
             cat("Reading csv file ", dQuote.ascii(tfn), "...\n")
           else
             cat("Reading csv file... ")            
-          read.csv(con, ...)
+          retval <- read.csv(con, ...)
           cat("Done.\n")
         }
    else {
@@ -113,8 +113,9 @@ read.xls <- function(xls, sheet = 1, verbose=FALSE, pattern, ..., perl="perl") {
        cat("Reading csv file ", dQuote.ascii(tfn), "...\n")
      else
        cat("Reading csv file... ")       
-     read.csv(con, skip = idx[1]-1, ...)
+     retval <- read.csv(con, skip = idx[1]-1, ...)
      cat("Done.\n")     
    }
+   retval
 }
 
