@@ -5,15 +5,19 @@
 Plot Venn diagrams for up to 5 sets
 }
 \usage{
-venn(data, small = 0.7, showSetLogicLabel = FALSE, simplify = FALSE)
+venn(data, universe=NA, small=0.7, showSetLogicLabel=FALSE,
+     simplify=FALSE, show.plot=TRUE)
 }
 \arguments{
   \item{data}{data to be plotted (see below)}
+  \item{universe}{??}
   \item{small}{Character size of group labels}
   \item{showSetLogicLabel}{Logical flag indicating whether the internal
     group label should be displayed}
   \item{simplify}{Logical flag indicating whether unobserved group
     should be omitted.}
+  \item{show.plot}{Logical flag indicating whether the plot should be
+    displayed.  If false, simply returns the group count matrix.}
 }
 \details{
   \code{data} should be either a named list of vectors containing
@@ -27,7 +31,7 @@ venn(data, small = 0.7, showSetLogicLabel = FALSE, simplify = FALSE)
   The fist column contains observed counts, subsequent columns contain
   0-1 indicators of group membership.
 }
-\author{Steffen Moeller \email{steffen_moeller@gmx.de},
+\author{Steffen Moeller \email{steffen\_moeller@gmx.de},
   with cleanup and packaging by Gregory R. Warnes
   \email{greg@random-technologies-llc.com}.}
 \examples{
@@ -57,7 +61,7 @@ venn(input)
 
 
 ## Omit un-observed groupings
-tmp <- venn(input, simplify=T)
+tmp <- venn(input, simplify=TRUE)
 
 ## show details
 tmp
@@ -65,14 +69,7 @@ tmp
 ## Show internal binary group labels
 venn(input, showSetLogicLabel=TRUE)
 
-## Omit un-observed groupings, and show internal binary group labels 
-venn(input, simplify=T, showSetLogicLabel=TRUE)
-
-
-
-
+## Specify universe
+venn(input, universe=NULL, showSetLogicLabel=TRUE)
 }
-% Add one or more standard keywords, see file 'KEYWORDS' in the
-% R documentation directory.
-\keyword{ ~kwd1 }
-\keyword{ ~kwd2 }% __ONLY ONE__ keyword per line
+\keyword{hplot}
