@@ -25,6 +25,7 @@ export(
        smartlegend,
        space,
        textplot,
+       venn,
        wapply
 )
 
