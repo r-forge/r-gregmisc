@@ -28,8 +28,8 @@
   }
 \usage{
   bandplot(x, y, ..., add = FALSE, sd = c(-2:2),
-           sd.col = c("lightblue", "blue", "red", "blue", "lightblue"),
-           sd.lwd = c(1, 2, 3, 2, 1), sd.lty = c(2, 1, 1, 1, 2),
+           sd.col=c("magenta", "blue", "red", "blue", "magenta"),
+           sd.lwd=c(2, 2, 3, 2, 2),  sd.lty=c(2, 1, 1, 1, 2), 
            method = "frac", width = 1/5, n=50) 
 }
 \arguments{

@@ -9,7 +9,6 @@ bandplot  <-  function(x,y,
                        sd.lwd=c(2,2,3,2,2),
                        sd.lty=c(2,1,1,1,2),
                        method="frac", width=1/5,
-                       use.runsd=TRUE,
                        n=50
                        )
   {
