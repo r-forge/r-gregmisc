@@ -1,172 +1,207 @@
 \name{sii}
 \alias{sii}
-%- Also NEED an '\alias' for EACH other topic documented here.
-\title{ ~~function to do ... ~~ }
+\alias{print.SII}
+\alias{plot.SII}
+\alias{summary.SII}
+\title{Compute ANSI S3.5-1997 Speech Intelligibility Index (SII)}
 \description{
-  ~~ A concise (1-5 lines) description of what the function does. ~~
+  Compute the Speech Intelligibility Index (SII) described by ANSI
+  specification S3.5-1997, including extensions for conductive
+  hearing loss.
 }
 \usage{
-sii(x, freq, noise, method = c("interpolate", "critical", "one-third octave", "equal-contributing", "octave"), voice = c("raised", "normal", "loud", "shout"))
+sii(speech = c("normal", "raised", "loud", "shout"),
+    noise, threshold, loss, freq, 
+    method = c("interpolate", "critical", "equal-contributing",
+               "one-third octave", "octave"),
+    importance = c("SII", "NNS", "CID22", "NU6", "DRT",
+                   "ShortPassage", "SPIN", "CST"))
+\method{print}{SII}(x, digits=2, ...)
+\method{plot}{SII}(x, ...)
+\method{summary}{SII}(object, digits=2, ...)
 }
-%- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{x}{ ~~Describe \code{x} here~~ }
-  \item{freq}{ ~~Describe \code{freq} here~~ }
-  \item{noise}{ ~~Describe \code{noise} here~~ }
-  \item{method}{ ~~Describe \code{method} here~~ }
-  \item{voice}{ ~~Describe \code{voice} here~~ }
+  \item{speech}{Either a numeric vector providing $E'_i$, the equivalent
+    speech spectrum level (in dB) at each frequency, or a character
+    string indicating the stated vocal effort corresponding to one of
+    the standard standard speech spectrum levels ("normal", "raised",
+    "loud", "shout"). Defaults to \code{speech="normal"} correspoding to
+    the normal level of stated vocal effort. }
+  \item{noise}{A numeric vector providing $N'_i$, the equivalent
+    noise spectrum level (in dB) at each frequency.  If missing,
+    defaults to -50 dB for each frequency.}
+  \item{threshold}{A numeric vector providing $T'_i$, the equivalent
+    hearing threshold level (in dB) at each frequency.  If missing,
+    defaults to 0 dB for each frequency.}
+  \item{loss}{A numeric vector providing $J'_i$, the conductive hearing
+    loss level (in dB) at each frequency.  If missing, 
+    defaults to 0 dB for each frequency.}
+  \item{freq}{Vector of frequencies for which \code{speech},
+    \code{noise}, \code{threshold}, and/or \code{loss} are specified.
+    If \code{method="interpolate"}, \code{freq} must be specified.
+    Otherwise, it must either match the required value for SII
+    calculation method given by argument \code{method}, or be missing,
+    in which case it will default to the values required for the
+    specified method.}
+  \item{method}{A character string specifying the SII calculation
+    method ("critical", "one-third octave", "equal-contributing",
+    "octave"), or \code{"interpolate"} in which case the critical-band
+    method will be applied, with interpolation from the provided
+    frequencies to the required 21 frequency values.}
+  \item{importance}{Either a numeric vector providing $F_i$, the
+    transfer function (importance weights) at each frequency, or a character
+    string indicating which transfer function to employ ("SII", "NNS",
+    "CID22", "NU6", "DRT", "ShortPassage", "SPIN", "CST"). Defaults to
+    the standard SII transfer function, \code{importance="SII"}.}
+  \item{object,x}{SII object}
+  \item{digits}{Number of digits to display} 
+  \item{...}{Optional arguments to \code{print}, \code{summary}, and
+    \code{plot} methods} 
 }
 \details{
-  ~~ If necessary, more details than the description above ~~
+    American National Standard ANSI S3.5-1997 ("Methods for Calculation of
+    the Speech Intelligibility Index") defines a method for computing a
+    physical measure that is highly correlated with the intelligibility
+    of speech as evaluated by speech perception tests given a group of
+    talkers and listeners. This measure is called the Speech
+    Intelligibility Index, or SII. The SII is calculated from acoustical
+    measurements of speech and noise.
+
+    The \code{sii} function implements ANSI S3.5-1997 as described in
+    the standard, without any attempt to optimize the performance. The
+    implementation does, however, include the extension for handling
+    conductive hearing loss from Annex A (utilizing the optional
+    \code{loss} argument, and for utilizing alternative band weights
+    (i.e. transfer function) appropriate for differing message contents
+    (e.g. types of speech) as described in Annex B or user-specified
+    band weights (utilizing the optional argument \code{importance}).
+
+    Further, this implementation provides a mechanism for
+    interpolating/extrapolating available measurements to those required
+    for calculating the critical band procedure (via the argument
+    \code{method="interpolate"}).  Interpolation is accomplished using
+    linear interpolation (on log-scaled data) to the frequencies
+    required for the critical-band SII procedure.  Interpolation is
+    performed (if necessary) for \code{noise}, \code{threshold}, and
+    \code{loss}.
+
 }
 \value{
-  ~Describe the value returned
-  If it is a LIST, use
-  \item{comp1 }{Description of 'comp1'}
-  \item{comp2 }{Description of 'comp2'}
-  ...
+    The return value is an object of class SII, containing the following
+    components:
+    \item{call}{Function call used to generate the SII object}
+    \item{orig}{List containing original (pre-extrapolation) values for
+      \code{freq}, \code{speech}, \code{noise}, \code{threshold}, and
+      \code{loss}.}
+    \item{speech, noise, threshold, loss, and freq}{Values used in
+      calculations (extrapolated if necessary)}
+    \item{table}{SII calculation worksheet, containing columns
+      corresponding to both Table C.1 and C.2 in Annex C of the
+      standard. Table columns are
+      \describe{
+	\item{Fi}{Center frequency of SII band, Hz}
+	\item{E'i}{Spectrum level of equivalent speech, dB}
+	\item{N'i}{Spectrum level of equivalent noise, dB}
+	\item{T'i}{Equivalent hearing threshold level, dB}
+	\item{Vi}{Spectrum level for self-speech masking, dB}
+	\item{Bi}{Larger of the specrum levels for equivalent noise and
+	  self-speech masking, dB}
+	\item{Ci}{Slope per octave (doubling of frequency) of the upward
+	  spread of masking, dB/octave}
+	\item{Zi}{Spectrum level for equivalent masking, dB}
+	\item{Xi}{Spectrum level of internal noise, dB}
+	\item{X'i}{Spectrum level of equivalent internal noise, dB}
+	\item{Di}{Spectrum level for equivalent disturbance, dB}
+	\item{Ui}{Spectrum level of standard speech for normal vocal
+	  effort, dB}
+	\item{Ji}{Equivalent hearing threshold due to conductive hearing
+	  loss, dB}
+	\item{Li}{Speech level distortion factor, dB}
+	\item{Ki}{Temporary variable used in the calculation of the band
+	  auditability function}
+	\item{Ai}{Band auditability function}
+	\item{Ii}{Band importance function}
+	\item{IiAi}{Product of the band importance function (Ii), and band
+	  auditability function(Ai)}
+      }
+    }
+    \item{sii}{Calculated SII value}
 }
-\references{ ~put references to the literature/web site here ~ }
-\author{ ~~who you are~~ }
-\note{ ~~further notes~~ 
+\references{
+ANSI S3.5-1997, "American National Standard Methods for 
+Calculation of the Speech Intelligibility Index" American National
+Standards Institute, New York. 
 
- ~Make other sections like Warning with \section{Warning }{....} ~
+Other software programs for calculating SII are available from
+\url{http://www.sii.to/html/programs.html}.
+
 }
-\seealso{ ~~objects to See Also as \code{\link{help}}, ~~~ }
+\author{Gregory R. Warnes \email{greg@random-technologies-llc.com}}
+\seealso{ SII Constants: \code{\link{critical}}, and
+  \code{\link{sic.critical}} }
 \examples{
-##---- Should be DIRECTLY executable !! ----
-##-- ==>  Define data, use random,
-##--	or do  help(data=index)  for the standard data sets.
 
-## The function is currently defined as
-function (x, freq, noise, method = c("interpolate", "critical", 
-    "one-third octave", "equal-contributing", "octave"), voice = c("raised", 
-    "normal", "loud", "shout")) 
-{
-    if (!(is.matrix(x) || is.data.frame(x))) 
-        x <- matrix(x, nrow = 1)
-    method = match.arg(method)
-    voice = match.arg(voice)
-    if (method == "interpolate") 
-        data.name = "critical"
-    else data.name = method
-    table <- read.csv("SII_Table1.csv", skip = 3, header = TRUE, 
-        nrows = 21, check.names = FALSE)
-    if (method == "interpolate") {
-        if (missing(freq) || length(freq) != ncol(x)) 
-            stop("`freq' must contain the frequencies corresponding to the measurements in `x'.")
-    }
-    else {
-        if (missing(freq)) 
-            freq <- table[, "fi"]
-        else if (freq != table[, "fi"]) 
-            stop("`freq' does not match frequencies specified in table ", 
-                data.name, ".")
-    }
-    if (missing(noise)) 
-        noise <- rep(0, length(freq))
-    nas <- is.na(x)
-    if (any(nas)) {
-        if (method == "interpolate") {
-            x <- x[!nas]
-            freq <- freq[!nas]
-            noise <- noise[!nas]
-        }
-        else stop("NA's only permitted for method 'interpolate'")
-    }
-    ord <- order(freq)
-    x <- x[ord]
-    freq <- freq[ord]
-    noise <- noise[ord]
-    retval <- list()
-    retval$call <- match.call()
-    retval$x.orig <- x
-    retval$freq.orig <- freq
-    retval$noise.orig <- noise
-    if (method == "interpolate") {
-        approx.l <- function(x, y, xout, ...) {
-            retval <- approx(log(x), y, log(xout), ...)
-            retval$x <- xout
-            retval
-        }
-        sii.freqs <- table[, "fi"]
-        THDI <- approx.l(x = freq, y = x, method = "linear", 
-            xout = sii.freqs, rule = 2)$y
-        noise <- approx.l(x = freq, y = noise, method = "linear", 
-            xout = sii.freqs, rule = 2)$y
-        freq <- sii.freqs
-        x <- THDI
-    }
-    col.names <- c("Fi", "E'i", "N'i", "T'i", "Vi", "Bi", "Ci", 
-        "Z'i", "Xi", "X'i", "Di", "Ui", "Li", "Ki", "Ai", "Ii", 
-        "IiAi")
-    sii.tab <- matrix(nrow = length(freq), ncol = length(col.names))
-    colnames(sii.tab) <- col.names
-    rownames(sii.tab) <- 1:nrow(sii.tab)
-    sii.tab[, "Fi"] <- freq
-    sii.tab[, "E'i"] <- table[, voice]
-    sii.tab[, "N'i"] <- noise
-    sii.tab[, "T'i"] <- x
-    if (method == "octave") 
-        sii.tab[, "Zi"] <- sii.tab[, "N'i"]
-    else {
-        sii.tab[, "Vi"] <- sii.tab[, "E'i"] - 24
-        sii.tab[, "Bi"] <- pmax(sii.tab[, "N'i"], sii.tab[, "Vi"])
-        if (method == "critical" || method == "interpolate" || 
-            method == "equal-contributing") {
-            sii.tab[, "Ci"] = -80 + 0.6 * (sii.tab[, "Bi"] + 
-                10 * log10(table[, "fi.high"] - table[, "fi.low"]))
-            Zifun <- function(i) {
-                if (i > 1) 
-                  inner <- sum(10^(0.1 * sii.tab[1:(i - 1), "Bi"] + 
-                    3.32 * sii.tab[1:(i - 1), "Ci"] * log10(table[i, 
-                      "Fi"]/table[1:(i - 1), "Fi.high"])))
-                else inner <- 0
-                10 * log10(10^(0.1 * sii.tab[i, "N'i"]) + inner)
-            }
-            sii.tab[, "Z'i"] = sapply(1:nrow(sii.tab), Zifun)
-        }
-        else {
-            sii.tab[, "Ci"] = -80 + 0.6 * (sii.tab[, "Bi"] + 
-                10 * log10(sii.tab[, "Fi"]) - 6.353)
-            Zifun <- function(i) {
-                if (i > 1) 
-                  inner <- sum(10^(0.1 * sii.tab[1:(i - 1), "Bi"] + 
-                    3.32 * sii.tab[1:(i - 1), "Ci"] * log10(0.89 * 
-                      table[i, "Fi"]/table[1:(i - 1), "Fi.high"])))
-                else inner <- 0
-                10 * log10(10^(0.1 * sii.tab[i, "N'i"]) + inner)
-            }
-            sii.tab[, "Z'i"] = sapply(1:nrow(sii.tab), Zifun)
-        }
-        sii.tab[1, "Z'i"] <- sii.tab[1, "Bi"]
-    }
-    sii.tab[, "Xi"] <- table[, "Xi"]
-    sii.tab[, "X'i"] <- sii.tab[, "T'i"] + sii.tab[, "Xi"]
-    sii.tab[, "Di"] <- max(sii.tab[, "Z'i"], sii.tab[, "X'i"])
-    sii.tab[, "Ui"] <- table[, "normal"]
-    enforce.range <- function(x) {
-        x[x < 0] <- 0
-        x[x > 1] <- 1
-        x
-    }
-    sii.tab[, "Li"] <- enforce.range(1 - (sii.tab[, "E'i"] - 
-        sii.tab[, "Ui"] - 10)/160)
-    sii.tab[, "Ki"] <- enforce.range((sii.tab[, "E'i"] - sii.tab[, 
-        "Di"] + 15)/30)
-    sii.tab[, "Ai"] <- sii.tab[, "Li"] * sii.tab[, "Ki"]
-    sii.tab[, "Ii"] <- table[, "Ii"]
-    sii.tab[, "IiAi"] <- table[, "Ii"] * sii.tab[, "Ai"]
-    sii.val <- sum(sii.tab[, "IiAi"])
-    retval$THDN <- x
-    retval$freq <- freq
-    retval$sii <- sii.val
-    retval$table <- sii.tab
-    class(retval) <- "SII"
-    retval
-  }
+## Example C.1 from ANSI S3.5-1997 Annex C
+sii.C1 <- sii(
+              speech   = c(50.0, 40.0, 40.0, 30.0, 20.0,  0.0),
+              noise    = c(70.0, 65.0, 45.0, 25.0,  1.0,-15.0),
+              threshold= c( 0.0,  0.0,  0.0,  0.0,  0.0,  0.0),
+              method="octave"
+	      )
+sii.C1                        # rounded to 2 digits by default
+print(sii.C1$sii, digits=20)  # full precision
+summary(sii.C1)               # full details
+plot(sii.C1)                  # plot
+## The value given in the Standard is $0.504$.
+
+
+	      
+## Same calculation, but manually specify the frequencies
+## and importance function, and use default for threshold
+
+sii.C1 <- sii(
+              speech   = c(50.0, 40.0, 40.0, 30.0, 20.0,  0.0),
+              noise    = c(70.0, 65.0, 45.0, 25.0,  1.0,-15.0),
+              method="octave",
+              freq=c(250, 500, 1000, 2000, 4000, 8000),
+	      importance=c(0.0617, 0.1671, 0.2373, 0.2648, 0.2142, 0.0549)
+	      )
+sii.C1	     
+
+## Now perform the calculation using frequency weights for the Connected
+## Speech Test (CST)
+sii.CST <- sii(
+               speech   = c(50.0, 40.0, 40.0, 30.0, 20.0,  0.0),
+               noise    = c(70.0, 65.0, 45.0, 25.0,  1.0,-15.0),
+               method="octave",
+	       importance="CST"
+	      )
+round(sii.CST$table[,-c(5:7,13)],2)
+sii.CST$sii
+
+## Example C.2 from ANSI S3.5-1997 Annex C
+
+sii.C2 <- sii(
+              speech   = rep(54.0, 18),
+              noise    = c(40.0, 30.0, 20.0, rep(0, 18-3) ),
+              threshold= rep(0.0,  18),
+              method="one-third"
+              )
+sii.C2$table[1:3,1:8]
+sii.C2
+
+## Interpolation example, for 8 frequencies using NU6 importance
+## weight, default values for noise.
+sii.left <- sii(
+                speech="raised",
+                threshold=c(25,25,30,35,45,45,55,60),
+                freq=c(250, 500, 1000, 2000, 3000, 4000, 6000, 8000),
+                importance="NU6"
+                )
+sii.left
+
+
 }
-% Add one or more standard keywords, see file 'KEYWORDS' in the
-% R documentation directory.
-\keyword{ ~kwd1 }
-\keyword{ ~kwd2 }% __ONLY ONE__ keyword per line
+
+\keyword{math}
+

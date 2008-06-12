@@ -3,41 +3,46 @@
 \alias{SII}
 \docType{package}
 \title{
-What the package does (short line)
-~~ package title ~~
+  Calculate ANSI S3.5-1997 Speech Intelligibility Index
 }
 \description{
-More about what it does (maybe more than one line)
-~~ A concise (1-5 lines) description of the package ~~
+This package calculates ANSI S3.5-199 Speech Intelligibility Index
+(SII), which is a standard method for computing the intelligibility
+of speeck from acoustical measurments of speech and noise. This
+package includes data frames corresponding to Tables 1 - 4 in the ANSI
+standard as well as a function utlilizing these tables and
+user-provided hearing threshold and noise level measurments  to
+compute the SII score.
+
+
+The intial purpose of this package is to support use of SII as a
+standard measure of the impact age-related of hearing loss.
 }
 \details{
-\tabular{ll}{
-Package: \tab SII\cr
-Type: \tab Package\cr
-Version: \tab 1.0\cr
-Date: \tab 2008-06-07\cr
-License: \tab What license is it under?\cr
-LazyLoad: \tab yes\cr
-}
-~~ An overview of how to use the package, including the most important ~~
-~~ functions ~~
 }
 \author{
-Who wrote it
-
-Maintainer: Who to complain to <yourfault@somewhere.net>
-~~ The author and/or maintainer of the package ~~
+  Gregory R. Warnes \email{support@random-technologies-llc.com}
 }
 \references{
-~~ Literature or other references for background information ~~
+ANSI S3.5-1997, "American National Standard Methods for 
+Calculation of the Speech Intelligibility Index" American National Stan- 
+dards Institute, New York.
+
+Other software programs for calculating SII are available from
+\url{http://www.sii.to/html/programs.html}.
 }
-~~ Optionally other standard keywords, one per line, from file KEYWORDS in ~~
-~~ the R documentation directory ~~
 \keyword{ package }
-\seealso{
-~~ Optional links to other man pages, e.g. ~~
-~~ \code{\link[<pkg>:<pkg>-package]{<pkg>}} ~~
-}
 \examples{
-~~ simple examples of the most important functions ~~
+## Example C.1 from ANSI S3.5-1997 Annex C
+sii.C1 <- sii(
+              speech   = c(50.0, 40.0, 40.0, 30.0, 20.0,  0.0),
+              noise    = c(70.0, 65.0, 45.0, 25.0,  1.0,-15.0),
+              threshold= c( 0.0,  0.0,  0.0,  0.0,  0.0,  0.0),
+              method="octave"
+	      )
+sii.C1                        # rounded to 2 digits by default
+print(sii.C1$sii, digits=20)  # full precision
+summary(sii.C1)               # full details
+plot(sii.C1)                  # plot
+## The value given in the Standard is $0.504$.
 }

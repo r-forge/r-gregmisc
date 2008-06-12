@@ -1,5 +1,5 @@
 `summary.SII` <-
-function (x, digits = 2, ...) 
+function (object, digits = 2, ...) 
 {
   cat("\n")
   cat("Speech Intellibility Index\n")
@@ -7,9 +7,9 @@ function (x, digits = 2, ...)
   cat("\n")
   cat("Call:\n")
   cat("\n")
-  print(x$call)
+  print(object$call)
   cat("\n")
-  methodStr <- switch(x$method,
+  methodStr <- switch(object$method,
                       "interpolate"="Interpolation + Critical Band",
                       "critical"="Critical band SII procedure",
                       "equal-contributing"="Equally-contrlbutlng (17 band) critical-band SII procedure ",
@@ -21,10 +21,10 @@ function (x, digits = 2, ...)
   cat("\n")
   cat("Calculation table:\n")
   cat("\n")
-  print(round(x$table, digits=digits))
+  print(object$table, digits=digits)
   cat("\n")
-  cat("SII:", round(x$sii, digits), "\n")
+  cat("SII:", round(object$sii, digits), "\n")
   cat("\n")
-  invisible(x)
+  invisible(object)
 }
 

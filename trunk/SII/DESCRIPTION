@@ -1,12 +1,12 @@
 Package: SII
 Type: Package
-Title: Calcluate ANSI S3.5-1997 Speech Intelligibility Index
+Title: Calculate ANSI S3.5-1997 Speech Intelligibility Index
 Version: 0.1.0
 Date: 2008-06-07
 Author: Gregory R. Warnes
 Maintainer: Gregory R. Warnes <support@random-technologies-llc.com>
 Description: 
-   This package calculates ANSI S3.5-199 Speech Intelligibility Index
+   This package calculates ANSI S3.5-1997 Speech Intelligibility Index
    (SII), which is a standard method for computing the intelligibility
    of speeck from acoustical measurments of speech and noise. This
    package includes data frames corresponding to Tables 1 - 4 in the ANSI
@@ -15,6 +15,9 @@ Description:
    compute the SII score.  
    --
    The intial purpose of this package is to support use of SII as a
-   standard measure of the impact age-related of hearing loss.
+   standard measure of severity of presbycusis (age-related of hearing
+   loss).  
+Depends: 
+Recommands: splines, gdata
 License: GPLv2
 LazyLoad: yes
