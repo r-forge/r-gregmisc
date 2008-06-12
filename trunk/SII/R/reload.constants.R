@@ -1,6 +1,10 @@
 reload.constants <- function(xls.path,rda.path=xls.path)
   {
 
+    
+    if(!require("gdata"))
+      stop("'gdata' package must be installed to run this function.")
+    
     "critical" <- read.xls(
                            xls=file.path(xls.path,"SII_Constants.xls"),
                            sheet=1,
@@ -72,8 +76,8 @@ reload.constants <- function(xls.path,rda.path=xls.path)
 
     "sic.octave" <- read.xls(
                          xls=file.path(xls.path,"SII_Constants.xls"),
-                         sheet=4,
-                         skip=5, 
+                         sheet=7,
+                         skip=3, 
                          header=TRUE, 
                          nrows=6, 
                          check.names=FALSE,

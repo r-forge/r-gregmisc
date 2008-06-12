@@ -7,8 +7,8 @@ sii <- function(
                 method=c(
                   "interpolate",                        
                   "critical",
-                  "one-third octave",
                   "equal-contributing",
+                  "one-third octave",
                   "octave"
                   ),
                 importance=c(
@@ -59,15 +59,22 @@ sii <- function(
   table <- get(data.name)
 
   ## Get the correct importance functions
-  importance=match.arg(importance)  
-  if(importance!="SII")
+  if(missing(importance) || is.character(importance) )
     {
-      sic.name <- paste("sic.",data.name, sep="")
-      data(list=sic.name, package="SII")
-      sic.table <- get(sic.name)
-      table[,"Ii"] <- sic.table[[importance]]
+      importance=match.arg(importance)  
+      if(importance!="SII")
+        {
+          sic.name <- paste("sic.",data.name, sep="")
+          data(list=sic.name, package="SII")
+          sic.table <- get(sic.name)
+          table[,"Ii"] <- sic.table[[importance]]
+        }
     }
-
+  else
+    if(length(importance) != nrow(table))
+      stop("`importance' vector have length ", nrow(table), "for method `",method,"'.")
+    else
+      table[,"Ii"] <- importance
 
   
   ## Handle missing freq
@@ -355,8 +362,9 @@ sii <- function(
   retval$threshold <- threshold
   retval$loss      <- loss
   retval$freq      <- freq
-  retval$sii       <- sii.val
+  retval$method    <- method
   retval$table     <- sii.tab
+  retval$sii       <- sii.val
   
   class(retval) <- "SII"
   

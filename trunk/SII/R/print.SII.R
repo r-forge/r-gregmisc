@@ -1,5 +1,7 @@
 `print.SII` <-
 function (x, digits = 2, ...) 
 {
-    print(unclass(round(x$sii, digits)))
+  cat("\n")
+  cat("SII:", round(x$sii, digits), "\n")
+  cat("\n")  
 }
