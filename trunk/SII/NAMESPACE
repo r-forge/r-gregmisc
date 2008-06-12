@@ -1,0 +1,7 @@
+export(
+       sii
+       )
+
+s3method(plot, SII)
+s3method(print, SII)
+s3method(summary, SII)
