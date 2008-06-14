@@ -17,6 +17,10 @@ Description:
    The initial purpose of this package is to support use of SII as a
    standard measure of severity of presbycusis (age-related of hearing
    loss).  
+   --
+   Development of this package was funded by the Center for Bioscience
+   Educationand Technology (CBET) of the Rochester Institute of
+   Technology (RIT).
 Depends: 
 Recommends: splines, gdata
 License: GPLv2
