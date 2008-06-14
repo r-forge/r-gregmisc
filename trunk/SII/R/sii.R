@@ -5,7 +5,6 @@ sii <- function(
                 loss,
                 freq,
                 method=c(
-                  "interpolate",                        
                   "critical",
                   "equal-contributing",
                   "one-third octave",
@@ -20,7 +19,8 @@ sii <- function(
                   "ShortPassage",
                   "SPIN",
                   "CST"
-                  )
+                  ),
+                interpolate=FALSE
                 )
 {
   ## Assumptions:
@@ -28,7 +28,7 @@ sii <- function(
   ## freq: If provided, frequencies in Hz at which speech, noise, and/or
   ##    threshold values are measured.  If missing, frequencies will
   ##    corresponding to those utilized by the specified method.
-  ##    Note that, frequencies must be provided for method="interpolate"
+  ##    Note that, frequencies must be provided if "interpolate=TRUE"
   ##
   ## speech: Speech level in dB at each frequency, or one of levels of
   ##    stated vocal effort ("raised",  "normal",  "loud", "shout")
@@ -49,7 +49,6 @@ sii <- function(
 
   ## Get the appropriate table of constants
   data.name <- switch(method,
-                      "interpolate"="critical",
                       "critical"="critical",
                       "one-third octave"="onethird",
                       "equal-contributing"="equal",
@@ -79,8 +78,8 @@ sii <- function(
   
   ## Handle missing freq
   if(missing(freq))
-    if(method=="interpolate")
-      stop("`freq' must be specified when `method=\"interpolate\"'")
+    if(interpolate)
+      stop("`freq' must be specified when `interpolate=TRUE'")
     else
       freq <- table$fi
 
@@ -117,29 +116,13 @@ sii <- function(
      )
     stop("`noise', `threshold', and `loss` must have the same length as `freq'.")
   
-  ## Check for & handle missing values
-  nas <- (is.na(noise) | is.na(threshold) | is.na(loss) | is.na(freq) )
+  ## Check for missing values
+  any.nas <- any(is.na(c(noise,threshold,loss,freq)) )
   if(!const.speech)
-    nas <- nas | is.na(speech)
+    any.nas <- any.nas || any(is.na(speech))
+  if(any.nas && !interpolate)
+        stop("Missing values only permitted when `interpolate=TRUE'")
   
-  if(any(nas) )
-    {
-      if(method=="interpolate")
-        {
-          warning(sum(nas), " missing values omitted.")
-          if(!const.speech)
-            speech     <- speech   [!nas]
-          
-          noise      <- noise    [!nas]
-          threshold  <- threshold[!nas]
-          loss       <- loss     [!nas]
-          freq       <- freq     [!nas]
-
-        }
-      else
-        stop("Missing values only permitted for method `interpolate'")
-    }
-
   ## Sort values into frequency order
   ord <- order(freq)
   freq      <- freq     [ord]
@@ -155,30 +138,41 @@ sii <- function(
   retval <- list()
   retval$call <- match.call()
   retval$orig <- list( freq, speech, noise, threshold, loss )
+
   
-  if(method=="interpolate")
+  if(interpolate)
     {
-      approx.l <- function(x,y)
-        { 
+
+      sii.freqs <- table[,"fi"]
+
+      approx.l <- function(obs.freq,value,target.freq)
+        {
+          nas <- is.na(value)
+          if(any(nas))
+            {
+              warning(sum(nas), " missing values ommitted")
+              value    <- value[!nas]
+              obs.freq <- obs.freq[!nas]
+            }
+          
           tmp <- approx(
-                        log(x),
-                        y,
-                        log(sii.freqs),
+                        x=log10(obs.freq),
+                        y=value,
+                        xout=log10(target.freq),
                         method="linear",  
                         rule=2
                         )
           tmp$y
         }
-
-      sii.freqs <- table[,"fi"]
+      #debug(approx.l)
       
       ## Interpolate unobserved frequencies
-      noise     <- approx.l(freq, noise)
-      threshold <- approx.l(freq, threshold)
-      loss      <- approx.l(freq, loss)
+      noise     <- approx.l(freq, noise,     sii.freqs)
+      threshold <- approx.l(freq, threshold, sii.freqs)
+      loss      <- approx.l(freq, loss,      sii.freqs)
 
       if(!const.speech)
-        speech    <- approx.l(freq, speech)
+        speech  <- approx.l(freq, speech,    sii.freqs)
       
       freq   <- sii.freqs
     }
@@ -231,7 +225,6 @@ sii <- function(
 
       ## 4.3.2.3 slope per octive of spread of masking, Ci
       if(method=="critical" ||
-         method=="interpolate" ||
          method=="equal-contributing")
         {
           sii.tab$"Ci" <- -80 + 0.6*( sii.tab$"Bi" + 10*log10(table$"hi" - table$"li") )
@@ -242,7 +235,6 @@ sii <- function(
         }
 
       if(method=="critical" ||
-         method=="interpolate" ||
          method=="equal-contributing")
         {
           Zifun <- function(i) 

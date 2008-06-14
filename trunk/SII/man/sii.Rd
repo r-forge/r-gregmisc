@@ -12,10 +12,11 @@
 \usage{
 sii(speech = c("normal", "raised", "loud", "shout"),
     noise, threshold, loss, freq, 
-    method = c("interpolate", "critical", "equal-contributing",
+    method = c("critical", "equal-contributing",
                "one-third octave", "octave"),
     importance = c("SII", "NNS", "CID22", "NU6", "DRT",
-                   "ShortPassage", "SPIN", "CST"))
+                   "ShortPassage", "SPIN", "CST"),
+    interpolate=FALSE)
 \method{print}{SII}(x, digits=2, ...)
 \method{plot}{SII}(x, ...)
 \method{summary}{SII}(object, digits=2, ...)
@@ -38,21 +39,24 @@ sii(speech = c("normal", "raised", "loud", "shout"),
     defaults to 0 dB for each frequency.}
   \item{freq}{Vector of frequencies for which \code{speech},
     \code{noise}, \code{threshold}, and/or \code{loss} are specified.
-    If \code{method="interpolate"}, \code{freq} must be specified.
+    If \code{interpolate=TRUE}, \code{freq} must be specified.
     Otherwise, it must either match the required value for SII
     calculation method given by argument \code{method}, or be missing,
     in which case it will default to the values required for the
     specified method.}
   \item{method}{A character string specifying the SII calculation
     method ("critical", "one-third octave", "equal-contributing",
-    "octave"), or \code{"interpolate"} in which case the critical-band
-    method will be applied, with interpolation from the provided
-    frequencies to the required 21 frequency values.}
+    "octave")}
   \item{importance}{Either a numeric vector providing $F_i$, the
-    transfer function (importance weights) at each frequency, or a character
-    string indicating which transfer function to employ ("SII", "NNS",
-    "CID22", "NU6", "DRT", "ShortPassage", "SPIN", "CST"). Defaults to
-    the standard SII transfer function, \code{importance="SII"}.}
+    transfer function (importance weights) at each frequency, or a
+    character string indicating which transfer function to employ
+    ("SII", "NNS", "CID22", "NU6", "DRT", "ShortPassage", "SPIN",
+    "CST"). Defaults to the standard SII transfer function,
+    \code{importance="SII"}.} 
+  \item{interpolate}{Logical flag indicating whether to interpolate 
+    from the provide measurement values and frequencies to those 
+    required by the specified method via linear interpolation on the log
+    scale.}
   \item{object,x}{SII object}
   \item{digits}{Number of digits to display} 
   \item{...}{Optional arguments to \code{print}, \code{summary}, and
@@ -78,13 +82,11 @@ sii(speech = c("normal", "raised", "loud", "shout"),
 
     Further, this implementation provides a mechanism for
     interpolating/extrapolating available measurements to those required
-    for calculating the critical band procedure (via the argument
-    \code{method="interpolate"}).  Interpolation is accomplished using
-    linear interpolation (on log-scaled data) to the frequencies
-    required for the critical-band SII procedure.  Interpolation is
-    performed (if necessary) for \code{noise}, \code{threshold}, and
-    \code{loss}.
-
+    for the specified calculation procedure.  When
+    \code{interpolate=TRUE}, required values for \code{speech},
+    \code{noise}, \code{threshold}, and \code{loss} will be computed 
+    using linear interpolation (on log-scaled data).  In this case,
+    missing values may be provided and will be appropriately interpolated.
 }
 \value{
     The return value is an object of class SII, containing the following
@@ -196,7 +198,9 @@ sii.left <- sii(
                 speech="raised",
                 threshold=c(25,25,30,35,45,45,55,60),
                 freq=c(250, 500, 1000, 2000, 3000, 4000, 6000, 8000),
-                importance="NU6"
+                method="critical",
+                importance="NU6",
+                interpolate=TRUE
                 )
 sii.left
 
