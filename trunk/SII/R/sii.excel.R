@@ -15,7 +15,7 @@ sii.excel <- function(
   
   if(matlab.spline)
     {
-      ispl <- interpSpline( THDI ~ freq )
+      ispl <- splines::interpSpline( THDI ~ freq )
       THDI <- predict(ispl, sii.freqs)$y
       THDI[sii.freqs<freq[1]] <- THDI[1]
     }

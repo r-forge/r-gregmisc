@@ -4,6 +4,8 @@ reload.constants <- function(xls.path,rda.path=xls.path)
     
     if(!require("gdata"))
       stop("'gdata' package must be installed to run this function.")
+
+    read.xls <- gdata::read.xls
     
     "critical" <- read.xls(
                            xls=file.path(xls.path,"SII_Constants.xls"),

@@ -1,6 +1,6 @@
 \name{sic.critical}
 \alias{sic.critical}
-\alias{sic.threeoctave}
+\alias{sic.onethird}
 \alias{sic.octave}
 \docType{data}
 \title{Alternative ANSI S3.5-1997 SII Transfer Function Weights}
@@ -10,7 +10,7 @@
 }
 \usage{
 data(sic.critical)
-data(sic.threeoctave)
+data(sic.onethird)
 data(sic.octave)
 }
 \format{

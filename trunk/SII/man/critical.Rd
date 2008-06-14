@@ -3,6 +3,7 @@
 \alias{equal}
 \alias{onethird}
 \alias{octave}
+\alias{overall.spl}
 \docType{data}
 \title{Constants Tables for ANSI S3.5-1997 Speech Intelligibility Index
   (SII)} 
