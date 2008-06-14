@@ -19,7 +19,8 @@ data(sic.octave)
   speech material:
   \describe{
     \item{\code{fi}}{Center frequency, Hz}
-    \item{\code{NNS}}{NNS (various nonsense syllable tessz where
+    \item{\code{SII}}{Standard SII transfer function (weights)}
+    \item{\code{NNS}}{NNS (various nonsense syllable tests where
       most of the English phonems occur equally often)}
     \item{\code{CID22}}{CID-W22 (PB-words)}
     \item{\code{NU6}}{NU6 monosyllables}
@@ -66,15 +67,21 @@ data(sic.critical)
 round(sic.critical,3)
 
 ## draw a comparison plot
-matplot(x=sic.critical[,1], y=sic.critical[,-1], type="o",
-        xlab="Frequency, Hz", ylab="Weight",
-        log="x")
+ngroup <- ncol(sic.critical)
+matplot(x=sic.critical[,1], y=sic.critical[,-1],
+        type="o",
+        xlab="Frequency, Hz",
+        ylab="Weight",
+        log="x",
+        lty=1:ngroup,
+        col=rainbow(ngroup)
+)
 legend(
        "topright",
        legend=names(sic.critical)[-1],
-       pch=1:ncol(sic.critical),
-       lty=1:ncol(sic.critical),
-       col=1:ncol(sic.critical)
+       pch=as.character(1:ngroup),
+       lty=1:ngroup,
+       col=rainbow(ngroup)
        )
 
 data(threeoctave)
