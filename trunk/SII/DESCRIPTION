@@ -22,6 +22,6 @@ Description:
    Educationand Technology (CBET) of the Rochester Institute of
    Technology (RIT).
 Depends: 
-Recommends: splines, gdata
+Suggests: splines, gdata, xtable
 License: GPLv2
 LazyLoad: yes
