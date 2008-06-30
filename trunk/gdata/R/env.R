@@ -1,6 +1,4 @@
-# $Id$
-
-env <- function(unit=c("KB","MB","bytes"), digits=0)
+env <- function(unit="KB", digits=0)
 {
   get.object.size <- function(object.name, pos)
   {
@@ -26,7 +24,7 @@ env <- function(unit=c("KB","MB","bytes"), digits=0)
     return(nobjects)
   }
 
-  unit <- match.arg(unit)
+  unit <- match.arg(unit, c("bytes","KB","MB"))
   denominator <- switch(unit, "KB"=1024, "MB"=1024^2, 1)
   size.vector <- sapply(seq(along=search()), get.environment.size)
   size.vector <- round(size.vector/denominator, digits)
