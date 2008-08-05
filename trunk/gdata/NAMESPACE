@@ -2,6 +2,7 @@
 export(
        Args,
        aggregate.table,
+       cbindX,
        combine,
        ConvertMedUnits,
        drop.levels,

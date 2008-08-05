@@ -1,3 +1,11 @@
+CHANGES IN 2.5.0 (2008-??-??)
+-----------------------------
+
+- New function cbindX that can bind objects with different number of rows.
+
+- write.fwf gains width argument. Unknown values can increase or decrease
+  the width of the columns. Additional tests and documentation fixes.
+
 CHANGES IN 2.4.2 (2008-05-11)
 -----------------------------
 
@@ -21,7 +29,7 @@ CHANGES IN 2.4.2 (2008-05-11)
 CHANGES IN 2.4.1 (2008-03-24)
 -----------------------------
 
-- Update perl libraries needed by xls2csv() and read.xls() 
+- Update perl libraries needed by xls2csv() and read.xls()
   to latest available versions on CRAN.
 
 - Add read.xls() to exported function list
@@ -35,7 +43,7 @@ CHANGES IN 2.4.0 (2008-01-30)
 -----------------------------
 
 - The keep() function now includes an 'all' argument to specify how
-  objects with names starting with '.' are handled. 
+  objects with names starting with '.' are handled.
 
 - keep() now shows an informative warning message when a requested
   object does not exist
