@@ -37,6 +37,10 @@ importFrom(gdata, reorder.factor)
 importFrom(stats, reorder)
 importFrom(stats, na.omit)
 
+# No Namespace
+#importFrom(caTools, runsd)
+#importFrom(caTools, runmean)
+
 
 S3method(balloonplot,default)
 S3method(balloonplot,table)
