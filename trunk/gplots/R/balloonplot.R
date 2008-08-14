@@ -77,7 +77,7 @@ balloonplot.default <- function(x,y,z,
   scale.method <- match.arg(scale.method)
   scale.range  <- match.arg(scale.range)
 
-  if( any(z < 0, na.rm=TRUE ) )
+  if( scale.method=="absolute" && any(z < 0, na.rm=TRUE )  )
     warning("z value(s) below zero detected.",
             " No balloons will be displayed for these cells.")
   
