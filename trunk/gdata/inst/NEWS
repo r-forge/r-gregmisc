@@ -1,6 +1,8 @@
 CHANGES IN 2.5.0 (2008-??-??)
 -----------------------------
 
+- New function trimSum that sums trimmed values
+
 - New function cbindX that can bind objects with different number of rows.
 
 - write.fwf gains width argument. Unknown values can increase or decrease

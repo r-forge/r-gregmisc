@@ -23,6 +23,7 @@ export(
        reorder.factor,
        resample,
        trim,
+	   trimSum,
        unmatrix,
        upperTriangle,
        "upperTriangle<-",
