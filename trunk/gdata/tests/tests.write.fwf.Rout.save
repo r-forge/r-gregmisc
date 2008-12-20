@@ -21,7 +21,7 @@ Loading required package: gtools
 > ### tests.write.fwf.R
 > ###------------------------------------------------------------------------
 > ### What: Tests for write.fwf
-> ### $Id: tests.write.fwf.R 997 2006-10-30 19:04:53Z ggorjan $
+> ### $Id: tests.write.fwf.R 1300 2008-08-05 11:47:18Z ggorjan $
 > ### Time-stamp: <2008-08-05 12:25:05 ggorjan>
 > ###------------------------------------------------------------------------
 > 
