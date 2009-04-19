@@ -23,7 +23,7 @@ ll <- function(pos=1, unit="KB", digits=0, dimensions=FALSE, function.dim="",
   get.object.size <- function(object.name, pos)
   {
     object <- get(object.name, pos=pos)
-    size <- try(object.size(object), silent=TRUE)
+    size <- try(unclass(object.size(object)), silent=TRUE)
     if(class(size) == "try-error")
       size <- 0
     return(size)
