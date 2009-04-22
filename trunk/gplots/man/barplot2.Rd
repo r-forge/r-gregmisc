@@ -237,7 +237,7 @@ lines(r, tN, type = 'h', col = 'red', lwd = 2)
 barplot2(tN, space = 1.5, axisnames = FALSE,
         sub = "barplot2(..., space = 1.5, axisnames = FALSE)")
 
-data(VADeaths, package = "base")
+data(VADeaths, package = "datasets")
 barplot2(VADeaths, plot = FALSE)
 barplot2(VADeaths, plot = FALSE, beside = TRUE)
 
