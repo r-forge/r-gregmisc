@@ -67,6 +67,12 @@ plotCI <- function (x,
   else
     z  <- x
 
+  if(invalid(uiw))
+    uiw <- NA
+  if(invalid(liw))
+    liw <- NA
+  
+  
   if(invalid(ui))
     ui <- z + uiw
   if(invalid(li))

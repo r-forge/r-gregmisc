@@ -41,18 +41,18 @@ plotCI(x, y = NULL, uiw, liw = uiw, ui, li, err='y', ylim=NULL,
     defaults to \code{1:n}.}
 
   \item{uiw}{ width of the upper or right error bar. Set to \code{NULL}
-    omit upper bars.}
+    or \code{NA} to omit upper bars.}
 
   \item{liw}{ width of the lower or left error bar.  Defaults to same value as
-    \code{uiw}.  Set to \code{NULL} to omit lower bars. }
+    \code{uiw}.  Set to \code{NULL} or \code{NA} to omit lower bars. }
 
   \item{ui}{ upper end of error bars.  Defaults to \code{y + uiw} or
-    \code{x + uiw} depeding on \code{err}.  Set to \code{NULL} omit
-    upper bars. }
+    \code{x + uiw} depeding on \code{err}.  Set to \code{NULL}  or
+    \code{NA} to omit upper bars. }
 
   \item{li}{ lower end of error bars.  Defaults to \code{y - liw} or
-    \code{x - liw} depedning on \code{err}.  Set to \code{NULL} to omit
-    lower bars.}
+    \code{x - liw} depedning on \code{err}.  Set to \code{NULL}  or
+    \code{NA} to omit lower bars.}
 
   \item{err}{ direction for error bars. Set to "y" for vertical bars.
     Set to "x" for horizontal bars. Defaults to "y".}
@@ -146,6 +146,22 @@ plotCI(x, y = NULL, uiw, liw = uiw, ui, li, err='y', ylim=NULL,
 
   # better yet, just use plotmeans ... #
   plotmeans( state.area ~ state.region )
+
+/dontshow{
+## Just for testing
+  plotCI(x=means, uiw=NA)
+  plotCI(x=means, uiw=NULL)
+  plotCI(x=means, uiw=ciw)
+  plotCI(x=means, uiw=ciw, liw=NULL)
+  plotCI(x=means, uiw=ciw, liw=NA)
+  plotCI(x=means, liw=ciw, ciw=NULL)
+  plotCI(x=means, liw=ciw, ciw=NA)
+  ciw.na <- ciw
+  ciw.na[3] <- NA
+  plotCI(x=means, uiw=ciw.na, liw=ciw)
+  plotCI(x=means, liw=ciw.na, uiw=ciw)
+}
+
 
 }
 
