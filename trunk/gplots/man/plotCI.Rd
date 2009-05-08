@@ -147,7 +147,7 @@ plotCI(x, y = NULL, uiw, liw = uiw, ui, li, err='y', ylim=NULL,
   # better yet, just use plotmeans ... #
   plotmeans( state.area ~ state.region )
 
-/dontshow{
+\dontshow{
 ## Just for testing
   plotCI(x=means, uiw=NA)
   plotCI(x=means, uiw=NULL)
