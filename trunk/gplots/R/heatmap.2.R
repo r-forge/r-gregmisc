@@ -103,9 +103,9 @@ heatmap.2 <- function (x,
   ##        key=FALSE
   ##      }
 
-  if ( is.null(Rowv) )
+  if ( is.null(Rowv) || is.na(Rowv) )
     Rowv <- FALSE
-  if ( is.null(Colv) )
+  if ( is.null(Colv) || is.na(Colv) )
     Colv <- FALSE
   else if( Colv=="Rowv" && !isTRUE(Rowv) )
     Colv <- FALSE
