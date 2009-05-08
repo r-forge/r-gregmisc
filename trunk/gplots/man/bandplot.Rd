@@ -60,7 +60,7 @@
 \value{
   Invisibly returns a list containing the x,y points plotted for each line.
 }
-\author{ Gregory R. Warnes \email{warnes@bst.rochester.edu}
+\author{ Gregory R. Warnes \email{greg@random-technologies-llc.com}
 }
 \seealso{ \code{\link{wapply}}, \code{\link{lowess}}}
 \examples{
