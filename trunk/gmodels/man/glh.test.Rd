@@ -4,12 +4,10 @@
 \alias{glh.test}
 \alias{print.glh.test}
 \alias{summary.glh.test}
-
 \title{ Test a General Linear Hypothesis for a Regression Model }
 \description{
-Test, print, or summarize a general linear hypothesis for a regression model }
+  Test, print, or summarize a general linear hypothesis for a regression model
 }
-
 \usage{
 glh.test(reg, cm, d=rep(0, nrow(cm)) )
 print.glh.test(x, digits=4,...)
