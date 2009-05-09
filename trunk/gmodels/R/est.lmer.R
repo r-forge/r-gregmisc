@@ -7,8 +7,8 @@
 
 est.lmer <- function(obj, cm, beta0, conf.int, show.beta0, n.sim)
 {
-  if(!require(coda, quietly=TRUE))
-    stop("coda package required when sim.lmer == TRUE")
+##  if(!require(coda, quietly=TRUE))
+##    stop("coda package required when sim.lmer == TRUE")
 
   samp <- mcmcsamp(obj, n.sim)
   samp.summ <- summary(samp)
