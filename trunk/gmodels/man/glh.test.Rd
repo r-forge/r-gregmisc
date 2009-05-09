@@ -67,7 +67,7 @@ summary.glh.test(object, digits=4,...)
 }
 \references{ R.H. Myers, Classical and Modern Regression with
   Applications,  2nd Ed, 1990, p. 105}
-\author{Gregory R. Warnes \email{warnes@bst.rochester.edu} }
+\author{Gregory R. Warnes \email{greg@random-technologies-llc.com} }
 \seealso{\code{\link{fit.contrast}}, \code{\link{estimable}},
   \code{\link{contrasts}} }
 \examples{

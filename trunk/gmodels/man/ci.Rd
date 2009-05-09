@@ -6,20 +6,21 @@
 \alias{ci.binom}
 \alias{ci.lm}
 \alias{ci.lme}
-\alias{ci.lmer}
+\alias{ci.mer}
 \title{Compute Confidence Intervals}
 \description{ Compute and display confidence intervals for model
   estimates.  Methods are provided for the mean of a numeric vector
   \code{ci.default}, the probability of a binomial vector
-  \code{ci.binom}, and for \code{lm}, \code{lme}, and \code{lmer} objects. }
+  \code{ci.binom}, and for \code{lm}, \code{lme}, and \code{mer} objects are
+  provided. }
 \synopsis{
   ci(x, confidence = 0.95, alpha = 1 - confidence,...)
   \method{ci}{default}(x, confidence = 0.95, alpha = 1 - confidence, na.rm=FALSE)...)
   \method{ci}{binom}(x, confidence = 0.95, alpha = 1 - confidence,...)
   \method{ci}{lm}(x, confidence = 0.95, alpha = 1 - confidence,...)
   \method{ci}{lme}(x, confidence = 0.95, alpha = 1 - confidence,...)
-  \method{ci}{lmer}(x, confidence = 0.95, alpha = 1 - confidence,
-                    sim.lmer=TRUE, n.sim=1000, ...) 
+  \method{ci}{mer}(x, confidence = 0.95, alpha = 1 - confidence,
+                    sim.mer=TRUE, n.sim=1000, ...) 
 }
 \arguments{
   \item{x}{ object from which to compute confidence intervals. }
@@ -28,8 +29,8 @@
   \item{na.rm}{boolean indicating whether missing values should be
     removed. Defaults to \code{FALSE}.}
   \item{\dots}{Arguments for methods}
-  \item{sim.lmer}{Logical value. If TRUE confidence
-    intervals will be estimated using \code{\Link[Matrix]{mcmcsamp}}. This option only takes effect for lmer
+  \item{sim.mer}{Logical value. If TRUE confidence
+    intervals will be estimated using \code{\Link[Matrix]{mcmcsamp}}. This option only takes effect for mer
     objects.}
   \item{n.sim}{Number of samples to take in \code{\Link[Matrix]{mcmcsamp}}.}
 }
@@ -41,7 +42,7 @@
   \code{Estimate}, \code{CI lower}, \code{CI upper}, \code{Std. Error},
   \code{DF} (for lme objects only), and \code{p-value}.
 }
-\author{ Gregory R. Warnes \email{warnes@bst.rochester.edu}
+\author{ Gregory R. Warnes \email{greg@random-technologies-llc.com}
 }
 \seealso{
   \code{\link[stats]{confint}},
@@ -66,7 +67,7 @@ reg  <-  lm(Area ~ Population, data=as.data.frame(state.x77))
 ci(reg) 
 
 \dontrun{
-# lmer example
+# mer example
 library(lme4)
 fm2 <- lmer(Reaction ~ Days + (1|Subject) + (0+Days|Subject), sleepstudy)
 ci(fm2)

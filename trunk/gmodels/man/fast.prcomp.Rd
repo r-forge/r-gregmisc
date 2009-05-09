@@ -69,7 +69,7 @@
   \code{\link{svd}} .
 }
 \author{Modifications by Gregory R. Warnes
-  \email{warnes@bst.rochester.edu} }
+  \email{greg@random-technologies-llc.com} }
 
 \seealso{
     \code{\link[stats]{prcomp}}, \code{\link{svd}}, \code{\link{La.svd}}
