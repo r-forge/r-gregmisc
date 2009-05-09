@@ -11,7 +11,7 @@ keywords(...)
   \item{\dots}{Optional argumenst to pass to show.file()}
 }
 \details{
-  This function simply determines the path $RHOME/doc/KEYWORDS and calls
+  This function simply determines the path \$RHOME/doc/KEYWORDS and calls
   show.file() to display it.
 }
 \value{
