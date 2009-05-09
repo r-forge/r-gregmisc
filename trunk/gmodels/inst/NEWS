@@ -1,3 +1,17 @@
+Version 2.15.0
+--------------
+
+New features:
+
+- Add support for 'mer' model from lme4.
+
+Bug fixes:
+
+- Correct several minor .Rd syntax errors
+
+- Move extra copyright text to Author field instead of License field.
+
+
 Version 2.14.1
 --------------
 
