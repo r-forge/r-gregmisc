@@ -17,7 +17,7 @@ even(x)
 \value{
   Vector of TRUE/FALSE values.
 }
-\author{ Gregory R. Warnes \email{warnes@bst.rochester.edu}}
+\author{ Gregory R. Warnes \email{greg@random-technologies-llc.com}}
 \seealso{ \code{\link[base]{round}} }
 \examples{
 
