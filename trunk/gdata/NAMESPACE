@@ -32,6 +32,8 @@ export(
        wideByFactor,
        write.fwf,
        xls2csv,
+       xls2tab,
+       xls2sep,       
 
        ## Object size stuff
        object.size, as.object_size, is.object_size, humanReadable,
