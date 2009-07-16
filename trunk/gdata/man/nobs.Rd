@@ -58,7 +58,7 @@ nobs(x, ...)
   A single numeric value or a vector of values (for data.frames) giving
   the number of non-missing values.
 }
-\author{ Gregory R. Warnes \email{warnes@bst.rochester.edu}  }
+\author{ Gregory R. Warnes \email{greg@random-technologies-llc.com}  }
 
 \seealso{ \code{\link{is.na}}, \code{\link{length}} }
 

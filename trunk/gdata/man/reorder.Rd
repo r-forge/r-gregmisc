@@ -56,7 +56,7 @@
   A new factor with reordered levels
 }
 
-\author{Gregory R. Warnes \email{warnes@bst.rochester.edu}}
+\author{Gregory R. Warnes \email{greg@random-technologies-llc.com}}
 
 \seealso{\code{\link{factor}} and \code{\link[stats]{reorder}}}
 
