@@ -25,7 +25,7 @@ resample(x, size, replace = FALSE, prob = NULL)
   have identical behavior.
 }
 \value{
-
+  Vector of the same length as the input, with the elements permuted.
 }
 \author{Gregory R. Warnes \email{greg@random-technologies-llc.com} }
 \seealso{ \code{\link{sample}} }
