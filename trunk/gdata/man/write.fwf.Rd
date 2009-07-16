@@ -75,13 +75,13 @@ quotes are used, \code{\link{read.table}} can be easily used to read the
 data back into \R. Check examples. Do read the details about
 \code{quoteInfo} argument.
 
-Use only *true* character, i.e., avoid use of "T" or similar separators
-for \code{sep}. Width of the separator is taken as number of characters
-in \code{sep} as evaluated via \code{\link{nchar}}.
+Use only *true* character, i.e., avoid use of tabs, i.e., "\\t", or similar
+separators via argument \code{sep}. Width of the separator is taken as
+the number of characters evaluated via \code{\link{nchar}(sep)}.
 
-Use \code{NA} to convert missing/unknown values. Only single value can
-be specified in \code{na}. Use \code{\link{NAToUnknown}} prior to export
-if you need greater flexibility.
+Use argument \code{na} to convert missing/unknown values. Only single value
+can be specified. Use \code{\link{NAToUnknown}} prior to export if you need
+greater flexibility.
 
 If \code{rowCol} is not \code{NULL} and \code{rownames=TRUE}, rownames
 will also have column name with \code{rowCol} value. This is mainly for
