@@ -1,7 +1,7 @@
 Package: fork
 Title: R functions for handling multiple processes.
-Version: 1.2.2
-Date: 2009-05-09
+Version: 1.2.3
+Date: 2009-07-17
 Author: Gregory R. Warnes <greg@random-technologies-llc.com>. Financial 
   support for some aspects of this package provided by Metrum Research Group, 
   LLC <http://www.metrumrg.com>.
