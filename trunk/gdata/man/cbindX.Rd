@@ -18,7 +18,7 @@
 \usage{cbindX(...)}
 
 \arguments{
-  \item{\ldots}{matrix and data.frame objects}
+  \item{\dots}{matrix and data.frame objects}
 }
 
 \details{

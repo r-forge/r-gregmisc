@@ -41,9 +41,9 @@ values to \code{NA} and vice versa.
 
 \usage{
 
-isUnknown(x, unknown=NA, \ldots)
-unknownToNA(x, unknown, warning=FALSE, \ldots)
-NAToUnknown(x, unknown, force=FALSE, call.=FALSE, \ldots)
+isUnknown(x, unknown=NA, \dots)
+unknownToNA(x, unknown, warning=FALSE, \dots)
+NAToUnknown(x, unknown, force=FALSE, call.=FALSE, \dots)
 
 }
 
@@ -52,7 +52,7 @@ NAToUnknown(x, unknown, force=FALSE, call.=FALSE, \ldots)
   \item{unknown}{generic, value used instead of \code{NA}}
   \item{warning}{logical, issue warning if \code{x} already has \code{NA}}
   \item{force}{logical, force to apply already existing value in \code{x}}
-  \item{\ldots}{arguments pased to other methods (as.character for POSIXlt
+  \item{\dots}{arguments pased to other methods (as.character for POSIXlt
     in case of isUnknown)}
   \item{call.}{logical, look in \code{\link{warning}}}
 }

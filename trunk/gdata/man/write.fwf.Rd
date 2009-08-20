@@ -22,7 +22,7 @@
 
 write.fwf(x, file="", append=FALSE, quote=FALSE, sep=" ", na="",
   rownames=FALSE, colnames=TRUE, rowCol=NULL, justify="left",
-  formatInfo=FALSE, quoteInfo=TRUE, width=NULL, \ldots)
+  formatInfo=FALSE, quoteInfo=TRUE, width=NULL, \dots)
 
 }
 
@@ -44,7 +44,7 @@ write.fwf(x, file="", append=FALSE, quote=FALSE, sep=" ", na="",
     widths and format}
   \item{quoteInfo}{logical, should \code{formatInfo} account for quotes}
   \item{width}{numeric, width of the columns in the output}
-  \item{\ldots}{further arguments to \code{\link{format.info}},
+  \item{\dots}{further arguments to \code{\link{format.info}},
     \code{\link{format}} and \code{\link{write.table}}}
 }
 
@@ -59,11 +59,11 @@ Output is similar to \code{print(x)} or \code{format(x)}. Formatting is
 done completely by \code{\link{format}} on a column basis. Columns in
 the output are by default separated with a space i.e. empty column with
 a width of one character, but that can be changed with \code{sep}
-argument as passed to \code{\link{write.table}} via \ldots.
+argument as passed to \code{\link{write.table}} via \dots.
 
 As mentioned formatting is done completely by
 \code{\link{format}}. Arguments can be passed to \code{format} via
-\code{\ldots} to further modify the output. However, note that the
+\code{\dots} to further modify the output. However, note that the
 returned \code{formatInfo} might not properly account for this, since
 \code{\link{format.info}} (which is used to collect information about
 formatting) lacks the arguments of \code{\link{format}}.
