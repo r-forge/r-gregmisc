@@ -64,7 +64,7 @@ space(x, y, s=1/50, na.rm=TRUE, direction="x")
   \item{y}{y location of each input point}
 }
 \author{ Gregory R. Warnes \email{greg@random-technologies-llc.com} }
-\seealso{ \code{\link{jitter}}, \code{\link[base]{sunflowerplot}} }
+\seealso{ \code{\link{jitter}}, \code{\link{sunflowerplot}} }
 
 \examples{
    x <- rep(1:5, 10)
