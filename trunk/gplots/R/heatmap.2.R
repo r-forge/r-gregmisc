@@ -356,8 +356,8 @@ heatmap.2 <- function (x,
   par(mar = c(margins[1], 0, 0, margins[2]))
   #if(scale != "none" || !symm)
   #  {
-  #    x <- t(x)
-  #    cellnote <- t(cellnote)
+      x <- t(x)
+      cellnote <- t(cellnote)
   #  }
   if(revC)
     { ## x columns reversed
