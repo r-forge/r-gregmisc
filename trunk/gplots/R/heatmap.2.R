@@ -354,11 +354,11 @@ heatmap.2 <- function (x,
   }
   ## draw the main carpet
   par(mar = c(margins[1], 0, 0, margins[2]))
-  if(!symm || scale != "none")
-    {
-      x <- t(x)
-      cellnote <- t(cellnote)
-    }
+  #if(scale != "none" || !symm)
+  #  {
+  #    x <- t(x)
+  #    cellnote <- t(cellnote)
+  #  }
   if(revC)
     { ## x columns reversed
       iy <- nr:1
