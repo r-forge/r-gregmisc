@@ -59,8 +59,12 @@ plotmeans  <- function (formula, data = NULL, subset, na.action,
     mf[,i] <- factor(mf[,i])
   
   means  <-  sapply(split(mf[[response]], mf[[-response]]), mean, na.rm=TRUE)
+  ns     <-  sapply(sapply(split(mf[[response]], mf[[-response]]), na.omit,
+                           simplify=FALSE), length )
   xlim  <-  c(0.5, length(means)+0.5)
 
+
+  
   if(!bars)
     {
       plot( means, ..., col=col, xlim=xlim)
@@ -69,12 +73,9 @@ plotmeans  <- function (formula, data = NULL, subset, na.action,
     {
 
       myvar  <-  function(x) var(x[!is.na(x)])
-
       vars <- sapply(split(mf[[response]], mf[[-response]]), myvar)
-      ns   <- sapply( sapply(split(mf[[response]], mf[[-response]]), na.omit,
-                             simplify=FALSE), length )
 
-                                        # apply minimum variance specified by minsd^2
+      ## apply minimum variance specified by minsd^2
       vars <- ifelse( vars < (minsd^2), (minsd^2), vars)
 
       if(use.t)
