@@ -51,7 +51,7 @@ ll <- function(pos=1, unit="KB", digits=0, dimensions=FALSE, function.dim="",
   {
     object.frame <- data.frame()
   }
-  else if(search()[pos] == "Autoloads")  # pos is the autoload environment
+  else if(environmentName(as.environment(pos)) == "Autoloads")
   {
     object.frame <- data.frame(rep("function",length(ls(pos,...))),
                       rep(0,length(ls(pos,...))), row.names=ls(pos,...))
