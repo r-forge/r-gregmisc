@@ -9,8 +9,8 @@
   object, its elements are listed and described.
 }
 \usage{
-ll(pos=1, unit="KB", digits=0, dimensions=FALSE, function.dim="",
-   sort.elements=FALSE, ...)
+ll(pos=1, unit="KB", digits=0, dim=FALSE, sort=FALSE, class=NULL,
+   invert=FALSE, ...)
 }
 \arguments{
   \item{pos}{environment position number, environment name, data frame,
@@ -19,10 +19,12 @@ ll(pos=1, unit="KB", digits=0, dimensions=FALSE, function.dim="",
     "MB", or first letter.}
   \item{digits}{number of decimals to display when rounding object
     size.}
-  \item{dimensions}{whether object dimensions should be returned.}
-  \item{function.dim}{value to report as the dimension of function
-    objects.}
-  \item{sort.elements}{whether elements should be sorted by name.}
+  \item{dim}{whether object dimensions should be returned.}
+  \item{sort}{whether elements should be sorted by name.}
+  \item{class}{character vector for limiting the output to specified
+    classes.}
+  \item{invert}{whether to invert the \code{class} filter, so specified
+    classes are excluded.}
   \item{...}{passed to \code{ls()}.}
 }
 \details{
@@ -54,7 +56,7 @@ ll(pos=1, unit="KB", digits=0, dimensions=FALSE, function.dim="",
 ll()
 ll(all=TRUE)
 ll("package:base")
-ll("package:base")[ll("package:base")$Class!="function",]
+ll("package:base", class="function", invert=TRUE)
 
 data(infert)
 ll(infert)
