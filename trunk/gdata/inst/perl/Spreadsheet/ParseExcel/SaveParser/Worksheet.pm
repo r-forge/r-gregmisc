@@ -1,8 +1,8 @@
-package Spreadsheet::ParseExcel::FmtJapan2;
+package Spreadsheet::ParseExcel::SaveParser::Worksheet;
 
 ###############################################################################
 #
-# Spreadsheet::ParseExcel::FmtJapan2 - A class for Cell formats.
+# Spreadsheet::ParseExcel::SaveParser::Worksheet - A class for SaveParser Worksheets.
 #
 # Used in conjunction with Spreadsheet::ParseExcel.
 #
@@ -18,50 +18,38 @@ package Spreadsheet::ParseExcel::FmtJapan2;
 use strict;
 use warnings;
 
-use Jcode;
-use Unicode::Map;
-use base 'Spreadsheet::ParseExcel::FmtJapan';
+#==============================================================================
+# Spreadsheet::ParseExcel::SaveParser::Worksheet
+#==============================================================================
+
+use base 'Spreadsheet::ParseExcel::Worksheet';
 our $VERSION = '0.56';
 
-#------------------------------------------------------------------------------
-# new (for Spreadsheet::ParseExcel::FmtJapan2)
-#------------------------------------------------------------------------------
 sub new {
-    my ( $sPkg, %hKey ) = @_;
-    my $oMap = Unicode::Map->new('CP932Excel');
-    die "NO MAP FILE CP932Excel!!"
-      unless ( -r Unicode::Map->mapping("CP932Excel") );
-
-    my $oThis = {
-        Code    => $hKey{Code},
-        _UniMap => $oMap,
-    };
-    bless $oThis;
-    $oThis->SUPER::new(%hKey);
-    return $oThis;
+    my ( $sClass, %rhIni ) = @_;
+    $sClass->SUPER::new(%rhIni);    # returns object
 }
 
 #------------------------------------------------------------------------------
-# TextFmt (for Spreadsheet::ParseExcel::FmtJapan2)
+# AddCell (for Spreadsheet::ParseExcel::SaveParser::Worksheet)
 #------------------------------------------------------------------------------
-sub TextFmt {
-    my ( $oThis, $sTxt, $sCode ) = @_;
-
-    #    $sCode = 'sjis' if((! defined($sCode)) || ($sCode eq '_native_'));
-    if ( $oThis->{Code} ) {
-        if ( !defined($sCode) ) {
-            $sTxt =~ s/(.)/\x00$1/sg;
-            $sTxt = $oThis->{_UniMap}->from_unicode($sTxt);
-        }
-        elsif ( $sCode eq 'ucs2' ) {
-            $sTxt = $oThis->{_UniMap}->from_unicode($sTxt);
-        }
-        return Jcode::convert( $sTxt, $oThis->{Code}, 'sjis' );
-    }
-    else {
-        return $sTxt;
-    }
+sub AddCell {
+    my ( $oSelf, $iR, $iC, $sVal, $oCell, $sCode ) = @_;
+    $oSelf->{_Book}
+      ->AddCell( $oSelf->{_SheetNo}, $iR, $iC, $sVal, $oCell, $sCode );
 }
+
+#------------------------------------------------------------------------------
+# Protect (for Spreadsheet::ParseExcel::SaveParser::Worksheet)
+#  - Password = undef   ->  No protect
+#  - Password = ''      ->  Protected. No password
+#  - Password = $pwd    ->  Protected. Password = $pwd
+#------------------------------------------------------------------------------
+sub Protect {
+    my ( $oSelf, $sPassword ) = @_;
+    $oSelf->{Protect} = $sPassword;
+}
+
 1;
 
 __END__
@@ -70,7 +58,7 @@ __END__
 
 =head1 NAME
 
-Spreadsheet::ParseExcel::FmtJapan2 - A class for Cell formats.
+Spreadsheet::ParseExcel::SaveParser::Worksheet - A class for SaveParser Worksheets.
 
 =head1 SYNOPSIS
 
