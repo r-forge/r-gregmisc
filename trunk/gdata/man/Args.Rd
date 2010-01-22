@@ -1,14 +1,12 @@
 \name{Args}
 \alias{Args}
-\title{
-  Formatted Argument List of a Function
-}
+\title{Describe Function Arguments}
 \description{
   Display function argument names and corresponding default values,
   formatted in two columns for easy reading.
 }
 \usage{
-Args(name, sort.args = FALSE)
+Args(name, sort=FALSE)
 }
 \arguments{
   \item{name}{a function or function name.}
@@ -23,16 +21,17 @@ Args(name, sort.args = FALSE)
   \code{all} have no formal arguments. See the \code{\link{formals}}
   help page.
 }
-\author{Arni Magnusson \email{arnima@u.washington.edu}}
+\author{Arni Magnusson}
 \seealso{
-  \code{\link{args}},
-  \code{\link{formals}},
-  \code{\link{help}}.
+  \code{Args} is a verbose alternative to \code{\link{args}}, based on
+  \code{\link{formals}}.
+
+  \code{\link{help}} also describes function arguments.
 }
 \examples{
 Args(glm)
 Args(scan)
-Args(legend)
+Args(legend, sort=TRUE)
 }
 % Programming
 \keyword{programming}
