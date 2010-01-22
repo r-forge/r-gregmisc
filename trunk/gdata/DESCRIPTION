@@ -5,7 +5,8 @@ Depends: R (>= 2.6.0)
 Imports: gtools
 Version: 2.6.1
 Date: 2009-08-19
-Author: Gregory R. Warnes and Gregor Gorjanc. Includes R source code
-	and/or documentation  contributed by Ben Bolker and Thomas Lumley.
+Author: Gregory R. Warnes, with contributions from Ben Bolker, Gregor Gorjanc, 
+        Gabor Grothendieck, Ales Korosec, Thomas Lumley, Don MacQueen, 
+        Arni Magnusson, Jim Rogers, and others
 Maintainer: Gregory Warnes <greg@random-technologies-llc.com>
 License: GPL-2
