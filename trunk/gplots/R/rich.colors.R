@@ -1,5 +1,4 @@
-rich.colors <- function(n, palette="temperature", rgb.matrix=FALSE,
-                        plot.colors=FALSE)
+rich.colors <- function(n, palette="temperature", rgb=FALSE, plot=FALSE)
 {
   if(n <= 0)
     return(character(0))
@@ -26,10 +25,10 @@ rich.colors <- function(n, palette="temperature", rgb.matrix=FALSE,
                     c("red","green","blue")))
   rich.vector <- apply(rgb.m, 1, function(v) rgb(v[1],v[2],v[3]))
 
-  if(rgb.matrix)
-    attr(rich.vector, "rgb.matrix") <- rgb.m
+  if(rgb)
+    attr(rich.vector, "rgb") <- rgb.m
 
-  if(plot.colors)
+  if(plot)
   {
     opar <- par("fig", "plt")
     par(fig=c(0,1,0,0.7), plt=c(0.15,0.9,0.2,0.95))
