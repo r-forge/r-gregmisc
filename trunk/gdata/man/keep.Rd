@@ -2,7 +2,7 @@
 \alias{keep}
 \title{Remove All Objects, Except Those Specified}
 \description{
-  Remove all objects from the default workspace, except those specified.
+  Remove all objects from the user workspace, except those specified.
 }
 \usage{
 keep(..., list=character(0), all=FALSE, sure=FALSE)
@@ -28,7 +28,7 @@ keep(..., list=character(0), all=FALSE, sure=FALSE)
 \author{Arni Magnusson}
 \seealso{
   \code{keep} is a convenient interface to \code{\link{rm}} when
-  removing most objects from the default workspace.
+  removing most objects from the user workspace.
 }
 \examples{
 data(women, cars)
