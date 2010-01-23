@@ -1,4 +1,10 @@
 sheetCount <- function(xls, verbose = FALSE, perl = "perl")
+  sheetCmd(xls, cmd="sheetCount.pl", verbose=verbose, perl=perl)
+  
+sheetNames <- function(xls, verbose = FALSE, perl = "perl")
+  sheetCmd(xls, cmd="sheetNames.pl", verbose=verbose, perl=perl)
+  
+sheetCmd <- function(xls, cmd="sheetCount.pl", verbose=FALSE, perl="perl")
 {
 
   ##
@@ -27,7 +33,7 @@ sheetCount <- function(xls, verbose = FALSE, perl = "perl")
     }
   ##
   
-  sc <- file.path(perl.dir,'sheetCount.pl')
+  sc <- file.path(perl.dir, cmd)
   
   ##
   ##
@@ -49,10 +55,14 @@ sheetCount <- function(xls, verbose = FALSE, perl = "perl")
     }
   ##
   results <- system(cmd, intern=TRUE)
+  tc <- textConnection(results)
+  results <- read.table(tc, as.is=TRUE, header=FALSE)
+  results <- unlist(results)
+  names(results) <- NULL
   ##
   if (verbose) cat("Done.\n\n")
   
-  as.numeric(results)
+  results
 }
 
 
