@@ -117,7 +117,7 @@ open(FH, "<$ARGV[0]") or die "Unable to open file '$ARGV[0]'.\n";
 close(FH);
 
 print "Loading '$ARGV[0]'...\n";
-my $oBook = $oExcel->Parse($ARGV[0]);
+my $oBook = $oExcel->Parse($ARGV[0]) or die "Error parsing file '$ARGV[0]'.\n";
 print "Done.\n";
 
 print "\n";
