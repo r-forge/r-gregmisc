@@ -1,4 +1,4 @@
-#!/bin/env perl
+#!/usr/bin/perl
 
 BEGIN {
 use File::Basename;
@@ -7,27 +7,66 @@ unshift(@INC, dirname $0);
 
 use strict;
 use Spreadsheet::ParseExcel;
+use POSIX;
+use File::Spec::Functions;
 
 # declare some varibles local
-my($row, $col, $sheet, $cell, $usage, $basename, $sheetnumber, $filename);
+
+my($row, $col, $sheet, $cell, $usage,
+   $targetfile,$basename, $sheetnumber,
+   $filename, $volume, $directories, $whoami,
+   $sep, $sepName, $sepLabel, $sepExt);
+
+##
+## Figure out whether I'm called as xls2csv.pl or xls2tab.pl
+##
+($volume,$directories,$whoami) = File::Spec->splitpath( $0 );
+
+if($whoami eq "xls2csv.pl")
+  {
+    $sep=",";
+    $sepName="comma";
+    $sepLabel="CSV";
+    $sepExt="csv";
+
+  }
+elsif ($whoami eq "xls2tsv.pl")
+  {
+    $sep="\t";
+    $sepName="tab";
+    $sepLabel="TSV";
+    $sepExt="tsv";
+  }
+elsif ($whoami eq "xls2tab.pl")
+  {
+    $sep="\t";
+    $sepName="tab";
+    $sepLabel="TAB";
+    $sepExt="tab";
+  }
+else
+  {
+    die("This script is named '$whoami', but must be named either 'xls2csv.pl' or 'xls2tab.pl' to function properly.\n");
+  }
+
 
 ##
 ## Usage information
 ##
 $usage = <<EOF;
 
-xls2csv.pl <excel file> [<output file>] [<worksheet number>]
+$whoami <excel file> [<output file>] [<worksheet number>]
 
 Translate the Microsoft Excel spreadsheet file contained in
-<excel file> into comma separated value format (CSV) and store
-in <output file>.
+<excel file> into $sepName separated value format ($sepLabel) and
+store in <output file>.
 
-If <output file> is not specified, the output file will have the
-same name as the input file with '.xls' or '.XLS' (if any)
-removed and '.csv' appended.
+If <output file> is not specified, the output file will have the same
+name as the input file with '.xls', or 'xlsx' removed and '.$sepExt'
+appended.
 
 If no worksheet number is given, each worksheet will be written to
-a separate file with the name '<output file>_<worksheet name>.csv'.
+a separate file with the name '<output file>_<worksheet name>.$sepExt'.
 
 EOF
 
@@ -35,26 +74,37 @@ EOF
 ## parse arguments
 ##
 
-if(!defined($ARGV[0]))
+if( !defined($ARGV[0]) )
   {
     print $usage;
     exit 1;
   }
 
-$basename = $ARGV[1];
-$basename =~ s/.csv//;
-if ($basename eq "")
-  {
-    my @path;
-    @path = split(/[\/\\]/, $ARGV[0]); # split on file separator
-    $basename =  $path[$#path];
-    $basename =~ s/.xls//i;
-  }
+if( defined($ARGV[1]) )
+   {
+     $basename = $targetfile = $ARGV[1];
+     $basename =~ s/\.$sepExt$//i;
+   }
+else
+   {
+     ($volume,$directories,$basename) = File::Spec->splitpath( $ARGV[0] );
+     $basename =~ s/\.xlsx*//i;
+   }
+
+my $targetsheetname;
+my $sheetnumber;
 
 if(defined($ARGV[2]) )
   {
-    $sheetnumber = $ARGV[2];
-    die "Sheetnumber must be an integer larger than 0." if $sheetnumber < 1;
+    if ( isdigit($ARGV[2]) )
+      {
+	$sheetnumber = $ARGV[2];
+	die "Sheetnumber must be an integer larger than 0.\n" if $sheetnumber < 1;
+      }
+    else
+      {
+	$targetsheetname = $ARGV[2];
+      }
   }
 
 ##
@@ -63,45 +113,79 @@ if(defined($ARGV[2]) )
 
 my $oExcel = new Spreadsheet::ParseExcel;
 
-print "Loading $ARGV[0] ...\n";
-
 open(FH, "<$ARGV[0]") or die "Unable to open file '$ARGV[0]'.\n";
 close(FH);
 
+print "Loading '$ARGV[0]'...\n";
 my $oBook = $oExcel->Parse($ARGV[0]);
+print "Done.\n";
 
 print "\n";
-print "Orignal Filename :", $oBook->{File} , "\n";
-print "Number of Sheets :", $oBook->{SheetCount} , "\n";
-print "Author           :", $oBook->{Author} , "\n";
+print "Orignal Filename: ", $oBook->{File} , "\n";
+print "Number of Sheets: ", $oBook->{SheetCount} , "\n";
+print "Author          : ", $oBook->{Author} , "\n";
 print "\n";
 
+## Get list all worksheets in the file
 my @sheetlist =  (@{$oBook->{Worksheet}});
-if (defined($sheetnumber))
+my $sheet;
+
+## If we want a specific sheet drop everything else
+if ( defined($sheetnumber) )
   {
-    @sheetlist=($sheetlist[$sheetnumber-1]);
+    $sheet = $oBook->Worksheet($sheetnumber-1) or die "No sheet number $sheetnumber.\n";
+    @sheetlist = ( $sheet  );
+
   }
+elsif ( defined($targetsheetname) )
+  {
+    $sheet = $oBook->Worksheet($targetsheetname) or die "No sheet named '$targetsheetname'.\n";
+    @sheetlist = ( $sheet  );
+  }
+
 
 ##
 ## iterate across each worksheet, writing out a separat csv file
 ##
 
 my $i=0;
+my $sheetname;
+my $found=0;
 foreach my $sheet (@sheetlist)
 {
   $i++;
 
-  my $sheetname = $sheet->{Name};
-  if(defined($sheetnumber))
+
+  $sheetname = $sheet->{Name};
+
+  if( defined($sheetnumber) || defined($targetsheetname) )
     {
-      $filename = "${basename}.csv";
+      if( defined($targetfile) )
+	{
+	  $filename = $targetfile;
+	}
+      else
+	{
+	  $filename = "${basename}.$sepExt";
+	}
     }
   else
     {
-      $filename = "${basename}_${sheetname}.csv";
+      $filename = "${basename}_${sheetname}.$sepExt";
     }
 
-  print "Writing Sheet number $i ('$sheetname') to file '$filename'\n";
+  if( defined($sheetnumber) )
+    {
+      print "Writing sheet number $sheetnumber ('$sheetname') to file '$filename'\n";
+    }
+  elsif ( defined($targetsheetname) )
+    {
+      print "Writing sheet '$sheetname' to file '$filename'\n";
+    }
+  else
+    {
+      print "Writing sheet number $i ('$sheetname') to file '$filename'\n";
+    }
 
   open(OutFile,">$filename");
 
@@ -139,15 +223,13 @@ foreach my $sheet (@sheetlist)
 
 	   $outputLine .= "\"" . $_ . "\"" if(length($_)>0);
 
-	   # separate cells with commas
-	   $outputLine .= "," if( $col != $maxcol) ;
+	   # separate cells with specified separator
+	   $outputLine .= $sep if( $col != $maxcol) ;
 
          }
 
-       #$outputLine =~ s/[, ]+$//g;  ## strip off trailing blanks and commas
-
        # skip blank/empty lines
-       if( $outputLine =~ /^[, ]*$/ )
+       if( $outputLine =~ /^[$sep ]*$/ )
 	 {
 	   $cumulativeBlankLines++
 	 }
