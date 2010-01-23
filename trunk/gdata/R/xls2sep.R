@@ -8,6 +8,10 @@ xls2tab <- function(xls, sheet=1, verbose=FALSE, ..., perl="perl")
   xls2sep(xls=xls, sheet=sheet, verbose=verbose, ..., method="tab",
           perl=perl) 
 
+xls2tsv <- function(xls, sheet=1, verbose=FALSE, ..., perl="perl")
+  xls2sep(xls=xls, sheet=sheet, verbose=verbose, ..., method="tsv",
+          perl=perl) 
+
 xls2sep <- function(xls, sheet = 1, verbose=FALSE, ...,
                     method=c("csv","tsv","tab"), perl="perl")
   {
