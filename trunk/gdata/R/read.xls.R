@@ -1,7 +1,7 @@
 ## s$Id$
 
 read.xls <- function(xls, sheet = 1, verbose=FALSE, pattern, ...,
-                     method=c("csv","tab"), perl="perl")
+                     method=c("csv","tsv","tab"), perl="perl")
 {
   con <- tfn <- NULL
   on.exit({ 
@@ -15,13 +15,8 @@ read.xls <- function(xls, sheet = 1, verbose=FALSE, pattern, ...,
   xls <- path.expand(xls)
 
 
-  ## translate from xls to csv/tab format (returns csv file name)
-  if(method=="csv")
-    con <- xls2csv(xls, sheet, verbose=verbose, ..., perl = perl)
-  else if(method=="tab")
-    con <- xls2tab(xls, sheet, verbose=verbose, ..., perl = perl)
-  else
-    stop("Unknown method", method)
+  ## translate from xls to csv/tsv/tab format (returns name of created file)
+  con <- xls2sep(xls, sheet, verbose=verbose, ..., method=method, perl = perl)
 
   ## load the csv file
   open(con)
@@ -35,7 +30,7 @@ read.xls <- function(xls, sheet = 1, verbose=FALSE, pattern, ...,
       
       if(method=="csv")
         retval <- read.csv(con, ...)
-      else if (method=="tab")
+      else if (method %in% c("tsv","tab") )
         retval <- read.delim(con, ...)
       else
         stop("Unknown method", method)
@@ -60,7 +55,7 @@ read.xls <- function(xls, sheet = 1, verbose=FALSE, pattern, ...,
 
     if(method=="csv")
       retval <- read.csv(con, skip = idx[1]-1, ...)
-    else if (method=="tab")
+    else if (method %in% c("tsv","tab") )
       retval <- read.delim(con, skip = idx[1]-1, ...)
     else
       stop("Unknown method", method)

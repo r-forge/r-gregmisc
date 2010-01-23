@@ -9,7 +9,7 @@ xls2tab <- function(xls, sheet=1, verbose=FALSE, ..., perl="perl")
           perl=perl) 
 
 xls2sep <- function(xls, sheet = 1, verbose=FALSE, ...,
-                    method=c("csv","tab"), perl="perl")
+                    method=c("csv","tsv","tab"), perl="perl")
   {
     
     method <- match.arg(method)
@@ -51,6 +51,11 @@ xls2sep <- function(xls, sheet = 1, verbose=FALSE, ...,
         script <- file.path(perl.dir,'xls2tab.pl')
         targetFile <- paste(tempfile(), "tab", sep = ".")
       }
+    else if(method=="tsv")
+      {
+        script <- file.path(perl.dir,'xls2tsv.pl')
+        targetFile <- paste(tempfile(), "tsv", sep = ".")
+      }
     else
       {
         stop("Unknown method", method)
@@ -89,7 +94,7 @@ xls2sep <- function(xls, sheet = 1, verbose=FALSE, ...,
     ##
 
     if(file.access(targetFile, 4)!=0)
-      stop("Unable to read translated", method, "file '", targetFile, "'." )
+      stop("Unable to read translated ", method, " file '", targetFile, "'." )
     
     cat("Done.\n")
 
