@@ -158,7 +158,7 @@ foreach my $sheet (@sheetlist)
 
   $sheetname = $sheet->{Name};
 
-  if( defined($sheetnumber) || defined($targetsheetname) )
+  if( defined($sheetnumber) || defined($targetsheetname) || $oBook->{SheetCount}==1 )
     {
       if( defined($targetfile) )
 	{
