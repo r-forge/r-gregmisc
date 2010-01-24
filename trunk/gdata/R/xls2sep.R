@@ -12,7 +12,7 @@ xls2tsv <- function(xls, sheet=1, verbose=FALSE, ..., perl="perl")
   xls2sep(xls=xls, sheet=sheet, verbose=verbose, ..., method="tsv",
           perl=perl) 
 
-xls2sep <- function(xls, sheet = 1, verbose=FALSE, ...,
+xls2sep <- function(xls, sheet=1, verbose=FALSE, ...,
                     method=c("csv","tsv","tab"), perl="perl")
   {
     
@@ -25,7 +25,7 @@ xls2sep <- function(xls, sheet = 1, verbose=FALSE, ...,
     ##
 
     ##
-    ## files
+    ## filesheet
     tf <- NULL
     if ( substring(xls, 1, 7) == "http://" ||
          substring(xls, 1, 6) == "ftp://" )
@@ -70,8 +70,12 @@ xls2sep <- function(xls, sheet = 1, verbose=FALSE, ...,
 
     ##
     ## execution command
-    cmd <- paste(perl, script, dQuote.ascii(xls), dQuote.ascii(targetFile),
-                 dQuote.ascii(sheet), sep=" ")
+    cmd <- paste(dQuote(perl),
+                 dQuote(script),
+                 dQuote.ascii(xls),
+                 dQuote.ascii(targetFile),
+                 dQuote.ascii(sheet),
+                 sep=" ")
     ##
     ##
 
@@ -89,7 +93,7 @@ xls2sep <- function(xls, sheet = 1, verbose=FALSE, ...,
     
     ##
     ## do the translation
-    if(verbose)  cat("Executing ", cmd, "... \n\n")
+    if(verbose)  cat("Executing '", cmd, "'... \n\n")
     ##
     results <- system(cmd, intern=!verbose)
     ##
