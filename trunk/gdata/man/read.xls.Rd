@@ -113,7 +113,7 @@ xls2sep(xls, sheet=1, verbose=FALSE, ..., method=c("csv","tsv","tab"),
 
    data <- read.xls(exampleFile)          # default is first worksheet
    data <- read.xls(exampleFile, sheet=2) # second worksheet by number
-   data <- read.xls(exampleFile, sheet="Sheet Second",v=T) # and by name
+   data <- read.xls(exampleFile, sheet="Sheet Second",v=TRUE) # and by name
 
    # load the third worksheet, skipping the first two non-data lines...
    data <- read.xls(exampleFile2007, sheet="Sheet with initial text", skip=2)
