@@ -60,6 +60,8 @@ read.xls <- function(xls, sheet = 1, verbose=FALSE, pattern, ...,
     else
       stop("Unknown method", method)
 
+    close(con)
+
     cat("Done.\n")     
   }
   retval

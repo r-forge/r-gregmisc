@@ -57,6 +57,7 @@ sheetCmd <- function(xls, cmd="sheetCount.pl", verbose=FALSE, perl="perl")
   results <- system(cmd, intern=TRUE)
   tc <- textConnection(results)
   results <- read.table(tc, as.is=TRUE, header=FALSE)
+  close(tc)
   results <- unlist(results)
   names(results) <- NULL
   ##
