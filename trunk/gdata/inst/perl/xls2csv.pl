@@ -122,13 +122,13 @@ open(FH, "<$ARGV[0]") or die "Unable to open file '$ARGV[0]'.\n";
 close(FH);
 
 print "Loading '$ARGV[0]'...\n";
-
 ## First try as a Excel 2007+ 'xml' file
 eval
   {
     local $SIG{__WARN__} = sub {};
     $oBook = Spreadsheet::XLSX -> new ($ARGV[0]);
   };
+## Then Excel 97-2004 Format
 if($@)
   {
     $oBook = new Spreadsheet::ParseExcel->Parse($ARGV[0]) or \
