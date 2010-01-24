@@ -24,6 +24,8 @@ export(
        remove.vars,
        reorder.factor,
        resample,
+       sheetCount,
+       sheetNames,
        trim,
        trimSum,
        unmatrix,
