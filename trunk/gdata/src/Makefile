@@ -12,4 +12,6 @@ default:
 clean:
 	rm -rf ${TARGET}
 	rm -rf ../inst/perl/share
-	#rm -rf ../inst/perl/darwin-2level
+
+distclean:
+	rm -rf ../inst/perl/darwin-2level
