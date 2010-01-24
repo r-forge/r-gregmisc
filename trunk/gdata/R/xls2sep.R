@@ -35,10 +35,8 @@ xls2sep <- function(xls, sheet=1, verbose=FALSE, ...,
           cat("Downloading",
               dQuote.ascii(xls), " to ",
               dQuote.ascii(tf), "...\n")
-        else
-          cat("Downloading...\n")
         download.file(xls, tf, mode = "wb")
-        cat("Done.\n")
+        if(verbose) cat("Done.\n")
         xls <- tf
       }
 
@@ -88,8 +86,6 @@ xls2sep <- function(xls, sheet=1, verbose=FALSE, ...,
         cat("   ", dQuote.ascii(targetFile), "\n")
         cat("... \n\n")
       }
-    else
-      cat("Converting xls file to", method, "file... ")         
     
     ##
     ## do the translation
@@ -104,7 +100,7 @@ xls2sep <- function(xls, sheet=1, verbose=FALSE, ...,
     if(file.access(targetFile, 4)!=0)
       stop("Unable to read translated ", method, " file '", targetFile, "'." )
     
-    cat("Done.\n")
+    if (verbose) cat("Done.\n")
 
     
     ## prepare for cleanup now, in case of error reading file

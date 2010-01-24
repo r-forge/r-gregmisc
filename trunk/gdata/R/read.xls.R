@@ -25,8 +25,6 @@ read.xls <- function(xls, sheet = 1, verbose=FALSE, pattern, ...,
     {
       if(verbose)
         cat("Reading", method, "file ", dQuote.ascii(tfn), "...\n")
-      else
-        cat("Reading", method, "file... ")
       
       if(method=="csv")
         retval <- read.csv(con, ...)
@@ -35,23 +33,24 @@ read.xls <- function(xls, sheet = 1, verbose=FALSE, pattern, ...,
       else
         stop("Unknown method", method)
         
-      cat("Done.\n")
+      if(verbose)
+        cat("Done.\n")
     }
   else {
-    cat("Searching for lines containing pattern ", pattern, "... ")
+    if(verbose)
+      cat("Searching for lines containing pattern ", pattern, "... ")
     idx <- grep(pattern, readLines(con))
     if (length(idx) == 0) {
       warning("pattern not found")
       return(NULL)
     }
-    cat("Done.\n")
+   if(verbose)
+     cat("Done.\n")
     
     seek(con, 0)
 
     if(verbose)
       cat("Reading", method, "file ", dQuote.ascii(tfn), "...\n")
-    else
-      cat("Reading", method, "file... ")       
 
     if(method=="csv")
       retval <- read.csv(con, skip = idx[1]-1, ...)
@@ -62,7 +61,8 @@ read.xls <- function(xls, sheet = 1, verbose=FALSE, pattern, ...,
 
     close(con)
 
-    cat("Done.\n")     
+    if(verbose)
+      cat("Done.\n")     
   }
   retval
 }
