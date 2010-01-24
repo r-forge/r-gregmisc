@@ -60,7 +60,8 @@ sub new {
 			my $formatCode = $1 || '';
 			if ($formatCode eq $default || not($formatCode)){
 				if ($t1 == 9 || $t1==10){ $formatCode="0.00000%";}
-				elsif ($t1 == 14){ $formatCode="m-d-yy";}
+				elsif ($t1 == 14){ $formatCode="yyyy-mm-dd";}
+				elsif ($t1 == 20){ $formatCode="h:mm";}
 				else {
 					$formatCode="";
 				}
@@ -159,7 +160,7 @@ sub new {
 				
 				$s   = m/t=\"s\"/      ?  1 : 0;
 				$s2  = m/t=\"str\"/    ?  1 : 0;
-				$sty = m/s="([0-9]+)"/ ? $1 : 0;
+				$sty = m/s="([0-9]+)"/ ?  $1 : 0;
 
 			}
 			elsif (/^<v/) {

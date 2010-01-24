@@ -2,11 +2,13 @@
 
 BEGIN {
 use File::Basename;
-unshift(@INC, dirname $0);
+# Add current path to perl library search path
+use lib dirname($0);
 }
 
 use strict;
 use Spreadsheet::ParseExcel;
+use Spreadsheet::XLSX;
 use POSIX;
 use File::Spec::Functions;
 
@@ -111,19 +113,32 @@ if(defined($ARGV[2]) )
 ## open spreadsheet
 ##
 
-my $oExcel = new Spreadsheet::ParseExcel;
+my $oExcel;
+my $oBook;
+
+$oExcel = new Spreadsheet::ParseExcel;
 
 open(FH, "<$ARGV[0]") or die "Unable to open file '$ARGV[0]'.\n";
 close(FH);
 
 print "Loading '$ARGV[0]'...\n";
-my $oBook = $oExcel->Parse($ARGV[0]) or die "Error parsing file '$ARGV[0]'.\n";
+
+## First try as a Excel 2007+ 'xml' file
+eval
+  {
+    local $SIG{__WARN__} = sub {};
+    $oBook = Spreadsheet::XLSX -> new ($ARGV[0]);
+  };
+if($@)
+  {
+    $oBook = new Spreadsheet::ParseExcel->Parse($ARGV[0]) or \
+      die "Error parsing file '$ARGV[0]'.\n";
+  }
 print "Done.\n";
 
 print "\n";
-print "Orignal Filename: ", $oBook->{File} , "\n";
+print "Orignal Filename: ", $ARGV[0], "\n";
 print "Number of Sheets: ", $oBook->{SheetCount} , "\n";
-print "Author          : ", $oBook->{Author} , "\n";
 print "\n";
 
 ## Get list all worksheets in the file

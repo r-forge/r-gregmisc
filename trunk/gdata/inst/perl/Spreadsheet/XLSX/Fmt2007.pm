@@ -6,6 +6,7 @@
 package Spreadsheet::XLSX::Fmt2007;
 use strict;
 use warnings;
+use POSIX;
 
 use Spreadsheet::XLSX::Utility2007 qw(ExcelFmt);
 our $VERSION = '0.12'; # 
@@ -34,7 +35,7 @@ my %hFmtDefault = (
     0x14 => 'h:mm',
     0x15 => 'h:mm:ss',
     0x16 => 'm-d-yy h:mm',
-#0x17-0x24 -- Differs in Natinal
+#0x17-0x24 -- Differs in National
     0x25 => '(#,##0_);(#,##0)',
     0x26 => '(#,##0_);[RED](#,##0)',
     0x27 => '(#,##0.00);(#,##0.00)',
@@ -93,27 +94,49 @@ sub FmtString {
         if ($oCell->{Type} eq 'Numeric') {
 	    if($oCell->{Format}){
 		$sFmtStr=$oCell->{Format};
-	    } elsif(int($oCell->{Val}) != $oCell->{Val}) {
-                $sFmtStr = '0.00';
-            }
-            else {
+	    }
+	    # Integer
+	    elsif( isdigit($oCell->{Val}) ){
                 $sFmtStr = '0';
-            }
-        }
+	    }
+	    # Floating Point
+            else{
+                $sFmtStr = '0.000000000000000';
+	    }
+	  }
         elsif($oCell->{Type} eq 'Date') {
 	    if($oCell->{Format}){
 		$sFmtStr=$oCell->{Format};
-            } elsif(int($oCell->{Val}) <= 0) {
-                $sFmtStr = 'h:mm:ss';
-            }
+	      }
+	    # Fraction < 1 --> Time
+	    elsif(int($oCell->{Val}) <= 0){
+                $sFmtStr = 'hh:mm:ss';
+	      }
+	    # Whole number --> Date
+	    elsif(int($oCell->{Val}) != $oCell->{Val}){
+                $sFmtStr = 'hh:mm:ss';
+	      }
+	    # Otherwise both Date and Time
             else {
-                $sFmtStr = 'm-d-yy';
-            }
-        }
-        else {
+                $sFmtStr = 'mm-dd-yyyy hh:mm:ss';
+	      }
+	  }
+        elsif($oCell->{Type} eq 'Time') 
+	  {
+	    if($oCell->{Format})
+	      {
+		$sFmtStr=$oCell->{Format};
+	      }
+	    elsif(int($oCell->{Val}) <= 0) 
+	      {
+                $sFmtStr = 'hh:mm:ss';
+	      }
+	  }
+        else 
+	  {
             $sFmtStr = '@';
-        }
-    }
+	  }
+      }
     return $sFmtStr;
 }
 #------------------------------------------------------------------------------
