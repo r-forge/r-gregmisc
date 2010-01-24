@@ -71,7 +71,7 @@ sii <- function(
     }
   else
     if(length(importance) != nrow(table))
-      stop("`importance' vector have length ", nrow(table), "for method `",method,"'.")
+      stop("`importance' vector must have length ", nrow(table), " for method `",method,"'.")
     else
       table[,"Ii"] <- importance
 
