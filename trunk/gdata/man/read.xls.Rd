@@ -27,8 +27,8 @@ xls2sep(xls, sheet=1, verbose=FALSE, ..., method=c("csv","tsv","tab"),
   \item{perl}{name of the perl executable to be called.}
   \item{method}{intermediate file format, "csv" for comma-separated and
     "tab" for tab-separated}
-  \item{...}{additional arguments to read.table. The defaults of
-    read.csv are used.}
+  \item{...}{additional arguments to read.table. The defaults for
+    read.csv() are used.}
 }
 \value{
   \code{"read.xls"} returns a data frame.
@@ -54,7 +54,7 @@ xls2sep(xls, sheet=1, verbose=FALSE, ..., method=c("csv","tsv","tab"),
 \note{ Either a working version of Perl must be present in the executable
   search path, or the exact path of the perl executable must be provided
   via the \code{perl} argument.  See the examples below for an illustration.}
-\seealso{ \code{\link[base]{read.csv}} }
+\seealso{ \code{\link[utils]{read.csv}} }
 \examples{
 
    # iris.xls is included in the gregmisc package for use as an example
