@@ -68,8 +68,8 @@ xls2sep <- function(xls, sheet=1, verbose=FALSE, ...,
 
     ##
     ## execution command
-    cmd <- paste(dQuote(perl),
-                 dQuote(script),
+    cmd <- paste(dQuote.ascii(perl),
+                 dQuote.ascii(script),
                  dQuote.ascii(xls),
                  dQuote.ascii(targetFile),
                  dQuote.ascii(sheet),
