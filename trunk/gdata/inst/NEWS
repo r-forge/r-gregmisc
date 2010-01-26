@@ -16,13 +16,11 @@ Enhancements:
 New Functions:
 
 - sheetCount() and sheetNames() to determine the number and names of 
-  worksheets in an Excel file, respecively.
+  worksheets in an Excel file, respectively.
 
 Bug Fixes:
 
 - Fix formatting warning in frameApply().
-
-- Modify unit tests to avoid issues related to zime zones.
 
 - Resolve crash of "ll(.GlobalEnv)"
 
@@ -33,7 +31,7 @@ CHANGES IN 2.6.1 (2009-07-15)
 
 Bug Fixes
 
-- Modify unit tests to avoid issues related to zime zones.
+- Modify unit tests to avoid issues related to time zones.
 
 
 CHANGES IN 2.6.0 (2009-07-15)
