@@ -49,13 +49,15 @@ sheetCmd <- function(xls, cmd="sheetCount.pl", verbose=FALSE, perl="perl")
   if(verbose)
     {
       cat("\n")
-      cat("Extracting sheet count from\n")
+      cat("Extracting sheet information from\n")
       cat("   ", dQuote.ascii(xls), "\n")
       cat("... \n\n")
     }
   ##
-  results <- system(cmd, intern=TRUE)
-  tc <- textConnection(results)
+  output <- system(cmd, intern=TRUE)
+  if(verbose) cat("Results: ", output, "\n")
+  ##
+  tc <- textConnection(output)
   results <- read.table(tc, as.is=TRUE, header=FALSE)
   close(tc)
   results <- unlist(results)
