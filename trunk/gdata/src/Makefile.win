@@ -3,7 +3,7 @@ TARGET=Compress-Raw-Zlib-2.024
 default:
 	tar xzf ${TARGET}.tar.gz
 	build.bat
-	# make clean
+	make -f Makefile.win clean
 
 clean:
 	rm -rf ${TARGET}

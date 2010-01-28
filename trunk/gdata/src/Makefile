@@ -15,4 +15,4 @@ clean:
 
 distclean:
 	rm -rf ../inst/perl/darwin-2level
-        rm -rf ../inst/perl/MSWin32-x86-multi-thread
+	rm -rf ../inst/perl/MSWin32-x86-multi-thread
