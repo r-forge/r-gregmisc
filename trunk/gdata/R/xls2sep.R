@@ -92,6 +92,7 @@ xls2sep <- function(xls, sheet=1, verbose=FALSE, ...,
     if(verbose)  cat("Executing '", cmd, "'... \n\n")
     ##
     results <- system(cmd, intern=!verbose)
+    if(verbose) cat(results,"\n\n")
     ##
     if (verbose) cat("Done.\n\n")
     ##
