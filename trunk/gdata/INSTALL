@@ -1,0 +1,16 @@
+
+Windows
+=======
+
+On Windows, the perl based routines (read.xls, xls2sep, xls2csv, xls2tab, 
+xls2tsv, sheetNames, sheetCount) will not work with the perl in Rtools
+but will work with ActiveState perl.
+
+If you have ActiveState installed and the pl extension is associated with it
+(which the ActiveState installer associates automatically) then these 
+routines will automatically locate ActiveState perl even if you omit the 
+perl= argument.
+
+Also ensure that the package was built with ActiveState Perl and not the perl
+in Rtools.
+

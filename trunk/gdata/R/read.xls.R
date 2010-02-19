@@ -16,6 +16,8 @@ read.xls <- function(xls, sheet = 1, verbose=FALSE, pattern, ...,
 
 
   ## translate from xls to csv/tsv/tab format (returns name of created file)
+  perl <- if (missing(perl)) findPerl(verbose = verbose)
+  else findPerl(perl, verbose = verbose)
   con <- xls2sep(xls, sheet, verbose=verbose, ..., method=method, perl = perl)
 
   ## load the csv file
