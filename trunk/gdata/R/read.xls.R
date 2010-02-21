@@ -5,7 +5,11 @@ read.xls <- function(xls, sheet = 1, verbose=FALSE, pattern, ...,
 {
   con <- tfn <- NULL
   on.exit({ 
-    if (inherits(con, "connection") && isOpen(con)) close(con)
+	err <- FALSE
+	if (inherits(con, "connection")) {
+		tryCatch(op <- isOpen(con), error = function(x) err <<- TRUE)
+		if (!err && op) close(con)
+	}
     if (file.exists(tfn)) file.remove(tfn)
   })
 

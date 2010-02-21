@@ -86,7 +86,7 @@ xls2sep(xls, sheet=1, verbose=FALSE, ..., method=c("csv","tsv","tab"),
    iris <- read.xls(xlsfile, perl="/usr/bin/perl")
 
    # read xls file from net
-   nba.url <- "http://lcb1.uoregon.edu/sergiok/DSC330HSP04/week5/NBA.xls"
+   nba.url <- "http://mgtclass.mgt.unm.edu/Bose/Excel/Tutorial.05/Cases/NBA.xls"
    nba <- read.xls(nba.url)
 
    # read xls file ignoring all lines prior to first containing State
