@@ -74,8 +74,7 @@ strmacro <- function(..., expr, strexpr)
             
             body <- gsub(pattern,
                          value,
-                         body,
-                         extended=TRUE)
+                         body)
           }
 
         #print(body)
