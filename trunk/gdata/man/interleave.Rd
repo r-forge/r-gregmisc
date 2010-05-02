@@ -66,7 +66,7 @@ interleave(..., append.source=TRUE, sep=": ", drop=FALSE)
 \value{
   Matrix containing the interleaved rows of the function arguments.
   }
-\author{ Gregory R. Warnes \email{greg@random-technologies-llc.com}
+\author{ Gregory R. Warnes \email{greg@warnes.net}
   }
 \seealso{ \code{\link{cbind}}, \code{\link{rbind}}, \code{\link{combine}} }
 

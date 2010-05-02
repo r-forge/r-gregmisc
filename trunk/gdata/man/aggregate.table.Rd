@@ -49,7 +49,7 @@ aggregate.table(x, by1, by2, FUN=mean, ...)
   Returns a matrix with one element for each combination of \code{by1}
   and \code{by2}.
 }
-\author{ Gregory R. Warnes \email{greg@random-technologies-llc.com}}
+\author{ Gregory R. Warnes \email{greg@warnes.net}}
 
 \seealso{ \code{\link{aggregate}}, \code{\link{tapply}},
           \code{\link{interleave}} }

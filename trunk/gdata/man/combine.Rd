@@ -59,7 +59,7 @@ combine(..., names=NULL)
 %   ...
 % }
 %\references{ ~put references to the literature/web site here ~ }
-\author{Gregory R. Warnes \email{greg@random-technologies-llc.com}}
+\author{Gregory R. Warnes \email{greg@warnes.net}}
 %\note{ ~~further notes~~ }
 \seealso{ \code{\link{rbind}}, \code{\link{merge}}}
 

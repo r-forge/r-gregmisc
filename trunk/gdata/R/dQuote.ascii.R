@@ -7,25 +7,3 @@
 ##
 dQuote.ascii <- function(x) paste('"',x,'"',sep='')
 
-findPerl <- function(perl, verbose = "FALSE") {
-
-	if (missing(perl)) {
-		if (.Platform$OS == "windows") {
-			perl <- Sys.which("perl")
-			if (perl == "") stop("perl not found. Use perl= argument.")
-			if (length(grep("rtools", tolower(perl))) > 0) {
-				perl.ftype <- shell("ftype perl", intern = TRUE)
-				if (length(grep("^perl=", perl.ftype)) > 0) {
-					perl <- sub('^perl="([^"]*)".*', "\\1", perl.ftype)
-				}
-			}
-		}
-		if (perl == "perl") perl <- Sys.which("perl")
-	}
-
-	if (verbose) cat("Using perl at", perl, "\n")
-
-	perl
-}
-
-

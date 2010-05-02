@@ -49,7 +49,7 @@ remove.vars(data, names="", info=TRUE)
 }
 \author{Code by Don MacQueen \email{macq\@llnl.gov}.
   Documentation by Gregory R. Warnes
-  \email{greg@random-technologies-llc.com} }
+  \email{greg@warnes.net} }
 \seealso{ \code{\link{names}},
   \code{\link{colnames}},
   \code{\link{data.frame}}
