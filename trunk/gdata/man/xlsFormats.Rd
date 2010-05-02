@@ -23,11 +23,6 @@ xlsFormats(perl = "perl", verbose = FALSE)
 	\code{\link{read.xls}}, \code{\link{xls2csv}}.
 }
 \examples{
-   ## List supported formats
    xlsFormats()
-
-   ## Example use
-   if( 'XLSX' \%in\% xlsFormats() )  # if XLSX is supported..
-     sheetNames(exampleFile2007)
 }
 \keyword{ misc }
