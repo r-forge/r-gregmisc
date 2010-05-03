@@ -12,8 +12,12 @@ Enhancements:
 
   If necessary perl libraries are not available, a warning message is
   displayed, as is a message suggesting the user run the (new)
-  installXLSXModules() function to attempt to install the necessary
+  installXLSXsupport() function to attempt to install the necessary
   perl libraries.
+
+- The function function installXLSXsupport() has been provided to
+  install the binary perl modules that read.xls needs to support Excel
+  2007+ 'XLSX' files.
 
 
 CHANGES IN 2.7.3 (2010-04-02)

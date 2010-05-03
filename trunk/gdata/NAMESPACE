@@ -11,7 +11,7 @@ export(
        elem,
        env,
        frameApply,
-       installXLSXModules,
+       installXLSXsupport,
        interleave,
        is.what,
        keep,

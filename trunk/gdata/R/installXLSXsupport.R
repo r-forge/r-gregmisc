@@ -1,6 +1,6 @@
 ## s$Id: read.xls.R 1423 2010-02-21 17:12:30Z ggrothendieck2 $
 
-installXLSXModules <- function(perl="perl", verbose=FALSE)
+installXLSXsupport <- function(perl="perl", verbose=FALSE)
 {
   ## determine proper path to perl executable
   perl <- if (missing(perl))

@@ -67,9 +67,9 @@
         show("\n")
         
         show(
-              " Run the function 'installXLSXModules()'",
+              " Run the function 'installXLSXsupport()'",
               " to automatically download and install the perl",
-              " libaries needed for Excel XLS and XLSX formats."
+              " libaries needed to support Excel XLS and XLSX formats."
            )
     }
         
