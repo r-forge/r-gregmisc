@@ -25,7 +25,7 @@ venn(data, universe=NA, small=0.7, showSetLogicLabel=FALSE,
     should be omitted.}
   \item{show.plot}{Logical flag indicating whether the plot should be
     displayed.  If false, simply returns the group count matrix.}
-  \item{y}{Ignored}
+  \item{y,...}{Ignored}
 }
 \details{
   \code{data} should be either a named list of vectors containing
