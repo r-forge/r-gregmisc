@@ -1,5 +1,6 @@
 \name{venn}
 \alias{venn}
+\alias{plot.venn}
 \title{Plot a Venn diagram}
 \description{
   Plot a Venn diagrams for up to 5 sets
@@ -11,7 +12,7 @@ venn(data, universe=NA, small=0.7, showSetLogicLabel=FALSE,
           simplify=FALSE)
 }
 \arguments{
-  \item{data}{Either a list list containing vectors of names or indices
+  \item{data,x}{Either a list list containing vectors of names or indices
     of group members, or a data frame containing boolean indicators of
     group membership (see below)}
   \item{universe}{Subset of valid name/index elements. Values  ignore values
@@ -24,6 +25,7 @@ venn(data, universe=NA, small=0.7, showSetLogicLabel=FALSE,
     should be omitted.}
   \item{show.plot}{Logical flag indicating whether the plot should be
     displayed.  If false, simply returns the group count matrix.}
+  \item{y}{Ignored}
 }
 \details{
   \code{data} should be either a named list of vectors containing
@@ -69,10 +71,10 @@ venn(input)
 ## Example using a list of item indexes belonging to the
 ## specified group.
 ##
-GroupA.i <- which(geneNames %in% GroupA)
-GroupB.i <- which(geneNames %in% GroupB)
-GroupC.i <- which(geneNames %in% GroupC)
-GroupD.i <- which(geneNames %in% GroupD)
+GroupA.i <- which(geneNames \%in\% GroupA)
+GroupB.i <- which(geneNames \%in\% GroupB)
+GroupC.i <- which(geneNames \%in\% GroupC)
+GroupD.i <- which(geneNames \%in\% GroupD)
 input.i  <-list(A=GroupA.i,B=GroupB.i,C=GroupC.i,D=GroupD.i)
 input.i
 
@@ -81,16 +83,16 @@ venn(input.i)
 ##
 ## Example using a data frame of indicator ('f'lag) columns
 ##
-GroupA.f <- geneNames %in% GroupA
-GroupB.f <- geneNames %in% GroupB
-GroupC.f <- geneNames %in% GroupC
-GroupD.f <- geneNames %in% GroupD
+GroupA.f <- geneNames \%in\% GroupA
+GroupB.f <- geneNames \%in\% GroupB
+GroupC.f <- geneNames \%in\% GroupC
+GroupD.f <- geneNames \%in\% GroupD
 input.df <- data.frame(A=GroupA.f,B=GroupB.f,C=GroupC.f,D=GroupD.f)
 head(input.df)
 venn(input.df)
 
 ## smaller set to create empty groupings
-small <- input[1:20,]
+small <- input.df[1:20,]
 
 venn(small, simplify=FALSE) # with empty groupings
 venn(small, simplify=TRUE)  # without empty groupings
@@ -114,10 +116,10 @@ tmp
 ##
 
 universe <- unique(c(GroupA,GroupB,GroupC,GroupD))
-GroupA.l <-universe %in% GroupA
-GroupB.l <-universe %in% GroupB
-GroupC.l <-universe %in% GroupC
-GroupD.l <-universe %in% GroupD
+GroupA.l <-universe \%in\% GroupA
+GroupB.l <-universe \%in\% GroupB
+GroupC.l <-universe \%in\% GroupC
+GroupD.l <-universe \%in\% GroupD
 
 ## Genes that are in GroupA and in GroupB but not in GroupD (unification
 ## of sets III0 and II00 in the venn diagram:
@@ -126,7 +128,7 @@ universe[GroupA.l & GroupB.l & !GroupD.l]
 ##
 ## Alternatively: construct a function to test for the pattern you want.
 ##
-test <- function(x) (x %in% GroupA) & (x %in% GroupB) & !(x %in% GroupC)
+test <- function(x) (x \%in\% GroupA) & (x \%in\% GroupB) & !(x \%in\% GroupC)
 universe[ test(universe) ]
 
 
