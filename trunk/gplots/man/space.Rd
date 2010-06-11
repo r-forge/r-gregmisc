@@ -63,7 +63,7 @@ space(x, y, s=1/50, na.rm=TRUE, direction="x")
   \item{x}{(modified) x location for each input point}
   \item{y}{y location of each input point}
 }
-\author{ Gregory R. Warnes \email{greg@random-technologies-llc.com} }
+\author{ Gregory R. Warnes \email{greg@warnes.net} }
 \seealso{ \code{\link{jitter}}, \code{\link{sunflowerplot}} }
 
 \examples{

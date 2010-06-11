@@ -115,7 +115,7 @@ plotCI(x, y = NULL, uiw, liw = uiw, ui, li, err='y', ylim=NULL,
   Sep. 20, 1997.  Enhanced version posted to r-help by Ben Bolker
   \email{ben@zoo.ufl.edu} on Apr. 16, 2001.  This version was modified
   and extended by Gregory R. Warnes
-  \email{greg@random-technologies-llc.com}.  Additional changes
+  \email{greg@warnes.net}.  Additional changes
   suggested by Martin Maechler \email{maechler@stat.math.ethz.ch}
   integrated on July 29, 2004.
   }

@@ -38,7 +38,7 @@ boxplot.n(..., top=FALSE, shrink=1, textcolor=NULL)
   \item{shrink}{ value to shrink character size (cex) when annotating.}
   \item{textcolor}{ text color. }
 }
-\author{ Gregory R. Warnes \email{greg@random-technologies-llc.com}}
+\author{ Gregory R. Warnes \email{greg@warnes.net}}
 \seealso{ \code{\link{boxplot}}, \code{\link{text}}}
 
 \examples{
