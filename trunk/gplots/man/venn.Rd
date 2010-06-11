@@ -51,7 +51,7 @@ venn(data, universe=NA, small=0.7, showSetLogicLabel=FALSE,
 ##
 
 ## construct some fake gene names..
-oneName <- function() paste(sample(LETTERS,5,replace=T),collapse="")
+oneName <- function() paste(sample(LETTERS,5,replace=TRUE),collapse="")
 geneNames <- replicate(1000, oneName())
                        
 ## 
