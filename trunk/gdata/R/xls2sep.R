@@ -13,11 +13,16 @@ xls2tsv <- function(xls, sheet=1, verbose=FALSE, ..., perl="perl")
           perl=perl) 
 
 xls2sep <- function(xls, sheet=1, verbose=FALSE, ...,
-                    method=c("csv","tsv","tab"), perl="perl")
+                    method=c("csv","tsv","tab"), perl = perl)
   {
     
     method <- match.arg(method)
     
+	perl <- if (missing(perl))
+		findPerl(verbose = verbose)
+	else
+		findPerl(perl, verbose = verbose)
+
     ##
     ## directories
     package.dir <- .path.package('gdata')
