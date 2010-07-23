@@ -455,16 +455,13 @@ latexhelp <- function(topics, package=NULL)
         if(!is.character(topic))
           topic <- deparse(substitute(topic))
        
-        callObj <- call("help", topic=topic, package=package, offline=TRUE)
+        callObj <- call("help", topic=topic, package=package)
         
         ## Get the file path
-        help.file<- eval(callObj)
+        help.file<- as.character(eval(callObj))
 
-        ## Get the latex text
-        help.latex <- readLines(help.file)
-
-        ## display it
-        cat(paste(help.latex, collapse="\n")) 
+        ## Get R to translate it to latex and display it
+        tools::Rd2latex(utils:::.getHelpFile(help.file))
         
         ## new page
         cat("\n")
@@ -472,6 +469,11 @@ latexhelp <- function(topics, package=NULL)
         cat("\n")
       }
   }
+
+
+tmp <- function (x, ...) 
+{
+}
 
 latexhelp(package="SII")
 

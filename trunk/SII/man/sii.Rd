@@ -7,7 +7,8 @@
 \description{
   Compute the Speech Intelligibility Index (SII) described by ANSI
   specification S3.5-1997, including extensions for conductive
-  hearing loss.
+  hearing loss. Optionally apply interpolation obtain values for the
+  required frequencies.
 }
 \usage{
 sii(speech = c("normal", "raised", "loud", "shout"),
@@ -17,26 +18,26 @@ sii(speech = c("normal", "raised", "loud", "shout"),
     importance = c("SII", "NNS", "CID22", "NU6", "DRT",
                    "ShortPassage", "SPIN", "CST"),
     interpolate=FALSE)
-\method{print}{SII}(x, digits=2, ...)
+\method{print}{SII}(x, digits=3, ...)
 \method{plot}{SII}(x, ...)
 \method{summary}{SII}(object, digits=2, ...)
 }
 \arguments{
-  \item{speech}{Either a numeric vector providing $E'_i$, the equivalent
-    speech spectrum level (in dB) at each frequency, or a character
-    string indicating the stated vocal effort corresponding to one of
-    the standard standard speech spectrum levels ("normal", "raised",
-    "loud", "shout"). Defaults to \code{speech="normal"} correspoding to
-    the normal level of stated vocal effort. }
-  \item{noise}{A numeric vector providing $N'_i$, the equivalent
-    noise spectrum level (in dB) at each frequency.  If missing,
-    defaults to -50 dB for each frequency.}
-  \item{threshold}{A numeric vector providing $T'_i$, the equivalent
-    hearing threshold level (in dB) at each frequency.  If missing,
-    defaults to 0 dB for each frequency.}
-  \item{loss}{A numeric vector providing $J'_i$, the conductive hearing
-    loss level (in dB) at each frequency.  If missing, 
-    defaults to 0 dB for each frequency.}
+  \item{speech}{Either a numeric vector providing \eqn{E'_i}{E'[i]}, the
+    equivalent speech spectrum level (in dB) at each frequency, or a
+    character string indicating the stated vocal effort corresponding to
+    one of the standard standard speech spectrum levels ("normal",
+    "raised", "loud", "shout"). Defaults to \code{speech="normal"}
+    correspoding to the normal level of stated vocal effort. }
+  \item{noise}{A numeric vector providing \eqn{N'_i}{N'[i]}, the
+    equivalent noise spectrum level (in dB) at each frequency.  If
+    missing, defaults to -50 dB for each frequency.}
+  \item{threshold}{A numeric vector providing \eqn{T'_i}{T'[i]}, the
+    equivalent hearing threshold level (in dB) at each frequency.  If
+    missing, defaults to 0 dB for each frequency.}
+  \item{loss}{A numeric vector providing \eqn{J'_i}{J'[i]}, the
+    conductive hearing loss level (in dB) at each frequency.  If
+    missing, defaults to 0 dB for each frequency.}
   \item{freq}{Vector of frequencies for which \code{speech},
     \code{noise}, \code{threshold}, and/or \code{loss} are specified.
     If \code{interpolate=TRUE}, \code{freq} must be specified.
@@ -47,12 +48,12 @@ sii(speech = c("normal", "raised", "loud", "shout"),
   \item{method}{A character string specifying the SII calculation
     method ("critical", "one-third octave", "equal-contributing",
     "octave")}
-  \item{importance}{Either a numeric vector providing $F_i$, the
-    transfer function (importance weights) at each frequency, or a
+  \item{importance}{Either a numeric vector providing \eqn{F_i}{F[i]},
+    the transfer function (importance weights) at each frequency, or a
     character string indicating which transfer function to employ
     ("SII", "NNS", "CID22", "NU6", "DRT", "ShortPassage", "SPIN",
     "CST"). Defaults to the standard SII transfer function,
-    \code{importance="SII"}.} 
+    \code{importance="SII"}.}
   \item{interpolate}{Logical flag indicating whether to interpolate 
     from the provide measurement values and frequencies to those 
     required by the specified method via linear interpolation on the log
@@ -75,7 +76,7 @@ sii(speech = c("normal", "raised", "loud", "shout"),
     the standard, without any attempt to optimize the performance. The
     implementation does, however, include the extension for handling
     conductive hearing loss from Annex A (utilizing the optional
-    \code{loss} argument, and for utilizing alternative band weights
+    \code{loss} argument), and for utilizing alternative band weights
     (i.e. transfer function) appropriate for differing message contents
     (e.g. types of speech) as described in Annex B or user-specified
     band weights (utilizing the optional argument \code{importance}).
@@ -85,8 +86,9 @@ sii(speech = c("normal", "raised", "loud", "shout"),
     for the specified calculation procedure.  When
     \code{interpolate=TRUE}, required values for \code{speech},
     \code{noise}, \code{threshold}, and \code{loss} will be computed 
-    using linear interpolation (on log-scaled data).  In this case,
-    missing values may be provided and will be appropriately interpolated.
+    using linear interpolation (of the log-scaled data).  In this case,
+    missing values may be provided and will be appropriately
+    interpolated.
 }
 \value{
     The return value is an object of class SII, containing the following
@@ -138,7 +140,7 @@ Other software programs for calculating SII are available from
 \url{http://www.sii.to/html/programs.html}.
 
 }
-\author{Gregory R. Warnes \email{greg@random-technologies-llc.com}}
+\author{Gregory R. Warnes \email{greg@warnes.net}}
 \seealso{ SII Constants: \code{\link{critical}}, and
   \code{\link{sic.critical}} }
 \examples{

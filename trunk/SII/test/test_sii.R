@@ -1,5 +1,5 @@
-## This file runs the R 'sii' code on the examples provided with the
-## 'official' C PROGRAM DEVELOPER-F¢S KIT available at-A
+## This file runs the R 'sii' code on the examples provided with The
+## 'Official' C Program Developer-F¢S Kit available at-A
 ## http://www.sii.to/html/programs.html to ensure that it yields the
 ## correct results.
 
