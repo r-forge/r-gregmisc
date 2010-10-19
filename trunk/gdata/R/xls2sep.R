@@ -45,9 +45,6 @@ xls2sep <- function(xls, sheet=1, verbose=FALSE, ...,
         xls <- tf
       }
 
-    if(file.access(xls, 4)!=0)
-      stop("Unable to read xls file '", xls, "'." )
-
     if(method=="csv")
       {
         script <- file.path(perl.dir,'xls2csv.pl')
@@ -95,21 +92,29 @@ xls2sep <- function(xls, sheet=1, verbose=FALSE, ...,
     ##
     ## do the translation
     if(verbose)  cat("Executing '", cmd, "'... \n\n")
-    ##
-    results <- system(cmd, intern=!verbose)
+
+    results <- try(system(cmd, intern=!verbose))
+
+    if(inherits(results, "try-error"))
+      stop( "Unable to read xls file '", xls, "':", results )
+    
     if(verbose) cat(results,"\n\n")
-    ##
     if (verbose) cat("Done.\n\n")
-    ##
-    ##
 
-    if(file.access(targetFile, 4)!=0)
-      stop("Unable to read translated ", method, " file '", targetFile, "'." )
-    
-    if (verbose) cat("Done.\n")
+    ##
+    ## check that the target file was created
+    ##
+    if(!file.exists(targetFile))
+      stop( "Intermediate file '", targetFile, "' missing!" )
 
+    ## Creae a file object to hand to the next stage..
+    retval <- try(file(targetFile))
+    if(inherits(retval, "try-error"))
+
+      stop("Unable to open intermediate file '", targetFile, "':",
+           retval)
     
-    ## prepare for cleanup now, in case of error reading file
-    file(targetFile)
+    return(retval)
+    
   }
 
