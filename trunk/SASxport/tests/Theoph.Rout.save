@@ -1,6 +1,6 @@
 
-R version 2.6.0 (2007-10-03)
-Copyright (C) 2007 The R Foundation for Statistical Computing
+R version 2.11.1 (2010-05-31)
+Copyright (C) 2010 The R Foundation for Statistical Computing
 ISBN 3-900051-07-0
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
@@ -22,7 +22,7 @@ Type 'q()' to quit R.
 > 
 > library(SASxport)
 
-Loaded SASxport version 1.2.2 (2007-11-07).
+Loaded SASxport version 1.2.3 (2008-02-29).
 
   Updates and technical support available from Random Technologies, LLC
   <http://random-technologies-llc.com/products/SASxport>

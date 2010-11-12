@@ -1,6 +1,6 @@
 
-R version 2.6.0 (2007-10-03)
-Copyright (C) 2007 The R Foundation for Statistical Computing
+R version 2.11.1 (2010-05-31)
+Copyright (C) 2010 The R Foundation for Statistical Computing
 ISBN 3-900051-07-0
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
@@ -17,7 +17,7 @@ Type 'q()' to quit R.
 
 > library(SASxport)
 
-Loaded SASxport version 1.2.2 (2007-11-07).
+Loaded SASxport version 1.2.3 (2008-02-29).
 
   Updates and technical support available from Random Technologies, LLC
   <http://random-technologies-llc.com/products/SASxport>
@@ -32,20 +32,20 @@ SAS xport file
 Filename: `Alfalfa.xpt'
 
 Variables in data set `SPEC':
-            dataset   name      type format flength fdigits iformat iflength
-SPEC.POP       SPEC    POP character              0       0                0
-SPEC.SAMPLE    SPEC SAMPLE   numeric              0       0                0
-SPEC.REP       SPEC    REP   numeric              0       0                0
-SPEC.SEEDWT    SPEC SEEDWT   numeric              0       0                0
-SPEC.HARV1     SPEC  HARV1   numeric              0       0                0
-SPEC.HARV2     SPEC  HARV2   numeric              0       0                0
-            ifdigits label nobs
-SPEC.POP           0         40
-SPEC.SAMPLE        0         40
-SPEC.REP           0         40
-SPEC.SEEDWT        0         40
-SPEC.HARV1         0         40
-SPEC.HARV2         0         40
+ dataset   name      type format flength fdigits iformat iflength ifdigits
+    SPEC    POP character              0       0                0        0
+    SPEC SAMPLE   numeric              0       0                0        0
+    SPEC    REP   numeric              0       0                0        0
+    SPEC SEEDWT   numeric              0       0                0        0
+    SPEC  HARV1   numeric              0       0                0        0
+    SPEC  HARV2   numeric              0       0                0        0
+ label nobs
+         40
+         40
+         40
+         40
+         40
+         40
 
 > 
 > Alfalfa <- read.xport("Alfalfa.xpt")
@@ -75,27 +75,34 @@ SAS xport file
 Filename: `test.xpt'
 
 Variables in data set `W.TEST':
-            dataset name      type format flength fdigits iformat iflength
-W.TEST.RACE  W.TEST RACE character   RACE       0       0                0
-W.TEST.AGE   W.TEST  AGE   numeric              0       0                0
-W.TEST.D1    W.TEST   D1   numeric              0       0                0
-W.TEST.DT1   W.TEST  DT1   numeric              0       0                0
-W.TEST.T1    W.TEST   T1   numeric              0       0                0
-            ifdigits                     label nobs
-W.TEST.RACE        0                              2
-W.TEST.AGE         0 Age at Beginning of Study    2
-W.TEST.D1          0                              2
-W.TEST.DT1         0                              2
-W.TEST.T1          0                              2
+ dataset name      type format flength fdigits iformat iflength ifdigits
+  W.TEST RACE character   RACE       0       0                0        0
+  W.TEST  AGE   numeric              0       0                0        0
+  W.TEST   D1   numeric              0       0                0        0
+  W.TEST  DT1   numeric              0       0                0        0
+  W.TEST   T1   numeric              0       0                0        0
+                     label nobs
+                              2
+ Age at Beginning of Study    2
+                              2
+                              2
+                              2
 
 > testdata <- read.xport("test.xpt")
 > summary(testdata)
-   RACE        AGE              D1             DT1                  T1       
-     :1   Min.   :30.00   Min.   :15402   Min.   :1.331e+09   Min.   :40425  
- blue:1   1st Qu.:30.25   1st Qu.:15425   1st Qu.:1.333e+09   1st Qu.:40432  
-          Median :30.50   Median :15448   Median :1.335e+09   Median :40439  
-          Mean   :30.50   Mean   :15448   Mean   :1.335e+09   Mean   :40439  
-          3rd Qu.:30.75   3rd Qu.:15471   3rd Qu.:1.337e+09   3rd Qu.:40446  
-          Max.   :31.00   Max.   :15494   Max.   :1.339e+09   Max.   :40453  
+     RACE                AGE              D1             DT1           
+ Length:2           Min.   :30.00   Min.   :15402   Min.   :1.331e+09  
+ Class :character   1st Qu.:30.25   1st Qu.:15425   1st Qu.:1.333e+09  
+ Mode  :character   Median :30.50   Median :15448   Median :1.335e+09  
+                    Mean   :30.50   Mean   :15448   Mean   :1.335e+09  
+                    3rd Qu.:30.75   3rd Qu.:15471   3rd Qu.:1.337e+09  
+                    Max.   :31.00   Max.   :15494   Max.   :1.339e+09  
+       T1       
+ Min.   :40425  
+ 1st Qu.:40432  
+ Median :40439  
+ Mean   :40439  
+ 3rd Qu.:40446  
+ Max.   :40453  
 > 
 > q()

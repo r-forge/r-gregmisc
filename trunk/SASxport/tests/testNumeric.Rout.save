@@ -1,6 +1,6 @@
 
-R version 2.6.0 (2007-10-03)
-Copyright (C) 2007 The R Foundation for Statistical Computing
+R version 2.11.1 (2010-05-31)
+Copyright (C) 2010 The R Foundation for Statistical Computing
 ISBN 3-900051-07-0
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
@@ -17,7 +17,7 @@ Type 'q()' to quit R.
 
 > library(SASxport)
 
-Loaded SASxport version 1.1.2 (2007-10-29).
+Loaded SASxport version 1.2.3 (2008-02-29).
 
   Updates and technical support available from Random Technologies, LLC
   <http://random-technologies-llc.com/products/SASxport>
@@ -72,11 +72,11 @@ Warning messages:
 > SASxport:::assert(all(df==df.2,na.rm=TRUE))
 > df.2
          INTS     DBLS                                                 CHAR
-1          NA       NA                                                     
-2  2147483647       NA                                                     
+1          NA       NA                                                 <NA>
+2  2147483647       NA                                                 <NA>
 3 -2147483647       NA aAbBcCdDeEfFgGhHiIjJkKlLmMnNoOpPqQrRsStTuUvVwWxXyYzZ
 4     -123456 -123.456                                              -123456
-5           0    0.000                                                     
+5           0    0.000                                                 <NA>
 6      123456  123.456                                              +123456
   FACTOR
 1   <NA>
@@ -87,6 +87,3 @@ Warning messages:
 6     ZZ
 > 
 > 
-> proc.time()
-   user  system elapsed 
-  1.123   0.119   2.017 

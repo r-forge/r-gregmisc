@@ -1,6 +1,6 @@
 
-R version 2.6.0 (2007-10-03)
-Copyright (C) 2007 The R Foundation for Statistical Computing
+R version 2.11.1 (2010-05-31)
+Copyright (C) 2010 The R Foundation for Statistical Computing
 ISBN 3-900051-07-0
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
@@ -17,7 +17,7 @@ Type 'q()' to quit R.
 
 > library(SASxport)
 
-Loaded SASxport version 1.2.2 (2007-11-07).
+Loaded SASxport version 1.2.3 (2008-02-29).
 
   Updates and technical support available from Random Technologies, LLC
   <http://random-technologies-llc.com/products/SASxport>
@@ -102,18 +102,18 @@ SAS xport file
 Filename: `a.xpt'
 
 Variables in data set `W.TEST':
-            dataset name      type   format flength fdigits iformat iflength
-W.TEST.RACE  W.TEST RACE character     RACE       0       0                0
-W.TEST.AGE   W.TEST  AGE   numeric                0       0                0
-W.TEST.D1    W.TEST   D1   numeric   MMDDYY      10       0                0
-W.TEST.DT1   W.TEST  DT1   numeric DATETIME       0       0                0
-W.TEST.T1    W.TEST   T1 character     TIME       0       0                0
-            ifdigits                     label nobs
-W.TEST.RACE        0                              2
-W.TEST.AGE         0 Age at Beginning of Study    2
-W.TEST.D1          0                              2
-W.TEST.DT1         0                              2
-W.TEST.T1          0                              2
+ dataset name      type   format flength fdigits iformat iflength ifdigits
+  W.TEST RACE character     RACE       0       0                0        0
+  W.TEST  AGE   numeric                0       0                0        0
+  W.TEST   D1   numeric   MMDDYY      10       0                0        0
+  W.TEST  DT1   numeric DATETIME       0       0                0        0
+  W.TEST   T1 character     TIME       0       0                0        0
+                     label nobs
+                              2
+ Age at Beginning of Study    2
+                              2
+                              2
+                              2
 
 > (tmp <- read.xport("a.xpt"))     #1.c
   RACE AGE         D1                    DT1       T1
@@ -129,18 +129,18 @@ SAS xport file
 Filename: `a.xpt'
 
 Variables in data set `B':
-       dataset name      type   format flength fdigits iformat iflength
-B.RACE       B RACE character     RACE       0       0                0
-B.AGE        B  AGE   numeric                0       0                0
-B.D1         B   D1   numeric   MMDDYY      10       0                0
-B.DT1        B  DT1   numeric DATETIME       0       0                0
-B.T1         B   T1 character     TIME       0       0                0
-       ifdigits                     label nobs
-B.RACE        0                              2
-B.AGE         0 Age at Beginning of Study    2
-B.D1          0                              2
-B.DT1         0                              2
-B.T1          0                              2
+ dataset name      type   format flength fdigits iformat iflength ifdigits
+       B RACE character     RACE       0       0                0        0
+       B  AGE   numeric                0       0                0        0
+       B   D1   numeric   MMDDYY      10       0                0        0
+       B  DT1   numeric DATETIME       0       0                0        0
+       B   T1 character     TIME       0       0                0        0
+                     label nobs
+                              2
+ Age at Beginning of Study    2
+                              2
+                              2
+                              2
 
 > (tmp <- read.xport("a.xpt"))     #2.c
   RACE AGE         D1                    DT1       T1
@@ -155,18 +155,18 @@ SAS xport file
 Filename: `a.xpt'
 
 Variables in data set `TEST':
-          dataset name      type   format flength fdigits iformat iflength
-TEST.RACE    TEST RACE character     RACE       0       0                0
-TEST.AGE     TEST  AGE   numeric                0       0                0
-TEST.D1      TEST   D1   numeric   MMDDYY      10       0                0
-TEST.DT1     TEST  DT1   numeric DATETIME       0       0                0
-TEST.T1      TEST   T1 character     TIME       0       0                0
-          ifdigits                     label nobs
-TEST.RACE        0                              2
-TEST.AGE         0 Age at Beginning of Study    2
-TEST.D1          0                              2
-TEST.DT1         0                              2
-TEST.T1          0                              2
+ dataset name      type   format flength fdigits iformat iflength ifdigits
+    TEST RACE character     RACE       0       0                0        0
+    TEST  AGE   numeric                0       0                0        0
+    TEST   D1   numeric   MMDDYY      10       0                0        0
+    TEST  DT1   numeric DATETIME       0       0                0        0
+    TEST   T1 character     TIME       0       0                0        0
+                     label nobs
+                              2
+ Age at Beginning of Study    2
+                              2
+                              2
+                              2
 
 > (tmp <- read.xport("a.xpt"))          #3.c
   RACE AGE         D1                    DT1       T1
@@ -181,34 +181,34 @@ SAS xport file
 Filename: `a.xpt'
 
 Variables in data set `TEST':
-          dataset name      type   format flength fdigits iformat iflength
-TEST.RACE    TEST RACE character     RACE       0       0                0
-TEST.AGE     TEST  AGE   numeric                0       0                0
-TEST.D1      TEST   D1   numeric   MMDDYY      10       0                0
-TEST.DT1     TEST  DT1   numeric DATETIME       0       0                0
-TEST.T1      TEST   T1 character     TIME       0       0                0
-          ifdigits                     label nobs
-TEST.RACE        0                              2
-TEST.AGE         0 Age at Beginning of Study    2
-TEST.D1          0                              2
-TEST.DT1         0                              2
-TEST.T1          0                              2
+ dataset name      type   format flength fdigits iformat iflength ifdigits
+    TEST RACE character     RACE       0       0                0        0
+    TEST  AGE   numeric                0       0                0        0
+    TEST   D1   numeric   MMDDYY      10       0                0        0
+    TEST  DT1   numeric DATETIME       0       0                0        0
+    TEST   T1 character     TIME       0       0                0        0
+                     label nobs
+                              2
+ Age at Beginning of Study    2
+                              2
+                              2
+                              2
 
 Variables in data set `Z':
-     dataset name    type format flength fdigits iformat iflength ifdigits
-Z.X3       Z   X3 numeric              0       0                0        0
-Z.X4       Z   X4 numeric              0       0                0        0
-Z.X5       Z   X5 numeric              0       0                0        0
-Z.X6       Z   X6 numeric              0       0                0        0
-Z.X7       Z   X7 numeric              0       0                0        0
-Z.X8       Z   X8 numeric              0       0                0        0
-     label nobs
-Z.X3        100
-Z.X4        100
-Z.X5        100
-Z.X6        100
-Z.X7        100
-Z.X8        100
+ dataset name    type format flength fdigits iformat iflength ifdigits label
+       Z   X3 numeric              0       0                0        0      
+       Z   X4 numeric              0       0                0        0      
+       Z   X5 numeric              0       0                0        0      
+       Z   X6 numeric              0       0                0        0      
+       Z   X7 numeric              0       0                0        0      
+       Z   X8 numeric              0       0                0        0      
+ nobs
+  100
+  100
+  100
+  100
+  100
+  100
 
 > (tmp <- read.xport("a.xpt"))                #4.c
 $test
@@ -331,34 +331,34 @@ SAS xport file
 Filename: `a.xpt'
 
 Variables in data set `W.TEST':
-            dataset name      type   format flength fdigits iformat iflength
-W.TEST.RACE  W.TEST RACE character     RACE       0       0                0
-W.TEST.AGE   W.TEST  AGE   numeric                0       0                0
-W.TEST.D1    W.TEST   D1   numeric   MMDDYY      10       0                0
-W.TEST.DT1   W.TEST  DT1   numeric DATETIME       0       0                0
-W.TEST.T1    W.TEST   T1 character     TIME       0       0                0
-            ifdigits                     label nobs
-W.TEST.RACE        0                              2
-W.TEST.AGE         0 Age at Beginning of Study    2
-W.TEST.D1          0                              2
-W.TEST.DT1         0                              2
-W.TEST.T1          0                              2
+ dataset name      type   format flength fdigits iformat iflength ifdigits
+  W.TEST RACE character     RACE       0       0                0        0
+  W.TEST  AGE   numeric                0       0                0        0
+  W.TEST   D1   numeric   MMDDYY      10       0                0        0
+  W.TEST  DT1   numeric DATETIME       0       0                0        0
+  W.TEST   T1 character     TIME       0       0                0        0
+                     label nobs
+                              2
+ Age at Beginning of Study    2
+                              2
+                              2
+                              2
 
 Variables in data set `W.Z':
-       dataset name    type format flength fdigits iformat iflength ifdigits
-W.Z.X3     W.Z   X3 numeric              0       0                0        0
-W.Z.X4     W.Z   X4 numeric              0       0                0        0
-W.Z.X5     W.Z   X5 numeric              0       0                0        0
-W.Z.X6     W.Z   X6 numeric              0       0                0        0
-W.Z.X7     W.Z   X7 numeric              0       0                0        0
-W.Z.X8     W.Z   X8 numeric              0       0                0        0
-       label nobs
-W.Z.X3        100
-W.Z.X4        100
-W.Z.X5        100
-W.Z.X6        100
-W.Z.X7        100
-W.Z.X8        100
+ dataset name    type format flength fdigits iformat iflength ifdigits label
+     W.Z   X3 numeric              0       0                0        0      
+     W.Z   X4 numeric              0       0                0        0      
+     W.Z   X5 numeric              0       0                0        0      
+     W.Z   X6 numeric              0       0                0        0      
+     W.Z   X7 numeric              0       0                0        0      
+     W.Z   X8 numeric              0       0                0        0      
+ nobs
+  100
+  100
+  100
+  100
+  100
+  100
 
 > (tmp <- read.xport("a.xpt"))         #5.c
 $w.test
@@ -478,34 +478,34 @@ SAS xport file
 Filename: `a.xpt'
 
 Variables in data set `W.TEST':
-            dataset name      type   format flength fdigits iformat iflength
-W.TEST.RACE  W.TEST RACE character     RACE       0       0                0
-W.TEST.AGE   W.TEST  AGE   numeric                0       0                0
-W.TEST.D1    W.TEST   D1   numeric   MMDDYY      10       0                0
-W.TEST.DT1   W.TEST  DT1   numeric DATETIME       0       0                0
-W.TEST.T1    W.TEST   T1 character     TIME       0       0                0
-            ifdigits                     label nobs
-W.TEST.RACE        0                              2
-W.TEST.AGE         0 Age at Beginning of Study    2
-W.TEST.D1          0                              2
-W.TEST.DT1         0                              2
-W.TEST.T1          0                              2
+ dataset name      type   format flength fdigits iformat iflength ifdigits
+  W.TEST RACE character     RACE       0       0                0        0
+  W.TEST  AGE   numeric                0       0                0        0
+  W.TEST   D1   numeric   MMDDYY      10       0                0        0
+  W.TEST  DT1   numeric DATETIME       0       0                0        0
+  W.TEST   T1 character     TIME       0       0                0        0
+                     label nobs
+                              2
+ Age at Beginning of Study    2
+                              2
+                              2
+                              2
 
 Variables in data set `Z':
-     dataset name    type format flength fdigits iformat iflength ifdigits
-Z.X3       Z   X3 numeric              0       0                0        0
-Z.X4       Z   X4 numeric              0       0                0        0
-Z.X5       Z   X5 numeric              0       0                0        0
-Z.X6       Z   X6 numeric              0       0                0        0
-Z.X7       Z   X7 numeric              0       0                0        0
-Z.X8       Z   X8 numeric              0       0                0        0
-     label nobs
-Z.X3        100
-Z.X4        100
-Z.X5        100
-Z.X6        100
-Z.X7        100
-Z.X8        100
+ dataset name    type format flength fdigits iformat iflength ifdigits label
+       Z   X3 numeric              0       0                0        0      
+       Z   X4 numeric              0       0                0        0      
+       Z   X5 numeric              0       0                0        0      
+       Z   X6 numeric              0       0                0        0      
+       Z   X7 numeric              0       0                0        0      
+       Z   X8 numeric              0       0                0        0      
+ nobs
+  100
+  100
+  100
+  100
+  100
+  100
 
 > (tmp <- read.xport("a.xpt"))           #6.c
 $w.test
@@ -625,80 +625,80 @@ SAS xport file
 Filename: `a.xpt'
 
 Variables in data set `TEST':
-          dataset name      type   format flength fdigits iformat iflength
-TEST.RACE    TEST RACE   numeric     RACE       0       0                0
-TEST.AGE     TEST  AGE   numeric                0       0                0
-TEST.D1      TEST   D1   numeric   MMDDYY      10       0                0
-TEST.DT1     TEST  DT1   numeric DATETIME       0       0                0
-TEST.T1      TEST   T1 character     TIME       0       0                0
-          ifdigits                     label nobs
-TEST.RACE        0                              2
-TEST.AGE         0 Age at Beginning of Study    2
-TEST.D1          0                              2
-TEST.DT1         0                              2
-TEST.T1          0                              2
+ dataset name      type   format flength fdigits iformat iflength ifdigits
+    TEST RACE   numeric     RACE       0       0                0        0
+    TEST  AGE   numeric                0       0                0        0
+    TEST   D1   numeric   MMDDYY      10       0                0        0
+    TEST  DT1   numeric DATETIME       0       0                0        0
+    TEST   T1 character     TIME       0       0                0        0
+                     label nobs
+                              2
+ Age at Beginning of Study    2
+                              2
+                              2
+                              2
 
 Variables in data set `Z':
-     dataset name    type format flength fdigits iformat iflength ifdigits
-Z.X3       Z   X3 numeric              0       0                0        0
-Z.X4       Z   X4 numeric              0       0                0        0
-Z.X5       Z   X5 numeric              0       0                0        0
-Z.X6       Z   X6 numeric              0       0                0        0
-Z.X7       Z   X7 numeric              0       0                0        0
-Z.X8       Z   X8 numeric              0       0                0        0
-     label nobs
-Z.X3        100
-Z.X4        100
-Z.X5        100
-Z.X6        100
-Z.X7        100
-Z.X8        100
+ dataset name    type format flength fdigits iformat iflength ifdigits label
+       Z   X3 numeric              0       0                0        0      
+       Z   X4 numeric              0       0                0        0      
+       Z   X5 numeric              0       0                0        0      
+       Z   X6 numeric              0       0                0        0      
+       Z   X7 numeric              0       0                0        0      
+       Z   X8 numeric              0       0                0        0      
+ nobs
+  100
+  100
+  100
+  100
+  100
+  100
 
 Variables in data set `FORMATS':
-                 dataset     name      type format flength fdigits iformat
-FORMATS.FMTNAME  FORMATS  FMTNAME character              0       0        
-FORMATS.START    FORMATS    START character              0       0        
-FORMATS.END      FORMATS      END character              0       0        
-FORMATS.LABEL    FORMATS    LABEL character              0       0        
-FORMATS.MIN      FORMATS      MIN   numeric              0       0        
-FORMATS.MAX      FORMATS      MAX   numeric              0       0        
-FORMATS.DEFAULT  FORMATS  DEFAULT   numeric              0       0        
-FORMATS.LENGTH   FORMATS   LENGTH   numeric              0       0        
-FORMATS.FUZZ     FORMATS     FUZZ   numeric              0       0        
-FORMATS.PREFIX   FORMATS   PREFIX character              0       0        
-FORMATS.MULT     FORMATS     MULT   numeric              0       0        
-FORMATS.FILL     FORMATS     FILL character              0       0        
-FORMATS.NOEDIT   FORMATS   NOEDIT   numeric              0       0        
-FORMATS.TYPE     FORMATS     TYPE character              0       0        
-FORMATS.SEXCL    FORMATS    SEXCL character              0       0        
-FORMATS.EEXCL    FORMATS    EEXCL character              0       0        
-FORMATS.HLO      FORMATS      HLO character              0       0        
-FORMATS.DECSEP   FORMATS   DECSEP character              0       0        
-FORMATS.DIG3SEP  FORMATS  DIG3SEP character              0       0        
-FORMATS.DATATYPE FORMATS DATATYPE character              0       0        
-FORMATS.LANGUAGE FORMATS LANGUAGE character              0       0        
-                 iflength ifdigits label nobs
-FORMATS.FMTNAME         0        0          3
-FORMATS.START           0        0          3
-FORMATS.END             0        0          3
-FORMATS.LABEL           0        0          3
-FORMATS.MIN             0        0          3
-FORMATS.MAX             0        0          3
-FORMATS.DEFAULT         0        0          3
-FORMATS.LENGTH          0        0          3
-FORMATS.FUZZ            0        0          3
-FORMATS.PREFIX          0        0          3
-FORMATS.MULT            0        0          3
-FORMATS.FILL            0        0          3
-FORMATS.NOEDIT          0        0          3
-FORMATS.TYPE            0        0          3
-FORMATS.SEXCL           0        0          3
-FORMATS.EEXCL           0        0          3
-FORMATS.HLO             0        0          3
-FORMATS.DECSEP          0        0          3
-FORMATS.DIG3SEP         0        0          3
-FORMATS.DATATYPE        0        0          3
-FORMATS.LANGUAGE        0        0          3
+ dataset     name      type format flength fdigits iformat iflength ifdigits
+ FORMATS  FMTNAME character              0       0                0        0
+ FORMATS    START character              0       0                0        0
+ FORMATS      END character              0       0                0        0
+ FORMATS    LABEL character              0       0                0        0
+ FORMATS      MIN   numeric              0       0                0        0
+ FORMATS      MAX   numeric              0       0                0        0
+ FORMATS  DEFAULT   numeric              0       0                0        0
+ FORMATS   LENGTH   numeric              0       0                0        0
+ FORMATS     FUZZ   numeric              0       0                0        0
+ FORMATS   PREFIX character              0       0                0        0
+ FORMATS     MULT   numeric              0       0                0        0
+ FORMATS     FILL character              0       0                0        0
+ FORMATS   NOEDIT   numeric              0       0                0        0
+ FORMATS     TYPE character              0       0                0        0
+ FORMATS    SEXCL character              0       0                0        0
+ FORMATS    EEXCL character              0       0                0        0
+ FORMATS      HLO character              0       0                0        0
+ FORMATS   DECSEP character              0       0                0        0
+ FORMATS  DIG3SEP character              0       0                0        0
+ FORMATS DATATYPE character              0       0                0        0
+ FORMATS LANGUAGE character              0       0                0        0
+ label nobs
+          3
+          3
+          3
+          3
+          3
+          3
+          3
+          3
+          3
+          3
+          3
+          3
+          3
+          3
+          3
+          3
+          3
+          3
+          3
+          3
+          3
 
 > (tmp <- read.xport("a.xpt"))     #7.c
 $test
@@ -822,34 +822,34 @@ SAS xport file
 Filename: `a.xpt'
 
 Variables in data set `W..1..':
-            dataset name      type   format flength fdigits iformat iflength
-W..1...RACE  W..1.. RACE character     RACE       0       0                0
-W..1...AGE   W..1..  AGE   numeric                0       0                0
-W..1...D1    W..1..   D1   numeric   MMDDYY      10       0                0
-W..1...DT1   W..1..  DT1   numeric DATETIME       0       0                0
-W..1...T1    W..1..   T1 character     TIME       0       0                0
-            ifdigits                     label nobs
-W..1...RACE        0                              2
-W..1...AGE         0 Age at Beginning of Study    2
-W..1...D1          0                              2
-W..1...DT1         0                              2
-W..1...T1          0                              2
+ dataset name      type   format flength fdigits iformat iflength ifdigits
+  W..1.. RACE character     RACE       0       0                0        0
+  W..1..  AGE   numeric                0       0                0        0
+  W..1..   D1   numeric   MMDDYY      10       0                0        0
+  W..1..  DT1   numeric DATETIME       0       0                0        0
+  W..1..   T1 character     TIME       0       0                0        0
+                     label nobs
+                              2
+ Age at Beginning of Study    2
+                              2
+                              2
+                              2
 
 Variables in data set `W..2..':
-          dataset name    type format flength fdigits iformat iflength ifdigits
-W..2...X3  W..2..   X3 numeric              0       0                0        0
-W..2...X4  W..2..   X4 numeric              0       0                0        0
-W..2...X5  W..2..   X5 numeric              0       0                0        0
-W..2...X6  W..2..   X6 numeric              0       0                0        0
-W..2...X7  W..2..   X7 numeric              0       0                0        0
-W..2...X8  W..2..   X8 numeric              0       0                0        0
-          label nobs
-W..2...X3        100
-W..2...X4        100
-W..2...X5        100
-W..2...X6        100
-W..2...X7        100
-W..2...X8        100
+ dataset name    type format flength fdigits iformat iflength ifdigits label
+  W..2..   X3 numeric              0       0                0        0      
+  W..2..   X4 numeric              0       0                0        0      
+  W..2..   X5 numeric              0       0                0        0      
+  W..2..   X6 numeric              0       0                0        0      
+  W..2..   X7 numeric              0       0                0        0      
+  W..2..   X8 numeric              0       0                0        0      
+ nobs
+  100
+  100
+  100
+  100
+  100
+  100
 
 > (tmp <- read.xport("a.xpt"))            #8.c
 $w..1..
@@ -973,132 +973,86 @@ SAS xport file
 Filename: `a.xpt'
 
 Variables in data set `DATA1':
-           dataset name      type   format flength fdigits iformat iflength
-DATA1.RACE   DATA1 RACE character     RACE       0       0                0
-DATA1.AGE    DATA1  AGE   numeric                0       0                0
-DATA1.D1     DATA1   D1   numeric   MMDDYY      10       0                0
-DATA1.DT1    DATA1  DT1   numeric DATETIME       0       0                0
-DATA1.T1     DATA1   T1 character     TIME       0       0                0
-           ifdigits                     label nobs
-DATA1.RACE        0                              2
-DATA1.AGE         0 Age at Beginning of Study    2
-DATA1.D1          0                              2
-DATA1.DT1         0                              2
-DATA1.T1          0                              2
+ dataset name      type   format flength fdigits iformat iflength ifdigits
+   DATA1 RACE character     RACE       0       0                0        0
+   DATA1  AGE   numeric                0       0                0        0
+   DATA1   D1   numeric   MMDDYY      10       0                0        0
+   DATA1  DT1   numeric DATETIME       0       0                0        0
+   DATA1   T1 character     TIME       0       0                0        0
+                     label nobs
+                              2
+ Age at Beginning of Study    2
+                              2
+                              2
+                              2
 
 Variables in data set `DATA2':
-         dataset name    type format flength fdigits iformat iflength ifdigits
-DATA2.X3   DATA2   X3 numeric              0       0                0        0
-DATA2.X4   DATA2   X4 numeric              0       0                0        0
-DATA2.X5   DATA2   X5 numeric              0       0                0        0
-DATA2.X6   DATA2   X6 numeric              0       0                0        0
-DATA2.X7   DATA2   X7 numeric              0       0                0        0
-DATA2.X8   DATA2   X8 numeric              0       0                0        0
-         label nobs
-DATA2.X3        100
-DATA2.X4        100
-DATA2.X5        100
-DATA2.X6        100
-DATA2.X7        100
-DATA2.X8        100
+ dataset name    type format flength fdigits iformat iflength ifdigits label
+   DATA2   X3 numeric              0       0                0        0      
+   DATA2   X4 numeric              0       0                0        0      
+   DATA2   X5 numeric              0       0                0        0      
+   DATA2   X6 numeric              0       0                0        0      
+   DATA2   X7 numeric              0       0                0        0      
+   DATA2   X8 numeric              0       0                0        0      
+ nobs
+  100
+  100
+  100
+  100
+  100
+  100
 
 Variables in data set `DATA3':
-               dataset     name    type format flength fdigits iformat iflength
-DATA3.FMTNAME    DATA3  FMTNAME numeric  RFMTA       0       0                0
-DATA3.START      DATA3    START numeric  RFMTB       0       0                0
-DATA3.END        DATA3      END numeric  RFMTC       0       0                0
-DATA3.LABEL      DATA3    LABEL numeric  RFMTD       0       0                0
-DATA3.MIN        DATA3      MIN numeric              0       0                0
-DATA3.MAX        DATA3      MAX numeric              0       0                0
-DATA3.DEFAULT    DATA3  DEFAULT numeric              0       0                0
-DATA3.LENGTH     DATA3   LENGTH numeric              0       0                0
-DATA3.FUZZ       DATA3     FUZZ numeric              0       0                0
-DATA3.PREFIX     DATA3   PREFIX numeric  RFMTE       0       0                0
-DATA3.MULT       DATA3     MULT numeric              0       0                0
-DATA3.FILL       DATA3     FILL numeric  RFMTF       0       0                0
-DATA3.NOEDIT     DATA3   NOEDIT numeric              0       0                0
-DATA3.TYPE       DATA3     TYPE numeric  RFMTG       0       0                0
-DATA3.SEXCL      DATA3    SEXCL numeric  RFMTH       0       0                0
-DATA3.EEXCL      DATA3    EEXCL numeric  RFMTI       0       0                0
-DATA3.HLO        DATA3      HLO numeric  RFMTJ       0       0                0
-DATA3.DECSEP     DATA3   DECSEP numeric RFMTBA       0       0                0
-DATA3.DIG3SEP    DATA3  DIG3SEP numeric RFMTBB       0       0                0
-DATA3.DATATYPE   DATA3 DATATYPE numeric RFMTBC       0       0                0
-DATA3.LANGUAGE   DATA3 LANGUAGE numeric RFMTBD       0       0                0
-               ifdigits label nobs
-DATA3.FMTNAME         0          3
-DATA3.START           0          3
-DATA3.END             0          3
-DATA3.LABEL           0          3
-DATA3.MIN             0          3
-DATA3.MAX             0          3
-DATA3.DEFAULT         0          3
-DATA3.LENGTH          0          3
-DATA3.FUZZ            0          3
-DATA3.PREFIX          0          3
-DATA3.MULT            0          3
-DATA3.FILL            0          3
-DATA3.NOEDIT          0          3
-DATA3.TYPE            0          3
-DATA3.SEXCL           0          3
-DATA3.EEXCL           0          3
-DATA3.HLO             0          3
-DATA3.DECSEP          0          3
-DATA3.DIG3SEP         0          3
-DATA3.DATATYPE        0          3
-DATA3.LANGUAGE        0          3
-
-Variables in data set `FORMATS':
-                 dataset     name      type format flength fdigits iformat
-FORMATS.FMTNAME  FORMATS  FMTNAME character              0       0        
-FORMATS.START    FORMATS    START character              0       0        
-FORMATS.END      FORMATS      END character              0       0        
-FORMATS.LABEL    FORMATS    LABEL character              0       0        
-FORMATS.MIN      FORMATS      MIN   numeric              0       0        
-FORMATS.MAX      FORMATS      MAX   numeric              0       0        
-FORMATS.DEFAULT  FORMATS  DEFAULT   numeric              0       0        
-FORMATS.LENGTH   FORMATS   LENGTH   numeric              0       0        
-FORMATS.FUZZ     FORMATS     FUZZ   numeric              0       0        
-FORMATS.PREFIX   FORMATS   PREFIX character              0       0        
-FORMATS.MULT     FORMATS     MULT   numeric              0       0        
-FORMATS.FILL     FORMATS     FILL character              0       0        
-FORMATS.NOEDIT   FORMATS   NOEDIT   numeric              0       0        
-FORMATS.TYPE     FORMATS     TYPE character              0       0        
-FORMATS.SEXCL    FORMATS    SEXCL character              0       0        
-FORMATS.EEXCL    FORMATS    EEXCL character              0       0        
-FORMATS.HLO      FORMATS      HLO character              0       0        
-FORMATS.DECSEP   FORMATS   DECSEP character              0       0        
-FORMATS.DIG3SEP  FORMATS  DIG3SEP character              0       0        
-FORMATS.DATATYPE FORMATS DATATYPE character              0       0        
-FORMATS.LANGUAGE FORMATS LANGUAGE character              0       0        
-                 iflength ifdigits label nobs
-FORMATS.FMTNAME         0        0         20
-FORMATS.START           0        0         20
-FORMATS.END             0        0         20
-FORMATS.LABEL           0        0         20
-FORMATS.MIN             0        0         20
-FORMATS.MAX             0        0         20
-FORMATS.DEFAULT         0        0         20
-FORMATS.LENGTH          0        0         20
-FORMATS.FUZZ            0        0         20
-FORMATS.PREFIX          0        0         20
-FORMATS.MULT            0        0         20
-FORMATS.FILL            0        0         20
-FORMATS.NOEDIT          0        0         20
-FORMATS.TYPE            0        0         20
-FORMATS.SEXCL           0        0         20
-FORMATS.EEXCL           0        0         20
-FORMATS.HLO             0        0         20
-FORMATS.DECSEP          0        0         20
-FORMATS.DIG3SEP         0        0         20
-FORMATS.DATATYPE        0        0         20
-FORMATS.LANGUAGE        0        0         20
+ dataset     name      type format flength fdigits iformat iflength ifdigits
+   DATA3  FMTNAME character              0       0                0        0
+   DATA3    START character              0       0                0        0
+   DATA3      END character              0       0                0        0
+   DATA3    LABEL character              0       0                0        0
+   DATA3      MIN   numeric              0       0                0        0
+   DATA3      MAX   numeric              0       0                0        0
+   DATA3  DEFAULT   numeric              0       0                0        0
+   DATA3   LENGTH   numeric              0       0                0        0
+   DATA3     FUZZ   numeric              0       0                0        0
+   DATA3   PREFIX character              0       0                0        0
+   DATA3     MULT   numeric              0       0                0        0
+   DATA3     FILL character              0       0                0        0
+   DATA3   NOEDIT   numeric              0       0                0        0
+   DATA3     TYPE character              0       0                0        0
+   DATA3    SEXCL character              0       0                0        0
+   DATA3    EEXCL character              0       0                0        0
+   DATA3      HLO character              0       0                0        0
+   DATA3   DECSEP character              0       0                0        0
+   DATA3  DIG3SEP character              0       0                0        0
+   DATA3 DATATYPE character              0       0                0        0
+   DATA3 LANGUAGE character              0       0                0        0
+ label nobs
+          3
+          3
+          3
+          3
+          3
+          3
+          3
+          3
+          3
+          3
+          3
+          3
+          3
+          3
+          3
+          3
+          3
+          3
+          3
+          3
+          3
 
 > (tmp <- read.xport("a.xpt"))     #9.c
 $data1
   RACE AGE         D1                    DT1       T1
-1 blue  30 2002-03-03 (03 Mar 2002 04:31:02) 11:13:45
-2       31 2002-06-03 (03 Jun 2002 04:42:07) 11:14:13
+1 <NA>  30 2002-03-03 (03 Mar 2002 04:31:02) 11:13:45
+2 <NA>  31 2002-06-03 (03 Jun 2002 04:42:07) 11:14:13
 
 $data2
              X3         X4          X5         X6         X7          X8
@@ -1203,54 +1157,6 @@ $data2
 99  0.963256836 0.91588259 0.873051692 0.97309719 0.75135814 0.770613592
 100 0.823852539 0.12452227 0.845681194 0.08775397 0.15969781 0.854058568
 
-$formats
-   FMTNAME START END            LABEL MIN MAX DEFAULT LENGTH FUZZ PREFIX MULT
-1    RFMTA     1   1             RACE   1  40       6      6    0           0
-2    RFMTB     1   1                1   1  40       6      6    0           0
-3    RFMTB     2   2                2   1  40       6      6    0           0
-4    RFMTB     3   3                3   1  40       6      6    0           0
-5    RFMTC     1   1                1   1  40       6      6    0           0
-6    RFMTC     2   2                2   1  40       6      6    0           0
-7    RFMTC     3   3                3   1  40       6      6    0           0
-8    RFMTD     1   1             blue   1  40       6      6    0           0
-9    RFMTD     2   2            green   1  40       6      6    0           0
-10   RFMTD     3   3           purple   1  40       6      6    0           0
-11   RFMTE     1   1                    1  40       6      6    0           0
-12   RFMTF     1   1                    1  40       6      6    0           0
-13   RFMTG     1   1                N   1  40       6      6    0           0
-14   RFMTH     1   1                N   1  40       6      6    0           0
-15   RFMTI     1   1                N   1  40       6      6    0           0
-16   RFMTJ     1   1                    1  40       6      6    0           0
-17  RFMTBA     1   1                    1  40       6      6    0           0
-18  RFMTBB     1   1                    1  40       6      6    0           0
-19  RFMTBC     1   1                    1  40       6      6    0           0
-20  RFMTBD     1   1                    1  40       6      6    0           0
-   FILL NOEDIT TYPE SEXCL EEXCL HLO DECSEP DIG3SEP DATATYPE LANGUAGE
-1            0    N     N     N                                     
-2            0    N     N     N                                     
-3            0    N     N     N                                     
-4            0    N     N     N                                     
-5            0    N     N     N                                     
-6            0    N     N     N                                     
-7            0    N     N     N                                     
-8            0    N     N     N                                     
-9            0    N     N     N                                     
-10           0    N     N     N                                     
-11           0    N     N     N                                     
-12           0    N     N     N                                     
-13           0    N     N     N                                     
-14           0    N     N     N                                     
-15           0    N     N     N                                     
-16           0    N     N     N                                     
-17           0    N     N     N                                     
-18           0    N     N     N                                     
-19           0    N     N     N                                     
-20           0    N     N     N                                     
-
-Warning messages:
-1: In read.xport("a.xpt") :
-  transport file contains more than one PROC FORMAT CNTLOUT= dataset; using only the first
-2: In FUN(X[[1L]], ...) : NA in code in FORMAT definition; removed
 > 
 > ### Check that we catch invalid parameters
 > failure <- try( write.xport(5,"a.xpt") )             #10.a
@@ -1260,8 +1166,8 @@ Error in write.xport(5, "a.xpt") :
 > (tmp <- read.xport("a.xpt"))                         #10.c
 $data1
   RACE AGE         D1                    DT1       T1
-1 blue  30 2002-03-03 (03 Mar 2002 04:31:02) 11:13:45
-2       31 2002-06-03 (03 Jun 2002 04:42:07) 11:14:13
+1 <NA>  30 2002-03-03 (03 Mar 2002 04:31:02) 11:13:45
+2 <NA>  31 2002-06-03 (03 Jun 2002 04:42:07) 11:14:13
 
 $data2
              X3         X4          X5         X6         X7          X8
@@ -1366,54 +1272,6 @@ $data2
 99  0.963256836 0.91588259 0.873051692 0.97309719 0.75135814 0.770613592
 100 0.823852539 0.12452227 0.845681194 0.08775397 0.15969781 0.854058568
 
-$formats
-   FMTNAME START END            LABEL MIN MAX DEFAULT LENGTH FUZZ PREFIX MULT
-1    RFMTA     1   1             RACE   1  40       6      6    0           0
-2    RFMTB     1   1                1   1  40       6      6    0           0
-3    RFMTB     2   2                2   1  40       6      6    0           0
-4    RFMTB     3   3                3   1  40       6      6    0           0
-5    RFMTC     1   1                1   1  40       6      6    0           0
-6    RFMTC     2   2                2   1  40       6      6    0           0
-7    RFMTC     3   3                3   1  40       6      6    0           0
-8    RFMTD     1   1             blue   1  40       6      6    0           0
-9    RFMTD     2   2            green   1  40       6      6    0           0
-10   RFMTD     3   3           purple   1  40       6      6    0           0
-11   RFMTE     1   1                    1  40       6      6    0           0
-12   RFMTF     1   1                    1  40       6      6    0           0
-13   RFMTG     1   1                N   1  40       6      6    0           0
-14   RFMTH     1   1                N   1  40       6      6    0           0
-15   RFMTI     1   1                N   1  40       6      6    0           0
-16   RFMTJ     1   1                    1  40       6      6    0           0
-17  RFMTBA     1   1                    1  40       6      6    0           0
-18  RFMTBB     1   1                    1  40       6      6    0           0
-19  RFMTBC     1   1                    1  40       6      6    0           0
-20  RFMTBD     1   1                    1  40       6      6    0           0
-   FILL NOEDIT TYPE SEXCL EEXCL HLO DECSEP DIG3SEP DATATYPE LANGUAGE
-1            0    N     N     N                                     
-2            0    N     N     N                                     
-3            0    N     N     N                                     
-4            0    N     N     N                                     
-5            0    N     N     N                                     
-6            0    N     N     N                                     
-7            0    N     N     N                                     
-8            0    N     N     N                                     
-9            0    N     N     N                                     
-10           0    N     N     N                                     
-11           0    N     N     N                                     
-12           0    N     N     N                                     
-13           0    N     N     N                                     
-14           0    N     N     N                                     
-15           0    N     N     N                                     
-16           0    N     N     N                                     
-17           0    N     N     N                                     
-18           0    N     N     N                                     
-19           0    N     N     N                                     
-20           0    N     N     N                                     
-
-Warning messages:
-1: In read.xport("a.xpt") :
-  transport file contains more than one PROC FORMAT CNTLOUT= dataset; using only the first
-2: In FUN(X[[1L]], ...) : NA in code in FORMAT definition; removed
 > 
 > failure <- try( write.xport(list(a=5,b=6),"a.xpt") ) #11.a
 Error in write.xport(list(a = 5, b = 6), "a.xpt") : 
@@ -1422,8 +1280,8 @@ Error in write.xport(list(a = 5, b = 6), "a.xpt") :
 > (tmp <- read.xport("a.xpt"))                         #10.c
 $data1
   RACE AGE         D1                    DT1       T1
-1 blue  30 2002-03-03 (03 Mar 2002 04:31:02) 11:13:45
-2       31 2002-06-03 (03 Jun 2002 04:42:07) 11:14:13
+1 <NA>  30 2002-03-03 (03 Mar 2002 04:31:02) 11:13:45
+2 <NA>  31 2002-06-03 (03 Jun 2002 04:42:07) 11:14:13
 
 $data2
              X3         X4          X5         X6         X7          X8
@@ -1528,54 +1386,6 @@ $data2
 99  0.963256836 0.91588259 0.873051692 0.97309719 0.75135814 0.770613592
 100 0.823852539 0.12452227 0.845681194 0.08775397 0.15969781 0.854058568
 
-$formats
-   FMTNAME START END            LABEL MIN MAX DEFAULT LENGTH FUZZ PREFIX MULT
-1    RFMTA     1   1             RACE   1  40       6      6    0           0
-2    RFMTB     1   1                1   1  40       6      6    0           0
-3    RFMTB     2   2                2   1  40       6      6    0           0
-4    RFMTB     3   3                3   1  40       6      6    0           0
-5    RFMTC     1   1                1   1  40       6      6    0           0
-6    RFMTC     2   2                2   1  40       6      6    0           0
-7    RFMTC     3   3                3   1  40       6      6    0           0
-8    RFMTD     1   1             blue   1  40       6      6    0           0
-9    RFMTD     2   2            green   1  40       6      6    0           0
-10   RFMTD     3   3           purple   1  40       6      6    0           0
-11   RFMTE     1   1                    1  40       6      6    0           0
-12   RFMTF     1   1                    1  40       6      6    0           0
-13   RFMTG     1   1                N   1  40       6      6    0           0
-14   RFMTH     1   1                N   1  40       6      6    0           0
-15   RFMTI     1   1                N   1  40       6      6    0           0
-16   RFMTJ     1   1                    1  40       6      6    0           0
-17  RFMTBA     1   1                    1  40       6      6    0           0
-18  RFMTBB     1   1                    1  40       6      6    0           0
-19  RFMTBC     1   1                    1  40       6      6    0           0
-20  RFMTBD     1   1                    1  40       6      6    0           0
-   FILL NOEDIT TYPE SEXCL EEXCL HLO DECSEP DIG3SEP DATATYPE LANGUAGE
-1            0    N     N     N                                     
-2            0    N     N     N                                     
-3            0    N     N     N                                     
-4            0    N     N     N                                     
-5            0    N     N     N                                     
-6            0    N     N     N                                     
-7            0    N     N     N                                     
-8            0    N     N     N                                     
-9            0    N     N     N                                     
-10           0    N     N     N                                     
-11           0    N     N     N                                     
-12           0    N     N     N                                     
-13           0    N     N     N                                     
-14           0    N     N     N                                     
-15           0    N     N     N                                     
-16           0    N     N     N                                     
-17           0    N     N     N                                     
-18           0    N     N     N                                     
-19           0    N     N     N                                     
-20           0    N     N     N                                     
-
-Warning messages:
-1: In read.xport("a.xpt") :
-  transport file contains more than one PROC FORMAT CNTLOUT= dataset; using only the first
-2: In FUN(X[[1L]], ...) : NA in code in FORMAT definition; removed
 > 
 > # Check with different list construction function *name*
 > example(read.xport)
@@ -1653,34 +1463,34 @@ SAS xport file
 Filename: `a.xpt'
 
 Variables in data set `DATA1':
-           dataset name      type   format flength fdigits iformat iflength
-DATA1.RACE   DATA1 RACE character     RACE       0       0                0
-DATA1.AGE    DATA1  AGE   numeric                0       0                0
-DATA1.D1     DATA1   D1   numeric   MMDDYY      10       0                0
-DATA1.DT1    DATA1  DT1   numeric DATETIME       0       0                0
-DATA1.T1     DATA1   T1 character     TIME       0       0                0
-           ifdigits                     label nobs
-DATA1.RACE        0                              2
-DATA1.AGE         0 Age at Beginning of Study    2
-DATA1.D1          0                              2
-DATA1.DT1         0                              2
-DATA1.T1          0                              2
+ dataset name      type   format flength fdigits iformat iflength ifdigits
+   DATA1 RACE character     RACE       0       0                0        0
+   DATA1  AGE   numeric                0       0                0        0
+   DATA1   D1   numeric   MMDDYY      10       0                0        0
+   DATA1  DT1   numeric DATETIME       0       0                0        0
+   DATA1   T1 character     TIME       0       0                0        0
+                     label nobs
+                              2
+ Age at Beginning of Study    2
+                              2
+                              2
+                              2
 
 Variables in data set `DATA2':
-         dataset name    type format flength fdigits iformat iflength ifdigits
-DATA2.X3   DATA2   X3 numeric              0       0                0        0
-DATA2.X4   DATA2   X4 numeric              0       0                0        0
-DATA2.X5   DATA2   X5 numeric              0       0                0        0
-DATA2.X6   DATA2   X6 numeric              0       0                0        0
-DATA2.X7   DATA2   X7 numeric              0       0                0        0
-DATA2.X8   DATA2   X8 numeric              0       0                0        0
-         label nobs
-DATA2.X3        100
-DATA2.X4        100
-DATA2.X5        100
-DATA2.X6        100
-DATA2.X7        100
-DATA2.X8        100
+ dataset name    type format flength fdigits iformat iflength ifdigits label
+   DATA2   X3 numeric              0       0                0        0      
+   DATA2   X4 numeric              0       0                0        0      
+   DATA2   X5 numeric              0       0                0        0      
+   DATA2   X6 numeric              0       0                0        0      
+   DATA2   X7 numeric              0       0                0        0      
+   DATA2   X8 numeric              0       0                0        0      
+ nobs
+  100
+  100
+  100
+  100
+  100
+  100
 
 > (tmp <- read.xport("a.xpt"))                            #11.c
 $data1
@@ -1870,34 +1680,34 @@ SAS xport file
 Filename: `a.xpt'
 
 Variables in data set `DATA1':
-           dataset name      type   format flength fdigits iformat iflength
-DATA1.RACE   DATA1 RACE character     RACE       0       0                0
-DATA1.AGE    DATA1  AGE   numeric                0       0                0
-DATA1.D1     DATA1   D1   numeric   MMDDYY      10       0                0
-DATA1.DT1    DATA1  DT1   numeric DATETIME       0       0                0
-DATA1.T1     DATA1   T1 character     TIME       0       0                0
-           ifdigits                     label nobs
-DATA1.RACE        0                              2
-DATA1.AGE         0 Age at Beginning of Study    2
-DATA1.D1          0                              2
-DATA1.DT1         0                              2
-DATA1.T1          0                              2
+ dataset name      type   format flength fdigits iformat iflength ifdigits
+   DATA1 RACE character     RACE       0       0                0        0
+   DATA1  AGE   numeric                0       0                0        0
+   DATA1   D1   numeric   MMDDYY      10       0                0        0
+   DATA1  DT1   numeric DATETIME       0       0                0        0
+   DATA1   T1 character     TIME       0       0                0        0
+                     label nobs
+                              2
+ Age at Beginning of Study    2
+                              2
+                              2
+                              2
 
 Variables in data set `DATA2':
-         dataset name    type format flength fdigits iformat iflength ifdigits
-DATA2.X3   DATA2   X3 numeric              0       0                0        0
-DATA2.X4   DATA2   X4 numeric              0       0                0        0
-DATA2.X5   DATA2   X5 numeric              0       0                0        0
-DATA2.X6   DATA2   X6 numeric              0       0                0        0
-DATA2.X7   DATA2   X7 numeric              0       0                0        0
-DATA2.X8   DATA2   X8 numeric              0       0                0        0
-         label nobs
-DATA2.X3        100
-DATA2.X4        100
-DATA2.X5        100
-DATA2.X6        100
-DATA2.X7        100
-DATA2.X8        100
+ dataset name    type format flength fdigits iformat iflength ifdigits label
+   DATA2   X3 numeric              0       0                0        0      
+   DATA2   X4 numeric              0       0                0        0      
+   DATA2   X5 numeric              0       0                0        0      
+   DATA2   X6 numeric              0       0                0        0      
+   DATA2   X7 numeric              0       0                0        0      
+   DATA2   X8 numeric              0       0                0        0      
+ nobs
+  100
+  100
+  100
+  100
+  100
+  100
 
 > (tmp <- read.xport("a.xpt"))     #12.c
 $data1
@@ -2086,80 +1896,80 @@ SAS xport file
 Filename: `a.xpt'
 
 Variables in data set `TEST':
-          dataset name      type   format flength fdigits iformat iflength
-TEST.RACE    TEST RACE   numeric     RACE       0       0                0
-TEST.AGE     TEST  AGE   numeric                0       0                0
-TEST.D1      TEST   D1   numeric   MMDDYY      10       0                0
-TEST.DT1     TEST  DT1   numeric DATETIME       0       0                0
-TEST.T1      TEST   T1 character     TIME       0       0                0
-          ifdigits                     label nobs
-TEST.RACE        0                              2
-TEST.AGE         0 Age at Beginning of Study    2
-TEST.D1          0                              2
-TEST.DT1         0                              2
-TEST.T1          0                              2
+ dataset name      type   format flength fdigits iformat iflength ifdigits
+    TEST RACE   numeric     RACE       0       0                0        0
+    TEST  AGE   numeric                0       0                0        0
+    TEST   D1   numeric   MMDDYY      10       0                0        0
+    TEST  DT1   numeric DATETIME       0       0                0        0
+    TEST   T1 character     TIME       0       0                0        0
+                     label nobs
+                              2
+ Age at Beginning of Study    2
+                              2
+                              2
+                              2
 
 Variables in data set `Z':
-       dataset name    type format flength fdigits iformat iflength ifdigits
-Z.VAR1       Z VAR1 numeric              0       0                0        0
-Z.VAR2       Z VAR2 numeric              0       0                0        0
-Z.VAR3       Z VAR3 numeric              0       0                0        0
-Z.VAR4       Z VAR4 numeric              0       0                0        0
-Z.VAR5       Z VAR5 numeric              0       0                0        0
-Z.VAR6       Z VAR6 numeric              0       0                0        0
-       label nobs
-Z.VAR1        100
-Z.VAR2        100
-Z.VAR3        100
-Z.VAR4        100
-Z.VAR5        100
-Z.VAR6        100
+ dataset name    type format flength fdigits iformat iflength ifdigits label
+       Z VAR1 numeric              0       0                0        0      
+       Z VAR2 numeric              0       0                0        0      
+       Z VAR3 numeric              0       0                0        0      
+       Z VAR4 numeric              0       0                0        0      
+       Z VAR5 numeric              0       0                0        0      
+       Z VAR6 numeric              0       0                0        0      
+ nobs
+  100
+  100
+  100
+  100
+  100
+  100
 
 Variables in data set `FORMATS':
-                 dataset     name      type format flength fdigits iformat
-FORMATS.FMTNAME  FORMATS  FMTNAME character              0       0        
-FORMATS.START    FORMATS    START character              0       0        
-FORMATS.END      FORMATS      END character              0       0        
-FORMATS.LABEL    FORMATS    LABEL character              0       0        
-FORMATS.MIN      FORMATS      MIN   numeric              0       0        
-FORMATS.MAX      FORMATS      MAX   numeric              0       0        
-FORMATS.DEFAULT  FORMATS  DEFAULT   numeric              0       0        
-FORMATS.LENGTH   FORMATS   LENGTH   numeric              0       0        
-FORMATS.FUZZ     FORMATS     FUZZ   numeric              0       0        
-FORMATS.PREFIX   FORMATS   PREFIX character              0       0        
-FORMATS.MULT     FORMATS     MULT   numeric              0       0        
-FORMATS.FILL     FORMATS     FILL character              0       0        
-FORMATS.NOEDIT   FORMATS   NOEDIT   numeric              0       0        
-FORMATS.TYPE     FORMATS     TYPE character              0       0        
-FORMATS.SEXCL    FORMATS    SEXCL character              0       0        
-FORMATS.EEXCL    FORMATS    EEXCL character              0       0        
-FORMATS.HLO      FORMATS      HLO character              0       0        
-FORMATS.DECSEP   FORMATS   DECSEP character              0       0        
-FORMATS.DIG3SEP  FORMATS  DIG3SEP character              0       0        
-FORMATS.DATATYPE FORMATS DATATYPE character              0       0        
-FORMATS.LANGUAGE FORMATS LANGUAGE character              0       0        
-                 iflength ifdigits label nobs
-FORMATS.FMTNAME         0        0          3
-FORMATS.START           0        0          3
-FORMATS.END             0        0          3
-FORMATS.LABEL           0        0          3
-FORMATS.MIN             0        0          3
-FORMATS.MAX             0        0          3
-FORMATS.DEFAULT         0        0          3
-FORMATS.LENGTH          0        0          3
-FORMATS.FUZZ            0        0          3
-FORMATS.PREFIX          0        0          3
-FORMATS.MULT            0        0          3
-FORMATS.FILL            0        0          3
-FORMATS.NOEDIT          0        0          3
-FORMATS.TYPE            0        0          3
-FORMATS.SEXCL           0        0          3
-FORMATS.EEXCL           0        0          3
-FORMATS.HLO             0        0          3
-FORMATS.DECSEP          0        0          3
-FORMATS.DIG3SEP         0        0          3
-FORMATS.DATATYPE        0        0          3
-FORMATS.LANGUAGE        0        0          3
+ dataset     name      type format flength fdigits iformat iflength ifdigits
+ FORMATS  FMTNAME character              0       0                0        0
+ FORMATS    START character              0       0                0        0
+ FORMATS      END character              0       0                0        0
+ FORMATS    LABEL character              0       0                0        0
+ FORMATS      MIN   numeric              0       0                0        0
+ FORMATS      MAX   numeric              0       0                0        0
+ FORMATS  DEFAULT   numeric              0       0                0        0
+ FORMATS   LENGTH   numeric              0       0                0        0
+ FORMATS     FUZZ   numeric              0       0                0        0
+ FORMATS   PREFIX character              0       0                0        0
+ FORMATS     MULT   numeric              0       0                0        0
+ FORMATS     FILL character              0       0                0        0
+ FORMATS   NOEDIT   numeric              0       0                0        0
+ FORMATS     TYPE character              0       0                0        0
+ FORMATS    SEXCL character              0       0                0        0
+ FORMATS    EEXCL character              0       0                0        0
+ FORMATS      HLO character              0       0                0        0
+ FORMATS   DECSEP character              0       0                0        0
+ FORMATS  DIG3SEP character              0       0                0        0
+ FORMATS DATATYPE character              0       0                0        0
+ FORMATS LANGUAGE character              0       0                0        0
+ label nobs
+          3
+          3
+          3
+          3
+          3
+          3
+          3
+          3
+          3
+          3
+          3
+          3
+          3
+          3
+          3
+          3
+          3
+          3
+          3
+          3
+          3
 
 > (tmp <- read.xport("a.xpt"))     #13.c
 $test
