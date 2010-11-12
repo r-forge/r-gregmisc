@@ -54,8 +54,7 @@ read.xport <- function(file,
       whichds <- setdiff(names(dsinfo), c(toupper(drop),'_CONTENTS_','_contents_'))
 
     scat("Reading the data file...")
-    ds <- read.xport.inner(file)
-
+    ds <- read.xport.inner(file, stringsAsFactors=FALSE)
     if(any(duplicated(names(dsinfo))))  # only true if file contains has more than one data set
        {
          warning("Duplicate data set names in file.  Data set names have been made unique.")
@@ -106,8 +105,8 @@ read.xport <- function(file,
     names(res) <- gsub('_','.',dsn)
 
 
-    possiblyConvertChar <- (is.logical(as.is) && !as.is) ||
-    (is.numeric(as.is) && as.is > 0)
+    possiblyConvertChar <- (is.logical(as.is) && !as.is) || 
+                           (is.numeric(as.is) && as.is > 0)
     j <- 0
     for(k in which.regular) {
       j   <- j + 1

@@ -24,9 +24,11 @@
 lookup.xport.inner <- function(file) .Call(xport_info, file)
 
 
-read.xport.inner <- function(file) {
+read.xport.inner <- function(file, stringsAsFactors=FALSE) {
     data.info <- lookup.xport.inner(file)
     ans <- .Call(xport_read, file, data.info)
-    if (length(ans) == 1) as.data.frame(ans[[1]])
-    else lapply(ans, as.data.frame)
+    if (length(ans) == 1)
+      as.data.frame(ans[[1]], stringsAsFactors=stringsAsFactors)
+    else
+      lapply(ans, as.data.frame, stringsAsFactors=stringsAsFactors)
 }
