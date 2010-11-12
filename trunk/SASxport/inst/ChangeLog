@@ -1,3 +1,24 @@
+2010-11-12 02:41  warnes
+
+	* [r1455] R/read.xport.R, R/xport.R: Fix bug: 'as.is=TRUE' argument
+	  to read.xport was being ignored.
+
+2010-11-12 02:36  warnes
+
+	* [r1454] tests/Alfalfa_Test.Rout.save,
+	  tests/TestUnnamedComponents.Rout.save, tests/Theoph.Rout.save,
+	  tests/cars.Rout.save, tests/datetime.xpt, tests/puromycin.xpt,
+	  tests/testDates.Rout.save, tests/testNegative.Rout.save,
+	  tests/testNumeric.Rout.save, tests/test_as_is.R,
+	  tests/test_as_is.Rout.save, tests/test_fields.Rout.save,
+	  tests/xport.Rout.save, tests/xxx.Rout.save: Add test for proper
+	  function of as.is flag to read.xport
+
+2008-02-29 15:40  warnes
+
+	* [r1245] DESCRIPTION, inst/ChangeLog, inst/NEWS: Update for
+	  release 1.2.3
+
 2008-02-29 15:37  warnes
 
 	* [r1244] man/write.xport.Rd: Correct typo in write.xport man page

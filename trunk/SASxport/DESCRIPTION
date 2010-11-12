@@ -1,8 +1,8 @@
 Package: SASxport
 Type: Package
 Title: Read and Write SAS XPORT Files
-Version: 1.2.3
-Date: 2008-02-29
+Version: 1.2.4
+Date: 2010-11-11
 Description: This package provides functions for reading, listing
   the contents of, and writing SAS xport format files. 
   The functions support reading and writing of either
@@ -11,9 +11,7 @@ Description: This package provides functions for reading, listing
   variables of different data types are stored. 
 Author: 
   Unless otherwise noted, the contents of this package were written by
-  Gregory R. Warnes <greg@random-technologies-llc.com>, are
-  Copyright (c) 2007 by Random Technologies LLC
-  <http://random-technologies-llc.com>, and are provided under the
+  Gregory R. Warnes <greg@warnes.net> and are provided under the
   terms of the GNU General Public License, version 2.0 or later. 
   --
   The files 'ieee2ibm.c' and 'ibm2ieee.c' were extracted from BRL-CAD, 
@@ -31,8 +29,8 @@ Author:
   --     
   The creation of this package was partially funded by Metrum Institute
   <http://metruminstitute.org>.  
-Maintainer: Gregory R. Warnes <greg@random-technologies-llc.com>
+Maintainer: Gregory R. Warnes <greg@warnes.net>
 License: GPL-2
 Depends: R (>= 2.4.0)
 Imports: chron
-URL: http://random-technologies-llc.com, http://metruminstitute.org
+URL: http://www.warnes.net, http://metruminstitute.org
