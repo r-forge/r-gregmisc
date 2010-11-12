@@ -44,7 +44,7 @@ toSAS(x, format, format.info=NULL)
   A vector of type "character" or of type "numeric", with an attribute
   named "label" containing the SAS format specification.
 }
-\author{ Gregory R. Warnes \email{greg@random-technologies-llc.com} }
+\author{ Gregory R. Warnes \email{greg@warnes.net} }
 \seealso{
   \code{\link{write.xport}},
   \code{\link{read.xport}},

@@ -52,7 +52,7 @@ write.xport             Write data to a SAS XPORT file
 }
 \author{
   Unless otherwise noted, the contents of this package were written by
-  Gregory R. Warnes \email{greg@random-technologies-llc.com}, are
+  Gregory R. Warnes \email{greg@warnes.net}, are
   Copyright (c) 2007 by Random Technologies LLC \cr
   \url{http://random-technologies-llc.com}, and are provided under the
   terms of the GNU General Public License, version 2.0 or later. 
@@ -75,7 +75,7 @@ write.xport             Write data to a SAS XPORT file
   \url{http://metruminstitute.org}.
   }
 \section{Maintainer}{
-  Gregory R. Warnes \email{greg@random-technologies-llc.com}
+  Gregory R. Warnes \email{greg@warnes.net}
 }
 \section{Support}{
   Technical support contracts and other services for R, this package,

@@ -94,7 +94,7 @@ read.xport(file,
   variables having customized label formats will be converted to \code{factor}
   objects with appropriate labels.
 }
-\author{ Gregory R. Warnes \email{greg@random-technologies-llc.com}
+\author{ Gregory R. Warnes \email{greg@warnes.net}
   based on \code{Hmisc:::sasxport.get} by Frank E. Harrell, Jr.}  
 \section{Note}{
   This code provides a subset of the functionality of the

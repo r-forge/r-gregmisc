@@ -68,7 +68,7 @@ write.xport(...,
   Data Set in SAS Transport (XPORT) Format'' available at
   \url{http://ftp.sas.com/techsup/download/technote/ts140.html}.
 }
-\author{Gregory R. Warnes \email{greg@random-technologies-llc.com}}
+\author{Gregory R. Warnes \email{greg@warnes.net}}
 \note{
    This package was created by Random Technologies LLC
    \url{http://random-technologies-llc.com}
