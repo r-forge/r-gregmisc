@@ -1,7 +1,8 @@
 
-R version 2.11.1 (2010-05-31)
+R version 2.12.0 (2010-10-15)
 Copyright (C) 2010 The R Foundation for Statistical Computing
 ISBN 3-900051-07-0
+Platform: i386-apple-darwin9.8.0/i386 (32-bit)
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
 You are welcome to redistribute it under certain conditions.
@@ -17,7 +18,7 @@ Type 'q()' to quit R.
 
 > library(SASxport)
 
-Loaded SASxport version 1.2.3 (2008-02-29).
+Loaded SASxport version 1.2.4 (2010-11-11).
 
   Updates and technical support available from Random Technologies, LLC
   <http://random-technologies-llc.com/products/SASxport>
@@ -91,6 +92,29 @@ rd.xpr> w <- read.xport(url, as.list=TRUE, include.formats=TRUE)
 
 rd.xpr> ## Don't show: 
 rd.xpr> SASxport:::assert( is.data.frame(w)==FALSE && is.list(w)==TRUE )
+
+rd.xpr> ## End Don't show
+rd.xpr> 
+rd.xpr> 
+rd.xpr> ## Not run: 
+rd.xpr> ##D ## The Hmisc library provides many useful functions for interacting with
+rd.xpr> ##D ## data imported from SAS via read.xport()
+rd.xpr> ##D library(Hmisc)
+rd.xpr> ##D 
+rd.xpr> ##D describe(w$test)   # see labels, format names for dataset test
+rd.xpr> ##D lapply(w, describe)# see descriptive stats in more detaiil for each variable
+rd.xpr> ##D 
+rd.xpr> ##D contents(w$test)   # another way to see variable attributes
+rd.xpr> ##D lapply(w, contents)# show contents of individual items in more detail
+rd.xpr> ##D 
+rd.xpr> ##D options(digits=7)  # compare the following matrix with PROC MEANS output
+rd.xpr> ##D t(sapply(w$z, function(x)
+rd.xpr> ##D  c(Mean=mean(x),SD=sqrt(var(x)),Min=min(x),Max=max(x))))
+rd.xpr> ## End(Not run)
+rd.xpr> 
+rd.xpr> 
+rd.xpr> 
+rd.xpr> 
 > write.xport(w$test,file="a.xpt") #1.a
 Warning message:
 In write.xport(w$test, file = "a.xpt") :
@@ -1452,6 +1476,29 @@ rd.xpr> w <- read.xport(url, as.list=TRUE, include.formats=TRUE)
 
 rd.xpr> ## Don't show: 
 rd.xpr> SASxport:::assert( is.data.frame(w)==FALSE && is.list(w)==TRUE )
+
+rd.xpr> ## End Don't show
+rd.xpr> 
+rd.xpr> 
+rd.xpr> ## Not run: 
+rd.xpr> ##D ## The Hmisc library provides many useful functions for interacting with
+rd.xpr> ##D ## data imported from SAS via read.xport()
+rd.xpr> ##D library(Hmisc)
+rd.xpr> ##D 
+rd.xpr> ##D describe(w$test)   # see labels, format names for dataset test
+rd.xpr> ##D lapply(w, describe)# see descriptive stats in more detaiil for each variable
+rd.xpr> ##D 
+rd.xpr> ##D contents(w$test)   # another way to see variable attributes
+rd.xpr> ##D lapply(w, contents)# show contents of individual items in more detail
+rd.xpr> ##D 
+rd.xpr> ##D options(digits=7)  # compare the following matrix with PROC MEANS output
+rd.xpr> ##D t(sapply(w$z, function(x)
+rd.xpr> ##D  c(Mean=mean(x),SD=sqrt(var(x)),Min=min(x),Max=max(x))))
+rd.xpr> ## End(Not run)
+rd.xpr> 
+rd.xpr> 
+rd.xpr> 
+rd.xpr> 
 > write.xport(list=base::list(w$test,w$z),file="a.xpt")   #11.a
 Warning message:
 In write.xport(list = base::list(w$test, w$z), file = "a.xpt") :
@@ -1667,6 +1714,29 @@ rd.xpr> w <- read.xport(url, as.list=TRUE, include.formats=TRUE)
 
 rd.xpr> ## Don't show: 
 rd.xpr> SASxport:::assert( is.data.frame(w)==FALSE && is.list(w)==TRUE )
+
+rd.xpr> ## End Don't show
+rd.xpr> 
+rd.xpr> 
+rd.xpr> ## Not run: 
+rd.xpr> ##D ## The Hmisc library provides many useful functions for interacting with
+rd.xpr> ##D ## data imported from SAS via read.xport()
+rd.xpr> ##D library(Hmisc)
+rd.xpr> ##D 
+rd.xpr> ##D describe(w$test)   # see labels, format names for dataset test
+rd.xpr> ##D lapply(w, describe)# see descriptive stats in more detaiil for each variable
+rd.xpr> ##D 
+rd.xpr> ##D contents(w$test)   # another way to see variable attributes
+rd.xpr> ##D lapply(w, contents)# show contents of individual items in more detail
+rd.xpr> ##D 
+rd.xpr> ##D options(digits=7)  # compare the following matrix with PROC MEANS output
+rd.xpr> ##D t(sapply(w$z, function(x)
+rd.xpr> ##D  c(Mean=mean(x),SD=sqrt(var(x)),Min=min(x),Max=max(x))))
+rd.xpr> ## End(Not run)
+rd.xpr> 
+rd.xpr> 
+rd.xpr> 
+rd.xpr> 
 > names(w) <- NULL
 > w[[3]] <- NULL
 > write.xport(list=w,file="a.xpt") #12.a
@@ -1884,6 +1954,29 @@ rd.xpr> w <- read.xport(url, as.list=TRUE, include.formats=TRUE)
 
 rd.xpr> ## Don't show: 
 rd.xpr> SASxport:::assert( is.data.frame(w)==FALSE && is.list(w)==TRUE )
+
+rd.xpr> ## End Don't show
+rd.xpr> 
+rd.xpr> 
+rd.xpr> ## Not run: 
+rd.xpr> ##D ## The Hmisc library provides many useful functions for interacting with
+rd.xpr> ##D ## data imported from SAS via read.xport()
+rd.xpr> ##D library(Hmisc)
+rd.xpr> ##D 
+rd.xpr> ##D describe(w$test)   # see labels, format names for dataset test
+rd.xpr> ##D lapply(w, describe)# see descriptive stats in more detaiil for each variable
+rd.xpr> ##D 
+rd.xpr> ##D contents(w$test)   # another way to see variable attributes
+rd.xpr> ##D lapply(w, contents)# show contents of individual items in more detail
+rd.xpr> ##D 
+rd.xpr> ##D options(digits=7)  # compare the following matrix with PROC MEANS output
+rd.xpr> ##D t(sapply(w$z, function(x)
+rd.xpr> ##D  c(Mean=mean(x),SD=sqrt(var(x)),Min=min(x),Max=max(x))))
+rd.xpr> ## End(Not run)
+rd.xpr> 
+rd.xpr> 
+rd.xpr> 
+rd.xpr> 
 > colnames(w[[2]]) <- rep("", length=ncol(w[[2]]))
 > write.xport(list=w,file="a.xpt") #13.a
 Warning message:
