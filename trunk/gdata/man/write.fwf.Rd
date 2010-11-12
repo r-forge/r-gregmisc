@@ -22,7 +22,8 @@
 
 write.fwf(x, file="", append=FALSE, quote=FALSE, sep=" ", na="",
   rownames=FALSE, colnames=TRUE, rowCol=NULL, justify="left",
-  formatInfo=FALSE, quoteInfo=TRUE, width=NULL, \dots)
+  formatInfo=FALSE, quoteInfo=TRUE, width=NULL, eol="\n",
+  qmethod=c("escape", "double"),  \dots)
 
 }
 
@@ -44,8 +45,18 @@ write.fwf(x, file="", append=FALSE, quote=FALSE, sep=" ", na="",
     widths and format}
   \item{quoteInfo}{logical, should \code{formatInfo} account for quotes}
   \item{width}{numeric, width of the columns in the output}
-  \item{\dots}{further arguments to \code{\link{format.info}},
-    \code{\link{format}} and \code{\link{write.table}}}
+  \item{eol}{the character(s) to print at the end of each line (row).
+    For example, 'eol="\\r\\n"' will produce Windows' line endings on a
+    Unix-alike OS, and 'eol="\\r"' will produce files as expected by Mac
+    OS Excel 2004.}
+  \item{qmethod}{a character string specifying how to deal with embedded
+    double quote characters when quoting strings.  Must be one of
+    '"escape"' (default), in which case the quote character is
+    escaped in C style by a backslash, or '"double"', in which
+    case it is doubled.  You can specify just the initial letter.}
+  \item{\dots}{further arguments to
+    \code{\link{format.info}} and \code{\link{format}}
+  }
 }
 
 \details{

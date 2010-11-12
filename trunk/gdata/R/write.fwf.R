@@ -5,10 +5,22 @@
 ### Time-stamp: <2008-08-05 12:11:27 ggorjan>
 ###------------------------------------------------------------------------
 
-write.fwf <- function(x, file="", append=FALSE, quote=FALSE, sep=" ",
-                      na="", rownames=FALSE, colnames=TRUE, rowCol=NULL,
-                      justify="left", formatInfo=FALSE, quoteInfo=TRUE,
-                      width=NULL, ...)
+write.fwf <- function(x,
+                      file="",
+                      append=FALSE,
+                      quote=FALSE,
+                      sep=" ",
+                      na="",
+                      rownames=FALSE,
+                      colnames=TRUE,
+                      rowCol=NULL,
+                      justify="left",
+                      formatInfo=FALSE,
+                      quoteInfo=TRUE,
+                      width=NULL,
+                      eol="\n",
+                      qmethod=c("escape", "double"),
+                      ...)
 {
   ## --- Setup ---
 
@@ -137,12 +149,28 @@ write.fwf <- function(x, file="", append=FALSE, quote=FALSE, sep=" ",
 
   if(colnames) {
     if(rownames && is.null(rowCol)) colnamesMy <- colnamesMy[-1]
-    write.table(t(as.matrix(colnamesMy)), file=file, append=append,
-                quote=quote, sep=sep, row.names=FALSE, col.names=FALSE, ...)
-  }
+    write.table(t(as.matrix(colnamesMy)),
+                file=file,
+                append=append,
+                quote=quote,
+                sep=sep,
+                eol=eol,
+                na=na,
+                row.names=FALSE,
+                col.names=FALSE,
+                qmethod=qmethod) 
+ }
 
-  write.table(x=x, file=file, append=(colnames || append), quote=quote,
-              sep=sep, row.names=FALSE, col.names=FALSE, ...)
+  write.table(x=x,
+              file=file,
+              append=(colnames || append),
+              quote=quote,
+              sep=sep,
+              eol=eol,
+              na=na,
+              row.names=FALSE,
+              col.names=FALSE,
+              qmethod=qmethod)
 
   ## --- Return format and fixed width information ---
 
