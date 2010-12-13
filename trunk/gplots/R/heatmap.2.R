@@ -493,8 +493,8 @@ heatmap.2 <- function (x,
         {
           max.raw <- max(abs(c(x,breaks)),na.rm=TRUE)
           min.raw <- -max.raw
-          tmpbreaks[1] <- -max(abs(x))
-          tmpbreaks[length(tmpbreaks)] <- max(abs(x))
+          tmpbreaks[1] <- -max(abs(x), na.rm=TRUE)
+          tmpbreaks[length(tmpbreaks)] <- max(abs(x), na.rm=TRUE)
         }
       else
         {
