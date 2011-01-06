@@ -2,7 +2,10 @@
 \usepackage{beamerthemesplit}
 \mode<presentation>
 {
-  \usetheme{Warsaw}
+%  \usetheme{Warsaw}
+%  \usetheme{Berlin}
+%  \usetheme{Copenhagen}
+  \usetheme[hideothersubsections,width=2.5cm]{Berkeley}
   \setbeamercovered{transparent}
 }
 %\setbeameroption{show notes}
@@ -37,7 +40,7 @@
 \author{Gregory R. Warnes\inst{1,2,3} }
 \institute{ 
   \inst{1}%
-  Biostatistics and Computational Biology \\
+  Center for Research Computing \\
   University of Rochester
   \and
   \inst{2}%
@@ -45,7 +48,8 @@
   University of Rochester
   \and
   \inst{3}%
-  Random Technologies, LLC.
+  Biostatistics and Computational Biology \\
+  University of Rochester
 }
 
 \begin{document}
@@ -82,65 +86,61 @@ $ $Id$ $
 %}
 %%\end{abstract}
 
-\section[Outline]{}
+\section[Outline]{Outline}
 \frame{
   \frametitle{Outline}
-
-%  \tableofcontents
-
- \begin{columns}
-      \begin{column}{0.5\textwidth}
-        \tableofcontents[sections={1-4}]
-      \end{column}
-      \begin{column}{0.5\textwidth}
-        \tableofcontents[sections={5-8}]
-      \end{column}
-    \end{columns}
-
+  \small
+  \begin{columns}
+    \begin{column}{0.5\textwidth}
+      \tableofcontents[sections={1-6}]
+    \end{column}
+    \begin{column}{0.5\textwidth}
+      \tableofcontents[sections={7-12}]
+    \end{column}
+  \end{columns}
+  
 }
 
 \section{Overview}
 \subsection{Goal}
 \frame{
-  \frametitle{Overview}
-  \begin{block}{Goal: Model Biochemical Pathways}
+  \frametitle{Goal: Model Biochemical Pathways}
     Estimate key rate parameters of biological pathways, e.g
-
-    \includegraphics[width=0.75\textwidth]{figures/glycolysis} 
-
+    \begin{center}
+      \includegraphics[width=0.75\textwidth]{figures/glycolysis} 
+    \end{center}
     in order to estimate rate parameters, predict responses to
     changes, and understand the system.
-  \end{block}
 }
 
 \subsection{Components}
 \frame{
-  \frametitle{Overview}
-  \begin{block}{Combine 3 components:}
-    \begin{tabular}{ll}
-     Biochemistry        & Biochemical components \& relationships \\
-     Mathematical Model  & Strucure of relationships between components \\
-     Bayesian Statistics & Relationship between previous information, \\
-                         & model and measured data \\
-    \end{tabular}
+  \frametitle{Combine 3 components:}
+    \begin{enumerate}
+     \item \emph{Biochemistry} - Biochemical components \& relationships 
+     \item \emph{Mathematical Model} - Structure of relationships between components
+     \item \emph{Statistical Model} - Relationship between previous information,
+                             model and measured data \\
+    \end{enumerate}
 
 %  \begin{block}{Method:}
 %    \begin{center}
 %    ``Wrap'' standard deterministic mathematical model describing a
 %    biochemical pathway within a Bayesian statistical model 
 %    \end{center}
-  \end{block}
+%  \end{block}
 
 }  
 
-\subsection{Intro to Bayesian Statistics}
+\section{Aside 1: Bayesian Statistics}
+\subsection{Concepts}
 \frame{
-  \frametitle{Intro to Bayesian Statistics (1/2)}
+  \frametitle{Bayesian Statistics: Concepts}
   \begin{enumerate}
-  \item Based on Decision Theory
+  \item Strong Foundation from Decision Theory
   \item Modeling Process:
     \begin{enumerate}
-    \item Costruct a model for observed data: {\color{blue} ``Likelihood'':
+    \item Construct a model for observed data: {\color{blue} ``Likelihood'':
       $L(\mathit{Data}|\theta)$ }
     \item Describe current information about model parameters:
       { \color{green} ``Prior distribution'' $\pi(\theta)$ }
@@ -156,8 +156,29 @@ $ $Id$ $
   \end{enumerate}
 }
 
+\subsection{Bayes Rule in Pictures}
+
+\newcommand{\doplot}[1]{%
+\frame{%
+  \frametitle{Bayesian Statistics: Bayes Rule in Pictures}
+  \begin{center}%
+    \includegraphics[height=0.75\textheight]{Posterior_00#1}%
+  \end{center}%
+}%
+}
+
+\doplot{1}
+\doplot{2}
+\doplot{3}
+\doplot{4}
+\doplot{5}
+\doplot{6}
+\doplot{7}
+
+
+\subsection{Strengths \& Weaknesses}
 \frame{
-  \frametitle{Intro to Bayesian Statistics (2/2)}
+  \frametitle{Bayesian Statistics: Strengths \& Weaknesses}
   \begin{itemize}
   \item Strengths
     \begin{itemize}
@@ -169,18 +190,57 @@ $ $Id$ $
     \begin{itemize}
     \item Characterization of ``current information'' can be
       controversial
-    \item Computationaly expensive 
+    \item Computationally expensive 
     \item Less popular than Frequentist statistics
     \end{itemize}
   \end{itemize}
 }
 
+\section{Aside 2: Data Cloning}
+\subsection{Concepts}
+\frame{
+  \frametitle{Data Cloning: Concepts}
+  \begin{enumerate}
+  \item Leverages Bayesian MCMC approach \emph{to}
+  \item Obtain Maximum likelihood estimates and standard errors (Frequentist)
+  \item Process:
+    \begin{enumerate}
+    \item Construct a Bayesian model for observed data
+    \item Fit $k$ \emph{replicates} of the observed data
+    \item Increase $k$ until no change is observed
+    \end{enumerate}
+  \item Result: Bayesian posterior is asymptotically Normal with
+    \begin{enumerate}
+      \item $ \text{Mean} \to \text{MLE} $
+      \item Variance 
+        $\to \frac{1}{\sqrt{k n}} (\text{Fishers Information})^{-1} 
+        = \frac{1}{\sqrt{k}} (\text{Standard Error}) $
+      \end{enumerate}
+  \end{enumerate}
+}
 
+\subsection{Strengths \& Weaknesses}
+\frame{
+  \frametitle{Data Cloning: Strengths \& Weaknesses}
+  \begin{itemize}
+  \item Strengths
+    \begin{itemize}
+    \item Very flexible
+    \item Provides standard \emph{Frequentist} MLE estimates
+    \item Not dependent on Bayesian Prior
+    \end{itemize}
+  \item Weaknesses
+    \begin{itemize}
+    \item Computationally expensive 
+    \item Current software support is limited
+    \end{itemize}
+  \end{itemize}
+}
 
 \section{Evaluation Approach}
 
 \frame{
-  \frametitle{Overview}
+  \frametitle{Reminder}
   \begin{block}{Goal: Model Biochemical Pathways}
     Estimate key rate parameters of biological pathways, e.g
 
@@ -207,19 +267,35 @@ $ $Id$ $
 \subsection{Pathway Structure}
 \frame{
   \frametitle{Pathway Structure}
-  Relationship Diagram:
-  \begin{reaction} source \yields R1 \yields R2 \yields
-    R3 \yields R4 \yields R5 \yields sink \end{reaction}
 
-  Chemical Equations:
-  \begin{chemarray*}
-    source &\yields^{k_1}& R1\\
-    R1 + E1 &\eqbm^{k_2}_{k_3}& R1E1 \yields^{k_4} R2 + E1\\
-    R2 + E2 &\eqbm^{k_5}_{k_6}& R2E2 \yields^{k_7} R3 + E2\\
-    R3 + E3 &\eqbm^{k_8}_{k_9}& R3E3 \yields^{k_{10}} R4 + E3\\
-    R4 + E4 &\eqbm^{k_{11}}_{k_{12}}& R4E4 \yields^{k_{13}} R5 + E4\\
-    R5 &\yields^{k_{14}}& sink
-  \end{chemarray*}
+  \begin{itemize}
+  \item   Relationship Diagram:
+    \footnotesize
+    \begin{reaction} source \yields R1 \yields R2 \yields
+      R3 \yields R4 \yields R5 \yields sink 
+    \end{reaction}
+    \normalsize
+  \item
+    Chemical Equations: \vspace{-5pt}
+    \begin{columns}
+      \footnotesize
+      \begin{column}[c]{4cm}\
+        \begin{chemarray*}
+          source &\yields^{k_1}& R1\\
+          R1 + E1 &\eqbm^{k_2}_{k_3}& R1E1 \yields^{k_4} R2 + E1\\
+          R2 + E2 &\eqbm^{k_5}_{k_6}& R2E2 \yields^{k_7} R3 + E2\\
+        \end{chemarray*}
+      \end{column}
+      \begin{column}[c]{4cm}
+        \begin{chemarray*}
+          R3 + E3 &\eqbm^{k_8}_{k_9}& R3E3 \yields^{k_{10}} R4 + E3\\
+          R4 + E4 &\eqbm^{k_{11}}_{k_{12}}& R4E4 \yields^{k_{13}} R5 + E4\\
+          R5 &\yields^{k_{14}}& sink
+        \end{chemarray*}
+      \end{column}
+      \normalsize
+    \end{columns}
+  \end{itemize}
 }
 
 \subsection{Rate constants}
@@ -253,7 +329,7 @@ $ $Id$ $
     \vspace{-0.125in}
     \begin{center}
       \label{pulse}
-      \includegraphics[height=0.6\textheight]{figures/tempDir/pulse}
+      \includegraphics[height=0.5\textheight]{figures/tempDir/pulse}
     \end{center}
     \vspace{-0.125in}
   \item Triplicate estimates of reactant concentrations every minute
@@ -268,7 +344,7 @@ $ $Id$ $
 \frame{
   \frametitle{Model Specification: What do we need?}
   \begin{itemize}
-  \item Relationship between parameters and observable data:
+  \item Relationship between parameters and observable data: \vspace{-10pt}
     \begin{itemize}
     \item Biochemical model
     \item Error structure
@@ -361,6 +437,7 @@ $ $Id$ $
 \frame{
   \frametitle{Likelihoods}
   Putting this together yields:
+  \footnotesize
   \begin{align*}
     v_2 &\sim N\left(\frac{d_1R1}{d_2+R1} -
       \frac{d_3R2}{d_4+R2}, \;\; \sigma^2\right)\\
@@ -368,7 +445,7 @@ $ $Id$ $
       \frac{d_5R3}{d_6+R3}, \;\; \sigma^2\right)\\
     v_4 &\sim N\left(\frac{d_5R3}{d_6+R3} -
       \frac{d_7R4}{d_8+R4}, \;\; \sigma^2\right)\\
-    \intertext{and}
+    \intertext{\normalsize and}
     v_5 &\sim N\left(\frac{d_7R4}{d_8+R4} - d_9R5, \;\; \sigma^2\right)
   \end{align*}
 }
@@ -393,8 +470,10 @@ $ $Id$ $
   }
 
 \section{Fitting}
+
+\subsection{Algorithms}
 \frame{
-  \frametitle{Fitting algorithm}
+  \frametitle{Fitting algorithms}
   
   We applied 3 different MCMC algorithms (in order of shortest to
   longest required run length) as implemented in the \textsc{Hydra}
@@ -411,6 +490,7 @@ $ $Id$ $
   which ensure reliable confidence intervals. 
 }
 
+\subsection{Aside 3: What is Markov Chain Monte Carlo?}
 \frame{
 \begin{block}{What is Markov Chain Monte Carlo?}
 
@@ -443,13 +523,16 @@ Examples:
 \includegraphics[height=0.75\textheight]{MCMC-Picture}
 \hfill
 \includegraphics[height=0.75\textheight]{MCMC-Histogram}
+\hfill
+\hfill
 \end{center}
 }
 
-
+\subsection{Algorithm Performance}
 \frame{
-  \frametitle{Convergence Rates (1/2)}
+  \frametitle{Algorithm Performance}
   \begin{center}
+    \small
     Mean Squared Residuals \\
     ~
 
@@ -468,18 +551,18 @@ Examples:
 }
 
 \frame{
-  \frametitle{Convergence Rates (2/2)}
+  \frametitle{Fit Quality  vs. Iteration}
   \begin{center}
-    \includegraphics[scale=0.5]{figures/MSR16}
+    \includegraphics[width=\textwidth]{figures/MSR16}
   \end{center}
-
-
 }
 
 
 \section{Results}
+
+\subsection{Posterior Distributions}
 \frame{
-  \frametitle{Results}
+  \frametitle{Posterior Distributions}
   
   
   \begin{columns}[c]
@@ -499,8 +582,9 @@ Examples:
   \end{columns}
 }
 
+\subsection{Observed vs. Fitted Values}
 \frame{
-  \frametitle{Actual vs Fitted}
+  \frametitle{Observed vs. Fitted Values}
 
   \begin{center}
   \includegraphics[width=0.5\textwidth]{figures/tempDir/V1fitted}
@@ -511,6 +595,31 @@ Examples:
   \end{center}
 }
 
+\section{Software}
+
+\frame{
+  \frametitle{Software: DEDiscover}
+
+  \begin{columns}
+    \begin{column}[c]{0.35\textwidth}
+      \includegraphics[width=\textwidth]{Logo2.png}
+    \end{column}
+    \begin{column}[c]{0.65\textwidth}
+      workflow-based differential equation modeling software for
+      scientists, statisticians and modellers.
+    \end{column}
+  \end{columns}
+  \begin{center}
+    \includegraphics[width=0.8\textwidth]{DEDflow3.pdf}
+
+    \vspace{10pt}
+    \small
+    \url{https://cbim.urmc.rochester.edu/software/dediscover}
+  \end{center}
+  
+}
+
+
 \section{Acknowledgments}
 \frame{
   \frametitle{Acknowledgments}
@@ -519,35 +628,38 @@ Examples:
   described here passed away unexpectedly on December 27, 2006.
 
 \begin{quote}
-\tiny
-  BURROWS, ROBERT BERNARD, II, 63, of North Scituate [Rhode Island],
-  died Wednesday, December 27, 2006. He was a long time resident of
-  Lexington, MA before moving to Rhode Island in 2001. After
-  graduating from Lexington High School, Dr. Burrows earned his
+  \tiny BURROWS, ROBERT BERNARD, II, 63, of North Scituate [Rhode
+  Island], died Wednesday, December 27, 2006. He was a long time
+  resident of Lexington, MA before moving to Rhode Island in 2001.
+  After graduating from Lexington High School, Dr. Burrows earned his
   Bachelor of Arts from Northeastern University, a Ph.D. in
   Biochemistry from the Massachusetts Institute of Technology, and a
   Master of Science in Statistics from the University of Rhode Island.
   He was a self-employed Research Biochemist and previously worked for
   the Boston Biomedical Research Institute. He leaves his sister Ellen
   Conner and her husband Donald of Coventry, his dearest friend Sally
-  Glanz of North Scituate and many cousins. (\emph{The Providence Journal/Evening
-      Bulletin} 2006 Dec. 31; Sec. B5)
+  Glanz of North Scituate and many cousins. (\emph{The Providence
+    Journal/Evening Bulletin} 2006 Dec. 31; Sec. B5)
 \end{quote}
 }
 
-\section[]{Reference \& Contact Information}
+\section{More Information}
 \frame{
-  \frametitle{Reference \& Contact Information}
+  \frametitle{More Information}
   \begin{block}{Manuscript}
+    \footnotesize
     Burrows~RB, Warnes~GR, Hanumara~RC, ``Statistical Modeling of Biochemical Pathways'',
     \emph{IET Systems Biology}, IET Syst. Biol. 1, 353 (2007)
   \end{block}
   \begin{block}{Contact Information}
+    \footnotesize
     \begin{itemize}
-    \item Email:              \texttt{greg@warnes.net}
-    \item Personal Web Page:  \texttt{http://www.warnes.net}
-    \item CBIM Web Page:      \texttt{https://cbim.urmc.rochester.edu}
-    \item UR Biostat Web Page \texttt{http://www.urmc.rochester.edu/smd/biostat}
+    \item Email:              \url{greg@warnes.net}
+%    \item Personal Web Page:  \url{http://www.warnes.net}
+    \item CRC Web Page:       \url{https://www.crc.rochester.edu}
+    \item CBIM Web Page:      \url{https://cbim.urmc.rochester.edu}
+    \item DEDiscover:         \url{https://cbim.urmc.rochester.edu/software/dediscover}
+    \item UR Biostat Web Page \url{http://www.urmc.rochester.edu/smd/biostat}
     \end{itemize}
   \end{block}
 }
@@ -579,6 +691,21 @@ Examples:
 %  \bibitem{projo}%16
 %    OBITUARIES-SCITUATE-BURROWS. \emph{The Providence Journal/Evening
 %      Bulletin} 2006 Dec. 31; Sec. B5
+%  \bibitem{Lele-1}%17
+%    S.R. Lele, B. Dennis, and F. Lutscher, Data Cloning: easy
+%    maximum likelihood estimation for complex ecological models
+%    using Bayesian Markov chain Monte Carlo methods. \emph{Ecology
+%      Letters}, 10:551-563, 2007.
+%  \bibitem{Lele-2}%18
+%    S.R. Lele, K. Nadeem, and B. Schuland. Estimability and likelihood
+%    inference for generalized linear mixed models using data cloning.
+%    \emph{Jornal of the Americal Statistical Association} 2010. in
+%    press.
+%  \bibitem{Ponciano}%19
+%    J.M. Ponciano, M.L. Taper, B. Dennis, and S.R. Lele. Hierarchical
+%    models in ecology: confidence intervals, hypothesis testing, and
+%    model selection using data cloning. \emph{Ecology}, 90:356-362,
+%    2009.
 %\end{thebibliography}
 
 
