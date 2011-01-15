@@ -1,3 +1,12 @@
+
+CHANGES IN 2.?.? (2011-??-??)
+-----------------------------
+
+Enhancements:
+
+- nPairs() gains a summary method that shows how many times each variable 
+  is known, while the other variable of a pair is not
+
 CHANGES IN 2.8.1 (2010-11-12)
 -----------------------------
 
