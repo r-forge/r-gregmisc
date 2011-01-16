@@ -38,10 +38,10 @@ estimable(obj, cm, beta0, conf.int=NULL,  show.beta0, ...)
      included in the output table.  Defaults to TRUE when beta0 is
      specified, FALSE otherwise.}
    \item{sim.mer}{Logical value. If TRUE p-values and confidence
-     intervals will be estimated using \code{\Link[Matrix]{mcmcsamp}}.
+     intervals will be estimated using \code{mcmcsamp}.
    }
    \item{n.sim}{Number of MCMC samples to take in
-     \code{\Link[Matrix]{mcmcsamp}}.
+     \code{mcmcsamp}.
    }
    \item{...}{ignored}
 }
@@ -71,7 +71,7 @@ estimable(obj, cm, beta0, conf.int=NULL,  show.beta0, ...)
   linear functions are meaningful.
 
   For computing contrasts among levels of a single factor,
-  \code{\link{fit.contrast}} may be more convenient.  For computing
+  \code{fit.contrast} may be more convenient.  For computing
   contrasts between two specific combinations of model parameters, the
   \code{contrast} function in Frank Harrell's Design library may be more
   convenient.
@@ -95,13 +95,14 @@ estimable(obj, cm, beta0, conf.int=NULL,  show.beta0, ...)
 }
 \author{
   BXC (Bendix Carstensen) \email{bxc\@novonordisk.com}, 
-  Gregory R. Warnes \email{greg@random-technologies-llc.com},
+  Gregory R. Warnes \email{greg@warnes.net},
   Soren Hojsgaard \email{sorenh@agrsci.dk}, and
   Randall C Johnson \email{rjohnson@ncifcrf.gov}
 }
 \seealso{
   \code{\link{fit.contrast}},
-  \code{\link[stats]{lm}}, \code{\link[nlme]{lme}},
+  \code{\link[stats]{lm}},
+  \code{\link[nlme]{lme}},
   \code{\link[stats]{contrasts}},
   \code{\link[Design]{contrast}},
   }

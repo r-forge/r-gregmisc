@@ -30,9 +30,9 @@
     removed. Defaults to \code{FALSE}.}
   \item{\dots}{Arguments for methods}
   \item{sim.mer}{Logical value. If TRUE confidence
-    intervals will be estimated using \code{\Link[Matrix]{mcmcsamp}}. This option only takes effect for mer
+    intervals will be estimated using \code{mcmcsamp}. This option only takes effect for mer
     objects.}
-  \item{n.sim}{Number of samples to take in \code{\Link[Matrix]{mcmcsamp}}.}
+  \item{n.sim}{Number of samples to take in \code{mcmcsamp}.}
 }
 %\details{
 %  ~~ If necessary, more details than the __description__  above ~~
@@ -42,7 +42,7 @@
   \code{Estimate}, \code{CI lower}, \code{CI upper}, \code{Std. Error},
   \code{DF} (for lme objects only), and \code{p-value}.
 }
-\author{ Gregory R. Warnes \email{greg@random-technologies-llc.com}
+\author{ Gregory R. Warnes \email{greg@warnes.net}
 }
 \seealso{
   \code{\link[stats]{confint}},
