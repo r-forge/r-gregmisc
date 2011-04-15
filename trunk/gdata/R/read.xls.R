@@ -33,7 +33,7 @@ read.xls <- function(xls, sheet = 1, verbose=FALSE, pattern, ...,
   if (missing(pattern))
     {
       if(verbose)
-        cat("Reading", method, "file ", dQuote.ascii(tfn), "...\n")
+        cat("Reading", method, "file ", dQuote(tfn), "...\n")
       
       if(method=="csv")
         retval <- read.csv(con, ...)
@@ -59,7 +59,7 @@ read.xls <- function(xls, sheet = 1, verbose=FALSE, pattern, ...,
     seek(con, 0)
 
     if(verbose)
-      cat("Reading", method, "file ", dQuote.ascii(tfn), "...\n")
+      cat("Reading", method, "file ", dQuote(tfn), "...\n")
 
     if(method=="csv")
       retval <- read.csv(con, skip = idx[1]-1, ...)
