@@ -3,8 +3,8 @@ Title: Various R programming tools for data manipulation
 Description: Various R programming tools for data manipulation
 Depends: R (>= 2.6.0)
 Imports: gtools
-Version: 2.8.1
-Date: 2010-11-12
+Version: 2.8.2
+Date: 2011-04-15
 Author: Gregory R. Warnes, with contributions from Ben Bolker, Gregor Gorjanc, 
         Gabor Grothendieck, Ales Korosec, Thomas Lumley, Don MacQueen, 
         Arni Magnusson, Jim Rogers, and others
