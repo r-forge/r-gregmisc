@@ -6,14 +6,17 @@
   and in an order that is easy to interpret.
 }
 \usage{
-rich.colors(n, palette="temperature", rgb=FALSE, plot=FALSE)
+rich.colors(n, palette="temperature", alpha=1.0, rgb=FALSE, plot=FALSE)
 }
 \arguments{
   \item{n}{number of colors to generate.}
   \item{palette}{palette to use: \code{"temperature"} contains
     blue-green-yellow-red, and \code{"blues"} contains
     black-blue-white.}
-  \item{alpha}{alpha transparency, from 0 to 1.}
+  \item{alpha}{alpha transparency, from 0 (fully transparent)  to 1
+    (opaque).} 
+  \item{rgb}{if ‘TRUE’ then a matrix of RGBA values is included as an
+          attribute.}
   \item{plot}{whether to plot a descriptive color diagram.}
 }
 \value{A character vector of color codes.}

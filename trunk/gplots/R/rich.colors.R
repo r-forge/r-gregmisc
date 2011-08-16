@@ -1,4 +1,8 @@
-rich.colors <- function(n, palette="temperature", alpha=1, plot=FALSE)
+rich.colors <- function(n,
+                        palette="temperature",
+                        alpha=1,
+                        rgb=FALSE,
+                        plot=FALSE)
 {
   if(n <= 0)
     return(character(0))
@@ -20,9 +24,13 @@ rich.colors <- function(n, palette="temperature", alpha=1, plot=FALSE)
     b[x>0.4] <- 1
   }
 
-  rgb.m <- matrix(c(r,g,b), ncol=3, dimnames=list(NULL,c("red","green","blue")))
+  rgb.m <- matrix(c(r,g,b), ncol=3,
+                  dimnames=list(NULL,c("red","green","blue")))
   col <- mapply(rgb, r, g, b, alpha)
 
+  if(rgb) 
+    attr(col, "rgb") <- cbind(rgb.m, alpha)
+  
   if(plot)
   {
     opar <- par("fig", "plt")
