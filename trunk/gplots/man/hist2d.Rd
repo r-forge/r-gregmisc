@@ -27,9 +27,8 @@
 }
 \usage{
 hist2d(x,y=NULL, nbins=200, same.scale=FALSE, na.rm=TRUE, show=TRUE,
-       col=c("black", heat.colors(12)), ... )
+       col=c("black", heat.colors(12)), FUN=base::length, ... )
 }
-%- maybe also `usage' for other objects documented here.
 \arguments{
   \item{x}{either a vector containing the x coordinates
     or a matrix with 2 columns. }
@@ -45,6 +44,10 @@ hist2d(x,y=NULL, nbins=200, same.scale=FALSE, na.rm=TRUE, show=TRUE,
     been computed. Defaults to TRUE.}
   \item{col}{ Colors for the histogram. Defaults to "black" for
     bins containing no elements, a set of 16 heat colors for other bins.}
+  \item{FUN}{Function used to summarize bin contents.  Defaults to
+    \code{base::length}. Use, e.g., \code{mean} to calculate means for each bin
+    instead of counts.
+    }
   \item{\dots}{ Parameters passed to the image function. }
 }
 \details{
@@ -61,10 +64,8 @@ hist2d(x,y=NULL, nbins=200, same.scale=FALSE, na.rm=TRUE, show=TRUE,
     bin}
   \item{x}{lower x limit of each bin}
   \item{y}{lower y limit of each bin}
-}
-%\references{ ~put references to the literature/web site here ~ }
+  }
 \author{ Gregory R. Warnes \email{greg@warnes.net}}
-%\note{ ~~further notes~~ }
 
 \seealso{ \code{\link{image}}, \code{\link{persp}}, \code{\link{hist}} }
 
