@@ -4,6 +4,7 @@ export(
        barplot2,
        bluered,
        boxplot.n,
+       ci2d,
        col2hex,
        colorpanel,
        greenred,

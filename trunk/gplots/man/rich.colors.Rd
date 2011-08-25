@@ -15,7 +15,7 @@ rich.colors(n, palette="temperature", alpha=1.0, rgb=FALSE, plot=FALSE)
     black-blue-white.}
   \item{alpha}{alpha transparency, from 0 (fully transparent)  to 1
     (opaque).} 
-  \item{rgb}{if ‘TRUE’ then a matrix of RGBA values is included as an
+  \item{rgb}{if \code{TRUE} then a matrix of RGBA values is included as an
           attribute.}
   \item{plot}{whether to plot a descriptive color diagram.}
 }
