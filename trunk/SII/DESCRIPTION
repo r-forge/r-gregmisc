@@ -1,10 +1,10 @@
 Package: SII
 Type: Package
 Title: Calculate ANSI S3.5-1997 Speech Intelligibility Index
-Version: 1.0.0
-Date: 2010-07-22
+Version: 1.0.1
+Date: 2011-08-26
 Author: Gregory R. Warnes
-Maintainer: Gregory R. Warnes <support@random-technologies-llc.com>
+Maintainer: Gregory R. Warnes <greg@warnes.net>
 Description: 
    This package calculates ANSI S3.5-1997 Speech Intelligibility Index
    (SII), a standard method for computing the intelligibility of
