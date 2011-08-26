@@ -19,7 +19,7 @@
    required frequencies.
 }
 \author{
-  Gregory R. Warnes \email{support@random-technologies-llc.com}
+  Gregory R. Warnes \email{greg@warnes.net}
 }
 \references{
 ANSI S3.5-1997, "American National Standard Methods for 
