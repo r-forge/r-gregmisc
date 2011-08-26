@@ -38,27 +38,41 @@ ci2d <- function(x,
     h2d$density <- h2d$counts / sum(h2d$counts, na.rm=TRUE)
 
     uniqueVals <- rev(unique(sort(h2d$density)))
-    cumProbs <- sapply( uniqueVals, function(val) sum( h2d$density[h2d$density>=val] ) )
+    cumProbs <- sapply(uniqueVals,
+                       function(val) sum( h2d$density[h2d$density>=val] ) )
     names(cumProbs) <- uniqueVals
     h2d$cumDensity <- matrix(nrow=nrow(h2d$density), ncol=ncol(h2d$density))
     h2d$cumDensity[] <- cumProbs[as.character(h2d$density)]
 
     if(show=="image")
       {
-        image( h2d$x, h2d$y, h2d$cumDensity, xlab=xlab, ylab=ylab, breaks=breaks, col=col)
+        image(h2d$x, h2d$y, h2d$cumDensity,
+              xlab=xlab, ylab=ylab,
+              breaks=breaks, col=col)
       }
     else if(show=="filled.contour")
       {
         filled.contour(h2d$x, h2d$y, h2d$cumDensity,
                        levels=breaks,
                        col=col,
-                       key.axes={axis(4, at=breaks); title("\nCI Level")}
+                       key.axes={ axis(4, at=breaks);
+                                  title("\nCI Level") }
                        )
        }
     else if(show=="contour")
-        contour(h2d$x, h2d$y, h2d$cumDensity, levels=breaks, nlevels=length(breaks))
+      {
+        tmpBreaks <- breaks[breaks<1]  # avoid having 1.0 line
+        contour(h2d$x, h2d$y, h2d$cumDensity,
+                levels=tmpBreaks,
+                labels=tmpBreaks,
+                nlevels=length(tmpBreaks),
+                col=col
+                )
+      }
+    
 
-    h2d$contours <- contourLines(h2d$x, h2d$y, h2d$cumDensity, levels=breaks, nlevels=length(breaks))
+    h2d$contours <- contourLines(h2d$x, h2d$y, h2d$cumDensity,
+                                 levels=breaks, nlevels=length(breaks))
     names
     invisible(h2d)
   }
