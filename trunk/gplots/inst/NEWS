@@ -1,3 +1,25 @@
+Release 2.10.0 - 2011-08-26
+---------------------------
+
+New Features:
+
+- New ci2d() function to create 2-dimensional empirical confidence
+  intervals utilizing hist2d().  See ?ci2d for details.
+
+- Add 'alpha' argument to rich.colors() to control transparency.
+
+Improvements:
+
+- Accellerate hist2d by replacing for() loop with tapply(), and allow
+  user to specify summary function applied (per suggestion by Peter
+  Hagedorn).
+
+Bug Fixes:
+
+- Correct error in heatmap.2() that arises when data includes NA values
+  (identified by Melissa Key).
+
+
 Release 2.8.0 - 2010-06-10
 --------------------------
 
@@ -15,7 +37,7 @@ Release 2.7.5 - ??
 
 Improvements:
 
-- Performance of 'hist2d' improved thanks to a suggestion from i
+- Performance of 'hist2d' improved thanks to a suggestion from 
   Joerg van den Hoff.
 
 Release 2.7.4 - 2009-11-12
