@@ -22,7 +22,7 @@ signal(signal, action = c("ignore", "default"))
   Nothing of interest.
 }
 \references{ See the unix man page for "signal" for more information}
-\author{Gregory R. Warnes \email{greg@random-technologies-llc.com},
+\author{Gregory R. Warnes \email{greg@warnes.net},
   with financial support from Metrum Research Group, LLC
   \url{http://www.metrumrg.com}.
 }

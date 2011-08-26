@@ -30,7 +30,7 @@ restoreSIGCLD()
   }
 \references{W.R. Stevens and S.A. Rago, Advanced Programming in the UNIX
   environment, 2nd ed. (c) 2005, Pearson Education, pp 308-310.}
-\author{Gregory R. Warnes \email{greg@random-technologies-llc.com},
+\author{Gregory R. Warnes \email{greg@warnes.net},
   with financial support from Metrum Research Group, LLC
   \url{http://www.metrumrg.com}.
 }
