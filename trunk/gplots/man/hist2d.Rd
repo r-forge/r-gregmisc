@@ -1,24 +1,4 @@
 % $Id$
-%
-% $Log$
-% Revision 1.6  2005/09/12 15:44:36  nj7w
-% Updated Greg's email
-%
-% Revision 1.5  2005/06/09 14:20:28  nj7w
-% Updating the version number, and various help files to synchronize splitting of gregmisc bundle in 4 individual components.
-%
-% Revision 1.1.1.1  2005/05/25 22:15:30  nj7w
-% Initial submission as an individual package
-%
-% Revision 1.4  2002/10/01 18:16:47  warnes
-%
-% - Added examples of using 'contour' and 'filled.contour' for display.
-%
-% Revision 1.3  2002/09/23 13:59:30  warnes
-% - Modified all files to include CVS Id and Log tags.
-%
-%
-
 \name{hist2d}
 \alias{hist2d}
 \title{ Compute and Plot a 2-Dimensional Histogram }
