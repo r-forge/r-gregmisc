@@ -8,20 +8,17 @@
   Create 2-dimensional empirical confidence regions from provided data.
 }
 \usage{
-ci2d <- function(x,
-                 y = NULL,
-                 nbins=51,
-                 method=c("bkde2D","hist2d"),
-                 bandwidth,
-                 factor=1.0,
-                 ci.levels=c(0.50,0.75,0.90,0.95,0.975),
-                 show=c("filled.contour","contour","image","none"),
-                 col=topo.colors(length(breaks)-1),
-                 show.points=FALSE,
-                 pch=par("pch"),
-                 points.col="red",
-                 xlab, ylab, 
-                 ...)
+ci2d(x, y = NULL,
+     nbins=51, method=c("bkde2D","hist2d"),
+     bandwidth, factor=1.0,
+     ci.levels=c(0.50,0.75,0.90,0.95,0.975),
+     show=c("filled.contour","contour","image","none"),
+     col=topo.colors(length(breaks)-1),
+     show.points=FALSE,
+     pch=par("pch"),
+     points.col="red",
+     xlab, ylab, 
+     ...)
 }
 \arguments{
   \item{x}{either a vector containing the x coordinates
@@ -35,6 +32,8 @@ ci2d <- function(x,
     the 2-d density summarizing the data.  Defaults to "bkde2D".}
   \item{bandwidth}{Bandwidth to use for \code{KernSmooth::bkde2D}.
     See below for default value. }
+  \item{factor}{Numeric scaling factor for bandwidth.  Useful for
+    exploring effect of changing the bandwidth.  Defaults to 1.0.}
   \item{ci.levels}{Confidence level(s) to use for plotting
     data. Defaults to \code{c(0.5, 0.75, 0.9, 0.95, 0.975)} }
   \item{show}{Plot type to be displaed.  One of "filled.contour",

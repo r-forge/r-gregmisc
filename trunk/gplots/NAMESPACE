@@ -47,8 +47,6 @@ importFrom(stats, na.omit)
 #importFrom(KernSmooth, bkdeD2)
 #importFrom(KernSmooth, dpik)
 
-
-
 S3method(balloonplot,default)
 S3method(balloonplot,table)
 
