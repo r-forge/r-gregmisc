@@ -4,7 +4,8 @@ Release 2.10.0 - 2011-08-26
 New Features:
 
 - New ci2d() function to create 2-dimensional empirical confidence
-  intervals utilizing hist2d().  See ?ci2d for details.
+  intervals utilizing KernSmooth:bkde2D and gplots::hist2d().  
+  See ?ci2d for details.
 
 - Add 'alpha' argument to rich.colors() to control transparency.
 

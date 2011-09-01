@@ -5,7 +5,7 @@ Depends: gtools, gdata, stats, caTools, grid
 Recommends: datasets, grid, MASS, KernSmooth
 Requires: R (>= 2.10)
 Suggests: gtools
-Version: 2.9.5
+Version: 2.10.0
 Date: 2011-09-01
 Author: Gregory R. Warnes. Includes R source code and/or documentation
         contributed by (in alphabetical order): 
