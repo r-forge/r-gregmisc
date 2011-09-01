@@ -43,8 +43,9 @@ importFrom(stats, na.omit)
 #importFrom(caTools, runsd)
 #importFrom(caTools, runmean)
 
-importFrom(KernSmooth, bkdeD2)
-importFrom(KernSmooth, dpik)
+# No Namespace
+#importFrom(KernSmooth, bkdeD2)
+#importFrom(KernSmooth, dpik)
 
 
 
