@@ -636,7 +636,7 @@ SII:::reload.constants
 
 The package mainainer may use it as :
 <<run.reload.constants, eval=FALSE>>=
-SII:::reload.constants(xls.path="./SII/data")
+SII:::reload.constants(xls.path="./SII/extdata")
 @ 
 
 The SII package must then be rebuilt and reinstalled for the updated
