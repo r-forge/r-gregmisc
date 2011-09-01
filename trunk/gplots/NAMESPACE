@@ -43,6 +43,10 @@ importFrom(stats, na.omit)
 #importFrom(caTools, runsd)
 #importFrom(caTools, runmean)
 
+importFrom(KernSmooth, bkdeD2)
+importFrom(KernSmooth, dpik)
+
+
 
 S3method(balloonplot,default)
 S3method(balloonplot,table)
