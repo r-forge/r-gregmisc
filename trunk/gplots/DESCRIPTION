@@ -4,7 +4,7 @@ Description: Various R programming tools for plotting data
 Depends: R (>= 2.10), gtools, gdata, stats, caTools, grid, KernSmooth
 Recommends: datasets, grid, MASS
 Suggests: gtools
-Version: 2.10.0
+Version: 2.10.1
 Date: 2011-09-01
 Author: Gregory R. Warnes. Includes R source code and/or documentation
         contributed by (in alphabetical order): 
