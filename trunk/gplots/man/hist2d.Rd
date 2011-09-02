@@ -1,6 +1,7 @@
 % $Id$
 \name{hist2d}
 \alias{hist2d}
+\alias{print.hist2d}
 \title{ Compute and Plot a 2-Dimensional Histogram }
 \description{
   Compute and plot a 2-dimensional histogram.
