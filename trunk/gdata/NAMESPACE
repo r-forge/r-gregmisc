@@ -5,6 +5,7 @@ export(
        aggregate.table,
        bindData,
        cbindX,
+       centerText,
        combine,
        ConvertMedUnits,
        drop.levels,
