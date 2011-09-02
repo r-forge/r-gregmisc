@@ -1,9 +1,8 @@
 Package: gplots
 Title: Various R programming tools for plotting data
 Description: Various R programming tools for plotting data
-Depends: gtools, gdata, stats, caTools, grid, KernSmooth
+Depends: R (>= 2.10), gtools, gdata, stats, caTools, grid, KernSmooth
 Recommends: datasets, grid, MASS
-Requires: R (>= 2.10)
 Suggests: gtools
 Version: 2.10.0
 Date: 2011-09-01
