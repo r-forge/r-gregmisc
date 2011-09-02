@@ -62,3 +62,5 @@ S3method(textplot,data.frame)
 S3method(textplot,default)
 S3method(textplot,matrix)
 
+S3method(print,ci2d)
+S3method(print,hist2d)

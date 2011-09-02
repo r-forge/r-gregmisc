@@ -19,6 +19,7 @@ ci2d(x, y = NULL,
      points.col="red",
      xlab, ylab, 
      ...)
+\method{print}{ci2d}(x, ...)
 }
 \arguments{
   \item{x}{either a vector containing the x coordinates
@@ -65,7 +66,9 @@ ci2d(x, y = NULL,
   kernel smoothing method, bin locations, bin sizes, and kernel bandwidth.
   }
 \value{
-  A list containing (at least) the following elements:
+  A \code{ci2d} object consisting of a list containing (at least) the
+  following elements:
+  \item{nobs}{number of original data points}
   \item{x}{x position of each density estimate bin}
   \item{y}{y position of each density estimate bin}
   \item{density}{Matrix containing the probability density of each bin
@@ -73,11 +76,9 @@ ci2d(x, y = NULL,
   \item{cumDensity}{Matrix where each element contains the cumulative
     probability density of all elements with the same density (used to
     create the confidence region plots) }
-  \item{contours}{Contours of each confidence region}.
+  \item{contours}{List of contours of each confidence region.}
   \item{call}{Call used to create this object}
 }
-%\references{
-%}
 \author{ Gregory R. Warnes \email{greg@warnes.net}}
 \seealso{
   \code{\link[KernSmooth]{bkde2D}}, \code{\link[KernSmooth]{dpik}},
@@ -251,12 +252,18 @@ ci2d(x, y = NULL,
            lty=c(NA,1,1,1)
          )
 
-   
+   ####
+   ## Test with a large number of points
+   ####
+   x <- rnorm(60000, sd=1)
+   y <- c( rnorm(40000, mean=x, sd=1),
+           rnorm(20000, mean=x+4, sd=1) )
 
+   hist2d(x,y)
+   ci <- ci2d(x,y)
+   ci
 
 }
-% Add one or more standard keywords, see file 'KEYWORDS' in the
-% R documentation directory.
 \keyword{dplot}
 \keyword{hplot}
 \keyword{nonparametric}

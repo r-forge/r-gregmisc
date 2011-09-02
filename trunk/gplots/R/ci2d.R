@@ -1,4 +1,4 @@
-## $Id$
+# $Id: hist2d.R 1471 2011-08-16 01:03:31Z warnes $
 
 ## first(...) selects the first element of which(...)
 first <- function(x,...)
@@ -87,8 +87,8 @@ ci2d <- function(x,
         h2d$x <- est$x1
         h2d$y <- est$x2
         h2d$counts <- est$fhat
+        h2d$nobs <- nrow(x)
         h2d$density <- est$fhat / sum(est$fhat) # normalize
-
       }
     else
       stop("Unknown method: '", method, "'")
@@ -124,7 +124,8 @@ ci2d <- function(x,
                        xlab=xlab,
                        ylab=ylab,
                        plot.title=plot.title(),
-                       key.title=title("\nCI Level")
+                       key.title=title("\nCI Level"),
+                       key.axes=axis(4, at=breaks)
                        )
        }
     else if(show=="contour")
@@ -153,6 +154,8 @@ ci2d <- function(x,
                             function(J) data.frame(x=J$x, y=J$y) )
 
     h2d$call <- match.call()
+    class(h2d) <- "ci2d"
     
     invisible(h2d)
   }
+

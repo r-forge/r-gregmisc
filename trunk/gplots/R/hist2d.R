@@ -1,16 +1,14 @@
 # $Id$
 
-if(is.R())
-
-  hist2d <- function(x,
-                     y=NULL,
-                     nbins=200,
-                     same.scale=FALSE,
-                     na.rm=TRUE,
-                     show=TRUE,
-                     col=c("black", heat.colors(12)),
-                     FUN=base::length,
-                     ... )
+hist2d <- function(x,
+                   y=NULL,
+                   nbins=200,
+                   same.scale=FALSE,
+                   na.rm=TRUE,
+                   show=TRUE,
+                   col=c("black", heat.colors(12)),
+                   FUN=base::length,
+                   ... )
   {
     if(is.null(y))
       {
@@ -53,12 +51,19 @@ if(is.R())
     ## If we're using length, set empty cells to 0 instead of NA
     if(identical(FUN,base::length))
       m[is.na(m)] <- 0
-        
+    
     xvals <- x.cuts[1:nbins[1]]
     yvals <- y.cuts[1:nbins[2]]
 
     if(show)
       image( xvals,yvals, m, col=col,...)
 
-    invisible(list(counts=m,x=xvals,y=yvals))
+    retval <- list()
+    retval$counts <- m
+    retval$x=xvals
+    retval$y=yvals
+    retval$nobs=length(x)
+    retval$call <- match.call()
+    class(retval) <- "hist2d"
+    retval
   }
