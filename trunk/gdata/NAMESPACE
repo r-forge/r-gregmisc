@@ -4,6 +4,7 @@ export(
        Args,
        aggregate.table,
        bindData,
+       case,
        cbindX,
        centerText,
        combine,
