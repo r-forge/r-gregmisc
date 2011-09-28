@@ -15,7 +15,7 @@ smartbind <- function(..., fill=NA)
                    if(is.matrix(x) || is.data.frame(x))
                      x
                    else
-                     data.frame(as.list(x))
+                     data.frame(as.list(x), check.names=FALSE)
                    )
 
     #retval <- new.env()
