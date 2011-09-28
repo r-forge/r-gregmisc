@@ -2,7 +2,7 @@
 ## Function to do rbind of data frames quickly, even if the columns don't match
 ##
 
-smartbind <- function(...)
+smartbind <- function(..., fill=NA)
   {
     verbose <- FALSE
     
@@ -47,7 +47,7 @@ smartbind <- function(...)
                   newclass <- "character"
                 else
                   newclass <- class(block[,col])
-                retval[[col]] <- as.vector(rep(NA,nrows), mode=newclass)
+                retval[[col]] <- as.vector(rep(fill,nrows), mode=newclass)
               }
             
             retval[[col]][start:end] <- as.vector(block[,col],
