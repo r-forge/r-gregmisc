@@ -5,10 +5,12 @@
   Efficient rbind of data frames, even if the column names don't match
 }
 \usage{
-smartbind(...)
+smartbind(..., fill=NA)
 }
 \arguments{
   \item{\dots}{Data frames to combine}
+  \item{fill}{Value to use when 'filling' missing columns.
+    Defaults to \code{NA}. }
 }
 \value{
   The returned data frame will contain:
@@ -38,6 +40,9 @@ smartbind(...)
 }
   # but smartbind combines them, appropriately creating NA entries
   smartbind(df1, df2)
+
+  # specify fill=0 to put 0 into the missing row entries
+  smartbind(df1, df2, fill=0)
 
 \dontshow{
   n=10 # number of data frames to create
