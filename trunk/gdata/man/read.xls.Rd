@@ -103,7 +103,7 @@ xls2sep(xls, sheet=1, verbose=FALSE, ..., method=c("csv","tsv","tab"),
    nba <- read.xls(nba.url)
    }
 
-   /dontrun{
+   \dontrun{
    # read xls file ignoring all lines prior to first containing State
    crime.url <- "http://www.jrsainfo.org/jabg/state_data2/Tribal_Data00.xls"
    crime <- read.xls(crime.url, pattern = "State")
