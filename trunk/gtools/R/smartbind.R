@@ -2,7 +2,7 @@
 ## Function to do rbind of data frames quickly, even if the columns don't match
 ##
 
-smartbind <- function(..., fill=NA)
+smartbind <- function(..., fill=NA, sep=':')
   {
     verbose <- FALSE
     
@@ -26,7 +26,7 @@ smartbind <- function(..., fill=NA)
     rowNameList <- unlist(lapply( names(data),
                                  function(x) 
                                    if(rowLens[x]<=1) x
-                                   else paste(x, seq(1,rowLens[x]),sep='.'))
+                                   else paste(x, seq(1,rowLens[x]),sep=sep))
                           )
 
        

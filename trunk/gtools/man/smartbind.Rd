@@ -5,12 +5,14 @@
   Efficient rbind of data frames, even if the column names don't match
 }
 \usage{
-smartbind(..., fill=NA)
+smartbind(..., fill=NA, sep=':')
 }
 \arguments{
   \item{\dots}{Data frames to combine}
   \item{fill}{Value to use when 'filling' missing columns.
     Defaults to \code{NA}. }
+  \item{sep}{Character string used to separate column names when pasting
+    them together.}
 }
 \value{
   The returned data frame will contain:
