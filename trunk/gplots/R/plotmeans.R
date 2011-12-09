@@ -13,6 +13,7 @@ plotmeans  <- function (formula, data = NULL, subset, na.action,
                         legends=names(means),
                         xaxt,
                         use.t = TRUE,
+                        lwd,
                         ...)
 {
   is.R <- get("is.R")
@@ -47,7 +48,7 @@ plotmeans  <- function (formula, data = NULL, subset, na.action,
   m$col  <- m$barwidth  <- NULL
   m$digits  <- m$mean.labels  <- m$ci.label  <- m$n.label <- NULL
   m$connect  <- m$ccol  <-  m$legends <- m$labels<- NULL
-  m$xaxt <- m$use.t <- NULL
+  m$xaxt <- m$use.t <- m$lwd <- NULL
   m[[1]] <- as.name("model.frame")
   mf <- eval(m, parent.frame())
   response <- attr(attr(mf, "terms"), "response")
@@ -141,7 +142,7 @@ plotmeans  <- function (formula, data = NULL, subset, na.action,
             lines(x=connect[[which]],y=means[connect[[which]]],col=ccol[which])
         }
       else
-        lines(means, ..., col=ccol)
+        lines(means, ..., lwd=lwd, col=ccol)
     }
 
 
