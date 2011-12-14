@@ -7,18 +7,17 @@
 
 est.mer <- function(obj, cm, beta0, conf.int, show.beta0, n.sim)
 {
-##   if(!require(coda, quietly=TRUE))
-##     stop("coda package required when sim.mer == TRUE")
 
   samp <- mcmcsamp(obj, n.sim)
-##  samp.summ <- summary(samp)
+  ##  samp.summ <- summary(samp)
 
   if(is.null(dim(cm)))
     n <- length(cm)
   else
     n <- dim(cm)[2]
-                               # drop extra information on end
-  samp.cm <- as.matrix(samp)[, 1:n] %*% t(cm)
+
+  ## drop extra information on end
+  samp.cm <- as.matrix(samp@fixef)[, 1:n] %*% t(cm)
 
   # calculate requested statistics
   est <- apply(samp.cm, 2, mean)
