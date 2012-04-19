@@ -10,8 +10,8 @@
 }
 \usage{
 glh.test(reg, cm, d=rep(0, nrow(cm)) )
-print.glh.test(x, digits=4,...)
-summary.glh.test(object, digits=4,...)
+\method{print}{glh.test}(x, digits=4,...)
+\method{summary}{glh.test}(object, digits=4,...)
 }
 
 \arguments{

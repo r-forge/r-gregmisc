@@ -20,7 +20,7 @@
   \method{ci}{lm}(x, confidence = 0.95, alpha = 1 - confidence,...)
   \method{ci}{lme}(x, confidence = 0.95, alpha = 1 - confidence,...)
   \method{ci}{mer}(x, confidence = 0.95, alpha = 1 - confidence,
-                    sim.mer=TRUE, n.sim=1000, ...) 
+                    sim.mer=TRUE, n.sim=10000, ...) 
 }
 \arguments{
   \item{x}{ object from which to compute confidence intervals. }
