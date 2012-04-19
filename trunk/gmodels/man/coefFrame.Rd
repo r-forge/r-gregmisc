@@ -8,7 +8,9 @@
   parameter.
 }
 \usage{
-coefFrame(mod, data, by = NULL, fit.on = TRUE, fitfun, keep.unused.levels = TRUE, byvar.sep = "\001", ...) 
+coefFrame(mod, data, by = NULL, fit.on = TRUE, fitfun,
+          keep.unused.levels = TRUE, byvar.sep = "\001", ...)
+
 }
 \arguments{
   \item{mod}{a model formula, to be passed to by \code{fitfun}.}
