@@ -1,5 +1,6 @@
 Package: gmodels
-Version: 2.15.1
+Version: 2.15.2
+Date: 2012-04-19
 Title: Various R programming tools for model fitting
 Author: Gregory R. Warnes. Includes R source code and/or documentation
         contributed by Ben Bolker, Thomas Lumley, and Randall C
