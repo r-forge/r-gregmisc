@@ -85,7 +85,10 @@ ci.mer <- function (x,
                                 show.beta0 = FALSE,
                                 n.sim = n.sim)
 
-    retval <- retval[, c("Estimate", "Lower.CI", "Upper.CI", "Std. Error", "p value")]
+    retval <- retval[,
+                     c("Estimate", "Lower.CI", "Upper.CI", "Std. Error", "p value"),
+                     drop=FALSE
+                     ]
     colnames(retval)[c(2:3, 5)] <- c("CI lower", "CI upper", "p-value")
     rownames(retval) <- names(x.effects)
     
