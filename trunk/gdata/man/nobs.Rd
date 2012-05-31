@@ -28,30 +28,30 @@
 %
 
 \name{nobs}
-\alias{nobs}
-\alias{nobs.default}
+%% \alias{nobs} % Now provided by stats
 \alias{nobs.data.frame}
-\alias{nobs.lm}
+\alias{nobs.default} 
+%% \alias{nobs.lm} % Now provided by stats
 %- Also NEED an `\alias' for EACH other topic documented here.
 \title{ Compute the Number of Non-missing Observations }
 \description{
- Compute the number of non-missing observations.  Special methods exist for
- data frames, and lm objects.
+ Compute the number of non-missing observations.  New 'default' method,
+ and method for data frames.
 }
 \usage{
-nobs(x, ...)
-\method{nobs}{default}(x, ...)
-\method{nobs}{data.frame}(x, ...)
-\method{nobs}{lm}(x, ...)
+%% nobs(object, ...)
+\method{nobs}{default}(object, ...)
+\method{nobs}{data.frame}(object, ...)
+%% \method{nobs}{lm}(object, ...)
 }
 \arguments{
-  \item{x}{ Target Object }
+  \item{object}{ Target Object }
   \item{\dots}{ Optional parameters (currently ignored)}
 }
 \details{
 
   In the simplest case, this is really just wrapper code for
-  \code{sum(!is.na(x))}.
+  \code{sum(!is.na(object))}.
   
 }
 \value{

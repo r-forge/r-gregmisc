@@ -1,12 +1,14 @@
 # $Id$
 
-nobs <- function(x,...)
-  UseMethod("nobs",x)
+## Now provided by 'stats' package
+## nobs <- function(x,...)
+##  UseMethod("nobs",x)
 
-nobs.default <- function(x, ...) sum( !is.na(x) )
+nobs.default <- function(object, ...) sum( !is.na(object) )
 
-nobs.data.frame <- function(x, ...)
-  sapply(x, nobs.default)
+nobs.data.frame <- function(object, ...)
+  sapply(object, nobs.default)
 
-nobs.lm <- function(x, ...)
-  nobs.default(x$residuals)
+## Now provided by the 'stats' package
+## nobs.lm <- function(x, ...)
+##   nobs.default(x$residuals)
