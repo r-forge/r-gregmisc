@@ -8,7 +8,7 @@
   class \code{aov}. One can interactively label the points in the plot.
 }
 \usage{
-qqnorm.aov(y, full=FALSE, label=FALSE, omit=NULL,
+\method{qqnorm}{aov}(y, full=FALSE, label=FALSE, omit=NULL,
            xlab=paste(if (full) "" else "Half", " Normal plot"), 
            ylab="Effects", ...)
 }
