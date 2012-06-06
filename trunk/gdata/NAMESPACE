@@ -22,7 +22,7 @@ export(
        lowerTriangle,
        "lowerTriangle<-",
        matchcols,
-       #nobs,  # default method now provided by stats package
+       nobs,  # default method now provided by stats package
        nPairs,
        read.xls,
        rename.vars,
@@ -123,7 +123,7 @@ S3method(sort, levelsMap)
 ## nobs stuff
 S3method(nobs, data.frame)
 S3method(nobs, default) 
-##S3method(nobs, lm)      # now provided by stats package
+S3method(nobs, lm)      # now provided by stats package
 
 ## Object size stuff
 S3method(print, object_size)
