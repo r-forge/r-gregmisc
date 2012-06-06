@@ -1,4 +1,12 @@
-Changes in 2.10.1 (2012-06-05)
+Changes in 2.10.2 (2012-06-06)
+------------------------------
+
+Bug fixes:
+
+- Fix issues in nobs.default identified in testing with the gmodels package.
+
+
+Changes in 2.10.1 (2012-06-06)
 ------------------------------
 
 Bug fixes:
