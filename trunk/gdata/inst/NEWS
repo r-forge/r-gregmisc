@@ -1,3 +1,13 @@
+Changes in 2.10.1 (2012-06-05)
+------------------------------
+
+Bug fixes:
+
+- Undo removal of 'nobs' and 'nobs.lm'.  Instead define aliases for
+  'nobs' and 'nobs.lm' to support backward compatibility for packages
+  depending on gdata.
+
+
 Changes in 2.10.0 (2012-06-05)
 ------------------------------
 
