@@ -27,7 +27,7 @@ xls2sep(xls, sheet=1, verbose=FALSE, ..., method=c("csv","tsv","tab"),
   \item{method}{intermediate file format, "csv" for comma-separated and
     "tab" for tab-separated}
   \item{na.strings}{a character vector of strings which are to be interpreted
-          as ‘NA’ values. See \code{\link[utils]{read.table}} for details.}
+          as 'NA' values. See \code{\link[utils]{read.table}} for details.}
   \item{...}{additional arguments to read.table. The defaults for
     read.csv() are used.}
 }
