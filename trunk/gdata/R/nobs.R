@@ -1,8 +1,10 @@
 # $Id$
 
-## Now provided by 'stats' package, provide aliase here to satisfy
-## dependencies
-nobs <- stats::nobs
+## Redefine here, so that the locally defined methods (particularly
+## nobs.default) take precidence over the ones now defined in the
+## stats package
+nobs <- function(object, ...)
+  UseMethod("nobs")
 
 nobs.default <- function(object, ...)
   {
@@ -16,7 +18,7 @@ nobs.default <- function(object, ...)
 nobs.data.frame <- function(object, ...)
   sapply(object, nobs.default)
 
-## Now provided by 'stats' package, provide 'alias' to satisfy
+## Now provided by 'stats' package, so provide alias to satisfy
 ## dependencies
 nobs.lm <- stats:::nobs.lm
 
