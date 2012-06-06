@@ -23,6 +23,10 @@ gdata: read.xls support for 'XLSX' (Excel 2007+) files ENABLED.
 
 Attaching package: 'gdata'
 
+The following object(s) are masked from 'package:stats':
+
+    nobs
+
 The following object(s) are masked from 'package:utils':
 
     object.size
@@ -640,4 +644,4 @@ The following object(s) are masked from 'package:utils':
 > 
 > proc.time()
    user  system elapsed 
-  2.950   0.357   3.509 
+  3.054   0.376   3.563 
