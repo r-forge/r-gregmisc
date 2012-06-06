@@ -8,10 +8,10 @@ nobs <- function(object, ...)
 
 nobs.default <- function(object, ...)
   {
-    if(is.vector(object))
+    if(is.numeric(object))
       sum( !is.na(object) )
     else
-      stats::nobs.default(object, ...)
+      stats:::nobs.default(object, ...)
   }
     
 
