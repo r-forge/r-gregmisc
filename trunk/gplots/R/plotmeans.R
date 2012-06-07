@@ -13,7 +13,7 @@ plotmeans  <- function (formula, data = NULL, subset, na.action,
                         legends=names(means),
                         xaxt,
                         use.t = TRUE,
-                        lwd,
+                        lwd=par("lwd"),
                         ...)
 {
   is.R <- get("is.R")

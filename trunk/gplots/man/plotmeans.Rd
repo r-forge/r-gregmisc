@@ -12,7 +12,7 @@ plotmeans(formula, data=NULL, subset, na.action,
           ci.label=FALSE, n.label=TRUE, digits=getOption("digits"),
           col="black", barwidth=1, barcol="blue",
           connect=TRUE, ccol=col, legends=names(means), xaxt,
-          use.t=TRUE, lwd, ...)
+          use.t=TRUE, lwd=par("lwd"), ...)
 }
 %
 %\usage{
