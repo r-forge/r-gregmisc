@@ -8,6 +8,8 @@ hist2d <- function(x,
                    show=TRUE,
                    col=c("black", heat.colors(12)),
                    FUN=base::length,
+                   xlab,
+                   ylab,
                    ... )
   {
     if(is.null(y))
@@ -32,13 +34,13 @@ hist2d <- function(x,
 
     if(same.scale)
       {
-        x.cuts <- seq( from=min(x,y), to=max(x,y), length=nbins[1])
-        y.cuts <- seq( from=min(x,y), to=max(x,y), length=nbins[2])
+        x.cuts <- seq( from=min(x,y), to=max(x,y), length=nbins[1]+1)
+        y.cuts <- seq( from=min(x,y), to=max(x,y), length=nbins[2]+1)
       }
     else
       {
-        x.cuts <- seq( from=min(x), to=max(x), length=nbins[1])
-        y.cuts <- seq( from=min(y), to=max(y), length=nbins[2])
+        x.cuts <- seq( from=min(x), to=max(x), length=nbins[1]+1)
+        y.cuts <- seq( from=min(y), to=max(y), length=nbins[2]+1)
       }
 
     index.x <- cut( x, x.cuts, include.lowest=TRUE)
@@ -51,15 +53,22 @@ hist2d <- function(x,
     ## If we're using length, set empty cells to 0 instead of NA
     if(identical(FUN,base::length))
       m[is.na(m)] <- 0
+
+    if(missing(xlab)) xlab <- deparse(substitute(xlab))
+    if(missing(ylab)) ylab <- deparse(substitute(ylab))
     
     if(show)
-      image( x.cuts, y.cuts, m, col=col, ...)
+      image( x.cuts, y.cuts, m, col=col, xlab=xlab, ylab=ylab, ...)
 
+    midpoints <- function(x) (x[-1]+x[-length(x)])/2
+    
     retval <- list()
     retval$counts <- m
-    retval$x=x.cuts
-    retval$y=y.cuts
-    retval$nobs=length(x)
+    retval$x.breaks = x.cuts
+    retval$y.breaks = y.cuts
+    retval$x = midpoints(x.cuts)
+    retval$y = midpoints(y.cuts)
+    retval$nobs = length(x)
     retval$call <- match.call()
     class(retval) <- "hist2d"
     retval
