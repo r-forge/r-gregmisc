@@ -32,13 +32,13 @@ hist2d <- function(x,
 
     if(same.scale)
       {
-        x.cuts <- seq( from=min(x,y), to=max(x,y), length=nbins[1]+1, labels=FALSE)
-        y.cuts <- seq( from=min(x,y), to=max(x,y), length=nbins[2]+1, labels=FALSE)
+        x.cuts <- seq( from=min(x,y), to=max(x,y), length=nbins[1])
+        y.cuts <- seq( from=min(x,y), to=max(x,y), length=nbins[2])
       }
     else
       {
-        x.cuts <- seq( from=min(x), to=max(x), length=nbins[1]+1, labels=FALSE)
-        y.cuts <- seq( from=min(y), to=max(y), length=nbins[2]+1, labels=FALSE)
+        x.cuts <- seq( from=min(x), to=max(x), length=nbins[1])
+        y.cuts <- seq( from=min(y), to=max(y), length=nbins[2])
       }
 
     index.x <- cut( x, x.cuts, include.lowest=TRUE)
@@ -52,16 +52,13 @@ hist2d <- function(x,
     if(identical(FUN,base::length))
       m[is.na(m)] <- 0
     
-    xvals <- x.cuts[1:nbins[1]]
-    yvals <- y.cuts[1:nbins[2]]
-
     if(show)
-      image( xvals,yvals, m, col=col,...)
+      image( x.cuts, y.cuts, m, col=col, ...)
 
     retval <- list()
     retval$counts <- m
-    retval$x=xvals
-    retval$y=yvals
+    retval$x=x.cuts
+    retval$y=y.cuts
     retval$nobs=length(x)
     retval$call <- match.call()
     class(retval) <- "hist2d"
