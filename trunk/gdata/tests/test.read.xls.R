@@ -2,7 +2,7 @@ library(gdata)
 
 if ( ! 'XLSX' %in% xlsFormats() )
   {
-    try( installXLSXModules() )
+    try( installXLSXsupport() )
   }
 
 # iris.xls is included in the gregmisc package for use as an example
