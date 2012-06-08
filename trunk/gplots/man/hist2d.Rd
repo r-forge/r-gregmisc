@@ -29,9 +29,8 @@ hist2d(x,y=NULL, nbins=200, same.scale=FALSE, na.rm=TRUE, show=TRUE,
     bins containing no elements, a set of 16 heat colors for other bins.}
   \item{FUN}{Function used to summarize bin contents.  Defaults to
     \code{base::length}. Use, e.g., \code{mean} to calculate means for each bin
-    instead of counts.
+    instead of counts.}
   \item{xlab,ylab}{(Optional) x and y axis labels}
-    }
   \item{\dots}{ Parameters passed to the image function. }
 }
 \details{
