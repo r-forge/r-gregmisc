@@ -313,7 +313,7 @@ ooplot.default <- function(data, width=1, space=NULL, names.arg=NULL,
     }
 
   if (beside)
-    w.m <- matrix(w.m, nc=NC)
+    w.m <- matrix(w.m, ncol=NC)
 
   ## check height/ci.l if using log scale to prevent log(<=0) error
   ## adjust appropriate ranges and bar base values
