@@ -34,7 +34,7 @@ The following object(s) are masked from 'package:utils':
 > 
 > if ( ! 'XLSX' %in% xlsFormats() )
 +   {
-+     try( installXLSXModules() )
++     try( installXLSXsupport() )
 +   }
 > 
 > # iris.xls is included in the gregmisc package for use as an example
@@ -644,4 +644,4 @@ The following object(s) are masked from 'package:utils':
 > 
 > proc.time()
    user  system elapsed 
-  3.054   0.376   3.563 
+  2.916   0.357   3.366 
