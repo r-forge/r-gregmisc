@@ -21,4 +21,3 @@ nobs.data.frame <- function(object, ...)
 ## Now provided by 'stats' package, so provide alias to satisfy
 ## dependencies
 nobs.lm <- stats:::nobs.lm
-
