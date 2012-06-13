@@ -8,7 +8,7 @@ nobs <- function(object, ...)
 
 nobs.default <- function(object, ...)
   {
-    if(is.numeric(object))
+    if(is.numeric(object) || is.logical(object))
       sum( !is.na(object) )
     else
       stats:::nobs.default(object, ...)
