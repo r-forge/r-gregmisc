@@ -5,7 +5,7 @@
   Efficient rbind of data frames, even if the column names don't match
 }
 \usage{
-smartbind(..., fill=NA, sep=':')
+smartbind(..., fill=NA, sep=':', verbose=FALSE)
 }
 \arguments{
   \item{\dots}{Data frames to combine}
@@ -13,6 +13,8 @@ smartbind(..., fill=NA, sep=':')
     Defaults to \code{NA}. }
   \item{sep}{Character string used to separate column names when pasting
     them together.}
+  \item{verbose}{Logical flag indicating whether to display processing
+    messages. Defaults to \code{FALSE}.}
 }
 \value{
   The returned data frame will contain:
