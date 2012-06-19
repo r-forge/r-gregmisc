@@ -58,21 +58,21 @@
 
   if(is.null(Y))  # univariate
     {
-      funct <- function(which,what,fun,...) fun(what[which],...)
+      funct.uni <- function(which,what,fun,...) fun(what[which],...)
 
       if(simplify)
-        Xvar <- sapply(run.elements, funct, what=X, fun=fun, ...)
+        Xvar <- sapply(run.elements, funct.uni, what=X, fun=fun, ...)
       else
-        Xvar <- lapply(run.elements, funct, what=X, fun=fun, ...)
+        Xvar <- lapply(run.elements, funct.uni, what=X, fun=fun, ...)
     }
   else # bivariate
     {
-      funct <- function(which,XX,YY,fun,...) fun(XX[which],YY[which], ...)
+      funct.bi <- function(which,XX,YY,fun,...) fun(XX[which],YY[which], ...)
 
       if(simplify)
-        Xvar <- sapply(run.elements, funct, XX=X, YY=Y, fun=fun, ...)
+        Xvar <- sapply(run.elements, funct.bi, XX=X, YY=Y, fun=fun, ...)
       else
-        Xvar <- lapply(run.elements, funct, XX=X, YY=Y, fun=fun, ...)
+        Xvar <- lapply(run.elements, funct.bi, XX=X, YY=Y, fun=fun, ...)
     }
 
 
