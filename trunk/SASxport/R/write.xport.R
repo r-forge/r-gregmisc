@@ -88,33 +88,8 @@ write.xport <- function(...,
 
     #######
     ##
-    scat("Check length of object names...\n")
-    long.names <- which(nchar(dfNames)>8)
-    if(length(long.names)>0)
-      {
-        old.names <- dfNames[long.names]
-        new.names <- substr(old.names, 1, 8 )
-        
-        warning("Truncating object names with more than 8 characters. ",
-                paste(long.names,
-                      ":'",
-                      old.names,
-                      "' --> '",
-                      new.names,
-                      "'",
-                      sep="",
-                      collapse=", " ))
-        
-        dfNames[long.names] <- new.names
-      }
-
-    #######
-    ##
     scat("Ensure object names are valid and unique...\n")
-    dfNames <- substr(make.names(dfNames, unique=TRUE),1,8)
-    if( all(names(dfList)!=dfNames))
-      warning("Data frame names modified to obey SAS rules")
-    names(dfList) <- dfNames
+    names(dfList) <- dfNames <- makeSASNames(dfNames)
     ##
     #######
 
@@ -174,14 +149,9 @@ write.xport <- function(...,
             dfList[[i]] <- df
           }
 
-        varNames <- substr(make.names(colnames(df), unique=TRUE),1,8)
-        if( any(colnames(df)!=varNames))
-          {
-            warning("Variable names modified to obey SAS rules")
-            colnames(df) <- varNames
-            dfList[[i]] <- df
-          }
-
+        
+        colnames(dfList[[i]]) <- colnames(df) <- varNames <- makeSASNames(colnames(df))
+        
         offsetTable <- data.frame("name"=varNames, "len"=NA, "offset"=NA )
         rownames(offsetTable) <- offsetTable[,"name"]
 
