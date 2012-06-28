@@ -66,12 +66,12 @@ data(state)
 reg  <-  lm(Area ~ Population, data=as.data.frame(state.x77))
 ci(reg) 
 
-\dontrun{
+%\dontrun{
 # mer example
 library(lme4)
 fm2 <- lmer(Reaction ~ Days + (1|Subject) + (0+Days|Subject), sleepstudy)
 ci(fm2)
-}
+%}
 
 
 }
