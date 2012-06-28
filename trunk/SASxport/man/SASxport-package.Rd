@@ -51,11 +51,10 @@ write.xport             Write data to a SAS XPORT file
 }
 }
 \author{
-  Unless otherwise noted, the contents of this package were written by
-  Gregory R. Warnes \email{greg@warnes.net}, are
-  Copyright (c) 2007 by Random Technologies LLC \cr
-  \url{http://random-technologies-llc.com}, and are provided under the
-  terms of the GNU General Public License, version 2.0 or later. 
+  Unless otherwise noted, the contents of this package were written and
+  Copyright (C) 2007 by Gregory R. Warnes \email{greg@warnes.net} and
+  are provided under the terms of the GNU General Public License,
+  version 2.0 or later.
 
   The file 'htond.c' is extracted from BRL-CAD
   \url{http://www.brlcad.org/}, written by Michael John Muuss, and is 
@@ -76,10 +75,5 @@ write.xport             Write data to a SAS XPORT file
   }
 \section{Maintainer}{
   Gregory R. Warnes \email{greg@warnes.net}
-}
-\section{Support}{
-  Technical support contracts and other services for R, this package,
-  and other packages are available from Random Technologies LLC
-  \url{http://random-technologies-llc.com}.
 }
 \keyword{package}

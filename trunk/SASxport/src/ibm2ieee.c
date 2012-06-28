@@ -6,8 +6,7 @@
  * Copyright (c) 2004-2007 United States Government as represented by
  * the U.S. Army Research Laboratory.
  *
- *  * Minor changes (c) 2007 Random Technologies LLC by Gregory R. Warnes
- * <greg@random-technologies-llc.com>
+ *  * Minor changes (c) 2007 by Gregory R. Warnes <greg@warnes.net>
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public License
@@ -146,7 +145,8 @@ ibm_normalized:
 
 		/* After suitable testing, this check can be deleted */
 		if( (left & 0x00800000) == 0 )  {
-			fprintf(stderr,"ibm->ieee missing 1, left=x%x\n", left);
+		  //fprintf(stderr,
+		  error("ibm->ieee missing 1, left=x%x\n", left);
 			left = (left<<1) | (right>>31);
 			right <<= 1;
 			goto ibm_normalized;

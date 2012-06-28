@@ -2,9 +2,9 @@
  *
  *    init.c: Routines to register SASxport C routines with R
  *
- *    Author:  Gregory R. Warnes <greg@random-technologies-llc.com>
+ *    Author:  Gregory R. Warnes <greg@warnes.net>
  *
- *    Copyright (C) 2007  Random Technologies LLC
+ *    Copyright (C) 2007 Gregory R. Warnes
  * 
  *    This program is free software; you can redistribute it and/or modify
  *    it under the terms of the GNU General Public License as published by

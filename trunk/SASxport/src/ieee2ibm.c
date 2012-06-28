@@ -6,8 +6,7 @@
  * Copyright (c) 2004-2007 United States Government as represented by
  * the U.S. Army Research Laboratory.
  *
- * Minor changes (c) 2007 Random Technologies LLC by Gregory R. Warnes
- * <greg@random-technologies-llc.com>
+ * Minor changes (c) 2007 Gregory R. Warnes <greg@warnes.net>
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public License
