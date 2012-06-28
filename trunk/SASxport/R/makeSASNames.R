@@ -1,4 +1,4 @@
-makeSASNames <- function(names, nchar=8, maxPasses=10)
+makeSASNames <- function(names, nchar=8, maxPasses=10, quiet=FALSE)
   {
     ## This function takes a vector of potential SAS dataset or
     ## variable names and converts them into *unique* 8-character
@@ -12,7 +12,8 @@ makeSASNames <- function(names, nchar=8, maxPasses=10)
     if (any(tooLong))
       {
         shortNames <- substr(as.character(names), 1, nchar)
-        warning("Truncated ", sum(tooLong), " long names to 8 characters.")
+        if(!quiet)
+          warning("Truncated ", sum(tooLong), " long names to 8 characters.")
       }
     else
       shortNames <- names
@@ -26,7 +27,7 @@ makeSASNames <- function(names, nchar=8, maxPasses=10)
       {
         passes <- passes+1
         dups <- duplicated(varNames)
-        repeatCount <- table(varNames[dups])
+        repeatCount <- table(varNames)-1
         digitChars <- nchar(as.character(repeatCount))+1
         names(digitChars) <- names(repeatCount)
         newNames <- make.names(substr(varNames, 1, nchar-digitChars[varNames]), unique=TRUE)
@@ -39,7 +40,7 @@ makeSASNames <- function(names, nchar=8, maxPasses=10)
     if(any(duplicated(varNames)))
       stop("Unable to make all names unique after ", passes, " passes.")
     
-    if(any(dups))
+    if(any(dups) && !quiet)
       warning("Made ",sum(dups)," duplicate names unique.")
 
     varNames
