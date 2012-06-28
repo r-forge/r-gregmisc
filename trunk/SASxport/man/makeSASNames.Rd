@@ -31,7 +31,7 @@ makeSASNames(names, nchar = 8, maxPasses = 10)
   Gregory R. Warnes \email{greg@warnes.net}
 }
 \seealso{
-  make.names
+  \code{\link[base]{make.names}}
 }
 \examples{
   ## Simple example: no duplicates or more than 8 characters
