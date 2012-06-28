@@ -70,14 +70,8 @@ write.xport(...,
 }
 \author{Gregory R. Warnes \email{greg@warnes.net}}
 \note{
-   This package was created by Random Technologies LLC
-   \url{http://random-technologies-llc.com}
-   with partial funding by Metrum Institute
+   This package was created with partial funding by Metrum Institute
    \url{http://metruminstitute.org}. 
-
-  Technical support contracts for this and other R packages are available
-  from Random Technologies LLC \url{http://random-technologies-llc.com}.
-
 }
 \seealso{
   \code{\link{toSAS}},

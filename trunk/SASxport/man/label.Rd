@@ -49,8 +49,10 @@ SASiformat(x) <- value
   \code{"SASiformat"} attribute of x, if any; otherwise, the value provided
   by \code{default}.    
 }
-\author{Gregory R. Warnes \email{greg@random-techologies-llc.com} based
-  on code from the \code{Hmisc} library by Frank E. Harrell, Jr.}
+\author{
+  Gregory R. Warnes \email{greg@warnes.net} based on code from the
+  \code{Hmisc} library by Frank E. Harrell, Jr.  ]
+}
 %\seealso{
 %}
 \examples{
