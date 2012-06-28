@@ -1,6 +1,6 @@
 
-R version 2.12.0 (2010-10-15)
-Copyright (C) 2010 The R Foundation for Statistical Computing
+R version 2.15.0 (2012-03-30)
+Copyright (C) 2012 The R Foundation for Statistical Computing
 ISBN 3-900051-07-0
 Platform: i386-apple-darwin9.8.0/i386 (32-bit)
 
@@ -18,10 +18,7 @@ Type 'q()' to quit R.
 
 > library(SASxport)
 
-Loaded SASxport version 1.2.4 (2010-11-11).
-
-  Updates and technical support available from Random Technologies, LLC
-  <http://random-technologies-llc.com/products/SASxport>
+Loaded SASxport version 1.3.0 (2012-06-21).
 
   Type `?SASxport' for usage information.
 
@@ -116,22 +113,19 @@ rd.xpr>
 rd.xpr> 
 rd.xpr> 
 > write.xport(w$test,file="a.xpt") #1.a
-Warning message:
-In write.xport(w$test, file = "a.xpt") :
-  Data frame names modified to obey SAS rules
 > lookup.xport("a.xpt")            #1.b
 
 SAS xport file
 --------------
 Filename: `a.xpt'
 
-Variables in data set `W.TEST':
+Variables in data set `W$TEST':
  dataset name      type   format flength fdigits iformat iflength ifdigits
-  W.TEST RACE character     RACE       0       0                0        0
-  W.TEST  AGE   numeric                0       0                0        0
-  W.TEST   D1   numeric   MMDDYY      10       0                0        0
-  W.TEST  DT1   numeric DATETIME       0       0                0        0
-  W.TEST   T1 character     TIME       0       0                0        0
+  W$TEST RACE character     RACE       0       0                0        0
+  W$TEST  AGE   numeric                0       0                0        0
+  W$TEST   D1   numeric   MMDDYY      10       0                0        0
+  W$TEST  DT1   numeric DATETIME       0       0                0        0
+  W$TEST   T1 character     TIME       0       0                0        0
                      label nobs
                               2
  Age at Beginning of Study    2
@@ -345,22 +339,19 @@ $z
 
 > 
 > write.xport(w$test,w$z,file="a.xpt") #5.a
-Warning message:
-In write.xport(w$test, w$z, file = "a.xpt") :
-  Data frame names modified to obey SAS rules
 > lookup.xport("a.xpt")                #5.b
 
 SAS xport file
 --------------
 Filename: `a.xpt'
 
-Variables in data set `W.TEST':
+Variables in data set `W$TEST':
  dataset name      type   format flength fdigits iformat iflength ifdigits
-  W.TEST RACE character     RACE       0       0                0        0
-  W.TEST  AGE   numeric                0       0                0        0
-  W.TEST   D1   numeric   MMDDYY      10       0                0        0
-  W.TEST  DT1   numeric DATETIME       0       0                0        0
-  W.TEST   T1 character     TIME       0       0                0        0
+  W$TEST RACE character     RACE       0       0                0        0
+  W$TEST  AGE   numeric                0       0                0        0
+  W$TEST   D1   numeric   MMDDYY      10       0                0        0
+  W$TEST  DT1   numeric DATETIME       0       0                0        0
+  W$TEST   T1 character     TIME       0       0                0        0
                      label nobs
                               2
  Age at Beginning of Study    2
@@ -368,14 +359,14 @@ Variables in data set `W.TEST':
                               2
                               2
 
-Variables in data set `W.Z':
+Variables in data set `W$Z':
  dataset name    type format flength fdigits iformat iflength ifdigits label
-     W.Z   X3 numeric              0       0                0        0      
-     W.Z   X4 numeric              0       0                0        0      
-     W.Z   X5 numeric              0       0                0        0      
-     W.Z   X6 numeric              0       0                0        0      
-     W.Z   X7 numeric              0       0                0        0      
-     W.Z   X8 numeric              0       0                0        0      
+     W$Z   X3 numeric              0       0                0        0      
+     W$Z   X4 numeric              0       0                0        0      
+     W$Z   X5 numeric              0       0                0        0      
+     W$Z   X6 numeric              0       0                0        0      
+     W$Z   X7 numeric              0       0                0        0      
+     W$Z   X8 numeric              0       0                0        0      
  nobs
   100
   100
@@ -385,12 +376,12 @@ Variables in data set `W.Z':
   100
 
 > (tmp <- read.xport("a.xpt"))         #5.c
-$w.test
+$`w$test`
   RACE AGE         D1                    DT1       T1
 1 blue  30 2002-03-03 (03 Mar 2002 04:31:02) 11:13:45
 2       31 2002-06-03 (03 Jun 2002 04:42:07) 11:14:13
 
-$w.z
+$`w$z`
              X3         X4          X5         X6         X7          X8
 1   0.554809570 0.91026592 0.199472918 0.77819594 0.76480773 0.907832049
 2   0.628906250 0.59507513 0.149382079 0.19969965 0.45795571 0.571611564
@@ -501,13 +492,13 @@ SAS xport file
 --------------
 Filename: `a.xpt'
 
-Variables in data set `W.TEST':
+Variables in data set `W$TEST':
  dataset name      type   format flength fdigits iformat iflength ifdigits
-  W.TEST RACE character     RACE       0       0                0        0
-  W.TEST  AGE   numeric                0       0                0        0
-  W.TEST   D1   numeric   MMDDYY      10       0                0        0
-  W.TEST  DT1   numeric DATETIME       0       0                0        0
-  W.TEST   T1 character     TIME       0       0                0        0
+  W$TEST RACE character     RACE       0       0                0        0
+  W$TEST  AGE   numeric                0       0                0        0
+  W$TEST   D1   numeric   MMDDYY      10       0                0        0
+  W$TEST  DT1   numeric DATETIME       0       0                0        0
+  W$TEST   T1 character     TIME       0       0                0        0
                      label nobs
                               2
  Age at Beginning of Study    2
@@ -532,7 +523,7 @@ Variables in data set `Z':
   100
 
 > (tmp <- read.xport("a.xpt"))           #6.c
-$w.test
+$`w$test`
   RACE AGE         D1                    DT1       T1
 1 blue  30 2002-03-03 (03 Mar 2002 04:31:02) 11:13:45
 2       31 2002-06-03 (03 Jun 2002 04:42:07) 11:14:13
@@ -836,22 +827,19 @@ $z
 > 
 > names(w) <- NULL
 > write.xport(w[[1]],w[[2]],file="a.xpt") #8.a
-Warning message:
-In write.xport(w[[1]], w[[2]], file = "a.xpt") :
-  Data frame names modified to obey SAS rules
 > lookup.xport("a.xpt")                   #8.b
 
 SAS xport file
 --------------
 Filename: `a.xpt'
 
-Variables in data set `W..1..':
+Variables in data set `W[[1]]':
  dataset name      type   format flength fdigits iformat iflength ifdigits
-  W..1.. RACE character     RACE       0       0                0        0
-  W..1..  AGE   numeric                0       0                0        0
-  W..1..   D1   numeric   MMDDYY      10       0                0        0
-  W..1..  DT1   numeric DATETIME       0       0                0        0
-  W..1..   T1 character     TIME       0       0                0        0
+  W[[1]] RACE character     RACE       0       0                0        0
+  W[[1]]  AGE   numeric                0       0                0        0
+  W[[1]]   D1   numeric   MMDDYY      10       0                0        0
+  W[[1]]  DT1   numeric DATETIME       0       0                0        0
+  W[[1]]   T1 character     TIME       0       0                0        0
                      label nobs
                               2
  Age at Beginning of Study    2
@@ -859,14 +847,14 @@ Variables in data set `W..1..':
                               2
                               2
 
-Variables in data set `W..2..':
+Variables in data set `W[[2]]':
  dataset name    type format flength fdigits iformat iflength ifdigits label
-  W..2..   X3 numeric              0       0                0        0      
-  W..2..   X4 numeric              0       0                0        0      
-  W..2..   X5 numeric              0       0                0        0      
-  W..2..   X6 numeric              0       0                0        0      
-  W..2..   X7 numeric              0       0                0        0      
-  W..2..   X8 numeric              0       0                0        0      
+  W[[2]]   X3 numeric              0       0                0        0      
+  W[[2]]   X4 numeric              0       0                0        0      
+  W[[2]]   X5 numeric              0       0                0        0      
+  W[[2]]   X6 numeric              0       0                0        0      
+  W[[2]]   X7 numeric              0       0                0        0      
+  W[[2]]   X8 numeric              0       0                0        0      
  nobs
   100
   100
@@ -876,12 +864,12 @@ Variables in data set `W..2..':
   100
 
 > (tmp <- read.xport("a.xpt"))            #8.c
-$w..1..
+$`w[[1]]`
   RACE AGE         D1                    DT1       T1
 1 blue  30 2002-03-03 (03 Mar 2002 04:31:02) 11:13:45
 2       31 2002-06-03 (03 Jun 2002 04:42:07) 11:14:13
 
-$w..2..
+$`w[[2]]`
              X3         X4          X5         X6         X7          X8
 1   0.554809570 0.91026592 0.199472918 0.77819594 0.76480773 0.907832049
 2   0.628906250 0.59507513 0.149382079 0.19969965 0.45795571 0.571611564
@@ -2174,3 +2162,6 @@ $z
 100 0.823852539 0.12452227 0.845681194 0.08775397 0.15969781 0.854058568
 
 > 
+> proc.time()
+   user  system elapsed 
+  2.092   0.073   8.083 
