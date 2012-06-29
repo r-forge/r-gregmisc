@@ -10,6 +10,8 @@ export(
        write.xport,
        "label",
        "label<-",
+
+       makeSASNames,
        
        "SASformat",
        "SASformat<-",
