@@ -7,13 +7,15 @@
   Create valid and unique SAS names from a character vector.
 }
 \usage{
-makeSASNames(names, nchar = 8, maxPasses = 10)
+makeSASNames(names, nchar = 8, maxPasses = 10, quiet=FALSE)
 }
 \arguments{
   \item{names}{character vector of candidate names}
   \item{nchar}{maximum number of characters}
-  \item{maxPasses}{maximum number of attempt to resolve
-    truncation-related conflicts.}
+  \item{maxPasses}{maximum number of interations to resolve
+    truncation-related name duplication.}
+  \item{quiet}{Logical indicating whether to generate warning messages
+    when names are truncated or made unique.}
 }
 \details{
   This function creates valid SAS names from a list of R object or
