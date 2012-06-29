@@ -48,6 +48,7 @@ toSAS.default           Convert R data object for storage in SAS
 units                   Set or Retrieve the label, SASformat, 
                         SASiformat, or units Attribute of a Vector
 write.xport             Write data to a SAS XPORT file
+makeSASNames            Create valid SAS names from a character vector.
 }
 }
 \author{
