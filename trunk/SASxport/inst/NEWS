@@ -1,3 +1,19 @@
+Version 1.3.0 2012-06-27
+------------------------
+
+New features:
+
+- New function makeSASNames() to create valid and unique SAS names
+  from character vectors.
+
+Bug fixes:
+
+- Improper handling of duplicates names in write.xport() was
+  generating names longer than 8 characters, resulting in invalid
+  files.  Corrected by using the new makeSASNames() function instead
+  of the R make.names() function.
+
+
 Version 1.2.4 2010-11-11
 ------------------------
 
