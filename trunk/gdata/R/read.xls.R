@@ -70,11 +70,11 @@ read.xls <- function(xls, sheet = 1, verbose=FALSE, pattern,
     else
       stop("Unknown method", method)
 
-    close(con)
-
     if(verbose)
       cat("Done.\n")     
   }
+  close(con)
+
   retval
 }
 
