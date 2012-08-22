@@ -1,3 +1,18 @@
+Changes in 2.11.1 (2012-09-22)
+------------------------------
+
+Enhancements:
+
+- read.xls() now supports fileEncoding argument to allow non-ascii
+  encoded data to be handled.  See the manual page for an example.
+
+Bug Fixes:
+
+- The perl script utilized by read.xls() was incorrectly appending a
+  space character at the end of each line, causing problems with
+  character and NA entries in the final column.
+
+
 Changes in 2.11.0 (2012-06-18)
 ------------------------------
 
