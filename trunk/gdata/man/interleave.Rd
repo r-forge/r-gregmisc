@@ -88,9 +88,9 @@ dat <- rnorm(1000)
 
 stderr <- function(x) sqrt( var(x,na.rm=TRUE) / nobs(x) )
 
-means   <- aggregate.table( dat, g1, g2, mean )
-stderrs <- aggregate.table( dat, g1, g2, stderr )
-ns      <- aggregate.table( dat, g1, g2, nobs )
+means   <- tapply(dat, list(g1, g2), mean )
+stderrs <- tapply(dat, list(g1, g2), stderr )
+ns      <- tapply(dat, list(g1, g2), nobs )
 blanks <- matrix( " ", nrow=5, ncol=3)
 
 tab <- interleave( "Mean"=round(means,2),
