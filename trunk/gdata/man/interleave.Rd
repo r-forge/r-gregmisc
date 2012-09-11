@@ -52,8 +52,8 @@ interleave(..., append.source=TRUE, sep=": ", drop=FALSE)
     argument name will be appended to the row names to show the source of
     each row. }
   \item{sep}{Separator between the original row name and the object name.}
-  \item{drop}{logical - If the number of columns in output matrix is 1, whether
-    matrix should be returned or a vector }
+  \item{drop}{boolean flag - When TRUE, matrices containing one column
+    will be converted to vectors.}
 }
 \details{
   This function creates a new matrix or data frame from its arguments.
