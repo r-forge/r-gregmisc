@@ -1,7 +1,7 @@
 Package: namespace
 Type: Package
 Title: Provide namespace managment functions not (yet) present in base R
-Version: 1.0
+Version: 0.9.0
 Date: 2012-09-13
 Author: Winston Chang, Daniel Adler, Hadley Wickham, Gregory R. Warnes, some code from the R 'base' package.
 Maintainer: Gregory R. Warnes <greg@warnes.net>
