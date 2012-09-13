@@ -4,7 +4,7 @@
 \alias{makeNamespace}
 \alias{getRegisteredNamespace}
 \title{
-Functions to obtain, create, register, and unregister namespaces
+Create, register, obtain a reference to, and unregister namespaces
 }
 \description{
 User-level functions to manage namespaces not (yet) available in base R.
@@ -54,6 +54,30 @@ getRegisteredNamespace(name)
   \code{\link[base]{ns-internal}}
 }
 \examples{
-## Examples needed! ##
+
+## Get a reference to the namespace for the 'base' package
+getRegisteredNamespace("base")
+
+## Create a namespace, and stuff something into it.
+ns <- makeNamespace("myNamespace")
+assign("test",7, env=ns)
+ls(env=ns)
+
+## Now grab a reference to the namespace we just defined
+ns2 <- getNamespace("myNamespace")
+
+\dontshow{
+stopifnot(identical(ns, ns2))
+}
+
+## Now unregister the namespace
+unregisterNamespace("myNamespace")
+
+## Returns NULL if it is no longer defined
+getRegisteredNamespace("myNamespace")
+\dontshow{
+   stopifnot( is.null(getRegisteredNamespace("::no such package::")) )
+}
+
 }
 \keyword{programming}
