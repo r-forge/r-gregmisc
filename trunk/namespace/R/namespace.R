@@ -35,7 +35,7 @@ unregisterNamespace <- function(name = NULL) {
     stop(name, " is not a registered namespace.")
 
   # Remove the item from the registry
-  rm(name, .getNameSpaceRegistry())
+  rm(name, envir=.getNameSpaceRegistry())
   invisible()
 }
 
