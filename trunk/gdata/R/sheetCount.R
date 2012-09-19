@@ -61,7 +61,7 @@ sheetCmd <- function(xls, cmd="sheetCount.pl", verbose=FALSE, perl="perl")
       cat("... \n\n")
     }
   ##
-  output <- system(cmd, intern=TRUE)
+  output <- system(cmd, intern=TRUE, ignore.stderr=TRUE)
   if(verbose) cat("Results: ", output, "\n")
   ##
   tc <- textConnection(output)
