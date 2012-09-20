@@ -38,7 +38,7 @@ duplicated2(x, bothWays=TRUE, ...)
     For more details see \code{\link{duplicated}}.
 }
 \seealso{
-  \code{\link{duplicated}}, \code{\link{unique}}
+  \code{\link[base]{duplicated}}, \code{\link[base]{unique}}
 }
 \author{Liviu Andronic}
 \examples{

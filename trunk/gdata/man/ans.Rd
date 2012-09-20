@@ -11,13 +11,13 @@ ans()
 }
 \details{
   This function retrieves \code{.Last.value}. For more details see 
-  \code{\link{Last.value}}.  
+  \code{\link[base]{.Last.value}}.  
 }
 \value{
   \code{.Last.value}
 }
 \seealso{
-  \code{\link{Last.value}}, \code{\link{eval}}
+  \code{\link[base]{.Last.value}}, \code{\link[base]{eval}}
 }
 \author{Liviu Andronic}
 \examples{
