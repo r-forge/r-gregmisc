@@ -1,4 +1,29 @@
-Changes in 2.12.0 (2012-10-12)
+Changes in 2.13.0 (2012-09-20)
+-----------------------------
+
+New features:
+
+- New 'duplicated2' function which returns TRUE for *all* elements
+  that are duplicated, including the first, contributed by Liviu
+  Andronic.  This differs from 'duplicated', which only returns the
+  second and following (second-to last and previous when
+  'fromLast=TRUE') duplicate elements.
+
+- New 'ans' functon to return the value of the last evaluated
+  top-level function (a convenience function for accessing
+  .Last.value), contributed by Liviu Andonic.
+
+Bug Fixes:
+
+- On windows, warning messages printed to stdout by perl were being
+  included in the return value from 'system', resulting in errors in
+  'sheetCount' and 'sheetNames'.  Corrected.
+
+- The 'MedUnits' column names 'SIUnits' and 'ConventionalUnits' were
+  reversed and misspelled.
+
+
+Changes in 2.12.0 (2012-09-12)
 ------------------------------
 
 Other Changes:
@@ -14,7 +39,7 @@ Other Changes:
    is depreciated and recommending the equivalent call to tapply. It
    will be removed entirely in a future version of gdata.
 
-Changes in 2.11.1 (2012-09-22)
+Changes in 2.11.1 (2012-08-22)
 ------------------------------
 
 Enhancements:
