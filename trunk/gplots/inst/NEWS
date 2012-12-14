@@ -1,4 +1,12 @@
-Release 2.11.0 - 2011-06-08
+Release 2.11.1 - 2012-12-14
+---------------------------
+
+Bug Fixes:
+
+- Replace corrupted BalloonPlot.pdf in inst/doc.
+
+
+Release 2.11.0 - 2012-06-08
 ---------------------------
 
 New Features:
