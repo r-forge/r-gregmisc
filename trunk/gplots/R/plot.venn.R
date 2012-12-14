@@ -39,7 +39,7 @@ drawVennDiagram <-function(data,small=0.7,
                              "Please call the function 'venn' with the same arguments, instead.\n")
 		}
 
-		warn("drawVennDiagram: Testing only, presuming first argument to specify",
+		warning("drawVennDiagram: Testing only, presuming first argument to specify",
 		     "the number of circles to draw.\n")
 		numCircles<-data
 	}
