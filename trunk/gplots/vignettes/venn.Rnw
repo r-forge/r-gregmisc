@@ -1,5 +1,7 @@
 \documentclass[a4paper]{article}
 
+\VignetteIndexEntry
+
 \title{Venn Diagrams with \texttt{gplots}}
 \author{Steffen M{\"{o}}ller}
 
