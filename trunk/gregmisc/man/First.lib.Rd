@@ -14,7 +14,7 @@
 \value{
   Nothing of interest
 }
-\author{ Gregory R. Warnes \email{warnes@bst.rochester.edu}}
+\author{ Gregory R. Warnes \email{greg@warnes.net}}
 \seealso{ \code{\link[base]{.First.lib}}}
 \examples{
 ## Should never be directly executed ##
