@@ -15,7 +15,7 @@ sheetCmd <- function(xls, cmd="sheetCount.pl", verbose=FALSE, perl="perl")
 
   ##
   ## directories
-  package.dir <- .path.package('gdata')
+  package.dir <- find.package('gdata')
   perl.dir <- file.path(package.dir,'perl')
   ##
   ##

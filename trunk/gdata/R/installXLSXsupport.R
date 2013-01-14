@@ -10,7 +10,7 @@ installXLSXsupport <- function(perl="perl", verbose=FALSE)
   
   ##
   ## directories
-  package.dir <- .path.package('gdata')
+  package.dir <- find.package('gdata')
   perl.dir <- file.path(package.dir,'perl')
   ##
   ##

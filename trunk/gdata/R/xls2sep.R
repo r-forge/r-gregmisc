@@ -36,7 +36,7 @@ xls2sep <- function(xls,
 
     ##
     ## directories
-    package.dir <- .path.package('gdata')
+    package.dir <- find.package('gdata')
     perl.dir <- file.path(package.dir,'perl')
     ##
 
