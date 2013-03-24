@@ -3,7 +3,8 @@ Changes in 2.13.1 (2013-03-24)
 
 Enhancements:
 
-- Replaced calls to depreciated function ".path.package" with the new public function "path.package".
+- Replaced calls to depreciated function ".path.package" with the new
+  public function "path.package".
 
 
 Changes in 2.13.0 (2012-09-20)
