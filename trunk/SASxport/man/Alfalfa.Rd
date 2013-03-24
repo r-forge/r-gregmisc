@@ -30,7 +30,7 @@ data(Alfalfa)
 
 # go were the data is...
 here <- getwd()
-setwd(file.path(.path.package("SASxport"),"extdata"))
+setwd(file.path(path.package("SASxport"),"extdata"))
 
 # Description of the file contents
 lookup.xport("Alfalfa.xpt")

@@ -45,7 +45,7 @@ lookup.xport(file)
 }
 \examples{
 \dontshow{
-setwd(file.path(.path.package("SASxport"),"extData"))
+setwd(file.path(path.package("SASxport"),"extData"))
 }
 ## Get information on a local file
 lookup.xport("Alfalfa.xpt")
