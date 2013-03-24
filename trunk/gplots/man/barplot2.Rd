@@ -84,8 +84,8 @@
         axes = TRUE, axisnames = TRUE,
         cex.axis = par("cex.axis"), cex.names = par("cex.axis"),
         inside = TRUE, plot = TRUE, axis.lty = 0, offset = 0,
-        plot.ci = FALSE, ci.l = NULL,
-        ci.u = NULL, ci.color = "black", ci.lty = "solid", ci.lwd = 1,
+        plot.ci = FALSE, ci.l = NULL, ci.u = NULL,
+        ci.color = "black", ci.lty = "solid", ci.lwd = 1, ci.width = 0.5,
         plot.grid = FALSE, grid.inc = NULL,
         grid.lty = "dotted", grid.lwd = 1, grid.col = "black",
         add = FALSE, panel.first = NULL, panel.last = NULL, \dots)
@@ -176,7 +176,10 @@
    the same dim structure as \code{height}.}
   \item{ci.color}{the color for the confidence interval line segments}
   \item{ci.lty}{the line type for the confidence interval line segments}
-  \item{ci.lwd}{the line width for the confidence interval line segments}
+  \item{ci.lwd}{the line width for the confidence interval line
+    segments}
+  \item{ci.width}{length of lines used for the "t" at the end of confidence
+    interval line segments, as a multple of \code{width}.  Defaults to 0.5.}
   \item{plot.grid}{if \code{TRUE} a lined grid will be plotted behind the bars}
   \item{grid.inc}{the number of grid increments to be plotted}
   \item{grid.lty}{the line type for the grid}
