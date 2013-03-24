@@ -5,10 +5,10 @@ Depends: R (>= 2.10), gtools, gdata, stats, caTools, grid, KernSmooth, MASS,
          datasets
 Recommends: grid
 Suggests: gtools
-Version: 2.11.1
-Date: 2012-12-14
+Version: 2.11.2
+Date: 2012-03-24
 Author: Gregory R. Warnes. Includes R source code and/or documentation
-        contributed by (in alphabetical order): 
+        contributed by (in alphabetical order):
  	  Ben Bolker, Lodewijk Bonebakker, Robert Gentleman, Wolfgang
  	  Huber Andy Liaw, Thomas Lumley, Martin Maechler, Arni
  	  Magnusson, Steffen Moeller, Marc Schwartz, Bill Venables
