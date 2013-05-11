@@ -10,12 +10,6 @@ loadMessage <- function()
 }
 
 
-
-.First.lib <- function(lib, pkg) {
-  library.dynam("SASxport", pkg, lib)
-  loadMessage()
-}
-
 .onLoad <- function(lib, pkg) {
   loadMessage()
 }
