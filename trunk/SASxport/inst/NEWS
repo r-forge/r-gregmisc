@@ -1,3 +1,20 @@
+Version 1.3.2 2013-05-11
+------------------------
+
+Bug fixes:
+
+- Integrate patch from foreign package to properly handle xport files
+  with datasets that end exactly on an 80-byte record boundry & add
+  corresponding test file.
+
+- Replace file.path(path.package(...)) with system.file(...)
+
+Changes:
+
+- Remove oboslete .First.lib() function
+
+- Replace file.path(path.package(...)) with system.file(...)
+
 Version 1.3.1 2013-03-24
 ------------------------
 
