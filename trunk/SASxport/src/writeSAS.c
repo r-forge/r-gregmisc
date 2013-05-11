@@ -149,11 +149,13 @@ void fill_file_header(
 
 
 void fill_member_header( 
-			char **dfName,  /* Name of data set  */
-  		        char **sasVer,  /* SAS version number*/
-			char **osType,  /* Operating System  */
-			char **cDate,   /* Creation date     */
-			char **mDate    /* Modification date */
+			char **dfName,  /* Name of data set   */
+  		        char **sasVer,  /* SAS version number */
+			char **osType,  /* Operating System   */
+			char **cDate,   /* Creation date      */
+			char **mDate,   /* Modification date  */
+			char **dfLabel, /* Label of data set  */
+			char **dfType   /* Type of data set   */
 			)
 {
   struct MEMBER_HEADER member_header;
@@ -175,7 +177,10 @@ void fill_member_header(
 
   /* Line 4 */
   blankCopy( member_header.sas_modified,16,    mDate[0]   );
-  blankFill( member_header.blanks2, 64);
+  blankFill( member_header.padding,     16);
+  blankCopy( member_header.dslabel,     40,    dfLabel[0] );
+  blankCopy( member_header.dstype,       8,    dfType[0]  );
+
 
   /* Copy over for return */
   memcpy( raw_buffer, &member_header, sizeof(member_header) );

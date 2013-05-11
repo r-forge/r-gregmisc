@@ -155,8 +155,12 @@ write.xport <- function(...,
         offsetTable <- data.frame("name"=varNames, "len"=NA, "offset"=NA )
         rownames(offsetTable) <- offsetTable[,"name"]
 
+        dfLabel <- label(df, default="" )
+        dfType <- SAStype(df, default="")
+        
         scat("Write data frame header ...")
-        out( xport.member.header(dfName=i, cDate=cDate, sasVer=sasVer, osType=osType ) )
+        out( xport.member.header(dfName=i, cDate=cDate, sasVer=sasVer, osType=osType,
+                                 dfLabel=dfLabel, dfType=dfType) )
         scat("Done.")
 
         scat("Write variable information block header ...")

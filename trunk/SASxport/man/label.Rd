@@ -15,13 +15,18 @@
 \alias{SASiformat<-}
 \alias{SASiformat<-.default}
 
+\alias{SAStype}
+\alias{SAStype.default}
+\alias{SAStype<-}
+\alias{SAStype<-.default}
 
 \title{
-Set or Retreive the 'label', 'SASformat', or 'SASiformat' Attribute of a Vector  
+Set or Retreive the 'label', 'SASformat', 'SASiformat', or 'SAStype'
+attribute of a vector or (components of) a data frame
 }
 \description{
-  Sets or retrieves the \code{"label"}, \code{"SASformat"}, or
-  \code{"SASiformat"} attribute of an object.
+  Sets or retrieves the \code{"label"}, \code{"SASformat"}, 
+  \code{"SASiformat"}, or \code{SAStype} attribute of an object.
 
   More comprehensive support for object labels, and SASformat, are
   available in Frank Harrell's \code{Hmisc} package.
@@ -36,18 +41,20 @@ SASformat(x) <- value
 SASiformat(x, default)
 SASiformat(x) <- value
 
+SAStype(x, default)
+SAStype(x) <- value
 }
 \arguments{
 \item{x}{any object}
-\item{value}{new value for the  \code{"label"}, \code{"SASformat"}, or
-  \code{"SASiformat"} attribute of an object.}
+\item{value}{new value for the  \code{"label"}, \code{"SASformat"}, 
+  \code{"SASiformat"}, or \code{SAStype}  attribute of an object.}
 \item{default}{value to return when no appropriate attribute is
   found.  The usual return value is NULL.}
 }
 \value{
-  the contents of the \code{"label"}, \code{"SASformat"}, or
-  \code{"SASiformat"} attribute of x, if any; otherwise, the value provided
-  by \code{default}.    
+  the contents of the \code{"label"}, \code{"SASformat"},
+  \code{"SASiformat"}, \code{"SAStype"} attribute of x, if any;
+  otherwise, the value provided by \code{default}.
 }
 \author{
   Gregory R. Warnes \email{greg@warnes.net} based on code from the
@@ -56,6 +63,8 @@ SASiformat(x) <- value
 %\seealso{
 %}
 \examples{
+
+## Examples for vectors
 
 fail.time <- c(10,20)
 
@@ -72,20 +81,24 @@ SASiformat(fail.time)
 # display all attributes
 attributes(fail.time)
 
-# Example showing specification of default return value
+## SAStype only applies to data frames
+df <- data.frame( fail.time, day=c("Mon","Tue") )
+label(df)   <- "Data frame object"
+SAStype(df) <- "USER"
+
+label(df)
+SAStype(df)
+
+## Example showing specification of default return value
 a <- 70
 label(a, default="no label")
 
-
 \dontrun{
-# for a nice display
+# Hmisc packages functions label attributes for annotating tables and plots:
 library(Hmisc)
+label(fail.time)
 describe(fail.time)
-
-f <- cph(Surv(fail.time, event) ~ xx)
-plot(xx,xx2,xlab=label(xx),"s",sep=""))
 }
-
 }
 \keyword{utilities}
 \keyword{interface}

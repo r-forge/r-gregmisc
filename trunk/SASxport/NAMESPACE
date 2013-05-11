@@ -17,8 +17,11 @@ export(
        "SASformat<-",
        
        "SASiformat",
-       "SASiformat<-"
-       )
+       "SASiformat<-",
+
+       "SAStype",
+       "SAStype<-"
+)
 
 S3method(toSAS, numeric)
 S3method(toSAS, logical)
@@ -32,10 +35,12 @@ S3method(toSAS, default)
 S3method(label, default)
 S3method(SASformat, default)
 S3method(SASiformat, default)
+S3method(SAStype, data.frame)
 
 S3method("label<-", default)
 S3method("SASformat<-", default)
 S3method("SASiformat<-", default)
+S3method("SAStype<-", data.frame)
 
 S3method(print, lookup.xport)
 S3method(summary, lookup.xport)

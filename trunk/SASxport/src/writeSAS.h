@@ -103,7 +103,10 @@ struct MEMBER_HEADER {
 
   /* Line 4 */
   char sas_modified[16];
-  char blanks2[64];   
+  //char blanks2[64];   
+  char padding[16];
+  char dslabel[40];
+  char dstype[8];
 };
 
 
@@ -155,7 +158,7 @@ void zeroCopy(char *target, int len, char *source);
 
 void fill_file_header(char **cDate, char **mDate, char **sasVer, char **osType);
 void fill_member_header(char **dfName, char **sasVer, char **osType, char **cDate, 
-			char **mDate);
+			char **mDate, char **dfLabel, char **dfType);
 
 void fill_namestr(int  *isChar, int  *nlng, int  *nvar0, char **nname, char **nlabel, 
 		  char **nform, int  *nfl, int  *nfd, int  *nfj, char **niform, 

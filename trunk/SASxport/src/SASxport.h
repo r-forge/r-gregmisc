@@ -50,6 +50,9 @@ struct SAS_XPORT_member {
   char sas_osname[8];
   char sas_create[16];
   char sas_mod[16];
+  char sas_dslabel[40];
+  char sas_dstype[8];
+
 };
 
 struct SAS_XPORT_namestr {

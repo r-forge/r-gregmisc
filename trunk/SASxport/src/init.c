@@ -31,7 +31,8 @@
 #define ARGTYPE static R_NativePrimitiveArgType
 
 ARGTYPE fill_file_header_args[]    = { STRSXP, STRSXP, STRSXP, STRSXP };
-ARGTYPE fill_member_header_args[]  = { STRSXP, STRSXP, STRSXP, STRSXP, STRSXP };
+ARGTYPE fill_member_header_args[]  = { STRSXP, STRSXP, STRSXP, STRSXP, STRSXP, STRSXP, 
+				       STRSXP };
 ARGTYPE fill_namestr_args[]        = { INTSXP, INTSXP, INTSXP, STRSXP, STRSXP, 
 				       STRSXP, INTSXP, INTSXP, INTSXP, STRSXP, 
 				       INTSXP, INTSXP, INTSXP };
@@ -43,7 +44,7 @@ ARGTYPE fill_space_args[]          = { INTSXP, INTSXP };
 #define CDEF(name, narg, argVec)  { #name, (DL_FUNC) &name, narg, argVec }
 static const R_CMethodDef CEntries[]  = {
   CDEF(fill_file_header,     4, fill_file_header_args    ),
-  CDEF(fill_member_header,   5, fill_member_header_args  ),
+  CDEF(fill_member_header,   7, fill_member_header_args  ),
   CDEF(fill_namestr,        13, fill_namestr_args        ),
   CDEF(fill_namestr_header,  1, fill_namestr_header_args ),
   CDEF(fill_obs_header,      0, 0                        ),
