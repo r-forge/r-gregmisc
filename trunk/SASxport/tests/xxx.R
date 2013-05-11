@@ -44,7 +44,7 @@ a.3 <- readBin( con="xxx3.xpt", what=raw(), n=1e5 )
 ## R doesn't have multiple NA types, while SAS does.  The original
 ## file contains a SAS '.A' missing value, while what we've created
 ## contains an ordinary '.' missing value, so mash this one byte to
-## avoid a comparison error for this know limitation.  
+## avoid a comparison error for this known limitation.  
 
 a.1[1089] <- as.raw("0x2e")
 
