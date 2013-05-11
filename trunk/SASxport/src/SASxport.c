@@ -25,19 +25,8 @@
 #include <string.h>
 #include <R.h>
 #include <Rinternals.h>
-//#include "foreign.h"
+#include "foreign.h"
 #include "SASxport.h"
-
-
-#ifdef ENABLE_NLS
-#include <libintl.h>
-#define _(String) dgettext ("foreign", String)
-#define gettext_noop(String) (String)
-#else
-#define _(String) (String)
-#define gettext_noop(String) (String)
-#endif
-
 
 #define HEADER_BEG "HEADER RECORD*******"
 #define HEADER_TYPE_LIBRARY "LIBRARY "
@@ -153,9 +142,9 @@ get_lib_header(FILE *fp, struct SAS_XPORT_header *head)
     int n;
 
     n = GET_RECORD(record, fp, 80);
-    if(n == 80 && strncmp(LIB_HEADER, record, 80) != 0)
+    if(n != 80 || strncmp(LIB_HEADER, record, 80) != 0)
 	error(_("file not in SAS transfer format"));
-  
+
     n = GET_RECORD(record, fp, 80);
     if(n != 80)
 	return 0;
@@ -230,8 +219,9 @@ init_xport_info(FILE *fp)
     Free(lib_head);
 
     n = GET_RECORD(record, fp, 80);
-    if(n != 80 || strncmp(MEM_HEADER, record, 75) != 0 ||
-       strncmp("  ", record+78, 2) != 0)
+    if(n != 80 || 
+       strncmp(MEM_HEADER, record, 75) != 0 ||
+       strncmp("  ", record+78, 2) != 0 )
 	error(_("file not in SAS transfer format"));
     record[78] = '\0';
     sscanf(record+75, "%d", &namestr_length);
@@ -297,7 +287,7 @@ next_xport_info(FILE *fp, int namestr_length, int nvars,
 {
     char *tmp;
     char record[81];
-    int i, n, nbytes, totwidth, nlength, restOfCard;
+    int i, n, totwidth, nlength, restOfCard;
     struct SAS_XPORT_namestr *nam_head;
 
     nam_head = Calloc(nvars, struct SAS_XPORT_namestr);
@@ -394,7 +384,6 @@ next_xport_info(FILE *fp, int namestr_length, int nvars,
     for(i = 0; i < nvars; i++)
 	totwidth += nlng[i];
 
-    nbytes = 0;
     nlength = 0;
     tmp = Calloc(totwidth <= 80 ? 81 : (totwidth+1), char);
     restOfCard = 0;
@@ -433,6 +422,18 @@ next_xport_info(FILE *fp, int namestr_length, int nvars,
 		break;
 	    }
 	}
+	else /* beware that the previous member can end on card
+	      * boundary with no padding */
+	  if (restOfCard == 80 && n == 80 &&
+	      strncmp(MEM_HEADER, tmp, 75) == 0 &&
+	      strncmp("  ", tmp+78, 2) == 0) {
+	    strncpy(record, tmp, 80);
+	    *tailpad = 0;
+	    record[78] = '\0';
+	    sscanf(record+75, "%d", &namestr_length);
+	    break;
+	  }
+	
 	if (fsetpos(fp, &currentPos)) {
 	    error(_("problem accessing SAS XPORT file"));
 	}
@@ -555,7 +556,7 @@ xport_info(SEXP xportFile)
 	error(_("first argument must be a file name"));
     fp = fopen(R_ExpandFileName(CHAR(STRING_ELT(xportFile, 0))), "rb");
     if (!fp)
-	error(_("unable to open file"));
+        error(_("unable to open file: '%s'"), strerror(errno));
     namestrLength = init_xport_info(fp);
 
     ansLength = 0;
@@ -659,7 +660,7 @@ xport_read(SEXP xportFile, SEXP xportInfo)
 	error(_("first argument must be a file name"));
     fp = fopen(R_ExpandFileName(CHAR(STRING_ELT(xportFile, 0))), "rb");
     if (!fp)
-	error(_("unable to open file"));
+        error(_("unable to open file: '%s'"), strerror(errno));
     if (fseek(fp, 240, SEEK_SET) != 0)
 	error(_("problem reading SAS XPORT file '%s'"),
 	      CHAR(STRING_ELT(xportFile, 0)));

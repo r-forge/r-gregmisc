@@ -13,11 +13,11 @@
  *  along with this program; if not, a copy is available at
  *  http://www.r-project.org/Licenses/
  */
- 
+
 /*
  *  This file is derived from code in the SAS Technical Support
  *  document TS-140 "The Record Layout of a Data Set in SAS Transport
- *  (XPORT) Format" available as 
+ *  (XPORT) Format" available as
  *       http://ftp.sas.com/techsup/download/technote/ts140.html
  */
 
@@ -25,13 +25,15 @@
 #define SASEXPORT_H
 
 #include <string.h>		/* for memcpy and memset */
+#include "foreign.h"
 #include "swap_bytes.h"
+#include <errno.h>
 
 /* double cnxptiee(double from, int fromtype, int totype); */
 
 
 
-struct SAS_XPORT_header { 
+struct SAS_XPORT_header {
   char sas_symbol[2][8];	/* should be "SAS     " */
   char saslib[8];		/* should be "SASLIB  " */
   char sasver[8];
@@ -40,11 +42,11 @@ struct SAS_XPORT_header {
   char sas_mod[16];
 };
 
-struct SAS_XPORT_member { 
+struct SAS_XPORT_member {
   char sas_symbol[8];
   char sas_dsname[8];
   char sasdata[8];
-  char sasver[8]; 
+  char sasver[8];
   char sas_osname[8];
   char sas_create[16];
   char sas_mod[16];
