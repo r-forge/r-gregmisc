@@ -123,8 +123,8 @@ write.xport <- function(...,
     if(file==stdout())
       out <- function(...)
         {
-          cat("ASCII: ", rawToDisplay(...), "")
-          cat("HEX:   ", ..., "")
+          cat("ASCII: ", rawToDisplay(...), "\n")
+          cat("HEX:   ", ..., "\n")
         }
     else
       out <- function(...) writeBin( ..., raw(), con=file)
@@ -159,7 +159,7 @@ write.xport <- function(...,
         out( xport.member.header(dfName=i, cDate=cDate, sasVer=sasVer, osType=osType ) )
         scat("Done.")
 
-        scat("Write variable informaton block header ...")
+        scat("Write variable information block header ...")
         out( xport.namestr.header( nvar=ncol(df) ) )
         scat("Done.")
         

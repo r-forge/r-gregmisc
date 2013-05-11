@@ -9,7 +9,6 @@ loadMessage <- function()
   cat("\n")
 }
 
-
 .onLoad <- function(lib, pkg) {
   loadMessage()
 }
