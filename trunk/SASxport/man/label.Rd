@@ -30,6 +30,8 @@ attribute of a vector or (components of) a data frame
 
   More comprehensive support for object labels, and SASformat, are
   available in Frank Harrell's \code{Hmisc} package.
+
+  Note that \code{SAStype} enforces the SAS 8-character naming convention.
 }
 \usage{
 label(x, default)

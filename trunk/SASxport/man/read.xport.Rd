@@ -82,9 +82,14 @@ read.xport(file,
     \item SAS date, time, and date/time variables are converted respectively to \code{Date}, 
     POSIX, or \code{chron} objects
     
-    \item SAS labels are stored in "label" attributes on each variable
+    \item SAS labels are stored in "label" attributes on each variable,
+    and are accessible using the \code{\link{label}} function.
     
-    \item SAS formats are stored in "format" attributes on each variable
+    \item SAS formats are stored in "SASformat" attributes on each
+    variable, and are accessable using \code{\link{SASformat}}
+    
+    \item SAS iformats are stored in "SASiformat" attributes on each
+    variable, and are accessable using \code{\link{SASiformat}}
     
     \item SAS integer variables are stored as integers unless
       \code{force.integer} is \code{FALSE}
@@ -93,6 +98,11 @@ read.xport(file,
   If the file includes the output of \code{PROC FORMAT CNTLOUT=},
   variables having customized label formats will be converted to \code{factor}
   objects with appropriate labels.
+
+  If a datasets in the original file has a label or type, these will be
+  stored in the corresponding 'lable' and 'SAStype' attributes, which
+  can be accessed by the \code{\link{label}} and \code{\link{SAStype}}
+  functions.
 }
 \author{ Gregory R. Warnes \email{greg@warnes.net}
   based on \code{Hmisc:::sasxport.get} by Frank E. Harrell, Jr.}  
@@ -110,7 +120,11 @@ read.xport(file,
   \code{\link[chron]{chron}},
   \code{\link[foreign]{lookup.xport}},
   \code{\link[Hmisc]{contents}},
-  \code{\link[Hmisc]{describe}}
+  \code{\link[Hmisc]{describe}},
+  \code{\link{label}},
+  \code{\link{SASformat}},
+  \code{\link{SASiformat}}, and
+  \code{\link{SAStype}}
 }
 \examples{
 

@@ -39,9 +39,10 @@ write.xport(...,
       converted to upper case.  All characters outside of the set A-Z,
       0-9, and '\_' are converted to '\_'.
     \item Character variables are stored as characters.
-    \item If \code{autogen.formats=TRUE} (the default), factor variables are stored as numeric with an appropriate SAS
-      format specification. If \code{autogen.formats=FALSE}, factor
-      variables are stored as characters.
+    \item If \code{autogen.formats=TRUE} (the default), factor variables
+      are stored as numeric with an appropriate SAS format
+      specification. If \code{autogen.formats=FALSE}, factor variables
+      are stored as characters.
     \item All numeric variables are stored as double-precision floating
       point values utilizing the IBM mainframe double precision floating
       point format (see the reference).
@@ -52,13 +53,18 @@ write.xport(...,
       '.'
   }
 
-  In addition, the SAS XPORT format allows each variable to have a
-  corresponding label, display format, and input format.  To set these
-  values, add the   attribute 'label', 'SASformat', or 'SASiformat' to
-  individual data frame variables. (See the example section.)
+  The SAS XPORT format allows each dataset to have a label and a type
+  (set via the \code{\link{label}} and \code{\link{SAStype}} functions).
+  In addition, each variable may have a corresponding label, display
+  format, and input format.  To set these values, add the attribute
+  'label', 'SASformat', or 'SASiformat' to individual data frame.  These
+  attributes may be set using the \code{\link{label}},
+  \code{\link{SASformat}}, and \code{\link{SASiformat}} functions. (See
+  examples provided below.)
 
   The actual translation of R objects to objects appropriate for SAS is
-  handled by the \code{\link{toSAS}} generic and associated methods.   
+  handled by the \code{\link{toSAS}} generic and associated methods,
+  which can be (re)defined by the user to provide fine-grained control.
 }
 \value{
   No return value
@@ -76,7 +82,11 @@ write.xport(...,
 \seealso{
   \code{\link{toSAS}},
   \code{\link{lookup.xport}},
-  \code{\link{read.xport}}
+  \code{\link{read.xport}},
+  \code{\link{label}},
+  \code{\link{SAStype}},
+  \code{\link{SASformat}},
+  and \code{\link{SASiformat}}  
 }
 \examples{
 
@@ -85,22 +95,23 @@ write.xport(...,
 #####
 
 ## manually create a data set
-temp <- data.frame( x=c(1, 2, NA, NA ), y=c('a', 'B', NA, '*' ) )
+abc <- data.frame( x=c(1, 2, NA, NA ), y=c('a', 'B', NA, '*' ) )
 
 ## look at it
-temp
+abc
 
 ## add a format specifier (not used by R)
-attr(temp$x, 'SASformat') <- 'date7.'
+SASformat(abc$x) <- 'date7.'
 
 ## add a variable label (not used by R)
-attr(temp$y, 'label')  <- 'character variable'
+label(abc$y) <- 'character variable'
+
+## add a dataset label and type
+label(abc) <- 'Simple example'
+SAStype(abc) <- 'MYTYPE'
 
 ## verify the additions
-str(temp)
-
-## rename the data set
-abc <- temp
+str(abc)
 
 # create a SAS XPORT file 
 write.xport( abc, file="xxx.dat" )
@@ -114,7 +125,12 @@ xxx.abc <- read.xport("xxx.dat")
 ## and look at it
 xxx.abc
 
-## Note that the variable names have been converted to uppercase
+## Check the label and type
+label(xxx.abc)
+SAStype(xxx.abc)
+
+## Note that the variable names and SAS dataset type have been converted
+## to uppercase
 
 }
 \keyword{file}

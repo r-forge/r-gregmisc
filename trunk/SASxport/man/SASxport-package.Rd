@@ -12,7 +12,7 @@
 \details{
   The \code{read.xport} function reads SAS xport formatted files,
   augmenting the functionality of the \code{\link[foreign]{read.xport}}
-  function provided in the 'foreign' package with additional features
+  function provided in the 'foreign' package with additional features,
   borrowed from \code{\link[Hmisc]{sasxport.get}} in Frank Harrell's
   'Hmisc' package.  Namely, variables are properly coerced into the
   types specified by the format field. All standard numeric and string
@@ -21,7 +21,10 @@
   in the xport file via:
 \preformatted{
      PROC FORMAT CNTLOUT=format;
-}
+   }
+   In addition, labels are supported for variable and data frames, as
+   are dataset 'types'.
+   
    The \code{write.xport} function writes one or more data sets into a
    SAS xport formatted file.  Standard R data types, including date and
    time objects (e.g. \code{Date}, and \code{POSIX.t}) are stored with
@@ -57,19 +60,25 @@ makeSASNames            Create valid SAS names from a character vector.
   are provided under the terms of the GNU General Public License,
   version 2.0 or later.
 
-  The file 'htond.c' is extracted from BRL-CAD
-  \url{http://www.brlcad.org/}, written by Michael John Muuss, and is 
-  Copyright (c) 2004-2007 United States Government as represented by
-  the U.S. Army Research Laboratory, and is utilized and redistributed
-  under the terms of the  GNU Lesser General Public License, version 2.1.
+  The files 'src/ieee2ibm.c' and 'src/ibm2ieee.c' were extracted from
+  BRL-CAD file /brlcad/src/libbu/htond.c written by Michael John Muuss,
+  Copyright (c) 2004-2007 United States Government as represented by the
+  U.S. Army Research Laboratory, and is utilized and redistributed under
+  the terms of the GNU Lesser General Public License, version 2.1.
 
-  The files 'AFirst.lib.s', 'all.is.numeric.R',
-  'importConvertDateTime.R', 'in.opererator.R', 'makeNames.R', 
-  'read.xport.R', and 'testDateTime.R' are copied or adapted from the
-  'Hmisc' package created by Frank E. Harrell, Jr. 
-  \email{f.harrell@vanderbilt.edu}, and are utilized and redistributed under
+  The files 'R/AFirst.lib.s', 'R/all.is.numeric.R',
+  'R/importConvertDateTime.R', 'R/in.opererator.R', 'R/makeNames.R',
+  'R/read.xport.R', and 'R/testDateTime.R' are copied or adapted from
+  the 'Hmisc' package created by Frank E. Harrell, Jr.
+  <f.harrell@vanderbilt.edu>, and are utilized and redistributed under
   the terms of the GNU General Public License, version 2.0 or later.
-  }
+
+  The files 'R/xport.R', 'src/SASxport.c', 'src/SASxport.h', and
+  'src/foreign.h' are copied or adapted from the R 'foreign' package
+  created by Douglas M. Bates <bates@stat.wisc.edu> and Saikat DebRoy
+  <saikat@stat.wisc.edu>, and are utilized and redistributed under the
+  terms of the GNU General Public License, version 2.0 or later.
+}
 \section{Funding}{
   This creation of this package was partially funded by Metrum Institute
   \url{http://metruminstitute.org}.

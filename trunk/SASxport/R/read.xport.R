@@ -127,7 +127,9 @@ read.xport <- function(file,
       }
 
       label(w)   <- dsLabels[k]
+      names(label(w)) <- NULL
       SAStype(w) <- dsTypes[k]
+      names(SAStype(w)) <- NULL
 
       nam      <- names.tolower(makeNames(names(w), allow=name.chars))
       names(w) <- nam

@@ -15,6 +15,6 @@ SAStype.default <- function(x, default=NULL)
 
 "SAStype<-.default" <- function(x, value)
 {
-  attr(x,'SAStype') <- value
+  attr(x,'SAStype') <- makeSASNames(value)
   x
 }
