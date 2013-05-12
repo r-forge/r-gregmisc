@@ -4,7 +4,7 @@ library(SASxport)
 abc.out <- data.frame( x=c(1, 2, NA, NA ), y=c('a', 'B', NA, '*' ) )
 
 ## add a data set label (not used by R)
-label(abc.out) <- "data set"
+label(abc.out) <- "xxxx data set xxxxx"
 SAStype(abc.out) <- "normal"
 
 ## add a format specifier (not used by R)
@@ -15,7 +15,7 @@ label(abc.out$y)  <- 'character variable'
 
 # create a SAS XPORT file from our local data frame
 write.xport(abc.out,
-            file="xxx2.xpt",
+            file="dfAttributes.xpt",
             cDate=strptime("28JUL07:21:08:06 ", format="%d%b%y:%H:%M:%S"),
             osType="SunOS",
             sasVer="9.1",
@@ -23,16 +23,16 @@ write.xport(abc.out,
             )
 
 # read the SAS data back in
-abc.in <- read.xport("xxx2.xpt", names.tolower=FALSE)
+abc.in <- read.xport("dfAttributes.xpt", names.tolower=FALSE)
 
 ## Test that the files are otherwise identical
-label(abc.out, "missing!")
-label(abc.in , "missing!")
+label(abc.out, "MISSING!")
+label(abc.in , "MISSING!")
 
-SAStype(abc.out, "missing!")
-SAStype(abc.in , "missing!")
+SAStype(abc.out, "MISSING!")
+SAStype(abc.in , "MISSING!")
 
-stopifnot( label(abc.out)==label(abc.in, "missing!") )
-stopifnot( SAStype(abc.out)==SAStype(abc.in, "missing!") )
+stopifnot( label  (abc.out, "MISSING!")==label  (abc.in, "MISSING!") )
+stopifnot( SAStype(abc.out, "MISSING!")==SAStype(abc.in, "MISSING!") )
 
 

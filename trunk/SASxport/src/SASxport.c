@@ -22,6 +22,7 @@
  */
 
 #include <stdio.h>
+#include <ctype.h>
 #include <string.h>
 #include <R.h>
 #include <Rinternals.h>
@@ -266,25 +267,21 @@ init_mem_info(FILE *fp, char *name, char *dslabel, char *dstype)
 	name[n] = '\0';
     } else name[0] = '\0';
 
-    /* Extract data set label */
-    tmp = strchr(mem_head->sas_dslabel, ' ');
-    n = tmp - mem_head->sas_dslabel;
-    if(n > 0) {
-	if (n > 40)
-	    n = 40;
-	strncpy(dslabel, mem_head->sas_dslabel, n);
-	dslabel[n] = '\0';
-    } else dslabel[0] = '\0';
+    /* Extract data set label, and trim trailing blanks */
+    strncpy(dslabel, mem_head->sas_dslabel, 40);
+    for(int i=40-1; i>0; i--)
+      if( isspace(dslabel[i]) )
+	dslabel[i] = '\0';
+      else
+	break;
 
     /* Extract data set type */
-    tmp = strchr(mem_head->sas_dstype, ' ');
-    n = tmp - mem_head->sas_dstype;
-    if(n > 0) {
-	if (n > 40)
-	    n = 40;
-	strncpy(dstype, mem_head->sas_dstype, n);
-	dstype[n] = '\0';
-    } else dstype[0] = '\0';
+    strncpy(dstype, mem_head->sas_dstype, 8);
+    for(int i=8-1; i>0; i--)
+      if( isspace(dstype[i]) )
+	dstype[i] = '\0';
+      else
+	break;
 
     Free(mem_head);
 
@@ -595,9 +592,14 @@ xport_info(SEXP xportFile)
 	PROTECT(varInfo = allocVector(VECSXP, VAR_INFO_LENGTH));
 	setAttrib(varInfo, R_NamesSymbol, varInfoNames);
 
-	PROTECT(dfLabel = mkChar(dslabel));
-	PROTECT(dfType  = mkChar(dstype) );
+	dslabel[40] = '\n';
+	PROTECT(dfLabel = allocVector(STRSXP, 1));
+	SET_STRING_ELT(dfLabel, 0, mkChar(dslabel));
 	setAttrib(varInfo, install("label"  ), dfLabel);
+
+	dstype[8] = '\n';
+	PROTECT(dfType  = allocVector(STRSXP, 1));
+	SET_STRING_ELT(dfType, 0, mkChar(dstype));
 	setAttrib(varInfo, install("SAStype"), dfType );
 
 	SET_XPORT_VAR_TYPE(varInfo, allocVector(STRSXP, memLength));

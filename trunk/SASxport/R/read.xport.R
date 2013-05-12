@@ -48,6 +48,9 @@ read.xport <- function(file,
     scat("Extracting data file information...")
     dsinfo <- lookup.xport.inner(file)
 
+    dsLabels <- sapply(dsinfo, label)
+    dsTypes  <- sapply(dsinfo, SAStype)
+    
     if(length(keep))
       whichds <- toupper(keep)
     else
@@ -122,6 +125,9 @@ read.xport <- function(file,
         scat('Empty dataset', k, 'ignored\n')
         next
       }
+
+      label(w)   <- dsLabels[k]
+      SAStype(w) <- dsTypes[k]
 
       nam      <- names.tolower(makeNames(names(w), allow=name.chars))
       names(w) <- nam

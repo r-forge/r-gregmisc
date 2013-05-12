@@ -1,7 +1,7 @@
 SAStype <- function(x, default)
   UseMethod("SAStype")
 
-SAStype.data.frame <- function(x, default=NULL)
+SAStype.default <- function(x, default=NULL)
 {
   lab <- attr(x,"SAStype")
   if(is.null(lab))
@@ -13,7 +13,7 @@ SAStype.data.frame <- function(x, default=NULL)
 "SAStype<-" <- function(x, value)
   UseMethod("SAStype<-")
 
-"SAStype<-.data.frame" <- function(x, value)
+"SAStype<-.default" <- function(x, value)
 {
   attr(x,'SAStype') <- value
   x
