@@ -3,6 +3,8 @@
 ##  loading the created data file.
 
 library(SASxport)
+Sys.setenv("TZ"="GMT")
+
 events <- read.csv('events.csv')
 exposure <- read.csv('exposure.csv')
 events

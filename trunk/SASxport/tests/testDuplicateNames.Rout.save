@@ -1,5 +1,5 @@
 
-R version 3.0.0 (2013-04-03) -- "Masked Marvel"
+R version 3.0.1 (2013-05-16) -- "Good Sport"
 Copyright (C) 2013 The R Foundation for Statistical Computing
 Platform: i686-pc-linux-gnu (32-bit)
 
@@ -21,7 +21,7 @@ Loaded SASxport version 1.3.3 (2013-05-30).
 
   Type `?SASxport' for usage information.
 
-> 
+> Sys.setenv("TZ"="GMT")
 > 
 > ##tests
 > example(read.xport)
@@ -119,23 +119,23 @@ In makeSASNames(dfNames) : Made 3 duplicate names unique.
 > read.xport("dn.a.xpt")
 $aa
   RACE AGE         D1                    DT1       T1
-1 blue  30 2002-03-03 (03 Mar 2002 04:31:02) 11:13:45
-2       31 2002-06-03 (03 Jun 2002 04:42:07) 11:14:13
+1 blue  30 2002-03-03 (03 Mar 2002 09:31:02) 11:13:45
+2       31 2002-06-03 (03 Jun 2002 09:42:07) 11:14:13
 
 $aa.1
   RACE AGE         D1                    DT1       T1
-1 blue  30 2002-03-03 (03 Mar 2002 04:31:02) 11:13:45
-2       31 2002-06-03 (03 Jun 2002 04:42:07) 11:14:13
+1 blue  30 2002-03-03 (03 Mar 2002 09:31:02) 11:13:45
+2       31 2002-06-03 (03 Jun 2002 09:42:07) 11:14:13
 
 $aa.2
   RACE AGE         D1                    DT1       T1
-1 blue  30 2002-03-03 (03 Mar 2002 04:31:02) 11:13:45
-2       31 2002-06-03 (03 Jun 2002 04:42:07) 11:14:13
+1 blue  30 2002-03-03 (03 Mar 2002 09:31:02) 11:13:45
+2       31 2002-06-03 (03 Jun 2002 09:42:07) 11:14:13
 
 $aa.3
   RACE AGE         D1                    DT1       T1
-1 blue  30 2002-03-03 (03 Mar 2002 04:31:02) 11:13:45
-2       31 2002-06-03 (03 Jun 2002 04:42:07) 11:14:13
+1 blue  30 2002-03-03 (03 Mar 2002 09:31:02) 11:13:45
+2       31 2002-06-03 (03 Jun 2002 09:42:07) 11:14:13
 
 > 
 > # Duplicate column names
@@ -147,12 +147,12 @@ Warning message:
 In makeSASNames(colnames(df)) : Made 5 duplicate names unique.
 > read.xport("dn.b.xpt")
   RACE AGE         D1                    DT1       T1 RACE.1 AGE.1       D1.1
-1 blue  30 2002-03-03 (03 Mar 2002 04:31:02) 11:13:45   blue    30 2002-03-03
-2       31 2002-06-03 (03 Jun 2002 04:42:07) 11:14:13           31 2002-06-03
+1 blue  30 2002-03-03 (03 Mar 2002 09:31:02) 11:13:45   blue    30 2002-03-03
+2       31 2002-06-03 (03 Jun 2002 09:42:07) 11:14:13           31 2002-06-03
                    DT1.1     T1.1
-1 (03 Mar 2002 04:31:02) 11:13:45
-2 (03 Jun 2002 04:42:07) 11:14:13
+1 (03 Mar 2002 09:31:02) 11:13:45
+2 (03 Jun 2002 09:42:07) 11:14:13
 > 
 > proc.time()
    user  system elapsed 
-  1.292   0.124   2.566 
+  1.368   0.100   2.671 

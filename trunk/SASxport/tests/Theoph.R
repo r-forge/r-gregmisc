@@ -4,6 +4,7 @@
 ####
 
 library(SASxport)
+Sys.setenv("TZ"="GMT")
 
 write.xport(Theoph,file="theoph.xpt")
 Theoph.2 <- read.xport("theoph.xpt")

@@ -1,4 +1,5 @@
 library(SASxport)
+Sys.setenv("TZ"="GMT")
 
 ## manually create a data set
 abc.out <- data.frame( x=c(1, 2, NA, NA ), y=c('a', 'B', NA, '*' ) )

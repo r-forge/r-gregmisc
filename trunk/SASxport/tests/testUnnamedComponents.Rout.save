@@ -1,5 +1,5 @@
 
-R version 3.0.0 (2013-04-03) -- "Masked Marvel"
+R version 3.0.1 (2013-05-16) -- "Good Sport"
 Copyright (C) 2013 The R Foundation for Statistical Computing
 Platform: i686-pc-linux-gnu (32-bit)
 
@@ -21,7 +21,7 @@ Loaded SASxport version 1.3.3 (2013-05-30).
 
   Type `?SASxport' for usage information.
 
-> 
+> Sys.setenv("TZ"="GMT")
 > 
 > ##tests
 > example(read.xport)
@@ -134,8 +134,8 @@ Variables in data set `W$TEST':
 
 > (tmp <- read.xport("a.xpt"))     #1.c
   RACE AGE         D1                    DT1       T1
-1 blue  30 2002-03-03 (03 Mar 2002 04:31:02) 11:13:45
-2       31 2002-06-03 (03 Jun 2002 04:42:07) 11:14:13
+1 blue  30 2002-03-03 (03 Mar 2002 09:31:02) 11:13:45
+2       31 2002-06-03 (03 Jun 2002 09:42:07) 11:14:13
 > 
 > b <- w$test
 > write.xport(b,file="a.xpt")      #2.a
@@ -161,8 +161,8 @@ Variables in data set `B':
 
 > (tmp <- read.xport("a.xpt"))     #2.c
   RACE AGE         D1                    DT1       T1
-1 blue  30 2002-03-03 (03 Mar 2002 04:31:02) 11:13:45
-2       31 2002-06-03 (03 Jun 2002 04:42:07) 11:14:13
+1 blue  30 2002-03-03 (03 Mar 2002 09:31:02) 11:13:45
+2       31 2002-06-03 (03 Jun 2002 09:42:07) 11:14:13
 > 
 > write.xport(test=w$test,file="a.xpt") #3.a
 > lookup.xport("a.xpt")                 #3.b
@@ -187,8 +187,8 @@ Variables in data set `TEST':
 
 > (tmp <- read.xport("a.xpt"))          #3.c
   RACE AGE         D1                    DT1       T1
-1 blue  30 2002-03-03 (03 Mar 2002 04:31:02) 11:13:45
-2       31 2002-06-03 (03 Jun 2002 04:42:07) 11:14:13
+1 blue  30 2002-03-03 (03 Mar 2002 09:31:02) 11:13:45
+2       31 2002-06-03 (03 Jun 2002 09:42:07) 11:14:13
 > 
 > write.xport(test=w$test,z=w$z,file="a.xpt") #4.a
 > lookup.xport("a.xpt")                       #4.b
@@ -230,8 +230,8 @@ Variables in data set `Z':
 > (tmp <- read.xport("a.xpt"))                #4.c
 $test
   RACE AGE         D1                    DT1       T1
-1 blue  30 2002-03-03 (03 Mar 2002 04:31:02) 11:13:45
-2       31 2002-06-03 (03 Jun 2002 04:42:07) 11:14:13
+1 blue  30 2002-03-03 (03 Mar 2002 09:31:02) 11:13:45
+2       31 2002-06-03 (03 Jun 2002 09:42:07) 11:14:13
 
 $z
              X3         X4          X5         X6         X7          X8
@@ -377,8 +377,8 @@ Variables in data set `W$Z':
 > (tmp <- read.xport("a.xpt"))         #5.c
 $`w$test`
   RACE AGE         D1                    DT1       T1
-1 blue  30 2002-03-03 (03 Mar 2002 04:31:02) 11:13:45
-2       31 2002-06-03 (03 Jun 2002 04:42:07) 11:14:13
+1 blue  30 2002-03-03 (03 Mar 2002 09:31:02) 11:13:45
+2       31 2002-06-03 (03 Jun 2002 09:42:07) 11:14:13
 
 $`w$z`
              X3         X4          X5         X6         X7          X8
@@ -524,8 +524,8 @@ Variables in data set `Z':
 > (tmp <- read.xport("a.xpt"))           #6.c
 $`w$test`
   RACE AGE         D1                    DT1       T1
-1 blue  30 2002-03-03 (03 Mar 2002 04:31:02) 11:13:45
-2       31 2002-06-03 (03 Jun 2002 04:42:07) 11:14:13
+1 blue  30 2002-03-03 (03 Mar 2002 09:31:02) 11:13:45
+2       31 2002-06-03 (03 Jun 2002 09:42:07) 11:14:13
 
 $z
              X3         X4          X5         X6         X7          X8
@@ -717,8 +717,8 @@ Variables in data set `FORMATS':
 > (tmp <- read.xport("a.xpt"))     #7.c
 $test
   RACE AGE         D1                    DT1       T1
-1 blue  30 2002-03-03 (03 Mar 2002 04:31:02) 11:13:45
-2 <NA>  31 2002-06-03 (03 Jun 2002 04:42:07) 11:14:13
+1 blue  30 2002-03-03 (03 Mar 2002 09:31:02) 11:13:45
+2 <NA>  31 2002-06-03 (03 Jun 2002 09:42:07) 11:14:13
 
 $z
              X3         X4          X5         X6         X7          X8
@@ -865,8 +865,8 @@ Variables in data set `W[[2]]':
 > (tmp <- read.xport("a.xpt"))            #8.c
 $`w[[1]]`
   RACE AGE         D1                    DT1       T1
-1 blue  30 2002-03-03 (03 Mar 2002 04:31:02) 11:13:45
-2       31 2002-06-03 (03 Jun 2002 04:42:07) 11:14:13
+1 blue  30 2002-03-03 (03 Mar 2002 09:31:02) 11:13:45
+2       31 2002-06-03 (03 Jun 2002 09:42:07) 11:14:13
 
 $`w[[2]]`
              X3         X4          X5         X6         X7          X8
@@ -1062,8 +1062,8 @@ Variables in data set `DATA3':
 > (tmp <- read.xport("a.xpt"))     #9.c
 $data1
   RACE AGE         D1                    DT1       T1
-1 <NA>  30 2002-03-03 (03 Mar 2002 04:31:02) 11:13:45
-2 <NA>  31 2002-06-03 (03 Jun 2002 04:42:07) 11:14:13
+1 <NA>  30 2002-03-03 (03 Mar 2002 09:31:02) 11:13:45
+2 <NA>  31 2002-06-03 (03 Jun 2002 09:42:07) 11:14:13
 
 $data2
              X3         X4          X5         X6         X7          X8
@@ -1177,8 +1177,8 @@ Error in write.xport(5, "a.xpt") :
 > (tmp <- read.xport("a.xpt"))                         #10.c
 $data1
   RACE AGE         D1                    DT1       T1
-1 <NA>  30 2002-03-03 (03 Mar 2002 04:31:02) 11:13:45
-2 <NA>  31 2002-06-03 (03 Jun 2002 04:42:07) 11:14:13
+1 <NA>  30 2002-03-03 (03 Mar 2002 09:31:02) 11:13:45
+2 <NA>  31 2002-06-03 (03 Jun 2002 09:42:07) 11:14:13
 
 $data2
              X3         X4          X5         X6         X7          X8
@@ -1291,8 +1291,8 @@ Error in write.xport(list(a = 5, b = 6), "a.xpt") :
 > (tmp <- read.xport("a.xpt"))                         #10.c
 $data1
   RACE AGE         D1                    DT1       T1
-1 <NA>  30 2002-03-03 (03 Mar 2002 04:31:02) 11:13:45
-2 <NA>  31 2002-06-03 (03 Jun 2002 04:42:07) 11:14:13
+1 <NA>  30 2002-03-03 (03 Mar 2002 09:31:02) 11:13:45
+2 <NA>  31 2002-06-03 (03 Jun 2002 09:42:07) 11:14:13
 
 $data2
              X3         X4          X5         X6         X7          X8
@@ -1529,8 +1529,8 @@ Variables in data set `DATA2':
 > (tmp <- read.xport("a.xpt"))                            #11.c
 $data1
   RACE AGE         D1                    DT1       T1
-1 blue  30 2002-03-03 (03 Mar 2002 04:31:02) 11:13:45
-2       31 2002-06-03 (03 Jun 2002 04:42:07) 11:14:13
+1 blue  30 2002-03-03 (03 Mar 2002 09:31:02) 11:13:45
+2       31 2002-06-03 (03 Jun 2002 09:42:07) 11:14:13
 
 $data2
              X3         X4          X5         X6         X7          X8
@@ -1769,8 +1769,8 @@ Variables in data set `DATA2':
 > (tmp <- read.xport("a.xpt"))     #12.c
 $data1
   RACE AGE         D1                    DT1       T1
-1 blue  30 2002-03-03 (03 Mar 2002 04:31:02) 11:13:45
-2       31 2002-06-03 (03 Jun 2002 04:42:07) 11:14:13
+1 blue  30 2002-03-03 (03 Mar 2002 09:31:02) 11:13:45
+2       31 2002-06-03 (03 Jun 2002 09:42:07) 11:14:13
 
 $data2
              X3         X4          X5         X6         X7          X8
@@ -2054,8 +2054,8 @@ Variables in data set `FORMATS':
 > (tmp <- read.xport("a.xpt"))     #13.c
 $test
   RACE AGE         D1                    DT1       T1
-1 blue  30 2002-03-03 (03 Mar 2002 04:31:02) 11:13:45
-2 <NA>  31 2002-06-03 (03 Jun 2002 04:42:07) 11:14:13
+1 blue  30 2002-03-03 (03 Mar 2002 09:31:02) 11:13:45
+2 <NA>  31 2002-06-03 (03 Jun 2002 09:42:07) 11:14:13
 
 $z
            VAR1       VAR2        VAR3       VAR4       VAR5        VAR6
@@ -2163,4 +2163,4 @@ $z
 > 
 > proc.time()
    user  system elapsed 
-  6.024   1.684  14.087 
+  6.016   1.632  12.803 

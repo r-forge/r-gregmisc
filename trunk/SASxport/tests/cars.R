@@ -1,4 +1,5 @@
 library(SASxport)
+Sys.setenv("TZ"="GMT")
 
 
 cars <- read.table(file="cars.sas", skip=3, nrows=26,

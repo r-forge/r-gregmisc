@@ -1,4 +1,5 @@
 library(SASxport)
+Sys.setenv("TZ"="GMT")
 
 df1 <- data.frame( f=c(1.0, -1.0), d=as.integer(c(-1,1) )  )
 write.xport(df1, file='df1.xpt')

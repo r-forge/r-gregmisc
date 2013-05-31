@@ -1,4 +1,5 @@
 library(SASxport)
+Sys.setenv("TZ"="GMT")
 
 x <- data.frame(A=1:10,
                 B=letters[1:10],

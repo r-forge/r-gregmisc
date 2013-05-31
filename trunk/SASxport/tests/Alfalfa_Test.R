@@ -2,6 +2,7 @@
 ## existing SAS xport file "Alfalfa.xpt"
 
 library(SASxport)
+Sys.setenv("TZ"="GMT")
 
 # existing data file
 SPEC <- read.xport("Alfalfa.xpt")

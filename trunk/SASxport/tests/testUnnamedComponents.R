@@ -1,5 +1,5 @@
 library(SASxport)
-
+Sys.setenv("TZ"="GMT")
 
 ##tests
 example(read.xport)

@@ -1,4 +1,5 @@
 library(SASxport)
+Sys.setenv("TZ"="GMT")
 
 lookup.xport('puromycin.xpt')
 

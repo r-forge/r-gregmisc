@@ -1,4 +1,5 @@
 library(SASxport)
+Sys.setenv("TZ"="GMT")
 
 ## Create a small data set containing dates, times, and date-times
 

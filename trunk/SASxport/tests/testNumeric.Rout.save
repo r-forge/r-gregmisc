@@ -1,5 +1,5 @@
 
-R version 3.0.0 (2013-04-03) -- "Masked Marvel"
+R version 3.0.1 (2013-05-16) -- "Good Sport"
 Copyright (C) 2013 The R Foundation for Statistical Computing
 Platform: i686-pc-linux-gnu (32-bit)
 
@@ -21,6 +21,7 @@ Loaded SASxport version 1.3.3 (2013-05-30).
 
   Type `?SASxport' for usage information.
 
+> Sys.setenv("TZ"="GMT")
 > 
 > ##
 > ## Construct a data frame with all common R data types.
@@ -86,4 +87,4 @@ Warning messages:
 > 
 > proc.time()
    user  system elapsed 
-  1.584   0.096   1.673 
+  1.572   0.084   1.651 

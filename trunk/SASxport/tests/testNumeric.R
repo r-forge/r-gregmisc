@@ -1,4 +1,5 @@
 library(SASxport)
+Sys.setenv("TZ"="GMT")
 
 ##
 ## Construct a data frame with all common R data types.
