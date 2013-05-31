@@ -76,14 +76,16 @@ make.format.factor <- function(var, fname)
     else
       formatName <- fname
     varLevels <- levels(var)
-    formats <- empty.format.table()    
-    for( j in 1:nlevels(var) )
-      formats <- add.format.entry(formats,
-                                  formatName,
-                                  j,
-                                  j,
-                                  varLevels[j]
-                                  )
+    formats <- empty.format.table()
+
+    if(nlevels(var)>0)
+      for( j in 1:nlevels(var) )
+        formats <- add.format.entry(formats,
+                                    formatName,
+                                    j,
+                                    j,
+                                    varLevels[j]
+                                    )
     formats
   }
 
