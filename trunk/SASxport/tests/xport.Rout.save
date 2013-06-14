@@ -106,4 +106,4 @@ Variables in data set `W.TEST':
 > q()
 > proc.time()
    user  system elapsed 
-  0.892   0.128   1.026 
+  0.888   0.132   1.031 

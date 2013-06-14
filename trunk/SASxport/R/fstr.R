@@ -12,6 +12,8 @@ fstr <- function(name, length, digits)
         else
           return( paste(name[i], length[i], '.', digits[i], sep='' ) )
       }
-    sapply( 1:length(name), inner)
-    
+    if(length(name)>0)
+      sapply( 1:length(name), inner)
+    else
+      character(0)
   }

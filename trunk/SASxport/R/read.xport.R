@@ -121,11 +121,6 @@ read.xport <- function(file,
 
       scat('.')
       
-      if(!length(w)) {
-        scat('Empty dataset', k, 'ignored\n')
-        next
-      }
-
       label(w)   <- dsLabels[k]
       names(label(w)) <- NULL
       SAStype(w) <- dsTypes[k]
@@ -145,70 +140,71 @@ read.xport <- function(file,
       
       ndinfo   <- names.tolower(makeNames(dinfo$name, allow=name.chars))
       names(lab) <- names(fmt) <- names(formats) <- names(iformats) <- ndinfo
-      for(i in 1:length(w)) {
-        changed <- FALSE
-        x  <- w[[i]]
-        fi <- fmt[nam[i]];
-        names(fi) <- NULL
-        if(fi != '' && length(finfo) && (fi %in% names(finfo))) {
-          f <- finfo[[fi]]
-          if(length(f)) {  ## may be NULL because had a range in format
-            x <- factor(x, f$value, f$label)
-            attr(x, 'SASformat') <- fi
-            changed <- TRUE
-          }
-        }
-
-        if(is.numeric(x)) {
-          if(fi %in% sasdateform) {
-            x <- importConvertDateTime(x, 'date', 'sas')
-            changed <- TRUE
-          } else if(fi %in% sastimeform) {
-            x <- importConvertDateTime(x, 'time', 'sas')
-            changed <- TRUE
-          } else if(fi %in% sasdatetimeform) {
-            x <- importConvertDateTime(x, 'datetime', 'sas')
-            changed <- TRUE
-          } else if(force.integer) {
-            if(all(is.na(x))) {
-              storage.mode(x) <- 'integer'
-              changed <- TRUE
-            } else if(max(abs(x),na.rm=TRUE) <= (2^31-1) &&
-                      all(floor(x) == x, na.rm=TRUE)) {
-              storage.mode(x) <- 'integer'
+      if(length(w)>0)
+        for(i in 1:length(w)) {
+          changed <- FALSE
+          x  <- w[[i]]
+          fi <- fmt[nam[i]];
+          names(fi) <- NULL
+          if(fi != '' && length(finfo) && (fi %in% names(finfo))) {
+            f <- finfo[[fi]]
+            if(length(f)) {  ## may be NULL because had a range in format
+              x <- factor(x, f$value, f$label)
+              attr(x, 'SASformat') <- fi
               changed <- TRUE
             }
           }
-        } else if(possiblyConvertChar && is.character(x)) {
-          if((is.logical(as.is) && !as.is) || 
-             (is.numeric(as.is) && length(unique(x)) < as.is*length(x))) {
-            x <- factor(x, exclude='')
-            changed <- TRUE
+
+          if(is.numeric(x)) {
+            if(fi %in% sasdateform) {
+              x <- importConvertDateTime(x, 'date', 'sas')
+              changed <- TRUE
+            } else if(fi %in% sastimeform) {
+              x <- importConvertDateTime(x, 'time', 'sas')
+              changed <- TRUE
+            } else if(fi %in% sasdatetimeform) {
+              x <- importConvertDateTime(x, 'datetime', 'sas')
+              changed <- TRUE
+            } else if(force.integer) {
+              if(all(is.na(x))) {
+                storage.mode(x) <- 'integer'
+                changed <- TRUE
+              } else if(max(abs(x),na.rm=TRUE) <= (2^31-1) &&
+                        all(floor(x) == x, na.rm=TRUE)) {
+                storage.mode(x) <- 'integer'
+                changed <- TRUE
+            }
+            }
+          } else if(possiblyConvertChar && is.character(x)) {
+            if((is.logical(as.is) && !as.is) || 
+               (is.numeric(as.is) && length(unique(x)) < as.is*length(x))) {
+              x <- factor(x, exclude='')
+              changed <- TRUE
+            }
           }
+          
+          lz <- lab[nam[i]]
+          if(!is.null(lz) && length(lz)>0 && !is.na(lz) && lz != '') {
+            names(lz) <- NULL
+            label(x)  <- lz
+            changed   <- TRUE
+          }
+
+          if(nam[i] %in% names(formats)  && formats[nam[i]] > "" )
+            {
+              SASformat(x) <- formats[[nam[i]]]
+              changed <- TRUE
+            }
+          
+          if(nam[i] %in% names(iformats) && iformats[nam[i]] > "" )
+            {
+              SASformat(x) <- formats[[nam[i]]]
+            changed <- TRUE
+            }
+          
+          if(changed)
+            w[[i]] <- x
         }
-
-        lz <- lab[nam[i]]
-        if(!is.null(lz) && length(lz)>0 && !is.na(lz) && lz != '') {
-          names(lz) <- NULL
-          label(x)  <- lz
-          changed   <- TRUE
-        }
-
-        if( formats[nam[i]] > "" )
-          {
-            SASformat(x) <- formats[[nam[i]]]
-            changed <- TRUE
-          }
-      
-        if( iformats[nam[i]] > "" )
-          {
-            SASformat(x) <- formats[[nam[i]]]
-            changed <- TRUE
-          }
-
-        if(changed)
-          w[[i]] <- x
-      }
 
       scat('.')
 
@@ -226,9 +222,11 @@ read.xport <- function(file,
           res$FORMATS <- empty.format.table()
       }
 
-    
     if(nds > 1 || as.list)
       res
+    else
+      if(class(w)=="list")
+        w[[1]]
     else
       w
   }

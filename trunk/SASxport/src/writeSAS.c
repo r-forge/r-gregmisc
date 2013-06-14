@@ -4,7 +4,7 @@
  *
  *    Author:  Gregory R. Warnes <greg@warnes.net>
  *
- *    Copyright (C) 2007  Gregory R. Warnes <greg@warnes.net>
+ *    Copyright (C) 2007-2013  Gregory R. Warnes <greg@warnes.net>
  * 
  *    This program is free software; you can redistribute it and/or modify
  *    it under the terms of the GNU General Public License as published by

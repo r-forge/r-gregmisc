@@ -4,6 +4,7 @@
  *
  *  Copyright 1999-1999 Douglas M. Bates <bates@stat.wisc.edu>,
  *                      Saikat DebRoy <saikat@stat.wisc.edu>
+ *  Additions copyright 2007-2013 Gregory R. Warnes <greg@warnes.net>
  *
  *
  *  This program is free software; you can redistribute it and/or modify
