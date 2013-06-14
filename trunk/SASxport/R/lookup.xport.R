@@ -37,6 +37,7 @@ summary.lookup.xport <- function(object, ...)
                                   "label"
                                   )
                                 ])
+        if(nrow(ret)==0) ret[1,] <- NA # ensure at least one row
         cbind(dataset=XX, ret, nobs=df$length)
       }
     

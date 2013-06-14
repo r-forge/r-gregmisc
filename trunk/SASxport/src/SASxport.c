@@ -587,7 +587,9 @@ xport_info(SEXP xportFile)
     PROTECT(ans = allocVector(VECSXP, 0));
     PROTECT(ansNames  = allocVector(STRSXP, 0));
 
-    while(namestrLength > 0 && (memLength = init_mem_info(fp, dsname, dslabel, dstype)) > 0) {
+    while(!feof(fp))
+      {
+	memLength = init_mem_info(fp, dsname, dslabel, dstype);
 
 	PROTECT(varInfo = allocVector(VECSXP, VAR_INFO_LENGTH));
 	setAttrib(varInfo, R_NamesSymbol, varInfoNames);
