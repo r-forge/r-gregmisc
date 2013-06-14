@@ -152,7 +152,9 @@ write.xport <- function(...,
         
         colnames(dfList[[i]]) <- colnames(df) <- varNames <- makeSASNames(colnames(df))
         
-        offsetTable <- data.frame("name"=varNames, "len"=NA, "offset"=NA )
+        offsetTable <- data.frame("name"=varNames,
+                                  "len"=rep(NA, length(varNames)),
+                                  "offset"=rep(NA, length(varNames)) )
         rownames(offsetTable) <- offsetTable[,"name"]
 
         dfLabel <- label(df, default="" )
@@ -239,22 +241,25 @@ write.xport <- function(...,
 
         scat("Write data ... ");
         spaceUsed <- 0
-        for(i in 1:nrow(df) )
-          for(j in 1:ncol(df) )
+        if(nrow(df)>0)
           {
-            val <- df[i,j]
-            valLen <- offsetTable[j,"len"]
-
-            scat("i=", i, " j=", j, " value=", val, " len=", valLen, "");
-            if(is.character( val ))
+          for(i in 1:nrow(df) )
+            for(j in 1:ncol(df) )
               {
-                out(xport.character(val, width=valLen ) )
-              }
-            else
-              out( xport.numeric( val ) )
+                val <- df[i,j]
+                valLen <- offsetTable[j,"len"]
+                
+                scat("i=", i, " j=", j, " value=", val, " len=", valLen, "");
+                if(is.character( val ))
+                  {
+                    out(xport.character(val, width=valLen ) )
+                  }
+                else
+                  out( xport.numeric( val ) )
 
-            spaceUsed <- spaceUsed + valLen
-          }
+                spaceUsed <- spaceUsed + valLen
+              }
+        }
         
         fillSize <- 80 - (spaceUsed %% 80)
         if(fillSize==80) fillSize <- 0
