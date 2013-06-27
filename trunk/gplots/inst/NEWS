@@ -1,3 +1,18 @@
+Release 2.11.3 - 2013-06-27
+---------------------------
+
+Enhancements:
+
+- Modify sinkplot() to use a local environment rather than the global
+  environment, to conform to CRAN policies.
+
+Bug Fixes:
+
+- Fixed typo/spelling error in plotmeans() man page.
+
+Other changes
+
+
 Release 2.11.2 - 2013-03-24
 ---------------------------
 
@@ -5,6 +20,10 @@ Enhancements:
 
 - Add ci.width argument to barplot2() to allow varying the length of
   the 't' at the end of confidence interval bars.
+
+Bug Fixes:
+
+- Fix error in heatmap.2 when colsep argument had length 1.
 
 Updates:
 
