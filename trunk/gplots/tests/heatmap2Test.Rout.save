@@ -1,8 +1,7 @@
 
-R version 2.15.0 (2012-03-30)
-Copyright (C) 2012 The R Foundation for Statistical Computing
-ISBN 3-900051-07-0
-Platform: x86_64-apple-darwin9.8.0/x86_64 (64-bit)
+R version 3.0.1 (2013-05-16) -- "Good Sport"
+Copyright (C) 2013 The R Foundation for Statistical Computing
+Platform: i686-pc-linux-gnu (32-bit)
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
 You are welcome to redistribute it under certain conditions.
@@ -25,24 +24,24 @@ gdata: read.xls support for 'XLSX' (Excel 2007+) files ENABLED.
 
 Attaching package: 'gdata'
 
-The following object(s) are masked from 'package:stats':
+The following object is masked from 'package:stats':
 
     nobs
 
-The following object(s) are masked from 'package:utils':
+The following object is masked from 'package:utils':
 
     object.size
 
 Loading required package: caTools
-Loading required package: bitops
 Loading required package: grid
 Loading required package: KernSmooth
 KernSmooth 2.23 loaded
 Copyright M. P. Wand 1997-2009
+Loading required package: MASS
 
 Attaching package: 'gplots'
 
-The following object(s) are masked from 'package:stats':
+The following object is masked from 'package:stats':
 
     lowess
 
@@ -236,7 +235,13 @@ List of 12
   ..$ high : num [1:256] -3.19 -3.16 -3.14 -3.11 -3.09 ...
   ..$ color: Factor w/ 254 levels "#80FFFFFF","#81FFFFFF",..: 1 1 2 3 4 5 6 7 8 9 ...
 > 
+> ## Test row and column separators 
+> heatmap.2(x,dendrogram="col", colsep=1) ## one colsep
+> heatmap.2(x,dendrogram="col", rowsep=1) ## one rowsep
+> 
+> heatmap.2(x,dendrogram="col", colsep=1:2) ## two colseps
+> heatmap.2(x,dendrogram="col", rowsep=1:2) ## two rowseps
 > 
 > proc.time()
    user  system elapsed 
-  1.427   0.067   1.487 
+  5.104   0.356   5.478 
