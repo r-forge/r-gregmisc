@@ -1,6 +1,6 @@
 # $Id$
 
-.First.lib <- function(libname, pkgname)
+.onAttach <- function(libname, pkgname)
 {
   packageStartupMessage(
           "All functionality of the `gregmisc' package has been moved",
