@@ -38,7 +38,7 @@ ll <- function(pos=1, unit="KB", digits=0, dim=FALSE, sort=FALSE, class=NULL,
   {
     if(length(pos) == 0)
       return(data.frame())
-    attach(pos, pos=2, warn.conflicts=FALSE)
+    attach(pos, pos=2, warn.conflicts=FALSE); on.exit(detach(pos=2))
     original.rank <- rank(names(pos))
     was.list <- TRUE
     pos <- 2
@@ -79,7 +79,7 @@ ll <- function(pos=1, unit="KB", digits=0, dim=FALSE, sort=FALSE, class=NULL,
   }
   if(was.list)
   {
-    detach(pos=2)
+    detach(pos=2); on.exit()
     if(!sort)
       object.frame <- object.frame[original.rank, ]
   }
