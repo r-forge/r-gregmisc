@@ -1,3 +1,13 @@
+Changes in 2.13.2 (2013-06-28)
+------------------------------
+
+Enhancements:
+
+- Modify ll() function to use on.exit() to ensure that detach() occurs
+  after attach() even when an error is encoundered during execution.
+
+- Working of deprecation warning message in aggregate.table clarified.
+
 Changes in 2.13.1 (2013-03-24)
 ------------------------------
 
