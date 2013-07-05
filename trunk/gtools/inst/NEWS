@@ -5,6 +5,10 @@ Bug fixes:
 
 - Update checkRVersion() to works with R version 3.0.0 and later.
 
+Other changes:
+
+- Remove cross-reference to (obsolete?) moc package
+
 gtools 2.7.1 - 2013-03-17
 -------------------------
 
