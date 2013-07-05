@@ -11,20 +11,22 @@ addLast(fun)
   \item{fun}{Function to be called.}
 }
 \details{
-  \code{addLast} defines \code{.Last} (if not already present) or redifines it
-  so that the function \code{fun} will be called when R exits.  The
-  latter is accomplished by saving the current definition of \code{.Last} and
-  creating a new \code{.Last} function that calls \code{fun} and then the
-  original \code{.Last} function.
+  \code{addLast} defines the \code{.Last} function in the global
+  environment (if not already present) or redifines it so that the
+  function \code{fun} will be called when R exits.  The latter is
+  accomplished by saving the current definition of \code{.Last} and
+  creating a new \code{.Last} function that calls \code{fun} and then
+  the original \code{.Last} function.
 }
 \value{
   None.
 }
+\note{This function creates/modifies the definition of '.Last' in the
+  global environment.}
 \author{Gregory R. Warnes \email{greg@warnes.net}}
 \seealso{ \code{\link[base]{.Last}} }
 \examples{
 
-\dontrun{
 ## Print a couple of cute messages when R exits.
 helloWorld <- function() cat("\nHello World!\n")
 byeWorld <- function() cat("\nGoodbye World!\n")
@@ -32,6 +34,7 @@ byeWorld <- function() cat("\nGoodbye World!\n")
 addLast(byeWorld)
 addLast(helloWorld)
 
+\dontrun{
 q("no")
 
 ## Should yield:
@@ -43,6 +46,7 @@ q("no")
 ##   Goodbye World!
 ##
 ##   Process R finished at Tue Nov 22 10:28:55 2005
+}
 
 ## Unix-flavour example: send Rplots.ps to printer on exit.
 myLast <- function()
@@ -52,6 +56,7 @@ myLast <- function()
   cat("bye bye...\n")
 }
 addLast(myLast)
+\dontrun{
 quit("yes")
 
 ## Should yield:
