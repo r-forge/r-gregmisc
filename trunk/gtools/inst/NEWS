@@ -3,11 +3,13 @@ gtools 2.7.2 - 2013-07-05
 
 Bug fixes:
 
-- Update checkRVersion() to works with R version 3.0.0 and later.
+- Update checkRVersion() to work with R version 3.0.0 and later.
 
 Other changes:
 
 - Remove cross-reference to (obsolete?) moc package
+- Add text to man page for addLast() noting that the value of .Last is
+  changed in the global environment.
 
 gtools 2.7.1 - 2013-03-17
 -------------------------
