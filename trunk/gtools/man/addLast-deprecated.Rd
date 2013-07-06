@@ -1,5 +1,5 @@
-\name{addLast}
-\alias{addLast}
+\name{addLast-deprecated}
+\alias{addLast-deprecated}
 \title{Add a function to be executed when R exits.}
 \description{
   Add a function to be executed when R exits.
@@ -21,10 +21,15 @@ addLast(fun)
 \value{
   None.
 }
-\note{This function creates/modifies the definition of '.Last' in the
-  global environment.}
+\note{This function has been deprecated in favor of \code{lastAdd}
+  because it creates/modifies the definition of '.Last' in the
+  global environment, which is expressly disallowed by the CRAN
+  policies. }
 \author{Gregory R. Warnes \email{greg@warnes.net}}
-\seealso{ \code{\link[base]{.Last}} }
+\seealso{
+  \code{\link[base]{.Last}},
+  \code{\link[gtools]{lastAdd}}
+}
 \examples{
 
 ## Print a couple of cute messages when R exits.
