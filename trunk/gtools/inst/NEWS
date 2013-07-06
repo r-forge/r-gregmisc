@@ -1,5 +1,23 @@
-gtools 2.7.2 - 2013-07-05
+gtools 3.0.0 - 2013-07-06
 -------------------------
+
+Major changes:
+
+- The function 'addLast()' has been deprecated because it directly
+  manipulates the global environment, which is expressly prohibited by
+  the CRAN policies.  
+
+- A new function, 'lastAdd()' has been created to replace 'addLast()'.
+  The name has been changed because the two functions require
+  different syntax. 'addLast()' was used like this:
+
+    byeWorld <- function() cat("\nGoodbye World!\n")
+    addLast(byeWorld)
+
+  The new 'lastAdd()' function is used like this:
+
+    byeWorld <- function() cat("\nGoodbye World!\n")
+    .Last <- lastAdd(byeWorld)
 
 Bug fixes:
 
@@ -8,8 +26,9 @@ Bug fixes:
 Other changes:
 
 - Remove cross-reference to (obsolete?) moc package
-- Add text to man page for addLast() noting that the value of .Last is
-  changed in the global environment.
+
+- The function 'assert()' (deprecated since gtools 2.5.0) is no longer
+  available and has been marked defunct.
 
 gtools 2.7.1 - 2013-03-17
 -------------------------
