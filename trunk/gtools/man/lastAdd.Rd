@@ -5,14 +5,14 @@
   Non-destructively construct a \code{.Last} function to be executed when R exits.
 }
 \usage{
-.Last <- addLast(fun)
+addLast(fun)
 }
 \arguments{
   \item{fun}{Function to be called.}
 }
 \details{
-  \code{lastAdd} constructs a new function to be used to replace the
-  exising definition of \code{.Last}, which will be executed when R
+  \code{lastAdd} constructs a new function which can be used to replace
+  the exising definition of \code{.Last}, which will be executed when R
   terminates normally.
 
   If a \code{.Last} function already exists in the global environment,
