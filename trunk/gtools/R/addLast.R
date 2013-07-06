@@ -1,6 +1,6 @@
 addLast <- function( fun )
   {
-    .Deprecated(new=paste(".Last <- lastAdd(", deparse(substitute(fun)), ")"),
+    .Deprecated(new=paste(".Last <- lastAdd(", deparse(substitute(fun)), ")", sep=''),
                 package='gtools'
                 )
     
