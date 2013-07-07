@@ -5,7 +5,7 @@
   Non-destructively construct a \code{.Last} function to be executed when R exits.
 }
 \usage{
-addLast(fun)
+lastAdd(fun)
 }
 \arguments{
   \item{fun}{Function to be called.}
