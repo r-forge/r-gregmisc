@@ -71,7 +71,6 @@ ci.lme <- function(x,confidence=0.95,alpha=1-confidence,...)
 ci.mer <- function (x, 
                     confidence = 0.95, 
                     alpha = 1 - confidence, 
-                    sim.mer = TRUE, 
                     n.sim = 1e4,
                     ...) 
 {
