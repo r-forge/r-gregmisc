@@ -1,4 +1,4 @@
-Version 2.15.4 - 2013-07-18
+Version 2.15.5 - 2013-07-18
 ---------------------------
 
 Bug fixes:
@@ -9,7 +9,7 @@ Bug fixes:
 Other Changes:
 
 - Update man page file for ci() to current Rd syntax.
-
+- Remove unused argument to ci.mer()
 
 Version 2.15.3 - 2012-06-27
 ---------------------------

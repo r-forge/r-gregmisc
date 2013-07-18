@@ -1,5 +1,5 @@
 Package: gmodels
-Version: 2.15.4
+Version: 2.15.5
 Date: 2013-07-18
 Title: Various R programming tools for model fitting
 Author: Gregory R. Warnes, Ben Bolker, Thomas Lumley, and Randall C
@@ -13,6 +13,5 @@ Depends: R (>= 1.9.0)
 Suggests: gplots, gtools, Matrix, nlme, lme4 (>= 0.999999-0)
 Imports: MASS, gdata
 License: GPL-2
-URL: http://cran.r-project.org/src/contrib/PACKAGES.html 
-     http://www.sf.net/projects/r-gregmisc
-
+URL: http://www.sf.net/projects/r-gregmisc
+NeedsCompilation: no
