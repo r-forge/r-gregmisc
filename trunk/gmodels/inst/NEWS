@@ -1,3 +1,16 @@
+Version 2.15.4 - 2013-07-18
+---------------------------
+
+Bug fixes:
+
+- Correct error in estimable.mlm() that caused it to always fail.  Added
+  test code to prevent future issues.
+
+Other Changes:
+
+- Update man page file for ci() to current Rd syntax.
+
+
 Version 2.15.3 - 2012-06-27
 ---------------------------
 
