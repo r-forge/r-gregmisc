@@ -1,3 +1,13 @@
+gtools 3.0.1 - 2013-09-22
+-------------------------
+
+Bug fixes:
+
+- Modified 'mixedorder()' to use Use 'suppressWarnings() instead of
+  'options(warn=-1)'.  This will avoid egregious warning messages when
+  called from within a nested environment, such as when run from
+  within 'knitr'
+
 gtools 3.0.0 - 2013-07-06
 -------------------------
 
