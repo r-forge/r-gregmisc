@@ -5,10 +5,10 @@
   These functions are provided for compatibility with older versions of
   gtools, and may be defunct as soon as the next release.
 }
-\usage{
-}
-\arguments{
-}
+%\usage{
+%}
+%\arguments{
+%}
 \details{
   gtools currently contains no deprecated functions.
   
