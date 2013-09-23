@@ -13,19 +13,12 @@ mixedorder <- function(x)
 
     numeric <- function(x)
       {
-        optwarn = options("warn")
-        on.exit( options(optwarn) )
-        options(warn=-1)
-        as.numeric(x)
+        suppressWarnings( as.numeric(x) )
       }
 
     nonnumeric <- function(x)
       {
-        optwarn = options("warn")
-        on.exit( options(optwarn) )
-        options(warn=-1)
-
-        ifelse(is.na(as.numeric(x)), toupper(x), NA)
+        suppressWarnings( ifelse(is.na(as.numeric(x)), toupper(x), NA) )
       }
 
 
