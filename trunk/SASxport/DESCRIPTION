@@ -39,5 +39,4 @@ Author:
 Maintainer: Gregory R. Warnes <greg@warnes.net>
 License: GPL-2
 Depends: R (>= 2.4.0), chron
-Imports: chron
 URL: http://www.warnes.net, http://metruminstitute.org
