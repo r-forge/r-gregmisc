@@ -44,20 +44,20 @@ lookup.xport(file)
   for \code{\link[foreign]{lookup.xport}}.
 }
 \examples{
-\dontshow{
-setwd(system.file("extdata", package="SASxport"))
 
-}
-## Get information on a local file
-lookup.xport("Alfalfa.xpt")
+## Get information about a local file
+alfFile <- system.file('extdata', 'Alfalfa.xpt', package='SASxport')
+lookup.xport(alfFile)
 
-## Or read a copy of test2.xpt available on the web:
+## Read a copy of test2.xpt available on the web:
 \dontrun{
-host <- 'http://biostat.mc.vanderbilt.edu'
-path <- '/cgi-bin/viewvc.cgi/*checkout*/Hmisc/trunk/tests/test2.xpt'
-url <- paste(host,path,sep="")
-
+url <- 'http://biostat.mc.vanderbilt.edu/wiki/pub/Main/Hmisc/test2.xpt'
 w <- lookup.xport(url)
+}
+## Or use the local copy...
+testFile <- system.file('extdata', 'test2.xpt', package="SASxport")
+w <- lookup.xport(testFile)
+
 
 # display the information (calls 'print.lookup.xport')
 w
@@ -74,7 +74,6 @@ wS # same display
 
 # variable names within all data sets
 wS$name 
-}
 
 }
 \keyword{file}
