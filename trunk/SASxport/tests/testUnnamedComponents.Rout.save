@@ -16,8 +16,9 @@ Type 'demo()' for some demos, 'help()' for on-line help, or
 Type 'q()' to quit R.
 
 > library(SASxport)
+Loading required package: chron
 
-Loaded SASxport version 1.3.5 (2013-06-14).
+Loaded SASxport version 1.3.6 (2013-10-09).
 
   Type `?SASxport' for usage information.
 
@@ -26,79 +27,143 @@ Loaded SASxport version 1.3.5 (2013-06-14).
 > ##tests
 > example(read.xport)
 
-rd.xpr> # -------
-rd.xpr> # SAS code to generate test dataset:
-rd.xpr> # -------
-rd.xpr> # libname y SASV5XPT "test2.xpt";
-rd.xpr> #
-rd.xpr> # PROC FORMAT; VALUE race 1=green 2=blue 3=purple; RUN;
-rd.xpr> # PROC FORMAT CNTLOUT=format;RUN;  * Name, e.g. 'format', unimportant;
-rd.xpr> # data test;
-rd.xpr> # LENGTH race 3 age 4;
-rd.xpr> # age=30; label age="Age at Beginning of Study";
-rd.xpr> # race=2;
-rd.xpr> # d1='3mar2002'd ;
-rd.xpr> # dt1='3mar2002 9:31:02'dt;
-rd.xpr> # t1='11:13:45't;
-rd.xpr> # output;
-rd.xpr> #
-rd.xpr> # age=31;
-rd.xpr> # race=4;
-rd.xpr> # d1='3jun2002'd ;
-rd.xpr> # dt1='3jun2002 9:42:07'dt;
-rd.xpr> # t1='11:14:13't;
-rd.xpr> # output;
-rd.xpr> # format d1 mmddyy10. dt1 datetime. t1 time. race race.;
-rd.xpr> # run;
-rd.xpr> # data z; LENGTH x3 3 x4 4 x5 5 x6 6 x7 7 x8 8;
-rd.xpr> #    DO i=1 TO 100;
-rd.xpr> #        x3=ranuni(3);
-rd.xpr> #        x4=ranuni(5);
-rd.xpr> #        x5=ranuni(7);
-rd.xpr> #        x6=ranuni(9);
-rd.xpr> #        x7=ranuni(11);
-rd.xpr> #        x8=ranuni(13);
-rd.xpr> #        output;
-rd.xpr> #        END;
-rd.xpr> #    DROP i;
-rd.xpr> #    RUN;
-rd.xpr> # PROC MEANS; RUN;
-rd.xpr> # PROC COPY IN=work OUT=y;SELECT test format z;RUN; *Creates test2.xpt;
-rd.xpr> # ------
+rd.xpr> ## -------
+rd.xpr> ## SAS code to generate test dataset:
+rd.xpr> ## -------
+rd.xpr> ## libname y SASV5XPT "test2.xpt";
+rd.xpr> ##
+rd.xpr> ## PROC FORMAT; VALUE race 1=green 2=blue 3=purple; RUN;
+rd.xpr> ## PROC FORMAT CNTLOUT=format;RUN;  * Name, e.g. 'format', unimportant;
+rd.xpr> ## data test;
+rd.xpr> ## LENGTH race 3 age 4;
+rd.xpr> ## age=30; label age="Age at Beginning of Study";
+rd.xpr> ## race=2;
+rd.xpr> ## d1='3mar2002'd ;
+rd.xpr> ## dt1='3mar2002 9:31:02'dt;
+rd.xpr> ## t1='11:13:45't;
+rd.xpr> ## output;
+rd.xpr> ##
+rd.xpr> ## age=31;
+rd.xpr> ## race=4;
+rd.xpr> ## d1='3jun2002'd ;
+rd.xpr> ## dt1='3jun2002 9:42:07'dt;
+rd.xpr> ## t1='11:14:13't;
+rd.xpr> ## output;
+rd.xpr> ## format d1 mmddyy10. dt1 datetime. t1 time. race race.;
+rd.xpr> ## run;
+rd.xpr> ## data z; LENGTH x3 3 x4 4 x5 5 x6 6 x7 7 x8 8;
+rd.xpr> ##    DO i=1 TO 100;
+rd.xpr> ##        x3=ranuni(3);
+rd.xpr> ##        x4=ranuni(5);
+rd.xpr> ##        x5=ranuni(7);
+rd.xpr> ##        x6=ranuni(9);
+rd.xpr> ##        x7=ranuni(11);
+rd.xpr> ##        x8=ranuni(13);
+rd.xpr> ##        output;
+rd.xpr> ##        END;
+rd.xpr> ##    DROP i;
+rd.xpr> ##    RUN;
+rd.xpr> ## PROC MEANS; RUN;
+rd.xpr> ## PROC COPY IN=work OUT=y;SELECT test format z;RUN; *Creates test2.xpt;
+rd.xpr> ## ------
 rd.xpr> 
-rd.xpr> # Read this dataset from a local file:
+rd.xpr> ## Read this dataset from a local file:
+rd.xpr> testFile <- system.file('extdata', 'test2.xpt', package="SASxport")
+
+rd.xpr> w <- read.xport(testFile)
+
+rd.xpr> class(w)
+[1] "list"
+
+rd.xpr> sapply(w, head)
+$test
+  RACE AGE         D1                    DT1       T1
+1 blue  30 2002-03-03 (03 Mar 2002 09:31:02) 11:13:45
+2 <NA>  31 2002-06-03 (03 Jun 2002 09:42:07) 11:14:13
+
+$z
+         X3        X4         X5        X6        X7         X8
+1 0.5548096 0.9102659 0.19947292 0.7781959 0.7648077 0.90783205
+2 0.6289062 0.5950751 0.14938208 0.1996997 0.4579557 0.57161156
+3 0.5601807 0.2015537 0.87107157 0.8915819 0.8178354 0.06978889
+4 0.9301758 0.6795225 0.06470965 0.2382916 0.6756623 0.86167683
+5 0.4273071 0.5349607 0.90357235 0.7710940 0.7477446 0.13104011
+6 0.1850586 0.5198102 0.79364078 0.7873601 0.7689810 0.89166854
+
+
 rd.xpr> ## Not run: 
-rd.xpr> ##D w <- read.xport('test2.xpt')
+rd.xpr> ##D ## Or read a copy of test2.xpt available on the web:
+rd.xpr> ##D url <- 'http://biostat.mc.vanderbilt.edu/wiki/pub/Main/Hmisc/test2.xpt'
+rd.xpr> ##D w <- read.xport(url)
 rd.xpr> ## End(Not run)
 rd.xpr> 
-rd.xpr> # Or read a copy of test2.xpt available on the web:
-rd.xpr> host <- 'http://biostat.mc.vanderbilt.edu'
+rd.xpr> ## We can also get the dataset wrapped in a list
+rd.xpr> w <- read.xport(testFile, as.list=TRUE)
 
-rd.xpr> path <- '/cgi-bin/viewvc.cgi/*checkout*/Hmisc/trunk/tests/test2.xpt'
+rd.xpr> class(w)
+[1] "list"
 
-rd.xpr> url <- paste(host,path,sep="")
+rd.xpr> sapply(w, head)
+$test
+  RACE AGE         D1                    DT1       T1
+1 blue  30 2002-03-03 (03 Mar 2002 09:31:02) 11:13:45
+2 <NA>  31 2002-06-03 (03 Jun 2002 09:42:07) 11:14:13
 
-rd.xpr> w <- read.xport(url)
+$z
+         X3        X4         X5        X6        X7         X8
+1 0.5548096 0.9102659 0.19947292 0.7781959 0.7648077 0.90783205
+2 0.6289062 0.5950751 0.14938208 0.1996997 0.4579557 0.57161156
+3 0.5601807 0.2015537 0.87107157 0.8915819 0.8178354 0.06978889
+4 0.9301758 0.6795225 0.06470965 0.2382916 0.6756623 0.86167683
+5 0.4273071 0.5349607 0.90357235 0.7710940 0.7477446 0.13104011
+6 0.1850586 0.5198102 0.79364078 0.7873601 0.7689810 0.89166854
 
-rd.xpr> # We can also get the dataset wrapped in a list
-rd.xpr> w <- read.xport(url, as.list=TRUE)
 
-rd.xpr> # And we can ask for the format information to be included as well.
-rd.xpr> w <- read.xport(url, as.list=TRUE, include.formats=TRUE)
+rd.xpr> ## And we can ask for the format information to be included as well.
+rd.xpr> w <- read.xport(testFile, as.list=TRUE, include.formats=TRUE)
+
+rd.xpr> class(w)
+[1] "list"
+
+rd.xpr> sapply(w, head)
+$test
+  RACE AGE         D1                    DT1       T1
+1 blue  30 2002-03-03 (03 Mar 2002 09:31:02) 11:13:45
+2 <NA>  31 2002-06-03 (03 Jun 2002 09:42:07) 11:14:13
+
+$z
+         X3        X4         X5        X6        X7         X8
+1 0.5548096 0.9102659 0.19947292 0.7781959 0.7648077 0.90783205
+2 0.6289062 0.5950751 0.14938208 0.1996997 0.4579557 0.57161156
+3 0.5601807 0.2015537 0.87107157 0.8915819 0.8178354 0.06978889
+4 0.9301758 0.6795225 0.06470965 0.2382916 0.6756623 0.86167683
+5 0.4273071 0.5349607 0.90357235 0.7710940 0.7477446 0.13104011
+6 0.1850586 0.5198102 0.79364078 0.7873601 0.7689810 0.89166854
+
+$FORMATS
+  FMTNAME            START              END  LABEL MIN MAX DEFAULT LENGTH  FUZZ
+1    RACE                1                1  green   1  40       6      6 1e-12
+2    RACE                2                2   blue   1  40       6      6 1e-12
+3    RACE                3                3 purple   1  40       6      6 1e-12
+  PREFIX MULT FILL NOEDIT TYPE SEXCL EEXCL HLO DECSEP DIG3SEP DATATYPE LANGUAGE
+1           0           0    N     N     N                                     
+2           0           0    N     N     N                                     
+3           0           0    N     N     N                                     
+
 
 rd.xpr> ## Don't show: 
-rd.xpr> SASxport:::assert( is.data.frame(w)==FALSE && is.list(w)==TRUE )
+rd.xpr> stopifnot( is.data.frame(w)==FALSE && is.list(w)==TRUE )
 
 rd.xpr> ## End Don't show
 rd.xpr> 
 rd.xpr> 
 rd.xpr> ## Not run: 
-rd.xpr> ##D ## The Hmisc library provides many useful functions for interacting with
-rd.xpr> ##D ## data imported from SAS via read.xport()
+rd.xpr> ##D #### The Hmisc library provides many useful functions for interacting with
+rd.xpr> ##D #### data imported from SAS via read.xport()
 rd.xpr> ##D library(Hmisc)
 rd.xpr> ##D 
 rd.xpr> ##D describe(w$test)   # see labels, format names for dataset test
-rd.xpr> ##D lapply(w, describe)# see descriptive stats in more detaiil for each variable
+rd.xpr> ##D lapply(w, describe)# see descriptive stats in more detail for each variable
 rd.xpr> ##D 
 rd.xpr> ##D contents(w$test)   # another way to see variable attributes
 rd.xpr> ##D lapply(w, contents)# show contents of individual items in more detail
@@ -1401,79 +1466,143 @@ $data2
 > # Check with different list construction function *name*
 > example(read.xport)
 
-rd.xpr> # -------
-rd.xpr> # SAS code to generate test dataset:
-rd.xpr> # -------
-rd.xpr> # libname y SASV5XPT "test2.xpt";
-rd.xpr> #
-rd.xpr> # PROC FORMAT; VALUE race 1=green 2=blue 3=purple; RUN;
-rd.xpr> # PROC FORMAT CNTLOUT=format;RUN;  * Name, e.g. 'format', unimportant;
-rd.xpr> # data test;
-rd.xpr> # LENGTH race 3 age 4;
-rd.xpr> # age=30; label age="Age at Beginning of Study";
-rd.xpr> # race=2;
-rd.xpr> # d1='3mar2002'd ;
-rd.xpr> # dt1='3mar2002 9:31:02'dt;
-rd.xpr> # t1='11:13:45't;
-rd.xpr> # output;
-rd.xpr> #
-rd.xpr> # age=31;
-rd.xpr> # race=4;
-rd.xpr> # d1='3jun2002'd ;
-rd.xpr> # dt1='3jun2002 9:42:07'dt;
-rd.xpr> # t1='11:14:13't;
-rd.xpr> # output;
-rd.xpr> # format d1 mmddyy10. dt1 datetime. t1 time. race race.;
-rd.xpr> # run;
-rd.xpr> # data z; LENGTH x3 3 x4 4 x5 5 x6 6 x7 7 x8 8;
-rd.xpr> #    DO i=1 TO 100;
-rd.xpr> #        x3=ranuni(3);
-rd.xpr> #        x4=ranuni(5);
-rd.xpr> #        x5=ranuni(7);
-rd.xpr> #        x6=ranuni(9);
-rd.xpr> #        x7=ranuni(11);
-rd.xpr> #        x8=ranuni(13);
-rd.xpr> #        output;
-rd.xpr> #        END;
-rd.xpr> #    DROP i;
-rd.xpr> #    RUN;
-rd.xpr> # PROC MEANS; RUN;
-rd.xpr> # PROC COPY IN=work OUT=y;SELECT test format z;RUN; *Creates test2.xpt;
-rd.xpr> # ------
+rd.xpr> ## -------
+rd.xpr> ## SAS code to generate test dataset:
+rd.xpr> ## -------
+rd.xpr> ## libname y SASV5XPT "test2.xpt";
+rd.xpr> ##
+rd.xpr> ## PROC FORMAT; VALUE race 1=green 2=blue 3=purple; RUN;
+rd.xpr> ## PROC FORMAT CNTLOUT=format;RUN;  * Name, e.g. 'format', unimportant;
+rd.xpr> ## data test;
+rd.xpr> ## LENGTH race 3 age 4;
+rd.xpr> ## age=30; label age="Age at Beginning of Study";
+rd.xpr> ## race=2;
+rd.xpr> ## d1='3mar2002'd ;
+rd.xpr> ## dt1='3mar2002 9:31:02'dt;
+rd.xpr> ## t1='11:13:45't;
+rd.xpr> ## output;
+rd.xpr> ##
+rd.xpr> ## age=31;
+rd.xpr> ## race=4;
+rd.xpr> ## d1='3jun2002'd ;
+rd.xpr> ## dt1='3jun2002 9:42:07'dt;
+rd.xpr> ## t1='11:14:13't;
+rd.xpr> ## output;
+rd.xpr> ## format d1 mmddyy10. dt1 datetime. t1 time. race race.;
+rd.xpr> ## run;
+rd.xpr> ## data z; LENGTH x3 3 x4 4 x5 5 x6 6 x7 7 x8 8;
+rd.xpr> ##    DO i=1 TO 100;
+rd.xpr> ##        x3=ranuni(3);
+rd.xpr> ##        x4=ranuni(5);
+rd.xpr> ##        x5=ranuni(7);
+rd.xpr> ##        x6=ranuni(9);
+rd.xpr> ##        x7=ranuni(11);
+rd.xpr> ##        x8=ranuni(13);
+rd.xpr> ##        output;
+rd.xpr> ##        END;
+rd.xpr> ##    DROP i;
+rd.xpr> ##    RUN;
+rd.xpr> ## PROC MEANS; RUN;
+rd.xpr> ## PROC COPY IN=work OUT=y;SELECT test format z;RUN; *Creates test2.xpt;
+rd.xpr> ## ------
 rd.xpr> 
-rd.xpr> # Read this dataset from a local file:
+rd.xpr> ## Read this dataset from a local file:
+rd.xpr> testFile <- system.file('extdata', 'test2.xpt', package="SASxport")
+
+rd.xpr> w <- read.xport(testFile)
+
+rd.xpr> class(w)
+[1] "list"
+
+rd.xpr> sapply(w, head)
+$test
+  RACE AGE         D1                    DT1       T1
+1 blue  30 2002-03-03 (03 Mar 2002 09:31:02) 11:13:45
+2 <NA>  31 2002-06-03 (03 Jun 2002 09:42:07) 11:14:13
+
+$z
+         X3        X4         X5        X6        X7         X8
+1 0.5548096 0.9102659 0.19947292 0.7781959 0.7648077 0.90783205
+2 0.6289062 0.5950751 0.14938208 0.1996997 0.4579557 0.57161156
+3 0.5601807 0.2015537 0.87107157 0.8915819 0.8178354 0.06978889
+4 0.9301758 0.6795225 0.06470965 0.2382916 0.6756623 0.86167683
+5 0.4273071 0.5349607 0.90357235 0.7710940 0.7477446 0.13104011
+6 0.1850586 0.5198102 0.79364078 0.7873601 0.7689810 0.89166854
+
+
 rd.xpr> ## Not run: 
-rd.xpr> ##D w <- read.xport('test2.xpt')
+rd.xpr> ##D ## Or read a copy of test2.xpt available on the web:
+rd.xpr> ##D url <- 'http://biostat.mc.vanderbilt.edu/wiki/pub/Main/Hmisc/test2.xpt'
+rd.xpr> ##D w <- read.xport(url)
 rd.xpr> ## End(Not run)
 rd.xpr> 
-rd.xpr> # Or read a copy of test2.xpt available on the web:
-rd.xpr> host <- 'http://biostat.mc.vanderbilt.edu'
+rd.xpr> ## We can also get the dataset wrapped in a list
+rd.xpr> w <- read.xport(testFile, as.list=TRUE)
 
-rd.xpr> path <- '/cgi-bin/viewvc.cgi/*checkout*/Hmisc/trunk/tests/test2.xpt'
+rd.xpr> class(w)
+[1] "list"
 
-rd.xpr> url <- paste(host,path,sep="")
+rd.xpr> sapply(w, head)
+$test
+  RACE AGE         D1                    DT1       T1
+1 blue  30 2002-03-03 (03 Mar 2002 09:31:02) 11:13:45
+2 <NA>  31 2002-06-03 (03 Jun 2002 09:42:07) 11:14:13
 
-rd.xpr> w <- read.xport(url)
+$z
+         X3        X4         X5        X6        X7         X8
+1 0.5548096 0.9102659 0.19947292 0.7781959 0.7648077 0.90783205
+2 0.6289062 0.5950751 0.14938208 0.1996997 0.4579557 0.57161156
+3 0.5601807 0.2015537 0.87107157 0.8915819 0.8178354 0.06978889
+4 0.9301758 0.6795225 0.06470965 0.2382916 0.6756623 0.86167683
+5 0.4273071 0.5349607 0.90357235 0.7710940 0.7477446 0.13104011
+6 0.1850586 0.5198102 0.79364078 0.7873601 0.7689810 0.89166854
 
-rd.xpr> # We can also get the dataset wrapped in a list
-rd.xpr> w <- read.xport(url, as.list=TRUE)
 
-rd.xpr> # And we can ask for the format information to be included as well.
-rd.xpr> w <- read.xport(url, as.list=TRUE, include.formats=TRUE)
+rd.xpr> ## And we can ask for the format information to be included as well.
+rd.xpr> w <- read.xport(testFile, as.list=TRUE, include.formats=TRUE)
+
+rd.xpr> class(w)
+[1] "list"
+
+rd.xpr> sapply(w, head)
+$test
+  RACE AGE         D1                    DT1       T1
+1 blue  30 2002-03-03 (03 Mar 2002 09:31:02) 11:13:45
+2 <NA>  31 2002-06-03 (03 Jun 2002 09:42:07) 11:14:13
+
+$z
+         X3        X4         X5        X6        X7         X8
+1 0.5548096 0.9102659 0.19947292 0.7781959 0.7648077 0.90783205
+2 0.6289062 0.5950751 0.14938208 0.1996997 0.4579557 0.57161156
+3 0.5601807 0.2015537 0.87107157 0.8915819 0.8178354 0.06978889
+4 0.9301758 0.6795225 0.06470965 0.2382916 0.6756623 0.86167683
+5 0.4273071 0.5349607 0.90357235 0.7710940 0.7477446 0.13104011
+6 0.1850586 0.5198102 0.79364078 0.7873601 0.7689810 0.89166854
+
+$FORMATS
+  FMTNAME            START              END  LABEL MIN MAX DEFAULT LENGTH  FUZZ
+1    RACE                1                1  green   1  40       6      6 1e-12
+2    RACE                2                2   blue   1  40       6      6 1e-12
+3    RACE                3                3 purple   1  40       6      6 1e-12
+  PREFIX MULT FILL NOEDIT TYPE SEXCL EEXCL HLO DECSEP DIG3SEP DATATYPE LANGUAGE
+1           0           0    N     N     N                                     
+2           0           0    N     N     N                                     
+3           0           0    N     N     N                                     
+
 
 rd.xpr> ## Don't show: 
-rd.xpr> SASxport:::assert( is.data.frame(w)==FALSE && is.list(w)==TRUE )
+rd.xpr> stopifnot( is.data.frame(w)==FALSE && is.list(w)==TRUE )
 
 rd.xpr> ## End Don't show
 rd.xpr> 
 rd.xpr> 
 rd.xpr> ## Not run: 
-rd.xpr> ##D ## The Hmisc library provides many useful functions for interacting with
-rd.xpr> ##D ## data imported from SAS via read.xport()
+rd.xpr> ##D #### The Hmisc library provides many useful functions for interacting with
+rd.xpr> ##D #### data imported from SAS via read.xport()
 rd.xpr> ##D library(Hmisc)
 rd.xpr> ##D 
 rd.xpr> ##D describe(w$test)   # see labels, format names for dataset test
-rd.xpr> ##D lapply(w, describe)# see descriptive stats in more detaiil for each variable
+rd.xpr> ##D lapply(w, describe)# see descriptive stats in more detail for each variable
 rd.xpr> ##D 
 rd.xpr> ##D contents(w$test)   # another way to see variable attributes
 rd.xpr> ##D lapply(w, contents)# show contents of individual items in more detail
@@ -1639,79 +1768,143 @@ $data2
 > # remove names
 > example(read.xport)
 
-rd.xpr> # -------
-rd.xpr> # SAS code to generate test dataset:
-rd.xpr> # -------
-rd.xpr> # libname y SASV5XPT "test2.xpt";
-rd.xpr> #
-rd.xpr> # PROC FORMAT; VALUE race 1=green 2=blue 3=purple; RUN;
-rd.xpr> # PROC FORMAT CNTLOUT=format;RUN;  * Name, e.g. 'format', unimportant;
-rd.xpr> # data test;
-rd.xpr> # LENGTH race 3 age 4;
-rd.xpr> # age=30; label age="Age at Beginning of Study";
-rd.xpr> # race=2;
-rd.xpr> # d1='3mar2002'd ;
-rd.xpr> # dt1='3mar2002 9:31:02'dt;
-rd.xpr> # t1='11:13:45't;
-rd.xpr> # output;
-rd.xpr> #
-rd.xpr> # age=31;
-rd.xpr> # race=4;
-rd.xpr> # d1='3jun2002'd ;
-rd.xpr> # dt1='3jun2002 9:42:07'dt;
-rd.xpr> # t1='11:14:13't;
-rd.xpr> # output;
-rd.xpr> # format d1 mmddyy10. dt1 datetime. t1 time. race race.;
-rd.xpr> # run;
-rd.xpr> # data z; LENGTH x3 3 x4 4 x5 5 x6 6 x7 7 x8 8;
-rd.xpr> #    DO i=1 TO 100;
-rd.xpr> #        x3=ranuni(3);
-rd.xpr> #        x4=ranuni(5);
-rd.xpr> #        x5=ranuni(7);
-rd.xpr> #        x6=ranuni(9);
-rd.xpr> #        x7=ranuni(11);
-rd.xpr> #        x8=ranuni(13);
-rd.xpr> #        output;
-rd.xpr> #        END;
-rd.xpr> #    DROP i;
-rd.xpr> #    RUN;
-rd.xpr> # PROC MEANS; RUN;
-rd.xpr> # PROC COPY IN=work OUT=y;SELECT test format z;RUN; *Creates test2.xpt;
-rd.xpr> # ------
+rd.xpr> ## -------
+rd.xpr> ## SAS code to generate test dataset:
+rd.xpr> ## -------
+rd.xpr> ## libname y SASV5XPT "test2.xpt";
+rd.xpr> ##
+rd.xpr> ## PROC FORMAT; VALUE race 1=green 2=blue 3=purple; RUN;
+rd.xpr> ## PROC FORMAT CNTLOUT=format;RUN;  * Name, e.g. 'format', unimportant;
+rd.xpr> ## data test;
+rd.xpr> ## LENGTH race 3 age 4;
+rd.xpr> ## age=30; label age="Age at Beginning of Study";
+rd.xpr> ## race=2;
+rd.xpr> ## d1='3mar2002'd ;
+rd.xpr> ## dt1='3mar2002 9:31:02'dt;
+rd.xpr> ## t1='11:13:45't;
+rd.xpr> ## output;
+rd.xpr> ##
+rd.xpr> ## age=31;
+rd.xpr> ## race=4;
+rd.xpr> ## d1='3jun2002'd ;
+rd.xpr> ## dt1='3jun2002 9:42:07'dt;
+rd.xpr> ## t1='11:14:13't;
+rd.xpr> ## output;
+rd.xpr> ## format d1 mmddyy10. dt1 datetime. t1 time. race race.;
+rd.xpr> ## run;
+rd.xpr> ## data z; LENGTH x3 3 x4 4 x5 5 x6 6 x7 7 x8 8;
+rd.xpr> ##    DO i=1 TO 100;
+rd.xpr> ##        x3=ranuni(3);
+rd.xpr> ##        x4=ranuni(5);
+rd.xpr> ##        x5=ranuni(7);
+rd.xpr> ##        x6=ranuni(9);
+rd.xpr> ##        x7=ranuni(11);
+rd.xpr> ##        x8=ranuni(13);
+rd.xpr> ##        output;
+rd.xpr> ##        END;
+rd.xpr> ##    DROP i;
+rd.xpr> ##    RUN;
+rd.xpr> ## PROC MEANS; RUN;
+rd.xpr> ## PROC COPY IN=work OUT=y;SELECT test format z;RUN; *Creates test2.xpt;
+rd.xpr> ## ------
 rd.xpr> 
-rd.xpr> # Read this dataset from a local file:
+rd.xpr> ## Read this dataset from a local file:
+rd.xpr> testFile <- system.file('extdata', 'test2.xpt', package="SASxport")
+
+rd.xpr> w <- read.xport(testFile)
+
+rd.xpr> class(w)
+[1] "list"
+
+rd.xpr> sapply(w, head)
+$test
+  RACE AGE         D1                    DT1       T1
+1 blue  30 2002-03-03 (03 Mar 2002 09:31:02) 11:13:45
+2 <NA>  31 2002-06-03 (03 Jun 2002 09:42:07) 11:14:13
+
+$z
+         X3        X4         X5        X6        X7         X8
+1 0.5548096 0.9102659 0.19947292 0.7781959 0.7648077 0.90783205
+2 0.6289062 0.5950751 0.14938208 0.1996997 0.4579557 0.57161156
+3 0.5601807 0.2015537 0.87107157 0.8915819 0.8178354 0.06978889
+4 0.9301758 0.6795225 0.06470965 0.2382916 0.6756623 0.86167683
+5 0.4273071 0.5349607 0.90357235 0.7710940 0.7477446 0.13104011
+6 0.1850586 0.5198102 0.79364078 0.7873601 0.7689810 0.89166854
+
+
 rd.xpr> ## Not run: 
-rd.xpr> ##D w <- read.xport('test2.xpt')
+rd.xpr> ##D ## Or read a copy of test2.xpt available on the web:
+rd.xpr> ##D url <- 'http://biostat.mc.vanderbilt.edu/wiki/pub/Main/Hmisc/test2.xpt'
+rd.xpr> ##D w <- read.xport(url)
 rd.xpr> ## End(Not run)
 rd.xpr> 
-rd.xpr> # Or read a copy of test2.xpt available on the web:
-rd.xpr> host <- 'http://biostat.mc.vanderbilt.edu'
+rd.xpr> ## We can also get the dataset wrapped in a list
+rd.xpr> w <- read.xport(testFile, as.list=TRUE)
 
-rd.xpr> path <- '/cgi-bin/viewvc.cgi/*checkout*/Hmisc/trunk/tests/test2.xpt'
+rd.xpr> class(w)
+[1] "list"
 
-rd.xpr> url <- paste(host,path,sep="")
+rd.xpr> sapply(w, head)
+$test
+  RACE AGE         D1                    DT1       T1
+1 blue  30 2002-03-03 (03 Mar 2002 09:31:02) 11:13:45
+2 <NA>  31 2002-06-03 (03 Jun 2002 09:42:07) 11:14:13
 
-rd.xpr> w <- read.xport(url)
+$z
+         X3        X4         X5        X6        X7         X8
+1 0.5548096 0.9102659 0.19947292 0.7781959 0.7648077 0.90783205
+2 0.6289062 0.5950751 0.14938208 0.1996997 0.4579557 0.57161156
+3 0.5601807 0.2015537 0.87107157 0.8915819 0.8178354 0.06978889
+4 0.9301758 0.6795225 0.06470965 0.2382916 0.6756623 0.86167683
+5 0.4273071 0.5349607 0.90357235 0.7710940 0.7477446 0.13104011
+6 0.1850586 0.5198102 0.79364078 0.7873601 0.7689810 0.89166854
 
-rd.xpr> # We can also get the dataset wrapped in a list
-rd.xpr> w <- read.xport(url, as.list=TRUE)
 
-rd.xpr> # And we can ask for the format information to be included as well.
-rd.xpr> w <- read.xport(url, as.list=TRUE, include.formats=TRUE)
+rd.xpr> ## And we can ask for the format information to be included as well.
+rd.xpr> w <- read.xport(testFile, as.list=TRUE, include.formats=TRUE)
+
+rd.xpr> class(w)
+[1] "list"
+
+rd.xpr> sapply(w, head)
+$test
+  RACE AGE         D1                    DT1       T1
+1 blue  30 2002-03-03 (03 Mar 2002 09:31:02) 11:13:45
+2 <NA>  31 2002-06-03 (03 Jun 2002 09:42:07) 11:14:13
+
+$z
+         X3        X4         X5        X6        X7         X8
+1 0.5548096 0.9102659 0.19947292 0.7781959 0.7648077 0.90783205
+2 0.6289062 0.5950751 0.14938208 0.1996997 0.4579557 0.57161156
+3 0.5601807 0.2015537 0.87107157 0.8915819 0.8178354 0.06978889
+4 0.9301758 0.6795225 0.06470965 0.2382916 0.6756623 0.86167683
+5 0.4273071 0.5349607 0.90357235 0.7710940 0.7477446 0.13104011
+6 0.1850586 0.5198102 0.79364078 0.7873601 0.7689810 0.89166854
+
+$FORMATS
+  FMTNAME            START              END  LABEL MIN MAX DEFAULT LENGTH  FUZZ
+1    RACE                1                1  green   1  40       6      6 1e-12
+2    RACE                2                2   blue   1  40       6      6 1e-12
+3    RACE                3                3 purple   1  40       6      6 1e-12
+  PREFIX MULT FILL NOEDIT TYPE SEXCL EEXCL HLO DECSEP DIG3SEP DATATYPE LANGUAGE
+1           0           0    N     N     N                                     
+2           0           0    N     N     N                                     
+3           0           0    N     N     N                                     
+
 
 rd.xpr> ## Don't show: 
-rd.xpr> SASxport:::assert( is.data.frame(w)==FALSE && is.list(w)==TRUE )
+rd.xpr> stopifnot( is.data.frame(w)==FALSE && is.list(w)==TRUE )
 
 rd.xpr> ## End Don't show
 rd.xpr> 
 rd.xpr> 
 rd.xpr> ## Not run: 
-rd.xpr> ##D ## The Hmisc library provides many useful functions for interacting with
-rd.xpr> ##D ## data imported from SAS via read.xport()
+rd.xpr> ##D #### The Hmisc library provides many useful functions for interacting with
+rd.xpr> ##D #### data imported from SAS via read.xport()
 rd.xpr> ##D library(Hmisc)
 rd.xpr> ##D 
 rd.xpr> ##D describe(w$test)   # see labels, format names for dataset test
-rd.xpr> ##D lapply(w, describe)# see descriptive stats in more detaiil for each variable
+rd.xpr> ##D lapply(w, describe)# see descriptive stats in more detail for each variable
 rd.xpr> ##D 
 rd.xpr> ##D contents(w$test)   # another way to see variable attributes
 rd.xpr> ##D lapply(w, contents)# show contents of individual items in more detail
@@ -1879,79 +2072,143 @@ $data2
 > # remove variable names
 > example(read.xport)
 
-rd.xpr> # -------
-rd.xpr> # SAS code to generate test dataset:
-rd.xpr> # -------
-rd.xpr> # libname y SASV5XPT "test2.xpt";
-rd.xpr> #
-rd.xpr> # PROC FORMAT; VALUE race 1=green 2=blue 3=purple; RUN;
-rd.xpr> # PROC FORMAT CNTLOUT=format;RUN;  * Name, e.g. 'format', unimportant;
-rd.xpr> # data test;
-rd.xpr> # LENGTH race 3 age 4;
-rd.xpr> # age=30; label age="Age at Beginning of Study";
-rd.xpr> # race=2;
-rd.xpr> # d1='3mar2002'd ;
-rd.xpr> # dt1='3mar2002 9:31:02'dt;
-rd.xpr> # t1='11:13:45't;
-rd.xpr> # output;
-rd.xpr> #
-rd.xpr> # age=31;
-rd.xpr> # race=4;
-rd.xpr> # d1='3jun2002'd ;
-rd.xpr> # dt1='3jun2002 9:42:07'dt;
-rd.xpr> # t1='11:14:13't;
-rd.xpr> # output;
-rd.xpr> # format d1 mmddyy10. dt1 datetime. t1 time. race race.;
-rd.xpr> # run;
-rd.xpr> # data z; LENGTH x3 3 x4 4 x5 5 x6 6 x7 7 x8 8;
-rd.xpr> #    DO i=1 TO 100;
-rd.xpr> #        x3=ranuni(3);
-rd.xpr> #        x4=ranuni(5);
-rd.xpr> #        x5=ranuni(7);
-rd.xpr> #        x6=ranuni(9);
-rd.xpr> #        x7=ranuni(11);
-rd.xpr> #        x8=ranuni(13);
-rd.xpr> #        output;
-rd.xpr> #        END;
-rd.xpr> #    DROP i;
-rd.xpr> #    RUN;
-rd.xpr> # PROC MEANS; RUN;
-rd.xpr> # PROC COPY IN=work OUT=y;SELECT test format z;RUN; *Creates test2.xpt;
-rd.xpr> # ------
+rd.xpr> ## -------
+rd.xpr> ## SAS code to generate test dataset:
+rd.xpr> ## -------
+rd.xpr> ## libname y SASV5XPT "test2.xpt";
+rd.xpr> ##
+rd.xpr> ## PROC FORMAT; VALUE race 1=green 2=blue 3=purple; RUN;
+rd.xpr> ## PROC FORMAT CNTLOUT=format;RUN;  * Name, e.g. 'format', unimportant;
+rd.xpr> ## data test;
+rd.xpr> ## LENGTH race 3 age 4;
+rd.xpr> ## age=30; label age="Age at Beginning of Study";
+rd.xpr> ## race=2;
+rd.xpr> ## d1='3mar2002'd ;
+rd.xpr> ## dt1='3mar2002 9:31:02'dt;
+rd.xpr> ## t1='11:13:45't;
+rd.xpr> ## output;
+rd.xpr> ##
+rd.xpr> ## age=31;
+rd.xpr> ## race=4;
+rd.xpr> ## d1='3jun2002'd ;
+rd.xpr> ## dt1='3jun2002 9:42:07'dt;
+rd.xpr> ## t1='11:14:13't;
+rd.xpr> ## output;
+rd.xpr> ## format d1 mmddyy10. dt1 datetime. t1 time. race race.;
+rd.xpr> ## run;
+rd.xpr> ## data z; LENGTH x3 3 x4 4 x5 5 x6 6 x7 7 x8 8;
+rd.xpr> ##    DO i=1 TO 100;
+rd.xpr> ##        x3=ranuni(3);
+rd.xpr> ##        x4=ranuni(5);
+rd.xpr> ##        x5=ranuni(7);
+rd.xpr> ##        x6=ranuni(9);
+rd.xpr> ##        x7=ranuni(11);
+rd.xpr> ##        x8=ranuni(13);
+rd.xpr> ##        output;
+rd.xpr> ##        END;
+rd.xpr> ##    DROP i;
+rd.xpr> ##    RUN;
+rd.xpr> ## PROC MEANS; RUN;
+rd.xpr> ## PROC COPY IN=work OUT=y;SELECT test format z;RUN; *Creates test2.xpt;
+rd.xpr> ## ------
 rd.xpr> 
-rd.xpr> # Read this dataset from a local file:
+rd.xpr> ## Read this dataset from a local file:
+rd.xpr> testFile <- system.file('extdata', 'test2.xpt', package="SASxport")
+
+rd.xpr> w <- read.xport(testFile)
+
+rd.xpr> class(w)
+[1] "list"
+
+rd.xpr> sapply(w, head)
+$test
+  RACE AGE         D1                    DT1       T1
+1 blue  30 2002-03-03 (03 Mar 2002 09:31:02) 11:13:45
+2 <NA>  31 2002-06-03 (03 Jun 2002 09:42:07) 11:14:13
+
+$z
+         X3        X4         X5        X6        X7         X8
+1 0.5548096 0.9102659 0.19947292 0.7781959 0.7648077 0.90783205
+2 0.6289062 0.5950751 0.14938208 0.1996997 0.4579557 0.57161156
+3 0.5601807 0.2015537 0.87107157 0.8915819 0.8178354 0.06978889
+4 0.9301758 0.6795225 0.06470965 0.2382916 0.6756623 0.86167683
+5 0.4273071 0.5349607 0.90357235 0.7710940 0.7477446 0.13104011
+6 0.1850586 0.5198102 0.79364078 0.7873601 0.7689810 0.89166854
+
+
 rd.xpr> ## Not run: 
-rd.xpr> ##D w <- read.xport('test2.xpt')
+rd.xpr> ##D ## Or read a copy of test2.xpt available on the web:
+rd.xpr> ##D url <- 'http://biostat.mc.vanderbilt.edu/wiki/pub/Main/Hmisc/test2.xpt'
+rd.xpr> ##D w <- read.xport(url)
 rd.xpr> ## End(Not run)
 rd.xpr> 
-rd.xpr> # Or read a copy of test2.xpt available on the web:
-rd.xpr> host <- 'http://biostat.mc.vanderbilt.edu'
+rd.xpr> ## We can also get the dataset wrapped in a list
+rd.xpr> w <- read.xport(testFile, as.list=TRUE)
 
-rd.xpr> path <- '/cgi-bin/viewvc.cgi/*checkout*/Hmisc/trunk/tests/test2.xpt'
+rd.xpr> class(w)
+[1] "list"
 
-rd.xpr> url <- paste(host,path,sep="")
+rd.xpr> sapply(w, head)
+$test
+  RACE AGE         D1                    DT1       T1
+1 blue  30 2002-03-03 (03 Mar 2002 09:31:02) 11:13:45
+2 <NA>  31 2002-06-03 (03 Jun 2002 09:42:07) 11:14:13
 
-rd.xpr> w <- read.xport(url)
+$z
+         X3        X4         X5        X6        X7         X8
+1 0.5548096 0.9102659 0.19947292 0.7781959 0.7648077 0.90783205
+2 0.6289062 0.5950751 0.14938208 0.1996997 0.4579557 0.57161156
+3 0.5601807 0.2015537 0.87107157 0.8915819 0.8178354 0.06978889
+4 0.9301758 0.6795225 0.06470965 0.2382916 0.6756623 0.86167683
+5 0.4273071 0.5349607 0.90357235 0.7710940 0.7477446 0.13104011
+6 0.1850586 0.5198102 0.79364078 0.7873601 0.7689810 0.89166854
 
-rd.xpr> # We can also get the dataset wrapped in a list
-rd.xpr> w <- read.xport(url, as.list=TRUE)
 
-rd.xpr> # And we can ask for the format information to be included as well.
-rd.xpr> w <- read.xport(url, as.list=TRUE, include.formats=TRUE)
+rd.xpr> ## And we can ask for the format information to be included as well.
+rd.xpr> w <- read.xport(testFile, as.list=TRUE, include.formats=TRUE)
+
+rd.xpr> class(w)
+[1] "list"
+
+rd.xpr> sapply(w, head)
+$test
+  RACE AGE         D1                    DT1       T1
+1 blue  30 2002-03-03 (03 Mar 2002 09:31:02) 11:13:45
+2 <NA>  31 2002-06-03 (03 Jun 2002 09:42:07) 11:14:13
+
+$z
+         X3        X4         X5        X6        X7         X8
+1 0.5548096 0.9102659 0.19947292 0.7781959 0.7648077 0.90783205
+2 0.6289062 0.5950751 0.14938208 0.1996997 0.4579557 0.57161156
+3 0.5601807 0.2015537 0.87107157 0.8915819 0.8178354 0.06978889
+4 0.9301758 0.6795225 0.06470965 0.2382916 0.6756623 0.86167683
+5 0.4273071 0.5349607 0.90357235 0.7710940 0.7477446 0.13104011
+6 0.1850586 0.5198102 0.79364078 0.7873601 0.7689810 0.89166854
+
+$FORMATS
+  FMTNAME            START              END  LABEL MIN MAX DEFAULT LENGTH  FUZZ
+1    RACE                1                1  green   1  40       6      6 1e-12
+2    RACE                2                2   blue   1  40       6      6 1e-12
+3    RACE                3                3 purple   1  40       6      6 1e-12
+  PREFIX MULT FILL NOEDIT TYPE SEXCL EEXCL HLO DECSEP DIG3SEP DATATYPE LANGUAGE
+1           0           0    N     N     N                                     
+2           0           0    N     N     N                                     
+3           0           0    N     N     N                                     
+
 
 rd.xpr> ## Don't show: 
-rd.xpr> SASxport:::assert( is.data.frame(w)==FALSE && is.list(w)==TRUE )
+rd.xpr> stopifnot( is.data.frame(w)==FALSE && is.list(w)==TRUE )
 
 rd.xpr> ## End Don't show
 rd.xpr> 
 rd.xpr> 
 rd.xpr> ## Not run: 
-rd.xpr> ##D ## The Hmisc library provides many useful functions for interacting with
-rd.xpr> ##D ## data imported from SAS via read.xport()
+rd.xpr> ##D #### The Hmisc library provides many useful functions for interacting with
+rd.xpr> ##D #### data imported from SAS via read.xport()
 rd.xpr> ##D library(Hmisc)
 rd.xpr> ##D 
 rd.xpr> ##D describe(w$test)   # see labels, format names for dataset test
-rd.xpr> ##D lapply(w, describe)# see descriptive stats in more detaiil for each variable
+rd.xpr> ##D lapply(w, describe)# see descriptive stats in more detail for each variable
 rd.xpr> ##D 
 rd.xpr> ##D contents(w$test)   # another way to see variable attributes
 rd.xpr> ##D lapply(w, contents)# show contents of individual items in more detail
@@ -2163,4 +2420,4 @@ $z
 > 
 > proc.time()
    user  system elapsed 
-  6.192   1.760  17.901 
+  6.172   1.968   9.155 

@@ -19,8 +19,9 @@ Type 'q()' to quit R.
 > ## existing SAS xport file "Alfalfa.xpt"
 > 
 > library(SASxport)
+Loading required package: chron
 
-Loaded SASxport version 1.3.5 (2013-06-14).
+Loaded SASxport version 1.3.6 (2013-10-09).
 
   Type `?SASxport' for usage information.
 
@@ -47,4 +48,4 @@ Loaded SASxport version 1.3.5 (2013-06-14).
 > 
 > proc.time()
    user  system elapsed 
-  0.956   0.092   1.147 
+  0.972   0.072   1.031 
