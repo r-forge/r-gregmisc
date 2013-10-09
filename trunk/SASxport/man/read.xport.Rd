@@ -181,12 +181,12 @@ w <- read.xport(url)
 }
 
 ## We can also get the dataset wrapped in a list
-w <- read.xport(testfile, as.list=TRUE)
+w <- read.xport(testFile, as.list=TRUE)
 class(w)
 sapply(w, head)
 
 ## And we can ask for the format information to be included as well.
-w <- read.xport(testfile, as.list=TRUE, include.formats=TRUE)
+w <- read.xport(testFile, as.list=TRUE, include.formats=TRUE)
 class(w)
 sapply(w, head)
 
