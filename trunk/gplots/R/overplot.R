@@ -151,6 +151,10 @@ overplot <- function (formula, data = parent.frame(),
         mycall$lty = i
 
         tmp.y <- y[mycall$subset & cond==level]
+
+        ## If nothing to plot, skip to next level
+        if(!any(is.finite(tmp.y))) next
+        
         min.tmp.y <- min(tmp.y, na.rm=TRUE)
         max.tmp.y <- max(tmp.y, na.rm=TRUE)
 
