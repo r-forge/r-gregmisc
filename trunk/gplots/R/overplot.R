@@ -4,10 +4,10 @@ panel.overplot <- function(formula, data, subset, col, lty, ...)
   {
     m <- match.call()
 
-    m[[1]] <- graphics:::plot.formula
+    m[[1]] <- as.name("plot")
     eval(m, parent.frame() )
 
-    m[[1]] <- gplots:::lowess.formula
+    m[[1]] <- as.name("lowess")
     tmp <- eval(m, parent.frame() )
 
     lines( tmp, col=col, lwd=2, lty=lty )
