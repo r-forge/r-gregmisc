@@ -40,12 +40,12 @@ importFrom(stats, reorder)
 importFrom(stats, na.omit)
 
 # No Namespace
-#importFrom(caTools, runsd)
-#importFrom(caTools, runmean)
+importFrom(caTools, runsd)
+importFrom(caTools, runmean)
 
 # No Namespace
-#importFrom(KernSmooth, bkdeD2)
-#importFrom(KernSmooth, dpik)
+importFrom(KernSmooth, bkde2D)
+importFrom(KernSmooth, dpik)
 
 S3method(balloonplot,default)
 S3method(balloonplot,table)
