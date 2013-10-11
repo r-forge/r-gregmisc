@@ -3,13 +3,13 @@ Title: Various R programming tools for plotting data
 Description: Various R programming tools for plotting data
 Depends: R (>= 3.0), gtools, gdata, stats, caTools, grid, KernSmooth,
         MASS, datasets
-Recommends: grid
-Suggests: gtools
-Version: 2.11.3
-Date: 2013-06-27
+Suggests: gtools, grid
+Version: 2.12.0
+Date: 2013-10-11
 Author: Gregory R. Warnes, Ben Bolker, Lodewijk Bonebakker, Robert
 	Gentleman, Wolfgang Huber Andy Liaw, Thomas Lumley, Martin
 	Maechler, Arni Magnusson, Steffen Moeller, Marc Schwartz, Bill
 	Venables 
 Maintainer: Gregory R. Warnes <greg@warnes.net>
 License: GPL-2
+NeedsCompilation: No

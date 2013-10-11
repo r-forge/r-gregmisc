@@ -1,3 +1,18 @@
+Release 2.11.4 - 2013-10-11
+---------------------------
+
+Enhancements:
+
+- Add heatmap.2() parameters to control row and column label rotation
+  ('srtRow', 'srtCol'), justification ('adjRow', 'adjCol'), and space
+  from plot edge ('offsetRow', 'offsetCol').
+
+Bug Fixes:
+
+- Fix bug in venn diagram code when number of TRUE cases in each
+  variable are equal.
+
+
 Release 2.11.3 - 2013-06-27
 ---------------------------
 
