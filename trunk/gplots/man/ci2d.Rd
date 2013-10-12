@@ -256,6 +256,7 @@ ci2d(x, y = NULL,
    ####
    ## Test with a large number of points
    ####
+   \dontrun{
    x <- rnorm(60000, sd=1)
    y <- c( rnorm(40000, mean=x, sd=1),
            rnorm(20000, mean=x+4, sd=1) )
@@ -263,7 +264,7 @@ ci2d(x, y = NULL,
    hist2d(x,y)
    ci <- ci2d(x,y)
    ci
-
+   }
 }
 \keyword{dplot}
 \keyword{hplot}
