@@ -9,8 +9,22 @@ Enhancements:
 
 Bug Fixes:
 
-- Fix bug in venn diagram code when number of TRUE cases in each
-  variable are equal.
+- Fix error in in venn() when all groups contained the same number of TRUE cases.
+
+- Correct error in overplot() when that occured when a group-category contained no
+  finite values.
+
+Other Changes:
+ 
+- Changes to overplot() to avoid warnings from upcoming enhancements to R CMD check.
+
+- Move several packages from Depends to Imports or Suggests.
+
+- Packages caTools and KernSmooth now have namespaces, so import
+  needed functions in NAMESPACE.
+
+- Mark one example in manual page for ci2d 'dontrun' to avoid timing
+  warning in R CMD check.
 
 
 Release 2.11.3 - 2013-06-27
@@ -24,8 +38,6 @@ Enhancements:
 Bug Fixes:
 
 - Fixed typo/spelling error in plotmeans() man page.
-
-Other changes
 
 
 Release 2.11.2 - 2013-03-24
