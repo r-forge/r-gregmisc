@@ -1,5 +1,13 @@
-Release 2.12.0 - 2013-10-11
+Release 2.12.0 - 2013-10-14
 ---------------------------
+
+API Changes:
+
+- boxplot.n() has been renamed to boxplot2() to avoid potential S3
+  method calling issues.
+
+- plot.lm2() has been rename to lmplot2() to avoid potential S3 method
+  calling issues.
 
 Enhancements:
 
