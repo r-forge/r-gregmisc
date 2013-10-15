@@ -1,57 +1,53 @@
-% $Id$
-%
-% $Log$
-% Revision 1.5  2005/12/01 16:46:52  nj7w
-% Updated Greg's email address
-%
-% Revision 1.4  2005/06/09 14:20:28  nj7w
-% Updating the version number, and various help files to synchronize splitting of gregmisc bundle in 4 individual components.
-%
-% Revision 1.1.1.1  2005/05/25 22:15:30  nj7w
-% Initial submission as an individual package
-%
-% Revision 1.3  2002/04/09 00:51:31  warneg
-%
-% Checkin for version 0.5.3
-%
-% Revision 1.2  2001/08/25 05:46:21  warneg
-% Added CVS header.
-%
-% Revision 1.1  2001/08/25 05:45:10  warneg
-% Initial Checkin
-%
-\name{boxplot.n}
+\name{gplots-deprecated}
 \alias{boxplot.n}
-\title{Produce a Boxplot Annotated with the Number of Observations}
+\alias{plot.lm2}
+\title{Deprecated functions}
 \description{
-  This funcntion uses \code{boxplot} to produce a boxplot which is then 
-  annotated with the number of observations in each group.
+  These funcntion have been deprecated and will be removed in future
+  releases of gplots.
 }
 \usage{
-boxplot.n(..., top=FALSE, shrink=1, textcolor=NULL)
+   boxplot.n(..., top=FALSE, shrink=1, textcolor=NULL)
+   plot.lm2(
+            x,
+            which = 1:5,
+            caption = c("Residuals vs Fitted", "Normal Q-Q plot",
+              "Scale-Location plot", "Cook's distance plot"),
+            panel = panel.smooth,
+            sub.caption = deparse(x$call),
+            main = "",
+            ask = interactive() && nb.fig < length(which)
+            && .Device != "postscript",
+            ...,
+            id.n = 3,
+            labels.id = names(residuals(x)),
+            cex.id = 0.75,
+            band=TRUE,
+            rug=TRUE,
+            width=1/10,
+            max.n=5000
+            )
 }
 \arguments{
-  \item{\dots}{ parameters passed to \code{boxplot}. }
-  \item{top}{ logical indicating whether the number of observations
-    should be added to the top or the bottom of the plotting
-    region. Defaults to \code{FALSE}. }
-  \item{shrink}{ value to shrink character size (cex) when annotating.}
-  \item{textcolor}{ text color. }
+  \item{\dots}{see man page for the corresponding replacement function}
+  \item{top, shrink, textcolor}{See man page for
+    \code{\link{boxplot2}}.}
+  \item{x, which, caption, panel, sub.caption, main, ask, id.n,
+    labels.id, cex.id, band, rug, width, max.n}{See man page for
+    \code{\link{lmplot2}}.}
 }
-\author{ Gregory R. Warnes \email{greg@warnes.net}}
-\seealso{ \code{\link{boxplot}}, \code{\link{text}}}
-
-\examples{
-data(state)
-
-# n's at bottom
-boxplot.n( state.area ~ state.region)
-
-# n's at top
-boxplot.n( state.area ~ state.region, top=TRUE)
-
-# small red text
-boxplot.n( state.area ~ state.region, shrink=0.8, textcolor="red") 
+\details{
+These functions have been deprecated.  Please refer to the manual page
+for the replacement function:
+  \itemize{
+    \item \code{boxplot.n} has been replaced by \code{\link{boxplot2}} 
+    \item \code{plot.lm2} has been replaced by \code{\link{lmplot2}}
+  }
 }
-
-\keyword{ hplot }
+\author{Gregory R. Warnes \email{greg@warnes.net}}
+\seealso{
+  \code{\link{boxplot2}},
+  \code{\link{lmplot2}},
+  \code{\link[base]{Deprecated}}
+}
+\keyword{misc}
