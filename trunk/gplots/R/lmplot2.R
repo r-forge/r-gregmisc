@@ -6,8 +6,7 @@ plot.lm2 <- function(
                      panel = panel.smooth,
                      sub.caption = deparse(x$call),
                      main = "",
-                     ask = interactive() && nb.fig < length(which)
-                     && .Device != "postscript",
+                     ask,
                      ...,
                      id.n = 3,
                      labels.id = names(residuals(x)),
