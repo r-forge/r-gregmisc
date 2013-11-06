@@ -9,6 +9,11 @@ mixedorder <- function(x)
     # - Separately rank numbers and strings
     # - Combine orders so that strings follow numbers
 
+    if(length(x)<1)
+        return(NULL)
+    else if(length(x)==1)
+        return(1)
+      
     delim="\\$\\@\\$"
 
     numeric <- function(x)
