@@ -26,7 +26,7 @@
 
 capture <- function( expression, collapse="\n")
   {
-    warning("Depreciated.  Use capture.output(...) from base instead.")
+    .Deprecated("capture.output", "base", )
 
     resultText <- capture.output( expression )
 
@@ -39,6 +39,6 @@ capture <- function( expression, collapse="\n")
 
 sprint <- function(x,...)
   {
-    warning("Depreciated.  Use capture.output(print(...)) from base instead.")
+    .Deprecated("capture.output", "base")
     capture(print(x,...))
   }
