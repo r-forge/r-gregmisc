@@ -36,7 +36,7 @@
 }
 \author{
   Gregory R. Warnes, Ph.D. \\
-  Random Technologies LLC.
+  Gregory R. Warnes Consulting
   }
 
 \begin{document}
