@@ -10,6 +10,8 @@ sii.excel <- function(
   if(length(THDI) != length(freq))
     stop("THDI must have the same length as freq")
 
+  data(sii.constants, package="SII", envir=parent.frame())
+  
   # Interpolate unobserved frequencies 
   sii.freqs <- sii.constants[,1]
   
