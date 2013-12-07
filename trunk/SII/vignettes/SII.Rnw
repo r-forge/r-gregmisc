@@ -492,10 +492,9 @@ for the calculation of SII:
 THDI=c(25,25,30,35,45,45,55,60)
 freq=c(250, 500, 1000, 2000, 3000, 4000, 6000, 8000)
 
-data(sii.constants)
-sii.freqs <- sii.constants[,1]
+sii.freqs <- SII:::sii.constants[,1]
 
-xlist <- sort(c(sii.constants[, 1], freq))
+xlist <- sort(c(SII:::sii.constants[, 1], freq))
 ylist <- rep(NA, length=length(xlist))
 names(ylist) <- xlist
 ylist[ as.character(freq) ] <- THDI
@@ -527,15 +526,15 @@ doplot <- function(logx=FALSE, separate=FALSE)
       plot(x=freq, y=THDI, col="black", cex=2, log=if(logx) "x" else "", 
            xlab="Frequency (Herz)", ylab="Threshhold of Detection (dB)",
            xlim=range(sii.freqs), ylim=c(20,60) )
-      lines(sii.constants[, 1], sii.constants[, "Ti'.THDN"], col="red", lwd=3)
+      lines(SII:::sii.constants[, 1], SII:::sii.constants[, "Ti'.THDN"], col="red", lwd=3)
       abline(v=sii.freqs,lty=3)
     }
     
     tmp()
-    lines( x=sii.constants[, 1], y=ispl, col="blue", lwd=2)
+    lines( x=SII:::sii.constants[, 1], y=ispl, col="blue", lwd=2)
     
     if(separate) tmp()
-    lines( x=sii.constants[, 1], y=ispl.l, col="cyan", lwd=2)
+    lines( x=SII:::sii.constants[, 1], y=ispl.l, col="cyan", lwd=2)
     
     if(separate) tmp()
     lines( spline  (x=freq, y=THDI), col="green", lwd=2)
@@ -663,12 +662,12 @@ sii.left <- sii(
 
 ## comparison of our interpolation and matlab's
 tab <- cbind(
-             matlab=sii.constants[,"Ti'.THDN"],
+             matlab=SII:::sii.constants[,"Ti'.THDN"],
              R     =sii.left$table[,"T'i"],
              delta =NA
              )
 tab[,3] <- tab[,1] - tab[,2]
-rownames(tab) <- sii.constants[,".NFreqLin"]
+rownames(tab) <- SII:::sii.constants[,".NFreqLin"]
 t(round(tab,2))
 @ 
 
@@ -676,7 +675,7 @@ t(round(tab,2))
 compare.plot <- function(x, matlab, title)
   {
     plot(x)
-    lines(sii.constants[,".NFreqLin"],
+    lines(SII:::sii.constants[,".NFreqLin"],
           matlab,
           type="l", col="red", lwd=3)
 
@@ -698,7 +697,7 @@ compare.plot <- function(x, matlab, title)
 
 <<ComparisonFigure1,fig=TRUE>>=
 
-compare.plot(sii.left, matlab=sii.constants[, "Ti'.THDN"], title="Spline method comparison, Left Ear")
+compare.plot(sii.left, matlab=SII:::sii.constants[, "Ti'.THDN"], title="Spline method comparison, Left Ear")
       
 @ 
 
@@ -725,7 +724,7 @@ tab <- cbind(
              delta =NA
              )
 tab[,3] <- tab[,1] - tab[,2]
-rownames(tab) <- sii.constants[,".NFreqLin"]
+rownames(tab) <- SII:::sii.constants[,".NFreqLin"]
 t(round(tab,2))
 @ 
 
