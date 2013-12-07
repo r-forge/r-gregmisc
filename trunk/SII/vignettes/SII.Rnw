@@ -728,7 +728,7 @@ rownames(tab) <- SII:::sii.constants[,".NFreqLin"]
 t(round(tab,2))
 @ 
 
-<<<ComparisonFigure2,fig=TRUE>>=
+<<ComparisonFigure2,fig=TRUE>>=
 compare.plot(sii.right, matlab=matlab, title="Spline method comparison, Right Ear")
 @ 
 
