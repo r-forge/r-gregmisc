@@ -8,8 +8,8 @@ trim.default <- function(s, recode.factor=TRUE, ...)
 
 trim.character <- function(s, recode.factor=TRUE, ...)
 {
-  s <- sub(pattern="^ +", replacement="", x=s)
-  s <- sub(pattern=" +$", replacement="", x=s)
+  s <- sub(pattern="^[[:blank:]]+", replacement="", x=s)
+  s <- sub(pattern="[[:blank:]]+$", replacement="", x=s)
   s
 }
 
