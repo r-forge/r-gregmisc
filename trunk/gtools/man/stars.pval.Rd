@@ -36,9 +36,7 @@ stars.pval(p.value)
 }
 \examples{
 p.val <- c(0.0004, 0.0015, 0.013, 0.044, 0.067, 0.24)
-stars.pval(x)
+stars.pval(p.val)
 }
-% Add one or more standard keywords, see file 'KEYWORDS' in the
-% R documentation directory.
 \keyword{misc}
 
