@@ -8,11 +8,11 @@
 }
 \usage{
 getDependencies(pkgs,
-                dependencies=NA,
-                 installed=TRUE,
-                 available=TRUE,
-                 base=FALSE,
-                 recommended=FALSE)
+                dependencies = c("Depends", "Imports", "LinkingTo"),
+                installed=TRUE,
+                available=TRUE,
+                base=FALSE,
+                recommended=FALSE)
 }
 \arguments{
   \item{pkgs}{character vector of package names}
