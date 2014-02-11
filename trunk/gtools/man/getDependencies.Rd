@@ -31,7 +31,7 @@ getDependencies(pkgs,
     packages that are included in the R installation. Defaults to
     FALSE.
     }
-  \item{base}{Logical indicating whether to include dependencies on
+  \item{recommended}{Logical indicating whether to include dependencies on
     recommended packages that are included in the R
     installation. Defaults to
     FALSE.
