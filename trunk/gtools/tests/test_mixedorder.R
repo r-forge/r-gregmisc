@@ -5,7 +5,7 @@ Treatment <- c("Control", "Asprin 10mg/day", "Asprin 50mg/day",
                "Asprin 100mg/day", "Acetomycin 100mg/day",
                "Acetomycin 1000mg/day")
 
-stopifnot( mixedorder(tmp)==c(4, 5, 1, 2, 3 ))
+stopifnot( mixedorder(Treatment)==c(5, 6, 2, 3, 4, 1) )
 
 
 x <- rev(c("AA 0.50 ml", "AA 1.5 ml", "AA 500 ml", "AA 1500 ml",
