@@ -1,3 +1,18 @@
+Release 2.13.0 - 2014-04-04
+---------------------------
+
+Bug Fixes:
+
+- heatmap.2 was not properly handling row trace reference line ('hline').
+  Patch submitted by Ilia Kats.
+
+Enhancements:
+
+- When the row or column trace is enabled, show the corresponding
+  reference line in the color key.
+
+
+
 Release 2.12.1 - 2013-10-14
 ---------------------------
 
@@ -23,7 +38,7 @@ Bug Fixes:
   finite values.
 
 Other Changes:
- 
+
 - Changes to overplot() to avoid warnings from upcoming enhancements to R CMD check.
 
 - Move several packages from Depends to Imports or Suggests.
