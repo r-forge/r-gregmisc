@@ -8,8 +8,9 @@ Bug Fixes
 
 Other Changes
 
-- Unit tests now follow R standard practice
+- 'aggregate.table' is now defunct.  See '?gdata-defunct' for details.
 
+- Unit tests and vignettes now follow R standard practice.
 
 Changes in 2.13.2 (2013-06-28)
 ------------------------------
