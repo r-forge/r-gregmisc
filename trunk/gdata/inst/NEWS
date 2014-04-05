@@ -1,3 +1,16 @@
+Changes in 2.13.3 (2014-04-04)
+------------------------------
+
+Bug Fixes
+
+- Unit tests were incorrectly checking for equality of optional POSIXlt
+  components.  (Bug reported by Brian Ripley).
+
+Other Changes
+
+- Unit tests now follow R standard practice
+
+
 Changes in 2.13.2 (2013-06-28)
 ------------------------------
 
