@@ -11,9 +11,9 @@ nobs.default <- function(object, ...)
     if(is.numeric(object) || is.logical(object))
       sum( !is.na(object) )
     else
-      stats:::nobs.default(object, ...)
+      stats::nobs(object, ...)
   }
-    
+
 
 nobs.data.frame <- function(object, ...)
   sapply(object, nobs.default)
