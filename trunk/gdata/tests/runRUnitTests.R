@@ -39,8 +39,9 @@
 if(require("RUnit", quietly=TRUE))
 {
 
-    pkg  <- c(read.dcf(file="../DESCRIPTION", fields="Package"))
-    path <- normalizePath( file.path(getwd(), "..", "inst", "unitTests") )
+    pkg  <- 'gdata'
+
+    path <- normalizePath("unitTests")
 
     cat("\nRunning unit tests\n")
     print(list(pkg=pkg, getwd=getwd(), pathToUnitTests=path))
