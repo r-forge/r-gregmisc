@@ -478,8 +478,58 @@ test.NAToUnknown <- function()
 
   ## Date-time classes
   checkIdentical(NAToUnknown(xDate, unknown=dateUnk), xDateUnk)
-  checkIdentical(NAToUnknown(xPOSIXlt, unknown=POSIXltUnk), xPOSIXltUnk)
   checkIdentical(NAToUnknown(xPOSIXct, unknown=POSIXctUnk), xPOSIXctUnk)
+
+
+  ####
+  ## Per Brian Ripley on 2014-01-15:
+  ##
+  ## On platforms where POSIXlt has a gmtoff component, it does not need to be set.  So
+  ##
+  ## > z$gmtoff
+  ## [1] 3600   NA
+  ## > xPOSIXltUnk$gmtoff
+  ## [1] 3600 3600
+  ##
+  ## (or sometimes 0, not NA).
+  ##
+  ## So although identical() correctly reports that they differ, this
+  ## is allowed for optional components.
+  ##
+  ## It would also be wrong to use identical() to compare isdst
+  ## components: isdst = -1 means unknown.
+  ##
+  ## Replaced:
+  ##   checkIdentical(NAToUnknown(xPOSIXlt, unknown=POSIXltUnk), xPOSIXltUnk)
+  ## With:
+  tmp_NAToUnknown <- NAToUnknown(xPOSIXlt, unknown=POSIXltUnk)
+  tmp_xPOSIXltUnk   <- xPOSIXltUnk
+  ##
+  tmp_NAToUnknown$gmtoff <- NULL  # Remove $gmtoff to avoid comparison
+  tmp_xPOSIXltUnk$gmtoff   <- NULL
+  ##
+  isdst.unknown <- unique(
+      c(which(is.na(tmp_NAToUnknown$isdst) |
+              tmp_NAToUnknown$isdst==-1
+              )
+        )
+      ,
+      c(which(is.na(tmp_xPOSIXltUnk$isdst) |
+              tmp_xPOSIXltUnk$isdst==-1
+              )
+        )
+
+      )
+  ##
+  checkIdentical(tmp_NAToUnknown$isdst[!isdst.unknown],
+                 tmp_xPOSIXltUnk$isds[!isdst.unknown])
+  ##
+  tmp_NAToUnknown$isdst <- NULL   # Remove $isdst to avoid comparison
+  tmp_xPOSIXltUnk$isdst   <- NULL    # by checkIdentical
+  ##
+  checkIdentical(tmp_NAToUnknown, tmp_xPOSIXltUnk)
+  ####
+
 
   ## --- lists and data.frames ---
 
