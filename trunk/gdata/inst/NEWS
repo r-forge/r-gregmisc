@@ -12,6 +12,8 @@ Other Changes
 
 - Unit tests and vignettes now follow R standard practice.
 
+- Minor changes to clean up R CMD check warnings.
+
 Changes in 2.13.2 (2013-06-28)
 ------------------------------
 
