@@ -78,6 +78,7 @@ heatmap.2 <- function (x,
                        lwid = NULL,
 
                        ## extras
+                       extrafun=NULL,
                        ...
                        )
 {
@@ -641,9 +642,6 @@ heatmap.2 <- function (x,
                   }
           }
 
-
-
-
     }
   else
     plot.new()
@@ -655,6 +653,9 @@ heatmap.2 <- function (x,
                              color=retval$col
                              )
 
+  ## If user has provided an extra function, call it.
+  if(!is.null(extrafun))
+      extrafun()
 
   invisible( retval )
 }
