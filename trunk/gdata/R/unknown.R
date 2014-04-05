@@ -40,7 +40,7 @@ isUnknown.POSIXlt <- function(x, unknown=NA, ...)
 }
 
 isUnknown.list <- function(x, unknown=NA, ...) {
-  unknown <- gdata:::.unknownList(x=x, unknown=unknown)
+  unknown <- .unknownList(x=x, unknown=unknown)
   x <- mapply(FUN="isUnknown", x=x, unknown=unknown, ..., SIMPLIFY=FALSE)
   x
 }
@@ -90,7 +90,7 @@ unknownToNA.factor <- function(x, unknown, warning=FALSE, ...)
 
 unknownToNA.list <- function(x, unknown, warning=FALSE, ...)
 {
-  unknown <- gdata:::.unknownList(x=x, unknown=unknown)
+  unknown <- .unknownList(x=x, unknown=unknown)
   x <- mapply(FUN="unknownToNA", x=x, unknown=unknown, warning=warning,
               SIMPLIFY=FALSE)
   return(x)
@@ -148,7 +148,7 @@ NAToUnknown.factor <- function(x, unknown, force=FALSE, call.=FALSE, ...)
 
 NAToUnknown.list <- function(x, unknown, force=FALSE, call.=FALSE, ...)
 {
-  unknown <- gdata:::.unknownList(x=x, unknown=unknown)
+  unknown <- .unknownList(x=x, unknown=unknown)
   x <- mapply(FUN="NAToUnknown", x=x, unknown=unknown, force=force,
               call.=call., SIMPLIFY=FALSE)
   x
