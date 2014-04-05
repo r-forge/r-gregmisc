@@ -249,7 +249,42 @@ test.isUnknown <- function()
   ## Date-time classes
   checkIdentical(isUnknown(xDateUnk, unknown=dateUnk), xDateTest)
   checkIdentical(isUnknown(xDate1Unk, unknown=dateUnk), xDate1Test)
-  checkIdentical(isUnknown(xPOSIXltUnk, unknown=POSIXltUnk), xPOSIXltTest)
+
+  ####
+  ## Per Brian Ripley on 2014-01-15:
+  ##
+  ## On platforms where POSIXlt has a gmtoff component, it does not
+  ## need to be set.  So
+  ##
+  ## > z$gmtoff
+  ## [1] 3600   NA
+  ## > xPOSIXltUnk$gmtoff
+  ## [1] 3600 3600
+  ##
+  ## (or sometimes 0, not NA).
+  ##
+  ## So although identical() correctly reports that they differ, this
+  ## is allowed for optional components.
+  ##
+  ## It would also be wrong to use identical() to compare isdst
+  ## components: isdst = -1 means unknown.
+  ##
+  ## Replaced:
+  ##    checkIdentical(isUnknown(xPOSIXltUnk, unknown=POSIXltUnk), xPOSIXltTest)
+  ## With:
+  tmp_isUnknown <- isUnknown(xPOSIXltUnk, unknown=POSIXltUnk)
+  tmp_xPOSIXltTest   <- xPOSIXlt
+
+  tmp_isUnknown$gmtoff    <- NULL  # Remove $gmtoff to avoid comparison
+  tmp_xPOSIXltTest$gmtoff <- NULL
+
+  tmp_isUnknownisdst     <- NULL   # Remove $isdst to avoid comparison
+  tmp_xPOSIXltTest$isdst <- NULL
+
+  checkIdentical(tmp_isUnknown, tmp_xPOSIXltTest)
+  ##
+  ####
+
   checkIdentical(isUnknown(xPOSIXlt1Unk, unknown=POSIXltUnk), xPOSIXlt1Test)
   checkIdentical(isUnknown(xPOSIXctUnk, unknown=POSIXctUnk), xPOSIXctTest)
   checkIdentical(isUnknown(xPOSIXct1Unk, unknown=POSIXctUnk), xPOSIXct1Test)
@@ -333,6 +368,7 @@ test.unknownToNA <- function()
   checkIdentical(unknownToNA(xDateUnk, unknown=dateUnk), xDate)
   checkIdentical(unknownToNA(xPOSIXctUnk, unknown=POSIXctUnk), xPOSIXct)
 
+  ####
   ## Per Brian Ripley on 2014-01-15:
   ##
   ## On platforms where POSIXlt has a gmtoff component, it does not need to be set.  So
@@ -350,6 +386,9 @@ test.unknownToNA <- function()
   ## It would also be wrong to use identical() to compare isdst
   ## components: isdst = -1 means unknown.
   ##
+  ## Replaced:
+  ##   checkIdentical(unknownToNA(xPOSIXltUnk, unknown=POSIXltUnk), xPOSIXlt)
+  ## With:
   tmp_unknownToNA <- unknownToNA(xPOSIXltUnk, unknown=POSIXltUnk)
   tmp_xPOSIXlt   <- xPOSIXlt
 
@@ -360,7 +399,7 @@ test.unknownToNA <- function()
   tmp_xPOSIXlt$isdst   <- NULL
 
   checkIdentical(tmp_unknownToNA, tmp_xPOSIXlt)
-
+  ####
 
   ## --- lists and data.frames ---
 
