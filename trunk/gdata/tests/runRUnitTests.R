@@ -36,28 +36,28 @@
 ## make
 ## make all
 
+PKG  <- 'gdata'
+
 if(require("RUnit", quietly=TRUE))
 {
-
-    pkg  <- 'gdata'
 
     path <- normalizePath("unitTests")
 
     cat("\nRunning unit tests\n")
-    print(list(pkg=pkg, getwd=getwd(), pathToUnitTests=path))
+    print(list(pkg=PKG, getwd=getwd(), pathToUnitTests=path))
 
-    library(package=pkg, character.only=TRUE)
+    library(package=PKG, character.only=TRUE)
 
     testFileRegexp <- "^runit.+\\.[rR]$"
 
     ## Debugging echo
     cat("\nRunning RUnit tests\n")
-    print(list(pkg=pkg,
+    print(list(pkg=PKG,
                getwd=getwd(),
                pathToRUnitTests=path))
 
     ## Define tests
-    testSuite <- defineTestSuite(name=paste(pkg, "RUnit testing"),
+    testSuite <- defineTestSuite(name=paste(PKG, "RUnit testing"),
                                  dirs=path,
                                  testFileRegexp=testFileRegexp
                                  )
@@ -68,7 +68,7 @@ if(require("RUnit", quietly=TRUE))
     if(file.access(path, 02) != 0)
         {
             ## cannot write to path -> use writable one
-            tdir <- tempfile(paste(pkg, "RUnitTests", sep="_"))
+            tdir <- tempfile(paste(PKG, "RUnitTests", sep="_"))
             dir.create(tdir)
             pathReport <- file.path(tdir, "report")
         }
@@ -103,7 +103,7 @@ if(require("RUnit", quietly=TRUE))
 } else {
 
     cat("R package 'RUnit' cannot be loaded - no unit tests run\n",
-        "for package", pkg,"\n")
+        "for package", PKG,"\n")
 
 }
 
