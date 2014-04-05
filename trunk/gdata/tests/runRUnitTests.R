@@ -36,67 +36,73 @@
 ## make
 ## make all
 
-## Sourced via shell (Makefile, Rscript, R CMD BATCH)
-if(!exists(".pkg")) {
-  .path <- getwd()
-  .way <- "shell"
-  .pkg <- c(read.dcf(file="../../DESCRIPTION", fields="Package"))
-  print(.pkg)
-  testFileRegexp <- "^base.+\\.[rR]$"
-}
+if(require("RUnit", quietly=TRUE))
+{
 
-if(require("RUnit", quietly=TRUE)) {
+    pkg  <- c(read.dcf(file="../DESCRIPTION", fields="Package"))
+    path <- normalizePath( file.path(getwd(), "..", "inst", "unitTests") )
 
-  ## Debugging echo
-  cat("\nRunning RUnit tests\n")
-  print(list(pkg=.pkg, getwd=getwd(), pathToRUnitTests=.path))
+    cat("\nRunning unit tests\n")
+    print(list(pkg=pkg, getwd=getwd(), pathToUnitTests=path))
 
-  ## Load the package - not needed for .runRUnitTests()
-  if(.way %in% c("shell"))
-    library(package=.pkg, character.only=TRUE)
+    library(package=pkg, character.only=TRUE)
 
-  ## Define tests
-  testSuite <- defineTestSuite(name=paste(.pkg, "RUnit testing"),
-                               dirs=.path, testFileRegexp=testFileRegexp)
+    testFileRegexp <- "^runit.+\\.[rR]$"
 
-  ## Run
-  tests <- runTestSuite(testSuite)
+    ## Debugging echo
+    cat("\nRunning RUnit tests\n")
+    print(list(pkg=pkg,
+               getwd=getwd(),
+               pathToRUnitTests=path))
 
-  if(file.access(.path, 02) != 0) {
-    ## cannot write to .path -> use writable one
-    tdir <- tempfile(paste(.pkg, "RUnitTests", sep="_"))
-    dir.create(tdir)
-    pathReport <- file.path(tdir, "report")
-  } else {
-    pathReport <- file.path(.path, "report")
-  }
+    ## Define tests
+    testSuite <- defineTestSuite(name=paste(pkg, "RUnit testing"),
+                                 dirs=path,
+                                 testFileRegexp=testFileRegexp
+                                 )
 
-  ## Print results:
-  printTextProtocol(tests)
-  printTextProtocol(tests,
-                    fileName=paste(pathReport, ".txt", sep=""))
+    ## Run
+    tests <- runTestSuite(testSuite)
 
-  ## Print HTML Version of results:
-  printHTMLProtocol(tests,
-                    fileName=paste(pathReport, ".html", sep=""))
+    if(file.access(path, 02) != 0)
+        {
+            ## cannot write to path -> use writable one
+            tdir <- tempfile(paste(pkg, "RUnitTests", sep="_"))
+            dir.create(tdir)
+            pathReport <- file.path(tdir, "report")
+        }
+    else
+        {
+            pathReport <- file.path(path, "report")
+        }
 
-  cat("\nRUnit reports also written to\n",
-      pathReport, ".(txt|html)\n\n", sep="")
+    ## Print results:
+    printTextProtocol(tests)
+    printTextProtocol(tests,
+                      fileName=paste(pathReport, ".txt", sep=""))
 
-  ## Return stop() to cause R CMD check stop in case of
-  ##  - failures i.e. FALSE to RUnit tests or
-  ##  - errors i.e. R errors
-  tmp <- getErrors(tests)
-  if(tmp$nFail > 0 || tmp$nErr > 0) {
-    stop(paste("\n\nRUnit testing failed:\n",
-               " - #test failures: ", tmp$nFail, "\n",
-               " - #R errors: ",  tmp$nErr, "\n\n", sep=""))
-  }
+    ## Print HTML Version of results:
+    printHTMLProtocol(tests,
+                      fileName=paste(pathReport, ".html", sep=""))
 
+    cat("\nRUnit reports also written to\n",
+        pathReport, ".(txt|html)\n\n", sep="")
+
+    ## Return stop() to cause R CMD check stop in case of
+    ##  - failures i.e. FALSE to RUnit tests or
+    ##  - errors i.e. R errors
+    tmp <- getErrors(tests)
+    if(tmp$nFail > 0 || tmp$nErr > 0)
+        {
+            stop(paste("\n\nRUnit testing failed:\n",
+                       " - #test failures: ", tmp$nFail, "\n",
+                       " - #R errors: ",  tmp$nErr, "\n\n", sep="")
+                 )
+        }
 } else {
 
-  cat("R package 'RUnit' cannot be loaded - no unit tests run\n",
-      "for package", .pkg,"\n")
+    cat("R package 'RUnit' cannot be loaded - no unit tests run\n",
+        "for package", pkg,"\n")
 
 }
 
