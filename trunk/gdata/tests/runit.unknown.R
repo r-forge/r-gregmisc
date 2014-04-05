@@ -7,10 +7,9 @@
 
 ### {{{ --- Test setup ---
 
-if(FALSE) {
-  library("RUnit")
-  library("gdata")
-}
+library("RUnit")
+library("gdata")
+
 
 ### {{{ --- Vectors ---
 
@@ -332,8 +331,36 @@ test.unknownToNA <- function()
 
   ## Date-time classes
   checkIdentical(unknownToNA(xDateUnk, unknown=dateUnk), xDate)
-  checkIdentical(unknownToNA(xPOSIXltUnk, unknown=POSIXltUnk), xPOSIXlt)
   checkIdentical(unknownToNA(xPOSIXctUnk, unknown=POSIXctUnk), xPOSIXct)
+
+  ## Per Brian Ripley on 2014-01-15:
+  ##
+  ## On platforms where POSIXlt has a gmtoff component, it does not need to be set.  So
+  ##
+  ## > z$gmtoff
+  ## [1] 3600   NA
+  ## > xPOSIXltUnk$gmtoff
+  ## [1] 3600 3600
+  ##
+  ## (or sometimes 0, not NA).
+  ##
+  ## So although identical() correctly reports that they differ, this
+  ## is allowed for optional components.
+  ##
+  ## It would also be wrong to use identical() to compare isdst
+  ## components: isdst = -1 means unknown.
+  ##
+  tmp_unknownToNA <- unknownToNA(xPOSIXltUnk, unknown=POSIXltUnk)
+  tmp_xPOSIXlt   <- xPOSIXlt
+
+  tmp_unknownToNA$gmtoff <- NULL  # Remove $gmtoff to avoid comparison
+  tmp_xPOSIXlt$gmtoff   <- NULL
+
+  tmp_unknownToNA$isdst <- NULL   # Remove $isdst to avoid comparison
+  tmp_xPOSIXlt$isdst   <- NULL
+
+  checkIdentical(tmp_unknownToNA, tmp_xPOSIXlt)
+
 
   ## --- lists and data.frames ---
 
