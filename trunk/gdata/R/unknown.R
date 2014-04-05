@@ -29,7 +29,14 @@ isUnknown.POSIXlt <- function(x, unknown=NA, ...)
   } else {
     unknown <- as.character(x=unknown, ...)
   }
-  isUnknown.default(x=as.character(x), unknown=unknown)
+
+  if(is.list(x) && !inherits(x=x, what="POSIXlt")) {
+    x <- lapply(x, FUN=as.character, ...)
+  } else {
+    x <- as.character(x=x, ...)
+  }
+
+  isUnknown.default(x=as.character(x), unknown=as.character(unknown))
 }
 
 isUnknown.list <- function(x, unknown=NA, ...) {
