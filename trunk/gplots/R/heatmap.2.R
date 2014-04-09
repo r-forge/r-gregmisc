@@ -66,6 +66,12 @@ heatmap.2 <- function (x,
                        denscol=tracecol,
                        symkey = min(x < 0, na.rm=TRUE) || symbreaks,
                        densadj = 0.25,
+                       key.title = NULL,
+                       key.xlab = NULL,
+                       key.ylab = NULL,
+                       key.xtickfun = NULL,
+                       key.ytickfun = NULL,
+                       key.par=list(),
 
                        ## plot labels
                        main = NULL,
@@ -562,7 +568,16 @@ heatmap.2 <- function (x,
   ## Add the color-key
   if(key)
     {
-      par(mar = c(5, 4, 2, 1), cex=0.75)
+      mar <- c(5, 4, 2, 1)
+      if (!is.null(key.xlab) && is.na(key.xlab))
+          mar[1] <- 2
+      if (!is.null(key.ylab) && is.na(key.ylab))
+          mar[2] <- 2
+      if (!is.null(key.title) && is.na(key.title))
+          mar[3] <- 1
+      par(mar = mar, cex=0.75, mgp=c(2, 1, 0))
+      if (length(key.par) > 0)
+          do.call(par, key.par)
       tmpbreaks <- breaks
 
       if(symkey)
@@ -584,15 +599,26 @@ heatmap.2 <- function (x,
             xaxt="n", yaxt="n")
 
       par(usr=c(0,1,0,1))
-      lv <- pretty(breaks)
-      xv <- scale01(as.numeric(lv), min.raw, max.raw)
-      axis(1, at=xv, labels=lv)
-      if(scale=="row")
-        mtext(side=1,"Row Z-Score", line=2)
-      else if(scale=="column")
-        mtext(side=1,"Column Z-Score", line=2)
-      else
-        mtext(side=1,"Value", line=2)
+      if (is.null(key.xtickfun)) {
+          lv <- pretty(breaks)
+          xv <- scale01(as.numeric(lv), min.raw, max.raw)
+          xargs <- list(at=xv, labels=lv)
+      } else {
+          xargs <- key.xtickfun()
+      }
+      xargs$side <- 1
+      do.call(axis, xargs)
+      if (is.null(key.xlab)) {
+        if(scale=="row")
+            key.xlab <- "Row Z-Score"
+        else if(scale=="column")
+           key.xlab <- "Column Z-Score"
+        else
+            key.xlab <- "Value"
+      }
+      if (!is.na(key.xlab)) {
+          mtext(side=1, key.xlab, line=par("mgp")[1], padj=0.5)
+      }
 
       if(density.info=="density")
         {
@@ -602,10 +628,22 @@ heatmap.2 <- function (x,
           dens$y <- dens$y[-omit]
           dens$x <- scale01(dens$x, min.raw, max.raw)
           lines(dens$x, dens$y / max(dens$y) * 0.95, col=denscol, lwd=1)
-          axis(2, at=pretty(dens$y)/max(dens$y) * 0.95, pretty(dens$y) )
-          title("Color Key\nand Density Plot")
+          if (is.null(key.ytickfun)) {
+              yargs <- list(at=pretty(dens$y)/max(dens$y) * 0.95, labels=pretty(dens$y))
+          } else {
+              yargs <- key.ytickfun()
+          }
+          yargs$side <- 2
+          do.call(axis, yargs)
+          if (is.null(key.title))
+              key.title <- "Color Key\nand Density Plot"
+          if (!is.na(key.title))
+            title(key.title)
           par(cex=0.5)
-          mtext(side=2,"Density", line=2)
+          if (is.null(key.ylab))
+              key.ylab <- "Density"
+          if (!is.na(key.ylab))
+            mtext(side=2,key.ylab, line=par("mgp")[1], padj=0.5)
         }
       else if(density.info=="histogram")
         {
@@ -613,10 +651,22 @@ heatmap.2 <- function (x,
           hx <- scale01(breaks, min.raw, max.raw)
           hy <- c(h$counts, h$counts[length(h$counts)])
           lines(hx, hy/max(hy)*0.95, lwd=1, type="s", col=denscol)
-          axis(2, at=pretty(hy)/max(hy) * 0.95, pretty(hy) )
-          title("Color Key\nand Histogram")
+          if (is.null(key.ytickfun)) {
+              yargs <- list(at=pretty(hy)/max(hy) * 0.95, labels=pretty(hy))
+          } else {
+              yargs <- key.ytickfun()
+          }
+          yargs$side <- 2
+          do.call(axis, yargs)
+          if (is.null(key.title))
+              key.title <- "Color Key\nand Histogram"
+          if (!is.na(key.title))
+            title(key.title)
           par(cex=0.5)
-          mtext(side=2,"Count", line=2)
+          if (is.null(key.ylab))
+              key.ylab <- "Count"
+          if (!is.na(key.ylab))
+            mtext(side=2,key.ylab, line=par("mgp")[1], padj=0.5)
         }
       else
         title("Color Key")
