@@ -30,8 +30,8 @@ abc.in <- read.xport("dfAttributes.xpt", names.tolower=FALSE)
 label(abc.out, self=TRUE, "MISSING!")
 label(abc.in , self=TRUE, "MISSING!")
 
-SAStype(abc.out, self=TRUE, "MISSING!")
-SAStype(abc.in , self=TRUE, "MISSING!")
+SAStype(abc.out, "MISSING!")
+SAStype(abc.in , "MISSING!")
 
 stopifnot( label  (abc.out, self=TRUE, "MISSING!") ==
            label  (abc.in,  self=TRUE, "MISSING!") )
