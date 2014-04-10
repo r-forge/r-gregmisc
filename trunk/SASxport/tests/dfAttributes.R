@@ -5,7 +5,7 @@ Sys.setenv("TZ"="GMT")
 abc.out <- data.frame( x=c(1, 2, NA, NA ), y=c('a', 'B', NA, '*' ) )
 
 ## add a data set label (not used by R)
-label(abc.out) <- "xxxx data set xxxxx"
+label(abc.out, self=TRUE) <- "xxxx data set xxxxx"
 SAStype(abc.out) <- "normal"
 
 ## add a format specifier (not used by R)
@@ -27,13 +27,16 @@ write.xport(abc.out,
 abc.in <- read.xport("dfAttributes.xpt", names.tolower=FALSE)
 
 ## Test that the files are otherwise identical
-label(abc.out, "MISSING!")
-label(abc.in , "MISSING!")
+label(abc.out, self=TRUE, "MISSING!")
+label(abc.in , self=TRUE, "MISSING!")
 
-SAStype(abc.out, "MISSING!")
-SAStype(abc.in , "MISSING!")
+SAStype(abc.out, self=TRUE, "MISSING!")
+SAStype(abc.in , self=TRUE, "MISSING!")
 
-stopifnot( label  (abc.out, "MISSING!")==label  (abc.in, "MISSING!") )
-stopifnot( SAStype(abc.out, "MISSING!")==SAStype(abc.in, "MISSING!") )
+stopifnot( label  (abc.out, self=TRUE, "MISSING!") ==
+           label  (abc.in,  self=TRUE, "MISSING!") )
+
+stopifnot( SAStype(abc.out, "MISSING!") ==
+           SAStype(abc.in,  "MISSING!") )
 
 
