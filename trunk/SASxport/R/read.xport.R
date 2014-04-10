@@ -1,5 +1,5 @@
 ##
-## Code originally from Frank Harrell's 'Hmisc' library: 
+## Code originally from Frank Harrell's 'Hmisc' library:
 ##   http://biostat.mc.vanderbilt.edu/twiki/bin/view/Main/Hmisc
 ## Copied with permission on 2007-08-04
 ##
@@ -32,7 +32,7 @@ read.xport <- function(file,
 
     if(length(grep('http://', file))>0 || length(grep('ftp://', file))>0 )
       {
-        scat("Downloading file...")        
+        scat("Downloading file...")
         tf <- tempfile()
         download.file(file, tf, mode='wb', quiet=TRUE)
         file <- tf
@@ -44,13 +44,13 @@ read.xport <- function(file,
     file.header <- substr(file.header, start=1, stop=nchar(xport.file.header) )
     if( !identical(xport.file.header, file.header) )
       stop("The specified file does not start with a SAS xport file header!")
-           
+
     scat("Extracting data file information...")
     dsinfo <- lookup.xport.inner(file)
 
     dsLabels <- sapply(dsinfo, label)
     dsTypes  <- sapply(dsinfo, SAStype)
-    
+
     if(length(keep))
       whichds <- toupper(keep)
     else
@@ -65,7 +65,7 @@ read.xport <- function(file,
          names(ds) <- make.unique(names(ds))
        }
 
-    
+
     if( (length(keep)>0 || length(drop)>0) )
       ds <- ds[whichds]
 
@@ -82,7 +82,7 @@ read.xport <- function(file,
         fds <- fds[1]
       }
     }
-  
+
     finfo <- NULL
     if(length(formats) || length(fds)) {
       if(length(formats))
@@ -108,7 +108,7 @@ read.xport <- function(file,
     names(res) <- gsub('_','.',dsn)
 
 
-    possiblyConvertChar <- (is.logical(as.is) && !as.is) || 
+    possiblyConvertChar <- (is.logical(as.is) && !as.is) ||
                            (is.numeric(as.is) && as.is > 0)
     j <- 0
     for(k in which.regular) {
@@ -120,9 +120,9 @@ read.xport <- function(file,
         else ds[[k]]
 
       scat('.')
-      
-      label(w)   <- dsLabels[k]
-      names(label(w)) <- NULL
+
+      label(w, self=TRUE)   <- dsLabels[k]
+      names(label(w, self=TRUE)) <- NULL
       SAStype(w) <- dsTypes[k]
       names(SAStype(w)) <- NULL
 
@@ -137,7 +137,7 @@ read.xport <- function(file,
       iformats <- fstr( ifmt, dinfo$iflength, dinfo$ifdigits)
 
       lab      <- dinfo$label
-      
+
       ndinfo   <- names.tolower(makeNames(dinfo$name, allow=name.chars))
       names(lab) <- names(fmt) <- names(formats) <- names(iformats) <- ndinfo
       if(length(w)>0)
@@ -176,13 +176,13 @@ read.xport <- function(file,
             }
             }
           } else if(possiblyConvertChar && is.character(x)) {
-            if((is.logical(as.is) && !as.is) || 
+            if((is.logical(as.is) && !as.is) ||
                (is.numeric(as.is) && length(unique(x)) < as.is*length(x))) {
               x <- factor(x, exclude='')
               changed <- TRUE
             }
           }
-          
+
           lz <- lab[nam[i]]
           if(!is.null(lz) && length(lz)>0 && !is.na(lz) && lz != '') {
             names(lz) <- NULL
@@ -195,13 +195,13 @@ read.xport <- function(file,
               SASformat(x) <- formats[[nam[i]]]
               changed <- TRUE
             }
-          
+
           if(nam[i] %in% names(iformats) && iformats[nam[i]] > "" )
             {
               SASformat(x) <- formats[[nam[i]]]
             changed <- TRUE
             }
-          
+
           if(changed)
             w[[i]] <- x
         }
@@ -216,7 +216,7 @@ read.xport <- function(file,
     if( include.formats )
       {
         nds <- nds+1
-        if( length(fds)>0 ) 
+        if( length(fds)>0 )
           res$"FORMATS" <- ds[[fds]]
         else
           res$FORMATS <- empty.format.table()

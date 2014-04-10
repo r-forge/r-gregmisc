@@ -1,13 +1,13 @@
 write.xport <- function(...,
                         list=base::list(),
-                        file = stop("'file' must be specified"), 
+                        file = stop("'file' must be specified"),
                         verbose=FALSE,
                         sasVer="7.00",
                         osType,
                         cDate=Sys.time(),
                         formats=NULL,
                         autogen.formats=TRUE
-                        ) 
+                        )
   {
 
     ## Handle verbose option ##
@@ -31,10 +31,10 @@ write.xport <- function(...,
     dotNames <- names(dotList)
     if(is.null(dotNames)) dotNames <- rep("", length(dotList))
 
-    if(length(dotList)>0) 
+    if(length(dotList)>0)
       {
         ## Get data frame names from ... in function call, but don't
-        ## clobber any explicitly provided names 
+        ## clobber any explicitly provided names
         mc <- match.call()
         mc$file <- NULL
         mc$verbose <- NULL
@@ -45,8 +45,8 @@ write.xport <- function(...,
         mc$autogen.formats <- NULL
         mc[[1]] <- NULL
         # note we *do not* mask off format argument so it will get
-        # magically included if present.  
-    
+        # magically included if present.
+
         mc <- as.character(mc)
 
         badNames <- which(is.na(dotNames) | dotNames<="")
@@ -59,7 +59,7 @@ write.xport <- function(...,
       listNames <- rep("", length(list))
     dfList  <- c(dotList, list)
     dfNames <- c(dotNames, listNames)
-    
+
     ## check for and handle <NA> or empty names ##
     badNames <- which(is.na(dfNames) | dfNames<="")
     if(length(badNames)>0)
@@ -79,7 +79,7 @@ write.xport <- function(...,
       if(length(not.df)==1)
         stop(paste("'", dfNames[not.df], "'"),
              " is not a data.frame object.")
-      else 
+      else
         stop(paste("'", dfNames[not.df], "'", sep="", collapse=", "),
              " are not data.frame objects.")
     ##
@@ -111,8 +111,8 @@ write.xport <- function(...,
 
     #######
     scat("opening file ...")
-    if (is.character(file)) 
-      if (file == "") 
+    if (is.character(file))
+      if (file == "")
         file <- stdout()
       else {
         file <- file(description=file, open="wb")
@@ -132,10 +132,10 @@ write.xport <- function(...,
     scat("Write file header ...")
     out( xport.file.header( cDate=cDate, sasVer=sasVer, osType=osType ) )
     scat("Done.")
-    
+
     for(i in dfNames)
       {
-        
+
         df <- dfList[[i]]
 
         if(is.null(colnames(df)))
@@ -149,17 +149,17 @@ write.xport <- function(...,
             dfList[[i]] <- df
           }
 
-        
+
         colnames(dfList[[i]]) <- colnames(df) <- varNames <- makeSASNames(colnames(df))
-        
+
         offsetTable <- data.frame("name"=varNames,
                                   "len"=rep(NA, length(varNames)),
                                   "offset"=rep(NA, length(varNames)) )
         rownames(offsetTable) <- offsetTable[,"name"]
 
-        dfLabel <- label(df, default="" )
+        dfLabel <- label(df, default="", self=TRUE )
         dfType <- SAStype(df, default="")
-        
+
         scat("Write data frame header ...")
         out( xport.member.header(dfName=i, cDate=cDate, sasVer=sasVer, osType=osType,
                                  dfLabel=dfLabel, dfType=dfType) )
@@ -168,7 +168,7 @@ write.xport <- function(...,
         scat("Write variable information block header ...")
         out( xport.namestr.header( nvar=ncol(df) ) )
         scat("Done.")
-        
+
         scat("Write entries for variable information block ...")
         lenIndex <- 0
         varIndex <- 1
@@ -197,14 +197,14 @@ write.xport <- function(...,
             offsetTable[i, "offset"] <- lenIndex
 
 
-            
+
 
             # parse format and iformat
             formatInfo  <- parseFormat(varFormat)
             iFormatInfo <- parseFormat(varIFormat)
-            
-            
-            
+
+
+
             # write the entry
             out(
                 xport.namestr(
@@ -213,7 +213,7 @@ write.xport <- function(...,
                               varNum    = varIndex,
                               varPos    = lenIndex,
                               varLength = varLen,
-                              varLabel  = varLabel,        
+                              varLabel  = varLabel,
                               fName   = formatInfo$name,
                               fLength = formatInfo$len,
                               fDigits = formatInfo$digits,
@@ -232,8 +232,8 @@ write.xport <- function(...,
 
         # Space-fill to 80 character record end
         fillSize <- 80 - (spaceUsed %% 80)
-        if(fillSize==80) fillSize <- 0        
-        out( xport.fill( TRUE, fillSize ) ) 
+        if(fillSize==80) fillSize <- 0
+        out( xport.fill( TRUE, fillSize ) )
 
         scat("Write header for data block ...")
         out( xport.obs.header() )
@@ -248,7 +248,7 @@ write.xport <- function(...,
               {
                 val <- df[i,j]
                 valLen <- offsetTable[j,"len"]
-                
+
                 scat("i=", i, " j=", j, " value=", val, " len=", valLen, "");
                 if(is.character( val ))
                   {
@@ -260,18 +260,18 @@ write.xport <- function(...,
                 spaceUsed <- spaceUsed + valLen
               }
         }
-        
+
         fillSize <- 80 - (spaceUsed %% 80)
         if(fillSize==80) fillSize <- 0
         out( xport.fill(TRUE, fillSize ) )
-        
+
         scat("Done.")
       }
 
     scat("Closing file ...")
-    if (is.character(file)) 
+    if (is.character(file))
       if (file != "")
-        {        
+        {
           close(file)
           on.exit()
         }
