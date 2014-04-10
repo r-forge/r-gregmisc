@@ -2,20 +2,21 @@ useDynLib(SASxport, .registration=TRUE)
 
 importFrom(chron, chron, times)
 importFrom(utils, packageDescription)
+importFrom(Hmisc, label, "label<-")
 
 export(
        toSAS,
        lookup.xport,
        read.xport,
        write.xport,
-       "label",
-       "label<-",
+       ## "label",
+       ## "label<-",
 
        makeSASNames,
-       
+
        "SASformat",
        "SASformat<-",
-       
+
        "SASiformat",
        "SASiformat<-",
 
@@ -32,12 +33,12 @@ S3method(toSAS, POSIXt)
 S3method(toSAS, Date)
 S3method(toSAS, default)
 
-S3method(label, default)
+## S3method(label, default)
 S3method(SASformat, default)
 S3method(SASiformat, default)
 S3method(SAStype, default)
 
-S3method("label<-", default)
+## S3method("label<-", default)
 S3method("SASformat<-", default)
 S3method("SASiformat<-", default)
 S3method("SAStype<-", default)
