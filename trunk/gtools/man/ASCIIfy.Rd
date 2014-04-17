@@ -6,10 +6,10 @@
   single-byte (\samp{\x00}) or two-byte (\samp{\u0000}) codes.
 }
 \usage{
-ASCIIfy(x, bytes = 2, fallback = "?")
+ASCIIfy(string, bytes = 2, fallback = "?")
 }
 \arguments{
-  \item{x}{a character vector, possibly containing non-ASCII
+  \item{string}{a character vector, possibly containing non-ASCII
     characters.}
   \item{bytes}{either \code{1} or \code{2}, for single-byte
     (\samp{\x00}) or two-byte (\samp{\u0000}) codes.}
@@ -44,4 +44,5 @@ athens <- "\u0391\u03b8\u03ae\u03bd\u03b1"
 print(athens)
 ASCIIfy(athens)
 }
-\keyword{}
+\keyword{utilites}
+\keyword{character}
