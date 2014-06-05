@@ -183,6 +183,8 @@ heatmap.2 <- function (x,
     {
       ddr <- Rowv ## use Rowv 'as-is', when it is dendrogram
       rowInd <- order.dendrogram(ddr)
+      if(length(rowInd)>nr || any(rowInd<1 | rowInd > nr ))
+         stop("Rowv dendrogram doesn't match size of x")
     }
   else if (is.integer(Rowv))
     { ## Compute dendrogram and do reordering based on given vector
@@ -214,6 +216,8 @@ heatmap.2 <- function (x,
     {
       ddc <- Colv ## use Colv 'as-is', when it is dendrogram
       colInd <- order.dendrogram(ddc)
+      if(length(ColInd)>nr || any(colInd<1 | colInd > nc ))
+         stop("Colv dendrogram doesn't match size of x")
     }
   else if(identical(Colv, "Rowv")) {
     if(nr != nc)
