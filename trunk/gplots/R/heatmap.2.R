@@ -8,6 +8,7 @@ heatmap.2 <- function (x,
                        distfun = dist,
                        hclustfun = hclust,
                        dendrogram = c("both","row","column","none"),
+                       reorderfun = function(d, w) reorder(d, w),
                        symm = FALSE,
 
                        ## data scaling
@@ -109,13 +110,6 @@ heatmap.2 <- function (x,
             "specified can produce unpredictable results.",
             "Please consider using only one or the other.")
 
-  ## key & density don't make sense when data is not all on the same scale
-  ##    if(scale!="none" &&  key==TRUE)
-  ##      {
-  ##        warning("Key cannot be plotted when scale!=\"none\".")
-  ##        key=FALSE
-  ##      }
-
   if ( is.null(Rowv) || is.na(Rowv) )
     Rowv <- FALSE
   if ( is.null(Colv) || is.na(Colv) )
@@ -190,7 +184,7 @@ heatmap.2 <- function (x,
     { ## Compute dendrogram and do reordering based on given vector
       hcr <- hclustfun(distfun(x))
       ddr <- as.dendrogram(hcr)
-      ddr <-  reorder(ddr, Rowv)
+      ddr <-  reorderfun(ddr, Rowv)
 
       rowInd <- order.dendrogram(ddr)
       if(nr != length(rowInd))
@@ -201,7 +195,7 @@ heatmap.2 <- function (x,
       Rowv <- rowMeans(x, na.rm = na.rm)
       hcr <- hclustfun(distfun(x))
       ddr <- as.dendrogram(hcr)
-      ddr <- reorder(ddr, Rowv)
+      ddr <- reorderfun(ddr, Rowv)
 
       rowInd <- order.dendrogram(ddr)
       if(nr != length(rowInd))
@@ -232,7 +226,7 @@ heatmap.2 <- function (x,
     {## Compute dendrogram and do reordering based on given vector
       hcc <- hclustfun(distfun(if(symm)x else t(x)))
       ddc <- as.dendrogram(hcc)
-      ddc <- reorder(ddc, Colv)
+      ddc <- reorderfun(ddc, Colv)
 
       colInd <- order.dendrogram(ddc)
       if(nc != length(colInd))
@@ -243,7 +237,7 @@ heatmap.2 <- function (x,
       Colv <- colMeans(x, na.rm = na.rm)
       hcc <- hclustfun(distfun(if(symm)x else t(x)))
       ddc <- as.dendrogram(hcc)
-      ddc <- reorder(ddc, Colv)
+      ddc <- reorderfun(ddc, Colv)
 
       colInd <- order.dendrogram(ddc)
       if(nc != length(colInd))
