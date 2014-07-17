@@ -1,3 +1,14 @@
+Version 1.4.1 - 2014-07-16
+--------------------------
+
+Bug fixes:
+
+- 'read.xport' now preserves '$' at the beginning of SAS character
+  format and iformat strings.
+
+- 'read.xport' argument names.tolower was not being honored for dataset
+   names.
+
 Version 1.4.0 - 2014-04-09
 --------------------------
 
