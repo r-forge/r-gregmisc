@@ -102,7 +102,7 @@ read.xport <- function(file,
     else
       names.tolower <- function(x) x
 
-    dsn <- tolower(which.regular)
+    dsn <- names.tolower(which.regular)
 
     res <- vector('list', nds)
     names(res) <- gsub('_','.',dsn)
