@@ -26,7 +26,7 @@ read.xport(file,
     variables should be returned as integers (\code{TRUE}) or doubles
     (\code{FALSE}). Variables outside the supported integer range
     (\code{.Machine$integer.max}) will always be converted to
-    doubles. 
+    doubles.
   }
   \item{formats}{a data frame or list (like that created by
     \code{foreign:::read.xport}) containing \code{PROC FORMAT}
@@ -36,7 +36,7 @@ read.xport(file,
   \item{name.chars}{Vector of additional characters permissible in
     variable names. By default, only the alpha and numeric
     characters ([A-Za-z0-9]) and periods ('.') are permitted. All
-    other characters are converted into periods ('.').   
+    other characters are converted into periods ('.').
   }
   \item{names.tolower}{Logical indicating whether variable and dataset
     names should be converted to lowercase (\code{TRUE}) or left
@@ -45,7 +45,7 @@ read.xport(file,
   \item{keep}{a vector of names of SAS datasets to process.  This list
     must include \code{PROC FORMAT} dataset if it is present for
     datasets to use use any of its value label formats.
-  } 
+  }
   \item{drop}{a vector of names of SAS datasets to ignore (original SAS
     upper case names)
   }
@@ -53,7 +53,7 @@ read.xport(file,
     Either a logical flag indicating whether SAS character variables should
     be preserved as character objects (\code{TRUE}) or factor
     objects (\code{FALSE}), or a fractional cutoff between 0 and 1.
-    
+
     When a fractional cutoff is provided, character variables
     containing a more than this fraction of unique values will be
     stored as a character variables. This is done in order to
@@ -65,12 +65,12 @@ read.xport(file,
   \item{as.list}{Logical indicating whether to return a list even if
     the SAS xport file contains only only one dataset.}
   \item{include.formats}{Logical indicating whether to include SAS
-    format information (if present) in the returned list} 
+    format information (if present) in the returned list}
 }
 \value{
   If only a single dataset is present (after removing \code{PROC FORMAT}
   data when \code{include.formats=FALSE}), the return value is a single
-  dataframe  object. Otherwise the return is a list of dataframe objects. 
+  dataframe  object. Otherwise the return is a list of dataframe objects.
 
   Note that if \code{include.formats=TRUE}, the returned list will
   contain a dataframe named "FORMATS" containing any available 'PROC FORMAT'
@@ -79,18 +79,18 @@ read.xport(file,
 \details{
 
   \itemize{
-    \item SAS date, time, and date/time variables are converted respectively to \code{Date}, 
+    \item SAS date, time, and date/time variables are converted respectively to \code{Date},
     POSIX, or \code{chron} objects
-    
+
     \item SAS labels are stored in "label" attributes on each variable,
     and are accessible using the \code{\link{label}} function.
-    
+
     \item SAS formats are stored in "SASformat" attributes on each
     variable, and are accessable using \code{\link{SASformat}}
-    
+
     \item SAS iformats are stored in "SASiformat" attributes on each
     variable, and are accessable using \code{\link{SASiformat}}
-    
+
     \item SAS integer variables are stored as integers unless
       \code{force.integer} is \code{FALSE}
   }
@@ -105,7 +105,7 @@ read.xport(file,
   functions.
 }
 \author{ Gregory R. Warnes \email{greg@warnes.net}
-  based on \code{Hmisc:::sasxport.get} by Frank E. Harrell, Jr.}  
+  based on \code{Hmisc:::sasxport.get} by Frank E. Harrell, Jr.}
 \section{Note}{
   This code provides a subset of the functionality of the
   \code{sasxport.get} function in the Hmisc library.
@@ -114,7 +114,7 @@ read.xport(file,
   \code{\link[foreign]{read.xport}},
   \code{\link{label}},
   \code{\link[Hmisc]{sas.get}},
-  \code{\link[Hmisc]{sasxport.get}},  
+  \code{\link[Hmisc]{sasxport.get}},
   \code{\link{Dates}},
   \code{\link{DateTimeClasses}},
   \code{\link[chron]{chron}},
@@ -195,7 +195,6 @@ stopifnot( is.data.frame(w)==FALSE && is.list(w)==TRUE )
 }
 
 
-\dontrun{
 #### The Hmisc library provides many useful functions for interacting with
 #### data imported from SAS via read.xport()
 library(Hmisc)
@@ -209,7 +208,6 @@ lapply(w, contents)# show contents of individual items in more detail
 options(digits=7)  # compare the following matrix with PROC MEANS output
 t(sapply(w$z, function(x)
  c(Mean=mean(x),SD=sqrt(var(x)),Min=min(x),Max=max(x))))
-}
 
 }
 \keyword{interface}
