@@ -3,7 +3,7 @@ parseFormat <- function(format)
   {
     retval <- list("name"="", "len"=0, "digits"=0)
 
-    
+
     if( !is.null(format) && (length(format)==1) && (format > "") )
               {
                 index <- regexpr("[0-9]+", format)
@@ -16,9 +16,9 @@ parseFormat <- function(format)
                 else
                   {
                     retval$name <- substr(format,0,index-1)[1]
-                    
-                    lenStr <- substr(format,index, nchar(format))
-                    
+
+                    lenStr <- substr(format, index, nchar(format))
+
                     index <- regexpr("\\.", lenStr)
                     if(index==-1)
                       {
@@ -31,10 +31,10 @@ parseFormat <- function(format)
                         retval$digits  <- as.numeric(substr(lenStr, index+1, nchar(lenStr)))
                       }
                   }
-                    
+
                 if(is.na(retval$len)) retval$len <- 0
                 if(is.na(retval$digits)) retval$digits <- 0
-                
+
               }
 
     return(retval)

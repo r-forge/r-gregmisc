@@ -196,14 +196,9 @@ write.xport <- function(...,
             offsetTable[i, "len"]    <- varLen
             offsetTable[i, "offset"] <- lenIndex
 
-
-
-
             # parse format and iformat
             formatInfo  <- parseFormat(varFormat)
             iFormatInfo <- parseFormat(varIFormat)
-
-
 
             # write the entry
             out(
