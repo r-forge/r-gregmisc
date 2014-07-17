@@ -130,10 +130,10 @@ read.xport <- function(file,
       names(w) <- nam
       dinfo    <- dsinfo[[k]]
 
-      fmt      <- sub('^\\$','',dinfo$format)
+      fmt <- dinfo$format
       formats  <- fstr( fmt, dinfo$flength, dinfo$fdigits)
 
-      ifmt     <- sub('^\\$','',dinfo$iformat)
+      ifmt <- dinfo$iformat
       iformats <- fstr( ifmt, dinfo$iflength, dinfo$ifdigits)
 
       lab      <- dinfo$label
