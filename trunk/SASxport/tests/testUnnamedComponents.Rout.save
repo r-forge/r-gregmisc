@@ -1,7 +1,7 @@
 
-R version 3.0.1 (2013-05-16) -- "Good Sport"
-Copyright (C) 2013 The R Foundation for Statistical Computing
-Platform: i686-pc-linux-gnu (32-bit)
+R version 3.1.0 Patched (2014-05-26 r65771) -- "Spring Dance"
+Copyright (C) 2014 The R Foundation for Statistical Computing
+Platform: x86_64-apple-darwin13.1.0 (64-bit)
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
 You are welcome to redistribute it under certain conditions.
@@ -17,8 +17,21 @@ Type 'q()' to quit R.
 
 > library(SASxport)
 Loading required package: chron
+Loading required package: Hmisc
+Loading required package: grid
+Loading required package: lattice
+Loading required package: survival
+Loading required package: splines
+Loading required package: Formula
 
-Loaded SASxport version 1.3.6 (2013-10-09).
+Attaching package: 'Hmisc'
+
+The following objects are masked from 'package:base':
+
+    format.pval, round.POSIXt, trunc.POSIXt, units
+
+
+Loaded SASxport version 1.4.1 (2014-07-16).
 
   Type `?SASxport' for usage information.
 
@@ -76,12 +89,12 @@ rd.xpr> class(w)
 [1] "list"
 
 rd.xpr> sapply(w, head)
-$test
+$TEST
   RACE AGE         D1                    DT1       T1
 1 blue  30 2002-03-03 (03 Mar 2002 09:31:02) 11:13:45
 2 <NA>  31 2002-06-03 (03 Jun 2002 09:42:07) 11:14:13
 
-$z
+$Z
          X3        X4         X5        X6        X7         X8
 1 0.5548096 0.9102659 0.19947292 0.7781959 0.7648077 0.90783205
 2 0.6289062 0.5950751 0.14938208 0.1996997 0.4579557 0.57161156
@@ -104,12 +117,12 @@ rd.xpr> class(w)
 [1] "list"
 
 rd.xpr> sapply(w, head)
-$test
+$TEST
   RACE AGE         D1                    DT1       T1
 1 blue  30 2002-03-03 (03 Mar 2002 09:31:02) 11:13:45
 2 <NA>  31 2002-06-03 (03 Jun 2002 09:42:07) 11:14:13
 
-$z
+$Z
          X3        X4         X5        X6        X7         X8
 1 0.5548096 0.9102659 0.19947292 0.7781959 0.7648077 0.90783205
 2 0.6289062 0.5950751 0.14938208 0.1996997 0.4579557 0.57161156
@@ -126,12 +139,12 @@ rd.xpr> class(w)
 [1] "list"
 
 rd.xpr> sapply(w, head)
-$test
+$TEST
   RACE AGE         D1                    DT1       T1
 1 blue  30 2002-03-03 (03 Mar 2002 09:31:02) 11:13:45
 2 <NA>  31 2002-06-03 (03 Jun 2002 09:42:07) 11:14:13
 
-$z
+$Z
          X3        X4         X5        X6        X7         X8
 1 0.5548096 0.9102659 0.19947292 0.7781959 0.7648077 0.90783205
 2 0.6289062 0.5950751 0.14938208 0.1996997 0.4579557 0.57161156
@@ -157,25 +170,310 @@ rd.xpr> stopifnot( is.data.frame(w)==FALSE && is.list(w)==TRUE )
 rd.xpr> ## End Don't show
 rd.xpr> 
 rd.xpr> 
-rd.xpr> ## Not run: 
-rd.xpr> ##D #### The Hmisc library provides many useful functions for interacting with
-rd.xpr> ##D #### data imported from SAS via read.xport()
-rd.xpr> ##D library(Hmisc)
-rd.xpr> ##D 
-rd.xpr> ##D describe(w$test)   # see labels, format names for dataset test
-rd.xpr> ##D lapply(w, describe)# see descriptive stats in more detail for each variable
-rd.xpr> ##D 
-rd.xpr> ##D contents(w$test)   # another way to see variable attributes
-rd.xpr> ##D lapply(w, contents)# show contents of individual items in more detail
-rd.xpr> ##D 
-rd.xpr> ##D options(digits=7)  # compare the following matrix with PROC MEANS output
-rd.xpr> ##D t(sapply(w$z, function(x)
-rd.xpr> ##D  c(Mean=mean(x),SD=sqrt(var(x)),Min=min(x),Max=max(x))))
-rd.xpr> ## End(Not run)
-rd.xpr> 
-rd.xpr> 
-rd.xpr> 
-rd.xpr> 
+rd.xpr> #### The Hmisc library provides many useful functions for interacting with
+rd.xpr> #### data imported from SAS via read.xport()
+rd.xpr> library(Hmisc)
+
+rd.xpr> describe(w$TEST)   # see labels, format names for dataset test
+w$TEST 
+
+ 5  Variables      2  Observations
+--------------------------------------------------------------------------------
+RACE 
+      n missing  unique   value 
+      1       1       1    blue 
+--------------------------------------------------------------------------------
+AGE : Age at Beginning of Study 
+      n missing  unique    Mean 
+      2       0       2    30.5 
+
+30 (1, 50%), 31 (1, 50%) 
+--------------------------------------------------------------------------------
+D1 
+      n missing  unique 
+      2       0       2 
+
+2002-03-03 (1, 50%), 2002-06-03 (1, 50%) 
+--------------------------------------------------------------------------------
+DT1  Format:day mon year h:m:s 
+                     n                missing                 unique 
+                     2                      0                      2 
+                  Mean 
+(18 Apr 2002 09:36:35) 
+
+(03 Jun 2002 09:42:07) (1, 50%) 
+(03 Mar 2002 09:31:02) (1, 50%) 
+--------------------------------------------------------------------------------
+T1  Format:h:m:s 
+      n missing  unique    Mean 
+      2       0       2    :01: 
+
+11:13:45 (1, 50%), 11:14:13 (1, 50%) 
+--------------------------------------------------------------------------------
+
+rd.xpr> lapply(w, describe)# see descriptive stats in more detail for each variable
+$TEST
+X[[1]] 
+
+ 5  Variables      2  Observations
+--------------------------------------------------------------------------------
+RACE 
+      n missing  unique   value 
+      1       1       1    blue 
+--------------------------------------------------------------------------------
+AGE : Age at Beginning of Study 
+      n missing  unique    Mean 
+      2       0       2    30.5 
+
+30 (1, 50%), 31 (1, 50%) 
+--------------------------------------------------------------------------------
+D1 
+      n missing  unique 
+      2       0       2 
+
+2002-03-03 (1, 50%), 2002-06-03 (1, 50%) 
+--------------------------------------------------------------------------------
+DT1  Format:day mon year h:m:s 
+                     n                missing                 unique 
+                     2                      0                      2 
+                  Mean 
+(18 Apr 2002 09:36:35) 
+
+(03 Jun 2002 09:42:07) (1, 50%) 
+(03 Mar 2002 09:31:02) (1, 50%) 
+--------------------------------------------------------------------------------
+T1  Format:h:m:s 
+      n missing  unique    Mean 
+      2       0       2    :01: 
+
+11:13:45 (1, 50%), 11:14:13 (1, 50%) 
+--------------------------------------------------------------------------------
+
+$Z
+X[[2]] 
+
+ 6  Variables      100  Observations
+--------------------------------------------------------------------------------
+X3 
+      n missing  unique    Mean     .05     .10     .25     .50     .75     .90 
+    100       0     100  0.5131 0.05585 0.13304 0.26428 0.51257 0.80719 0.93059 
+    .95 
+0.96426 
+
+lowest : 0.00576 0.01524 0.02380 0.02627 0.05351
+highest: 0.96948 0.97473 0.98010 0.98096 0.99390 
+--------------------------------------------------------------------------------
+X4 
+      n missing  unique    Mean     .05     .10     .25     .50     .75     .90 
+    100       0     100  0.5119 0.06694 0.09393 0.22310 0.49638 0.82109 0.92206 
+    .95 
+0.94963 
+
+lowest : 0.02636 0.02890 0.02926 0.03010 0.05395
+highest: 0.95790 0.96828 0.97047 0.97466 0.98267 
+--------------------------------------------------------------------------------
+X5 
+      n missing  unique    Mean     .05     .10     .25     .50     .75     .90 
+    100       0     100  0.4888 0.04286 0.06765 0.19898 0.46766 0.77899 0.89237 
+    .95 
+0.91886 
+
+lowest : 0.004134 0.007872 0.008811 0.038577 0.039260
+highest: 0.933789 0.975597 0.984074 0.996114 0.997253 
+--------------------------------------------------------------------------------
+X6 
+      n missing  unique    Mean     .05     .10     .25     .50     .75     .90 
+    100       0     100  0.4987 0.09022 0.18649 0.26865 0.46423 0.72667 0.85553 
+    .95 
+0.93149 
+
+lowest : 0.01010 0.01943 0.03064 0.05931 0.08775
+highest: 0.93330 0.96090 0.97310 0.97840 0.99511 
+--------------------------------------------------------------------------------
+X7 
+      n missing  unique    Mean     .05     .10     .25     .50     .75     .90 
+    100       0     100  0.5533  0.0850  0.1474  0.3313  0.5666  0.8120  0.9176 
+    .95 
+ 0.9517 
+
+lowest : 0.04201 0.04716 0.04986 0.05864 0.07641
+highest: 0.96377 0.97244 0.97413 0.99318 0.99791 
+--------------------------------------------------------------------------------
+X8 
+      n missing  unique    Mean     .05     .10     .25     .50     .75     .90 
+    100       0     100  0.4809 0.04251 0.06831 0.27122 0.49223 0.71333 0.87322 
+    .95 
+0.91886 
+
+lowest : 0.007269 0.010586 0.013044 0.018595 0.039906
+highest: 0.930491 0.935669 0.936941 0.958679 0.959636 
+--------------------------------------------------------------------------------
+
+$FORMATS
+X[[3]] 
+
+ 21  Variables      3  Observations
+--------------------------------------------------------------------------------
+FMTNAME 
+      n missing  unique   value 
+      3       0       1    RACE 
+--------------------------------------------------------------------------------
+START 
+      n missing  unique 
+      3       0       3 
+
+               1 (1, 33%),                2 (1, 33%) 
+               3 (1, 33%) 
+--------------------------------------------------------------------------------
+END 
+      n missing  unique 
+      3       0       3 
+
+               1 (1, 33%),                2 (1, 33%) 
+               3 (1, 33%) 
+--------------------------------------------------------------------------------
+LABEL 
+      n missing  unique 
+      3       0       3 
+
+blue (1, 33%), green (1, 33%), purple (1, 33%) 
+--------------------------------------------------------------------------------
+MIN 
+      n missing  unique    Mean 
+      3       0       1       1 
+--------------------------------------------------------------------------------
+MAX 
+      n missing  unique    Mean 
+      3       0       1      40 
+--------------------------------------------------------------------------------
+DEFAULT 
+      n missing  unique    Mean 
+      3       0       1       6 
+--------------------------------------------------------------------------------
+LENGTH 
+      n missing  unique    Mean 
+      3       0       1       6 
+--------------------------------------------------------------------------------
+FUZZ 
+      n missing  unique    Mean 
+      3       0       1   1e-12 
+--------------------------------------------------------------------------------
+MULT 
+      n missing  unique    Mean 
+      3       0       1       0 
+--------------------------------------------------------------------------------
+NOEDIT 
+      n missing  unique    Mean 
+      3       0       1       0 
+--------------------------------------------------------------------------------
+TYPE 
+      n missing  unique   value 
+      3       0       1       N 
+--------------------------------------------------------------------------------
+SEXCL 
+      n missing  unique   value 
+      3       0       1       N 
+--------------------------------------------------------------------------------
+EEXCL 
+      n missing  unique   value 
+      3       0       1       N 
+--------------------------------------------------------------------------------
+
+Variables with all observations missing:
+
+[1] PREFIX   FILL     HLO      DECSEP   DIG3SEP  DATATYPE LANGUAGE
+
+
+rd.xpr> contents(w$TEST)   # another way to see variable attributes
+
+Data frame:w$TEST	2 observations and 5 variables    Maximum # NAs:1
+
+                        Labels Levels   Class Storage NAs
+RACE                                3         integer   1
+AGE  Age at Beginning of Study        integer integer   0
+D1                                       Date  double   0
+DT1                                     chron  double   0
+T1                                      times  double   0
+
++--------+-----------------+
+|Variable|Levels           |
++--------+-----------------+
+|  RACE  |green,blue,purple|
++--------+-----------------+
+
+rd.xpr> lapply(w, contents)# show contents of individual items in more detail
+$TEST
+
+Data frame:X[[1L]]	2 observations and 5 variables    Maximum # NAs:1
+
+                        Labels Levels   Class Storage NAs
+RACE                                3         integer   1
+AGE  Age at Beginning of Study        integer integer   0
+D1                                       Date  double   0
+DT1                                     chron  double   0
+T1                                      times  double   0
+
++--------+-----------------+
+|Variable|Levels           |
++--------+-----------------+
+|  RACE  |green,blue,purple|
++--------+-----------------+
+
+$Z
+
+Data frame:X[[2L]]	100 observations and 6 variables    Maximum # NAs:0
+
+   Storage
+X3  double
+X4  double
+X5  double
+X6  double
+X7  double
+X8  double
+
+$FORMATS
+
+Data frame:X[[3L]]	3 observations and 21 variables    Maximum # NAs:0
+
+           Storage
+FMTNAME  character
+START    character
+END      character
+LABEL    character
+MIN         double
+MAX         double
+DEFAULT     double
+LENGTH      double
+FUZZ        double
+PREFIX   character
+MULT        double
+FILL     character
+NOEDIT      double
+TYPE     character
+SEXCL    character
+EEXCL    character
+HLO      character
+DECSEP   character
+DIG3SEP  character
+DATATYPE character
+LANGUAGE character
+
+
+rd.xpr> options(digits=7)  # compare the following matrix with PROC MEANS output
+
+rd.xpr> t(sapply(w$Z, function(x)
+rd.xpr+  c(Mean=mean(x),SD=sqrt(var(x)),Min=min(x),Max=max(x))))
+        Mean        SD         Min       Max
+X3 0.5131445 0.2944341 0.005760193 0.9938965
+X4 0.5119257 0.3100749 0.026361614 0.9826741
+X5 0.4887739 0.3141976 0.004133753 0.9972528
+X6 0.4986746 0.2710817 0.010095772 0.9951080
+X7 0.5533156 0.2843679 0.042010437 0.9979081
+X8 0.4809487 0.2892945 0.007268806 0.9596358
+> ## Read example dataset from a local file
+> testFile <- system.file('extdata', 'test2.xpt', package="SASxport")
+> w <- read.xport(testFile, names.tolower=TRUE)
+> 
 > write.xport(w$test,file="a.xpt") #1.a
 > lookup.xport("a.xpt")            #1.b
 
@@ -186,7 +484,7 @@ Filename: `a.xpt'
 Variables in data set `W$TEST':
  dataset name      type   format flength fdigits iformat iflength ifdigits
   W$TEST RACE character     RACE       0       0                0        0
-  W$TEST  AGE   numeric                0       0                0        0
+  W$TEST  AGE character                0       0                0        0
   W$TEST   D1   numeric   MMDDYY      10       0                0        0
   W$TEST  DT1   numeric DATETIME       0       0                0        0
   W$TEST   T1 character     TIME       0       0                0        0
@@ -213,7 +511,7 @@ Filename: `a.xpt'
 Variables in data set `B':
  dataset name      type   format flength fdigits iformat iflength ifdigits
        B RACE character     RACE       0       0                0        0
-       B  AGE   numeric                0       0                0        0
+       B  AGE character                0       0                0        0
        B   D1   numeric   MMDDYY      10       0                0        0
        B  DT1   numeric DATETIME       0       0                0        0
        B   T1 character     TIME       0       0                0        0
@@ -239,7 +537,7 @@ Filename: `a.xpt'
 Variables in data set `TEST':
  dataset name      type   format flength fdigits iformat iflength ifdigits
     TEST RACE character     RACE       0       0                0        0
-    TEST  AGE   numeric                0       0                0        0
+    TEST  AGE character                0       0                0        0
     TEST   D1   numeric   MMDDYY      10       0                0        0
     TEST  DT1   numeric DATETIME       0       0                0        0
     TEST   T1 character     TIME       0       0                0        0
@@ -265,7 +563,7 @@ Filename: `a.xpt'
 Variables in data set `TEST':
  dataset name      type   format flength fdigits iformat iflength ifdigits
     TEST RACE character     RACE       0       0                0        0
-    TEST  AGE   numeric                0       0                0        0
+    TEST  AGE character                0       0                0        0
     TEST   D1   numeric   MMDDYY      10       0                0        0
     TEST  DT1   numeric DATETIME       0       0                0        0
     TEST   T1 character     TIME       0       0                0        0
@@ -293,12 +591,12 @@ Variables in data set `Z':
   100
 
 > (tmp <- read.xport("a.xpt"))                #4.c
-$test
+$TEST
   RACE AGE         D1                    DT1       T1
 1 blue  30 2002-03-03 (03 Mar 2002 09:31:02) 11:13:45
 2       31 2002-06-03 (03 Jun 2002 09:42:07) 11:14:13
 
-$z
+$Z
              X3         X4          X5         X6         X7          X8
 1   0.554809570 0.91026592 0.199472918 0.77819594 0.76480773 0.907832049
 2   0.628906250 0.59507513 0.149382079 0.19969965 0.45795571 0.571611564
@@ -412,7 +710,7 @@ Filename: `a.xpt'
 Variables in data set `W$TEST':
  dataset name      type   format flength fdigits iformat iflength ifdigits
   W$TEST RACE character     RACE       0       0                0        0
-  W$TEST  AGE   numeric                0       0                0        0
+  W$TEST  AGE character                0       0                0        0
   W$TEST   D1   numeric   MMDDYY      10       0                0        0
   W$TEST  DT1   numeric DATETIME       0       0                0        0
   W$TEST   T1 character     TIME       0       0                0        0
@@ -440,12 +738,12 @@ Variables in data set `W$Z':
   100
 
 > (tmp <- read.xport("a.xpt"))         #5.c
-$`w$test`
+$`W$TEST`
   RACE AGE         D1                    DT1       T1
 1 blue  30 2002-03-03 (03 Mar 2002 09:31:02) 11:13:45
 2       31 2002-06-03 (03 Jun 2002 09:42:07) 11:14:13
 
-$`w$z`
+$`W$Z`
              X3         X4          X5         X6         X7          X8
 1   0.554809570 0.91026592 0.199472918 0.77819594 0.76480773 0.907832049
 2   0.628906250 0.59507513 0.149382079 0.19969965 0.45795571 0.571611564
@@ -559,7 +857,7 @@ Filename: `a.xpt'
 Variables in data set `W$TEST':
  dataset name      type   format flength fdigits iformat iflength ifdigits
   W$TEST RACE character     RACE       0       0                0        0
-  W$TEST  AGE   numeric                0       0                0        0
+  W$TEST  AGE character                0       0                0        0
   W$TEST   D1   numeric   MMDDYY      10       0                0        0
   W$TEST  DT1   numeric DATETIME       0       0                0        0
   W$TEST   T1 character     TIME       0       0                0        0
@@ -587,12 +885,12 @@ Variables in data set `Z':
   100
 
 > (tmp <- read.xport("a.xpt"))           #6.c
-$`w$test`
+$`W$TEST`
   RACE AGE         D1                    DT1       T1
 1 blue  30 2002-03-03 (03 Mar 2002 09:31:02) 11:13:45
 2       31 2002-06-03 (03 Jun 2002 09:42:07) 11:14:13
 
-$z
+$Z
              X3         X4          X5         X6         X7          X8
 1   0.554809570 0.91026592 0.199472918 0.77819594 0.76480773 0.907832049
 2   0.628906250 0.59507513 0.149382079 0.19969965 0.45795571 0.571611564
@@ -705,8 +1003,8 @@ Filename: `a.xpt'
 
 Variables in data set `TEST':
  dataset name      type   format flength fdigits iformat iflength ifdigits
-    TEST RACE   numeric     RACE       0       0                0        0
-    TEST  AGE   numeric                0       0                0        0
+    TEST RACE character     RACE       0       0                0        0
+    TEST  AGE character                0       0                0        0
     TEST   D1   numeric   MMDDYY      10       0                0        0
     TEST  DT1   numeric DATETIME       0       0                0        0
     TEST   T1 character     TIME       0       0                0        0
@@ -733,59 +1031,13 @@ Variables in data set `Z':
   100
   100
 
-Variables in data set `FORMATS':
- dataset     name      type format flength fdigits iformat iflength ifdigits
- FORMATS  FMTNAME character              0       0                0        0
- FORMATS    START character              0       0                0        0
- FORMATS      END character              0       0                0        0
- FORMATS    LABEL character              0       0                0        0
- FORMATS      MIN   numeric              0       0                0        0
- FORMATS      MAX   numeric              0       0                0        0
- FORMATS  DEFAULT   numeric              0       0                0        0
- FORMATS   LENGTH   numeric              0       0                0        0
- FORMATS     FUZZ   numeric              0       0                0        0
- FORMATS   PREFIX character              0       0                0        0
- FORMATS     MULT   numeric              0       0                0        0
- FORMATS     FILL character              0       0                0        0
- FORMATS   NOEDIT   numeric              0       0                0        0
- FORMATS     TYPE character              0       0                0        0
- FORMATS    SEXCL character              0       0                0        0
- FORMATS    EEXCL character              0       0                0        0
- FORMATS      HLO character              0       0                0        0
- FORMATS   DECSEP character              0       0                0        0
- FORMATS  DIG3SEP character              0       0                0        0
- FORMATS DATATYPE character              0       0                0        0
- FORMATS LANGUAGE character              0       0                0        0
- label nobs
-          3
-          3
-          3
-          3
-          3
-          3
-          3
-          3
-          3
-          3
-          3
-          3
-          3
-          3
-          3
-          3
-          3
-          3
-          3
-          3
-          3
-
 > (tmp <- read.xport("a.xpt"))     #7.c
-$test
+$TEST
   RACE AGE         D1                    DT1       T1
 1 blue  30 2002-03-03 (03 Mar 2002 09:31:02) 11:13:45
-2 <NA>  31 2002-06-03 (03 Jun 2002 09:42:07) 11:14:13
+2       31 2002-06-03 (03 Jun 2002 09:42:07) 11:14:13
 
-$z
+$Z
              X3         X4          X5         X6         X7          X8
 1   0.554809570 0.91026592 0.199472918 0.77819594 0.76480773 0.907832049
 2   0.628906250 0.59507513 0.149382079 0.19969965 0.45795571 0.571611564
@@ -900,7 +1152,7 @@ Filename: `a.xpt'
 Variables in data set `W[[1]]':
  dataset name      type   format flength fdigits iformat iflength ifdigits
   W[[1]] RACE character     RACE       0       0                0        0
-  W[[1]]  AGE   numeric                0       0                0        0
+  W[[1]]  AGE character                0       0                0        0
   W[[1]]   D1   numeric   MMDDYY      10       0                0        0
   W[[1]]  DT1   numeric DATETIME       0       0                0        0
   W[[1]]   T1 character     TIME       0       0                0        0
@@ -928,12 +1180,12 @@ Variables in data set `W[[2]]':
   100
 
 > (tmp <- read.xport("a.xpt"))            #8.c
-$`w[[1]]`
+$`W[[1]]`
   RACE AGE         D1                    DT1       T1
 1 blue  30 2002-03-03 (03 Mar 2002 09:31:02) 11:13:45
 2       31 2002-06-03 (03 Jun 2002 09:42:07) 11:14:13
 
-$`w[[2]]`
+$`W[[2]]`
              X3         X4          X5         X6         X7          X8
 1   0.554809570 0.91026592 0.199472918 0.77819594 0.76480773 0.907832049
 2   0.628906250 0.59507513 0.149382079 0.19969965 0.45795571 0.571611564
@@ -1051,7 +1303,7 @@ Filename: `a.xpt'
 Variables in data set `DATA1':
  dataset name      type   format flength fdigits iformat iflength ifdigits
    DATA1 RACE character     RACE       0       0                0        0
-   DATA1  AGE   numeric                0       0                0        0
+   DATA1  AGE character                0       0                0        0
    DATA1   D1   numeric   MMDDYY      10       0                0        0
    DATA1  DT1   numeric DATETIME       0       0                0        0
    DATA1   T1 character     TIME       0       0                0        0
@@ -1078,59 +1330,13 @@ Variables in data set `DATA2':
   100
   100
 
-Variables in data set `DATA3':
- dataset     name      type format flength fdigits iformat iflength ifdigits
-   DATA3  FMTNAME character              0       0                0        0
-   DATA3    START character              0       0                0        0
-   DATA3      END character              0       0                0        0
-   DATA3    LABEL character              0       0                0        0
-   DATA3      MIN   numeric              0       0                0        0
-   DATA3      MAX   numeric              0       0                0        0
-   DATA3  DEFAULT   numeric              0       0                0        0
-   DATA3   LENGTH   numeric              0       0                0        0
-   DATA3     FUZZ   numeric              0       0                0        0
-   DATA3   PREFIX character              0       0                0        0
-   DATA3     MULT   numeric              0       0                0        0
-   DATA3     FILL character              0       0                0        0
-   DATA3   NOEDIT   numeric              0       0                0        0
-   DATA3     TYPE character              0       0                0        0
-   DATA3    SEXCL character              0       0                0        0
-   DATA3    EEXCL character              0       0                0        0
-   DATA3      HLO character              0       0                0        0
-   DATA3   DECSEP character              0       0                0        0
-   DATA3  DIG3SEP character              0       0                0        0
-   DATA3 DATATYPE character              0       0                0        0
-   DATA3 LANGUAGE character              0       0                0        0
- label nobs
-          3
-          3
-          3
-          3
-          3
-          3
-          3
-          3
-          3
-          3
-          3
-          3
-          3
-          3
-          3
-          3
-          3
-          3
-          3
-          3
-          3
-
 > (tmp <- read.xport("a.xpt"))     #9.c
-$data1
+$DATA1
   RACE AGE         D1                    DT1       T1
-1 <NA>  30 2002-03-03 (03 Mar 2002 09:31:02) 11:13:45
-2 <NA>  31 2002-06-03 (03 Jun 2002 09:42:07) 11:14:13
+1 blue  30 2002-03-03 (03 Mar 2002 09:31:02) 11:13:45
+2       31 2002-06-03 (03 Jun 2002 09:42:07) 11:14:13
 
-$data2
+$DATA2
              X3         X4          X5         X6         X7          X8
 1   0.554809570 0.91026592 0.199472918 0.77819594 0.76480773 0.907832049
 2   0.628906250 0.59507513 0.149382079 0.19969965 0.45795571 0.571611564
@@ -1240,12 +1446,12 @@ Error in write.xport(5, "a.xpt") :
   '5', 'a.xpt' are not data.frame objects.
 > SASxport:::assert( "try-error" %in% class(failure) ) #10.b
 > (tmp <- read.xport("a.xpt"))                         #10.c
-$data1
+$DATA1
   RACE AGE         D1                    DT1       T1
-1 <NA>  30 2002-03-03 (03 Mar 2002 09:31:02) 11:13:45
-2 <NA>  31 2002-06-03 (03 Jun 2002 09:42:07) 11:14:13
+1 blue  30 2002-03-03 (03 Mar 2002 09:31:02) 11:13:45
+2       31 2002-06-03 (03 Jun 2002 09:42:07) 11:14:13
 
-$data2
+$DATA2
              X3         X4          X5         X6         X7          X8
 1   0.554809570 0.91026592 0.199472918 0.77819594 0.76480773 0.907832049
 2   0.628906250 0.59507513 0.149382079 0.19969965 0.45795571 0.571611564
@@ -1354,12 +1560,12 @@ Error in write.xport(list(a = 5, b = 6), "a.xpt") :
   'list(a = 5, b = 6)', 'a.xpt' are not data.frame objects.
 > SASxport:::assert( "try-error" %in% class(failure) ) #11.b
 > (tmp <- read.xport("a.xpt"))                         #10.c
-$data1
+$DATA1
   RACE AGE         D1                    DT1       T1
-1 <NA>  30 2002-03-03 (03 Mar 2002 09:31:02) 11:13:45
-2 <NA>  31 2002-06-03 (03 Jun 2002 09:42:07) 11:14:13
+1 blue  30 2002-03-03 (03 Mar 2002 09:31:02) 11:13:45
+2       31 2002-06-03 (03 Jun 2002 09:42:07) 11:14:13
 
-$data2
+$DATA2
              X3         X4          X5         X6         X7          X8
 1   0.554809570 0.91026592 0.199472918 0.77819594 0.76480773 0.907832049
 2   0.628906250 0.59507513 0.149382079 0.19969965 0.45795571 0.571611564
@@ -1464,157 +1670,7 @@ $data2
 
 > 
 > # Check with different list construction function *name*
-> example(read.xport)
-
-rd.xpr> ## -------
-rd.xpr> ## SAS code to generate test dataset:
-rd.xpr> ## -------
-rd.xpr> ## libname y SASV5XPT "test2.xpt";
-rd.xpr> ##
-rd.xpr> ## PROC FORMAT; VALUE race 1=green 2=blue 3=purple; RUN;
-rd.xpr> ## PROC FORMAT CNTLOUT=format;RUN;  * Name, e.g. 'format', unimportant;
-rd.xpr> ## data test;
-rd.xpr> ## LENGTH race 3 age 4;
-rd.xpr> ## age=30; label age="Age at Beginning of Study";
-rd.xpr> ## race=2;
-rd.xpr> ## d1='3mar2002'd ;
-rd.xpr> ## dt1='3mar2002 9:31:02'dt;
-rd.xpr> ## t1='11:13:45't;
-rd.xpr> ## output;
-rd.xpr> ##
-rd.xpr> ## age=31;
-rd.xpr> ## race=4;
-rd.xpr> ## d1='3jun2002'd ;
-rd.xpr> ## dt1='3jun2002 9:42:07'dt;
-rd.xpr> ## t1='11:14:13't;
-rd.xpr> ## output;
-rd.xpr> ## format d1 mmddyy10. dt1 datetime. t1 time. race race.;
-rd.xpr> ## run;
-rd.xpr> ## data z; LENGTH x3 3 x4 4 x5 5 x6 6 x7 7 x8 8;
-rd.xpr> ##    DO i=1 TO 100;
-rd.xpr> ##        x3=ranuni(3);
-rd.xpr> ##        x4=ranuni(5);
-rd.xpr> ##        x5=ranuni(7);
-rd.xpr> ##        x6=ranuni(9);
-rd.xpr> ##        x7=ranuni(11);
-rd.xpr> ##        x8=ranuni(13);
-rd.xpr> ##        output;
-rd.xpr> ##        END;
-rd.xpr> ##    DROP i;
-rd.xpr> ##    RUN;
-rd.xpr> ## PROC MEANS; RUN;
-rd.xpr> ## PROC COPY IN=work OUT=y;SELECT test format z;RUN; *Creates test2.xpt;
-rd.xpr> ## ------
-rd.xpr> 
-rd.xpr> ## Read this dataset from a local file:
-rd.xpr> testFile <- system.file('extdata', 'test2.xpt', package="SASxport")
-
-rd.xpr> w <- read.xport(testFile)
-
-rd.xpr> class(w)
-[1] "list"
-
-rd.xpr> sapply(w, head)
-$test
-  RACE AGE         D1                    DT1       T1
-1 blue  30 2002-03-03 (03 Mar 2002 09:31:02) 11:13:45
-2 <NA>  31 2002-06-03 (03 Jun 2002 09:42:07) 11:14:13
-
-$z
-         X3        X4         X5        X6        X7         X8
-1 0.5548096 0.9102659 0.19947292 0.7781959 0.7648077 0.90783205
-2 0.6289062 0.5950751 0.14938208 0.1996997 0.4579557 0.57161156
-3 0.5601807 0.2015537 0.87107157 0.8915819 0.8178354 0.06978889
-4 0.9301758 0.6795225 0.06470965 0.2382916 0.6756623 0.86167683
-5 0.4273071 0.5349607 0.90357235 0.7710940 0.7477446 0.13104011
-6 0.1850586 0.5198102 0.79364078 0.7873601 0.7689810 0.89166854
-
-
-rd.xpr> ## Not run: 
-rd.xpr> ##D ## Or read a copy of test2.xpt available on the web:
-rd.xpr> ##D url <- 'http://biostat.mc.vanderbilt.edu/wiki/pub/Main/Hmisc/test2.xpt'
-rd.xpr> ##D w <- read.xport(url)
-rd.xpr> ## End(Not run)
-rd.xpr> 
-rd.xpr> ## We can also get the dataset wrapped in a list
-rd.xpr> w <- read.xport(testFile, as.list=TRUE)
-
-rd.xpr> class(w)
-[1] "list"
-
-rd.xpr> sapply(w, head)
-$test
-  RACE AGE         D1                    DT1       T1
-1 blue  30 2002-03-03 (03 Mar 2002 09:31:02) 11:13:45
-2 <NA>  31 2002-06-03 (03 Jun 2002 09:42:07) 11:14:13
-
-$z
-         X3        X4         X5        X6        X7         X8
-1 0.5548096 0.9102659 0.19947292 0.7781959 0.7648077 0.90783205
-2 0.6289062 0.5950751 0.14938208 0.1996997 0.4579557 0.57161156
-3 0.5601807 0.2015537 0.87107157 0.8915819 0.8178354 0.06978889
-4 0.9301758 0.6795225 0.06470965 0.2382916 0.6756623 0.86167683
-5 0.4273071 0.5349607 0.90357235 0.7710940 0.7477446 0.13104011
-6 0.1850586 0.5198102 0.79364078 0.7873601 0.7689810 0.89166854
-
-
-rd.xpr> ## And we can ask for the format information to be included as well.
-rd.xpr> w <- read.xport(testFile, as.list=TRUE, include.formats=TRUE)
-
-rd.xpr> class(w)
-[1] "list"
-
-rd.xpr> sapply(w, head)
-$test
-  RACE AGE         D1                    DT1       T1
-1 blue  30 2002-03-03 (03 Mar 2002 09:31:02) 11:13:45
-2 <NA>  31 2002-06-03 (03 Jun 2002 09:42:07) 11:14:13
-
-$z
-         X3        X4         X5        X6        X7         X8
-1 0.5548096 0.9102659 0.19947292 0.7781959 0.7648077 0.90783205
-2 0.6289062 0.5950751 0.14938208 0.1996997 0.4579557 0.57161156
-3 0.5601807 0.2015537 0.87107157 0.8915819 0.8178354 0.06978889
-4 0.9301758 0.6795225 0.06470965 0.2382916 0.6756623 0.86167683
-5 0.4273071 0.5349607 0.90357235 0.7710940 0.7477446 0.13104011
-6 0.1850586 0.5198102 0.79364078 0.7873601 0.7689810 0.89166854
-
-$FORMATS
-  FMTNAME            START              END  LABEL MIN MAX DEFAULT LENGTH  FUZZ
-1    RACE                1                1  green   1  40       6      6 1e-12
-2    RACE                2                2   blue   1  40       6      6 1e-12
-3    RACE                3                3 purple   1  40       6      6 1e-12
-  PREFIX MULT FILL NOEDIT TYPE SEXCL EEXCL HLO DECSEP DIG3SEP DATATYPE LANGUAGE
-1           0           0    N     N     N                                     
-2           0           0    N     N     N                                     
-3           0           0    N     N     N                                     
-
-
-rd.xpr> ## Don't show: 
-rd.xpr> stopifnot( is.data.frame(w)==FALSE && is.list(w)==TRUE )
-
-rd.xpr> ## End Don't show
-rd.xpr> 
-rd.xpr> 
-rd.xpr> ## Not run: 
-rd.xpr> ##D #### The Hmisc library provides many useful functions for interacting with
-rd.xpr> ##D #### data imported from SAS via read.xport()
-rd.xpr> ##D library(Hmisc)
-rd.xpr> ##D 
-rd.xpr> ##D describe(w$test)   # see labels, format names for dataset test
-rd.xpr> ##D lapply(w, describe)# see descriptive stats in more detail for each variable
-rd.xpr> ##D 
-rd.xpr> ##D contents(w$test)   # another way to see variable attributes
-rd.xpr> ##D lapply(w, contents)# show contents of individual items in more detail
-rd.xpr> ##D 
-rd.xpr> ##D options(digits=7)  # compare the following matrix with PROC MEANS output
-rd.xpr> ##D t(sapply(w$z, function(x)
-rd.xpr> ##D  c(Mean=mean(x),SD=sqrt(var(x)),Min=min(x),Max=max(x))))
-rd.xpr> ## End(Not run)
-rd.xpr> 
-rd.xpr> 
-rd.xpr> 
-rd.xpr> 
+> w <- read.xport(testFile, names.tolower=TRUE)
 > write.xport(list=base::list(w$test,w$z),file="a.xpt")   #11.a
 Warning message:
 In write.xport(list = base::list(w$test, w$z), file = "a.xpt") :
@@ -1628,7 +1684,7 @@ Filename: `a.xpt'
 Variables in data set `DATA1':
  dataset name      type   format flength fdigits iformat iflength ifdigits
    DATA1 RACE character     RACE       0       0                0        0
-   DATA1  AGE   numeric                0       0                0        0
+   DATA1  AGE character                0       0                0        0
    DATA1   D1   numeric   MMDDYY      10       0                0        0
    DATA1  DT1   numeric DATETIME       0       0                0        0
    DATA1   T1 character     TIME       0       0                0        0
@@ -1656,12 +1712,12 @@ Variables in data set `DATA2':
   100
 
 > (tmp <- read.xport("a.xpt"))                            #11.c
-$data1
+$DATA1
   RACE AGE         D1                    DT1       T1
 1 blue  30 2002-03-03 (03 Mar 2002 09:31:02) 11:13:45
 2       31 2002-06-03 (03 Jun 2002 09:42:07) 11:14:13
 
-$data2
+$DATA2
              X3         X4          X5         X6         X7          X8
 1   0.554809570 0.91026592 0.199472918 0.77819594 0.76480773 0.907832049
 2   0.628906250 0.59507513 0.149382079 0.19969965 0.45795571 0.571611564
@@ -1766,157 +1822,7 @@ $data2
 
 > 
 > # remove names
-> example(read.xport)
-
-rd.xpr> ## -------
-rd.xpr> ## SAS code to generate test dataset:
-rd.xpr> ## -------
-rd.xpr> ## libname y SASV5XPT "test2.xpt";
-rd.xpr> ##
-rd.xpr> ## PROC FORMAT; VALUE race 1=green 2=blue 3=purple; RUN;
-rd.xpr> ## PROC FORMAT CNTLOUT=format;RUN;  * Name, e.g. 'format', unimportant;
-rd.xpr> ## data test;
-rd.xpr> ## LENGTH race 3 age 4;
-rd.xpr> ## age=30; label age="Age at Beginning of Study";
-rd.xpr> ## race=2;
-rd.xpr> ## d1='3mar2002'd ;
-rd.xpr> ## dt1='3mar2002 9:31:02'dt;
-rd.xpr> ## t1='11:13:45't;
-rd.xpr> ## output;
-rd.xpr> ##
-rd.xpr> ## age=31;
-rd.xpr> ## race=4;
-rd.xpr> ## d1='3jun2002'd ;
-rd.xpr> ## dt1='3jun2002 9:42:07'dt;
-rd.xpr> ## t1='11:14:13't;
-rd.xpr> ## output;
-rd.xpr> ## format d1 mmddyy10. dt1 datetime. t1 time. race race.;
-rd.xpr> ## run;
-rd.xpr> ## data z; LENGTH x3 3 x4 4 x5 5 x6 6 x7 7 x8 8;
-rd.xpr> ##    DO i=1 TO 100;
-rd.xpr> ##        x3=ranuni(3);
-rd.xpr> ##        x4=ranuni(5);
-rd.xpr> ##        x5=ranuni(7);
-rd.xpr> ##        x6=ranuni(9);
-rd.xpr> ##        x7=ranuni(11);
-rd.xpr> ##        x8=ranuni(13);
-rd.xpr> ##        output;
-rd.xpr> ##        END;
-rd.xpr> ##    DROP i;
-rd.xpr> ##    RUN;
-rd.xpr> ## PROC MEANS; RUN;
-rd.xpr> ## PROC COPY IN=work OUT=y;SELECT test format z;RUN; *Creates test2.xpt;
-rd.xpr> ## ------
-rd.xpr> 
-rd.xpr> ## Read this dataset from a local file:
-rd.xpr> testFile <- system.file('extdata', 'test2.xpt', package="SASxport")
-
-rd.xpr> w <- read.xport(testFile)
-
-rd.xpr> class(w)
-[1] "list"
-
-rd.xpr> sapply(w, head)
-$test
-  RACE AGE         D1                    DT1       T1
-1 blue  30 2002-03-03 (03 Mar 2002 09:31:02) 11:13:45
-2 <NA>  31 2002-06-03 (03 Jun 2002 09:42:07) 11:14:13
-
-$z
-         X3        X4         X5        X6        X7         X8
-1 0.5548096 0.9102659 0.19947292 0.7781959 0.7648077 0.90783205
-2 0.6289062 0.5950751 0.14938208 0.1996997 0.4579557 0.57161156
-3 0.5601807 0.2015537 0.87107157 0.8915819 0.8178354 0.06978889
-4 0.9301758 0.6795225 0.06470965 0.2382916 0.6756623 0.86167683
-5 0.4273071 0.5349607 0.90357235 0.7710940 0.7477446 0.13104011
-6 0.1850586 0.5198102 0.79364078 0.7873601 0.7689810 0.89166854
-
-
-rd.xpr> ## Not run: 
-rd.xpr> ##D ## Or read a copy of test2.xpt available on the web:
-rd.xpr> ##D url <- 'http://biostat.mc.vanderbilt.edu/wiki/pub/Main/Hmisc/test2.xpt'
-rd.xpr> ##D w <- read.xport(url)
-rd.xpr> ## End(Not run)
-rd.xpr> 
-rd.xpr> ## We can also get the dataset wrapped in a list
-rd.xpr> w <- read.xport(testFile, as.list=TRUE)
-
-rd.xpr> class(w)
-[1] "list"
-
-rd.xpr> sapply(w, head)
-$test
-  RACE AGE         D1                    DT1       T1
-1 blue  30 2002-03-03 (03 Mar 2002 09:31:02) 11:13:45
-2 <NA>  31 2002-06-03 (03 Jun 2002 09:42:07) 11:14:13
-
-$z
-         X3        X4         X5        X6        X7         X8
-1 0.5548096 0.9102659 0.19947292 0.7781959 0.7648077 0.90783205
-2 0.6289062 0.5950751 0.14938208 0.1996997 0.4579557 0.57161156
-3 0.5601807 0.2015537 0.87107157 0.8915819 0.8178354 0.06978889
-4 0.9301758 0.6795225 0.06470965 0.2382916 0.6756623 0.86167683
-5 0.4273071 0.5349607 0.90357235 0.7710940 0.7477446 0.13104011
-6 0.1850586 0.5198102 0.79364078 0.7873601 0.7689810 0.89166854
-
-
-rd.xpr> ## And we can ask for the format information to be included as well.
-rd.xpr> w <- read.xport(testFile, as.list=TRUE, include.formats=TRUE)
-
-rd.xpr> class(w)
-[1] "list"
-
-rd.xpr> sapply(w, head)
-$test
-  RACE AGE         D1                    DT1       T1
-1 blue  30 2002-03-03 (03 Mar 2002 09:31:02) 11:13:45
-2 <NA>  31 2002-06-03 (03 Jun 2002 09:42:07) 11:14:13
-
-$z
-         X3        X4         X5        X6        X7         X8
-1 0.5548096 0.9102659 0.19947292 0.7781959 0.7648077 0.90783205
-2 0.6289062 0.5950751 0.14938208 0.1996997 0.4579557 0.57161156
-3 0.5601807 0.2015537 0.87107157 0.8915819 0.8178354 0.06978889
-4 0.9301758 0.6795225 0.06470965 0.2382916 0.6756623 0.86167683
-5 0.4273071 0.5349607 0.90357235 0.7710940 0.7477446 0.13104011
-6 0.1850586 0.5198102 0.79364078 0.7873601 0.7689810 0.89166854
-
-$FORMATS
-  FMTNAME            START              END  LABEL MIN MAX DEFAULT LENGTH  FUZZ
-1    RACE                1                1  green   1  40       6      6 1e-12
-2    RACE                2                2   blue   1  40       6      6 1e-12
-3    RACE                3                3 purple   1  40       6      6 1e-12
-  PREFIX MULT FILL NOEDIT TYPE SEXCL EEXCL HLO DECSEP DIG3SEP DATATYPE LANGUAGE
-1           0           0    N     N     N                                     
-2           0           0    N     N     N                                     
-3           0           0    N     N     N                                     
-
-
-rd.xpr> ## Don't show: 
-rd.xpr> stopifnot( is.data.frame(w)==FALSE && is.list(w)==TRUE )
-
-rd.xpr> ## End Don't show
-rd.xpr> 
-rd.xpr> 
-rd.xpr> ## Not run: 
-rd.xpr> ##D #### The Hmisc library provides many useful functions for interacting with
-rd.xpr> ##D #### data imported from SAS via read.xport()
-rd.xpr> ##D library(Hmisc)
-rd.xpr> ##D 
-rd.xpr> ##D describe(w$test)   # see labels, format names for dataset test
-rd.xpr> ##D lapply(w, describe)# see descriptive stats in more detail for each variable
-rd.xpr> ##D 
-rd.xpr> ##D contents(w$test)   # another way to see variable attributes
-rd.xpr> ##D lapply(w, contents)# show contents of individual items in more detail
-rd.xpr> ##D 
-rd.xpr> ##D options(digits=7)  # compare the following matrix with PROC MEANS output
-rd.xpr> ##D t(sapply(w$z, function(x)
-rd.xpr> ##D  c(Mean=mean(x),SD=sqrt(var(x)),Min=min(x),Max=max(x))))
-rd.xpr> ## End(Not run)
-rd.xpr> 
-rd.xpr> 
-rd.xpr> 
-rd.xpr> 
+> w <- read.xport(testFile, names.tolower=TRUE)
 > names(w) <- NULL
 > w[[3]] <- NULL
 > write.xport(list=w,file="a.xpt") #12.a
@@ -1932,7 +1838,7 @@ Filename: `a.xpt'
 Variables in data set `DATA1':
  dataset name      type   format flength fdigits iformat iflength ifdigits
    DATA1 RACE character     RACE       0       0                0        0
-   DATA1  AGE   numeric                0       0                0        0
+   DATA1  AGE character                0       0                0        0
    DATA1   D1   numeric   MMDDYY      10       0                0        0
    DATA1  DT1   numeric DATETIME       0       0                0        0
    DATA1   T1 character     TIME       0       0                0        0
@@ -1960,12 +1866,12 @@ Variables in data set `DATA2':
   100
 
 > (tmp <- read.xport("a.xpt"))     #12.c
-$data1
+$DATA1
   RACE AGE         D1                    DT1       T1
 1 blue  30 2002-03-03 (03 Mar 2002 09:31:02) 11:13:45
 2       31 2002-06-03 (03 Jun 2002 09:42:07) 11:14:13
 
-$data2
+$DATA2
              X3         X4          X5         X6         X7          X8
 1   0.554809570 0.91026592 0.199472918 0.77819594 0.76480773 0.907832049
 2   0.628906250 0.59507513 0.149382079 0.19969965 0.45795571 0.571611564
@@ -2070,157 +1976,7 @@ $data2
 
 > 
 > # remove variable names
-> example(read.xport)
-
-rd.xpr> ## -------
-rd.xpr> ## SAS code to generate test dataset:
-rd.xpr> ## -------
-rd.xpr> ## libname y SASV5XPT "test2.xpt";
-rd.xpr> ##
-rd.xpr> ## PROC FORMAT; VALUE race 1=green 2=blue 3=purple; RUN;
-rd.xpr> ## PROC FORMAT CNTLOUT=format;RUN;  * Name, e.g. 'format', unimportant;
-rd.xpr> ## data test;
-rd.xpr> ## LENGTH race 3 age 4;
-rd.xpr> ## age=30; label age="Age at Beginning of Study";
-rd.xpr> ## race=2;
-rd.xpr> ## d1='3mar2002'd ;
-rd.xpr> ## dt1='3mar2002 9:31:02'dt;
-rd.xpr> ## t1='11:13:45't;
-rd.xpr> ## output;
-rd.xpr> ##
-rd.xpr> ## age=31;
-rd.xpr> ## race=4;
-rd.xpr> ## d1='3jun2002'd ;
-rd.xpr> ## dt1='3jun2002 9:42:07'dt;
-rd.xpr> ## t1='11:14:13't;
-rd.xpr> ## output;
-rd.xpr> ## format d1 mmddyy10. dt1 datetime. t1 time. race race.;
-rd.xpr> ## run;
-rd.xpr> ## data z; LENGTH x3 3 x4 4 x5 5 x6 6 x7 7 x8 8;
-rd.xpr> ##    DO i=1 TO 100;
-rd.xpr> ##        x3=ranuni(3);
-rd.xpr> ##        x4=ranuni(5);
-rd.xpr> ##        x5=ranuni(7);
-rd.xpr> ##        x6=ranuni(9);
-rd.xpr> ##        x7=ranuni(11);
-rd.xpr> ##        x8=ranuni(13);
-rd.xpr> ##        output;
-rd.xpr> ##        END;
-rd.xpr> ##    DROP i;
-rd.xpr> ##    RUN;
-rd.xpr> ## PROC MEANS; RUN;
-rd.xpr> ## PROC COPY IN=work OUT=y;SELECT test format z;RUN; *Creates test2.xpt;
-rd.xpr> ## ------
-rd.xpr> 
-rd.xpr> ## Read this dataset from a local file:
-rd.xpr> testFile <- system.file('extdata', 'test2.xpt', package="SASxport")
-
-rd.xpr> w <- read.xport(testFile)
-
-rd.xpr> class(w)
-[1] "list"
-
-rd.xpr> sapply(w, head)
-$test
-  RACE AGE         D1                    DT1       T1
-1 blue  30 2002-03-03 (03 Mar 2002 09:31:02) 11:13:45
-2 <NA>  31 2002-06-03 (03 Jun 2002 09:42:07) 11:14:13
-
-$z
-         X3        X4         X5        X6        X7         X8
-1 0.5548096 0.9102659 0.19947292 0.7781959 0.7648077 0.90783205
-2 0.6289062 0.5950751 0.14938208 0.1996997 0.4579557 0.57161156
-3 0.5601807 0.2015537 0.87107157 0.8915819 0.8178354 0.06978889
-4 0.9301758 0.6795225 0.06470965 0.2382916 0.6756623 0.86167683
-5 0.4273071 0.5349607 0.90357235 0.7710940 0.7477446 0.13104011
-6 0.1850586 0.5198102 0.79364078 0.7873601 0.7689810 0.89166854
-
-
-rd.xpr> ## Not run: 
-rd.xpr> ##D ## Or read a copy of test2.xpt available on the web:
-rd.xpr> ##D url <- 'http://biostat.mc.vanderbilt.edu/wiki/pub/Main/Hmisc/test2.xpt'
-rd.xpr> ##D w <- read.xport(url)
-rd.xpr> ## End(Not run)
-rd.xpr> 
-rd.xpr> ## We can also get the dataset wrapped in a list
-rd.xpr> w <- read.xport(testFile, as.list=TRUE)
-
-rd.xpr> class(w)
-[1] "list"
-
-rd.xpr> sapply(w, head)
-$test
-  RACE AGE         D1                    DT1       T1
-1 blue  30 2002-03-03 (03 Mar 2002 09:31:02) 11:13:45
-2 <NA>  31 2002-06-03 (03 Jun 2002 09:42:07) 11:14:13
-
-$z
-         X3        X4         X5        X6        X7         X8
-1 0.5548096 0.9102659 0.19947292 0.7781959 0.7648077 0.90783205
-2 0.6289062 0.5950751 0.14938208 0.1996997 0.4579557 0.57161156
-3 0.5601807 0.2015537 0.87107157 0.8915819 0.8178354 0.06978889
-4 0.9301758 0.6795225 0.06470965 0.2382916 0.6756623 0.86167683
-5 0.4273071 0.5349607 0.90357235 0.7710940 0.7477446 0.13104011
-6 0.1850586 0.5198102 0.79364078 0.7873601 0.7689810 0.89166854
-
-
-rd.xpr> ## And we can ask for the format information to be included as well.
-rd.xpr> w <- read.xport(testFile, as.list=TRUE, include.formats=TRUE)
-
-rd.xpr> class(w)
-[1] "list"
-
-rd.xpr> sapply(w, head)
-$test
-  RACE AGE         D1                    DT1       T1
-1 blue  30 2002-03-03 (03 Mar 2002 09:31:02) 11:13:45
-2 <NA>  31 2002-06-03 (03 Jun 2002 09:42:07) 11:14:13
-
-$z
-         X3        X4         X5        X6        X7         X8
-1 0.5548096 0.9102659 0.19947292 0.7781959 0.7648077 0.90783205
-2 0.6289062 0.5950751 0.14938208 0.1996997 0.4579557 0.57161156
-3 0.5601807 0.2015537 0.87107157 0.8915819 0.8178354 0.06978889
-4 0.9301758 0.6795225 0.06470965 0.2382916 0.6756623 0.86167683
-5 0.4273071 0.5349607 0.90357235 0.7710940 0.7477446 0.13104011
-6 0.1850586 0.5198102 0.79364078 0.7873601 0.7689810 0.89166854
-
-$FORMATS
-  FMTNAME            START              END  LABEL MIN MAX DEFAULT LENGTH  FUZZ
-1    RACE                1                1  green   1  40       6      6 1e-12
-2    RACE                2                2   blue   1  40       6      6 1e-12
-3    RACE                3                3 purple   1  40       6      6 1e-12
-  PREFIX MULT FILL NOEDIT TYPE SEXCL EEXCL HLO DECSEP DIG3SEP DATATYPE LANGUAGE
-1           0           0    N     N     N                                     
-2           0           0    N     N     N                                     
-3           0           0    N     N     N                                     
-
-
-rd.xpr> ## Don't show: 
-rd.xpr> stopifnot( is.data.frame(w)==FALSE && is.list(w)==TRUE )
-
-rd.xpr> ## End Don't show
-rd.xpr> 
-rd.xpr> 
-rd.xpr> ## Not run: 
-rd.xpr> ##D #### The Hmisc library provides many useful functions for interacting with
-rd.xpr> ##D #### data imported from SAS via read.xport()
-rd.xpr> ##D library(Hmisc)
-rd.xpr> ##D 
-rd.xpr> ##D describe(w$test)   # see labels, format names for dataset test
-rd.xpr> ##D lapply(w, describe)# see descriptive stats in more detail for each variable
-rd.xpr> ##D 
-rd.xpr> ##D contents(w$test)   # another way to see variable attributes
-rd.xpr> ##D lapply(w, contents)# show contents of individual items in more detail
-rd.xpr> ##D 
-rd.xpr> ##D options(digits=7)  # compare the following matrix with PROC MEANS output
-rd.xpr> ##D t(sapply(w$z, function(x)
-rd.xpr> ##D  c(Mean=mean(x),SD=sqrt(var(x)),Min=min(x),Max=max(x))))
-rd.xpr> ## End(Not run)
-rd.xpr> 
-rd.xpr> 
-rd.xpr> 
-rd.xpr> 
+> w <- read.xport(testFile, names.tolower=TRUE)
 > colnames(w[[2]]) <- rep("", length=ncol(w[[2]]))
 > write.xport(list=w,file="a.xpt") #13.a
 Warning message:
@@ -2234,8 +1990,8 @@ Filename: `a.xpt'
 
 Variables in data set `TEST':
  dataset name      type   format flength fdigits iformat iflength ifdigits
-    TEST RACE   numeric     RACE       0       0                0        0
-    TEST  AGE   numeric                0       0                0        0
+    TEST RACE character     RACE       0       0                0        0
+    TEST  AGE character                0       0                0        0
     TEST   D1   numeric   MMDDYY      10       0                0        0
     TEST  DT1   numeric DATETIME       0       0                0        0
     TEST   T1 character     TIME       0       0                0        0
@@ -2262,59 +2018,13 @@ Variables in data set `Z':
   100
   100
 
-Variables in data set `FORMATS':
- dataset     name      type format flength fdigits iformat iflength ifdigits
- FORMATS  FMTNAME character              0       0                0        0
- FORMATS    START character              0       0                0        0
- FORMATS      END character              0       0                0        0
- FORMATS    LABEL character              0       0                0        0
- FORMATS      MIN   numeric              0       0                0        0
- FORMATS      MAX   numeric              0       0                0        0
- FORMATS  DEFAULT   numeric              0       0                0        0
- FORMATS   LENGTH   numeric              0       0                0        0
- FORMATS     FUZZ   numeric              0       0                0        0
- FORMATS   PREFIX character              0       0                0        0
- FORMATS     MULT   numeric              0       0                0        0
- FORMATS     FILL character              0       0                0        0
- FORMATS   NOEDIT   numeric              0       0                0        0
- FORMATS     TYPE character              0       0                0        0
- FORMATS    SEXCL character              0       0                0        0
- FORMATS    EEXCL character              0       0                0        0
- FORMATS      HLO character              0       0                0        0
- FORMATS   DECSEP character              0       0                0        0
- FORMATS  DIG3SEP character              0       0                0        0
- FORMATS DATATYPE character              0       0                0        0
- FORMATS LANGUAGE character              0       0                0        0
- label nobs
-          3
-          3
-          3
-          3
-          3
-          3
-          3
-          3
-          3
-          3
-          3
-          3
-          3
-          3
-          3
-          3
-          3
-          3
-          3
-          3
-          3
-
 > (tmp <- read.xport("a.xpt"))     #13.c
-$test
+$TEST
   RACE AGE         D1                    DT1       T1
 1 blue  30 2002-03-03 (03 Mar 2002 09:31:02) 11:13:45
-2 <NA>  31 2002-06-03 (03 Jun 2002 09:42:07) 11:14:13
+2       31 2002-06-03 (03 Jun 2002 09:42:07) 11:14:13
 
-$z
+$Z
            VAR1       VAR2        VAR3       VAR4       VAR5        VAR6
 1   0.554809570 0.91026592 0.199472918 0.77819594 0.76480773 0.907832049
 2   0.628906250 0.59507513 0.149382079 0.19969965 0.45795571 0.571611564
@@ -2420,4 +2130,4 @@ $z
 > 
 > proc.time()
    user  system elapsed 
-  6.172   1.968   9.155 
+  1.648   0.070   1.728 

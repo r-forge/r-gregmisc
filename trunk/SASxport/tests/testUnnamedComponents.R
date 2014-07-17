@@ -3,6 +3,10 @@ Sys.setenv("TZ"="GMT")
 
 ##tests
 example(read.xport)
+## Read example dataset from a local file
+testFile <- system.file('extdata', 'test2.xpt', package="SASxport")
+w <- read.xport(testFile, names.tolower=TRUE)
+
 write.xport(w$test,file="a.xpt") #1.a
 lookup.xport("a.xpt")            #1.b
 (tmp <- read.xport("a.xpt"))     #1.c
@@ -52,13 +56,13 @@ SASxport:::assert( "try-error" %in% class(failure) ) #11.b
 (tmp <- read.xport("a.xpt"))                         #10.c
 
 # Check with different list construction function *name*
-example(read.xport)
+w <- read.xport(testFile, names.tolower=TRUE)
 write.xport(list=base::list(w$test,w$z),file="a.xpt")   #11.a
 lookup.xport("a.xpt")                                   #11.b
 (tmp <- read.xport("a.xpt"))                            #11.c
 
 # remove names
-example(read.xport)
+w <- read.xport(testFile, names.tolower=TRUE)
 names(w) <- NULL
 w[[3]] <- NULL
 write.xport(list=w,file="a.xpt") #12.a
@@ -66,7 +70,7 @@ lookup.xport("a.xpt")            #12.b
 (tmp <- read.xport("a.xpt"))     #12.c
 
 # remove variable names
-example(read.xport)
+w <- read.xport(testFile, names.tolower=TRUE)
 colnames(w[[2]]) <- rep("", length=ncol(w[[2]]))
 write.xport(list=w,file="a.xpt") #13.a
 lookup.xport("a.xpt")            #13.b

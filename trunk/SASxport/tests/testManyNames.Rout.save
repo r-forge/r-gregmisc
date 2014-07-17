@@ -1,7 +1,7 @@
 
-R version 3.0.1 (2013-05-16) -- "Good Sport"
-Copyright (C) 2013 The R Foundation for Statistical Computing
-Platform: i686-pc-linux-gnu (32-bit)
+R version 3.1.0 Patched (2014-05-26 r65771) -- "Spring Dance"
+Copyright (C) 2014 The R Foundation for Statistical Computing
+Platform: x86_64-apple-darwin13.1.0 (64-bit)
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
 You are welcome to redistribute it under certain conditions.
@@ -17,8 +17,21 @@ Type 'q()' to quit R.
 
 > library(SASxport)
 Loading required package: chron
+Loading required package: Hmisc
+Loading required package: grid
+Loading required package: lattice
+Loading required package: survival
+Loading required package: splines
+Loading required package: Formula
 
-Loaded SASxport version 1.3.6 (2013-10-09).
+Attaching package: 'Hmisc'
+
+The following objects are masked from 'package:base':
+
+    format.pval, round.POSIXt, trunc.POSIXt, units
+
+
+Loaded SASxport version 1.4.1 (2014-07-16).
 
   Type `?SASxport' for usage information.
 
@@ -38,9 +51,9 @@ Loaded SASxport version 1.3.6 (2013-10-09).
 There were 21 warnings (use warnings() to see them)
 > manyDF.in <- read.xport(file="manyDF.xport")
 > names(manyDF.in)
- [1] "iris"    "iris.1"  "iris.2"  "iris.3"  "iris.4"  "iris.5"  "iris.6" 
- [8] "iris.7"  "iris.8"  "iris.9"  "iris.10" "iris.11" "iris.12" "iris.13"
-[15] "iris.14" "iris.15" "iris.16" "iris.17" "iris.18" "iris.19"
+ [1] "IRIS"    "IRIS.1"  "IRIS.2"  "IRIS.3"  "IRIS.4"  "IRIS.5"  "IRIS.6" 
+ [8] "IRIS.7"  "IRIS.8"  "IRIS.9"  "IRIS.10" "IRIS.11" "IRIS.12" "IRIS.13"
+[15] "IRIS.14" "IRIS.15" "IRIS.16" "IRIS.17" "IRIS.18" "IRIS.19"
 > head(manyDF.in[[ncopies]])
   SEPAL.LE SEPAL.WI PETAL.LE PETAL.WI SPECIES
 1      5.1      3.5      1.4      0.2  setosa
@@ -96,4 +109,4 @@ Warning messages:
 > 
 > proc.time()
    user  system elapsed 
- 19.200   0.208  19.802 
+  4.563   0.056   4.649 

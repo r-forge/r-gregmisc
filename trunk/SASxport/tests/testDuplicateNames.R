@@ -1,8 +1,9 @@
 library(SASxport)
 Sys.setenv("TZ"="GMT")
 
-##tests
-example(read.xport)
+## Read example dataset from a local file
+testFile <- system.file('extdata', 'test2.xpt', package="SASxport")
+w <- read.xport(testFile, names.tolower=TRUE)
 
 # Duplicate df names
 write.xport("AA"=w$test,"Aa"=w$test,"aA"=w$test,"aa"=w$test, file="dn.a.xpt") #1.a
