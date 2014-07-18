@@ -75,8 +75,14 @@ void ibm2ieee(register unsigned char *out, register const unsigned char *in, int
 		register unsigned int left, right, signbit;
 		register int exp;
 
-		left  = (in[0]<<24) | (in[1]<<16) | (in[2]<<8) | in[3];
-		right = (in[4]<<24) | (in[5]<<16) | (in[6]<<8) | in[7];
+		left  = ( (unsigned int) in[0]<<24) | 
+                        ( (unsigned int) in[1]<<16) | 
+                        ( (unsigned int) in[2]<<8) | 
+                        in[3];
+		right = ( (unsigned int) in[4]<<24) | 
+                        ( (unsigned int) in[5]<<16) |
+                        ( (unsigned int) in[6]<<8)  |
+                        in[7];
 		in += 8;
 
 		exp = (left>>24) & 0x7F;	/* excess 64, base 16 */
@@ -116,19 +122,19 @@ ibm_normalized:
 		} else if( left & 0x00400000 ) {
 			/* fix = 1; */
 			exp += 1023-129+1+ 3-1;
-			left = (left<<1) |
+			left = ( (unsigned int) left<<1) |
 				( (right>>(32-1)) & (0x7FFFFFFF>>(31-1)) );
 			right <<= 1;
 		} else if( left & 0x00200000 ) {
 			/* fix = 2; */
 			exp += 1023-129+1+ 3-2;
-			left = (left<<2) |
+			left = ( (unsigned int) left<<2) |
 				( (right>>(32-2)) & (0x7FFFFFFF>>(31-2)) );
 			right <<= 2;
 		} else if( left & 0x00100000 ){
 			/* fix = 3; */
 			exp += 1023-129+1+ 3-3;
-			left = (left<<3) |
+			left = ( (unsigned int) left<<3) |
 				( (right>>(32-3)) & (0x7FFFFFFF>>(31-3)) );
 			right <<= 3;
 		} else {
@@ -138,7 +144,7 @@ ibm_normalized:
 			 *  at least on the Gould.
 			 */
 			exp -= 4;
-			left = (left<<4) | (right>>(32-4));
+			left = ( (unsigned int) left<<4) | (right>>(32-4));
 			right <<= 4;
 			goto ibm_normalized;
 		}
@@ -147,16 +153,16 @@ ibm_normalized:
 		if( (left & 0x00800000) == 0 )  {
 		  //fprintf(stderr,
 		  error("ibm->ieee missing 1, left=x%x\n", left);
-			left = (left<<1) | (right>>31);
+			left = ( (unsigned int) left<<1) | (right>>31);
 			right <<= 1;
 			goto ibm_normalized;
 		}
 
 		/* Having nearly VAX format, shift to IEEE, rounding. */
 #		ifdef ROUNDING
-			right = (left<<(32-3)) | ((right+4)>>3);
+			right = ( (unsigned int) left<<(32-3)) | ((right+4)>>3);
 #		else
-			right = (left<<(32-3)) | (right>>3);
+			right = ( (unsigned int) left<<(32-3)) | (right>>3);
 #		endif
 		left =  ((left & 0x007FFFFF)>>3) | signbit | (exp<<20);
 
