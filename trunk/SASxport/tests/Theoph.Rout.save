@@ -57,4 +57,4 @@ Loaded SASxport version 1.4.2 (2014-07-17).
 > 
 > proc.time()
    user  system elapsed 
-  0.692   0.045   0.747 
+  0.776   0.047   0.832 

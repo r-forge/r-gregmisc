@@ -84,4 +84,4 @@ $IRIS2
 > 
 > proc.time()
    user  system elapsed 
-  0.560   0.043   0.593 
+  0.537   0.038   0.568 
