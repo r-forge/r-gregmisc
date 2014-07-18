@@ -20,5 +20,8 @@ write.xport(SPEC,
 a.1 <- readBin( con="Alfalfa.xpt",  what=raw(), n=3600 )
 a.2 <- readBin( con="Alfalfa2.xpt", what=raw(), n=3600 )
 
+## Display for diff
+a.2
+
 ## Test that the files are identical
 stopifnot( all(a.1 == a.2) )

@@ -31,7 +31,7 @@ write.xport(abc=abc.SAS,
             cDate=strptime("28JUL07:21:08:06 ", format="%d%b%y:%H:%M:%S"),
             osType="SunOS",
             sasVer="9.1",
-            autogen.formats=FALSE            
+            autogen.formats=FALSE
             )
 
 
@@ -45,9 +45,14 @@ a.3 <- readBin( con="xxx3.xpt", what=raw(), n=1e5 )
 ## R doesn't have multiple NA types, while SAS does.  The original
 ## file contains a SAS '.A' missing value, while what we've created
 ## contains an ordinary '.' missing value, so mash this one byte to
-## avoid a comparison error for this known limitation.  
+## avoid a comparison error for this known limitation.
 
 a.1[1089] <- as.raw("0x2e")
+
+## Display the created files for diff
+a.2
+
+a.3
 
 ## Test that the files are otherwise identical
 stopifnot( all(a.1 == a.2) )
