@@ -968,4 +968,4 @@ wrt.xp>
 > 
 > proc.time()
    user  system elapsed 
-  0.763   0.066   0.814 
+  0.723   0.049   0.763 
