@@ -39,17 +39,6 @@
 #define MISSING 0x2e000000  /* Standard SAS missing value: '.' */
 
 /*****
-  REVERSE macro, used as a wrapper for the reverse() function to avoid
-  compiling/calling it on big-endian, where it is a NOOP.
- *****/
-
-#if ( defined(BIG_ENDIAN) && BIG_ENDIAN ) || ( defined(LITTLE_ENDIAN) && !LITTLE_ENDIAN )
-#  define REVERSE(a,b) ( a )
-#else
-#  define REVERSE(a,b) reverse( (unsigned char*) a, (size_t) b )
-#endif
-
-/*****
  * Useful macro functions
  *****/
 
@@ -60,6 +49,14 @@
 #define ASSERT(x) if(!(x)) error("Assertion failed: x")
 #endif
 
+/* Convert (if necessary) to Big-Endian  */
+# define HTOBE_SHORT(a)  host_to_be( (unsigned char*) &a, sizeof(short) )
+# define HTOBE_INT(a)    host_to_be( (unsigned char*) &a, sizeof(int)  )
+# define HTOBE_DOUBLE(a) host_to_be( (unsigned char*) value, sizeof(double) );
+
+/* Alternative definition using system functions: */
+/* #define HTOBE_SHORT(a) (a) = htons( a ) */
+/* #define HTOBE_INT(a)   (a) = htonl( a ) */
 
 /*****
  *  File Record Structures
@@ -175,7 +172,7 @@ SEXP getRawBuffer();
 
 void doTest();
 
-void reverse( unsigned char *intp, size_t size);
+void host_to_be( unsigned char *intp, size_t size);
 void ieee2ibm(register unsigned char *out, register const unsigned char *in, int count);
 
 #endif /* FIELDS_H */

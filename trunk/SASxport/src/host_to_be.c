@@ -6,22 +6,20 @@
 #include <assert.h>
 #include <sys/types.h>
 
-/* reverse: convert current byte order to big endian */
-void reverse( unsigned char *intp, size_t size)
+/* host_to_be: convert current host byte order to big endian */
+void host_to_be( unsigned char *intp, size_t size)
 {
   static unsigned char endianTest[2] =   {0x01,0x00};
   size_t i;
   unsigned char tmp;
 
-#if !defined(BIG_ENDIAN) && !defined(LITTLE_ENDIAN)
   /* Test if we are on a big endian or little endian platform */
-  if( (short) *endianTest != 1 ) 
-    {  
+  if( (short) *endianTest != 1 )
+    {
       /* The native byte order is big endian, so do nothing */
       //printf("Big Endian Machine!\n");
-      return;  
+      return;
     }
-#endif
 
   /* If native byte order is little endian, we need to swap bytes */
   for(i=0; i < size/2; i++)
@@ -30,41 +28,41 @@ void reverse( unsigned char *intp, size_t size)
       intp[i] = intp[size-i-1];
       intp[size-i-1] = tmp;
     }
-  
+
   return;
 }
 
 /* test code */
-void test_reverse()
+void test_host_to_be()
 {
   unsigned char  byte_pattern[1] = { 0x00 };
   unsigned char  byte_value      = 0x00;
-  
+
   unsigned char  short_pattern[2] = { 0x01, 0x00 };   /* NB: big endian byte pattern */
   short   short_value       = 0x0100;          /* NB: hex is also written big endian */
-  
+
   unsigned char  int_pattern[4]   = { 0x03, 0x02, 0x01, 0x00 };
-  int     int_value        = 0x03020100; 
+  int     int_value        = 0x03020100;
 
   unsigned char  long_pattern[4]  = { 0x03, 0x02, 0x01, 0x00 };
-  long    long_value       = 0x03020100; 
+  long    long_value       = 0x03020100;
 
-  /* Do the reverse, then test */
+  /* Do the host_to_be, then test */
 
   /* byte */
-  reverse( &byte_value, sizeof(unsigned char) );
+  host_to_be( &byte_value, sizeof(unsigned char) );
   ASSERT( (unsigned char) *byte_pattern == byte_value );
 
   /* short */
-  reverse( (unsigned char*) &short_value, sizeof(short) );
+  host_to_be( (unsigned char*) &short_value, sizeof(short) );
   ASSERT( *((short *) short_pattern) == short_value );
 
   /* int */
-  reverse( (unsigned char*) &int_value, sizeof(int) );
+  host_to_be( (unsigned char*) &int_value, sizeof(int) );
   ASSERT( *((int *) int_pattern) == int_value );
 
   /* long */
-  reverse( (unsigned char*) &long_value, sizeof(long) );
+  host_to_be( (unsigned char*) &long_value, sizeof(long) );
   ASSERT( *((long*) long_pattern) == long_value );
 
 }
@@ -72,6 +70,6 @@ void test_reverse()
 #ifdef DO_TEST
 int main(int argc, char *argv)
 {
-  test_reverse();
+  test_host_to_be();
 }
 #endif

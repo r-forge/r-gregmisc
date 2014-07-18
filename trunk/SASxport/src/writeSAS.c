@@ -260,21 +260,17 @@ void fill_namestr(
   zeroFill(namestr_record.rest, 52);               /* remaining fields are irrelevant     */
 
 
-  /* Flip byte order if necessary */
-#define SHORTREV(a) REVERSE( &a, sizeof(short) )
-#define INTREV(a)   REVERSE( &a, sizeof(int)  )
+  HTOBE_SHORT( namestr_record.ntype );
+  HTOBE_SHORT( namestr_record.nhfun );
+  HTOBE_SHORT( namestr_record.nlng  );
+  HTOBE_SHORT( namestr_record.nvar0 );
+  HTOBE_SHORT( namestr_record.nfl   );
+  HTOBE_SHORT( namestr_record.nfd   );
+  HTOBE_SHORT( namestr_record.nfj   );
+  HTOBE_SHORT( namestr_record.nifl  );
+  HTOBE_SHORT( namestr_record.nifd  );
 
-  SHORTREV( namestr_record.ntype );
-  SHORTREV( namestr_record.nhfun );
-  SHORTREV( namestr_record.nlng  );
-  SHORTREV( namestr_record.nvar0 );
-  SHORTREV( namestr_record.nfl   );
-  SHORTREV( namestr_record.nfd   );
-  SHORTREV( namestr_record.nfj   );
-  SHORTREV( namestr_record.nifl  );
-  SHORTREV( namestr_record.nifd  );
-
-  INTREV  ( namestr_record.npos  );
+  HTOBE_INT  ( namestr_record.npos  );
 
   /* copy filled struct to return area */
   memcpy( raw_buffer, &namestr_record, sizeof(namestr_record) );
@@ -309,7 +305,10 @@ void fill_numeric_field(
 {
   /* convert to IBM floating point */
 
-  reverse( (unsigned char*) value, sizeof(double) );
+  /* first convert to big-endian layout */
+  HTOBE_DOUBLE( value );
+
+  /* now convert to ibm flaoting point format */
   ieee2ibm( (unsigned char *) raw_buffer, (unsigned char *) value, 1);
 
   //cnxptiee( (char *) value, 0, raw_buffer , 1 );
