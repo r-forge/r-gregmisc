@@ -31,7 +31,7 @@ The following objects are masked from 'package:base':
     format.pval, round.POSIXt, trunc.POSIXt, units
 
 
-Loaded SASxport version 1.4.1 (2014-07-16).
+Loaded SASxport version 1.4.2 (2014-07-17).
 
   Type `?SASxport' for usage information.
 
@@ -86,11 +86,11 @@ Loaded SASxport version 1.4.1 (2014-07-16).
 > a.1[1089] <- as.raw("0x2e")
 > 
 > ## Test that the files are otherwise identical
-> SASxport:::assert( all(a.1 == a.2) )
-> SASxport:::assert( all(a.1 == a.3) )
+> stopifnot( all(a.1 == a.2) )
+> stopifnot( all(a.1 == a.3) )
 > 
 > 
 > 
 > proc.time()
    user  system elapsed 
-  0.454   0.038   0.482 
+  0.479   0.038   0.509 

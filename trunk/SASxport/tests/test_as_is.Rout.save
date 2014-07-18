@@ -31,7 +31,7 @@ The following objects are masked from 'package:base':
     format.pval, round.POSIXt, trunc.POSIXt, units
 
 
-Loaded SASxport version 1.4.1 (2014-07-16).
+Loaded SASxport version 1.4.2 (2014-07-17).
 
   Type `?SASxport' for usage information.
 
@@ -65,7 +65,7 @@ Variables in data set `PUROMYCI':
  - attr(*, "label")= chr " "
  - attr(*, "SAStype")= chr " "
 > 
-> SASxport:::assert( class(x$STATE)=="factor" )
+> stopifnot( class(x$STATE)=="factor" )
 > 
 > ## When as.is=TRUE, character variable "STATE" should be preserved as
 > ## a character variable.
@@ -79,10 +79,10 @@ Variables in data set `PUROMYCI':
  - attr(*, "label")= chr " "
  - attr(*, "SAStype")= chr " "
 > 
-> SASxport:::assert( class(x$STATE)=="character" )
+> stopifnot( class(x$STATE)=="character" )
 > 
 > 
 > 
 > proc.time()
    user  system elapsed 
-  0.465   0.036   0.495 
+  0.471   0.038   0.498 

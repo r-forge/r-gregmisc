@@ -31,7 +31,7 @@ The following objects are masked from 'package:base':
     format.pval, round.POSIXt, trunc.POSIXt, units
 
 
-Loaded SASxport version 1.4.1 (2014-07-16).
+Loaded SASxport version 1.4.2 (2014-07-17).
 
   Type `?SASxport' for usage information.
 
@@ -1444,7 +1444,7 @@ $DATA2
 > failure <- try( write.xport(5,"a.xpt") )             #10.a
 Error in write.xport(5, "a.xpt") : 
   '5', 'a.xpt' are not data.frame objects.
-> SASxport:::assert( "try-error" %in% class(failure) ) #10.b
+> stopifnot( "try-error" %in% class(failure) ) #10.b
 > (tmp <- read.xport("a.xpt"))                         #10.c
 $DATA1
   RACE AGE         D1                    DT1       T1
@@ -1558,7 +1558,7 @@ $DATA2
 > failure <- try( write.xport(list(a=5,b=6),"a.xpt") ) #11.a
 Error in write.xport(list(a = 5, b = 6), "a.xpt") : 
   'list(a = 5, b = 6)', 'a.xpt' are not data.frame objects.
-> SASxport:::assert( "try-error" %in% class(failure) ) #11.b
+> stopifnot( "try-error" %in% class(failure) ) #11.b
 > (tmp <- read.xport("a.xpt"))                         #10.c
 $DATA1
   RACE AGE         D1                    DT1       T1
@@ -2130,4 +2130,4 @@ $Z
 > 
 > proc.time()
    user  system elapsed 
-  1.648   0.070   1.728 
+  1.694   0.074   1.774 

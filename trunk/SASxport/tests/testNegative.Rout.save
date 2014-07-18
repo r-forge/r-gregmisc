@@ -31,7 +31,7 @@ The following objects are masked from 'package:base':
     format.pval, round.POSIXt, trunc.POSIXt, units
 
 
-Loaded SASxport version 1.4.1 (2014-07-16).
+Loaded SASxport version 1.4.2 (2014-07-17).
 
   Type `?SASxport' for usage information.
 
@@ -50,7 +50,7 @@ Loaded SASxport version 1.4.1 (2014-07-16).
 1  1 -1
 2 -1  1
 > 
-> SASxport:::assert(all(df1==df2))
+> stopifnot(all(df1==df2))
 > 
 > df3 <- data.frame(x.continuous=seq(-100,100,by=0.5), x.integer=as.integer(seq(-100,100,by=0.5)) )
 > write.xport(df3, file='df3.xpt')
@@ -58,8 +58,8 @@ Warning message:
 In makeSASNames(colnames(df)) : Truncated 2 long names to 8 characters.
 > df4 <- read.xport(file='df3.xpt')
 > 
-> SASxport:::assert(all(df3==df4))
+> stopifnot(all(df3==df4))
 > 
 > proc.time()
    user  system elapsed 
-  0.530   0.036   0.560 
+  0.610   0.045   0.644 

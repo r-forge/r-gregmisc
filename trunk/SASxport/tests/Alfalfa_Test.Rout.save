@@ -34,7 +34,7 @@ The following objects are masked from 'package:base':
     format.pval, round.POSIXt, trunc.POSIXt, units
 
 
-Loaded SASxport version 1.4.1 (2014-07-16).
+Loaded SASxport version 1.4.2 (2014-07-17).
 
   Type `?SASxport' for usage information.
 
@@ -57,8 +57,8 @@ Loaded SASxport version 1.4.1 (2014-07-16).
 > a.2 <- readBin( con="Alfalfa2.xpt", what=raw(), n=3600 )
 > 
 > ## Test that the files are identical
-> SASxport:::assert( all(a.1 == a.2) )
+> stopifnot( all(a.1 == a.2) )
 > 
 > proc.time()
    user  system elapsed 
-  0.478   0.037   0.508 
+  0.487   0.038   0.517 

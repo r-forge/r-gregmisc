@@ -31,7 +31,7 @@ The following objects are masked from 'package:base':
     format.pval, round.POSIXt, trunc.POSIXt, units
 
 
-Loaded SASxport version 1.4.1 (2014-07-16).
+Loaded SASxport version 1.4.2 (2014-07-17).
 
   Type `?SASxport' for usage information.
 
@@ -55,7 +55,7 @@ Warning messages:
 2: In xport.numeric(val) : IBM exponent overflow, generating NA
 > df.2 <- read.xport(file='testNumeric.xpt')
 > 
-> SASxport:::assert( all(df == df.2, na.rm=TRUE) )
+> stopifnot( all(df == df.2, na.rm=TRUE) )
 > df.2
          INTS     DBLS                                                 CHAR
 1          NA       NA                                                 <NA>
@@ -81,7 +81,7 @@ Warning messages:
 > df.2 <- read.xport(file='testNumeric.xpt')
 > 
 > 
-> SASxport:::assert(all(df==df.2,na.rm=TRUE))
+> stopifnot(all(df==df.2,na.rm=TRUE))
 > df.2
          INTS     DBLS                                                 CHAR
 1          NA       NA                                                 <NA>
@@ -101,4 +101,4 @@ Warning messages:
 > 
 > proc.time()
    user  system elapsed 
-  0.615   0.037   0.645 
+  0.628   0.042   0.660 
