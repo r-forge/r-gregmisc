@@ -3,12 +3,19 @@ Version 1.4.2 - 2014-07-17
 
 Bug fixes:
 
-- Explicitly cast left shifts in ibm2ieee.c to avoid undefined
+- Explicitly cast left bit shifts to avoid undefined C language
   behavior. (Reported by Brian Ripley)
 
 - Resolve problem in accessing "Hmisc::label.default<-" if
   SASxport::read.xport is called without loading SASxport.  (Reported
   by Dominic Comtois)
+
+Other changes:
+
+- Modified several test files to display generated .xpt data so that
+  issues can be more easily detected and diagnosed.
+
+- C code cleanup and reorgaization to improve clarity.
 
 Version 1.4.1 - 2014-07-16
 --------------------------
