@@ -16,7 +16,7 @@ df <- data.frame(ints, dbls, char, factor)
 write.xport(df, file='testNumeric.xpt')
 df.2 <- read.xport(file='testNumeric.xpt')
 
-SASxport:::assert( all(df == df.2, na.rm=TRUE) )
+stopifnot( all(df == df.2, na.rm=TRUE) )
 df.2
 
 # this gets properly handled
@@ -25,6 +25,6 @@ write.xport(df, file='testNumeric.xpt')
 df.2 <- read.xport(file='testNumeric.xpt')
 
 
-SASxport:::assert(all(df==df.2,na.rm=TRUE))
+stopifnot(all(df==df.2,na.rm=TRUE))
 df.2
 

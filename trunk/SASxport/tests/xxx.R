@@ -50,7 +50,7 @@ a.3 <- readBin( con="xxx3.xpt", what=raw(), n=1e5 )
 a.1[1089] <- as.raw("0x2e")
 
 ## Test that the files are otherwise identical
-SASxport:::assert( all(a.1 == a.2) )
-SASxport:::assert( all(a.1 == a.3) )
+stopifnot( all(a.1 == a.2) )
+stopifnot( all(a.1 == a.3) )
 
 

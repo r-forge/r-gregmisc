@@ -48,11 +48,11 @@ lookup.xport("a.xpt")            #9.b
 
 ### Check that we catch invalid parameters
 failure <- try( write.xport(5,"a.xpt") )             #10.a
-SASxport:::assert( "try-error" %in% class(failure) ) #10.b
+stopifnot( "try-error" %in% class(failure) ) #10.b
 (tmp <- read.xport("a.xpt"))                         #10.c
 
 failure <- try( write.xport(list(a=5,b=6),"a.xpt") ) #11.a
-SASxport:::assert( "try-error" %in% class(failure) ) #11.b
+stopifnot( "try-error" %in% class(failure) ) #11.b
 (tmp <- read.xport("a.xpt"))                         #10.c
 
 # Check with different list construction function *name*

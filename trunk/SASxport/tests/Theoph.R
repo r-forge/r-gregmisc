@@ -15,6 +15,6 @@ names(Theoph.2) <- names(Theoph)
 ## Test equality, handling the ordered factor Subject separately because
 ## SAS xport files don't provide a mechanism for storing factor orders
 
-SASxport:::assert( all( as.character(Theoph$Subject) == as.character(Theoph.2$Subject) ))
-SASxport:::assert( all(Theoph[,-1] == Theoph.2[,-1]) )
+stopifnot( all( as.character(Theoph$Subject) == as.character(Theoph.2$Subject) ))
+stopifnot( all(Theoph[,-1] == Theoph.2[,-1]) )
 

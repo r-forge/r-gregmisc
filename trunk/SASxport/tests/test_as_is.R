@@ -8,7 +8,7 @@ lookup.xport('puromycin.xpt')
 x <- read.xport('puromycin.xpt')
 str(x)
 
-SASxport:::assert( class(x$STATE)=="factor" )
+stopifnot( class(x$STATE)=="factor" )
 
 ## When as.is=TRUE, character variable "STATE" should be preserved as
 ## a character variable.
@@ -16,6 +16,6 @@ SASxport:::assert( class(x$STATE)=="factor" )
 x <- read.xport('puromycin.xpt',as.is=TRUE)
 str(x)
 
-SASxport:::assert( class(x$STATE)=="character" )
+stopifnot( class(x$STATE)=="character" )
 
 

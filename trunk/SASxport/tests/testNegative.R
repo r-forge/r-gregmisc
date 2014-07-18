@@ -8,10 +8,10 @@ df2 <- read.xport(file='df1.xpt')
 print(df1)
 print(df2)
 
-SASxport:::assert(all(df1==df2))
+stopifnot(all(df1==df2))
 
 df3 <- data.frame(x.continuous=seq(-100,100,by=0.5), x.integer=as.integer(seq(-100,100,by=0.5)) )
 write.xport(df3, file='df3.xpt')
 df4 <- read.xport(file='df3.xpt')
 
-SASxport:::assert(all(df3==df4))
+stopifnot(all(df3==df4))

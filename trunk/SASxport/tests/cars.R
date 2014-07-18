@@ -24,4 +24,4 @@ a.1 <- readBin( con="cars.xpt",  what=raw(), n=1e5)
 a.2 <- readBin( con="cars2.xpt", what=raw(), n=1e5)
 
 ## Test that the files are identical
-SASxport:::assert( all(a.1 == a.2) )
+stopifnot( all(a.1 == a.2) )

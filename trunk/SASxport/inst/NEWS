@@ -1,13 +1,25 @@
+Version 1.4.2 - 2014-07-17
+--------------------------
+
+Bug fixes:
+
+- Explicitly cast left shifts in ibm2ieee.c to avoid undefined
+  behavior. (Reported by Brian Ripley)
+
+- Resolve problem in accessing "Hmisc::label.default<-" if
+  SASxport::read.xport is called without loading SASxport.  (Reported
+  by Dominic Comtois)
+
 Version 1.4.1 - 2014-07-16
 --------------------------
 
 Bug fixes:
 
 - 'read.xport' now preserves '$' at the beginning of SAS character
-  format and iformat strings.
+  format and iformat strings.  (Reported by Dominic Comtois)
 
-- 'read.xport' argument names.tolower was not being honored for dataset
-   names.
+- 'read.xport' argument names.tolower was not being honored for
+   dataset names.  (Reported by Dominic Comtois)
 
 Version 1.4.0 - 2014-04-09
 --------------------------
