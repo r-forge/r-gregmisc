@@ -30,7 +30,7 @@
  *
  *  Convert an array of IBM/360 format double precision values of at *in
  *  of length 'count' to BIG-ENDIAN IEEE double precision value at *out.
- *  
+ *
  *  This code was extracted from the "ntohd" function, original author
  *  Michael John Muuss
  *
@@ -63,7 +63,9 @@
 	continue; } \
 
 
-void ibm2ieee(register unsigned char *out, register const unsigned char *in, int count)
+void ibm2ieee(register unsigned char *out,
+	      register const unsigned char *in,
+	      int count)
 {
 	/*
 	 *  IBM Format.
@@ -75,11 +77,11 @@ void ibm2ieee(register unsigned char *out, register const unsigned char *in, int
 		register unsigned int left, right, signbit;
 		register int exp;
 
-		left  = ( (unsigned int) in[0]<<24) | 
-                        ( (unsigned int) in[1]<<16) | 
-                        ( (unsigned int) in[2]<<8) | 
+		left  = ( (unsigned int) in[0]<<24) |
+                        ( (unsigned int) in[1]<<16) |
+                        ( (unsigned int) in[2]<<8) |
                         in[3];
-		right = ( (unsigned int) in[4]<<24) | 
+		right = ( (unsigned int) in[4]<<24) |
                         ( (unsigned int) in[5]<<16) |
                         ( (unsigned int) in[6]<<8)  |
                         in[7];

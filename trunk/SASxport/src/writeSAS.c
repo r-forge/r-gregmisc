@@ -5,7 +5,7 @@
  *    Author:  Gregory R. Warnes <greg@warnes.net>
  *
  *    Copyright (C) 2007-2013  Gregory R. Warnes <greg@warnes.net>
- * 
+ *
  *    This program is free software; you can redistribute it and/or modify
  *    it under the terms of the GNU General Public License as published by
  *    the Free Software Foundation; either version 2 of the License, or
@@ -40,7 +40,7 @@ void blankFill(char *target, int len)
 {
   int i;
 
-  for(i=0; i<(len); i++) 
+  for(i=0; i<(len); i++)
     target[i]=' ';
 }
 
@@ -64,7 +64,7 @@ void zeroFill(char *target, int len)
 {
   int i;
 
-  for(i=0; i<(len); i++) 
+  for(i=0; i<(len); i++)
     target[i]=0;
 }
 
@@ -90,7 +90,7 @@ void zeroCopy(char *target, int len, char *source)
  * This function is used to retreive the filled buffer as an R 'raw'
  * object.  This is necessary because the buffer legitimately contains
  * embedded nulls and R currently does not permit raw buffers to be
- * passed via .C .   
+ * passed via .C .
  */
 
 #define MYBUFSIZE 1024 /* plenty big */
@@ -113,7 +113,7 @@ SEXP getRawBuffer()
 
 
 
-void fill_file_header( 
+void fill_file_header(
 		      char **cDate,   /* creation date                    */
 		      char **mdate,   /* modification date                */
 		      char **sasVer,  /* SAS version number               */
@@ -127,7 +127,7 @@ void fill_file_header(
 
   /* Line 2*/
   blankCopy( file_header.sas_symbol1,  8,  "SAS      ");
-  blankCopy( file_header.sas_symbol2,  8,  "SAS      ");    
+  blankCopy( file_header.sas_symbol2,  8,  "SAS      ");
   blankCopy( file_header.saslib,       8,  "SASLIB   ");
   blankCopy( file_header.sasver,       8,  sasVer[0]     );
   zeroCopy ( file_header.sas_os,       8,  osType[0]     );
@@ -148,7 +148,7 @@ void fill_file_header(
 }
 
 
-void fill_member_header( 
+void fill_member_header(
 			char **dfName,  /* Name of data set   */
   		        char **sasVer,  /* SAS version number */
 			char **osType,  /* Operating System   */
@@ -220,19 +220,19 @@ void fill_namestr(
 		  int  *nvar0,              /* VARNUM                              */
 		  char **nname,             /* NAME OF VARIABLE                    */
 		  char **nlabel,            /* LABEL OF VARIABLE                   */
-		  
+
 		  char **nform,             /* NAME OF FORMAT                      */
 		  int  *nfl,                /* FORMAT FIELD LENGTH OR 0            */
 		  int  *nfd,                /* FORMAT NUMBER OF DECIMALS           */
 		  int  *nfj,                /* 0=LEFT JUSTIFICATION, 1=RIGHT JUST  */
-		  
+
 	      //  char nfill[2],            /* (UNUSED, FOR ALIGNMENT AND FUTURE)  */
-		   
+
 		  char **niform,            /* NAME OF INPUT FORMAT                */
 		  int  *nifl,               /* INFORMAT LENGTH ATTRIBUTE           */
 		  int  *nifd,               /* INFORMAT NUMBER OF DECIMALS         */
 		  int  *npos                /* POSITION OF VALUE IN OBSERVATION    */
-		  
+
 	      //  char rest[52],            /* remaining fields are irrelevant     */
 		  )
 {
@@ -250,19 +250,19 @@ void fill_namestr(
   namestr_record.nfd   = (short) *nfd;             /* FORMAT NUMBER OF DECIMALS           */
   namestr_record.nfj   = (short) *nfj;             /* 0=LEFT JUSTIFICATION, 1=RIGHT JUST  */
 
-  zeroFill(namestr_record.nfill, 2);              /* (UNUSED, FOR ALIGNMENT AND FUTURE)  */
+  zeroFill(namestr_record.nfill, 2);               /* (UNUSED, FOR ALIGNMENT AND FUTURE)  */
 
   blankCopy(namestr_record.niform,  8, niform[0]); /* NAME OF INPUT FORMAT                */
   namestr_record.nifl  = (short) *nifl;            /* INFORMAT LENGTH ATTRIBUTE           */
   namestr_record.nifd  = (short) *nifd;            /* INFORMAT NUMBER OF DECIMALS         */
-  namestr_record.npos  = (int)  *npos;            /* POSITION OF VALUE IN OBSERVATION    */
+  namestr_record.npos  = (int)  *npos;             /* POSITION OF VALUE IN OBSERVATION    */
 
   zeroFill(namestr_record.rest, 52);               /* remaining fields are irrelevant     */
 
 
   /* Flip byte order if necessary */
 #define SHORTREV(a) REVERSE( &a, sizeof(short) )
-#define INTREV(a)  REVERSE( &a, sizeof(int)  )
+#define INTREV(a)   REVERSE( &a, sizeof(int)  )
 
   SHORTREV( namestr_record.ntype );
   SHORTREV( namestr_record.nhfun );
@@ -274,7 +274,7 @@ void fill_namestr(
   SHORTREV( namestr_record.nifl  );
   SHORTREV( namestr_record.nifd  );
 
-  INTREV ( namestr_record.npos  );
+  INTREV  ( namestr_record.npos  );
 
   /* copy filled struct to return area */
   memcpy( raw_buffer, &namestr_record, sizeof(namestr_record) );
@@ -284,13 +284,13 @@ void fill_namestr(
 
   return;
 }
-  
-		   
+
+
 void fill_obs_header()
 {
   struct OBS_HEADER obs_header;
 
-  blankCopy( obs_header.l1, 80, 
+  blankCopy( obs_header.l1, 80,
 	     "HEADER RECORD*******OBS     HEADER RECORD!!!!!!!000000000000000000000000000000  ");
 
   /* copy filled struct to return area */
@@ -305,10 +305,10 @@ void fill_obs_header()
 
 void fill_numeric_field(
 			double *value /* single numeric value */
-			) 
+			)
 {
   /* convert to IBM floating point */
-  
+
   reverse( (unsigned char*) value, sizeof(double) );
   ieee2ibm( (unsigned char *) raw_buffer, (unsigned char *) value, 1);
 
@@ -320,11 +320,11 @@ void fill_numeric_field(
   return;
 }
 
-  
+
 void fill_character_field(
 			  char **value, /* single character string */
 			  int *width    /* field width */
-			  ) 
+			  )
 {
   /* copy to buffer */
   blankCopy(raw_buffer, *width, value[0]);
@@ -344,7 +344,7 @@ void fill_numeric_NA()
 
   return;
 }
-  
+
 void fill_space(
 		int *type, /* 0 --> zero fill, 1 --> space fill */
 		int *width

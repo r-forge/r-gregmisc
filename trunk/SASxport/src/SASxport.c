@@ -62,7 +62,7 @@
 
 static double get_IBM_double(char* c, size_t len)
 {
-				/* Conversion from IBM 360 format to double */
+/* Conversion from IBM 360 format to double */
 /*
  * IBM format:
  * 6       5                 0
@@ -77,14 +77,14 @@ static double get_IBM_double(char* c, size_t len)
  * the high order hex fraction digit.
  */
     unsigned int i, upper, lower;
-				/* exponent is expressed here as
-				   excess 70 (=64+6) to accomodate
-				   integer conversion of c[1] to c[4] */
+    /* exponent is expressed here as
+       excess 70 (=64+6) to accomodate
+       integer conversion of c[1] to c[4] */
     char negative = c[0] & 0x80, exponent = (c[0] & 0x7f) - 70, buf[4];
-    double value; 
+    double value;
     char ibuf[8];
 
-    if (len < 2 || len > 8) 
+    if (len < 2 || len > 8)
       error(_("invalid field length in numeric variable"));
 
     /* this effectively zero-pads c: */
@@ -169,7 +169,7 @@ get_lib_header(FILE *fp, struct SAS_XPORT_header *head)
 	return 0;
     return 1;
 }
-  
+
 static int
 get_mem_header(FILE *fp, struct SAS_XPORT_member *member)
 {
@@ -179,7 +179,7 @@ get_mem_header(FILE *fp, struct SAS_XPORT_member *member)
     n = GET_RECORD(record, fp, 80);
     if(n != 80 || strncmp(DSC_HEADER, record, 80) != 0)
 	error(_("file not in SAS transfer format"));
-  
+
     n = GET_RECORD(record, fp, 80);
     if(n != 80)
 	return 0;
@@ -224,7 +224,7 @@ init_xport_info(FILE *fp)
     Free(lib_head);
 
     n = GET_RECORD(record, fp, 80);
-    if(n != 80 || 
+    if(n != 80 ||
        strncmp(MEM_HEADER, record, 75) != 0 ||
        strncmp("  ", record+78, 2) != 0 )
 	error(_("file not in SAS transfer format"));
@@ -290,20 +290,20 @@ init_mem_info(FILE *fp, char *name, char *dslabel, char *dstype)
 }
 
 static int
-next_xport_info(FILE *fp, int namestr_length, int nvars, 
+next_xport_info(FILE *fp, int namestr_length, int nvars,
 		int *headpad,
-		int *tailpad, 
-		int *length, 
-		int *ntype, 
+		int *tailpad,
+		int *length,
+		int *ntype,
 		int *nlng,
-		int *nvar0, 
-		SEXP nname, 
-		SEXP nlabel, 
-		SEXP nform, 
-		int *nfl, 
-		int *nfd, 
-		SEXP niform, 
-		int *nifl, 
+		int *nvar0,
+		SEXP nname,
+		SEXP nlabel,
+		SEXP nform,
+		int *nfl,
+		int *nfd,
+		SEXP niform,
+		int *nifl,
 		int *nifd,
 		int *npos)
 {
@@ -331,13 +331,13 @@ next_xport_info(FILE *fp, int namestr_length, int nvars,
 	}
 	(*headpad) += i;
     }
-    
+
     n = GET_RECORD(record, fp, 80);
     if(n != 80 || strncmp(OBS_HEADER, record, 80) != 0) {
 	Free(nam_head);
 	error(_("file not in SAS transfer format"));
     }
-  
+
     for(i = 0; i < nvars; i++) {
         int nname_len = 0, nlabel_len = 0, nform_len = 0, niform_len=0;
 	char tmpname[41];
@@ -455,7 +455,7 @@ next_xport_info(FILE *fp, int namestr_length, int nvars,
 	    sscanf(record+75, "%d", &namestr_length);
 	    break;
 	  }
-	
+
 	if (fsetpos(fp, &currentPos)) {
 	    error(_("problem accessing SAS XPORT file"));
 	}
@@ -663,14 +663,14 @@ xport_info(SEXP xportFile)
 	SET_STRING_ELT(ansNames , ansLength, mkChar(dsname ));
 	SET_VECTOR_ELT(ans, ansLength, varInfo);
 	ansLength++;
- 
+
 	UNPROTECT(7);
 	PROTECT(ans);
 	PROTECT(ansNames);
     }
 
 
-    setAttrib(ans, R_NamesSymbol, ansNames);  
+    setAttrib(ans, R_NamesSymbol, ansNames);
     UNPROTECT(5);
     fclose(fp);
     return ans;
@@ -736,7 +736,7 @@ xport_read(SEXP xportFile, SEXP xportInfo)
 	    for(k = nvar-1; k >= 0; k--) {
 		tmpchar = record + dataPosition[k];
 		if(dataType[k] == REALSXP) {
-		    REAL(VECTOR_ELT(data, k))[j] = 
+		    REAL(VECTOR_ELT(data, k))[j] =
 			get_IBM_double(tmpchar, dataWidth[k]);
 		} else {
 		    tmpchar[dataWidth[k]] = '\0';
@@ -753,7 +753,7 @@ xport_read(SEXP xportFile, SEXP xportInfo)
 	}
 
 	fseek(fp, dataTailPad, SEEK_CUR);
-	
+
 	Free(record);
     }
     UNPROTECT(1);
