@@ -9,26 +9,31 @@
 /* host_to_be: convert current host byte order to big endian */
 void host_to_be( unsigned char *intp, size_t size)
 {
-  static unsigned char endianTest[2] =   {0x01,0x00};
   size_t i;
   unsigned char tmp;
 
+  short twobytes = 0x0001;
+  char  onebyte  = *(char*) &twobytes;
+
   /* Test if we are on a big endian or little endian platform */
-  if( (short) *endianTest != 1 )
+  if (onebyte == 1) 
+   { 
+     /* Native byte order is little endian, so swap bytes */
+     /* printf("Little Endian Machine!\n"); */
+
+      for(i=0; i < size/2; i++)
+        {
+          tmp = (unsigned char) intp[i];
+          intp[i] = intp[size-i-1];
+          intp[size-i-1] = tmp;
+        }
+    }
+  else
     {
       /* The native byte order is big endian, so do nothing */
-      //printf("Big Endian Machine!\n");
-      return;
+      /* printf("Big Endian Machine!\n");  */
     }
-
-  /* If native byte order is little endian, we need to swap bytes */
-  for(i=0; i < size/2; i++)
-    {
-      tmp = (unsigned char) intp[i];
-      intp[i] = intp[size-i-1];
-      intp[size-i-1] = tmp;
-    }
-
+ 
   return;
 }
 
