@@ -50,9 +50,9 @@
 #endif
 
 /* Convert (if necessary) to Big-Endian  */
-# define HTOBE_SHORT(a)  host_to_be( (unsigned char*) &a, sizeof(short) )
-# define HTOBE_INT(a)    host_to_be( (unsigned char*) &a, sizeof(int)  )
-# define HTOBE_DOUBLE(a) host_to_be( (unsigned char*) value, sizeof(double) );
+# define HTOBE_SHORT(a)  host_to_be( (unsigned char*) &a, sizeof(short)  )
+# define HTOBE_INT(a)    host_to_be( (unsigned char*) &a, sizeof(int)    )
+# define HTOBE_DOUBLE(a) host_to_be( (unsigned char*) &a, sizeof(double) )
 
 /* Alternative definition using system functions: */
 /* #define HTOBE_SHORT(a) (a) = htons( a ) */
