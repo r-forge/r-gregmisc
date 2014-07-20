@@ -6,8 +6,8 @@
 #include <assert.h>
 #include <sys/types.h>
 
-/* host_to_be: convert current host byte order to big endian */
-void host_to_be( unsigned char *intp, size_t size)
+/* to_bigend: convert current host byte order to big endian */
+void to_bigend( unsigned char *intp, size_t size)
 {
   size_t i;
   unsigned char tmp;
@@ -16,8 +16,8 @@ void host_to_be( unsigned char *intp, size_t size)
   char  onebyte  = *(char*) &twobytes;
 
   /* Test if we are on a big endian or little endian platform */
-  if (onebyte == 1) 
-   { 
+  if (onebyte == 1)
+   {
      /* Native byte order is little endian, so swap bytes */
      /* printf("Little Endian Machine!\n"); */
 
@@ -33,12 +33,12 @@ void host_to_be( unsigned char *intp, size_t size)
       /* The native byte order is big endian, so do nothing */
       /* printf("Big Endian Machine!\n");  */
     }
- 
+
   return;
 }
 
 /* test code */
-void test_host_to_be()
+void test_to_bigend()
 {
   unsigned char  byte_pattern[1] = { 0x00 };
   unsigned char  byte_value      = 0x00;
@@ -52,29 +52,29 @@ void test_host_to_be()
   unsigned char  long_pattern[4]  = { 0x03, 0x02, 0x01, 0x00 };
   long    long_value       = 0x03020100;
 
-  /* Do the host_to_be, then test */
+  /* Do the to_bigend, then test */
 
   /* byte */
-  host_to_be( &byte_value, sizeof(unsigned char) );
+  to_bigend( &byte_value, sizeof(unsigned char) );
   ASSERT( (unsigned char) *byte_pattern == byte_value );
 
   /* short */
-  host_to_be( (unsigned char*) &short_value, sizeof(short) );
+  to_bigend( (unsigned char*) &short_value, sizeof(short) );
   ASSERT( *((short *) short_pattern) == short_value );
 
   /* int */
-  host_to_be( (unsigned char*) &int_value, sizeof(int) );
+  to_bigend( (unsigned char*) &int_value, sizeof(int) );
   ASSERT( *((int *) int_pattern) == int_value );
 
   /* long */
-  host_to_be( (unsigned char*) &long_value, sizeof(long) );
+  to_bigend( (unsigned char*) &long_value, sizeof(long) );
   ASSERT( *((long*) long_pattern) == long_value );
 
 }
 
 #ifdef DO_TEST
-int main(int argc, char *argv)
+int main(int argc, char **argv)
 {
-  test_host_to_be();
+  test_to_bigend();
 }
 #endif
