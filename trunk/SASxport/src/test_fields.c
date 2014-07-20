@@ -4,8 +4,8 @@
  *
  *    Author:  Gregory R. Warnes <greg@warnes.net>
  *
- *    Copyright (C) 2007  Gregory R. Warnes 
- * 
+ *    Copyright (C) 2007  Gregory R. Warnes
+ *
  *    This program is free software; you can redistribute it and/or modify
  *    it under the terms of the GNU General Public License as published by
  *    the Free Software Foundation; either version 2 of the License, or
@@ -40,7 +40,7 @@ int test_blankFill( int bufsize )
   char buffer[bufsize];
   char postbuffer = 'c';
   int i;
-  
+
   /* fill the buffer with 'x' */
   for(i=0; i<bufsize; i++)
     buffer[i] = 'x';
@@ -56,6 +56,8 @@ int test_blankFill( int bufsize )
   assert( prebuffer == 'c' );
   assert( postbuffer == 'c' );
 
+  postbuffer = prebuffer;  //* Avoid compiler warning about unused varibles */
+
   return 0;
 }
 
@@ -68,7 +70,7 @@ int test_blankCopy( int bufsize )
   char *shortstr = "abc";
   char *longstr  = "123456789012345678901234567890";
   int i;
-  
+
   /* fill the buffer with 'x' */
   for(i=0; i<bufsize; i++)
     buffer[i] = 'x';
@@ -103,6 +105,8 @@ int test_blankCopy( int bufsize )
   assert( prebuffer == 'c' );
   assert( postbuffer == 'c' );
 
+  postbuffer = prebuffer;  //* Avoid compiler warning about unused varibles */
+
   return 0;
 }
 
@@ -114,7 +118,7 @@ int test_zeroFill(int bufsize)
   char buffer[bufsize];
   char postbuffer = 'c';
   int i;
-  
+
   /* fill the buffer with 'x' */
   for(i=0; i<bufsize; i++)
     buffer[i] = 'x';
@@ -130,6 +134,8 @@ int test_zeroFill(int bufsize)
   assert( prebuffer == 'c' );
   assert( postbuffer == 'c' );
 
+  postbuffer = prebuffer;  //* Avoid compiler warning about unused varibles */
+
   return 0;
 }
 
@@ -142,7 +148,7 @@ int test_zeroCopy(int bufsize)
   char *shortstr = "abc";
   char *longstr  = "123456789012345678901234567890123456789012345678901234567890";
   int i;
-  
+
   /* fill the buffer with 'x' */
   for(i=0; i<bufsize; i++)
     buffer[i] = 'x';
@@ -177,6 +183,8 @@ int test_zeroCopy(int bufsize)
   assert( prebuffer == 'c' );
   assert( postbuffer == 'c' );
 
+  postbuffer = prebuffer;  //* Avoid compiler warning about unused varibles */
+
   return 0;
 }
 
@@ -190,7 +198,7 @@ void doTest()
   test_blankCopy(SMALL);
   test_zeroCopy(SMALL);
 
-  
+
   /* big buffer */
   test_blankFill(BIG);
   test_zeroFill(BIG);
@@ -198,4 +206,4 @@ void doTest()
   test_blankCopy(BIG);
   test_zeroCopy(BIG);
 }
-  
+
