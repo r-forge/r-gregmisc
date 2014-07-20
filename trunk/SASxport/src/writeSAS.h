@@ -30,6 +30,8 @@
 #include <R.h>
 #include <Rinternals.h>
 #include <sys/types.h>
+#include "to_bigend.h"
+#include "ibm2ieee.h"
 
 
 /*****
@@ -49,14 +51,9 @@
 #define ASSERT(x) if(!(x)) error("Assertion failed: x")
 #endif
 
-/* Convert (if necessary) to Big-Endian  */
-#define HTOBE_SHORT(a)  host_to_be( (unsigned char*) &a, sizeof(short)  )
-#define HTOBE_INT(a)    host_to_be( (unsigned char*) &a, sizeof(int)    )
-#define HTOBE_DOUBLE(a) host_to_be( (unsigned char*) &a, sizeof(double) )
-
 /* Alternative definition using system functions: */
-/* #define HTOBE_SHORT(a) (a) = htons( a ) */
-/* #define HTOBE_INT(a)   (a) = htonl( a ) */
+/* #define TO_BIGEND_SHORT(a) (a) = htons( a ) */
+/* #define TO_BIGEND_INT(a)   (a) = htonl( a ) */
 
 /*****
  *  File Record Structures
@@ -172,7 +169,6 @@ SEXP getRawBuffer();
 
 void doTest();
 
-void host_to_be( unsigned char *intp, size_t size);
 void ieee2ibm(register unsigned char *out, register const unsigned char *in, int count);
 
-#endif /* FIELDS_H */
+#endif /* WRITESAS_H */

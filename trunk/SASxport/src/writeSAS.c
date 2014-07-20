@@ -32,9 +32,6 @@
 #include "writeSAS.h"
 
 
-
-
-
 /* Fill <target> buffer with <len> blanks without any terminating nulls */
 void blankFill(char *target, int len)
 {
@@ -198,7 +195,6 @@ void fill_namestr_header(
  )
 {
   struct NAMESTR_HEADER namestr_header;
-  char tmpBuf[5];
 
   blankCopy( namestr_header.l1,    54, "HEADER RECORD*******NAMESTR HEADER RECORD!!!!!!!000000");
   blankCopy( namestr_header.nvar,   4, nvar[0] );
@@ -260,17 +256,17 @@ void fill_namestr(
   zeroFill(namestr_record.rest, 52);               /* remaining fields are irrelevant     */
 
 
-  HTOBE_SHORT( namestr_record.ntype );
-  HTOBE_SHORT( namestr_record.nhfun );
-  HTOBE_SHORT( namestr_record.nlng  );
-  HTOBE_SHORT( namestr_record.nvar0 );
-  HTOBE_SHORT( namestr_record.nfl   );
-  HTOBE_SHORT( namestr_record.nfd   );
-  HTOBE_SHORT( namestr_record.nfj   );
-  HTOBE_SHORT( namestr_record.nifl  );
-  HTOBE_SHORT( namestr_record.nifd  );
+  TO_BIGEND_SHORT( namestr_record.ntype );
+  TO_BIGEND_SHORT( namestr_record.nhfun );
+  TO_BIGEND_SHORT( namestr_record.nlng  );
+  TO_BIGEND_SHORT( namestr_record.nvar0 );
+  TO_BIGEND_SHORT( namestr_record.nfl   );
+  TO_BIGEND_SHORT( namestr_record.nfd   );
+  TO_BIGEND_SHORT( namestr_record.nfj   );
+  TO_BIGEND_SHORT( namestr_record.nifl  );
+  TO_BIGEND_SHORT( namestr_record.nifd  );
 
-  HTOBE_INT  ( namestr_record.npos  );
+  TO_BIGEND_INT  ( namestr_record.npos  );
 
   /* copy filled struct to return area */
   memcpy( raw_buffer, &namestr_record, sizeof(namestr_record) );
@@ -306,7 +302,7 @@ void fill_numeric_field(
   /* convert to IBM floating point */
 
   /* first convert to big-endian layout */
-  HTOBE_DOUBLE( value );
+  TO_BIGEND_DOUBLE( value );
 
   /* now convert to ibm flaoting point format */
   ieee2ibm( (unsigned char *) raw_buffer, (unsigned char *) value, 1);
