@@ -22,8 +22,8 @@
  * information.
  */
 
-#include "writeSAS.h"
 #include <stdio.h>
+#include "ibm2ieee.h"
 
 /****************************
  * ibm2ieee
@@ -39,29 +39,6 @@
  *  imposes a speed penalty here.
  *
  ***************************/
-
-#define	OUT_IEEE_ZERO	{ \
-	*out++ = 0; \
-	*out++ = 0; \
-	*out++ = 0; \
-	*out++ = 0; \
-	*out++ = 0; \
-	*out++ = 0; \
-	*out++ = 0; \
-	*out++ = 0; \
-	continue; } \
-
-#define	OUT_IEEE_NAN	{ /* Signaling NAN */ \
-	*out++ = 0xFF; \
-	*out++ = 0xF0; \
-	*out++ = 0x0B; \
-	*out++ = 0xAD; \
-	*out++ = 0x0B; \
-	*out++ = 0xAD; \
-	*out++ = 0x0B; \
-	*out++ = 0xAD; \
-	continue; } \
-
 
 void ibm2ieee(register unsigned char *out,
 	      register const unsigned char *in,

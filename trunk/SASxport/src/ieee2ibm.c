@@ -22,8 +22,8 @@
  * information.
  */
 
-#include "writeSAS.h"
 #include <stdio.h>
+#include "ibm2ieee.h"
 
 /****************************
  * ieee2ibm

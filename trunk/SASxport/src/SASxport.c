@@ -48,7 +48,7 @@
 #define BLANK24 "                        "
 
 #define GET_RECORD(rec, fp, len) \
-          fread((rec), sizeof(char), (size_t) (len), (fp))
+    (int) fread((rec), sizeof(char), (size_t) (len), (fp))
 
 #define IS_SASNA_CHAR(c) ((c) == 0x5f || (c) == 0x2e || \
                           (0x41 <= (c) && (c) <= 0x5a))
@@ -80,9 +80,11 @@ static double get_IBM_double(char* c, size_t len)
     /* exponent is expressed here as
        excess 70 (=64+6) to accomodate
        integer conversion of c[1] to c[4] */
-    char negative = c[0] & 0x80, exponent = (c[0] & 0x7f) - 70, buf[4];
+    char negative = c[0] & 0x80;
+    // needs to be signed: char is not on Raspbian
+    signed char exponent = (c[0] & 0x7f) - 70;
     double value;
-    char ibuf[8];
+    char buf[4], ibuf[8];
 
     if (len < 2 || len > 8)
       error(_("invalid field length in numeric variable"));
@@ -258,9 +260,8 @@ init_mem_info(FILE *fp, char *name, char *dslabel, char *dstype)
     record[58] = '\0';
     sscanf(record+54, "%d", &length);
 
-    /* Extract data set name */
     tmp = strchr(mem_head->sas_dsname, ' ');
-    n = tmp - mem_head->sas_dsname;
+    n = (int)(tmp - mem_head->sas_dsname);
     if(n > 0) {
 	if (n > 8)
 	    n = 8;
@@ -290,7 +291,9 @@ init_mem_info(FILE *fp, char *name, char *dslabel, char *dstype)
 }
 
 static int
-next_xport_info(FILE *fp, int namestr_length, int nvars,
+next_xport_info(FILE *fp,
+		int namestr_length,
+		int nvars,
 		int *headpad,
 		int *tailpad,
 		int *length,
@@ -586,7 +589,7 @@ xport_info(SEXP xportFile)
 
     ansLength = 0;
     PROTECT(ans = allocVector(VECSXP, 0));
-    PROTECT(ansNames  = allocVector(STRSXP, 0));
+    PROTECT(ansNames = allocVector(STRSXP, 0));
 
     while(!feof(fp))
       {
@@ -689,6 +692,7 @@ xport_read(SEXP xportFile, SEXP xportInfo)
     char *record, *tmpchar, *c;
     FILE *fp;
     SEXP ans, names, data, dataInfo, dataName;
+    double dbl;
 
     ansLength = LENGTH(xportInfo);
     PROTECT(ans = allocVector(VECSXP, ansLength));
@@ -736,8 +740,19 @@ xport_read(SEXP xportFile, SEXP xportInfo)
 	    for(k = nvar-1; k >= 0; k--) {
 		tmpchar = record + dataPosition[k];
 		if(dataType[k] == REALSXP) {
-		    REAL(VECTOR_ELT(data, k))[j] =
-			get_IBM_double(tmpchar, dataWidth[k]);
+
+		  /* REAL(VECTOR_ELT(data, k))[j] = */
+		  /* 	get_IBM_double(tmpchar, dataWidth[k]); */
+
+		  ibm2ieee( (unsigned char*) &dbl,
+			    (unsigned char*) tmpchar,
+			    1 );
+
+		  /* convert from big-endian layout */
+		  to_bigend( (unsigned char*) &dbl, sizeof(double) );
+
+		  REAL(VECTOR_ELT(data, k))[j] = dbl;
+
 		} else {
 		    tmpchar[dataWidth[k]] = '\0';
 		    /* strip trailing blanks */
