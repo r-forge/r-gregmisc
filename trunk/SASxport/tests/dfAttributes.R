@@ -24,7 +24,9 @@ write.xport(abc.out,
             )
 
 # read the SAS data back in
-abc.in <- read.xport("dfAttributes.xpt", names.tolower=FALSE)
+abc.in <- read.xport("dfAttributes.xpt",
+                     names.tolower=FALSE,
+                     verbose=TRUE)
 
 ## Test that the files are otherwise identical
 label(abc.out, self=TRUE, "MISSING!")
