@@ -302,7 +302,7 @@ void fill_numeric_field(
   /* convert to IBM floating point */
 
   /* first convert to big-endian layout */
-  TO_BIGEND_DOUBLE( value );
+  TO_BIGEND_DOUBLE( *value );
 
   /* now convert to ibm flaoting point format */
   ieee2ibm( (unsigned char *) raw_buffer, (unsigned char *) value, 1);
