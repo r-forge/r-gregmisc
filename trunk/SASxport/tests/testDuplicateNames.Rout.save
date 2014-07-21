@@ -31,7 +31,7 @@ The following objects are masked from 'package:base':
     format.pval, round.POSIXt, trunc.POSIXt, units
 
 
-Loaded SASxport version 1.4.2 (2014-07-17).
+Loaded SASxport version 1.5.0 (2014-07-21).
 
   Type `?SASxport' for usage information.
 
@@ -84,4 +84,4 @@ In makeSASNames(colnames(df)) : Made 5 duplicate names unique.
 > 
 > proc.time()
    user  system elapsed 
-  0.485   0.036   0.510 
+  0.493   0.036   0.518 

@@ -4,7 +4,7 @@ Version 1.5.0 - 2014-07-21
 Bug fixes:
 
 - Now works properly on big-endian systems such as the PowerPC,
-  Spark. (Reported by Brian Ripley )
+  Spark. (Reported by Brian Ripley )x
 
 - Explicitly cast left bit shifts to avoid undefined C language
   behavior. (Reported by Brian Ripley)

@@ -31,7 +31,7 @@ The following objects are masked from 'package:base':
     format.pval, round.POSIXt, trunc.POSIXt, units
 
 
-Loaded SASxport version 1.4.2 (2014-07-17).
+Loaded SASxport version 1.5.0 (2014-07-21).
 
   Type `?SASxport' for usage information.
 
@@ -109,4 +109,4 @@ Warning messages:
 > 
 > proc.time()
    user  system elapsed 
-  4.396   0.056   4.447 
+  4.290   0.056   4.341 
