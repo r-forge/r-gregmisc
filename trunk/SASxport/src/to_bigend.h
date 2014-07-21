@@ -23,4 +23,8 @@ void to_bigend( unsigned char *intp, size_t size);
 #define TO_BIGEND_INT(a)    to_bigend( (unsigned char*) &a, sizeof(int)    )
 #define TO_BIGEND_DOUBLE(a) to_bigend( (unsigned char*) &a, sizeof(double) )
 
+/* Alternative definition using system functions: */
+/* #define TO_BIGEND_SHORT(a) (a) = htons( a ) */
+/* #define TO_BIGEND_INT(a)   (a) = htonl( a ) */
+
 #endif /* TO_BIGEND_H */
