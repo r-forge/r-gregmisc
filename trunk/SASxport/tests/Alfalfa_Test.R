@@ -35,3 +35,4 @@ a.2 <- readBin( con="Alfalfa2.xpt", what=raw(), n=3600 )
 
 ## Test that the files are identical
 stopifnot( all(a.1 == a.2) )
+
