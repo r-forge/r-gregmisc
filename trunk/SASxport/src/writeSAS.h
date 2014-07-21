@@ -51,10 +51,6 @@
 #define ASSERT(x) if(!(x)) error("Assertion failed: x")
 #endif
 
-/* Alternative definition using system functions: */
-/* #define TO_BIGEND_SHORT(a) (a) = htons( a ) */
-/* #define TO_BIGEND_INT(a)   (a) = htonl( a ) */
-
 /*****
  *  File Record Structures
  *****/
