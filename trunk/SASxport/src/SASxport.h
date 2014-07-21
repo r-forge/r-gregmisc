@@ -28,8 +28,6 @@
 #include "foreign.h"
 #include "swap_bytes.h"
 #include <errno.h>
-#include "to_bigend.h"
-#include "ibm2ieee.h"
 
 /* double cnxptiee(double from, int fromtype, int totype); */
 

@@ -741,10 +741,6 @@ xport_read(SEXP xportFile, SEXP xportInfo)
 	tmpchar = record + dataPosition[k];
 	if(dataType[k] == REALSXP)
 	  {
-#ifdef BIGENDIAN
-	    reverse_double(tmpchar);
-#endif
-
 	    REAL(VECTOR_ELT(data, k))[j] =
 	      get_IBM_double(tmpchar, dataWidth[k]);
 	  }
