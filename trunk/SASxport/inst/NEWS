@@ -1,7 +1,10 @@
-Version 1.4.2 - 2014-07-17
+Version 1.5.0 - 2014-07-21
 --------------------------
 
 Bug fixes:
+
+- Now works properly on big-endian systems such as the PowerPC,
+  Spark. (Reported by Brian Ripley )
 
 - Explicitly cast left bit shifts to avoid undefined C language
   behavior. (Reported by Brian Ripley)
@@ -10,6 +13,12 @@ Bug fixes:
   SASxport::read.xport is called without loading SASxport.  (Reported
   by Dominic Comtois)
 
+- 'read.xport' now preserves '$' at the beginning of SAS character
+  format and iformat strings.  (Reported by Dominic Comtois)
+
+- 'read.xport' argument names.tolower was not being honored for
+   dataset names.  (Reported by Dominic Comtois)
+
 Other changes:
 
 - Modified several test files to display generated .xpt data so that
@@ -17,16 +26,6 @@ Other changes:
 
 - C code cleanup and reorgaization to improve clarity.
 
-Version 1.4.1 - 2014-07-16
---------------------------
-
-Bug fixes:
-
-- 'read.xport' now preserves '$' at the beginning of SAS character
-  format and iformat strings.  (Reported by Dominic Comtois)
-
-- 'read.xport' argument names.tolower was not being honored for
-   dataset names.  (Reported by Dominic Comtois)
 
 Version 1.4.0 - 2014-04-09
 --------------------------
