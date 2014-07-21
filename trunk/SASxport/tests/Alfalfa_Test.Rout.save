@@ -41,7 +41,26 @@ Loaded SASxport version 1.4.2 (2014-07-17).
 > Sys.setenv("TZ"="GMT")
 > 
 > # existing data file
-> SPEC <- read.xport("Alfalfa.xpt")
+> SPEC <- read.xport("Alfalfa.xpt", verbose=TRUE)
+### Checking if the specified file has the appropriate header ###
+### Extracting data file information... ###
+### Reading the data file... ###
+### Processing contents... ###
+### Processing SAS dataset SPEC ###
+### . ###
+### . ###
+### Done ###
+> 
+> str(SPEC)
+'data.frame':	40 obs. of  6 variables:
+ $ POP   : Factor w/ 2 levels "MAX","min": 2 2 2 2 2 1 1 1 1 1 ...
+ $ SAMPLE: int  0 1 2 3 4 5 6 7 8 9 ...
+ $ REP   : int  1 1 1 1 1 1 1 1 1 1 ...
+ $ SEEDWT: int  64 54 40 45 64 75 45 63 65 59 ...
+ $ HARV1 : num  172 138 146 170 125 ...
+ $ HARV2 : num  180 151 129 191 173 ...
+ - attr(*, "label")= chr " "
+ - attr(*, "SAStype")= chr " "
 > 
 > ## Write it out again, pretending to be the same OS, SAS version, and creation date
 > write.xport(SPEC,
@@ -842,4 +861,4 @@ HEX:
 > 
 > proc.time()
    user  system elapsed 
-  0.506   0.054   0.550 
+  0.557   0.059   0.608 
