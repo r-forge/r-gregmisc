@@ -5,7 +5,9 @@ library(SASxport)
 Sys.setenv("TZ"="GMT")
 
 # existing data file
-SPEC <- read.xport("Alfalfa.xpt")
+SPEC <- read.xport("Alfalfa.xpt", verbose=TRUE)
+
+str(SPEC)
 
 ## Write it out again, pretending to be the same OS, SAS version, and creation date
 write.xport(SPEC,
