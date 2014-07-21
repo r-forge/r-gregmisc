@@ -50,6 +50,10 @@ void ibm2ieee(register unsigned char *out,
 	 *  No hidden bits in mantissa (56 bits).
 	 */
 	register int	i;
+	int loop = 0;
+
+	static char numeric_NA[8] = {0x2e,0x00,0x00,0x00,0x00,0x00,0x00,0x00};
+
 	for( i=count-1; i >= 0; i-- )  {
 		register unsigned int left, right, signbit;
 		register int exp;
@@ -122,6 +126,16 @@ ibm_normalized:
 			 *  This case was not expected, but does happen,
 			 *  at least on the Gould.
 			 */
+		        if(loop)
+			  {
+			    warning("IBM exponent overflow, generating NA\n");
+			    memcpy(out, numeric_NA, 8);
+			    out+= 8;
+			    continue;
+			  }
+			else
+			  loop = 1;
+
 			exp -= 4;
 			left = ( (unsigned int) left<<4) | (right>>(32-4));
 			right <<= 4;
