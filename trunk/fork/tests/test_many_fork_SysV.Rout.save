@@ -1,7 +1,7 @@
 
-R version 2.4.1 (2006-12-18)
-Copyright (C) 2006 The R Foundation for Statistical Computing
-ISBN 3-900051-07-0
+R version 3.1.0 Patched (2014-05-26 r65771) -- "Spring Dance"
+Copyright (C) 2014 The R Foundation for Statistical Computing
+Platform: x86_64-apple-darwin13.1.0 (64-bit)
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
 You are welcome to redistribute it under certain conditions.
@@ -34,3 +34,6 @@ Check the process table to see if there are any zombies...
 Done. No Zombies present.
 > 
 > 
+> proc.time()
+   user  system elapsed 
+  0.240   0.099  10.497 
