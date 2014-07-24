@@ -93,3 +93,19 @@ ci.mer <- function (x,
     
     retval
 }
+
+
+ci.estimable  <-  function(x,confidence=0.95,alpha=1-confidence,...)
+  {
+    ci.low  <- x$Estimate + qt(alpha/2, x$DF) * x$"Std. Error"
+    ci.high <- x$Estimate - qt(alpha/2, x$DF) * x$"Std. Error"
+    retval  <- cbind(Estimate=x$Estimate,
+                     "CI lower"=ci.low,
+                     "CI upper"=ci.high,
+                     "Std. Error"= x$"Std. Error",
+                     "p-value" = x$"Pr(>|t|)"
+                     )
+    rownames(retval) <- rownames(x)
+    
+    retval
+  }

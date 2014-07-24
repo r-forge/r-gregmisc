@@ -104,7 +104,7 @@ estimable(obj, cm, beta0, conf.int=NULL,  show.beta0, ...)
   \code{\link[stats]{lm}},
   \code{\link[nlme]{lme}},
   \code{\link[stats]{contrasts}},
-  \code{\link[rms]{contrast.rms}},
+  \code{\link[rms]{contrast}}
   }
 
 \examples{

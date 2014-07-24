@@ -19,6 +19,7 @@ S3method(ci, binom)
 S3method(ci, lm)
 S3method(ci, lme)
 S3method(ci, mer)
+S3method(ci, estimable)
 
 S3method(fit.contrast, lm)
 S3method(fit.contrast, lme)

@@ -161,6 +161,9 @@ estimable.default <- function (obj, cm, beta0, conf.int=NULL,
       rownames(retval) <- make.unique(rownames(retval))
       retval <- as.data.frame(retval)
       if(!show.beta0) retval$beta0 <- NULL
+
+      class(retval) <- c("estimable", class(retval))
+      
       return(retval)
     }
 }
@@ -273,6 +276,9 @@ estimable.mer <- function (obj, cm, beta0, conf.int=NULL, show.beta0,
   rownames(retval) <- make.unique(rownames(retval))
   retval <- as.data.frame(retval)
   if(!show.beta0) retval$beta0 <- NULL
+
+  class(retval) <- c("estimable", class(retval))
+
   return(retval)
 
 }
