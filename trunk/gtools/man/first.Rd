@@ -1,6 +1,10 @@
 \name{first}
 \alias{first}
+\alias{first.default}
+\alias{first.list}
 \alias{last}
+\alias{last.default}
+\alias{last.list}
 \title{Return first or last element of a vector or list}
 \description{
   Return first or last element of a vector or list
