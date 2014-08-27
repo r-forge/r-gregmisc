@@ -4,6 +4,9 @@ last  <- function(x) UseMethod("last")
 first.default <- function(x) x[1]
 last.default  <- function(x) x[length(x)]
 
+first.list <- function(x) x[[1]]
+last.list  <- function(x) x[[length(x)]]
+
 left <- function(x, n=6)
 {
    n <- min(n, ncol(x))
@@ -13,5 +16,6 @@ left <- function(x, n=6)
 right <- function(x, n=6)
 {
    n <- min(n, ncol(x))
-   x[, (ncol(x)-n):ncol(x)]
+   x[, (ncol(x)-n+1):ncol(x)]
 }
+
