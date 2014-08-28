@@ -17,7 +17,7 @@ sub check_modules(;$)
        $VERBOSE, 
        $HAS_Spreadsheet_ParseExcel,
        $HAS_Compress_Raw_Zlib,
-       $HAS_Spreadsheet_XLSX
+       $HAS_Spreadsheet_ParseXLSX
       );
     $VERBOSE=$_[0];
 
@@ -25,9 +25,9 @@ sub check_modules(;$)
     eval
       {
         require Spreadsheet::ParseExcel;
+	use Spreadsheet::ParseExcel::Utility qw(ExcelFmt);
         $HAS_Spreadsheet_ParseExcel=1;
         print "Loaded Spreadsheet::ParseExcel\n" if $VERBOSE;
-
       };
     eval
       {
@@ -38,7 +38,7 @@ sub check_modules(;$)
     eval
       {
         require Spreadsheet::ParseXLSX;
-        $HAS_Spreadsheet_XLSX=1;
+        $HAS_Spreadsheet_ParseXLSX=1;
         print "Loaded Spreadsheet::ParseXLSX\n" if $VERBOSE;
       };
 
@@ -49,10 +49,10 @@ sub check_modules(;$)
         print "ERROR: Unable to load Compress::Raw::Zlib perl module! \n"
 	  if ! $HAS_Compress_Raw_Zlib;
         print "ERROR: Unable to load Spreadsheet::ParseXLSX perl module! \n"
-	  if ! $HAS_Spreadsheet_XLSX;
+	  if ! $HAS_Spreadsheet_ParseXLSX;
       }
 
-    return $HAS_Spreadsheet_ParseExcel, $HAS_Compress_Raw_Zlib, $HAS_Spreadsheet_XLSX;
+    return $HAS_Spreadsheet_ParseExcel, $HAS_Compress_Raw_Zlib, $HAS_Spreadsheet_ParseXLSX;
   }
 
 sub check_modules_and_notify()
@@ -60,7 +60,7 @@ sub check_modules_and_notify()
     my( 
        $HAS_Spreadsheet_ParseExcel,
        $HAS_Compress_Raw_Zlib,
-       $HAS_Spreadsheet_XLSX) = check_modules(0);
+       $HAS_Spreadsheet_ParseXLSX) = check_modules(0);
 
     $HAS_Spreadsheet_ParseExcel or
       die("ERROR: Perl module Spreadsheet::ParseExcel cannot be loaded. Exiting.\n");
@@ -68,12 +68,12 @@ sub check_modules_and_notify()
     $HAS_Compress_Raw_Zlib or
       warn("WARNING: Perl module Compress::Raw::Zlib cannot be loaded.\n");
 
-    $HAS_Spreadsheet_XLSX or
+    $HAS_Spreadsheet_ParseXLSX or
       warn("WARNING: Perl module Spreadsheet::ParseXLSX cannot be loaded.\n");
 
-    ($HAS_Compress_Raw_Zlib && $HAS_Spreadsheet_XLSX ) or
+    ($HAS_Compress_Raw_Zlib && $HAS_Spreadsheet_ParseXLSX ) or
       warn("WARNING: Microsoft Excel 2007 'XLSX' formatted files will not be processed.\n");
-    return $HAS_Spreadsheet_ParseExcel, $HAS_Compress_Raw_Zlib, $HAS_Spreadsheet_XLSX;
+    return $HAS_Spreadsheet_ParseExcel, $HAS_Compress_Raw_Zlib, $HAS_Spreadsheet_ParseXLSX;
   }
 
 sub install_modules()

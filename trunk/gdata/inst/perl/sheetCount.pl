@@ -15,7 +15,7 @@ require 'module_tools.pl';
 my(
    $HAS_Spreadsheet_ParseExcel,
    $HAS_Compress_Raw_Zlib,
-   $HAS_Spreadsheet_XLSX
+   $HAS_Spreadsheet_ParseXLSX
   ) = check_modules_and_notify();
 
 use File::Spec::Functions;
