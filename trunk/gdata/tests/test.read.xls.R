@@ -110,3 +110,22 @@ if( 'XLSX' %in% xlsFormats() )
      example.wide.x <- read.xls(wideFileX)
      stopifnot(dim(example.wide.x)==c(0,16384))
   }
+
+## Check handling of files with dates calulcated relative to
+## 1900-01-01 and 1904-01-01
+
+file.1900 <- file.path(path.package('gdata'),'xls', 'ExampleExcelFile_1900.xls')
+file.1904 <- file.path(path.package('gdata'),'xls', 'ExampleExcelFile_1904.xls')
+
+example.1900 <- read.xls(file.1900, sheet=3)
+example.1904 <- read.xls(file.1904, sheet=3)
+
+stopifnot( na.omit(example.1900 == example.1904) )
+
+fileX.1900 <- file.path(path.package('gdata'),'xls', 'ExampleExcelFile_1900.xlsx')
+fileX.1904 <- file.path(path.package('gdata'),'xls', 'ExampleExcelFile_1904.xlsx')
+
+exampleX.1900 <- read.xls(file.1900, sheet=3)
+exampleX.1904 <- read.xls(file.1904, sheet=3)
+
+stopifnot( na.omit(exampleX.1900 == exampleX.1904)  )
