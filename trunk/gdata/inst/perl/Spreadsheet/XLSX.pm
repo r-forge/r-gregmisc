@@ -98,7 +98,7 @@ sub new {
 	
 		/^(\w+)\s+/;
 		
-		my ($tag, $other) = ($1, $');
+		my ($tag, $other) = ($1, $'); #'
 
 		my @pairs = split /\" /, $other;
 
@@ -146,7 +146,7 @@ sub new {
 		my $s2   = 0;
 		my $sty  = 0;
 		foreach ($member_sheet -> contents =~ /(\<.*?\/?\>|.*?(?=\<))/g) {
-			if (/^\<c r=\"([A-Z])([A-Z]?)(\d+)\"/) {
+			if (/^\<c r=\"([A-Z])([A-Z]?)([A-Z]?)(\d+)\"/) {
 				
 				$col = ord ($1) - 65;
 				
@@ -154,6 +154,12 @@ sub new {
                 			$col++;
 					$col *= 26;
 					$col += (ord ($2) - 65);
+				}
+
+				if ($3) {
+                			$col++;
+					$col *= 26;
+					$col += (ord ($3) - 65);
 				}
 				
 				$row = $3 - 1;
