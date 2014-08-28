@@ -27,9 +27,10 @@ my(
 my($row, $col, $sheet, $cell, $usage,
    $targetfile,$basename, $sheetnumber,
    $filename, $volume, $directories, $whoami,
-   $sep, $sepName, $sepLabel, $sepExt, 
+   $sep, $sepName, $sepLabel, $sepExt,
    $skipBlankLines, %switches,
-   $parser, $oBook, $formatter
+   $parser, $oBook, $formatter,
+   $using_1904_date
 );
 
 ##
@@ -141,6 +142,7 @@ $formatter = Spreadsheet::ParseExcel::FmtDefault->new();
 open(FH, "<$ARGV[0]") or die "Unable to open file '$ARGV[0]'.\n";
 close(FH);
 
+print "\n";
 print "Loading '$ARGV[0]'...\n";
 ## First try as a Excel 2007+ 'xml' file
 eval
@@ -158,9 +160,26 @@ if ( !defined $oBook )
   }
 print "Done.\n";
 
+## Does this file use 1904-01-01 as the reference date instead of
+## 1900-01-01?
+$using_1904_date = ( $oBook->using_1904_date() == 1 ) || # ParseExcel
+                   ( $oBook->{Flag1904}        == 1 );   # ParseXLSX
+
+
+## Show the user some summary information before we start extracting
+## date
 print "\n";
 print "Orignal Filename: ", $ARGV[0], "\n";
 print "Number of Sheets: ", $oBook->{SheetCount} , "\n";
+if($using_1904_date)
+  {
+      print "Date reference  : 1904-01-01\n";
+  }
+else
+  {
+      print "Date reference  : 1900-01-01\n";
+  }
+
 print "\n";
 
 ## Get list all worksheets in the file
@@ -245,14 +264,35 @@ foreach my $sheet (@sheetlist)
 	   my $format = $formatter->FmtString($cell, $oBook);
 	   if( defined($cell) )
 	      {
-		  if ($cell->type() eq "Date" && $oBook->{Flag1904} )
+		  if ($cell->type() eq "Date") # && $using_1904_date )
 		    {
+			my $is_date = ( $format =~ m/y/ &&
+					$format =~ m/m/ &&
+					$format =~ m/d/ );
+
+			my $is_time = ( $format =~ m/h[:\]]*m/ ||
+					$format =~ m/m[:\]]*s/ );
+
+
+			if($is_date && $is_time)
+			  {
+			      $format = "yyyy-mm-dd hh:mm:ss.00";
+			  }
+			elsif ($is_date)
+			  {
+			      $format = "yyyy-mm-dd";
+			  }
+			elsif ($is_time)
+			  {
+			      $format = "hh:mm:ss.00"
+			  }
+
 			$_ = ExcelFmt($format,
 				      $cell->unformatted(),
-				      $oBook->{Flag1904});
+				      $using_1904_date);
 		    }
 		  else
-		    {  
+		    {
 		      $_=$cell->value();
 		    }
 
@@ -266,7 +306,7 @@ foreach my $sheet (@sheetlist)
 		# they are used as field delimiters
 		s/\"/\\\"/g;
 	      }
-	   else 
+	   else
 	     {
 	       $_ = '';
 	     }
@@ -291,7 +331,7 @@ foreach my $sheet (@sheetlist)
 
   close OutFile;
 
-  print "  (Ignored $cumulativeBlankLines blank lines.)\n" 
+  print "  (Ignored $cumulativeBlankLines blank lines.)\n"
       if $skipBlankLines;
   print "\n";
 }

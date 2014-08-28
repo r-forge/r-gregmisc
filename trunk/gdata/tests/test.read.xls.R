@@ -23,19 +23,19 @@ stopifnot(all.equal(iris.1, iris.3))
 exampleFile <- file.path(path.package('gdata'),'xls',
                          'ExampleExcelFile.xls')
 
-exampleFile2007 <- file.path(path.package('gdata'),'xls',
+exampleFileX <- file.path(path.package('gdata'),'xls',
                          'ExampleExcelFile.xlsx')
 
 # see the number and names of sheets:
 sheetCount(exampleFile)
 
 if( 'XLSX' %in% xlsFormats() )
-  sheetCount(exampleFile2007)
+  sheetCount(exampleFileX)
 
 sheetNames(exampleFile)
 
 if( 'XLSX' %in% xlsFormats() )
-  sheetNames(exampleFile2007)
+  sheetNames(exampleFileX)
 
 example.1 <- read.xls(exampleFile, sheet=1) # default is first worksheet
 example.1
@@ -46,28 +46,28 @@ example.2
 example.3 <- read.xls(exampleFile, sheet=3, header=FALSE) # third worksheet by number
 example.3
 
-example.4 <- read.xls(exampleFile, sheet=3, header=FALSE) # third worksheet by number
+example.4 <- read.xls(exampleFile, sheet=4, header=FALSE) # fourth worksheet by number
 example.4
 
 if( 'XLSX' %in% xlsFormats() )
   {
-  example.x.1 <- read.xls(exampleFile2007, sheet=1) # default is first worksheet
+  example.x.1 <- read.xls(exampleFileX, sheet=1) # default is first worksheet
   print(example.x.1)
 
-  example.x.2 <- read.xls(exampleFile2007, sheet=2) # second worksheet by number
+  example.x.2 <- read.xls(exampleFileX, sheet=2) # second worksheet by number
   print(example.x.2)
 
-  example.x.3 <- read.xls(exampleFile2007, sheet=3, header=FALSE) # third worksheet by number
+  example.x.3 <- read.xls(exampleFileX, sheet=3, header=FALSE) # third worksheet by number
   print(example.x.3)
 
-  example.x.4 <- read.xls(exampleFile2007, sheet=3, header=FALSE) # third worksheet by number
+  example.x.4 <- read.xls(exampleFileX, sheet=4, header=FALSE) # fourth worksheet by number
   print(example.x.4)
 
-  data <- read.xls(exampleFile2007, sheet="Sheet Second") # and by name
+  data <- read.xls(exampleFileX, sheet="Sheet Second") # and by name
   print(data)
 
   # load the third worksheet, skipping the first two non-data lines...
-  data <- read.xls(exampleFile2007, sheet="Sheet with initial text", skip=2)
+  data <- read.xls(exampleFileX, sheet="Sheet with initial text", skip=2)
   print(data)
 }
 
@@ -79,7 +79,7 @@ example.skip
 
 if( 'XLSX' %in% xlsFormats() )
   {
-    example.x.skip <- read.xls(exampleFile2007, sheet=2, blank.lines.skip=FALSE)
+    example.x.skip <- read.xls(exampleFileX, sheet=2, blank.lines.skip=FALSE)
     example.x.skip
   }
 
@@ -114,18 +114,30 @@ if( 'XLSX' %in% xlsFormats() )
 ## Check handling of files with dates calulcated relative to
 ## 1900-01-01 and 1904-01-01
 
-file.1900 <- file.path(path.package('gdata'),'xls', 'ExampleExcelFile_1900.xls')
-file.1904 <- file.path(path.package('gdata'),'xls', 'ExampleExcelFile_1904.xls')
-
-example.1900 <- read.xls(file.1900, sheet=3)
-example.1904 <- read.xls(file.1904, sheet=3)
-
-stopifnot( na.omit(example.1900 == example.1904) )
-
+file.1900  <- file.path(path.package('gdata'),'xls', 'ExampleExcelFile_1900.xls' )
+file.1904  <- file.path(path.package('gdata'),'xls', 'ExampleExcelFile_1904.xls' )
 fileX.1900 <- file.path(path.package('gdata'),'xls', 'ExampleExcelFile_1900.xlsx')
 fileX.1904 <- file.path(path.package('gdata'),'xls', 'ExampleExcelFile_1904.xlsx')
 
-exampleX.1900 <- read.xls(file.1900, sheet=3)
-exampleX.1904 <- read.xls(file.1904, sheet=3)
+example.1900 <- read.xls(file.1900, sheet=3, header=FALSE)
+example.1900
 
-stopifnot( na.omit(exampleX.1900 == exampleX.1904)  )
+example.1904 <- read.xls(file.1904, sheet=3, header=FALSE)
+example.1904
+
+exampleX.1900 <- read.xls(file.1900, sheet=3, header=FALSE)
+exampleX.1900
+
+exampleX.1904 <- read.xls(file.1904, sheet=3, header=FALSE)
+exampleX.1904
+
+# all colmns should be identical
+stopifnot( na.omit(example.1900  == exampleX.1900) )
+stopifnot( na.omit(example.1904  == exampleX.1904) )
+
+# column 8 will differ by 1462 due to different date baselines (1900 vs 1904)
+stopifnot( na.omit(example.1900 [,-8] == example.1904 [,-8]) )
+stopifnot( na.omit(exampleX.1900[,-8] == exampleX.1904[,-8]) )
+
+stopifnot( na.omit(example.1900 [,8] - example.1904 [,8]) == 1462 )
+stopifnot( na.omit(exampleX.1900[,8] - exampleX.1904[,8]) == 1462 )
