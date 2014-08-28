@@ -37,9 +37,9 @@ sub check_modules(;$)
       };
     eval
       {
-        require Spreadsheet::XLSX;
+        require Spreadsheet::ParseXLSX;
         $HAS_Spreadsheet_XLSX=1;
-        print "Loaded Spreadsheet::XLSX\n" if $VERBOSE;
+        print "Loaded Spreadsheet::ParseXLSX\n" if $VERBOSE;
       };
 
     if($VERBOSE)
@@ -48,7 +48,7 @@ sub check_modules(;$)
 	  if !$HAS_Spreadsheet_ParseExcel;
         print "ERROR: Unable to load Compress::Raw::Zlib perl module! \n"
 	  if ! $HAS_Compress_Raw_Zlib;
-        print "ERROR: Unable to load Spreadsheet::XLSX perl module! \n"
+        print "ERROR: Unable to load Spreadsheet::ParseXLSX perl module! \n"
 	  if ! $HAS_Spreadsheet_XLSX;
       }
 
@@ -69,7 +69,7 @@ sub check_modules_and_notify()
       warn("WARNING: Perl module Compress::Raw::Zlib cannot be loaded.\n");
 
     $HAS_Spreadsheet_XLSX or
-      warn("WARNING: Perl module Spreadsheet::XLSX cannot be loaded.\n");
+      warn("WARNING: Perl module Spreadsheet::ParseXLSX cannot be loaded.\n");
 
     ($HAS_Compress_Raw_Zlib && $HAS_Spreadsheet_XLSX ) or
       warn("WARNING: Microsoft Excel 2007 'XLSX' formatted files will not be processed.\n");
@@ -98,7 +98,7 @@ sub install_modules()
     #return 0;
 
     # install the libraries we want
-    for $mod (qw( Compress::Raw::Zlib Spreadsheet::XLSX )){
+    for $mod (qw( Compress::Raw::Zlib Spreadsheet::ParseXLSX )){
         my $obj = CPAN::Shell->expand('Module',$mod);
         $obj->install;
     }
