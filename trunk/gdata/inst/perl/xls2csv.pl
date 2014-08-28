@@ -20,7 +20,7 @@ require 'module_tools.pl';
 my(
    $HAS_Spreadsheet_ParseExcel,
    $HAS_Compress_Raw_Zlib,
-   $HAS_Spreadsheet_XLSX
+   $HAS_Spreadsheet_ParseXLSX
   ) = check_modules_and_notify();
 
 # declare some varibles local
@@ -29,7 +29,7 @@ my($row, $col, $sheet, $cell, $usage,
    $filename, $volume, $directories, $whoami,
    $sep, $sepName, $sepLabel, $sepExt, 
    $skipBlankLines, %switches,
-   $parser, $oBook
+   $parser, $oBook, $formatter
 );
 
 ##
@@ -135,7 +135,8 @@ if(defined($ARGV[2]) )
 my $oExcel;
 my $oBook;
 
-$oExcel = new Spreadsheet::ParseExcel;
+$oExcel    = new Spreadsheet::ParseExcel;
+$formatter = Spreadsheet::ParseExcel::FmtDefault->new();
 
 open(FH, "<$ARGV[0]") or die "Unable to open file '$ARGV[0]'.\n";
 close(FH);
@@ -240,13 +241,26 @@ foreach my $sheet (@sheetlist)
 
        for(my $col = $mincol; $col <= $maxcol; $col++)
          {
-           my $cell = $sheet->{Cells}[$row][$col];
+           my $cell   = $sheet->{Cells}[$row][$col];
+	   my $format = $formatter->FmtString($cell, $oBook);
 	   if( defined($cell) )
 	      {
-		$_=$cell->Value; #{Val};
+		  if ($cell->type() eq "Date" && $oBook->{Flag1904} )
+		    {
+			$_ = ExcelFmt($format,
+				      $cell->unformatted(),
+				      $oBook->{Flag1904});
+		    }
+		  else
+		    {  
+		      $_=$cell->value();
+		    }
 
 		# convert '#NUM!' strings to missing (empty) values
 		s/#NUM!//;
+
+		# convert "#DIV/0!" strings to missing (emtpy) values
+                s|#DIV/0!||;
 
 		# escape double-quote characters in the data since
 		# they are used as field delimiters
