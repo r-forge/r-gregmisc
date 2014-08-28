@@ -65,7 +65,7 @@ if( 'XLSX' %in% xlsFormats() )
 
   data <- read.xls(exampleFile2007, sheet="Sheet Second") # and by name
   print(data)
-  
+
   # load the third worksheet, skipping the first two non-data lines...
   data <- read.xls(exampleFile2007, sheet="Sheet with initial text", skip=2)
   print(data)
@@ -86,7 +86,7 @@ if( 'XLSX' %in% xlsFormats() )
 
 ## Check handing of fileEncoding for latin-1 characters
 
-latin1File <- file.path(path.package('gdata'),'xls', 'latin-1.xls')
+latin1File  <- file.path(path.package('gdata'),'xls', 'latin-1.xls' )
 latin1FileX <- file.path(path.package('gdata'),'xls', 'latin-1.xlsx')
 
 example.latin1 <- read.xls(latin1File, fileEncoding='latin1')
@@ -97,3 +97,16 @@ if( 'XLSX' %in% xlsFormats() )
   }
 
 
+## Check handling of very wide file
+
+wideFile  <- file.path(path.package('gdata'),'xls', 'wide.xls' )
+wideFileX <- file.path(path.package('gdata'),'xls', 'wide.xlsx')
+
+example.wide <- read.xls(wideFile)
+stopifnot(dim(example.wide)==c(0,256))
+
+if( 'XLSX' %in% xlsFormats() )
+  {
+     example.wide.x <- read.xls(wideFileX)
+     stopifnot(dim(example.wide.x)==c(0,16384))
+  }
