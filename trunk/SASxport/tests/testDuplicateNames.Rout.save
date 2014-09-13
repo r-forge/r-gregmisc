@@ -84,4 +84,4 @@ In makeSASNames(colnames(df)) : Made 5 duplicate names unique.
 > 
 > proc.time()
    user  system elapsed 
-  0.493   0.036   0.518 
+  0.515   0.037   0.542 

@@ -859,6 +859,7 @@ HEX:
 > ## Test that the files are identical
 > stopifnot( all(a.1 == a.2) )
 > 
+> 
 > proc.time()
    user  system elapsed 
-  0.518   0.053   0.561 
+  0.531   0.054   0.576 

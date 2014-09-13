@@ -525,4 +525,4 @@ HEX:
 > 
 > proc.time()
    user  system elapsed 
-  0.483   0.048   0.533 
+  0.507   0.047   0.544 
