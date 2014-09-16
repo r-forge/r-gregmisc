@@ -21,7 +21,7 @@ heatmap.2 <- function (x,
 
                        ## mapping data to colors
                        breaks,
-                       symbreaks=min(x < 0, na.rm=TRUE) || scale!="none",
+                       symbreaks=any(x < 0, na.rm=TRUE) || scale!="none",
 
                        ## colors
                        col="heat.colors",
@@ -65,7 +65,7 @@ heatmap.2 <- function (x,
                        keysize = 1.5,
                        density.info=c("histogram","density","none"),
                        denscol=tracecol,
-                       symkey = min(x < 0, na.rm=TRUE) || symbreaks,
+                       symkey = any(x < 0, na.rm=TRUE) || symbreaks,
                        densadj = 0.25,
                        key.title = NULL,
                        key.xlab = NULL,
@@ -555,7 +555,7 @@ heatmap.2 <- function (x,
 
   if( dendrogram %in% c("both","column") )
     {
-      plot(ddc, axes = FALSE, xaxs = "i", leaflab = "none")
+      plot.dendrogram(ddc, axes = FALSE, xaxs = "i", leaflab = "none")
     }
   else
     plot.new()

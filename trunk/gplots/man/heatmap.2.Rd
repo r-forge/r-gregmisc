@@ -33,7 +33,7 @@ heatmap.2 (x,
 
            # mapping data to colors
            breaks,
-           symbreaks=min(x < 0, na.rm=TRUE) || scale!="none",
+           symbreaks=any(x < 0, na.rm=TRUE) || scale!="none",
 
            # colors
            col="heat.colors",
@@ -77,7 +77,7 @@ heatmap.2 (x,
            keysize = 1.5,
            density.info=c("histogram","density","none"),
            denscol=tracecol,
-           symkey = min(x < 0, na.rm=TRUE) || symbreaks,
+           symkey = any(x < 0, na.rm=TRUE) || symbreaks,
            densadj = 0.25,
            key.title = NULL,
            key.xlab = NULL,
@@ -126,7 +126,7 @@ heatmap.2 (x,
     warning is issued and Rowv (or Colv) arguments are honoured.}
   \item{reorderfun}{\code{function(d, w)} of dendrogram and weights for
     reordering the row and column dendrograms.  The default uses
-    \code{\link{stats}{reorder.dendrogram}}.
+    \code{\link{stats}{reorder.dendrogram}} }.
   \item{symm}{logical indicating if \code{x} should be treated
     \bold{symm}etrically; can only be true when \code{x} is a square matrix.}
   % data scaling
@@ -162,7 +162,7 @@ heatmap.2 (x,
   \item{notecex}{(optional) numeric scaling factor for \code{cellnote}
     items.}
   \item{notecol}{(optional) character string specifying the color for
-    \code{cellnote} text.  Defaults to "green".}
+    \code{cellnote} text.  Defaults to "cyan".}
   \item{na.color}{Color to use for missing value (\code{NA}). Defaults
     to the plot background color.}
   % level trace
