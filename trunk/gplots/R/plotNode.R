@@ -1,14 +1,16 @@
+here <- function() {}
+
 plot.dendrogram <- stats:::plot.dendrogram
-environment(plot.dendrogram) <- .GlobalEnv
+environment(plot.dendrogram) <- environment(here)
 
 plotNodeLimit <- stats:::plotNodeLimit
-environment(plotNodeLimit) <- .GlobalEnv
+environment(plotNodeLimit) <- environment(here)
 
 .memberDend <- stats:::.memberDend
-environment(.memberDend) <- .GlobalEnv
+environment(.memberDend) <- environment(here)
 
 .midDend <- stats:::.midDend
-environment(.midDend) <- .GlobalEnv
+environment(.midDend) <- environment(here)
 
 unByteCode <- function(fun)
     {
@@ -18,4 +20,4 @@ unByteCode <- function(fun)
     }
 
 plotNode <- unByteCode(stats:::plotNode)
-environment(plotNode) <- .GlobalEnv
+environment(plotNode) <- environment(here)
