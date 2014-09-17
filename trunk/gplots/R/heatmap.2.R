@@ -560,7 +560,15 @@ heatmap.2 <- function (x,
   par(mar = c(margins[1], 0, 0, 0))
   if( dendrogram %in% c("both","row") )
     {
-      plot(ddr, horiz = TRUE, axes = FALSE, yaxs = "i", leaflab = "none")
+        flag <- try(
+            plot.dendrogram(ddr, horiz = TRUE, axes = FALSE, yaxs = "i", leaflab = "none")
+            )
+        if("try-error" %in% class(flag))
+            {
+                cond <- attr(flag, "condition")
+                if(!is.null(cond) && conditionMessage(cond)=="evaluation nested too deeply: infinite recursion / options(expressions=)?")
+                    stop('Row dendrogram too deeply nested, recursion limit exceeded.  Try increasing option("expressions"=...).')
+            }
     }
   else
     plot.new()
@@ -569,7 +577,15 @@ heatmap.2 <- function (x,
 
   if( dendrogram %in% c("both","column") )
     {
-      plot.dendrogram(ddc, axes = FALSE, xaxs = "i", leaflab = "none")
+        flag <- try(
+            plot.dendrogram(ddc, axes = FALSE, xaxs = "i", leaflab = "none")
+            )
+        if("try-error" %in% class(flag))
+            {
+                cond <- attr(flag, "condition")
+                if(!is.null(cond) && conditionMessage(cond)=="evaluation nested too deeply: infinite recursion / options(expressions=)?")
+                    stop('Column dendrogram too deeply nested, recursion limit exceeded.  Try increasing option("expressions"=...).')
+            }
     }
   else
     plot.new()
