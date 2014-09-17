@@ -667,7 +667,8 @@ heatmap.2 <- function (x,
             mtext(side=2,key.ylab, line=par("mgp")[1], padj=0.5)
         }
       else
-        title("Color Key")
+          if (is.null(key.title))
+              title("Color Key")
 
 
       if(trace %in% c("both","column") )
