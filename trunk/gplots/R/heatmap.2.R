@@ -114,8 +114,8 @@ heatmap.2 <- function (x,
     Rowv <- FALSE
   if ( is.null(Colv) || is.na(Colv) )
     Colv <- FALSE
-  else if( Colv=="Rowv" && !isTRUE(Rowv) )
-    Colv <- FALSE
+  else if( all(Colv=="Rowv") )
+    Colv <- Rowv
 
 
   if(length(di <- dim(x)) != 2 || !is.numeric(x))
@@ -135,8 +135,15 @@ heatmap.2 <- function (x,
 
   if(!inherits(Rowv, "dendrogram")) {
     ## Check if Rowv and dendrogram arguments are consistent
-    if ( ( (!isTRUE(Rowv)) || (is.null(Rowv))) &&
-         (dendrogram %in% c("both","row") ) )
+    if (
+          (
+             ( is.logical(Rowv)  && !isTRUE(Rowv) )
+              ||
+             ( is.null(Rowv) )
+          )
+          &&
+          ( dendrogram %in% c("both","row") )
+       )
       {
         if (is.logical(Colv) && (Colv))
           dendrogram <- "column"
@@ -151,8 +158,14 @@ heatmap.2 <- function (x,
 
   if(!inherits(Colv, "dendrogram")) {
     ## Check if Colv and dendrogram arguments are consistent
-    if ( ( (!isTRUE(Colv)) || (is.null(Colv)))
-        && (dendrogram %in% c("both","column")) )
+    if (
+         (
+           (is.logical(Colv) && !isTRUE(Colv) )
+             ||
+            (is.null(Colv))
+         )
+         &&
+         ( dendrogram %in% c("both","column")) )
       {
         if (is.logical(Rowv) && (Rowv))
           dendrogram <- "row"
@@ -182,9 +195,10 @@ heatmap.2 <- function (x,
     }
   else if (is.integer(Rowv))
     { ## Compute dendrogram and do reordering based on given vector
+        browser()
       hcr <- hclustfun(distfun(x))
       ddr <- as.dendrogram(hcr)
-      ddr <-  reorderfun(ddr, Rowv)
+      ddr <- reorderfun(ddr, Rowv)
 
       rowInd <- order.dendrogram(ddr)
       if(nr != length(rowInd))
