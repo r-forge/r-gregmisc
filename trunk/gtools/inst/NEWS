@@ -1,3 +1,15 @@
+gtools 3.5.0 - 2014-10-08
+-------------------------
+
+New features:
+
+- New functions first() and last() to retrun the first or last
+  element of a vector or list.
+
+- New functions left() and right() to return the leftmost or 
+  rightmost n (default to 6) columns of a matrix or dataframe.
+
+
 gtools 3.4.1 - 2014-05-27
 -------------------------
 
