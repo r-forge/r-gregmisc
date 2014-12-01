@@ -1,40 +1,32 @@
-% $Id$
-%
-% $Log$
-% Revision 1.7  2005/12/01 16:46:52  nj7w
-% Updated Greg's email address
-%
-% Revision 1.6  2005/06/09 14:20:28  nj7w
-% Updating the version number, and various help files to synchronize splitting of gregmisc bundle in 4 individual components.
-%
-% Revision 1.1.1.1  2005/05/25 22:15:30  nj7w
-% Initial submission as an individual package
-%
-% Revision 1.5  2003/11/19 14:52:32  warnes
-%
-% Remove extranious NULL that confused R CMD check.
-%
-% Revision 1.4  2002/09/23 13:59:30  warnes
-% - Modified all files to include CVS Id and Log tags.
-%
-%
-
 \name{bandplot}
 \alias{bandplot}
+\alias{bandplot.formula}
+\alias{bandplot.default}
 \title{Plot x-y Points with Locally Smoothed Mean and Standard Deviation}
 \description{
-  Plot x-y Points with lines showing the locally smoothed mean and
-  standard deviation.
-  }
+  Plot x-y points with curves for locally smoothed mean and standard deviation.
+}
 \usage{
-  bandplot(x, y, ..., add = FALSE, sd = c(-2:2),
+bandplot(x,...)
+\method{bandplot}{formula}(x, data=parent.frame(), subset, na.action, ...,
+           xlab=NULL, ylab=NULL, add = FALSE, sd = c(-2:2),
            sd.col=c("magenta", "blue", "red", "blue", "magenta"),
            sd.lwd=c(2, 2, 3, 2, 2),  sd.lty=c(2, 1, 1, 1, 2), 
-           method = "frac", width = 1/5, n=50) 
+           method = "frac", width = 1/5, n=50)
+\method{bandplot}{default}(x, y, ..., add = FALSE, sd = c(-2:2),
+           sd.col=c("magenta", "blue", "red", "blue", "magenta"),
+           sd.lwd=c(2, 2, 3, 2, 2),  sd.lty=c(2, 1, 1, 1, 2), 
+           method = "frac", width = 1/5, n=50)
 }
 \arguments{
-  \item{x}{numeric vector of x locations}
-  \item{y}{numeric vector of x locations}
+  \item{x}{either formula providing a single dependent variable (y) and
+    an single independent variable (x) to use as coordinates in the
+    scatter plot  or a numeric vector of x locations}
+  \item{y}{numeric vector of y locations}
+  \item{data}{a data.frame (or list) from which the variables in `formula'
+          should be taken.}
+  \item{subset}{ an optional vector specifying a subset of observations to be
+          used in the fitting process. }
   \item{\dots}{Additional plotting parameters. }
   \item{add}{ Boolean indicating whether the local mean and standard
     deviation lines should be added to an existing plot.  Defaults to
