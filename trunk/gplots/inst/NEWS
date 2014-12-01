@@ -1,3 +1,12 @@
+Release 2.15.0 - 2014-12-01
+---------------------------
+
+New features:
+
+- Convert bandplot() to S3-method dispatch and add method for class formula, so that
+  'bandplot( y ~ x, data=dataframe )' now works as expected.
+
+
 Release 2.14.2 - 2014-09-17
 ---------------------------
 
