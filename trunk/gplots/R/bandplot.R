@@ -59,7 +59,7 @@ bandplot.default  <-  function(x, y,
 
 
 bandplot.formula <- function(x,
-                             data=parent.frame(),
+                             data,
                              subset,
                              na.action,
                              xlab=NULL,
@@ -80,20 +80,24 @@ bandplot.formula <- function(x,
         if (missing(na.action))
             na.action <- getOption("na.action")
 
+        ## construct call to model.frame to generate model matrix
         mf <- match.call(expand.dots = FALSE)
-
         m <- match(c("x", "data", "subset", "na.action"), names(mf), 0L)
-
-        # rename 'x' to 'formula'
-        names(mf)[m[2]] <- "formula"
-
         mf <- mf[c(1L, m)]
         mf$drop.unused.levels <- TRUE
         mf[[1L]] <- quote(stats::model.frame)
+
+        ## rename 'x' to 'formula'
+        names(mf)[2] <- "formula"
+
         mf <- eval(mf, parent.frame())
 
+        ## now extract x and y
         response <- attr(attr(mf, "terms"), "response")
+        x <- mf[[-response]]
+        y <- mf[[response]]
 
+        ## get x and y axis labels
         sx <- substitute(x)
 
         if (is.null(xlab)) {
@@ -110,8 +114,9 @@ bandplot.formula <- function(x,
                 ylab <- "y"
         }
 
-        bandplot.default(x=mf[[-response]],
-                 y=mf[[response]],
+        ## now call the default method to actually do the work
+        bandplot.default(x,
+                 y,
                  ...,
                  xlab=xlab,
                  ylab=ylab,
