@@ -10,10 +10,10 @@ cluster  <- hclust1(distance)
 dend <- as.dendrogram(cluster)
 
 ## R's default recursion limits will be exceeded when plotting this dendrogram
-try( plot.dendrogram(dend) )
+try( gplots:::plot.dendrogram(dend) )
 try( heatmap.2(dat, Rowv=dend) )
 
 ## Increase them and try again
 options("expressions"=20000)
-plot.dendrogram(dend)
+gplots:::plot.dendrogram(dend)
 heatmap.2(dat, Rowv=dend)
