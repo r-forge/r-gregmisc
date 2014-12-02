@@ -50,6 +50,9 @@ importFrom(KernSmooth, dpik)
 S3method(balloonplot, default)
 S3method(balloonplot, table)
 
+S3method(bandplot, default)
+S3method(bandplot, formula)
+
 S3method(barplot2, default)
 
 S3method(lowess, default)
