@@ -18,7 +18,7 @@ bandplot.default  <-  function(x, y,
 
     if(length(sd.col)<length(sd)) sd <-rep(sd.col,length=length(sd))
     if(length(sd.lwd)<length(sd)) sd <-rep(sd.lwd,length=length(sd))
-    if(length(sd.lty)<length(sd)) sd <-rep(sd.lty,length=length(sd))    
+    if(length(sd.lty)<length(sd)) sd <-rep(sd.lty,length=length(sd))
     if(!add)
       {
         m <- match.call(expand.dots = TRUE)
@@ -54,7 +54,7 @@ bandplot.default  <-  function(x, y,
                 )
 
       }
-    
+
   }
 
 
@@ -79,33 +79,35 @@ bandplot.formula <- function(x,
             stop("x missing or incorrect")
         if (missing(na.action))
             na.action <- getOption("na.action")
-        m <- match.call(expand.dots = FALSE)
-        if (is.matrix(eval(m$data, parent.frame())))
-            m$data <- as.data.frame(data)
-        m$formula <- m$x
-        m$...  <- m$x <- m$f <- m$iter <- m$delta <- NULL
-        m$xlab <- m$ylab <- m$add  <- m$sd <- NULL
-        m$sd.col <- m$sd.lwd <-  m$sd.lty <- NULL
-        m$method <- m$width <- m$n <- NULL
 
-        m[[1]] <- as.name("model.frame")
-        mf <- eval(m, parent.frame())
+        mf <- match.call(expand.dots = FALSE)
+
+        m <- match(c("x", "data", "subset", "na.action"), names(mf), 0L)
+
+        # rename 'x' to 'formula'
+        names(mf)[m[2]] <- "formula"
+
+        mf <- mf[c(1L, m)]
+        mf$drop.unused.levels <- TRUE
+        mf[[1L]] <- quote(stats::model.frame)
+        mf <- eval(mf, parent.frame())
+
         response <- attr(attr(mf, "terms"), "response")
-        
+
         sx <- substitute(x)
 
         if (is.null(xlab)) {
-            if (mode(x) != "name") 
+            if (mode(x) != "name")
                 xlab <- deparse(sx[[3L]])
             else
-                xlab <- "x" 
+                xlab <- "x"
         }
 
         if (is.null(ylab)) {
-            if (mode(x) != "name") 
+            if (mode(x) != "name")
                 ylab <- deparse(sx[[2L]])
             else
-                ylab <- "y" 
+                ylab <- "y"
         }
 
         bandplot.default(x=mf[[-response]],
