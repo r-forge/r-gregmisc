@@ -1,5 +1,5 @@
 Package: gplots
-Title: Various R programming tools for plotting data
+Title: Various R Programming Tools for Plotting Data
 Description: Various R programming tools for plotting data
 Depends: R (>= 3.0)
 Imports: gtools, gdata, stats, caTools, KernSmooth
