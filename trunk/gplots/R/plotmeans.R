@@ -7,6 +7,7 @@ plotmeans  <- function (formula, data = NULL, subset, na.action,
                         mean.labels=FALSE,
                         ci.label=FALSE,
                         n.label=TRUE,
+                        text.n.label="N=",
                         digits=getOption("digits"), col="black",
                         barwidth=1,
                         barcol="blue",
@@ -78,7 +79,7 @@ plotmeans  <- function (formula, data = NULL, subset, na.action,
              xlab=xlab, ylab=ylab, labels=mean.labels, col=col, xlim=xlim,
              lwd=barwidth, barcol=barcol, minbar=minbar, maxbar=maxbar, ... )
       if(invalid(xaxt) || xaxt!="n")
-        axis(1, at = 1:length(means), labels = legends)
+        axis(1, at = 1:length(means), labels = legends, ...)
 
       if(ci.label)
         {
@@ -103,8 +104,12 @@ plotmeans  <- function (formula, data = NULL, subset, na.action,
 
 
   if(n.label)
-      text(x=1:length(means),y=par("usr")[3],
-           labels=paste("n=",ns,"\n",sep=""))
+      {
+          text(x=1:length(means),
+               y=par("usr")[3],
+               labels=paste(text.n.label, ns, "\n", sep="")
+               )
+      }
 
   if(!invalid(connect) & !identical(connect,FALSE))
     {
@@ -119,7 +124,6 @@ plotmeans  <- function (formula, data = NULL, subset, na.action,
       else
         lines(means, ..., lwd=lwd, col=ccol)
     }
-
 
 }
 
