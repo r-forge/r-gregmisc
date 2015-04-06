@@ -1,4 +1,4 @@
-gtools 3.5.0 - 2014-10-08
+gtools 3.5.0 - 2015-04-06
 -------------------------
 
 New features:
@@ -8,6 +8,10 @@ New features:
 
 - New functions left() and right() to return the leftmost or 
   rightmost n (default to 6) columns of a matrix or dataframe.
+
+Bug fixes:
+
+- Modify keywords() to work properly in R 3.4.X and later.
 
 
 gtools 3.4.1 - 2014-05-27

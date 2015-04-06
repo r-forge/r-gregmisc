@@ -1,5 +1,18 @@
+2015-04-06  warnes
+
+	* [r1916] inst/ChangeLog: Add ChangeLog files to repository
+	* [r1915] R/keywords.R: Implement fix to keywords() needed for
+	  R-3.4.1, as suggested by Kurt
+	  Hornik.
+	* [r1914] NAMESPACE, R/first.R: - Export S3 methods for first(),
+	  last(), left() and right().
+	  - Ensure code matches man page for first(), last(), left(), and
+	  right().
+
 2014-10-09  warnes
 
+	* [r1897] DESCRIPTION, inst/NEWS: Update for 3.5.0 release of
+	  gtools
 	* [r1896] R/first.R: Make right() and left() S3 methods for classes
 	  data.frame and matrix
 
