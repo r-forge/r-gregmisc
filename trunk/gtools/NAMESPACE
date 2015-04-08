@@ -12,15 +12,12 @@ export(
        ddirichlet,
        defmacro,
        even,
-       first,
        foldchange,
        foldchange2logratio,
        getDependencies,
        inv.logit,
        invalid,
        keywords,
-       last,
-       left,
        lastAdd,
        logit,
        logratio2foldchange,
@@ -30,7 +27,6 @@ export(
        permutations,
        permute,
        quantcut,
-       right,
        rdirichlet,
        running,
        scat,
@@ -40,16 +36,3 @@ export(
        stars.pval,
        strmacro
        )
-
-S3method(first, default)
-S3method(first, list   )
-
-S3method(last,  default)
-S3method(last,  list   )
-
-S3method(left,  data.frame)
-S3method(left,  matrix)
-
-S3method(right, data.frame)
-S3method(right, matrix)
-
