@@ -1,13 +1,13 @@
-gtools 3.5.0 - 2015-04-06
+gtools 3.4.2 - 2015-04-06
 -------------------------
 
 New features:
 
-- New functions first() and last() to retrun the first or last
-  element of a vector or list.
+- New function loadedPackages() to display name, version, and path of
+  loaded packages (package namespaces).
 
-- New functions left() and right() to return the leftmost or 
-  rightmost n (default to 6) columns of a matrix or dataframe.
+- New function: na.replace() to replace missing values within a
+  vector with a specified value.`
 
 Bug fixes:
 

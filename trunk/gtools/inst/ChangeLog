@@ -1,5 +1,8 @@
 2015-04-06  warnes
 
+	* [r1918] man/dirichlet.Rd: Correct URL
+	* [r1917] inst/ChangeLog, inst/NEWS: Update NEWS and ChangeLog for
+	  gtools 3.5.0
 	* [r1916] inst/ChangeLog: Add ChangeLog files to repository
 	* [r1915] R/keywords.R: Implement fix to keywords() needed for
 	  R-3.4.1, as suggested by Kurt
