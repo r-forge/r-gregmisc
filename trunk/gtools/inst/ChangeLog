@@ -1,3 +1,16 @@
+2015-04-09  warnes
+
+	* [r1920] DESCRIPTION, NAMESPACE, R/loadedPackages.R,
+	  R/na.replace.R, inst/ChangeLog, inst/NEWS, man/loadedPackages.Rd,
+	  man/na.replace.Rd: Move first()/last()/left()/right() to gdata.
+	  Add new functions na.replace() and loadedPackages().
+	  Add more text to package description.
+
+2015-04-08  warnes
+
+	* [r1919] NAMESPACE, R/first.R, man/first.Rd, man/left.Rd: Move
+	  first/last/left/right to from gtools to gdata
+
 2015-04-06  warnes
 
 	* [r1918] man/dirichlet.Rd: Correct URL
