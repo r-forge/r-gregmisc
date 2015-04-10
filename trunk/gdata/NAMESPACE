@@ -14,11 +14,14 @@ export(
        duplicated2,
        elem,
        env,
+       first,
        frameApply,
        installXLSXsupport,
        interleave,
        is.what,
        keep,
+       last,
+       left,
        ll,
        ls.funs,
        lowerTriangle,
@@ -31,6 +34,7 @@ export(
        remove.vars,
        reorder.factor,
        resample,
+       right,
        sheetCount,
        sheetNames,
        startsWith,
@@ -151,3 +155,13 @@ S3method(trim, default)
 S3method(trim, factor)
 S3method(trim, list)
 S3method(trim, data.frame)
+
+## first, last, left, right
+S3method(first, default)
+S3method(first, list   )
+S3method(last,  default)
+S3method(last,  list   )
+S3method(left,  data.frame)
+S3method(left,  matrix)
+S3method(right, data.frame)
+S3method(right, matrix)
