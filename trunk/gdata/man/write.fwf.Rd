@@ -64,9 +64,7 @@ write.fwf(x, file="", append=FALSE, quote=FALSE, sep=" ", na="",
 \details{
 
 While *F*ixed *w*idth *f*ormat is no longer widely used, it remains
-common in some disciplines.  When possible, we recommend using
-standardized format (e.g. *c*omma *s*eparated *v*alues; see
-\code{\link{read.csv}}) when possible.
+common in some disciplines.
 
 Output is similar to \code{print(x)} or \code{format(x)}. Formatting is
 done completely by \code{\link{format}} on a column basis. Columns in
