@@ -1,5 +1,8 @@
 2015-04-14  warnes
 
+	* [r1928] man/write.fwf.Rd: Remove editorializing
+	* [r1927] inst/ChangeLog, inst/NEWS: Update NEWS and ChangeLog for
+	  gdata 2.15.0
 	* [r1926] R/write.fwf.R, man/write.fwf.Rd: Add 'scientific'
 	  argument to write.fwf to allow control of whether numeric values
 	  can be displated using scientific notation.
