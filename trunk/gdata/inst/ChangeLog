@@ -1,3 +1,12 @@
+2015-04-14  warnes
+
+	* [r1926] R/write.fwf.R, man/write.fwf.Rd: Add 'scientific'
+	  argument to write.fwf to allow control of whether numeric values
+	  can be displated using scientific notation.
+	* [r1925] inst/perl/xls2csv.pl: Replace depricated PERL function
+	  POSIX::isnumeric with equivalent regexp
+	* [r1924] inst/ChangeLog: Add gdata ChangeLog to SVN
+
 2015-04-10  warnes
 
 	* [r1922] DESCRIPTION, NAMESPACE, inst/NEWS: Update files for gdata
