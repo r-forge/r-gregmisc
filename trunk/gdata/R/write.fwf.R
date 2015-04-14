@@ -20,6 +20,7 @@ write.fwf <- function(x,
                       width=NULL,
                       eol="\n",
                       qmethod=c("escape", "double"),
+                      scientific=TRUE,
                       ...)
 {
   ## --- Setup ---
@@ -29,6 +30,14 @@ write.fwf <- function(x,
   if(length(na) > 1)
     stop("only single value can be defined for 'na'")
 
+  if(!scientific)
+      {
+          option.scipen <- getOption("scipen")
+          on.exit( function() options("scipen"=option.scipen) )
+          options("scipen"=100)
+      }
+
+  
   if(rownames) {
     x <- cbind(rownames(x), x)
     rowColVal <- ifelse(!is.null(rowCol), rowCol, "row")
