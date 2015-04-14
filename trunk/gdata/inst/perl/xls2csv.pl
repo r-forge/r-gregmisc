@@ -118,7 +118,7 @@ my $sheetnumber;
 
 if(defined($ARGV[2]) )
   {
-    if ( isdigit($ARGV[2]) )
+    if ( $ARGV[2] =~ m|^\d+$| )
       {
 	$sheetnumber = $ARGV[2];
 	die "Sheetnumber must be an integer larger than 0.\n" if $sheetnumber < 1;
