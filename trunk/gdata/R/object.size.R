@@ -104,5 +104,6 @@ humanReadable <- function(x, standard="SI", units, digits=1, width=3, sep=" ")
              width=width, sep=sep)
 }
 
+
 ###------------------------------------------------------------------------
 ### object.size.R ends here

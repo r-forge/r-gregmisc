@@ -19,15 +19,14 @@ kB, MB, GB, etc.
 }
 
 \usage{
-
-humanReadable(x, standard="SI", digits=1, width=3, sep=" ")
-
+humanReadable(x, standard=c("SI","IEC"), units, digits=1, width=3, sep=" ")
 }
 
 \arguments{
   \item{x}{integer, byte size}
-  \item{standard}{character, "SI" for powers of 1000 or anything else for
+  \item{standard}{character, either "SI" for powers of 1000 or "IEC" for
     powers of 1024, see details}
+  \item{units}{character, unit to use for all values (optional)}
   \item{digits}{integer, number of digits after decimal point}
   \item{width}{integer, width of number string}
   \item{sep}{character, separator between number and unit}
@@ -104,6 +103,14 @@ added at the end of the string.
 
 \examples{
 
+# Simple example: maximum addressible size of 32 bit pointer
+humanReadable(2^32-1, standard="SI")
+humanReadable(2^32-1, standard="IEC")
+
+humanReadable(2^32-1, standard="SI",  unit="MB")
+humanReadable(2^32-1, standard="IEC", unit="MiB")
+
+
 baseSI <- 10
 powerSI <- seq(from=3, to=27, by=3)
 SI0 <- (baseSI)^powerSI
@@ -117,12 +124,22 @@ IEC0 <- (baseIEC)^powerIEC
 IEC1 <- IEC0 - IEC0 / c(2, runif(n=k, min=1.01, max=5.99))
 IEC2 <- IEC0 + IEC0 / c(2, runif(n=k, min=1.01, max=5.99))
 
+# Auto units
 cbind(humanReadable(x=SI1, width=NULL, digits=3),
       humanReadable(x=SI0, width=NULL, digits=2),
       humanReadable(x=SI2, width=NULL, digits=1),
       humanReadable(x=IEC1, standard="IEC", width=7, digits=3),
       humanReadable(x=IEC0, standard="IEC", width=7, digits=2),
       humanReadable(x=IEC2, standard="IEC", width=7, digits=1))
+
+# Single unit
+cbind(humanReadable(x=SI1, units="GB", width=NULL, digits=3),
+      humanReadable(x=SI0, units="GB", width=NULL, digits=2),
+      humanReadable(x=SI2, units="GB", width=NULL, digits=1),
+      humanReadable(x=IEC1, units="GiB", standard="IEC", width=7, digits=3),
+      humanReadable(x=IEC0, units="GiB", standard="IEC", width=7, digits=2),
+      humanReadable(x=IEC2, units="GiB", standard="IEC", width=7, digits=1))
+
 }
 
 \keyword{misc}
