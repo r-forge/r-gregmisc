@@ -4,15 +4,15 @@
 ### $Id$
 ### Time-stamp: <2008-12-30 08:05:43 ggorjan>
 ###------------------------------------------------------------------------
-
 object.size <- function(...) 
 {
   structure(sapply(list(...),
                    utils::object.size),
-                   class=c("object_size", "numeric"))
+                   class=c("object_sizes", "numeric"))
 }
 
-print.object_size <- function(x, quote=FALSE, humanReadable, ...)
+print.object_sizes <- function(x, quote=FALSE, units,
+                                  humanReadable, ...)
 {  
   xOrig <- x
   if(missing(humanReadable)) {
@@ -28,36 +28,30 @@ print.object_size <- function(x, quote=FALSE, humanReadable, ...)
   invisible(xOrig)
 }
 
-is.object_size <- function(x) inherits(x, what="object_size")
+is.object_sizes <- function(x) inherits(x, what="object_sizes")
    
-as.object_size <- function(x)
+as.object_sizes <- function(x)
 {
   if(!is.numeric(x)) stop("'x' must be numeric/integer")
-  class(x) <- c("object_size", "numeric")
+  class(x) <- c("object_sizes", "numeric")
   x
 }
 
-c.object_size <- function(..., recursive=FALSE)
+c.object_sizes <- function(..., recursive=FALSE)
 {
   x <- NextMethod()
-  if(is.numeric(x)) class(x) <- c("object_size", "numeric")
+  if(is.numeric(x)) class(x) <- c("object_sizes", "numeric")
   x
 }
 
-humanReadable <- function(x, standard="SI", digits=1, width=3, sep=" ")
+humanReadable <- function(x, standard="SI", units, digits=1, width=3, sep=" ")
 {
   ## --- Setup ---
 
-  if(any(x < 0)) stop("'x' must be positive")
-  if(standard == "SI") {
-    suffix <- c("B", "kB",  "MB",  "GB",  "TB",  "PB",  "EB",  "ZB",  "YB")
-    base <- 1000
-  } else {
-    suffix <- c("B", "KiB", "MiB", "GiB", "TiB", "PiB", "EiB", "ZiB", "YiB")
-    base <- 1024
-  }
-
-  ## --- Apply ---
+  suffix.decimal <- c("B", "kB",  "MB",  "GB",  "TB",  "PB",  "EB",  "ZB",  "YB")
+  suffix.binary  <- c("B", "KiB", "MiB", "GiB", "TiB", "PiB", "EiB", "ZiB", "YiB")
+    
+  ## --- Functions ---
 
   .applyHuman <- function(x, base, suffix, digits, width, sep)
   {
@@ -85,8 +79,29 @@ humanReadable <- function(x, standard="SI", digits=1, width=3, sep=" ")
     paste(x, suffix[i], sep=sep)
   }
 
-  sapply(X=x, FUN=".applyHuman", base=base, suffix=suffix, digits=digits,
-         width=width, sep=sep)
+  ## -- Work
+  
+  if(any(x < 0)) stop("'x' must be positive")
+  if(standard == "SI") {
+    suffix <- suffix.decimal
+    base <- 10^3
+  } else {
+    suffix <- suffix.binary
+    base <- 2^10
+  }
+
+  if(!missing(units))
+      {
+          units <- match.arg( units, suffix )
+          power <- which( units %in% suffix ) -1
+          X <- x/(base^power)
+          X <- format.default(round(x=x, digits=digits), nsmall=digits)
+          X <- paste(X, units)
+          X
+      }
+  else
+      sapply(X=x, FUN=".applyHuman", base=base, suffix=suffix, digits=digits,
+             width=width, sep=sep)
 }
 
 ###------------------------------------------------------------------------
