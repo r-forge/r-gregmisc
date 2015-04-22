@@ -13,6 +13,15 @@ New features:
   prevent numeric columns from being displayed using scientific
   notification.
 
+- The 'standard' argument to humanReadable() now accepts only two values,
+  'SI' for base 1000, and IEC for base 1024.
+
+- New 'units' argument to humanReadable() that permits specifying the
+  standard unit to use for all values.
+
+- The object.size() function now accepts the 'units' argument which is 
+  passed onto humanReadable().
+
 Bug fixes:
 
 - reorder.factor() was ignoring the argument 'X', making it incompatible

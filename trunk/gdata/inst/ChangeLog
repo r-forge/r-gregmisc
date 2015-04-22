@@ -1,5 +1,12 @@
 2015-04-22  warnes
 
+	* [r1936] DESCRIPTION, R/humanReadable.R, R/object.size.R,
+	  man/humanReadable.Rd: Fix 'units' argument of humanReadable()
+	* [r1935] man/object.size.Rd: Update object.size() man page to
+	  reflect change in class of return value from 'object_size' to
+	  'object_sizes'
+	* [r1934] inst/ChangeLog, inst/NEWS: Update NEWS and ChangeLog for
+	  gdata 2.16.0
 	* [r1933] NAMESPACE, R/object.size.R: Modify gdaata:object.size to
 	  generate S3 objects of class 'object_sizes' (note the final 's')
 	  to avoid conflicts with methods in utils for object_size.
