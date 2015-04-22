@@ -12,6 +12,9 @@ reorder.factor <- function(x,
 {
     constructor <- if (order) ordered else factor
 
+    if(!missing(X))
+       return( NextMethod(x)) 
+
     if (!missing(new.order))
       {
         if (is.numeric(new.order))
