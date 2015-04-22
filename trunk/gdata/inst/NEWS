@@ -1,4 +1,4 @@
-Changes in 2.15.0 (2015-04-06)
+Changes in 2.16.0 (2015-04-21)
 ------------------------------
 
 New features:
@@ -13,10 +13,21 @@ New features:
   prevent numeric columns from being displayed using scientific
   notification.
 
+Bug fixes:
+
+- reorder.factor() was ignoring the argument 'X', making it incompatible
+  with the behavior of stats:::reorder.default(). This has been corrected,
+  and providing 'X' now returns the same results whether gdata is loaded 
+  or not.  (Reported by Sam Hunter.)
+ 
 Other changes:
 
-- Replaced depricated PERL function POSIX::isdigit with equivalent
-  regular expression.
+- Replaced depricated PERL function POSIX::isdigit with equivalent regular 
+  expression.
+
+- object.size() now returns objects with S3 class 'object_sizes' (note the 
+  final 's') to avoid conflicts with methods in utils for class 'object_size' 
+  which can only handle a scalar size.
 
 
 Changes in 2.14.0 (2014-08-27)
