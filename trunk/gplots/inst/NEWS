@@ -1,3 +1,12 @@
+Release 2.17.0 - 2015-04-21
+---------------------------
+
+New Features:
+
+- heatmap.2() has two new arguments, 'colRow' and 'colCol' to control
+  the color of row and column text labels.
+
+
 Release 2.16.0 - 2015-01-02
 ---------------------------
 
