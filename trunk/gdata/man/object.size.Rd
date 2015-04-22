@@ -5,10 +5,10 @@
 
 \name{object.size}
 \alias{object.size}
-\alias{print.object_size}
-\alias{c.object_size}
-\alias{as.object_size}
-\alias{is.object_size}
+\alias{print.object_sizes}
+\alias{c.object_sizes}
+\alias{as.object_sizes}
+\alias{is.object_sizes}
 
 \title{Report the Space Allocated for an Object}
 \description{
@@ -17,7 +17,7 @@
 \usage{
 object.size(\dots)
 
-\method{print}{object_size}(x, quote=FALSE, humanReadable, \dots)
+\method{print}{object_sizes}(x, quote=FALSE, humanReadable, \dots)
 }
 \arguments{
   \item{\dots}{\code{object.size}: \R objects; \code{print}; arguments 
@@ -76,10 +76,10 @@ z <- sapply(ls("package:base"), function(x)
             object.size(get(x, envir = baseenv())))
 (tmp <- as.matrix(rev(sort(z))[1:10]))
 
-as.object_size(14567567)
+as.object_sizes(14567567)
 options(humanReadable=TRUE)
 (z <- object.size(letters, c(letters, letters), rep(letters, 100), rep(letters, 10000)))
-is.object_size(z)
-as.object_size(14567567)
+is.object_sizes(z)
+as.object_sizes(14567567)
 }
 \keyword{utilities}
