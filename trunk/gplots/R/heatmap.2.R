@@ -59,6 +59,8 @@ heatmap.2 <- function (x,
                        adjCol = c(NA,0),
                        offsetRow = 0.5,
                        offsetCol = 0.5,
+                       colRow = NULL,
+                       colCol = NULL,
 
                        ## color key + density info
                        key = TRUE,
@@ -281,6 +283,12 @@ heatmap.2 <- function (x,
     labCol <- if(is.null(colnames(x))) (1:nc)[colInd] else colnames(x)
   else
     labCol <- labCol[colInd]
+  
+  if(!is.null(colRow))
+    colRow <- colRow[rowInd]
+  
+  if(!is.null(colCol))
+    colCol <- colCol[colInd]
 
   if(scale == "row") {
     retval$rowMeans <- rm <- rowMeans(x, na.rm = na.rm)
@@ -415,7 +423,7 @@ heatmap.2 <- function (x,
     }
 
   ## add column labels
-  if(is.null(srtCol))
+  if(is.null(srtCol) && is.null(colCol))
     axis(1,
          1:nc,
          labels= labCol,
@@ -428,7 +436,7 @@ heatmap.2 <- function (x,
          )
   else
     {
-      if(is.numeric(srtCol))
+      if(is.null(srtCol) || is.numeric(srtCol))
         {
           if(missing(adjCol) || is.null(adjCol))
             adjCol=c(1,NA)
@@ -442,7 +450,10 @@ heatmap.2 <- function (x,
                ##pos=1,
                adj=adjCol,
                cex=cexCol,
-               srt=srtCol)
+               srt=srtCol,
+               col=colCol
+               )
+          print(colCol)
           par(xpd=xpd.orig)
         }
       else
@@ -450,7 +461,7 @@ heatmap.2 <- function (x,
     }
 
   ## add row labels
-  if(is.null(srtRow))
+  if(is.null(srtRow) && is.null(colRow))
     {
       axis(4,
            iy,
@@ -465,7 +476,7 @@ heatmap.2 <- function (x,
     }
   else
     {
-      if(is.numeric(srtRow))
+      if(is.null(srtRow) || is.numeric(srtRow))
         {
           xpd.orig <- par("xpd")
           par(xpd=NA)
@@ -475,7 +486,8 @@ heatmap.2 <- function (x,
                labels=labRow,
                adj=adjRow,
                cex=cexRow,
-               srt=srtRow
+               srt=srtRow,
+               col=colRow
                )
           par(xpd=xpd.orig)
         }
