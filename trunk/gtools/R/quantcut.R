@@ -1,7 +1,10 @@
 # $Id$
 
-quantcut <- function(x, q=seq(0,1,by=0.25), na.rm=TRUE, ... )
+quantcut <- function(x, q=4, na.rm=TRUE, ... )
   {
+    if(length(q)==1)
+        q <- seq(0,1, length.out=q+1)
+    
     quant <- quantile(x, q, na.rm=na.rm)
     dups <- duplicated(quant)
     if(any(dups))
