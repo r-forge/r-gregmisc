@@ -194,6 +194,8 @@ heatmap.2 <- function (x,
       rowInd <- order.dendrogram(ddr)
       if(length(rowInd)>nr || any(rowInd<1 | rowInd > nr ))
          stop("Rowv dendrogram doesn't match size of x")
+      if (length(rowInd) < nr)
+          nr <- length(rowInd)
     }
   else if (is.integer(Rowv))
     { ## Compute dendrogram and do reordering based on given vector
@@ -230,6 +232,8 @@ heatmap.2 <- function (x,
       colInd <- order.dendrogram(ddc)
       if(length(colInd)>nc || any(colInd<1 | colInd > nc ))
          stop("Colv dendrogram doesn't match size of x")
+      if (length(colInd) < nc)
+          nc <- length(colInd)
     }
   else if(identical(Colv, "Rowv")) {
     if(nr != nc)
@@ -633,8 +637,8 @@ heatmap.2 <- function (x,
         }
       else
         {
-          min.raw <- min(x, na.rm=TRUE) ## Again, modified to use scaled
-          max.raw <- max(x, na.rm=TRUE) ## or unscaled (SD 12/2/03)
+          min.raw <- min.breaks
+          max.raw <- max.breaks
         }
 
       z <- seq(min.raw, max.raw, length=length(col))
@@ -661,7 +665,7 @@ heatmap.2 <- function (x,
             key.xlab <- "Value"
       }
       if (!is.na(key.xlab)) {
-          mtext(side=1, key.xlab, line=par("mgp")[1], padj=0.5)
+          mtext(side=1, key.xlab, line=par("mgp")[1], padj=0.5, cex=par("cex") * par("cex.lab"))
       }
 
       if(density.info=="density")
@@ -687,7 +691,7 @@ heatmap.2 <- function (x,
           if (is.null(key.ylab))
               key.ylab <- "Density"
           if (!is.na(key.ylab))
-            mtext(side=2,key.ylab, line=par("mgp")[1], padj=0.5)
+            mtext(side=2,key.ylab, line=par("mgp")[1], padj=0.5, cex=par("cex") * par("cex.lab"))
         }
       else if(density.info=="histogram")
         {
@@ -710,7 +714,7 @@ heatmap.2 <- function (x,
           if (is.null(key.ylab))
               key.ylab <- "Count"
           if (!is.na(key.ylab))
-            mtext(side=2,key.ylab, line=par("mgp")[1], padj=0.5)
+            mtext(side=2,key.ylab, line=par("mgp")[1], padj=0.5, cex=par("cex") * par("cex.lab"))
         }
       else
           if (is.null(key.title))
