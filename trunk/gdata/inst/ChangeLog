@@ -1,5 +1,11 @@
 2015-04-23  warnes
 
+	* [r1952] R/write.fwf.R: - write.fwf() now properly supports
+	  matrix objects, including matrix objects wihtout column
+	  names. (Reported by Carl Witthoft.)
+	* [r1951] inst/perl/xls2csv.pl: Remove 'use POSIX' from xls2csv.pl
+	  since it is no longer needed
+	* [r1939] inst/ChangeLog, inst/NEWS: Update NEWS and ChangeLog
 	* [r1938] R/reorder.R: reorder.factor() now hands off processing to
 	  stats:::reorder.default() when either 'X' or 'FUN' is specified.
 
