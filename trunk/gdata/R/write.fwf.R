@@ -44,6 +44,8 @@ write.fwf <- function(x,
     colnames(x)[1] <- rowColVal
   }
   colnamesMy <- colnames(x)
+  if(length(colnamesMy)==0)
+      colnamesMy <- paste( "V", 1:ncol(x), sep="")
 
   nRow <- nrow(x)
   nCol <- length(colnamesMy)
@@ -67,18 +69,20 @@ write.fwf <- function(x,
                           stringsAsFactors=FALSE)
 
   ## Which columns are numeric like
-  isNum <- sapply(x, is.numeric)
+  isNum <- apply(x, 2, is.numeric)
   ## is.numeric picks also Date and POSIXt
-  isNum <- isNum & !(sapply(x, inherits, what="Date") |
-                     sapply(x, inherits, what="POSIXt"))
+  isNum <- isNum & !(apply(x, 2, inherits, what="Date") |
+                     apply(x, 2, inherits, what="POSIXt"))
 
   ## Which columns are factors --> convert them to character
-  isFac <- sapply(x, is.factor)
-  x[, isFac] <- lapply(x[, isFac, drop=FALSE], as.character)
+  isFac <- apply(x, 2, is.factor)
+  x[, isFac] <- apply(x[, isFac, drop=FALSE], 2, as.character)
 
   ## Collect information about how format() will format columns.
   ## We need to get this info now, since format will turn all columns to character
-  tmp <- lapply(x, format.info, ...)
+browser()
+  
+  tmp <- apply(x, 2, format.info, ...)
   tmp1 <- sapply(tmp, length)
   tmp <- t(as.data.frame(tmp))
   retFormat$width <- tmp[, 1]
@@ -137,7 +141,7 @@ write.fwf <- function(x,
 
   ## Number of levels for "non-numeric"" columns
   if(any(!isNum)) {
-    retFormat[!isNum, "nlevels"] <- sapply(x[, !isNum, drop=FALSE],
+    retFormat[!isNum, "nlevels"] <- apply(x[, !isNum, drop=FALSE], 2,
                                            function(z) length(unique(z)))
   }
 
