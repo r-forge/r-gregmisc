@@ -9,7 +9,6 @@ use lib dirname($0);
 use strict;
 #use Spreadsheet::ParseExcel;
 #use Spreadsheet::ParseXLSX;
-use POSIX;
 use File::Spec::Functions;
 use Getopt::Std;
 
