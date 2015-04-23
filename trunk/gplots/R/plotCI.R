@@ -103,7 +103,7 @@ plotCI <- function (x,
     {
       if(invalid(labels) || labels==FALSE )
         plot(x, y, ylim = ylim, xlim=xlim, col=col,
-             xlab=xlab, ylab=ylab, ...)
+             xlab=xlab, ylab=ylab, type="n", ...)
       else
         {
           plot(x, y, ylim = ylim, xlim=xlim, col=col, type="n",
