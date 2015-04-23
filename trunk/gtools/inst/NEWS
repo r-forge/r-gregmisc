@@ -1,3 +1,15 @@
+gtools 3.4.3 - 2015-04-06
+-------------------------
+
+Bug fixes:
+
+- Removed stray browser() call in smartbind().
+
+Other changes:
+
+- Correct typographical errors in package description.
+
+
 gtools 3.4.2 - 2015-04-06
 -------------------------
 

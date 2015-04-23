@@ -1,5 +1,15 @@
+2015-04-23  warnes
+
+	* [r1944] R/smartbind.R, R/strmacro.R: Remove debugging code and
+	  stray browser() call
+
+2015-04-14  warnes
+
+	* [r1923] DESCRIPTION: Fix typo
+
 2015-04-09  warnes
 
+	* [r1921] inst/ChangeLog: Update gtools ChangeLog
 	* [r1920] DESCRIPTION, NAMESPACE, R/loadedPackages.R,
 	  R/na.replace.R, inst/ChangeLog, inst/NEWS, man/loadedPackages.Rd,
 	  man/na.replace.Rd: Move first()/last()/left()/right() to gdata.
