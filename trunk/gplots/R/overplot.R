@@ -58,8 +58,6 @@ overplot <- function (formula, data = parent.frame(),
   x.all.min <- min(x, na.rm=TRUE)
   x.all.max <- max(x, na.rm=TRUE)
 
-  if(y.all.min==y.all.max) browser()
-
   if (length(cond) == 0) {
     cond <- list(as.factor(rep(1, length(x))))
   }
