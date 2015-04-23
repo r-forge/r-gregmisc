@@ -1,5 +1,8 @@
 2015-04-23  warnes
 
+	* [r1954] DESCRIPTION, R/heatmap.2.R, inst/ChangeLog, inst/NEWS: In
+	  heatmap.2(), the color key now properly handles color breaks that
+	  are not equally spaced. (Issue reported by Tim Richter-Heitmann.)
 	* [r1948] R/plotCI.R: - plotCI() was not properly respecting the
 	  'type=' argument. This has
 	  been corrected.
