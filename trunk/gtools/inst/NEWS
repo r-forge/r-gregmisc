@@ -1,6 +1,12 @@
 gtools 3.4.3 - 2015-04-06
 -------------------------
 
+Enhancements:
+
+- The 'q' argument to quantcut() now accept an integer
+  indicating the number of equally spaced quantile groups to
+  create. (Suggestion and patch submitted by Ryan C. Thompson.)
+
 Bug fixes:
 
 - Removed stray browser() call in smartbind().

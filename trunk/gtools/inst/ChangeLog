@@ -1,5 +1,12 @@
 2015-04-23  warnes
 
+	* [r1949] R/quantcut.R, man/quantcut.Rd: - The 'q' argument to
+	  quantcut()'s 'q' now accept an integer
+	  indicating the number of equally spaced quantile groups to
+	  create. (Suggestion and patch submitted by Ryan C. Thompson.)
+	* [r1946] DESCRIPTION: Revers accidental text deletion:
+	* [r1945] DESCRIPTION, inst/ChangeLog, inst/NEWS: Update for gtools
+	  3.4.3
 	* [r1944] R/smartbind.R, R/strmacro.R: Remove debugging code and
 	  stray browser() call
 
