@@ -12,7 +12,7 @@ reorder.factor <- function(x,
 {
     constructor <- if (order) ordered else factor
 
-    if(!missing(X))
+    if(!missing(X) || !missing(FUN))
        return( NextMethod(x)) 
 
     if (!missing(new.order))
