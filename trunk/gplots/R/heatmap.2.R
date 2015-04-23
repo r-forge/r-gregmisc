@@ -198,7 +198,8 @@ heatmap.2 <- function (x,
   else if (is.integer(Rowv))
     { ## Compute dendrogram and do reordering based on given vector
         browser()
-      hcr <- hclustfun(distfun(x))
+      distr <- distfun(x)       
+      hcr <- hclustfun(distr)
       ddr <- as.dendrogram(hcr)
       ddr <- reorderfun(ddr, Rowv)
 
@@ -209,7 +210,8 @@ heatmap.2 <- function (x,
   else if (isTRUE(Rowv))
     { ## If TRUE, compute dendrogram and do reordering based on rowMeans
       Rowv <- rowMeans(x, na.rm = na.rm)
-      hcr <- hclustfun(distfun(x))
+      distr <- distfun(x)
+      hcr <- hclustfun(distr)
       ddr <- as.dendrogram(hcr)
       ddr <- reorderfun(ddr, Rowv)
 
@@ -240,7 +242,8 @@ heatmap.2 <- function (x,
     colInd <- rowInd
   } else if(is.integer(Colv))
     {## Compute dendrogram and do reordering based on given vector
-      hcc <- hclustfun(distfun(if(symm)x else t(x)))
+      distc <- distfun(if(symm)x else t(x))
+      hcc <- hclustfun(distc)
       ddc <- as.dendrogram(hcc)
       ddc <- reorderfun(ddc, Colv)
 
@@ -251,7 +254,8 @@ heatmap.2 <- function (x,
   else if (isTRUE(Colv))
     {## If TRUE, compute dendrogram and do reordering based on rowMeans
       Colv <- colMeans(x, na.rm = na.rm)
-      hcc <- hclustfun(distfun(if(symm)x else t(x)))
+      distc <- distfun(if(symm)x else t(x))
+      hcc <- hclustfun(distc)
       ddc <- as.dendrogram(hcc)
       ddc <- reorderfun(ddc, Colv)
 
