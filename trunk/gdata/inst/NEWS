@@ -26,8 +26,9 @@ Bug fixes:
 
 - reorder.factor() was ignoring the argument 'X', making it incompatible
   with the behavior of stats:::reorder.default(). This has been corrected,
-  and providing 'X' now returns the same results whether gdata is loaded 
-  or not.  (Reported by Sam Hunter.)
+  and providing either 'X' or 'FUN' causes processing to be handed off to 
+  stats:::reorder.defailt() so will return the same results whether gdata
+  is loaded or not.  (Reported by Sam Hunter.)
  
 Other changes:
 

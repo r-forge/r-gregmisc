@@ -1,5 +1,12 @@
+2015-04-23  warnes
+
+	* [r1938] R/reorder.R: reorder.factor() now hands off processing to
+	  stats:::reorder.default() when either 'X' or 'FUN' is specified.
+
 2015-04-22  warnes
 
+	* [r1937] inst/ChangeLog, inst/NEWS: Update NEWS and ChangeLog for
+	  changes to humanReadable()
 	* [r1936] DESCRIPTION, R/humanReadable.R, R/object.size.R,
 	  man/humanReadable.Rd: Fix 'units' argument of humanReadable()
 	* [r1935] man/object.size.Rd: Update object.size() man page to
