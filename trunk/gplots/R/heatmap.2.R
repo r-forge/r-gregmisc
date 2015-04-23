@@ -198,8 +198,8 @@ heatmap.2 <- function (x,
           nr <- length(rowInd)
     }
   else if (is.integer(Rowv))
-    { ## Compute dendrogram and do reordering based on given vector
-        browser()
+    {
+      ## Compute dendrogram and do reordering based on given vector
       distr <- distfun(x)       
       hcr <- hclustfun(distr)
       ddr <- as.dendrogram(hcr)
@@ -641,7 +641,7 @@ heatmap.2 <- function (x,
           max.raw <- max.breaks
         }
 
-      z <- seq(min.raw, max.raw, length=length(col))
+      z <- seq(min.raw, max.raw, by=min(diff(breaks)/4))
       image(z=matrix(z, ncol=1),
             col=col, breaks=tmpbreaks,
             xaxt="n", yaxt="n")
@@ -670,10 +670,11 @@ heatmap.2 <- function (x,
 
       if(density.info=="density")
         {
-          dens <- density(x, adjust=densadj, na.rm=TRUE)
+          dens <- density(x, adjust=densadj, na.rm=TRUE,
+                          from=min.scale, to=max.scale)
           omit <- dens$x < min(breaks) | dens$x > max(breaks)
-          dens$x <- dens$x[-omit]
-          dens$y <- dens$y[-omit]
+          dens$x <- dens$x[!omit]
+          dens$y <- dens$y[!omit]
           dens$x <- scale01(dens$x, min.raw, max.raw)
           lines(dens$x, dens$y / max(dens$y) * 0.95, col=denscol, lwd=1)
           if (is.null(key.ytickfun)) {

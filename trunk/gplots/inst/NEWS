@@ -1,4 +1,4 @@
-Release 2.17.0 - 2015-04-21
+Release 2.17.0 - 2015-04-23
 ---------------------------
 
 New Features:
@@ -6,6 +6,29 @@ New Features:
 - heatmap.2() has two new arguments, 'colRow' and 'colCol' to control
   the color of row and column text labels.
 
+- heatmap.2() has been modified to make it easier to extract and plot
+  subclusters from a large heatmap. Simply pass the dendrogram of the
+  subcluster together with the full data matrix and, optionally, the
+  breaks of the full heatmap in order to obtain the same color
+  scaling. (Patch contributed by Ilia Kats.) 
+
+- venn() now returns a list of the members of each set intersection in
+  the attribute 'intersections'.  This can be disabled using the
+  argument 'intersection=FALSE' (Patch by Steffen Möller.)
+
+Bug Fixes:
+
+- plotCI() now properly respects the 'type=' argument.  (Bug report
+  and correction by Wiktor Żelazny.)
+
+- Remove stray browser() call from overplot()
+
+- In the balloonplot() examples, explicitly specify argument to
+  gplots:::reorder.factor to prevent error.
+
+Other Changes:
+
+- Remove stray browser() call from
 
 Release 2.16.0 - 2015-01-02
 ---------------------------
