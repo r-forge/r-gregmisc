@@ -17,7 +17,7 @@ Description: Various R programming tools for data manipulation, including:
    - matrix operations ('unmatrix', 'upperTriangle', 'lowerTriangle'),
    - operations on vectors ('case', 'unknownToNA', 'duplicated2', 'trimSum'),
    - operations on data frames ('frameApply', 'wideByFactor'),
-   - value of last evaluated expression ('ans'),
+   - value of last evaluated expression ('ans'), and
    - wrapper for 'sample' that ensures consistent behavior for both
      scalar and vector arguments ('resample').
 Depends: R (>= 2.13.0)
