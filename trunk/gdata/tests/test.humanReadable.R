@@ -2,6 +2,8 @@ library(gdata)
 
 options(humanReadable=FALSE)
 
+set.seed(123456)
+
 baseSI <- 10
 powerSI <- seq(from=0, to=27, by=3)
 SI0 <- (baseSI)^powerSI

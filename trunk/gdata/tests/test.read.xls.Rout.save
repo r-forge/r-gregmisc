@@ -846,4 +846,4 @@ The following object is masked from 'package:utils':
 > 
 > proc.time()
    user  system elapsed 
- 14.409   0.863  15.497 
+ 14.104   0.888  15.221 
