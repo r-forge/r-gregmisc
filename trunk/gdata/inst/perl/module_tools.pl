@@ -91,6 +91,8 @@ sub install_modules()
     CPAN::Index->reload();
 
     # set the target install path
+    CPAN::Shell->o("conf", "mbuildpl_arg", 
+		   "PREFIX=$here LIB=$here --prefix $here --install-base $here");
     CPAN::Shell->o("conf", "makepl_arg", 
 		   "PREFIX=$here LIB=$here --prefix $here --install-base $here");
     CPAN::Shell->install("Compress::Raw::Zlib");
