@@ -11,7 +11,7 @@ Description: Various R programming tools for data manipulation, including:
    - manipulating MS-Excel formatted files ('read.xls',
      'installXLSXsupport', 'sheetCount', 'xlsFormats'),
    - generating fixed-width format files ('write.fwf'),
-   - extrating compoents of date & time objects ('getYear', 'getMonth',
+   - extricating components of date & time objects ('getYear', 'getMonth',
      'getDay', 'getHour', 'getMin', 'getSec'),
    - operations on columns of data frames  ('matchcols', 'rename.vars'),
    - matrix operations ('unmatrix', 'upperTriangle', 'lowerTriangle'),
