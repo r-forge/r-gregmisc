@@ -1,9 +1,9 @@
 #!/usr/bin/perl
 
 BEGIN {
-use File::Basename;
-# Add current path to perl library search path
-use lib dirname($0);
+  use File::Basename;
+  # Add current path to perl library search path
+  use lib dirname($0);
 }
 
 use strict;
@@ -61,7 +61,7 @@ elsif ($whoami eq "xls2tab.pl")
   }
 else
   {
-    die("This script is named '$whoami', but must be named either 'xls2csv.pl' or 'xls2tab.pl' to function properly.\n");
+    die("This script is named '$whoami', but must be named 'xls2csv.pl', 'xls2tsv', or 'xls2tab.pl' to function properly.\n");
   }
 
 
