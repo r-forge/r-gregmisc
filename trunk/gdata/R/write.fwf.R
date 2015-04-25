@@ -37,7 +37,7 @@ write.fwf <- function(x,
           options("scipen"=100)
       }
 
-  
+
   if(rownames) {
     x <- cbind(rownames(x), x)
     rowColVal <- ifelse(!is.null(rowCol), rowCol, "row")
@@ -80,8 +80,6 @@ write.fwf <- function(x,
 
   ## Collect information about how format() will format columns.
   ## We need to get this info now, since format will turn all columns to character
-browser()
-  
   tmp <- apply(x, 2, format.info, ...)
   tmp1 <- sapply(tmp, length)
   tmp <- t(as.data.frame(tmp))
@@ -171,7 +169,7 @@ browser()
                 na=na,
                 row.names=FALSE,
                 col.names=FALSE,
-                qmethod=qmethod) 
+                qmethod=qmethod)
  }
 
   write.table(x=x,
