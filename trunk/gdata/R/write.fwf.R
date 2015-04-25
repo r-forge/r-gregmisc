@@ -49,7 +49,8 @@ write.fwf <- function(x,
 
 
   if(rownames) {
-    x <- cbind(rownames(x), as.data.frame(x))
+    x <- as.data.frame(x)
+    x <- cbind(rownames(x), x)
     rowColVal <- ifelse(!is.null(rowCol), rowCol, "row")
     colnames(x)[1] <- rowColVal
   }
