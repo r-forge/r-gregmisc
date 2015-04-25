@@ -1659,8 +1659,13 @@ sub _subXF {
         $iFillP,   $iFillCF, $iFillCB
     );
 
-
-    if ( $oBook->{BIFFVersion} == verBIFF4 ) {
+    if ( $oBook->{BIFFVersion} == verBIFF2 ) {
+	die "Unsupported file format: Excel Version 2.0 (4.0 or later required)";
+    }
+    elsif ( $oBook->{BIFFVersion} == verBIFF3 ) {
+	die "Unsupported file format: Excel Version 3.0 (4.0 or later required)";
+    }
+    elsif ( $oBook->{BIFFVersion} == verBIFF4 ) {
 
         # Minimal support for Excel 4. We just get the font and format indices
         # so that the cell data value can be formatted.
