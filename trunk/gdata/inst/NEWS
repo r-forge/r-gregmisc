@@ -51,6 +51,8 @@ Other changes:
   and Paul Johnson.  Charles also provided a patch to correct the
   issue.)
 
+- aggregate.table(), which has been defuct gdate 2.13.3 (2014-04-04)
+  has now been completely removed.
 
 Changes in 2.14.0 (2014-08-27)
 ------------------------------

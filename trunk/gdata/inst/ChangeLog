@@ -1,3 +1,66 @@
+2015-04-25 16:24  warnes
+
+	* R/write.fwf.R: Missed on commit.
+
+2015-04-25 16:23  warnes
+
+	* R/write.fwf.R, tests/test.humanReadable.Rout.save,
+	  tests/test.reorder.factor.Rout.save,
+	  tests/tests.write.fwf.Rout.save,
+	  tests/unitTests/runit.write.fwf.R: Modfy write.fwf() to properly
+	  handle matrix argument, avoiding conversion to dataframe unless
+	  rownames=TRUE. Add corresponding unit tests.
+
+2015-04-25 09:11  warnes
+
+	* inst/perl/module_tools.pl: Installing PERL modules was failing.
+	  Adding CPAN configuration option fixed the problem.
+
+2015-04-25 08:49  warnes
+
+	* inst/perl/xls2csv.pl: Error message about executable name was
+	  missing one alternative
+
+2015-04-25 07:59  warnes
+
+	* DESCRIPTION: Better describe gdata contents
+
+2015-04-25 07:58  warnes
+
+	* NAMESPACE: is.* and as.* aren't generics
+
+2015-04-25 07:57  warnes
+
+	* man/humanReadable.Rd, man/object.size.Rd: Add 'justify' argument
+	  to print and format object_sizes methods
+
+2015-04-25 07:57  warnes
+
+	* R/humanReadable.R, R/object.size.R: Add 'justify' argument to
+	  print and format object_sizes methods
+
+2015-04-25 07:56  warnes
+
+	* R/write.fwf.R: Remove stray call to 'browser'
+
+2015-04-25 06:26  warnes
+
+	* DESCRIPTION, inst/ChangeLog, inst/NEWS: Update DESCRIPTION,
+	  ChangeLog, and NEWS
+
+2015-04-25 05:54  warnes
+
+	* NAMESPACE, R/humanReadable.R, R/object.size.R,
+	  man/humanReadable.Rd, man/object.size.Rd,
+	  tests/test.humanReadable.R, tests/test.humanReadable.Rout.save:
+	  Complete work on object.size(), object_sizes methods, and
+	  humanReadable.
+
+2015-04-25 02:52  warnes
+
+	* inst/perl/Spreadsheet/ParseExcel.pm: Add error message if Excel
+	  file format is too old
+
 2015-04-23 22:49  warnes
 
 	* inst/ChangeLog, inst/NEWS: Update NEWS and ChangeLog
