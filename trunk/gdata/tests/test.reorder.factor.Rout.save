@@ -29,12 +29,7 @@ Levels: c b a
 > library(gdata)
 gdata: read.xls support for 'XLS' (Excel 97-2004) files ENABLED.
 
-gdata: Unable to load perl libaries needed by read.xls()
-gdata: to support 'XLSX' (Excel 2007+) files.
-
-gdata: Run the function 'installXLSXsupport()'
-gdata: to automatically download and install the perl
-gdata: libaries needed to support Excel XLS and XLSX formats.
+gdata: read.xls support for 'XLSX' (Excel 2007+) files ENABLED.
 
 Attaching package: 'gdata'
 
@@ -58,4 +53,4 @@ Levels: c b a
 > 
 > proc.time()
    user  system elapsed 
-  0.300   0.049   0.345 
+  0.357   0.048   0.401 

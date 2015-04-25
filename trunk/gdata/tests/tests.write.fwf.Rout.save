@@ -25,12 +25,7 @@ Type 'q()' to quit R.
 > library(gdata)
 gdata: read.xls support for 'XLS' (Excel 97-2004) files ENABLED.
 
-gdata: Unable to load perl libaries needed by read.xls()
-gdata: to support 'XLSX' (Excel 2007+) files.
-
-gdata: Run the function 'installXLSXsupport()'
-gdata: to automatically download and install the perl
-gdata: libaries needed to support Excel XLS and XLSX formats.
+gdata: read.xls support for 'XLSX' (Excel 2007+) files ENABLED.
 
 Attaching package: 'gdata'
 
@@ -85,7 +80,7 @@ num1 num2 num3 int1 fac1 fac2 cha1 cha2 Date POSIXt
 > ## NA should be -
 > write.fwf(x=testData, na="-")
 num1 num2 num3 int1 fac1 fac2 cha1 cha2 Date POSIXt
- 1 -   -         1 -   f q -      1900-01-01 1900-01-01 01:01:01
+ 1   -         - 1 -   f q -      1900-01-01 1900-01-01 01:01:01
  2 1.0  733070.3 2 a   g r longer -          1900-01-01 01:01:01
  3 1.5 1214213.8 3 b   h s y      1900-01-01 1900-01-01 01:01:01
  4 2.0  553823.8 4 c   i t x      1900-01-01 1900-01-01 01:01:01
@@ -95,21 +90,21 @@ num1 num2 num3 int1 fac1 fac2 cha1 cha2 Date POSIXt
  8 4.0 1053686.6 6 g   m x t      1900-01-01 1900-01-01 01:01:01
  9 4.5  971024.2 7 h   n y s      1900-01-01 1900-01-01 01:01:01
 10 5.0  631193.4 8 i   o z r      1900-01-01 1900-01-01 01:01:01
--  5.5  879431.1 9 hjh - - q      1900-01-01 1900-01-01 01:01:01
+ - 5.5  879431.1 9 hjh - - q      1900-01-01 1900-01-01 01:01:01
 > ## NA should be -NA-
 > write.fwf(x=testData, na="-NA-")
 num1 num2 num3 int1 fac1 fac2 cha1 cha2 Date POSIXt
- 1   -NA- -NA-      1    -NA- f    q    -NA-   1900-01-01 1900-01-01 01:01:01
- 2   1.0   733070.3 2    a    g    r    longer -NA-       1900-01-01 01:01:01
- 3   1.5  1214213.8 3    b    h    s    y      1900-01-01 1900-01-01 01:01:01
- 4   2.0   553823.8 4    c    i    t    x      1900-01-01 1900-01-01 01:01:01
- 5   2.5  1085022.9 -NA- d    j    u    w      1900-01-01 -NA-               
- 6   3.0   571063.9 4    e    k    v    v      1900-01-01 1900-01-01 01:01:01
- 7   3.5   606718.4 5    f    l    w    u      1900-01-01 1900-01-01 01:01:01
- 8   4.0  1053686.6 6    g    m    x    t      1900-01-01 1900-01-01 01:01:01
- 9   4.5   971024.2 7    h    n    y    s      1900-01-01 1900-01-01 01:01:01
-10   5.0   631193.4 8    i    o    z    r      1900-01-01 1900-01-01 01:01:01
--NA- 5.5   879431.1 9    hjh  -NA- -NA- q      1900-01-01 1900-01-01 01:01:01
+   1 -NA-      -NA-    1 -NA- f    q    -NA-   1900-01-01 1900-01-01 01:01:01
+   2  1.0  733070.3    2 a    g    r    longer -NA-       1900-01-01 01:01:01
+   3  1.5 1214213.8    3 b    h    s    y      1900-01-01 1900-01-01 01:01:01
+   4  2.0  553823.8    4 c    i    t    x      1900-01-01 1900-01-01 01:01:01
+   5  2.5 1085022.9 -NA- d    j    u    w      1900-01-01 -NA-               
+   6  3.0  571063.9    4 e    k    v    v      1900-01-01 1900-01-01 01:01:01
+   7  3.5  606718.4    5 f    l    w    u      1900-01-01 1900-01-01 01:01:01
+   8  4.0 1053686.6    6 g    m    x    t      1900-01-01 1900-01-01 01:01:01
+   9  4.5  971024.2    7 h    n    y    s      1900-01-01 1900-01-01 01:01:01
+  10  5.0  631193.4    8 i    o    z    r      1900-01-01 1900-01-01 01:01:01
+-NA-  5.5  879431.1    9 hjh  -NA- -NA- q      1900-01-01 1900-01-01 01:01:01
 > 
 > ## Some other separator than space
 > write.fwf(testData[, 1:4], sep="-mySep-")
@@ -236,4 +231,4 @@ HI! num1 num2 num3 int1 fac1 fac2 cha1 cha2 Date POSIXt
 > 
 > proc.time()
    user  system elapsed 
-  0.413   0.044   0.448 
+  0.476   0.053   0.524 
