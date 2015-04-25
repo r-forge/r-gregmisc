@@ -3,7 +3,6 @@ export(
        .onAttach,
        ans,
        Args,
-       aggregate.table,
        bindData,
        case,
        cbindX,
