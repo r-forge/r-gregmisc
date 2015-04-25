@@ -22,26 +22,30 @@ object.size(\dots)
 
 \method{as}{object_sizes}(x)
 
-\method{c}{object_sizes}(x)
+\method{c}{object_sizes}(\dots, recursive=FALSE)
 
 \method{format}{object_sizes}(x, humanReadable=getOption("humanReadable"), standard="IEC", units,
-       digits=1, width=NULL, sep=" ", \dots)
+       digits=1, width=NULL, sep=" ", justify = c("right", "left"),
+\dots)
 
-\method{print}{object_sizes}x, quote=FALSE, humanReadable=getOption("humanReadable"),
-      standard="IEC", units, digits=1, width=NULL, sep=" ", \dots)
+\method{print}{object_sizes}(x, quote=FALSE, humanReadable=getOption("humanReadable"),
+      standard="IEC", units, digits=1, width=NULL, sep=" ",
+      justify = c("right", "left"), \dots)
 
 }
 \arguments{
   \item{\dots}{\code{object.size}: \R objects;
-               \code{print}: arguments to be passed to other methods.}
+    \code{print} and \code{format}: arguments to be passed to other
+    methods.
+  }
   \item{x}{output from \code{object.size}}
   \item{quote}{logical, indicating whether or not the result should be
     printed with surrounding quotes.}
   \item{humanReadable}{logical, use the \dQuote{human readable} format.}
-  \item{standard,units,digits,width,sep,justify}{arguments passed to
-     \code{\link{humanReadable}}.  See the  \code{\link{humanReadable}}
-     man page for details.
-    }
+  \item{standard,units,digits,width,sep,justify}{See the man page for
+    \code{\link{humanReadable}}.
+   }
+   \item{recursive}{See the man page for \code{\link[base]{c}}. }
 }
 \details{
 
@@ -60,7 +64,7 @@ object.size(\dots)
   space needed to store its name in the symbol table.
 
   Associated space (e.g., the environment of a function and what the
-  pointer in a ‘EXTPTRSXP’ points to) is not included in the
+  pointer in a \code{EXTPTRSXP} points to) is not included in the
   calculation.
 
   Object sizes are larger on 64-bit builds than 32-bit ones, but

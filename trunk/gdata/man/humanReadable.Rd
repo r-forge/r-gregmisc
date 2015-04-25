@@ -13,8 +13,7 @@ kB, MB, GB, etc.
 
 \usage{
 humanReadable(x, units="auto", standard=c("IEC", "SI", "Unix"),
-              digits=1, width=NULL, sep=" ", justify=c("right", "left"),
-              \dots)
+              digits=1, width=NULL, sep=" ", justify=c("right", "left") )
 }
 
 \arguments{
