@@ -25,6 +25,16 @@ write.fwf <- function(x,
 {
   ## --- Setup ---
 
+  dapply <- function(x, FUN, ..., simplify=TRUE)
+      {
+          if(is.data.frame(x))
+              return(sapply(x, FUN, ..., simplify=simplify))
+          else if(is.matrix(x))
+              return(apply(x, 2, FUN, ...))
+          else
+              stop("x must be a data.frame or a matrix")
+      }
+
   if(!(is.data.frame(x) || is.matrix(x)))
     stop("'x' must be a data.frame or matrix")
   if(length(na) > 1)
@@ -39,7 +49,7 @@ write.fwf <- function(x,
 
 
   if(rownames) {
-    x <- cbind(rownames(x), x)
+    x <- cbind(rownames(x), as.data.frame(x))
     rowColVal <- ifelse(!is.null(rowCol), rowCol, "row")
     colnames(x)[1] <- rowColVal
   }
@@ -69,22 +79,26 @@ write.fwf <- function(x,
                           stringsAsFactors=FALSE)
 
   ## Which columns are numeric like
-  isNum <- apply(x, 2, is.numeric)
+  isNum <- dapply(x, is.numeric)
   ## is.numeric picks also Date and POSIXt
-  isNum <- isNum & !(apply(x, 2, inherits, what="Date") |
-                     apply(x, 2, inherits, what="POSIXt"))
+  isNum <- isNum & !(dapply(x, inherits, what="Date") |
+                     dapply(x, inherits, what="POSIXt"))
 
   ## Which columns are factors --> convert them to character
-  isFac <- apply(x, 2, is.factor)
-  x[, isFac] <- apply(x[, isFac, drop=FALSE], 2, as.character)
+  isFac <- dapply(x, is.factor)
+  if(any(isFac))
+      ## This conditional is necessary because if x is a matrix, even if
+      ## all(isFAC==FALSE), this assignment will coerce it to mode
+      ## character.  This isn't a problem for dataframes.
+      x[, isFac] <- sapply(x[, isFac, drop=FALSE], as.character)
 
   ## Collect information about how format() will format columns.
   ## We need to get this info now, since format will turn all columns to character
-  tmp <- apply(x, 2, format.info, ...)
+  tmp <- dapply(x, format.info, ..., simplify=FALSE)
+  if(is.matrix(x)) tmp <- as.data.frame(tmp)
   tmp1 <- sapply(tmp, length)
   tmp <- t(as.data.frame(tmp))
   retFormat$width <- tmp[, 1]
-
   ## Collect other details for numeric columns
   if(any(isNum)) {
     ## Numeric columns with digits
@@ -100,6 +114,9 @@ write.fwf <- function(x,
 
   ## --- Format ---
 
+  ## store original object in 'y'
+  y <- x
+
   ## Formatting (to character)
   for(i in 1:nCol) {
     if(widthNULL) {
@@ -112,17 +129,17 @@ write.fwf <- function(x,
     ## following test to "fiddle" with the value in 'na' argument since -
     ## NA should not increase the width of column with width 1, while wider
     ## value for 'na' should increase the width
-    test <- is.na(x[, i])
+    test <- is.na(y[, i])
     ## Make a copy to make sure we get character after first format() - Date class caused problems
     x2 <- character(length=nRow)
     ## Add formatted values
-    x2[!test] <- format(x[!test, i], justify=justify, width=tmp, ...)
+    x2[!test] <- format(y[!test, i], justify=justify, width=tmp, ...)
     ## Add 'na' value
     x2[test] <- na
     ## Replace the original
     x[, i] <- x2
     ## Collect width (again)
-    tmp2 <- format.info(x[, i], ...)[1]
+    tmp2 <- format.info(x2, ...)[1]
     ## Reformat if 'na' value change the width of the column
     if(tmp2 != retFormat[i, "width"]) {
       retFormat[i, "width"] <- tmp2
@@ -139,7 +156,7 @@ write.fwf <- function(x,
 
   ## Number of levels for "non-numeric"" columns
   if(any(!isNum)) {
-    retFormat[!isNum, "nlevels"] <- apply(x[, !isNum, drop=FALSE], 2,
+    retFormat[!isNum, "nlevels"] <- dapply(x[, !isNum, drop=FALSE],
                                            function(z) length(unique(z)))
   }
 

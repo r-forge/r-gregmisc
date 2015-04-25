@@ -1,13 +1,11 @@
 
-R version 3.1.2 (2014-10-31) -- "Pumpkin Helmet"
-Copyright (C) 2014 The R Foundation for Statistical Computing
-Platform: x86_64-unknown-linux-gnu (64-bit)
+R version 3.2.0 (2015-04-16) -- "Full of Ingredients"
+Copyright (C) 2015 The R Foundation for Statistical Computing
+Platform: x86_64-apple-darwin13.4.0 (64-bit)
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
 You are welcome to redistribute it under certain conditions.
 Type 'license()' or 'licence()' for distribution details.
-
-  Natural language support but running in an English locale
 
 R is a collaborative project with many contributors.
 Type 'contributors()' for more information and
@@ -31,20 +29,23 @@ Levels: c b a
 > library(gdata)
 gdata: read.xls support for 'XLS' (Excel 97-2004) files ENABLED.
 
-gdata: read.xls support for 'XLSX' (Excel 2007+) files ENABLED.
+gdata: Unable to load perl libaries needed by read.xls()
+gdata: to support 'XLSX' (Excel 2007+) files.
 
-Attaching package: ‘gdata’
+gdata: Run the function 'installXLSXsupport()'
+gdata: to automatically download and install the perl
+gdata: libaries needed to support Excel XLS and XLSX formats.
 
-The following object is masked from ‘package:stats’:
+Attaching package: 'gdata'
+
+The following object is masked from 'package:stats':
 
     nobs
 
-The following object is masked from ‘package:utils’:
+The following object is masked from 'package:utils':
 
     object.size
 
-Warning message:
-S3 methods ‘print.object_size’, ‘c.object_size’ were declared in NAMESPACE but not found 
 > 
 > ( m2 <- reorder(m, X=c(3, 2, 1)) )
 [1] a b c
@@ -57,4 +58,4 @@ Levels: c b a
 > 
 > proc.time()
    user  system elapsed 
-  0.512   0.070   0.638 
+  0.300   0.049   0.345 
