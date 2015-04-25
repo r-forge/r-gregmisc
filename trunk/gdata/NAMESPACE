@@ -130,9 +130,7 @@ S3method(nobs, lm)      # now provided by stats package
 
 ## Object size stuff
 S3method(c,      object_sizes)
-S3method(as,     object_sizes)
 S3method(format, object_sizes)
-S3method(is,     object_sizes)
 S3method(print,  object_sizes)
 
 ## unknown stuff
