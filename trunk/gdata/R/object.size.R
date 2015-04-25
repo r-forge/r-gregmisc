@@ -16,6 +16,7 @@ print.object_sizes <- function(x,
                                digits=1,
                                width=NULL,
                                sep=" ",
+                               justify = c("right", "left"),
                                ...)
 {
     print(format(x,
@@ -24,7 +25,8 @@ print.object_sizes <- function(x,
                  units=units,
                  digits=digits,
                  width=width,
-                 sep=sep),
+                 sep=sep,
+                 justify=justify),
           quote=quote,
           ...)
 
@@ -39,6 +41,7 @@ format.object_sizes <- function(x,
                                 digits=1,
                                 width=NULL,
                                 sep=" ",
+                                justify = c("right", "left"),
                                 ...)
 {
     if( !missing(units) )
@@ -51,7 +54,8 @@ format.object_sizes <- function(x,
                              units=units,
                              digits=digits,
                              width=width,
-                             sep=sep
+                             sep=sep,
+                             justify=justify
                              )
        }
     else if( is.null(humanReadable) || humanReadable==FALSE )
@@ -62,7 +66,8 @@ format.object_sizes <- function(x,
                       units=units,
                       digits=digits,
                       width=width,
-                      sep=sep)
+                      sep=sep,
+                      justify=justify)
 
 }
 

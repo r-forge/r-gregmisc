@@ -4,8 +4,7 @@ humanReadable <- function(x,
                           digits=1,
                           width=NULL,
                           sep=" ",
-                          justify = c("right", "left"),
-                          ...
+                          justify = c("right", "left")
                           )
 {
   ## --- Setup ---
