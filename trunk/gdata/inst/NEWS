@@ -3,13 +3,13 @@ Changes in 2.16.0 (2015-04-25)
 
 New features:
 
-- New functions first() and last() to retrun the first or last
+- New functions first() and last() to return the first or last
   element of a vector or list.
 
 - New functions left() and right() to return the leftmost or
   rightmost n (default to 6) columns of a matrix or dataframe.
 
-- New 'scienfic' argument to write.fwf().  Set 'scientific=FALSE' to
+- New 'scientific' argument to write.fwf().  Set 'scientific=FALSE' to
   prevent numeric columns from being displayed using scientific
   notification.
 
@@ -24,7 +24,7 @@ New features:
 - New 'units' argument to humanReadable()--and hence to
   print.object_sizes() and format.object_sizes()--that permits
   specifying the unit to use for all values.  Use 'bytes' to display
-  all valus with the unit 'bytes', use 'auto' (or leave it missing) to
+  all values with the unit 'bytes', use 'auto' (or leave it missing) to
   automatically select the best unit, and use a unit from the selected
   standard to use that unit (i.e. 'MiB').
 
@@ -45,13 +45,13 @@ Bug fixes:
 
 Other changes:
 
-- Replaced depricated PERL function POSIX::isdigit in xls2csv.pl
+- Replaced deprecated PERL function POSIX::isdigit in xls2csv.pl
   (which is used by read.xls() ) with an equivalent regular
   expression. (Reported by both Charles Plessy, Gerrit-jan Schutten,
   and Paul Johnson.  Charles also provided a patch to correct the
   issue.)
 
-- aggregate.table(), which has been defuct gdate 2.13.3 (2014-04-04)
+- aggregate.table(), which has been defunct gdate 2.13.3 (2014-04-04)
   has now been completely removed.
 
 Changes in 2.14.0 (2014-08-27)
