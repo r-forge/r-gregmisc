@@ -1,7 +1,3 @@
-# $Id$
-
-# Reorder the levels of a factor.
-
 reorder.factor <- function(x,
                            X,
                            FUN,
@@ -13,17 +9,28 @@ reorder.factor <- function(x,
     constructor <- if (order) ordered else factor
 
     if(!missing(X) || !missing(FUN))
-       return( NextMethod(x)) 
+        {
+            if(missing(FUN)) FUN <- 'mean'
 
-    if (!missing(new.order))
+            ## I would prefer to call stats::reorder.default directly,
+            ## but it exported from stats, so the relevant code is
+            ## replicated here:
+            ## -->
+            scores <- tapply(X = X, INDEX = x, FUN = FUN, ...)
+            ans <- (if (order)
+                        ordered
+                    else factor)(x, levels = names(sort(scores, na.last = TRUE)))
+            attr(ans, "scores") <- scores
+            ## <--
+            return(ans)
+        }
+    else if (!missing(new.order))
       {
         if (is.numeric(new.order))
           new.order <- levels(x)[new.order]
         else
           new.order <- new.order
       }
-    else if (!missing(FUN))
-      new.order <- names(sort(tapply(X, x, FUN, ...)))
     else
       new.order <- sort(levels(x))
 
