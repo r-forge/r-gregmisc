@@ -156,11 +156,7 @@ S3method(trim, factor)
 S3method(trim, list)
 S3method(trim, data.frame)
 
-## first, last, left, right
-S3method(first, default)
-S3method(first, list   )
-S3method(last,  default)
-S3method(last,  list   )
+## left, right
 S3method(left,  data.frame)
 S3method(left,  matrix)
 S3method(right, data.frame)
