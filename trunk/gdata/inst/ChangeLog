@@ -1,5 +1,15 @@
 2015-04-28  warnes
 
+	* [r1987] inst/NEWS: Update NEWS for gdata 2.16.1
+	* [r1986] NAMESPACE: Remove no-longer defined methods.
+	* [r1985] man/reorder.Rd: Summary: Minor formatting changes, use
+	  rnorm() for X in example, and use set.seed() for consistent
+	  results.
+	* [r1984] man/first.Rd: Summary: Replace unicode single-quote
+	  characters with ASCII ones.
+	* [r1983] R/reorder.R: Summary: Call base::sort instead of sort,
+	  which has been redefined by arguments.
+	* [r1982] inst/ChangeLog, inst/NEWS: Update NEWS and ChangeLog.
 	* [r1981] DESCRIPTION: Bump version number.
 	* [r1980] R/trim.R: Remove CVS header tag.
 	* [r1979] DESCRIPTION: Update version requirement for R (>= 2.3.0)
