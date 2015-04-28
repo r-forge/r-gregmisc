@@ -1,11 +1,22 @@
-Changes in 2.16.1 (2015-04-25)
+Changes in 2.16.1 (2015-04-28)
+-----------------------------
+
+Other changes:
+
+- Requirement for Perl version 5.10.0 or later is specified in the
+  package DESCRITION.
+
+- first() and last() are now simply wrappers for calls to 'head(x, n=1)' and
+  'tail(x, n=1)', respectively.
+
+
+Changes in 2.16.0 (2015-04-25)
 ------------------------------
 
 New features:
 
 - New functions first() and last() to return the first or last element
-  of an object.  These are convenience functions for 'head(x, n=1)' and
-  'tail(x, n=1)', respectively,
+  of an object.
 
 - New functions left() and right() to return the leftmost or
   rightmost n (default to 6) columns of a matrix or dataframe.
