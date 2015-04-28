@@ -1,8 +1,6 @@
-# $Id$
-
 mixedsort <- function(x, decreasing=FALSE, na.last=TRUE, blank.last=FALSE)
     {
-        ord <- mixedorder(x, decreasing=decreasing, na.last=na.last,
+        svn ord <- mixedorder(x, decreasing=decreasing, na.last=na.last,
                              blank.last=blank.last)
         x[ord]
     }
@@ -116,5 +114,3 @@ mixedorder <- function(x, decreasing=FALSE, na.last=TRUE, blank.last=FALSE)
 
     return(retval)
   }
-
-
