@@ -1,10 +1,11 @@
-Changes in 2.16.0 (2015-04-25)
+Changes in 2.16.1 (2015-04-25)
 ------------------------------
 
 New features:
 
-- New functions first() and last() to return the first or last
-  element of a vector or list.
+- New functions first() and last() to return the first or last element
+  of an object.  These are convenience functions for 'head(x, n=1)' and
+  'tail(x, n=1)', respectively,
 
 - New functions left() and right() to return the leftmost or
   rightmost n (default to 6) columns of a matrix or dataframe.
@@ -34,11 +35,12 @@ New features:
 
 Bug fixes:
 
-- reorder.factor() was ignoring the argument 'X', making it incompatible
-  with the behavior of stats:::reorder.default(). This has been corrected,
-  and providing either 'X' or 'FUN' causes processing to be handed off to
-  stats:::reorder.defailt() so will return the same results whether gdata
-  is loaded or not.  (Reported by Sam Hunter.)
+- reorder.factor() was ignoring the argument 'X' unless 'FUN' was
+  supplied, making it incompatible with the behavior of
+  stats:::reorder.default(). This has been corrected, so that calling
+  reorder on a factor with arguments 'X' and/or 'FUN' should now
+  return the same results whether gdata is loaded or not.  (Reported
+  by Sam Hunter.)
 
 - write.fwf() now properly supports matrix objects, including matrix
   objects without column names. (Reported by Carl Witthoft.)
@@ -51,8 +53,9 @@ Other changes:
   and Paul Johnson.  Charles also provided a patch to correct the
   issue.)
 
-- aggregate.table(), which has been defunct gdate 2.13.3 (2014-04-04)
+- aggregate.table(), which has been defunct gdata 2.13.3 (2014-04-04)
   has now been completely removed.
+
 
 Changes in 2.14.0 (2014-08-27)
 ------------------------------
