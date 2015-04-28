@@ -17,9 +17,11 @@ reorder.factor <- function(x,
             ## replicated here:
             ## -->
             scores <- tapply(X = X, INDEX = x, FUN = FUN, ...)
-            ans <- (if (order)
-                        ordered
-                    else factor)(x, levels = names(sort(scores, na.last = TRUE)))
+            levels <- names(base::sort(scores, na.last = TRUE))
+            if(order)
+                ans <- ordered(x, levels=levels)
+            else
+                ans <- factor(x, levels=levels)
             attr(ans, "scores") <- scores
             ## <--
             return(ans)
