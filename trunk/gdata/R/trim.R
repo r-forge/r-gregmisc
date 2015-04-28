@@ -1,5 +1,3 @@
-# $Id$
-
 trim <- function(s, recode.factor=TRUE, ...)
   UseMethod("trim", s)
 
