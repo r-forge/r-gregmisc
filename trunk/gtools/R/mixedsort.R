@@ -1,8 +1,13 @@
 # $Id$
 
-mixedsort <- function(x) x[mixedorder(x)]
+mixedsort <- function(x, decreasing=FALSE, na.last=TRUE, blank.last=FALSE)
+    {
+        ord <- mixedorder(x, decreasing=decreasing, na.last=na.last,
+                             blank.last=blank.last)
+        x[ord]
+    }
 
-mixedorder <- function(x)
+mixedorder <- function(x, decreasing=FALSE, na.last=TRUE, blank.last=FALSE)
   {
     # - Split each each character string into an vector of strings and
     #   numbers
@@ -14,9 +19,8 @@ mixedorder <- function(x)
     else if(length(x)==1)
         return(1)
 
-    if( is.numeric(x) )
-        return( order(x) )
-
+    if( !is.character(x) )
+        return( order(x, decreasing=decreasing, na.last=na.last) )
 
     delim="\\$\\@\\$"
 
@@ -34,12 +38,6 @@ mixedorder <- function(x)
 
     which.nas <- which(is.na(x))
     which.blanks <- which(x=="")
-
-    if(length(which.blanks) >0)
-        x[ which.blanks ] <- -Inf
-
-    if(length(which.nas) >0)
-        x[ which.nas ] <- Inf
 
     ####
     # - Convert each character string into an vector containing single
@@ -79,7 +77,7 @@ mixedorder <- function(x)
                               )
 
     # now order them
-    rank.numeric   <- sapply(step1.numeric.t,rank)
+    rank.numeric   <- sapply(step1.numeric.t, rank)
     rank.character <- sapply(step1.character.t,
                              function(x) as.numeric(factor(x)))
 
@@ -95,8 +93,26 @@ mixedorder <- function(x)
 
     order.frame <- as.data.frame(rank.overall)
     if(length(which.nas) > 0)
-      order.frame[which.nas,] <- Inf
-    retval <- do.call("order",order.frame)
+        if(is.na(na.last))
+            order.frame[which.nas,] <- NA
+        else if(na.last)
+            order.frame[which.nas,] <- Inf
+        else
+            order.frame[which.nas,] <- -Inf
+
+    if(length(which.blanks) > 0)
+        if(is.na(blank.last))
+            order.frame[which.blanks,] <- NA
+        else if(blank.last)
+            order.frame[which.blanks,] <- 1e99
+        else
+            order.frame[which.blanks,] <- -1e99
+
+    order.frame <- as.list(order.frame)
+    order.frame$decreasing <- decreasing
+    order.frame$na.last <- NA
+
+    retval <- do.call("order", order.frame)
 
     return(retval)
   }
