@@ -15,11 +15,11 @@ last(x, n=1, ...)
   \item{n}{a single integer. If positive, size for the resulting object:
           number of elements for a vector (including lists), rows for a
           matrix or data frame or lines for a function. If negative,
-          all but the ‘n’ last/first number of elements of ‘x’.}
+          all but the 'n' last/first number of elements of 'x'.}
    \item{...}{arguments to be passed to or from other methods.}
 }
 \value{
-  An object (usually) like ‘x’ but generally smaller.
+  An object (usually) like 'x' but generally smaller.
 }
 \author{
   Gregory R. Warnes \email{greg@warnes.net}
