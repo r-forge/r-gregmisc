@@ -1,5 +1,3 @@
-% $Id$
-
 \name{reorder.factor}
 \alias{reorder.factor}
 \title{Reorder the Levels of a Factor}
@@ -7,13 +5,7 @@
   Reorder the levels of a factor
 }
 \usage{
-\method{reorder}{factor}(x,
-                         X,
-                         FUN,
-                         ...,
-                         order=is.ordered(x),
-                         new.order,
-                         sort=mixedsort)
+\method{reorder}{factor}(x, X, FUN, ..., order=is.ordered(x), new.order, sort=mixedsort)
 }
 \arguments{
   \item{x}{factor}
@@ -58,9 +50,18 @@
 
 \author{Gregory R. Warnes \email{greg@warnes.net}}
 
-\seealso{\code{\link{factor}} and \code{\link[stats]{reorder}}}
+\seealso{
+  \code{\link{factor}}
+  and
+  \code{\link[stats]{reorder}}
+}
 
 \examples{
+
+\dontshow{
+    set.seed(123456)
+}
+
    # Create a 4 level example factor
    trt <- factor( sample( c("PLACEBO", "300 MG", "600 MG", "1200 MG"),
                   100, replace=TRUE ) )
@@ -78,7 +79,7 @@
    trt4 <- reorder(trt, new.order=c("PLACEBO", "300 MG", "600 MG", "1200 MG"))
    summary(trt4)
    # - using frequency
-   trt5 <- reorder(trt, X=as.numeric(trt), FUN=length)
+   trt5 <- reorder(trt, X=rnorm(100), FUN=mean)
    summary(trt5)
 
    # Drop out the '300 MG' level
