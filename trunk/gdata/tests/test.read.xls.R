@@ -96,19 +96,33 @@ if( 'XLSX' %in% xlsFormats() )
 latin1File  <- file.path(path.package('gdata'),'xls', 'latin-1.xls' )
 latin1FileX <- file.path(path.package('gdata'),'xls', 'latin-1.xlsx')
 
-example.latin1 <- read.xls(latin1File, fileEncoding='latin1')
-charTab <- function(x) {
-    x <- as.matrix(x)
-    x <- x[!is.na(x)]
-    table( nchar(x, 'bytes' ) )
-}
-charTab(example.latin1)
-
+if(.Platform$OS.type=="unix")
+  {
+      example.latin1 <- read.xls(latin1File,
+                                 fileEncoding='latin1',
+                                 encoding='latin1',
+                                 stringsAsFactors=FALSE)
+  } else {
+      example.latin1 <- read.xls(latin1File,
+                                        #fileEncoding='latin1',
+                                 encoding='latin1',
+                                 stringsAsFactors=FALSE)
+  }
 
 if( 'XLSX' %in% xlsFormats() )
   {
-      example.latin1.x <- read.xls(latin1FileX, fileEncoding='latin1')
-      charTab(example.latin1)
+      if(.Platform$OS.type=="unix")
+          {
+              example.latin1.x <- read.xls(latin1FileX,
+                                         fileEncoding='latin1',
+                                         encoding='latin1',
+                                         stringsAsFactors=FALSE)
+          } else {
+              example.latin1.x <- read.xls(latin1FileX,
+                                        #fileEncoding='latin1',
+                                         encoding='latin1',
+                                         stringsAsFactors=FALSE)
+          }
   } else {
     cat("************************************************************\n")
     cat("** DIFF IN THIS SECTION IS EXPECTED BECAUSE PERL PACKAGES **\n")

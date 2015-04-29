@@ -710,31 +710,39 @@ The following object is masked from 'package:utils':
 > latin1File  <- file.path(path.package('gdata'),'xls', 'latin-1.xls' )
 > latin1FileX <- file.path(path.package('gdata'),'xls', 'latin-1.xlsx')
 > 
-> example.latin1 <- read.xls(latin1File, fileEncoding='latin1')
-> charTab <- function(x) {
-+     x <- as.matrix(x)
-+     x <- x[!is.na(x)]
-+     table( nchar(x, 'bytes' ) )
-+ }
-> charTab(example.latin1)
-
- 4  5  6  7 14 15 16 17 19 21 22 23 24 25 27 29 30 31 32 34 
-64 11 17 32  1  4  1  5  1  1 11  2 11  1  5  5  1  1  6  6 
-> 
+> if(.Platform$OS.type=="unix")
++   {
++       example.latin1 <- read.xls(latin1File,
++                                  fileEncoding='latin1',
++                                  encoding='latin1',
++                                  stringsAsFactors=FALSE)
++   } else {
++       example.latin1 <- read.xls(latin1File,
++                                         #fileEncoding='latin1',
++                                  encoding='latin1',
++                                  stringsAsFactors=FALSE)
++   }
 > 
 > if( 'XLSX' %in% xlsFormats() )
 +   {
-+       example.latin1.x <- read.xls(latin1FileX, fileEncoding='latin1')
-+       charTab(example.latin1)
++       if(.Platform$OS.type=="unix")
++           {
++               example.latin1.x <- read.xls(latin1FileX,
++                                          fileEncoding='latin1',
++                                          encoding='latin1',
++                                          stringsAsFactors=FALSE)
++           } else {
++               example.latin1.x <- read.xls(latin1FileX,
++                                         #fileEncoding='latin1',
++                                          encoding='latin1',
++                                          stringsAsFactors=FALSE)
++           }
 +   } else {
 +     cat("************************************************************\n")
 +     cat("** DIFF IN THIS SECTION IS EXPECTED BECAUSE PERL PACKAGES **\n")
 +     cat("** FOR SUPPORTING XLSX ARE NOT INSTALLED                  **\n")
 +     cat("************************************************************\n")
 + }
-
- 4  5  6  7 14 15 16 17 19 21 22 23 24 25 27 29 30 31 32 34 
-64 11 17 32  1  4  1  5  1  1 11  2 11  1  5  5  1  1  6  6 
 > 
 > 
 > ## Check handling of very wide file
@@ -875,4 +883,4 @@ The following object is masked from 'package:utils':
 > 
 > proc.time()
    user  system elapsed 
- 13.230   0.833  14.261 
+ 13.275   0.831  14.313 
