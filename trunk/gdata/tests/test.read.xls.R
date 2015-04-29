@@ -84,8 +84,10 @@ if( 'XLSX' %in% xlsFormats() )
     example.x.skip <- read.xls(exampleFileX, sheet=2, blank.lines.skip=FALSE)
     example.x.skip
   } else {
-    cat("** DIFF IN THIS SECTION IS EXPECTED BECAUSE PERL PACKAGES **\n")
-    cat("** FOR SUPPORTING XLSX ARE NOT INSTALLED **\n")
+      cat("************************************************************\n")
+      cat("** DIFF IN THIS SECTION IS EXPECTED BECAUSE PERL PACKAGES **\n")
+      cat("** FOR SUPPORTING XLSX ARE NOT INSTALLED                  **\n")
+      cat("************************************************************\n")
   }
 
 
@@ -95,16 +97,24 @@ latin1File  <- file.path(path.package('gdata'),'xls', 'latin-1.xls' )
 latin1FileX <- file.path(path.package('gdata'),'xls', 'latin-1.xlsx')
 
 example.latin1 <- read.xls(latin1File, fileEncoding='latin1')
-example.latin1
+charTab <- function(x) {
+    x <- as.matrix(x)
+    x <- x[!is.na(x)]
+    table( nchar(x, 'bytes' ) )
+}
+charTab(example.latin1)
+
 
 if( 'XLSX' %in% xlsFormats() )
   {
       example.latin1.x <- read.xls(latin1FileX, fileEncoding='latin1')
-      example.latin1.x
+      charTab(example.latin1)
   } else {
+    cat("************************************************************\n")
     cat("** DIFF IN THIS SECTION IS EXPECTED BECAUSE PERL PACKAGES **\n")
-    cat("** FOR SUPPORTING XLSX ARE NOT INSTALLED **\n")
-  }
+    cat("** FOR SUPPORTING XLSX ARE NOT INSTALLED                  **\n")
+    cat("************************************************************\n")
+}
 
 
 ## Check handling of very wide file

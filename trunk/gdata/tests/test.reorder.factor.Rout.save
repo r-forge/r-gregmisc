@@ -53,4 +53,4 @@ Levels: c b a
 > 
 > proc.time()
    user  system elapsed 
-  0.327   0.045   0.363 
+  0.331   0.045   0.368 
