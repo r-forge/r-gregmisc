@@ -300,8 +300,8 @@ unique.levelsMap <- function(x, incomparables=FALSE, ...)
 
   ## --- Mapping levels in x ---
 
-  char <- all(lapply(value, is.character))
-  int <- all(lapply(value, is.integer))
+  char <- all(sapply(value, is.character))
+  int <- all(sapply(value, is.integer))
 
   if(int) { # codes=TRUE
     if(is.integer(x)) x <- factor(x)
