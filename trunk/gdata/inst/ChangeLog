@@ -1,5 +1,29 @@
+2015-04-29  warnes
+
+	* [r1992] tests/test.humanReadable.Rout.save,
+	  tests/test.read.xls.R, tests/test.read.xls.Rout.save,
+	  tests/test.reorder.factor.Rout.save,
+	  tests/tests.write.fwf.Rout.save: Apparentely read.csv() needs
+	  different combination of "fileEncoding=`latin1`" and
+	  "encoding=`latin1`" on unix and windows platforms.
+	* [r1991] R/mapLevels.R: In mapLevels(), use sapply() instead of
+	  lapply() to avoid warning message.
+	* [r1990] tests/test.humanReadable.Rout.save,
+	  tests/test.read.xls.R, tests/test.read.xls.Rout.save,
+	  tests/test.reorder.factor.Rout.save,
+	  tests/tests.write.fwf.Rout.save: Displaying all the latin1
+	  characters for diff isn't reliable across platforms. Simply
+	  summarize the latin1 data instead.
+	* [r1989] R/installXLSXsupport.R,
+	  tests/test.humanReadable.Rout.save, tests/test.read.xls.R,
+	  tests/test.read.xls.Rout.save,
+	  tests/test.reorder.factor.Rout.save,
+	  tests/tests.write.fwf.Rout.save: Display read latin1 data so that
+	  diff can catch changes.
+
 2015-04-28  warnes
 
+	* [r1988] inst/ChangeLog: Update ChangeLog for gdata 2.16.1
 	* [r1987] inst/NEWS: Update NEWS for gdata 2.16.1
 	* [r1986] NAMESPACE: Remove no-longer defined methods.
 	* [r1985] man/reorder.Rd: Summary: Minor formatting changes, use

@@ -1,6 +1,10 @@
 Changes in 2.16.1 (2015-04-28)
 -----------------------------
 
+Bug fixes:
+
+- mapLevels() no longer generates warnings about conversion of lists to vectors.
+
 Other changes:
 
 - Requirement for Perl version 5.10.0 or later is specified in the
