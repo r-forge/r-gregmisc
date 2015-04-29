@@ -235,4 +235,4 @@ The following object is masked from 'package:utils':
 > 
 > proc.time()
    user  system elapsed 
-  0.410   0.050   0.451 
+  0.384   0.045   0.421 

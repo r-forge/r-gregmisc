@@ -592,25 +592,28 @@ The following object is masked from 'package:utils':
 > 
 > if( 'XLSX' %in% xlsFormats() )
 +   {
-+   example.x.1 <- read.xls(exampleFileX, sheet=1) # default is first worksheet
-+   print(example.x.1)
++     example.x.1 <- read.xls(exampleFileX, sheet=1) # default is first worksheet
++     print(example.x.1)
 + 
-+   example.x.2 <- read.xls(exampleFileX, sheet=2) # second worksheet by number
-+   print(example.x.2)
++     example.x.2 <- read.xls(exampleFileX, sheet=2) # second worksheet by number
++     print(example.x.2)
 + 
-+   example.x.3 <- read.xls(exampleFileX, sheet=3, header=FALSE) # third worksheet by number
-+   print(example.x.3)
++     example.x.3 <- read.xls(exampleFileX, sheet=3, header=FALSE) # third worksheet by number
++     print(example.x.3)
 + 
-+   example.x.4 <- read.xls(exampleFileX, sheet=4, header=FALSE) # fourth worksheet by number
-+   print(example.x.4)
++     example.x.4 <- read.xls(exampleFileX, sheet=4, header=FALSE) # fourth worksheet by number
++     print(example.x.4)
 + 
-+   data <- read.xls(exampleFileX, sheet="Sheet Second") # and by name
-+   print(data)
++     data <- read.xls(exampleFileX, sheet="Sheet Second") # and by name
++     print(data)
 + 
-+   # load the third worksheet, skipping the first two non-data lines...
-+   data <- read.xls(exampleFileX, sheet="Sheet with initial text", skip=2)
-+   print(data)
-+ }
++     # load the third worksheet, skipping the first two non-data lines...
++     data <- read.xls(exampleFileX, sheet="Sheet with initial text", skip=2)
++     print(data)
++   } else {
++       cat("** DIFF IN THIS SECTION IS EXPECTED BECAUSE PERL PACKAGES **\n")
++     cat("** FOR SUPPORTING XLSX ARE NOT INSTALLED **\n")
++   }
   A  B   C
 1 1  1   1
 2 2  4   8
@@ -673,7 +676,6 @@ The following object is masked from 'package:utils':
 3 NA  ThirdRow 3  2  1 NA    Red
 4 NA FourthRow 4  3  2  1  Black
 > 
-> 
 > ## Check handling of skip.blank.lines=FALSE
 > 
 > example.skip <- read.xls(exampleFile, sheet=2, blank.lines.skip=FALSE)
@@ -689,6 +691,9 @@ The following object is masked from 'package:utils':
 +   {
 +     example.x.skip <- read.xls(exampleFileX, sheet=2, blank.lines.skip=FALSE)
 +     example.x.skip
++   } else {
++     cat("** DIFF IN THIS SECTION IS EXPECTED BECAUSE PERL PACKAGES **\n")
++     cat("** FOR SUPPORTING XLSX ARE NOT INSTALLED **\n")
 +   }
           X  D E.  F  G Factor
 1  FirstRow  1 NA NA NA    Red
@@ -704,11 +709,646 @@ The following object is masked from 'package:utils':
 > latin1FileX <- file.path(path.package('gdata'),'xls', 'latin-1.xlsx')
 > 
 > example.latin1 <- read.xls(latin1File, fileEncoding='latin1')
+> example.latin1
+      X.á. X.Á.                               X.â. X.Â. X.à. X.À. X.å. X.Å.
+1  aacute    á               small a, acute accent   NA   NA   NA   NA   NA
+2  Aacute    Á             capital A, acute accent   NA   NA   NA   NA   NA
+3   acirc    â          small a, circumflex accent   NA   NA   NA   NA   NA
+4   Acirc    Â        capital A, circumflex accent   NA   NA   NA   NA   NA
+5  agrave    à               small a, grave accent   NA   NA   NA   NA   NA
+6  Agrave    À             capital A, grave accent   NA   NA   NA   NA   NA
+7   aring    å                       small a, ring   NA   NA   NA   NA   NA
+8   Aring    Å                     capital A, ring   NA   NA   NA   NA   NA
+9  atilde    ã                      small a, tilde   NA   NA   NA   NA   NA
+10 Atilde    Ã                    capital A, tilde   NA   NA   NA   NA   NA
+11   auml    ä     small a, dieresis or umlautmark   NA   NA   NA   NA   NA
+12   Auml    Ä   capital A, dieresis or umlautmark   NA   NA   NA   NA   NA
+13  aelig    æ       small ae diphthong (ligature)   NA   NA   NA   NA   NA
+14  AElig    Æ      capital AE diphthong(ligature)   NA   NA   NA   NA   NA
+15 ccedil    ç                    small c, cedilla   NA   NA   NA   NA   NA
+16 Ccedil    Ç                  capital C, cedilla   NA   NA   NA   NA   NA
+17    eth    ð                small eth, Icelandic   NA   NA   NA   NA   NA
+18    ETH    Ð              capital Eth, Icelandic   NA   NA   NA   NA   NA
+19 eacute    é               small e, acute accent   NA   NA   NA   NA   NA
+20 Eacute    É             capital E, acute accent   NA   NA   NA   NA   NA
+21  ecirc    ê          small e, circumflex accent   NA   NA   NA   NA   NA
+22  Ecirc    Ê        capital E, circumflex accent   NA   NA   NA   NA   NA
+23 egrave    è               small e, grave accent   NA   NA   NA   NA   NA
+24 Egrave    È             capital E, grave accent   NA   NA   NA   NA   NA
+25   euml    ë     small e, dieresis or umlautmark   NA   NA   NA   NA   NA
+26   Euml    Ë   capital E, dieresis or umlautmark   NA   NA   NA   NA   NA
+27 iacute    í               small i, acute accent   NA   NA   NA   NA   NA
+28 Iacute    Í             capital I, acute accent   NA   NA   NA   NA   NA
+29  icirc    î          small i, circumflex accent   NA   NA   NA   NA   NA
+30  Icirc    Î        capital I, circumflex accent   NA   NA   NA   NA   NA
+31 igrave    ì               small i, grave accent   NA   NA   NA   NA   NA
+32 Igrave    Ì             capital I, grave accent   NA   NA   NA   NA   NA
+33   iuml    ï     small i, dieresis or umlautmark   NA   NA   NA   NA   NA
+34   Iuml    Ï   capital I, dieresis or umlautmark   NA   NA   NA   NA   NA
+35 ntilde    ñ                      small n, tilde   NA   NA   NA   NA   NA
+36 Ntilde    Ñ                    capital N, tilde   NA   NA   NA   NA   NA
+37 oacute    ó               small o, acute accent   NA   NA   NA   NA   NA
+38 Oacute    Ó             capital O, acute accent   NA   NA   NA   NA   NA
+39  ocirc    ô          small o, circumflex accent   NA   NA   NA   NA   NA
+40  Ocirc    Ô        capital O, circumflex accent   NA   NA   NA   NA   NA
+41 ograve    ò               small o, grave accent   NA   NA   NA   NA   NA
+42 Ograve    Ò             capital O, grave accent   NA   NA   NA   NA   NA
+43 oslash    ø                      small o, slash   NA   NA   NA   NA   NA
+44 Oslash    Ø                    capital O, slash   NA   NA   NA   NA   NA
+45 otilde    õ                      small o, tilde   NA   NA   NA   NA   NA
+46 Otilde    Õ                    capital O, tilde   NA   NA   NA   NA   NA
+47   ouml    ö     small o, dieresis or umlautmark   NA   NA   NA   NA   NA
+48   Ouml    Ö   capital O, dieresis or umlautmark   NA   NA   NA   NA   NA
+49  szlig    ß   small sharp s, German (szligature   NA   NA   NA   NA   NA
+50  thorn    þ              small thorn, Icelandic   NA   NA   NA   NA   NA
+51  THORN    Þ            capital THORN, Icelandic   NA   NA   NA   NA   NA
+52 uacute    ú               small u, acute accent   NA   NA   NA   NA   NA
+53 Uacute    Ú             capital U, acute accent   NA   NA   NA   NA   NA
+54  ucirc    û          small u, circumflex accent   NA   NA   NA   NA   NA
+55  Ucirc    Û        capital U, circumflex accent   NA   NA   NA   NA   NA
+56 ugrave    ù               small u, grave accent   NA   NA   NA   NA   NA
+57 Ugrave    Ù             capital U, grave accent   NA   NA   NA   NA   NA
+58   uuml    ü     small u, dieresis or umlautmark   NA   NA   NA   NA   NA
+59   Uuml    Ü   capital U, dieresis or umlautmark   NA   NA   NA   NA   NA
+60 yacute    ý               small y, acute accent   NA   NA   NA   NA   NA
+61 Yacute    Ý             capital Y, acute accent   NA   NA   NA   NA   NA
+62   yuml    ÿ     small y, dieresis or umlautmark   NA   NA   NA   NA   NA
+   X.ã. X.Ã. X.ä. X.Ä. X.æ. X.Æ. X.ç. X.Ç. X.ð. X.Ð. X.é. X.É. X.ê. X.Ê. X.è.
+1    NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+2    NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+3    NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+4    NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+5    NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+6    NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+7    NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+8    NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+9    NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+10   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+11   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+12   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+13   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+14   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+15   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+16   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+17   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+18   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+19   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+20   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+21   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+22   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+23   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+24   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+25   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+26   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+27   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+28   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+29   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+30   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+31   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+32   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+33   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+34   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+35   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+36   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+37   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+38   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+39   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+40   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+41   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+42   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+43   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+44   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+45   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+46   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+47   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+48   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+49   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+50   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+51   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+52   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+53   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+54   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+55   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+56   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+57   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+58   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+59   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+60   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+61   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+62   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+   X.È. X.ë. X.Ë. X.í. X.Í. X.î. X.Î. X.ì. X.Ì. X.ï. X.Ï. X.ñ. X.Ñ. X.ó. X.Ó.
+1    NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+2    NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+3    NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+4    NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+5    NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+6    NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+7    NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+8    NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+9    NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+10   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+11   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+12   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+13   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+14   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+15   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+16   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+17   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+18   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+19   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+20   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+21   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+22   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+23   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+24   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+25   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+26   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+27   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+28   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+29   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+30   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+31   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+32   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+33   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+34   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+35   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+36   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+37   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+38   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+39   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+40   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+41   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+42   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+43   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+44   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+45   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+46   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+47   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+48   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+49   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+50   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+51   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+52   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+53   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+54   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+55   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+56   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+57   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+58   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+59   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+60   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+61   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+62   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+   X.ô. X.Ô. X.ò. X.Ò. X.ø. X.Ø. X.õ. X.Õ. X.ö. X.Ö. X.ß. X.þ. X.Þ. X.ú. X.Ú.
+1    NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+2    NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+3    NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+4    NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+5    NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+6    NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+7    NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+8    NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+9    NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+10   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+11   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+12   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+13   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+14   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+15   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+16   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+17   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+18   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+19   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+20   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+21   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+22   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+23   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+24   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+25   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+26   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+27   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+28   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+29   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+30   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+31   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+32   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+33   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+34   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+35   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+36   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+37   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+38   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+39   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+40   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+41   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+42   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+43   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+44   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+45   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+46   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+47   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+48   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+49   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+50   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+51   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+52   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+53   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+54   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+55   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+56   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+57   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+58   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+59   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+60   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+61   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+62   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+   X.û. X.Û. X.ù. X.Ù. X.ü. X.Ü. X.ý. X.Ý. X.ÿ.
+1    NA   NA   NA   NA   NA   NA   NA   NA   NA
+2    NA   NA   NA   NA   NA   NA   NA   NA   NA
+3    NA   NA   NA   NA   NA   NA   NA   NA   NA
+4    NA   NA   NA   NA   NA   NA   NA   NA   NA
+5    NA   NA   NA   NA   NA   NA   NA   NA   NA
+6    NA   NA   NA   NA   NA   NA   NA   NA   NA
+7    NA   NA   NA   NA   NA   NA   NA   NA   NA
+8    NA   NA   NA   NA   NA   NA   NA   NA   NA
+9    NA   NA   NA   NA   NA   NA   NA   NA   NA
+10   NA   NA   NA   NA   NA   NA   NA   NA   NA
+11   NA   NA   NA   NA   NA   NA   NA   NA   NA
+12   NA   NA   NA   NA   NA   NA   NA   NA   NA
+13   NA   NA   NA   NA   NA   NA   NA   NA   NA
+14   NA   NA   NA   NA   NA   NA   NA   NA   NA
+15   NA   NA   NA   NA   NA   NA   NA   NA   NA
+16   NA   NA   NA   NA   NA   NA   NA   NA   NA
+17   NA   NA   NA   NA   NA   NA   NA   NA   NA
+18   NA   NA   NA   NA   NA   NA   NA   NA   NA
+19   NA   NA   NA   NA   NA   NA   NA   NA   NA
+20   NA   NA   NA   NA   NA   NA   NA   NA   NA
+21   NA   NA   NA   NA   NA   NA   NA   NA   NA
+22   NA   NA   NA   NA   NA   NA   NA   NA   NA
+23   NA   NA   NA   NA   NA   NA   NA   NA   NA
+24   NA   NA   NA   NA   NA   NA   NA   NA   NA
+25   NA   NA   NA   NA   NA   NA   NA   NA   NA
+26   NA   NA   NA   NA   NA   NA   NA   NA   NA
+27   NA   NA   NA   NA   NA   NA   NA   NA   NA
+28   NA   NA   NA   NA   NA   NA   NA   NA   NA
+29   NA   NA   NA   NA   NA   NA   NA   NA   NA
+30   NA   NA   NA   NA   NA   NA   NA   NA   NA
+31   NA   NA   NA   NA   NA   NA   NA   NA   NA
+32   NA   NA   NA   NA   NA   NA   NA   NA   NA
+33   NA   NA   NA   NA   NA   NA   NA   NA   NA
+34   NA   NA   NA   NA   NA   NA   NA   NA   NA
+35   NA   NA   NA   NA   NA   NA   NA   NA   NA
+36   NA   NA   NA   NA   NA   NA   NA   NA   NA
+37   NA   NA   NA   NA   NA   NA   NA   NA   NA
+38   NA   NA   NA   NA   NA   NA   NA   NA   NA
+39   NA   NA   NA   NA   NA   NA   NA   NA   NA
+40   NA   NA   NA   NA   NA   NA   NA   NA   NA
+41   NA   NA   NA   NA   NA   NA   NA   NA   NA
+42   NA   NA   NA   NA   NA   NA   NA   NA   NA
+43   NA   NA   NA   NA   NA   NA   NA   NA   NA
+44   NA   NA   NA   NA   NA   NA   NA   NA   NA
+45   NA   NA   NA   NA   NA   NA   NA   NA   NA
+46   NA   NA   NA   NA   NA   NA   NA   NA   NA
+47   NA   NA   NA   NA   NA   NA   NA   NA   NA
+48   NA   NA   NA   NA   NA   NA   NA   NA   NA
+49   NA   NA   NA   NA   NA   NA   NA   NA   NA
+50   NA   NA   NA   NA   NA   NA   NA   NA   NA
+51   NA   NA   NA   NA   NA   NA   NA   NA   NA
+52   NA   NA   NA   NA   NA   NA   NA   NA   NA
+53   NA   NA   NA   NA   NA   NA   NA   NA   NA
+54   NA   NA   NA   NA   NA   NA   NA   NA   NA
+55   NA   NA   NA   NA   NA   NA   NA   NA   NA
+56   NA   NA   NA   NA   NA   NA   NA   NA   NA
+57   NA   NA   NA   NA   NA   NA   NA   NA   NA
+58   NA   NA   NA   NA   NA   NA   NA   NA   NA
+59   NA   NA   NA   NA   NA   NA   NA   NA   NA
+60   NA   NA   NA   NA   NA   NA   NA   NA   NA
+61   NA   NA   NA   NA   NA   NA   NA   NA   NA
+62   NA   NA   NA   NA   NA   NA   NA   NA   NA
 > 
 > if( 'XLSX' %in% xlsFormats() )
 +   {
-+     example.latin1.x <- read.xls(latin1FileX, fileEncoding='latin1')
++       example.latin1.x <- read.xls(latin1FileX, fileEncoding='latin1')
++       example.latin1.x
++   } else {
++     cat("** DIFF IN THIS SECTION IS EXPECTED BECAUSE PERL PACKAGES **\n")
++     cat("** FOR SUPPORTING XLSX ARE NOT INSTALLED **\n")
 +   }
+      X.á. X.Á.                               X.â. X.Â. X.à. X.À. X.å. X.Å.
+1  aacute    á               small a, acute accent   NA   NA   NA   NA   NA
+2  Aacute    Á             capital A, acute accent   NA   NA   NA   NA   NA
+3   acirc    â          small a, circumflex accent   NA   NA   NA   NA   NA
+4   Acirc    Â        capital A, circumflex accent   NA   NA   NA   NA   NA
+5  agrave    à               small a, grave accent   NA   NA   NA   NA   NA
+6  Agrave    À             capital A, grave accent   NA   NA   NA   NA   NA
+7   aring    å                       small a, ring   NA   NA   NA   NA   NA
+8   Aring    Å                     capital A, ring   NA   NA   NA   NA   NA
+9  atilde    ã                      small a, tilde   NA   NA   NA   NA   NA
+10 Atilde    Ã                    capital A, tilde   NA   NA   NA   NA   NA
+11   auml    ä     small a, dieresis or umlautmark   NA   NA   NA   NA   NA
+12   Auml    Ä   capital A, dieresis or umlautmark   NA   NA   NA   NA   NA
+13  aelig    æ       small ae diphthong (ligature)   NA   NA   NA   NA   NA
+14  AElig    Æ      capital AE diphthong(ligature)   NA   NA   NA   NA   NA
+15 ccedil    ç                    small c, cedilla   NA   NA   NA   NA   NA
+16 Ccedil    Ç                  capital C, cedilla   NA   NA   NA   NA   NA
+17    eth    ð                small eth, Icelandic   NA   NA   NA   NA   NA
+18    ETH    Ð              capital Eth, Icelandic   NA   NA   NA   NA   NA
+19 eacute    é               small e, acute accent   NA   NA   NA   NA   NA
+20 Eacute    É             capital E, acute accent   NA   NA   NA   NA   NA
+21  ecirc    ê          small e, circumflex accent   NA   NA   NA   NA   NA
+22  Ecirc    Ê        capital E, circumflex accent   NA   NA   NA   NA   NA
+23 egrave    è               small e, grave accent   NA   NA   NA   NA   NA
+24 Egrave    È             capital E, grave accent   NA   NA   NA   NA   NA
+25   euml    ë     small e, dieresis or umlautmark   NA   NA   NA   NA   NA
+26   Euml    Ë   capital E, dieresis or umlautmark   NA   NA   NA   NA   NA
+27 iacute    í               small i, acute accent   NA   NA   NA   NA   NA
+28 Iacute    Í             capital I, acute accent   NA   NA   NA   NA   NA
+29  icirc    î          small i, circumflex accent   NA   NA   NA   NA   NA
+30  Icirc    Î        capital I, circumflex accent   NA   NA   NA   NA   NA
+31 igrave    ì               small i, grave accent   NA   NA   NA   NA   NA
+32 Igrave    Ì             capital I, grave accent   NA   NA   NA   NA   NA
+33   iuml    ï     small i, dieresis or umlautmark   NA   NA   NA   NA   NA
+34   Iuml    Ï   capital I, dieresis or umlautmark   NA   NA   NA   NA   NA
+35 ntilde    ñ                      small n, tilde   NA   NA   NA   NA   NA
+36 Ntilde    Ñ                    capital N, tilde   NA   NA   NA   NA   NA
+37 oacute    ó               small o, acute accent   NA   NA   NA   NA   NA
+38 Oacute    Ó             capital O, acute accent   NA   NA   NA   NA   NA
+39  ocirc    ô          small o, circumflex accent   NA   NA   NA   NA   NA
+40  Ocirc    Ô        capital O, circumflex accent   NA   NA   NA   NA   NA
+41 ograve    ò               small o, grave accent   NA   NA   NA   NA   NA
+42 Ograve    Ò             capital O, grave accent   NA   NA   NA   NA   NA
+43 oslash    ø                      small o, slash   NA   NA   NA   NA   NA
+44 Oslash    Ø                    capital O, slash   NA   NA   NA   NA   NA
+45 otilde    õ                      small o, tilde   NA   NA   NA   NA   NA
+46 Otilde    Õ                    capital O, tilde   NA   NA   NA   NA   NA
+47   ouml    ö     small o, dieresis or umlautmark   NA   NA   NA   NA   NA
+48   Ouml    Ö   capital O, dieresis or umlautmark   NA   NA   NA   NA   NA
+49  szlig    ß   small sharp s, German (szligature   NA   NA   NA   NA   NA
+50  thorn    þ              small thorn, Icelandic   NA   NA   NA   NA   NA
+51  THORN    Þ            capital THORN, Icelandic   NA   NA   NA   NA   NA
+52 uacute    ú               small u, acute accent   NA   NA   NA   NA   NA
+53 Uacute    Ú             capital U, acute accent   NA   NA   NA   NA   NA
+54  ucirc    û          small u, circumflex accent   NA   NA   NA   NA   NA
+55  Ucirc    Û        capital U, circumflex accent   NA   NA   NA   NA   NA
+56 ugrave    ù               small u, grave accent   NA   NA   NA   NA   NA
+57 Ugrave    Ù             capital U, grave accent   NA   NA   NA   NA   NA
+58   uuml    ü     small u, dieresis or umlautmark   NA   NA   NA   NA   NA
+59   Uuml    Ü   capital U, dieresis or umlautmark   NA   NA   NA   NA   NA
+60 yacute    ý               small y, acute accent   NA   NA   NA   NA   NA
+61 Yacute    Ý             capital Y, acute accent   NA   NA   NA   NA   NA
+62   yuml    ÿ     small y, dieresis or umlautmark   NA   NA   NA   NA   NA
+   X.ã. X.Ã. X.ä. X.Ä. X.æ. X.Æ. X.ç. X.Ç. X.ð. X.Ð. X.é. X.É. X.ê. X.Ê. X.è.
+1    NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+2    NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+3    NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+4    NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+5    NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+6    NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+7    NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+8    NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+9    NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+10   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+11   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+12   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+13   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+14   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+15   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+16   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+17   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+18   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+19   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+20   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+21   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+22   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+23   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+24   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+25   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+26   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+27   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+28   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+29   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+30   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+31   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+32   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+33   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+34   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+35   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+36   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+37   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+38   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+39   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+40   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+41   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+42   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+43   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+44   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+45   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+46   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+47   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+48   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+49   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+50   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+51   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+52   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+53   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+54   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+55   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+56   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+57   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+58   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+59   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+60   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+61   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+62   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+   X.È. X.ë. X.Ë. X.í. X.Í. X.î. X.Î. X.ì. X.Ì. X.ï. X.Ï. X.ñ. X.Ñ. X.ó. X.Ó.
+1    NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+2    NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+3    NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+4    NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+5    NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+6    NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+7    NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+8    NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+9    NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+10   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+11   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+12   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+13   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+14   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+15   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+16   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+17   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+18   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+19   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+20   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+21   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+22   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+23   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+24   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+25   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+26   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+27   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+28   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+29   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+30   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+31   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+32   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+33   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+34   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+35   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+36   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+37   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+38   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+39   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+40   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+41   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+42   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+43   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+44   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+45   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+46   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+47   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+48   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+49   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+50   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+51   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+52   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+53   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+54   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+55   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+56   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+57   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+58   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+59   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+60   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+61   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+62   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+   X.ô. X.Ô. X.ò. X.Ò. X.ø. X.Ø. X.õ. X.Õ. X.ö. X.Ö. X.ß. X.þ. X.Þ. X.ú. X.Ú.
+1    NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+2    NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+3    NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+4    NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+5    NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+6    NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+7    NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+8    NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+9    NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+10   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+11   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+12   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+13   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+14   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+15   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+16   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+17   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+18   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+19   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+20   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+21   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+22   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+23   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+24   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+25   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+26   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+27   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+28   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+29   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+30   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+31   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+32   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+33   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+34   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+35   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+36   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+37   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+38   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+39   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+40   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+41   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+42   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+43   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+44   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+45   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+46   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+47   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+48   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+49   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+50   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+51   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+52   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+53   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+54   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+55   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+56   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+57   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+58   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+59   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+60   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+61   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+62   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA   NA
+   X.û. X.Û. X.ù. X.Ù. X.ü. X.Ü. X.ý. X.Ý. X.ÿ.
+1    NA   NA   NA   NA   NA   NA   NA   NA   NA
+2    NA   NA   NA   NA   NA   NA   NA   NA   NA
+3    NA   NA   NA   NA   NA   NA   NA   NA   NA
+4    NA   NA   NA   NA   NA   NA   NA   NA   NA
+5    NA   NA   NA   NA   NA   NA   NA   NA   NA
+6    NA   NA   NA   NA   NA   NA   NA   NA   NA
+7    NA   NA   NA   NA   NA   NA   NA   NA   NA
+8    NA   NA   NA   NA   NA   NA   NA   NA   NA
+9    NA   NA   NA   NA   NA   NA   NA   NA   NA
+10   NA   NA   NA   NA   NA   NA   NA   NA   NA
+11   NA   NA   NA   NA   NA   NA   NA   NA   NA
+12   NA   NA   NA   NA   NA   NA   NA   NA   NA
+13   NA   NA   NA   NA   NA   NA   NA   NA   NA
+14   NA   NA   NA   NA   NA   NA   NA   NA   NA
+15   NA   NA   NA   NA   NA   NA   NA   NA   NA
+16   NA   NA   NA   NA   NA   NA   NA   NA   NA
+17   NA   NA   NA   NA   NA   NA   NA   NA   NA
+18   NA   NA   NA   NA   NA   NA   NA   NA   NA
+19   NA   NA   NA   NA   NA   NA   NA   NA   NA
+20   NA   NA   NA   NA   NA   NA   NA   NA   NA
+21   NA   NA   NA   NA   NA   NA   NA   NA   NA
+22   NA   NA   NA   NA   NA   NA   NA   NA   NA
+23   NA   NA   NA   NA   NA   NA   NA   NA   NA
+24   NA   NA   NA   NA   NA   NA   NA   NA   NA
+25   NA   NA   NA   NA   NA   NA   NA   NA   NA
+26   NA   NA   NA   NA   NA   NA   NA   NA   NA
+27   NA   NA   NA   NA   NA   NA   NA   NA   NA
+28   NA   NA   NA   NA   NA   NA   NA   NA   NA
+29   NA   NA   NA   NA   NA   NA   NA   NA   NA
+30   NA   NA   NA   NA   NA   NA   NA   NA   NA
+31   NA   NA   NA   NA   NA   NA   NA   NA   NA
+32   NA   NA   NA   NA   NA   NA   NA   NA   NA
+33   NA   NA   NA   NA   NA   NA   NA   NA   NA
+34   NA   NA   NA   NA   NA   NA   NA   NA   NA
+35   NA   NA   NA   NA   NA   NA   NA   NA   NA
+36   NA   NA   NA   NA   NA   NA   NA   NA   NA
+37   NA   NA   NA   NA   NA   NA   NA   NA   NA
+38   NA   NA   NA   NA   NA   NA   NA   NA   NA
+39   NA   NA   NA   NA   NA   NA   NA   NA   NA
+40   NA   NA   NA   NA   NA   NA   NA   NA   NA
+41   NA   NA   NA   NA   NA   NA   NA   NA   NA
+42   NA   NA   NA   NA   NA   NA   NA   NA   NA
+43   NA   NA   NA   NA   NA   NA   NA   NA   NA
+44   NA   NA   NA   NA   NA   NA   NA   NA   NA
+45   NA   NA   NA   NA   NA   NA   NA   NA   NA
+46   NA   NA   NA   NA   NA   NA   NA   NA   NA
+47   NA   NA   NA   NA   NA   NA   NA   NA   NA
+48   NA   NA   NA   NA   NA   NA   NA   NA   NA
+49   NA   NA   NA   NA   NA   NA   NA   NA   NA
+50   NA   NA   NA   NA   NA   NA   NA   NA   NA
+51   NA   NA   NA   NA   NA   NA   NA   NA   NA
+52   NA   NA   NA   NA   NA   NA   NA   NA   NA
+53   NA   NA   NA   NA   NA   NA   NA   NA   NA
+54   NA   NA   NA   NA   NA   NA   NA   NA   NA
+55   NA   NA   NA   NA   NA   NA   NA   NA   NA
+56   NA   NA   NA   NA   NA   NA   NA   NA   NA
+57   NA   NA   NA   NA   NA   NA   NA   NA   NA
+58   NA   NA   NA   NA   NA   NA   NA   NA   NA
+59   NA   NA   NA   NA   NA   NA   NA   NA   NA
+60   NA   NA   NA   NA   NA   NA   NA   NA   NA
+61   NA   NA   NA   NA   NA   NA   NA   NA   NA
+62   NA   NA   NA   NA   NA   NA   NA   NA   NA
 > 
 > 
 > ## Check handling of very wide file
@@ -723,6 +1363,9 @@ The following object is masked from 'package:utils':
 +   {
 +      example.wide.x <- read.xls(wideFileX)
 +      stopifnot(dim(example.wide.x)==c(0,16384))
++   } else {
++     cat("** DIFF IN THIS SECTION IS EXPECTED BECAUSE PERL PACKAGES **\n")
++     cat("** FOR SUPPORTING XLSX ARE NOT INSTALLED **\n")
 +   }
 > 
 > ## Check handling of files with dates calulcated relative to
@@ -846,4 +1489,4 @@ The following object is masked from 'package:utils':
 > 
 > proc.time()
    user  system elapsed 
- 14.104   0.888  15.221 
+ 13.148   0.835  14.190 
