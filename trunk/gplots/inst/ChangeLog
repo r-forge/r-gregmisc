@@ -1,5 +1,10 @@
 2015-05-01  warnes
 
+	* [r2012] man/gplots-defunct.Rd: Summary: Correct man page name
+	* [r2011] man/gplots-deprecated.Rd: Summary: Forgot to add \alias
+	  for smartlegend.
+	* [r2010] man/lmplot2.Rd: Remove leftover alias
+	* [r2009] inst/ChangeLog: Commit ChangeLog
 	* [r2008] NAMESPACE, inst/NEWS: Update NEWS again.
 	* [r2007] man/gplots-defunct.Rd, man/gplots-deprecated.Rd,
 	  man/lmplot2.Rd, man/smartlegend.Rd: Mark boxplot.n and()
