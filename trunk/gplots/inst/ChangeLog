@@ -1,5 +1,16 @@
+2015-05-01  warnes
+
+	* [r1995] R/heatmap.2.R: - heatmap.2: row traces could be plotted
+	  in the wrong order.
+	* [r1994] R/heatmap.2.R, man/heatmap.2.Rd: - heatmap.2: column
+	  traces could be plotted in the wrong order.
+	  - heatmap.2: add support for plotting sub-clusters of the full
+	  row and
+	  column dendrograms
+
 2015-04-23  warnes
 
+	* [r1955] inst/ChangeLog, inst/NEWS: Update NEWS and ChangeLog
 	* [r1954] DESCRIPTION, R/heatmap.2.R, inst/ChangeLog, inst/NEWS: In
 	  heatmap.2(), the color key now properly handles color breaks that
 	  are not equally spaced. (Issue reported by Tim Richter-Heitmann.)

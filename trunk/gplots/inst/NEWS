@@ -11,7 +11,7 @@ New Features:
   subclusters from a large heatmap. Simply pass the dendrogram of the
   subcluster together with the full data matrix and, optionally, the
   breaks of the full heatmap in order to obtain the same color
-  scaling. (Patch contributed by Ilia Kats.) 
+  scaling. (Suggestion and patch contributed by Ilia Kats.)
 
 - venn() now returns a list of the members of each set intersection in
   the attribute 'intersections'.  This can be disabled using the
@@ -21,6 +21,9 @@ Bug Fixes:
 
 - In heatmap.2(), the color key now properly handles color breaks that
   are not equally spaced. (Issue reported by Tim Richter-Heitmann.)
+
+- In heatmap.2(), row/column traces in could be plotted on the wrong
+  row/column.
 
 - plotCI() now properly respects the 'type=' argument.  (Bug report
   and correction by Wiktor Żelazny.)
