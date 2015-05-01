@@ -1,6 +1,5 @@
 \name{lmplot2}
 \alias{lmplot2}
-\alais{plot.lm2}
 \title{
   Plots to assess the goodness of fit for the linear model objects
 }
