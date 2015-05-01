@@ -2,7 +2,7 @@
 \alias{smartlegend}
 \title{Place a legend in a specified logical ("top","bottom", "left",
   "right", etc) location on a plot.}
-\description{ 
+\description{
   This function places a legend in a specified logical ("top","bottom", "left",
   "right", etc) location on a plot.
 }
@@ -22,6 +22,10 @@ smartlegend(x = c("left", "center", "right"),
 }
 \value{
   Same as \code{legend}
+}
+\note{
+  This function is deprecated because \code{\link{legend}} has
+  implemented relative positioning (e.g. \code{x="topright"}).
 }
 \author{Gregory R. Warnes \email{greg@warnes.net} }
 \seealso{ \code{\link{legend}} }
