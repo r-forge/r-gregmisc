@@ -1,5 +1,14 @@
 2015-05-01  warnes
 
+	* [r2008] NAMESPACE, inst/NEWS: Update NEWS again.
+	* [r2007] man/gplots-defunct.Rd, man/gplots-deprecated.Rd,
+	  man/lmplot2.Rd, man/smartlegend.Rd: Mark boxplot.n and()
+	  plot.lm2() as defunct.
+	* [r2006] R/boxplot2.R, R/lmplot2.R: Make ballonplot.n() and
+	  plot.lm2() 'defunct'.
+	* [r2005] inst/ChangeLog, inst/NEWS: Update NEWS and ChangeLog
+	  again.
+	* [r2004] man/sinkplot.Rd: Summary: Punctuation.
 	* [r2003] NAMESPACE: Correct URLs in man pages.
 	* [r2002] man/heatmap.2.Rd, man/sinkplot.Rd: Correct URLs in man
 	  pages.
