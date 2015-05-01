@@ -115,7 +115,7 @@ heatmap.2 (x,
     computed and reordered based on the order of the vector.}
   \item{Colv}{determines if and how the \emph{column} dendrogram should
     be reordered.	Has the options as the \code{Rowv} argument above and
-    \emph{additionally} when \code{x} is a square matrix, 
+    \emph{additionally} when \code{x} is a square matrix,
     \code{Colv="Rowv"} means that columns should be treated identically
     to the rows.}
   \item{distfun}{function used to compute the distance (dissimilarity)
@@ -131,7 +131,7 @@ heatmap.2 (x,
     reordering the row and column dendrograms.  The default uses
     \code{\link{stats}{reorder.dendrogram}} }.
   \item{symm}{logical indicating if \code{x} should be treated
-    \bold{symm}etrically; can only be true when \code{x} is a 
+    \bold{symm}etrically; can only be true when \code{x} is a
     square matrix.}
   % data scaling
   \item{scale}{character indicating if the values should be centered and
@@ -154,7 +154,7 @@ heatmap.2 (x,
   \item{col}{colors used for the image. Defaults to heat colors
     (\code{heat.colors}).}
   % block separation
-  \item{colsep, rowsep, sepcolor}{(optional) vector of integers 
+  \item{colsep, rowsep, sepcolor}{(optional) vector of integers
     indicating which columns or rows should be separated from the
     preceding columns or rows by a narrow space of color
     \code{sepcolor}.}
@@ -187,12 +187,12 @@ heatmap.2 (x,
     defaults to the value of \code{tracecol}.}
   % Row/Column Labeling
   \item{margins}{numeric vector of length 2 containing the margins
-    (see \code{\link{par}(mar= *)}) for column and row names, 
+    (see \code{\link{par}(mar= *)}) for column and row names,
     respectively.}
-  \item{ColSideColors}{(optional) character vector of length 
+  \item{ColSideColors}{(optional) character vector of length
     \code{ncol(x)} containing the color names for a horizontal side bar
     that may be used to annotate the columns of \code{x}.}
-  \item{RowSideColors}{(optional) character vector of length 
+  \item{RowSideColors}{(optional) character vector of length
     \code{nrow(x)} containing the color names for a vertical side bar
     that may be used to annotate the rows of \code{x}.}
   \item{cexRow, cexCol}{positive numbers, used as \code{cex.axis} in
@@ -206,8 +206,8 @@ heatmap.2 (x,
   \item{adjRow, adjCol}{2-element vector giving the (left-right,
     top-bottom) justification of row/column labels (relative to the text
     orientation).}
-  \item{offsetRow, offsetCol}{Number of character-width spaces to 
-    place between row/column labels and the edge of the plotting 
+  \item{offsetRow, offsetCol}{Number of character-width spaces to
+    place between row/column labels and the edge of the plotting
     region.}
   \item{colRow, colCol}{color of row/column labels, either a scalar to
     set the color of all labels the same, or a vector providing the
@@ -329,7 +329,6 @@ heatmap.2 (x,
 \seealso{\code{\link{image}}, \code{\link{hclust}}}
 
 \examples{
- library(gplots)
  data(mtcars)
  x  <- as.matrix(mtcars)
  rc <- rainbow(nrow(x), start=0, end=.3)
@@ -338,20 +337,26 @@ heatmap.2 (x,
  ##
  ## demonstrate the effect of row and column dendrogram options
  ##
- heatmap.2(x)  ## default - dendrogram plotted and reordering done.
+ heatmap.2(x)                    ## default - dendrogram plotted and reordering done.
  heatmap.2(x, dendrogram="none") ##  no dendrogram plotted, but reordering done.
- heatmap.2(x, dendrogram="row") ## row dendrogram plotted and row reordering done.
- heatmap.2(x, dendrogram="col") ## col dendrogram plotted and col reordering done.
+ heatmap.2(x, dendrogram="row")  ## row dendrogram plotted and row reordering done.
+ heatmap.2(x, dendrogram="col")  ## col dendrogram plotted and col reordering done.
 
- heatmap.2(x, keysize=2)  ## default - dendrogram plotted and reordering done.
+ heatmap.2(x, keysize=2)         ## default - dendrogram plotted and reordering done.
 
- heatmap.2(x, Rowv=FALSE, dendrogram="both") ## generate warning!
- heatmap.2(x, Rowv=NULL, dendrogram="both")  ## generate warning!
- heatmap.2(x, Colv=FALSE, dendrogram="both") ## generate warning!
+ heatmap.2(x, Rowv=FALSE, dendrogram="both") ## generates a warning!
+ heatmap.2(x, Rowv=NULL, dendrogram="both")  ## generates a warning!
+ heatmap.2(x, Colv=FALSE, dendrogram="both") ## generates a warning!
 
  ## Reorder dendrogram by branch means rather than sums
  heatmap.2(x, reorderfun=function(d, w) reorder(d, w, agglo.FUN = mean) )
 
+ ## plot a sub-cluster using the same color coding as for the full heatmap
+ full <- heatmap.2(x)
+ heatmap.2(x, Colv=full$colDendrogram[[2]], breaks=full$breaks)  # column subset
+ heatmap.2(x, Rowv=full$rowDendrogram[[1]], breaks=full$breaks)  # row subset
+ heatmap.2(x, Colv=full$colDendrogram[[2]],
+              Rowv=full$rowDendrogram[[1]], breaks=full$breaks)  # both
 
  ## Show effect of row and column label rotation
  heatmap.2(x, srtCol=NULL)
@@ -460,7 +465,7 @@ heatmap.2 (x,
 	       main="heatmap(<Mtcars data>, ..., scale=\"column\")",
          tracecol="green", density="density")
  ## Note that the breakpoints are now symmetric about 0
- 
+
  ## Color the labels to match RowSideColors and ColSideColors
  hv <- heatmap.2(x, col=cm.colors(255), scale="column",
          RowSideColors=rc, ColSideColors=cc, margin=c(5, 10),
@@ -468,7 +473,7 @@ heatmap.2 (x,
 	       main="heatmap(<Mtcars data>, ..., scale=\"column\")",
          tracecol="green", density="density", colRow=rc, colCol=cc,
          srtCol=45, adjCol=c(0.5,1))
- 
+
 
 
 %% want example using the `add.exp' argument!

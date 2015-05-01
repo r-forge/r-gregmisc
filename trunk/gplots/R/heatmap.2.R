@@ -200,7 +200,7 @@ heatmap.2 <- function (x,
   else if (is.integer(Rowv))
     {
       ## Compute dendrogram and do reordering based on given vector
-      distr <- distfun(x)       
+      distr <- distfun(x)
       hcr <- hclustfun(distr)
       ddr <- as.dendrogram(hcr)
       ddr <- reorderfun(ddr, Rowv)
@@ -291,10 +291,10 @@ heatmap.2 <- function (x,
     labCol <- if(is.null(colnames(x))) (1:nc)[colInd] else colnames(x)
   else
     labCol <- labCol[colInd]
-  
+
   if(!is.null(colRow))
     colRow <- colRow[rowInd]
-  
+
   if(!is.null(colCol))
     colCol <- colCol[colInd]
 
@@ -536,7 +536,7 @@ heatmap.2 <- function (x,
     {
       retval$vline <- vline
       vline.vals <- scale01(vline, min.scale, max.scale)
-      for( i in colInd )
+      for( i in 1:length(colInd) )
         {
           if(!is.null(vline))
             {
