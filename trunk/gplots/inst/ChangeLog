@@ -1,5 +1,17 @@
 2015-05-01  warnes
 
+	* [r2003] NAMESPACE: Correct URLs in man pages.
+	* [r2002] man/heatmap.2.Rd, man/sinkplot.Rd: Correct URLs in man
+	  pages.
+	* [r2001] inst/NEWS: Update NEWS again.
+	* [r2000] DESCRIPTION: Improve package description.
+	* [r1999] man/smartlegend.Rd: Mark 'smartlegend' as deprecated
+	* [r1998] R/smartlegend.R: Summary: Mark smartlegend() as
+	  deprecated.
+	* [r1997] man/venn.Rd: Summary: venn example used 'F' instead of
+	  'FALSE'.
+	* [r1996] DESCRIPTION, inst/ChangeLog, inst/NEWS: Update
+	  DESCRIPTION, NEWS, and ChangeLog again for gplots 2.17.0.
 	* [r1995] R/heatmap.2.R: - heatmap.2: row traces could be plotted
 	  in the wrong order.
 	* [r1994] R/heatmap.2.R, man/heatmap.2.Rd: - heatmap.2: column

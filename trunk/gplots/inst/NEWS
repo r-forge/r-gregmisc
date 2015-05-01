@@ -39,6 +39,7 @@ Other Changes:
   positioning feature ('top', 'right') has been added to
   graphics::legend()
 
+- Update out-of-date URLs in man pages.
 
 Release 2.16.0 - 2015-01-02
 ---------------------------
