@@ -4,6 +4,9 @@ smartlegend <- function(x=c("left","center","right"),
                         y=c("top","center","bottom"),
                         ..., inset=0.05 )
   {
+
+    .Deprecated('legend', 'graphics')
+
     x <- match.arg(x)
     y <- match.arg(y)
 
