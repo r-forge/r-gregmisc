@@ -37,7 +37,7 @@ venn(data, universe=NA, small=0.7, showSetLogicLabel=FALSE,
   indexes of group intersections (1, 2, .., N), or a data frame containing
   indicator variables (TRUE, FALSE, TRUE, ..) for group intersectionship.
   Group names will be taken from the component list element or column
-  names.  
+  names.
 }
 \value{
   Invisibly returns an object of class "venn", containing a matrix of
@@ -59,8 +59,8 @@ venn(data, universe=NA, small=0.7, showSetLogicLabel=FALSE,
 ## construct some fake gene names..
 oneName <- function() paste(sample(LETTERS,5,replace=TRUE),collapse="")
 geneNames <- replicate(1000, oneName())
-                       
-## 
+
+##
 GroupA <- sample(geneNames, 400, replace=FALSE)
 GroupB <- sample(geneNames, 750, replace=FALSE)
 GroupC <- sample(geneNames, 250, replace=FALSE)
@@ -113,7 +113,7 @@ tmp <- venn(input, universe=geneNames[1:100])
 tmp
 
 ##
-## Example to determine which elements are in A and B but not in 
+## Example to determine which elements are in A and B but not in
 ## C and D: first determine the universe, then form indicator columns
 ## and perform intersections on these.  R allows using the set operations
 ## directly, but some might find this approach more intuitive.
@@ -139,8 +139,7 @@ universe[ test(universe) ]
 ## Intriduced with gplots 2.16, the names of individuals for everz intersection
 ## is offered as an attribute to the retrun value.
 ##
-
-a<-venn(list(1:5,3:8),show.plot=F,intersections=TRUE)
+a<-venn(list(1:5,3:8), show.plot=FALSE)
 intersections<-attr(a,"intersections")
 print(intersections)
 
