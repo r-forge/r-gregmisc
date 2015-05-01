@@ -1,4 +1,4 @@
-\name{gplots-deprecated}
+\name{gplots-defunct}
 \alias{boxplot.n}
 \alias{plot.lm2}
 \title{Defunct functions}
