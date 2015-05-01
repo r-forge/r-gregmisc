@@ -1,4 +1,4 @@
-Release 2.17.0 - 2015-04-23
+Release 2.17.0 - 2015-04-28
 ---------------------------
 
 New Features:
@@ -32,6 +32,13 @@ Bug Fixes:
 
 - In the balloonplot() examples, explicitly specify the 'neworder'
   argument to gplots:::reorder.factor to prevent errors.
+
+Other Changes:
+
+- smartlegend() is now marked as deprecated, since the relative
+  positioning feature ('top', 'right') has been added to
+  graphics::legend()
+
 
 Release 2.16.0 - 2015-01-02
 ---------------------------
