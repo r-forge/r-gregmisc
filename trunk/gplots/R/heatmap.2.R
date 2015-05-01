@@ -554,7 +554,7 @@ heatmap.2 <- function (x,
     {
       retval$hline <- hline
       hline.vals <- scale01(hline, min.scale, max.scale)
-      for( i in rowInd )
+      for( i in 1:length(rowInd) )
         {
           if(!is.null(hline))
             {
