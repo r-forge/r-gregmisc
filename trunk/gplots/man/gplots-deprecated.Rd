@@ -1,5 +1,6 @@
 \name{gplots-deprecated}
 \alias{deprecated}
+\alias{smartlegend}
 \title{Deprecated functions}
 \description{
   These funcntion have been deprecated and will be removed in future
