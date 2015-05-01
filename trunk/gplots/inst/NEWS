@@ -35,9 +35,12 @@ Bug Fixes:
 
 Other Changes:
 
-- smartlegend() is now marked as deprecated, since the relative
-  positioning feature ('top', 'right') has been added to
-  graphics::legend()
+- smartlegend() is now deprecated because the relative positioning
+  feature ('top', 'right') has been added to graphics::legend().
+  Calling smartlegend() will generate a warning.
+
+- boxplot.n() and plot.lm2() are defunct have been removed.  Use of
+  these functions will now generate an error.
 
 - Update out-of-date URLs in man pages.
 
