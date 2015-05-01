@@ -1,5 +1,6 @@
 2015-05-01  warnes
 
+	* [r2013] inst/ChangeLog: Update ChangeLog (again)
 	* [r2012] man/gplots-defunct.Rd: Summary: Correct man page name
 	* [r2011] man/gplots-deprecated.Rd: Summary: Forgot to add \alias
 	  for smartlegend.
