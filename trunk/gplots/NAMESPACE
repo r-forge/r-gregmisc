@@ -63,6 +63,8 @@ S3method(plot, venn)
 S3method(print, ci2d)
 S3method(print, hist2d)
 
+S3method(qqnorm, aov)
+
 S3method(textplot, character)
 S3method(textplot, data.frame)
 S3method(textplot, default)
