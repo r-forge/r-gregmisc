@@ -1,6 +1,6 @@
 mixedsort <- function(x, decreasing=FALSE, na.last=TRUE, blank.last=FALSE)
     {
-        svn ord <- mixedorder(x, decreasing=decreasing, na.last=na.last,
+        ord <- mixedorder(x, decreasing=decreasing, na.last=na.last,
                              blank.last=blank.last)
         x[ord]
     }
