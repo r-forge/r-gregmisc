@@ -1,6 +1,4 @@
-# $Id$
-
-# cat to stdout and immediately flush
+# Immediately print message to consoled
 scat <- function(...)
   {
     DEBUG <- options()$DEBUG
