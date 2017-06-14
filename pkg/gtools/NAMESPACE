@@ -51,3 +51,9 @@ importFrom("stats", "na.omit", "quantile", "rgamma", "symnum")
 importFrom("utils", "available.packages", "flush.console", "head",
            "help.search", "installed.packages", "modifyList",
            "packageVersion")
+
+# Refer to all C routines by their name prefixed by C_
+useDynLib(gtools, .registration = TRUE, .fixes = "C_")
+
+
+
