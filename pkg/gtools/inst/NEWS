@@ -1,4 +1,4 @@
-gtools 3.7.0 - 2017-06-11
+gtools 3.7.0 - 2017-06-14
 -------------------------
 
 New functions:
@@ -17,6 +17,8 @@ Enhancements:
 
 - smartbind() has a new argument 'list' to pass a list of data frames,
   /instead of/in addition to/ data frames as arguments.
+
+- Internal changes to bring code up to current CRAN guidelines.
 
 Bug Fixes:
 

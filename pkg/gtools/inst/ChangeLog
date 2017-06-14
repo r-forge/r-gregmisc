@@ -1,10 +1,34 @@
+2017-06-14  warnes
+
+	* [r2169] DESCRIPTION, NAMESPACE, R/checkRVersion.R,
+	  R/newVersionAvailable.R, R/roman2int.R, R/setTCPNoDelay.R,
+	  man/combinations.Rd, man/defmacro.Rd, src/gtools.h[ADD],
+	  src/gtools_load.c[ADD], src/setTCPNoDelay.c,
+	  tests/test_setTCPNoDelay.R: Explicitly register C routines used
+	  by gtools
+
+2017-06-13  warnes
+
+	* [r2168] man/combinations.Rd, man/defmacro.Rd: Update R News URLS
+
 2017-06-12  warnes
+
+	* [r2165] man/capwords.Rd: Update link for taxise::taxize_capwords
+	  in gtools::capwords man page
+
+	* [r2164] inst/ChangeLog: Fix typos
+
+	* [r2163] man/capwords.Rd: Update link for taxise::taxize_capwords
+	  in gtools::capwords man page
+
+	* [r2162] DESCRIPTION, NAMESPACE, inst/ChangeLog, inst/NEWS: Update
+	  meta files for gtools 3.7.0
 
 	* [r2161] tests/smartbind_emptynames.R: Fix test for smartbind with
 	  empty column names
 
 	* [r2160] man/setTCPNoDelay.Rd, tests/test_setTCPNoDelay.R: Add
-	  improved example to man page for setTCPNoDelay() and fix test
+	  improved example to man page for setTCPnoDelat() and fix test
 	  function.
 
 	* [r2159] man/ask.Rd: Add 'con' argument to ask() to allow
@@ -13,13 +37,20 @@
 	* [r2158] R/capwords.R, man/capwords.Rd: Add capwords() function to
 	  apply standard capitalization rules to a scharacter string.
 
+2017-05-23  warnes
+
+	* [r2145] R/ask.R, R/quantcut.R, R/smartbind.R: - Integrate changes
+	  made by Mango Solutions at
+	  https://github.com/MangoTheCat/SASxport. - Remove functions
+	  duplicated from the Hmisc package. - Minor code cleanup.
+
 2016-08-24  warnes
 
 	* [r2144] tests/test_setTCPNoDelay.R: Add more testing code.
 
 2016-08-15  warnes
 
-	* [r2143] inst/ChangeLog: Update ChangeLogtaxi
+	* [r2143] inst/ChangeLog: Update ChangeLog
 
 	* [r2142] DESCRIPTION: Update version number and date
 
@@ -44,7 +75,7 @@
 2015-11-24  warnes
 
 	* [r2071] R/smartbind.R: Correct error when column types don't
-	  match.
+	  match (reported by
 
 2015-10-15  warnes
 
@@ -88,10 +119,10 @@
 	  gdata::trim() or base::trimws() (added in R 3.2.0). The previous
 	  solution was to include gdata/R/gdata/R/trim.R in gtools using a
 	  symbolic link.
-
+	  
 	  Unfortunately, Rforge doesn't seem to like the symbolic link when
 	  building packages, and generates an error.
-
+	  
 	  So, instead, create the file trimws.R, which creates trimws() if
 	  it isn't already available (e.g. via base::trimws), and modify
 	  keywords() and roman2int() to use trimws() instead of
@@ -332,14 +363,14 @@
 	* [r1748] mixedorder() was failing to correctly handle numbers
 	  including decimals due to a faulty regular expression. Prior to
 	  the fix:
-
+	  
 	  > drr [1] "Dose 0.3 mg" "Dose 0.04 mg" "Dose 0.5 mg" >
 	  gtools::mixedsort(drr) [1] "Dose 0.3 mg" "Dose 0.04 mg" "Dose 0.5
 	  mg" After the fix:
-
+	  
 	  > drr [1] "Dose 0.3 mg" "Dose 0.04 mg" "Dose 0.5 mg" >
 	  mixedsort(drr) [1] "Dose 0.04 mg" "Dose 0.3 mg" "Dose 0.5 mg"
-
+	  
 	  In addition, an optimization was added that checked if the input
 	  vector was numeric. If so, simply use the existing base::order
 	  function.
@@ -687,7 +718,7 @@
 2005-08-31  warnes
 
 	* [r645] Adding the defmacro() function, extracted from
-
+	  
 	  Lumley T. "Programmer's Niche: Macros in {R}", R News, 2001, Vol
 	  1, No. 3, pp 11--13, \url{http://CRAN.R-project.org/doc/Rnews/}
 
@@ -882,11 +913,11 @@
 	* [r196] - library() backported from 1.7-devel. This version of the
 	  function adds the "pos=" argument to specify where in the search
 	  path the library should be placed.
-
+	  
 	  - updated .First.lib to use library(...pos=3) for MASS to avoid
 	  the 'genotype' data set in MASS from masking the genotype
 	  funciton in genetics when it loads gregmisc
-
+	  
 	  - Added logit() inv.logit() matchcols() function and
 	  corresponding docs
 
@@ -964,12 +995,12 @@
 2002-08-01  warnes
 
 	* [r114] - Corrected documentation mismatch for ci, ci.default.
-
+	  
 	  - Replaced all occurences of '_' for assignment with '<-'.
-
+	  
 	  - Replaced all occurences of 'T' or 'F' for 'TRUE' and 'FALSE'
 	  with the spelled out version.
-
+	  
 	  - Updaded version number and date.
 
 2002-04-09  warneg
@@ -985,7 +1016,7 @@
 2002-03-20  warneg
 
 	* [r91] - Added definition of is.R function.
-
+	  
 	  - Added boxplot.formula
 
 2002-03-07  warneg
