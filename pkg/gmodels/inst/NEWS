@@ -1,25 +1,19 @@
-Version 2.18.0 - 2017-06-05
+Version 2.18.0 - 2018-06-19
 ---------------------------
 
-New functions:
+Bug fixes:
 
-- Add update.list() function to replace named elements a list.
-- Add mv() function to rename an object.
-- Add first(), last(), 'first<-'() and 'last<-'() functions to extract
-  or replace first or last vector/list elements.
+- ci.binom() was using an incorrect method for calcuating binomial
+  conficence intervals.  It now calculates the Clopper-Pearson 'exect'
+  interval, which is *conservative* due to the discrete nature of the
+  binomial distribution.
 
-New features:
+Other Changes:
 
-- Add 'byrow' argument to lowerTriangle()/upperTriangle() functions.
+- Support for lme4 objects has been removed due to incompatible
+  changes to the lme4 package.
 
-Other User-visible Changes:
-
-- humanReadable() now properly handles a single value for the argument 'justify'.
-- Improve logging and error reporting for remove.vars()
-- read.xls() now handles latin-1 files properly on MS-Windows.
-- write.fwf() now properly handles matrix arguments.
-
-Version 2.16.0 - 2015-04-22
+Version 2.16.0 - 2014-07-24
 ---------------------------
 
 New features:
