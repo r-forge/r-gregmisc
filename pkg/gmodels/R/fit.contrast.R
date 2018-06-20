@@ -1,8 +1,8 @@
 # $Id$
 
 fit.contrast.lm <- function(model, varname, coeff, showall=FALSE,
-                            conf.int, 
-                            df=FALSE, 
+                            conf.int=NULL,
+                            df=FALSE,
                             ...)
 {
   # check class of model
@@ -102,10 +102,10 @@ fit.contrast.lm <- function(model, varname, coeff, showall=FALSE,
 
   if(!df)
     retval <- retval[,-5,drop=FALSE]
-  
+
   class(retval) <- "fit_contrast"
-  
-  retval  
+
+  retval
 }
 
 # fit.contrast.lme and fit.contrast.mer are necessary because
