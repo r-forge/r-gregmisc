@@ -1,3 +1,25 @@
+2018-06-20 20:51  warnes
+
+	* DESCRIPTION, inst/ChangeLog: Update DESCRIPTION and ChangeLog for
+	  gmodels 2.16.1
+
+2018-06-20 20:50  warnes
+
+	* NAMESPACE: Remove obsolete functions.
+
+2018-06-20 20:46  warnes
+
+	* R/fit.contrast.R, man/ci.Rd, man/estimable.Rd,
+	  man/fit.contrast.Rd: Fix R CMD check issues.
+
+2018-06-20 20:42  warnes
+
+	* R/ci.R: Remove trailing whitespace
+
+2018-06-20 20:40  warnes
+
+	* R/est_p_ci.R: Use base::trimws() instead of gdata::trim()
+
 2018-06-20 20:35  warnes
 
 	* test: Remove duplicated/incorrect 'test' directory.
