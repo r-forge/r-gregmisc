@@ -11,10 +11,10 @@ baseOf(v, base=10, len=1)
   \item{v}{
     A single integer value to be transformed.
     }
-  \item{b}{
+  \item{base}{
     The base to which to transform to.
     }
-  \item{l}{
+  \item{len}{
     The minimal length of the returned array.
     }
 }
@@ -22,7 +22,7 @@ baseOf(v, base=10, len=1)
  This function converts the elements of an integer vector as an array of its digits.
  The base of the numbering scheme may be changed away from 10,
  which defines our decimal system, to any other integer value. For
- b=2, the number is returned in the dual system. The least significant
+ base=2, the number is returned in the dual system. The least significant
  digit has the highest index in the array, i.e. it appears on the right.
  The highest exponent is at position 1, i.e. left.
 
@@ -51,32 +51,41 @@ baseOf(v, base=10, len=1)
 \examples{
 # decimal representation
 baseOf(123)
+
 # dual representation
-baseOf(123,b=2)
+baseOf(123,base=2)
+
 # octal representation
-baseOf(123,b=8)
+baseOf(123,base=8)
+
 # hexadecimal representation
-baseOf(123,b=16)
+baseOf(123,base=16)
+
 # hexadecimal with more typical letter-notation
 c(0:9,LETTERS)[baseOf(123,16)]
+
 # hexadecimal again, now showing a single string
 paste(c(0:9,LETTERS)[baseOf(123,16)],collapse="")
+
 # decimal representation but filling leading zeroes
-baseOf(123,l=5)
+baseOf(123,len=5)
+
 # and converting that back
-sum(2^(4:0)*baseOf(123,l=5))
+sum(2^(4:0)*baseOf(123,len=5))
+
 # hashing and a tabular venn diagram derived from it
 m<-matrix(sample(c(FALSE,TRUE),replace=TRUE,size=300),ncol=4)
 colnames(m)<-c("strong","colorful","nice","humorous")
 names(dimnames(m)) <- c("samples","features")
 head(m)
+
 m.val <- apply(m,1,function(X){return(sum(2^((ncol(m)-1):0)*X))})
 m.val.rle <- rle(sort(m.val))
-m.counts <- cbind(t(baseOf(m.val.rle$value,b=2,l=ncol(m))),
-                  m.val.rle$length)
+m.counts <- cbind(baseOf(m.val.rle$value,base=2,len=ncol(m)),
+                    m.val.rle$lengths)
 colnames(m.counts)<- c(colnames(m),"num")
 rownames(m.counts)<- apply(m.counts[,1:ncol(m)],1,paste,collapse="")
-m.counts[1==m.counts[,"nice"]&1==m.counts[,"humorous"],,drop=F]
+m.counts[1==m.counts[,"nice"]&1==m.counts[,"humorous"],,drop=FALSE]
 m.counts[,"num",drop=T]
 }
 \keyword{base}
