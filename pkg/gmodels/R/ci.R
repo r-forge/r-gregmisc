@@ -116,12 +116,12 @@ ci.estimable  <-  function(x,confidence=0.95,alpha=1-confidence,...)
   }
 
 
-ci.fit_contrast <- function (x, confidence = 0.95, alpha = 1 - confidence, ...) 
+ci.fit_contrast <- function (x, confidence = 0.95, alpha = 1 - confidence, ...)
 {
   if( !all(c("lower CI", "upper CI") %in% colnames(x) ) )
     stop("object does not contain confidence interval information.")
-  colnames(x) <- c("Estimate", "Std. Error", "Delete", 
-                   "p-value", 
+  colnames(x) <- c("Estimate", "Std. Error", "Delete",
+                   "p-value",
                    "CI lower", "CI upper")
   x[, c(1, 5:6, 2, 4), drop=FALSE]
 }
