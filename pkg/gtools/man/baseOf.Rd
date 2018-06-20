@@ -86,7 +86,7 @@ m.counts <- cbind(baseOf(m.val.rle$value,base=2,len=ncol(m)),
 colnames(m.counts)<- c(colnames(m),"num")
 rownames(m.counts)<- apply(m.counts[,1:ncol(m)],1,paste,collapse="")
 m.counts[1==m.counts[,"nice"]&1==m.counts[,"humorous"],,drop=FALSE]
-m.counts[,"num",drop=T]
+m.counts[,"num",drop=TRUE]
 }
 \keyword{base}
 
