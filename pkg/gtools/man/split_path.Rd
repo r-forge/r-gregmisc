@@ -7,9 +7,9 @@
 split_path(x, depth_first = TRUE)
 }
 \arguments{
-\item{character}{scalar.  Path to be processed.}
+\item{x}{character scalar.  Path to be processed.}
 
-\item{depth_firs}{logical.  Should path be returned depth first?  Defaults
+\item{depth_first}{logical.  Should path be returned depth first?  Defaults
 to \code{TRUE}.}
 }
 \value{

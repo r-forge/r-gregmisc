@@ -4,8 +4,8 @@
 #'  \emph{valid} file path into a character vector of path components
 #'  (e.g. directories).
 #'
-#' @param character scalar.  Path to be processed.
-#' @param depth_firs  logical.  Should path be returned depth first?  Defaults
+#' @param x            character scalar.  Path to be processed.
+#' @param depth_first  logical.  Should path be returned depth first?  Defaults
 #'   to \code{TRUE}.
 #'
 #' @return Character vector of path components, depth first.
