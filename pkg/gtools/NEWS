@@ -3,7 +3,7 @@ gtools 3.8.1 - 2018-06-21
 
 Behind the scenes:
 
-- Remove softlinks
+- Remove softlinks per request from Uwe Ligges
 
 gtools 3.8.0 - 2018-06-20
 -------------------------
