@@ -1,3 +1,25 @@
+2018-06-25 14:53  warnes
+
+	* ChangeLog, NEWS, inst/ChangeLog, inst/NEWS: Move NEWS and
+	  ChangeLog to top level.
+
+2018-06-25 14:52  warnes
+
+	* ChangeLog, NEWS: Remove NEWS and ChangeLog soft links
+
+2018-06-20 21:06  warnes
+
+	* inst/ChangeLog: Update ChangeLog for gmodels 2.18.0.
+
+2018-06-20 21:04  warnes
+
+	* DESCRIPTION, inst/NEWS: Update DESCRIPTION and NEWS for gmodels
+	  2.18.0.
+
+2018-06-20 21:02  warnes
+
+	* NAMESPACE: Add imports from stats package.
+
 2018-06-20 20:51  warnes
 
 	* DESCRIPTION, inst/ChangeLog: Update DESCRIPTION and ChangeLog for
